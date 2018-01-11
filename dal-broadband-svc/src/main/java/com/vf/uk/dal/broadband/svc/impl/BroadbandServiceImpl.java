@@ -30,7 +30,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			String	journeyId = broadbandDao.createJourneyWithFLBBDetails(flbbRequestForJourney);
 			response.setJourneyId(journeyId);
 		}
-		response = ConverterUtils.createAvailabilityCheckResponse(response,getServiceAvailabilityResponse);
+		response = ConverterUtils.createAvailabilityCheckResponse(response,getServiceAvailabilityResponse,availabilityCheckRequest);
 		return response;
 	}
 
