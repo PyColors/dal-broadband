@@ -5,38 +5,15 @@
 
 	<groupId>com.vf.uk.dal</groupId>
 	<artifactId>dal-broadband-svc</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>7.1.0</version>
 	<packaging>jar</packaging>
-
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>1.4.4.RELEASE</version>
 	</parent>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -45,6 +22,177 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>log4j-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-eureka</artifactId> 
+			<exclusions> <exclusion> <artifactId>log4j-over-slf4j</artifactId> <groupId>org.slf4j</groupId> 
+			</exclusion> <exclusion> <artifactId>logback-classic</artifactId> <groupId>ch.qos.logback</groupId> 
+			</exclusion> </exclusions> <version>1.2.0.RELEASE</version> </dependency> -->
+		<dependency>
+			<groupId>com.vf.uk.dal</groupId>
+			<artifactId>dal-core</artifactId>
+			<version>4.5.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>log4j-over-slf4j</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal</groupId>
+			<artifactId>solr</artifactId>
+			<version>6.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>commons</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>noggit</artifactId>
+			<version>0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>stax2</artifactId>
+			<version>3.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>woodstox</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.solr</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.7</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j-over-slf4j</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>logback-classic</artifactId>
+					<groupId>ch.qos.logback</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency> <groupId>com.vf.uk.dal.solr</groupId> <artifactId>jul-to-slf4j</artifactId> 
+			<version>1.7.7</version> <exclusions> <exclusion> <artifactId>log4j-over-slf4j</artifactId> 
+			<groupId>org.slf4j</groupId> </exclusion> <exclusion> <artifactId>logback-classic</artifactId> 
+			<groupId>ch.qos.logback</groupId> </exclusion> </exclusions> </dependency> 
+			<dependency> <groupId>com.vf.uk.dal.solr</groupId> <artifactId>zookeeper</artifactId> 
+			<version>3.4.6</version> </dependency> <dependency> <groupId>com.vf.uk.dal.solr</groupId> 
+			<artifactId>slf4j-api</artifactId> <version>1.7.7</version> <exclusions> 
+			<exclusion> <artifactId>log4j-over-slf4j</artifactId> <groupId>org.slf4j</groupId> 
+			</exclusion> <exclusion> <artifactId>logback-classic</artifactId> <groupId>ch.qos.logback</groupId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>com.vf.uk.dal.solr</groupId> 
+			<artifactId>log4j</artifactId> <version>1.2.17</version> <exclusions> <exclusion> 
+			<artifactId>log4j-over-slf4j</artifactId> <groupId>org.slf4j</groupId> </exclusion> 
+			<exclusion> <artifactId>logback-classic</artifactId> <groupId>ch.qos.logback</groupId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>com.vf.uk.dal.solr</groupId> 
+			<artifactId>junit</artifactId> <version>4.12</version> </dependency> <dependency> 
+			<groupId>com.vf.uk.dal.solr</groupId> <artifactId>solr-query-manager</artifactId> 
+			<version>4.5.0</version> </dependency> -->
+		<!-- Coherence Jars -->
+		<dependency>
+			<groupId>com.vf.uk.dal</groupId>
+			<artifactId>coherence</artifactId>
+			<version>12.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.coh</groupId>
+			<artifactId>coherence-domain</artifactId>
+			<version>6.6.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.vf.uk.dal.coh</groupId>
+			<artifactId>coherence-logging-utility</artifactId>
+			<version>6.2.0</version>
+		</dependency>
+		<!-- LoggingUtility uses slf4j-ext and json-simple jar -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-ext</artifactId>
+			<version>1.7.20</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<!-- <version>1.3.7.RELEASE</version> -->
+		</dependency>
+		<!-- ECS changes -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.netflix.archaius/archaius-core -->
+		<dependency>
+		    <groupId>com.netflix.archaius</groupId>
+		    <artifactId>archaius-core</artifactId>
+		    <version>0.7.4</version>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
 
 </project>
