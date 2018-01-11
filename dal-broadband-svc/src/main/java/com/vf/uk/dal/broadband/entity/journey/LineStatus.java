@@ -22,7 +22,7 @@ public class LineStatus {
 
 	private String accessLineStatus = null;
 
-	private String gNPStatus = null;
+	private String gnpStatus = null;
 
 	private String lineOption = null;
 
@@ -72,8 +72,8 @@ public class LineStatus {
 		this.accessLineStatus = accessLineStatus;
 	}
 
-	public LineStatus gNPStatus(String gNPStatus) {
-		this.gNPStatus = gNPStatus;
+	public LineStatus gnpStatus(String gnpStatus) {
+		this.gnpStatus = gnpStatus;
 		return this;
 	}
 
@@ -82,12 +82,12 @@ public class LineStatus {
 	 * 
 	 * @return gNPStatus
 	 **/
-	public String getGNPStatus() {
-		return gNPStatus;
+	public String getGnpStatus() {
+		return gnpStatus;
 	}
 
-	public void setGNPStatus(String gNPStatus) {
-		this.gNPStatus = gNPStatus;
+	public void setGnpStatus(String gnpStatus) {
+		this.gnpStatus = gnpStatus;
 	}
 
 	public LineStatus lineOption(String lineOption) {
@@ -212,7 +212,7 @@ public class LineStatus {
 		LineStatus lineStatus = (LineStatus) o;
 		return Objects.equals(this.statusCode, lineStatus.statusCode)
 				&& Objects.equals(this.accessLineStatus, lineStatus.accessLineStatus)
-				&& Objects.equals(this.gNPStatus, lineStatus.gNPStatus)
+				&& Objects.equals(this.gnpStatus, lineStatus.gnpStatus)
 				&& Objects.equals(this.lineOption, lineStatus.lineOption)
 				&& Objects.equals(this.technology, lineStatus.technology)
 				&& Objects.equals(this.lineType, lineStatus.lineType)
@@ -223,7 +223,7 @@ public class LineStatus {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(statusCode, accessLineStatus, gNPStatus, lineOption, technology, lineType, tempStructure,
+		return Objects.hash(statusCode, accessLineStatus, gnpStatus, lineOption, technology, lineType, tempStructure,
 				standbyPowerRequired, narrowBandServicesAvailable);
 	}
 
@@ -234,7 +234,7 @@ public class LineStatus {
 
 		sb.append("    statusCode: ").append(toIndentedString(statusCode)).append("\n");
 		sb.append("    accessLineStatus: ").append(toIndentedString(accessLineStatus)).append("\n");
-		sb.append("    gNPStatus: ").append(toIndentedString(gNPStatus)).append("\n");
+		sb.append("    gNPStatus: ").append(toIndentedString(gnpStatus)).append("\n");
 		sb.append("    lineOption: ").append(toIndentedString(lineOption)).append("\n");
 		sb.append("    technology: ").append(toIndentedString(technology)).append("\n");
 		sb.append("    lineType: ").append(toIndentedString(lineType)).append("\n");
