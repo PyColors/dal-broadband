@@ -1,0 +1,27 @@
+{
+  "lineRef": {
+    "lineIdentification": {
+      "fllandlineNumber": "asdasdasdasd",
+      "typeCode": "asdasdasdasd",
+      "serviceClassificationCode": "asdasdasdasd",
+      "moveFromPostCode": "rg145xe",
+      "installationAddress": {
+        "identification": {
+          "id": "asdsadasdasd",
+          "contextId": "asdasdasd"
+        },
+        "postCode": "Rg145XE",
+        "houseName": "asdasd",
+        "houseNumber": "asdasdasd",
+        "flatNumber": "asdasdasdasas",
+        "streetName": "asdasdasd",
+        "town": "asdasdadsasd",
+        "country": "UK",
+        "locality": "asdasd",
+        "citySubDivisionName": "DM",
+        "moveTypeCode": "asdasdasd"
+      }
+    }
+  },
+  "journeyId": "123456789"
+}

@@ -1,0 +1,125 @@
+{
+  "flbbJourneyDetails": {
+    "servicePoint": {
+      "lineRefernece": {
+        "installationAddress": {
+          "identification": {
+            "id": "adasdasdsa",
+            "contextId": "asdasdasdsa"
+          },
+          "postCode": "Rg145XE",
+          "houseName": "24",
+          "houseNumber": "24",
+          "flatNumber": "24",
+          "streetName": "asdasdasdad",
+          "town": "asdasdasdasd",
+          "county": "asdadadasd",
+          "country": "asdasdasda",
+          "locality": "asdasdasd",
+          "citySubDivisionName": "aa",
+          "moveTypeCode": "asdasda"
+        },
+        "lineLocator": {
+          "exchangeCode": "asdasd",
+          "exchangeName": "asdasdads",
+          "districtCode": "asdasdasd",
+          "l2SID": "asdasdads",
+          "cableLinkID": "asdasdasdasd",
+          "distributionPoint": "asdasdasd"
+        },
+        "lineSettings": {
+          "serviceCode": "asdasdasd",
+          "installationCode": "asdasdasd",
+          "terminationCode": "asdasdasdasd"
+        },
+        "lineStatus": {
+          "statusCode": "sadasdasdad",
+          "accessLineStatus": "asdasdasasd",
+          "gNPStatus": "asdasdasd",
+          "lineOption": "asdasdasd",
+          "technology": "asdasdasd",
+          "lineType": "sadasdasadsad",
+          "tempStructure": "sadasdads",
+          "standbyPowerRequired": "asdasdasd",
+          "narrowBandServicesAvailable": "asdasdasd"
+        },
+        "availableServices": {
+          "service": [
+            "asdasdasdasd"
+          ]
+        },
+        "lineDirectory": [
+          {
+            "featureCode": "asdasdasdasd",
+            "directoryCode": "asdasdasd",
+            "locationCode": "asdasdasdads"
+          }
+        ]
+      },
+      "serviceReference": {
+        "serviceLines": [
+          {
+            "classificationCode": "asdasdasdasd",
+            "networkType": "asdasdasddas",
+            "lineTreatments": [
+              {
+                "identification": "asdasdasdasd",
+                "earliestAvailableDate": "23/10/2018",
+                "connectionCharge": "asdasdasd"
+              }
+            ],
+            "serviceLines": [
+              {
+                "itemReference": {
+                  "identificationId": "asdasdasd",
+                  "name": "asdasdad",
+                  "classificationCode": "asdasdasd"
+                },
+                "lineSpeeds": {
+                  "maxDownSpeed": "111",
+                  "minDownSpeed": "111",
+                  "avgDownSpeed": "111",
+                  "minGuaranteedDownSpeed": "111",
+                  "maxUpSpeed": "111",
+                  "minUpSpeed": "111",
+                  "bandwidthMeasure": "111"
+                },
+                "miscRefernce": {
+                  "serviceProviderName": "sadasdad",
+                  "lineLength": "asasdasdsad",
+                  "classificationCode": "asdasdasd",
+                  "customerAgreedDate": "28/10/2019",
+                  "readyForServiceDate": "29/10/2019",
+                  "anfp": "asdasdasdasd"
+                },
+                "serviceLineTreatments": [
+                  {
+                    "parentIdentification": "asdasdasdasd",
+                    "serviceType": "asdasdasd",
+                    "serviceAction": "asdasdasdasd",
+                    "simValue": "asdasdasd",
+                    "lineInfo": "asdasdasd",
+                    "canNumberBeRetained": "sadasdasd",
+                    "portInFlag": "asdasdasd",
+                    "vicCode": "asdasdasd",
+                    "pendingOrders": [
+                      {
+                        "completionDate": "23/10/2209",
+                        "typeCode": "asdasdasd",
+                        "thirdPartyFlag": "sadasdasd"
+                      }
+                    ],
+                    "accessLine": {
+                      "id": "asdasdasd",
+                      "channelId": "asdasdd"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
