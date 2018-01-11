@@ -396,6 +396,17 @@ public class ConverterUtils {
 		identification.setContextId(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getIdentification().getContextId());
 		installationAddress.setIdentification(identification);
+		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
+				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()){
+			List<String> classificationCodeList = new ArrayList<>();
+			for(com.vf.uk.dal.entity.serviceavailability.ServiceLines servLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
+				classificationCodeList.add(servLines.getClassificationCode());
+			}
+			response.setClassificationCode(classificationCodeList);
+		}
+				
 		response.setInstallationAddress(installationAddress);
 
 		return response;
