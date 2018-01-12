@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 
 

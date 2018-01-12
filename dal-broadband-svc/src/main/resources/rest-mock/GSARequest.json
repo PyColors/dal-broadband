@@ -1,0 +1,20 @@
+{
+"customerType": "INDIVIDUAL",
+"landlineNumber": null,
+"moveFromPostCode": null,
+"installationAddress": {
+ "houseNumber": "8",
+ "flatNumber": null,
+ "houseName": null,
+ "streetName": "Merry Lane",
+ "locality": null,
+ "city": "Lancashire",
+ "postCode": "OL6 0FD",
+ "county": null,
+ "countryCode": "United Kingdom",
+ "citySubDivisionName": "MR",
+ "addressReferenceNumber": "A90000121249",
+ "addressType": "Gold",
+ "moveTypeCode": null
+}
+}

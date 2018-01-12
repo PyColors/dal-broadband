@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package com.vf.uk.dal.braodband.entity;
+package com.vf.uk.dal.broadband.entity;
 
 import java.util.ArrayList;
 import java.util.List;

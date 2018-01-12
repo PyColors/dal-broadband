@@ -1,6 +1,6 @@
 package com.vf.uk.dal.broadband.dao;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
