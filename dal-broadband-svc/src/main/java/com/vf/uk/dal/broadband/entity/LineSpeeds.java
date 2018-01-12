@@ -11,7 +11,7 @@
  */
 
 
-package com.vf.uk.dal.braodband.entity;
+package com.vf.uk.dal.broadband.entity;
 
 import java.util.Objects;
 

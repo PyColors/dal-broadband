@@ -3,8 +3,8 @@ package com.vf.uk.dal.broadband.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.journey.AccessLine;
 import com.vf.uk.dal.broadband.entity.journey.AvailableServices;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyDetails;
@@ -35,7 +35,7 @@ public class ConverterUtils {
 
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
 			AvailabilityCheckRequest availabilityCheckRequest) {
-		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest();
+		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest(); 
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
@@ -63,6 +63,8 @@ public class ConverterUtils {
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getStreetName());
 		installationAddress.setCity(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getTown());
+		installationAddress.setAddressReferenceNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getIdentification().getId());
+		installationAddress.setAddressType(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getIdentification().getContextId());
 		request.setInstallationAddress(installationAddress);
 		return request;
 	}
@@ -349,7 +351,7 @@ public class ConverterUtils {
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
 						.getServiceLine().get(0).getLineSpeeds() != null) {
 
-			com.vf.uk.dal.braodband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.braodband.entity.LineSpeeds();
+			com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 			lineSpeedForResponse.setAvgDownSpeed(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
 					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getAvgDownSpeed());
 			lineSpeedForResponse.setBandwidthMeasure(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
@@ -367,7 +369,7 @@ public class ConverterUtils {
 					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getMinUpSpeed());
 			response.setLineSpeeds(lineSpeedForResponse);
 		}
-		com.vf.uk.dal.braodband.entity.InstallationAddress installationAddress = new com.vf.uk.dal.braodband.entity.InstallationAddress();
+		com.vf.uk.dal.broadband.entity.InstallationAddress installationAddress = new com.vf.uk.dal.broadband.entity.InstallationAddress();
 		installationAddress.setCitySubDivisionName(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getCitySubDivisionName());
 		installationAddress.setCountry(
@@ -390,7 +392,7 @@ public class ConverterUtils {
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getStreetName());
 		installationAddress.setTown(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getTown());
-		com.vf.uk.dal.braodband.entity.Identification identification = new com.vf.uk.dal.braodband.entity.Identification();
+		com.vf.uk.dal.broadband.entity.Identification identification = new com.vf.uk.dal.broadband.entity.Identification();
 		identification.setId(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress()
 				.getIdentification().getId());
 		identification.setContextId(availabilityCheckRequest.getLineRef().getLineIdentification()

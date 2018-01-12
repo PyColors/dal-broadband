@@ -1,0 +1,243 @@
+{"serviceAvailabilityLine": [{
+   "lineReference":    {
+      "landlineNumber": null,
+      "addressReferenceNumber": null,
+      "postCode": "OL6 0FD",
+      "linePlant":       {
+         "sparePairs": 60,
+         "workingLines": 1,
+         "stoppedLines": 1
+      },
+      "lineDirectory": [],
+      "lineLocator":       {
+         "exchangeCode": "ASH",
+         "exchangeName": "Ashton",
+         "districtCode": "MR",
+         "L2SID": "BAAAHM",
+         "cableLinkID": "OGHP10003881",
+         "distributionPoint": "66",
+         "cableProvider": null
+      },
+      "lineSettings": null,
+      "lineStatus":       {
+         "statusCode": "Working",
+         "accessLineStatus": "Working",
+         "GNPStatus": null,
+         "lineOption": null,
+         "technology": "Generic Ethernet Access",
+         "lineType": null,
+         "tempStructure": false,
+         "standbyPowerRequired": false,
+         "narrowBandServicesAvailable": "false"
+      },
+      "availableServices": {"service":       [
+         "IPTV",
+         "EFM"
+      ]},
+      "unsupportedServices": null,
+      "incompatibleServices": null
+   },
+   "serviceLines":    [
+            {
+         "classificationCode": "Line and ADSL",
+         "networkType": "Onnet",
+         "lineTreatment":          [
+                        {
+               "lineTreatmentType": "EXISTING",
+               "earliestAvailabilityDate": "2018-01-26",
+               "appointmentNeeded": false,
+               "connectionCharge": "No Charge"
+            },
+                        {
+               "lineTreatmentType": "NEW",
+               "earliestAvailabilityDate": "2018-01-22",
+               "appointmentNeeded": false,
+               "connectionCharge": "No Charge"
+            }
+         ],
+         "serviceLine":          [
+                        {
+               "productCode": null,
+               "productName": null,
+               "classificationCode": "Line",
+               "lineSpeeds": null,
+               "lineTreatment": [],
+               "miscReference": null
+            },
+                        {
+               "productCode": "PC00024",
+               "productName": "Single Play Enhanced Transit",
+               "classificationCode": "ADSL",
+               "lineSpeeds":                {
+                  "maxDownSpeed": 1210,
+                  "minDownSpeed": 510,
+                  "minGuaranteedDownSpeed": 395,
+                  "maxUpSpeed": 1000,
+                  "minUpSpeed": 500,
+                  "avgDownSpeed": null,
+                  "bandwidthMeasure": null
+               },
+               "lineTreatment":                [
+                                    {
+                     "lineTreatmentType": "EXISTING",
+                     "accessLineID": "C001611233752",
+                     "accessLineType": "PSTN_ACCESSLINE",
+                     "serviceType": "SMPF",
+                     "serviceAction": "Provide",
+                     "SIM2Value": null,
+                     "lineInfo": "PSTN Working Line Takeover",
+                     "canNumberBeRetained": false,
+                     "portInFlag": "BT",
+                     "VICCode": null,
+                     "pendingOrder": [                     {
+                        "completionDate": null,
+                        "typeCode": "CANCEL",
+                        "thirdPartyFlag": false
+                     }],
+                     "note": null
+                  },
+                                    {
+                     "lineTreatmentType": "NEW",
+                     "accessLineID": "LLMR0001652",
+                     "accessLineType": "STOPPED_MPF_ACCESSLINE",
+                     "serviceType": "SMPF",
+                     "serviceAction": "Provide",
+                     "SIM2Value": null,
+                     "lineInfo": "Restart MPF Stopped Line",
+                     "canNumberBeRetained": false,
+                     "portInFlag": null,
+                     "VICCode": null,
+                     "pendingOrder": [],
+                     "note": null
+                  }
+               ],
+               "miscReference":                {
+                  "serviceProviderName": null,
+                  "lineLength": "3000.0",
+                  "customerAgreedDate": null,
+                  "readyForServiceDate": null,
+                  "ANFP": null
+               }
+            }
+         ]
+      },
+            {
+         "classificationCode": "Line and Fibre with Speed 76",
+         "networkType": "Onnet",
+         "lineTreatment": [         {
+            "lineTreatmentType": "EXISTING",
+            "earliestAvailabilityDate": "2018-01-26",
+            "appointmentNeeded": false,
+            "connectionCharge": "No Charge"
+         }],
+         "serviceLine":          [
+                        {
+               "productCode": null,
+               "productName": null,
+               "classificationCode": "Line",
+               "lineSpeeds": null,
+               "lineTreatment": [],
+               "miscReference": null
+            },
+                        {
+               "productCode": "PC00041",
+               "productName": "Single Play FTTC",
+               "classificationCode": "Fibre with Speed 76",
+               "lineSpeeds":                {
+                  "maxDownSpeed": 49500,
+                  "minDownSpeed": 33000,
+                  "minGuaranteedDownSpeed": 54270,
+                  "maxUpSpeed": 18450,
+                  "minUpSpeed": 12300,
+                  "avgDownSpeed": null,
+                  "bandwidthMeasure": "Predicted"
+               },
+               "lineTreatment": [               {
+                  "lineTreatmentType": "EXISTING",
+                  "accessLineID": "C001611233752",
+                  "accessLineType": "PSTN_ACCESSLINE",
+                  "serviceType": "FTTC",
+                  "serviceAction": "Provide",
+                  "SIM2Value": null,
+                  "lineInfo": "PSTN Working Line Takeover",
+                  "canNumberBeRetained": false,
+                  "portInFlag": "BT",
+                  "VICCode": null,
+                  "pendingOrder": [                  {
+                     "completionDate": null,
+                     "typeCode": "CANCEL",
+                     "thirdPartyFlag": false
+                  }],
+                  "note": null
+               }],
+               "miscReference":                {
+                  "serviceProviderName": null,
+                  "lineLength": null,
+                  "customerAgreedDate": null,
+                  "readyForServiceDate": null,
+                  "ANFP": "Extra Short from cabinet"
+               }
+            }
+         ]
+      },
+            {
+         "classificationCode": "Line and Fibre with Speed 38",
+         "networkType": "Onnet",
+         "lineTreatment": [         {
+            "lineTreatmentType": "EXISTING",
+            "earliestAvailabilityDate": "2018-01-26",
+            "appointmentNeeded": false,
+            "connectionCharge": "No Charge"
+         }],
+         "serviceLine":          [
+                        {
+               "productCode": null,
+               "productName": null,
+               "classificationCode": "Line",
+               "lineSpeeds": null,
+               "lineTreatment": [],
+               "miscReference": null
+            },
+                        {
+               "productCode": "PC00041",
+               "productName": "Single Play FTTC",
+               "classificationCode": "Fibre with Speed 38",
+               "lineSpeeds":                {
+                  "maxDownSpeed": 38000,
+                  "minDownSpeed": 33000,
+                  "minGuaranteedDownSpeed": 35000,
+                  "maxUpSpeed": 10000,
+                  "minUpSpeed": 10000,
+                  "avgDownSpeed": null,
+                  "bandwidthMeasure": "Predicted"
+               },
+               "lineTreatment": [               {
+                  "lineTreatmentType": "EXISTING",
+                  "accessLineID": "C001611233752",
+                  "accessLineType": "PSTN_ACCESSLINE",
+                  "serviceType": "FTTC",
+                  "serviceAction": "Provide",
+                  "SIM2Value": null,
+                  "lineInfo": "PSTN Working Line Takeover",
+                  "canNumberBeRetained": false,
+                  "portInFlag": "BT",
+                  "VICCode": null,
+                  "pendingOrder": [                  {
+                     "completionDate": null,
+                     "typeCode": "CANCEL",
+                     "thirdPartyFlag": false
+                  }],
+                  "note": null
+               }],
+               "miscReference":                {
+                  "serviceProviderName": null,
+                  "lineLength": null,
+                  "customerAgreedDate": null,
+                  "readyForServiceDate": null,
+                  "ANFP": "Extra Short from cabinet"
+               }
+            }
+         ]
+      }
+   ]
+}]}

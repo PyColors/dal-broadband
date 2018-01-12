@@ -1,7 +1,7 @@
 package com.vf.uk.dal.broadband.svc;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 
 public interface BroadbandService {
 
