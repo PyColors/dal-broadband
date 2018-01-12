@@ -1,0 +1,53 @@
+{
+  "flbbJourneyDetails": {
+    "servicePoint": {
+      "lineRefernece": {
+        "installationAddress": {
+          "identification": {
+            "id": "A90000121249",
+            "contextId": "Gold"
+          },
+          "postCode": "OL6 0FD",
+          "houseName": null,
+          "houseNumber": "8",
+          "flatNumber": null,
+          "streetName": "Merry Lane",
+          "town": "Lancashire",
+          "county": null,
+          "country": "United Kingdom",
+          "locality": null,
+          "citySubDivisionName": "MR",
+          "moveTypeCode": null
+        },
+        "lineLocator": {
+          "exchangeCode": "ASH",
+          "exchangeName": "Ashton",
+          "districtCode": "MR",
+          "l2SID": "BAAAHM",
+          "cableLinkID": "OGHP10003881",
+          "distributionPoint": "66"
+        },
+        "lineSettings": null,
+        "lineStatus": {
+          "statusCode": "Working",
+          "accessLineStatus": "Working",
+          "lineOption": null,
+          "technology": "Generic Ethernet Access",
+          "lineType": null,
+          "tempStructure": "false",
+          "standbyPowerRequired": "false",
+          "narrowBandServicesAvailable": "false",
+          "gnpStatus": "string"
+        },
+        "availableServices": {
+          "service": [
+            "IPTV",
+            "EFM"
+          ]
+        },
+        "lineDirectory": null
+      },
+      "serviceReference": null
+    }
+  }
+}

@@ -60,7 +60,15 @@
                "productCode": null,
                "productName": null,
                "classificationCode": "Line",
-               "lineSpeeds": null,
+               "lineSpeeds": {
+                  "maxDownSpeed": 38000,
+                  "minDownSpeed": 33000,
+                  "minGuaranteedDownSpeed": 35000,
+                  "maxUpSpeed": 10000,
+                  "minUpSpeed": 10000,
+                  "avgDownSpeed": null,
+                  "bandwidthMeasure": "Predicted"
+               },
                "lineTreatment": [],
                "miscReference": null
             },
@@ -135,7 +143,15 @@
                "productCode": null,
                "productName": null,
                "classificationCode": "Line",
-               "lineSpeeds": null,
+               "lineSpeeds": {
+                  "maxDownSpeed": 49500,
+                  "minDownSpeed": 33000,
+                  "minGuaranteedDownSpeed": 54270,
+                  "maxUpSpeed": 18450,
+                  "minUpSpeed": 12300,
+                  "avgDownSpeed": null,
+                  "bandwidthMeasure": "Predicted"
+               },
                "lineTreatment": [],
                "miscReference": null
             },
@@ -194,7 +210,15 @@
                "productCode": null,
                "productName": null,
                "classificationCode": "Line",
-               "lineSpeeds": null,
+               "lineSpeeds": {
+                  "maxDownSpeed": 38000,
+                  "minDownSpeed": 33000,
+                  "minGuaranteedDownSpeed": 35000,
+                  "maxUpSpeed": 10000,
+                  "minUpSpeed": 10000,
+                  "avgDownSpeed": null,
+                  "bandwidthMeasure": "Predicted"
+               },
                "lineTreatment": [],
                "miscReference": null
             },

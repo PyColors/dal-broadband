@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -54,14 +55,17 @@ public class BroadbandControllerTest {
 		String jsonString2 = new String(Utility.readFile("\\rest-mock\\FLBBREQUEST.json"));
 		FLBBJourneyRequest flbbRequestForJourney = new ObjectMapper().readValue(jsonString2, FLBBJourneyRequest.class);
 		
-		/*String jsonString2 = new String(Utility.readFile("\\rest-mock\\FLBBREQUEST.json"));
-		FLBBJourneyRequest requestForFLBB = new ObjectMapper().readValue(jsonString2, FLBBJourneyRequest.class);*/
+		String jsonString3 = new String(Utility.readFile("\\rest-mock\\FLBBREQUESTFORUPDATE.json"));
+		FLBBJourneyRequest requestForFLBB = new ObjectMapper().readValue(jsonString3, FLBBJourneyRequest.class);
 		
 		given(restTemplate.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability",request , GetServiceAvailibilityResponse.class)).
 		willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(response, HttpStatus.OK));
 		
 		FLBBJourneyResponse responeForFLBB = new FLBBJourneyResponse();
 		responeForFLBB.setJourneyId("123456789");
+		System.out.println(flbbRequestForJourney);
+		given(restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb",requestForFLBB , FLBBJourneyResponse.class)).
+		willReturn(new ResponseEntity<FLBBJourneyResponse>(responeForFLBB, HttpStatus.OK));
 		
 		
 	}
@@ -69,7 +73,7 @@ public class BroadbandControllerTest {
 	@Test
 	public void testCheckAvailabilityForBroadband(){
 		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY); 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		AvailabilityCheckRequest request = null;
 		try {
