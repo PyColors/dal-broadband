@@ -4,114 +4,301 @@
       "lineRefernece": {
         "installationAddress": {
           "identification": {
-            "id": "adasdasdsa",
-            "contextId": "asdasdasdsa"
+            "id": "addressReferenceNumber",
+            "contextId": "A90000121249"
           },
-          "postCode": "Rg145XE",
-          "houseName": "24",
-          "houseNumber": "24",
-          "flatNumber": "24",
-          "streetName": "asdasdasdad",
-          "town": "asdasdasdasd",
-          "county": "asdadadasd",
-          "country": "asdasdasda",
-          "locality": "asdasdasd",
-          "citySubDivisionName": "aa",
-          "moveTypeCode": "asdasda"
+          "postCode": "OL6 0FD",
+          "houseName": "string",
+          "houseNumber": "8",
+          "flatNumber": "string",
+          "streetName": "Merry Lane",
+          "town": "Lancashire",
+          "county": "string",
+          "country": "United Kingdom",
+          "locality": "string",
+          "citySubDivisionName": "MR",
+          "moveTypeCode": "string"
         },
         "lineLocator": {
-          "exchangeCode": "asdasd",
-          "exchangeName": "asdasdads",
-          "districtCode": "asdasdasd",
-          "l2SID": "asdasdads",
-          "cableLinkID": "asdasdasdasd",
-          "distributionPoint": "asdasdasd"
+          "exchangeCode": "ASH",
+          "exchangeName": "Ashton",
+          "districtCode": "MR",
+          "l2SID": "BAAAHM",
+          "cableLinkID": "OGHP10003881",
+          "distributionPoint": "66"
         },
         "lineSettings": {
-          "serviceCode": "asdasdasd",
-          "installationCode": "asdasdasd",
-          "terminationCode": "asdasdasdasd"
+          "serviceCode": "string",
+          "installationCode": "string",
+          "terminationCode": "string"
         },
         "lineStatus": {
-          "statusCode": "sadasdasdad",
-          "accessLineStatus": "asdasdasasd",
-          "gNPStatus": "asdasdasd",
-          "lineOption": "asdasdasd",
-          "technology": "asdasdasd",
-          "lineType": "sadasdasadsad",
-          "tempStructure": "sadasdads",
-          "standbyPowerRequired": "asdasdasd",
-          "narrowBandServicesAvailable": "asdasdasd"
+          "statusCode": "Working",
+          "accessLineStatus": "Working",
+          "lineOption": null,
+          "technology": "Generic Ethernet Access",
+          "lineType": "string",
+          "tempStructure": "false",
+          "standbyPowerRequired": "false",
+          "narrowBandServicesAvailable": "false",
+          "gNPStatus": "string"
         },
         "availableServices": {
           "service": [
-            "asdasdasdasd"
+            "IPTV",
+            "EFM"
           ]
         },
         "lineDirectory": [
           {
-            "featureCode": "asdasdasdasd",
-            "directoryCode": "asdasdasd",
-            "locationCode": "asdasdasdads"
+            "featureCode": "string",
+            "directoryCode": "string",
+            "locationCode": "string"
           }
         ]
       },
       "serviceReference": {
         "serviceLines": [
           {
-            "classificationCode": "asdasdasdasd",
-            "networkType": "asdasdasddas",
+            "classificationCode": "Line and ADSL",
+            "networkType": "Onnet",
             "lineTreatments": [
               {
-                "identification": "asdasdasdasd",
-                "earliestAvailableDate": "23/10/2018",
-                "connectionCharge": "asdasdasd"
+                "identification": "EXISTING",
+                "earliestAvailableDate": "2018-01-24",
+                "appointmentNeeded": false,
+                "connectionCharge": "No Charge"
+              },
+              {
+                "identification": "NEW",
+                "earliestAvailableDate": "2018-01-18",
+                "appointmentNeeded": false,
+                "connectionCharge": "No Charge"
               }
             ],
             "serviceLines": [
               {
                 "itemReference": {
-                  "identificationId": "asdasdasd",
-                  "name": "asdasdad",
-                  "classificationCode": "asdasdasd"
+                  "identificationId": "string",
+                  "name": "string",
+                  "classificationCode": "Line"
+                },
+                "lineSpeeds": null,
+                "miscRefernce": null,
+                "serviceLineTreatments": []
+              },
+              {
+                "itemReference": {
+                  "identificationId": "PC00024",
+                  "name": "Single Play Enhanced Transit",
+                  "classificationCode": "ADSL"
                 },
                 "lineSpeeds": {
-                  "maxDownSpeed": "111",
-                  "minDownSpeed": "111",
-                  "avgDownSpeed": "111",
-                  "minGuaranteedDownSpeed": "111",
-                  "maxUpSpeed": "111",
-                  "minUpSpeed": "111",
-                  "bandwidthMeasure": "111"
+                  "maxDownSpeed": "1210",
+                  "minDownSpeed": "510",
+                  "avgDownSpeed": "string",
+                  "minGuaranteedDownSpeed": "395",
+                  "maxUpSpeed": "1000",
+                  "minUpSpeed": "500",
+                  "bandwidthMeasure": "string"
                 },
                 "miscRefernce": {
-                  "serviceProviderName": "sadasdad",
-                  "lineLength": "asasdasdsad",
-                  "classificationCode": "asdasdasd",
-                  "customerAgreedDate": "28/10/2019",
-                  "readyForServiceDate": "29/10/2019",
-                  "anfp": "asdasdasdasd"
+                  "serviceProviderName": "string",
+                  "lineLength": "3000.0",
+                  "classificationCode": "string",
+                  "customerAgreedDate": "24/01/2018",
+                  "readyForServiceDate": "24/01/2018",
+                  "anfp": "string"
                 },
                 "serviceLineTreatments": [
                   {
-                    "parentIdentification": "asdasdasdasd",
-                    "serviceType": "asdasdasd",
-                    "serviceAction": "asdasdasdasd",
-                    "simValue": "asdasdasd",
-                    "lineInfo": "asdasdasd",
-                    "canNumberBeRetained": "sadasdasd",
-                    "portInFlag": "asdasdasd",
-                    "vicCode": "asdasdasd",
+                    "parentIdentification": "string",
+                    "serviceType": "SMPF",
+                    "serviceAction": "Provide",
+                    "simValue": "string",
+                    "lineInfo": "PSTN Working Line Takeover",
+                    "canNumberBeRetained": "false",
+                    "portInFlag": "BT",
+                    "vicCode": "string",
                     "pendingOrders": [
                       {
-                        "completionDate": "23/10/2209",
-                        "typeCode": "asdasdasd",
-                        "thirdPartyFlag": "sadasdasd"
+                        "completionDate": "24/01/2018",
+                        "typeCode": "CANCEL",
+                        "thirdPartyFlag": "false"
                       }
                     ],
                     "accessLine": {
-                      "id": "asdasdasd",
-                      "channelId": "asdasdd"
+                      "id": "C001611233752",
+                      "channelId": "string"
+                    }
+                  },
+                  {
+                    "parentIdentification": "string",
+                    "serviceType": "SMPF",
+                    "serviceAction": "Provide",
+                    "simValue": "string",
+                    "lineInfo": "Restart MPF Stopped Line",
+                    "canNumberBeRetained": "false",
+                    "portInFlag": "BT",
+                    "vicCode": "string",
+                    "pendingOrders": [
+                      {
+                        "completionDate": "24/01/2018",
+                        "typeCode": "string",
+                        "thirdPartyFlag": "string"
+                      }
+                    ],
+                    "accessLine": {
+                      "id": "LLMR0001652",
+                      "channelId": "string"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "classificationCode": "Line and Fibre with Speed 76",
+            "networkType": "Onnet",
+            "lineTreatments": [
+              {
+                "identification": "EXISTING",
+                "earliestAvailableDate": "2018-01-24",
+                "appointmentNeeded": false,
+                "connectionCharge": "No Charge"
+              }
+            ],
+            "serviceLines": [
+              {
+                "itemReference": {
+                  "identificationId": "string",
+                  "name": "string",
+                  "classificationCode": "Line"
+                },
+                "lineSpeeds": null,
+                "miscRefernce": null,
+                "serviceLineTreatments": []
+              },
+              {
+                "itemReference": {
+                  "identificationId": "PC00041",
+                  "name": "Single Play FTTC",
+                  "classificationCode": "Fibre with Speed 76"
+                },
+                "lineSpeeds": {
+                  "maxDownSpeed": "49500",
+                  "minDownSpeed": "33000",
+                  "avgDownSpeed": null,
+                  "minGuaranteedDownSpeed": "54270",
+                  "maxUpSpeed": "18450",
+                  "minUpSpeed": "12300",
+                  "bandwidthMeasure": null
+                },
+                "miscRefernce": {
+                  "serviceProviderName": null,
+                  "lineLength": null,
+                  "classificationCode": "string",
+                  "customerAgreedDate": null,
+                  "readyForServiceDate": null,
+                  "anfp": "Extra Short from cabinet"
+                },
+                "serviceLineTreatments": [
+                  {
+                    "parentIdentification": "string",
+                    "serviceType": "FTTC",
+                    "serviceAction": "Provide",
+                    "simValue": null,
+                    "lineInfo": "PSTN Working Line Takeover",
+                    "canNumberBeRetained": "false",
+                    "portInFlag": "BT",
+                    "vicCode": null,
+                    "pendingOrders": [
+                      {
+                        "completionDate": null,
+                        "typeCode": "CANCEL",
+                        "thirdPartyFlag": "false"
+                      }
+                    ],
+                    "accessLine": {
+                      "id": "C001611233752",
+                      "channelId": "string"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "classificationCode": "Line and Fibre with Speed 38",
+            "networkType": "Onnet",
+            "lineTreatments": [
+              {
+                "identification": "EXISTING",
+                "earliestAvailableDate": "2018-01-24",
+                "appointmentNeeded": false,
+                "connectionCharge": "No Charge"
+              },
+              {
+                "identification": "NEW",
+                "earliestAvailableDate": "2018-01-18",
+                "appointmentNeeded": false,
+                "connectionCharge": "No Charge"
+              }
+            ],
+            "serviceLines": [
+              {
+                "itemReference": {
+                  "identificationId": "string",
+                  "name": "string",
+                  "classificationCode": "Line"
+                },
+                "lineSpeeds": null,
+                "miscRefernce": null,
+                "serviceLineTreatments": []
+              },
+              {
+                "itemReference": {
+                  "identificationId": "PC00041",
+                  "name": "Single Play FTTC",
+                  "classificationCode": "Fibre with Speed 38"
+                },
+                "lineSpeeds": {
+                  "maxDownSpeed": "38000",
+                  "minDownSpeed": "33000",
+                  "avgDownSpeed": null,
+                  "minGuaranteedDownSpeed": "35000",
+                  "maxUpSpeed": "10000",
+                  "minUpSpeed": "10000",
+                  "bandwidthMeasure": null
+                },
+                "miscRefernce": {
+                  "serviceProviderName": null,
+                  "lineLength": null,
+                  "classificationCode": "string",
+                  "customerAgreedDate": null,
+                  "readyForServiceDate": null,
+                  "anfp": "Extra Short from cabinet"
+                },
+                "serviceLineTreatments": [
+                  {
+                    "parentIdentification": "string",
+                    "serviceType": "FTTC",
+                    "serviceAction": "Provide",
+                    "simValue": null,
+                    "lineInfo": "PSTN Working Line Takeover",
+                    "canNumberBeRetained": "false",
+                    "portInFlag": "BT",
+                    "vicCode": null,
+                    "pendingOrders": [
+                      {
+                        "completionDate": null,
+                        "typeCode": "CANCEL",
+                        "thirdPartyFlag": "false"
+                      }
+                    ],
+                    "accessLine": {
+                      "id": "C001611233752",
+                      "channelId": "string"
                     }
                   }
                 ]

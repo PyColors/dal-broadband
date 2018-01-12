@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
@@ -16,7 +16,7 @@ import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
 @Component("broadbandDao")
 public class BroadbandDaoImpl implements BroadbandDao {
-	
+	 
 	@Autowired
 	private RegistryClient registryClient;
 

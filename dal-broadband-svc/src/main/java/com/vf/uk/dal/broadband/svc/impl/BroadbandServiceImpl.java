@@ -4,9 +4,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;

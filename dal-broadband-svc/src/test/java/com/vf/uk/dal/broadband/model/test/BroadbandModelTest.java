@@ -4,13 +4,13 @@ import java.beans.IntrospectionException;
 
 import org.junit.Test;
 
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckRequest;
-import com.vf.uk.dal.braodband.entity.AvailabilityCheckResponse;
-import com.vf.uk.dal.braodband.entity.Identification;
-import com.vf.uk.dal.braodband.entity.InstallationAddress;
-import com.vf.uk.dal.braodband.entity.LineIdentification;
-import com.vf.uk.dal.braodband.entity.LineRef;
-import com.vf.uk.dal.braodband.entity.LineSpeeds;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.Identification;
+import com.vf.uk.dal.broadband.entity.InstallationAddress;
+import com.vf.uk.dal.broadband.entity.LineIdentification;
+import com.vf.uk.dal.broadband.entity.LineRef;
+import com.vf.uk.dal.broadband.entity.LineSpeeds;
 import com.vf.uk.dal.broadband.entity.journey.AccessLine;
 import com.vf.uk.dal.broadband.entity.journey.AppointmentWindow;
 import com.vf.uk.dal.broadband.entity.journey.AvailableServices;
@@ -50,7 +50,7 @@ public class BroadbandModelTest {
  	{
 		BeanTest.test(AvailabilityCheckRequest.class);
 		BeanTest.test(AvailabilityCheckResponse.class);
-		BeanTest.test(com.vf.uk.dal.braodband.entity.Error.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.Error.class);
 		BeanTest.test(Identification.class);
 		BeanTest.test(InstallationAddress.class);
 		BeanTest.test(LineIdentification.class);
