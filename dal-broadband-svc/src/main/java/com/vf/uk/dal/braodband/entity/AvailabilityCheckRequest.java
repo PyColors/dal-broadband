@@ -14,17 +14,12 @@ package com.vf.uk.dal.braodband.entity;
 
 import java.util.Objects;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * AvailabilityCheckRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-01-10T17:09:06.461Z")
 public class AvailabilityCheckRequest {
-	@SerializedName("lineRef")
 	private LineRef lineRef = null;
 
-	@SerializedName("journeyId")
 	private String journeyId = null;
 
 	public AvailabilityCheckRequest lineRef(LineRef lineRef) {
