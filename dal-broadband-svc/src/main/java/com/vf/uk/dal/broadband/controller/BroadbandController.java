@@ -23,8 +23,8 @@ BroadbandService broadbandService;
 	
 	@RequestMapping(value = "/availability/check", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(@RequestBody AvailabilityCheckRequest availabilityCheckRequest) {
-		AvailabilityCheckResponse availabilityCheckRes = broadbandService.checkAvailabilityForBroadband(availabilityCheckRequest);
-	return null;
+	return	 broadbandService.checkAvailabilityForBroadband(availabilityCheckRequest);
+	
 	}	
 	
 	
