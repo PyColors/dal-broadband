@@ -25,6 +25,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
+import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
@@ -104,6 +105,52 @@ public class BroadbandControllerTest {
 		}
 		AvailabilityCheckResponse resonse = broadBandController.checkAvailabilityForBroadband(request);
 		assertNotNull(resonse);
+	}
+	
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandForInvalidClassificationCode(){
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		AvailabilityCheckRequest request = null;
+		try {
+			 String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST3.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			broadBandController.checkAvailabilityForBroadband(request);
+		}catch(Exception e){
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+		
+		
+	}
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandForValidClassificationCode(){
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		AvailabilityCheckRequest request = null;
+		try {
+			 String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST4.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			AvailabilityCheckResponse resonse = broadBandController.checkAvailabilityForBroadband(request);
+			assertNotNull(resonse);
+		}catch(Exception e){
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+		
+		
 	}
 	
 	

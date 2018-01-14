@@ -100,7 +100,11 @@ definitions:
         $ref: '#/definitions/LineRef'
       journeyId:
         type: string
-        description : 'Existing journey id, for logged in customer journey id will not be null else null'  
+        description : 'Existing journey id, for logged in customer journey id will not be null else null' 
+      classificationCode:
+        type: array
+        items:
+          type: string  
   
   
   
