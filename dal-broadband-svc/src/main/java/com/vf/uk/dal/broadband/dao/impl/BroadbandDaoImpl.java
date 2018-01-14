@@ -1,6 +1,8 @@
 package com.vf.uk.dal.broadband.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +26,8 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	public GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest) {
 		
 		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		GetServiceAvailibilityResponse availabilityCheckResponse = null;
 		GetServiceAvailibilityRequest request = ConverterUtils.createGetServiceAvailibilityRequest(availabilityCheckRequest);
 		ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate

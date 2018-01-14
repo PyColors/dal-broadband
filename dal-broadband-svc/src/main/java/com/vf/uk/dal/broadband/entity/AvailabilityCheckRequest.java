@@ -12,6 +12,8 @@
 
 package com.vf.uk.dal.broadband.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,6 +23,8 @@ public class AvailabilityCheckRequest {
 	private LineRef lineRef = null;
 
 	private String journeyId = null;
+	
+	private List<String> classificationCode = new ArrayList<>();
 
 	public AvailabilityCheckRequest lineRef(LineRef lineRef) {
 		this.lineRef = lineRef;
@@ -57,6 +61,14 @@ public class AvailabilityCheckRequest {
 
 	public void setJourneyId(String journeyId) {
 		this.journeyId = journeyId;
+	}
+
+	public List<String> getClassificationCode() {
+		return classificationCode;
+	}
+
+	public void setClassificationCode(List<String> classificationCode) {
+		this.classificationCode = classificationCode;
 	}
 
 	@Override
