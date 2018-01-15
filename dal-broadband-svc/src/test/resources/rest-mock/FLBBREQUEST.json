@@ -41,7 +41,7 @@
           "tempStructure": "false",
           "standbyPowerRequired": "false",
           "narrowBandServicesAvailable": "false",
-          "gNPStatus": "string"
+          "gnpStatus": "string"
         },
         "availableServices": {
           "service": [

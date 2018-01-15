@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,6 +25,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
+import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
@@ -54,14 +56,17 @@ public class BroadbandControllerTest {
 		String jsonString2 = new String(Utility.readFile("\\rest-mock\\FLBBREQUEST.json"));
 		FLBBJourneyRequest flbbRequestForJourney = new ObjectMapper().readValue(jsonString2, FLBBJourneyRequest.class);
 		
-		/*String jsonString2 = new String(Utility.readFile("\\rest-mock\\FLBBREQUEST.json"));
-		FLBBJourneyRequest requestForFLBB = new ObjectMapper().readValue(jsonString2, FLBBJourneyRequest.class);*/
+		String jsonString3 = new String(Utility.readFile("\\rest-mock\\FLBBREQUESTFORUPDATE.json"));
+		FLBBJourneyRequest requestForFLBB = new ObjectMapper().readValue(jsonString3, FLBBJourneyRequest.class);
 		
 		given(restTemplate.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability",request , GetServiceAvailibilityResponse.class)).
 		willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(response, HttpStatus.OK));
 		
 		FLBBJourneyResponse responeForFLBB = new FLBBJourneyResponse();
 		responeForFLBB.setJourneyId("123456789");
+		System.out.println(flbbRequestForJourney);
+		given(restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb",requestForFLBB , FLBBJourneyResponse.class)).
+		willReturn(new ResponseEntity<FLBBJourneyResponse>(responeForFLBB, HttpStatus.OK));
 		
 		
 	}
@@ -69,7 +74,7 @@ public class BroadbandControllerTest {
 	@Test
 	public void testCheckAvailabilityForBroadband(){
 		ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY); 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		AvailabilityCheckRequest request = null;
 		try {
@@ -100,6 +105,52 @@ public class BroadbandControllerTest {
 		}
 		AvailabilityCheckResponse resonse = broadBandController.checkAvailabilityForBroadband(request);
 		assertNotNull(resonse);
+	}
+	
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandForInvalidClassificationCode(){
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		AvailabilityCheckRequest request = null;
+		try {
+			 String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST3.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			broadBandController.checkAvailabilityForBroadband(request);
+		}catch(Exception e){
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+		
+		
+	}
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandForValidClassificationCode(){
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		AvailabilityCheckRequest request = null;
+		try {
+			 String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST4.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try{
+			AvailabilityCheckResponse resonse = broadBandController.checkAvailabilityForBroadband(request);
+			assertNotNull(resonse);
+		}catch(Exception e){
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+		
+		
 	}
 	
 	
