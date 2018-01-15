@@ -3,6 +3,8 @@ package com.vf.uk.dal.broadband.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.journey.AccessLine;
@@ -26,6 +28,7 @@ import com.vf.uk.dal.broadband.entity.journey.ServiceLineTreatment;
 import com.vf.uk.dal.broadband.entity.journey.ServiceLines;
 import com.vf.uk.dal.broadband.entity.journey.ServicePoint;
 import com.vf.uk.dal.broadband.entity.journey.ServiceReference;
+import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
@@ -339,34 +342,35 @@ public class ConverterUtils {
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()!=null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().isEmpty()){
 			response.setAppointmentNeeded(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().get(0).getAppointmentNeeded());
+			response.setEarliestAvailableDate(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().get(0).getEarliestAvailabilityDate());
 		}
+		List<String> classificationCodesList = new ArrayList<>();
+		boolean is76FibreAvailable = false;
+		boolean is38FibreAvailable = false;
 		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
-						.getServiceLine() != null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
-						.getServiceLine().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
-						.getServiceLine().get(0).getLineSpeeds() != null) {
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()) {
 
-			com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.broadband.entity.LineSpeeds();
-			lineSpeedForResponse.setAvgDownSpeed(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getAvgDownSpeed());
-			lineSpeedForResponse.setBandwidthMeasure(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getBandwidthMeasure());
-			lineSpeedForResponse.setMaxDownSpeed(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getMaxDownSpeed());
-			lineSpeedForResponse.setMaxUpSpeed(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getMaxUpSpeed());
-			lineSpeedForResponse.setMinDownSpeed(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getMinDownSpeed());
-			lineSpeedForResponse.setMinGuaranteedDownSpeed(
-					getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
-							.getServiceLine().get(0).getLineSpeeds().getMinGuaranteedDownSpeed());
-			lineSpeedForResponse.setMinUpSpeed(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines().get(0).getServiceLine().get(0).getLineSpeeds().getMinUpSpeed());
+			
+			for(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
+				classificationCodesList.add(serviceLines.getClassificationCode());
+			}
+
+			if (classificationCodesList.contains(BroadBandConstant.LINE_WITH_76)) {
+				is76FibreAvailable = true;
+			}else if(!classificationCodesList.contains(BroadBandConstant.LINE_WITH_76)
+					&& classificationCodesList.contains(BroadBandConstant.LINE_WITH_38)){
+				is38FibreAvailable = true;
+			}
+			com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = null;
+			for(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
+					if(is76FibreAvailable && StringUtils.equalsIgnoreCase(serviceLines.getClassificationCode(), BroadBandConstant.LINE_WITH_76)){
+						lineSpeedForResponse = setLineSpeedForBroadband(serviceLines, "Fibre with Speed 76");
+					}else if(is38FibreAvailable && StringUtils.equalsIgnoreCase(serviceLines.getClassificationCode(), BroadBandConstant.LINE_WITH_38)){
+						lineSpeedForResponse = setLineSpeedForBroadband(serviceLines,"Fibre with Speed 38");
+					}
+			}
 			response.setLineSpeeds(lineSpeedForResponse);
 		}
 		com.vf.uk.dal.broadband.entity.InstallationAddress installationAddress = new com.vf.uk.dal.broadband.entity.InstallationAddress();
@@ -412,6 +416,26 @@ public class ConverterUtils {
 		response.setInstallationAddress(installationAddress);
 
 		return response;
+	}
+
+	private static com.vf.uk.dal.broadband.entity.LineSpeeds setLineSpeedForBroadband(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines,String speed) {
+		com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.broadband.entity.LineSpeeds();
+		for(com.vf.uk.dal.entity.serviceavailability.ServiceLine serviceLine : serviceLines.getServiceLine()){
+			if(StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), speed)){
+				lineSpeedForResponse.setAvgDownSpeed(serviceLine.getLineSpeeds().getAvgDownSpeed());
+				lineSpeedForResponse.setBandwidthMeasure(serviceLine.getLineSpeeds().getBandwidthMeasure());
+				lineSpeedForResponse.setMaxDownSpeed(serviceLine.getLineSpeeds().getMaxDownSpeed());
+				lineSpeedForResponse.setMaxUpSpeed(serviceLine.getLineSpeeds().getMaxUpSpeed());
+				lineSpeedForResponse.setMinDownSpeed(serviceLine.getLineSpeeds().getMinDownSpeed());
+				lineSpeedForResponse.setMinGuaranteedDownSpeed(
+						serviceLine.getLineSpeeds().getMinGuaranteedDownSpeed());
+				lineSpeedForResponse.setMinUpSpeed(serviceLine.getLineSpeeds().getMinUpSpeed());
+			}
+		}
+		
+		
+		
+		return lineSpeedForResponse;
 	}
 
 }
