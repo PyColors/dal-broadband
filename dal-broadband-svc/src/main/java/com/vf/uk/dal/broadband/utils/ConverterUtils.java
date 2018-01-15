@@ -342,6 +342,7 @@ public class ConverterUtils {
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()!=null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().isEmpty()){
 			response.setAppointmentNeeded(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().get(0).getAppointmentNeeded());
+			response.setEarliestAvailableDate(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().get(0).getEarliestAvailabilityDate());
 		}
 		List<String> classificationCodesList = new ArrayList<>();
 		boolean is76FibreAvailable = false;
