@@ -4,6 +4,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,11 +23,14 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vf.uk.dal.broadband.beans.test.BroadbandTestBeans;
+import com.vf.uk.dal.broadband.common.test.CommonMethods;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
+import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
@@ -43,6 +49,12 @@ public class BroadbandControllerTest {
 	
 	@MockBean
 	RestTemplate restTemplate;
+	
+	@MockBean
+	BroadbandRepoProvider broadBandProvider;
+	
+	@Autowired
+	private BroadbandRepoProvider broadbandRepoProvider;
 	
 	@Before
 	public void setupMockBehaviour() throws Exception {
@@ -68,7 +80,10 @@ public class BroadbandControllerTest {
 		given(restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb",requestForFLBB , FLBBJourneyResponse.class)).
 		willReturn(new ResponseEntity<FLBBJourneyResponse>(responeForFLBB, HttpStatus.OK));
 		
+		given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer", BundleDetails.class)).
+		willReturn(CommonMethods.getFlbList());
 		
+		given(broadBandProvider.getProductModelList(broadbandRepoProvider.getSolrHelper(), Arrays.asList("085897","085897"))).willReturn(CommonMethods.getProductModelsListFromDeviceIdList());
 	}
 	
 	@Test
@@ -153,5 +168,32 @@ public class BroadbandControllerTest {
 		
 	}
 	
+	
+	@Test
+	public void testGetFlbList() {
+		assertNotNull(broadBandController.getFlbList(CommonMethods.getQueryParamsMapForCoupleBundleListForFLB("Consumer",
+				"", "", "", "", "", "", "", "", "",
+				"", "", "")));
+	}
+
+	@Test
+	public void testNullFlbList() {
+		try {
+			assertNotNull(broadBandController.getFlbList(CommonMethods.getQueryParamsMapForCoupleBundleListForFLB(null,
+					"SIMO", null, null, null, null, null, null, null, null, null, null, null)));
+		} catch (Exception e) {
+
+		}
+	}
+
+/*	@Test
+	public void testGetFlbList1() {
+		try {
+			Map<String, String> querparam = new HashMap<>();
+			bundleController.getFlbList(querparam);
+		} catch (Exception e) {
+		}
+	}
+*/	
 	
 }
