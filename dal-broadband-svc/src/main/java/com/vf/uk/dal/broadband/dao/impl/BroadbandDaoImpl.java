@@ -51,26 +51,45 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		GetServiceAvailibilityResponse availabilityCheckResponse = null;
 		GetServiceAvailibilityRequest request = ConverterUtils.createGetServiceAvailibilityRequest(availabilityCheckRequest);
-		ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate
-				.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability", request, GetServiceAvailibilityResponse.class);
-		if (client != null)
-			availabilityCheckResponse = client.getBody();
+		try{
+			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate
+					.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability", request, GetServiceAvailibilityResponse.class);
+			if (client != null)
+				availabilityCheckResponse = client.getBody();
+		}catch(Exception e){
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+		}
+		
 
 		return availabilityCheckResponse;
 	}
 
 	@Override
 	public void updateJourneyWithFLBBDetails(String journeyId, FLBBJourneyRequest flbbRequestForJourney) {
-		RestTemplate restTemplate = registryClient.getRestTemplate();
-		restTemplate.put("http://JOURNEY-V1/journey/"+journeyId+"/flbb", flbbRequestForJourney);
+		try{
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			restTemplate.put("http://JOURNEY-V1/journey/"+journeyId+"/flbb", flbbRequestForJourney);
+		}catch(Exception e){
+			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
+			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
+		}
+		
 		
 	}
 
 	@Override
 	public String createJourneyWithFLBBDetails(FLBBJourneyRequest flbbRequestForJourney) {
-		RestTemplate restTemplate = registryClient.getRestTemplate();
-		ResponseEntity<FLBBJourneyResponse> client = restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb", flbbRequestForJourney, FLBBJourneyResponse.class);
-		
+		ResponseEntity<FLBBJourneyResponse> client = null;
+		try{
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			client = restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb", flbbRequestForJourney, FLBBJourneyResponse.class);
+
+		}catch(Exception e){
+			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
+			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
+		}
+				
 		if(client!=null){
 			FLBBJourneyResponse flbbResponse = client.getBody();
 			if(flbbResponse!=null){
