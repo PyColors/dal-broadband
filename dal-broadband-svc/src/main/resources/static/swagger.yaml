@@ -36,7 +36,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/Error'
-  /bundle:
+  /broadband/bundle:
     get:
       summary: Get the list of bundle(FLBB)  based on the filter criteria.
       description: >-
