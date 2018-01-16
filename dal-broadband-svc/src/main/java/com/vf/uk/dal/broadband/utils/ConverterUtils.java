@@ -324,8 +324,8 @@ public class ConverterUtils {
 				serviceLinesList.add(serviceLinesRequestForJourney);
 			}
 			serviceReference.setServiceLines(serviceLinesList);
+			servicePoint.setServiceReference(serviceReference);
 		}
-
 		flbbJourneyDetails.setServicePoint(servicePoint);
 		request.setFlbbJourneyDetails(flbbJourneyDetails);
 		return request;

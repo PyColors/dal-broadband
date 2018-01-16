@@ -77,8 +77,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 			LogHelper.error(this, "Invalid classification code !!!");
 			throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
 		}
-		
-		
 		return response;
 	}
 	
