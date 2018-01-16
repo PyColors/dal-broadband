@@ -50,7 +50,7 @@ BroadbandService broadbandService;
 		String journeyType = queryParams.containsKey(Constants.JOURNEY_TYPE) ? queryParams.get(Constants.JOURNEY_TYPE)
 				: null;
 		String offerCode = queryParams.containsKey(Constants.OFFER_CODE) ? queryParams.get(Constants.OFFER_CODE) : null;
-		String duration = queryParams.containsKey(Constants.OFFER_CODE) ? queryParams.get(Constants.OFFER_CODE) : null;
+		String duration = queryParams.containsKey(Constants.DURATION) ? queryParams.get(Constants.DURATION) : null;
 		String classificationCode = queryParams.containsKey(Constants.CLASSIFICATION_CODE)
 				? queryParams.get(Constants.CLASSIFICATION_CODE) : null;
 		getBundleListSearchCriteria.setJourneyType(journeyType);
