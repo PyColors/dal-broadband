@@ -19,6 +19,7 @@ import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
+import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.broadband.utils.MediaConstants;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -36,6 +37,18 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao.getServiceAvailability(availabilityCheckRequest);
+		
+		if(getServiceAvailabilityResponse==null){
+			LogHelper.error(this, "Invalid classification code !!!");
+			throw new ApplicationException(ExceptionMessages.EMPTY_GSA_RESPONSE);
+		}else if(getServiceAvailabilityResponse.getServiceAvailabilityLine()!=null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
+				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()==null){
+			LogHelper.error(this, "No Service Lines Recieved From TIL !!!");
+			throw new ApplicationException(ExceptionMessages.INVALID_SERVICE_LINE);
+			
+		}
+		
 		boolean isClassificationCodePresent = false;
 		if(getServiceAvailabilityResponse.getServiceAvailabilityLine()!=null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
