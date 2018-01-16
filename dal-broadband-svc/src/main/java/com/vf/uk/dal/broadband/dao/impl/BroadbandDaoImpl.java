@@ -97,6 +97,11 @@ public class BroadbandDaoImpl implements BroadbandDao {
 				s = s.substring(1, s.length() - 1);
 				LogHelper.error(CommonUtility.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.INVALID_API_REQUEST);
+			}else if (e.getStatusCode().value() == 404) {
+				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
+				s = s.substring(1, s.length() - 1);
+				LogHelper.error(CommonUtility.class, "" + s);
+				throw new ApplicationException(ExceptionMessages.NO_DATA_RECIEVED);
 			}
 		}
 		catch (HttpServerErrorException e) {

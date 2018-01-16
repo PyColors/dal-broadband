@@ -10,5 +10,6 @@ public class ExceptionMessages {
 	public static final String SOLR_GETPRODUCTMODEL_EXCEPTION = "Exception From Solr getProductModel";
 	/** The Constant SOLR_CONNECTION_CLOSE_EXCEPTION. */
 	public static final String SOLR_CONNECTION_CLOSE_EXCEPTION ="Exception occured while closing solr connection";
+	public static final String NO_DATA_RECIEVED = "No Data Found in solr.";
 
 }
