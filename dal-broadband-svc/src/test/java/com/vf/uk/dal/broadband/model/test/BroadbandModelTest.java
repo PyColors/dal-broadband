@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 
 import org.junit.Test;
 
+import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.Identification;
@@ -49,6 +50,7 @@ public class BroadbandModelTest {
  	public void testModelClass() throws NoSuchMethodException, IntrospectionException
  	{
 		BeanTest.test(AvailabilityCheckRequest.class);
+		BeanTest.test(AppointmentAndAvailabilityDetail.class);
 		BeanTest.test(AvailabilityCheckResponse.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.Error.class);
 		BeanTest.test(Identification.class);

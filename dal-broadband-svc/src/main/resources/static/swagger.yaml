@@ -92,16 +92,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'          
 definitions:
-  
-  
-  
-    
-  
-    
-  
-  
-      
-  
   AvailabilityCheckResponse:
     type: object
     properties:
@@ -110,12 +100,12 @@ definitions:
         description : 'Journey id of the broadband - Unique'
       installationAddress:
         $ref: '#/definitions/InstallationAddress'
-      appointmentNeeded:
-        type: boolean
-        description: 'Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option' 
-      earliestAvailableDate:
-        type: string
-        description : 'The earliest available date when the service will be available'
+      appointmentAndAvailabilityDetail:
+        type: array
+        items:
+          $ref: '#/definitions/AppointmentAndAvailabilityDetail'  
+        
+      
       engineeringVisitCharge:
         type: number
         format : float
@@ -125,6 +115,19 @@ definitions:
         type: array
         items:
           type: string 
+  
+  AppointmentAndAvailabilityDetail:
+    type: object
+    properties:
+      appointmentNeeded:
+        type: boolean
+        description: 'Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option' 
+      earliestAvailableDate:
+        type: string
+        description : 'The earliest available date when the service will be available'
+      lineTreatmentType:
+        type: string
+        description : 'EXISTING OR NEW'  
   
   LineRef:
     type: object

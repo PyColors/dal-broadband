@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.journey.AccessLine;
@@ -344,8 +345,17 @@ public class ConverterUtils {
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()!=null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().isEmpty()){
-			response.setAppointmentNeeded(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().get(0).getAppointmentNeeded());
-			response.setEarliestAvailableDate(getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().get(0).getEarliestAvailabilityDate());
+			List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityList = new ArrayList<>();
+			for(com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()){
+				AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
+				appointmentDetails.setAppointmentNeeded(lineTreatment.getAppointmentNeeded());
+				appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailabilityDate());
+				if(lineTreatment.getLineTreatmentType()!=null){
+					appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
+				}
+				appointmentAndAvailabilityList.add(appointmentDetails);
+			}
+			response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 		}
 		List<String> classificationCodesList = new ArrayList<>();
 		boolean is76FibreAvailable = false;
