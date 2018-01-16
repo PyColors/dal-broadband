@@ -104,8 +104,19 @@ public class BroadbandModelTest {
 		BeanTest.test(com.vf.uk.dal.entity.serviceavailability.ServiceLine.class);
 		BeanTest.test(com.vf.uk.dal.entity.serviceavailability.ServiceLines.class);
 		BeanTest.test(com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment.class);
-		
-		
- 			
+		BeanTest.test(com.vf.uk.dal.broadband.entity.BundleDetails.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.BundleHeader.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.BundlePrice.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.Duration.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.FlbBundle.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.HardwarePrice.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.MediaLink.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.MerchandisingPromotion.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.MiscellaneousAttributes.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.Price.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.PriceForBundleAndHardware.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.SecureNet.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.StepPricingInfo.class);
  	}
 }
