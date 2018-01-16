@@ -211,6 +211,9 @@ public class ConverterUtils {
 					for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : serviceLinesFromRequest
 							.getLineTreatment()) {
 						LineTreatment lineTreatmentForJourney = new LineTreatment();
+						if(lineTreatment.getLineTreatmentType()!=null){
+							lineTreatmentForJourney.setIdentification(lineTreatment.getLineTreatmentType().toString());
+						}
 						lineTreatmentForJourney.setAppointmentNeeded(lineTreatment.getAppointmentNeeded());
 						if (lineTreatment.getConnectionCharge() != null) {
 							lineTreatmentForJourney.setConnectionCharge(lineTreatment.getConnectionCharge().toString());
@@ -290,7 +293,7 @@ public class ConverterUtils {
 								serviceLineTreatment.setLineInfo(serviceLineTreatmentReq.getLineInfo());
 								serviceLineTreatment.setPortInFlag(serviceLineTreatmentReq.getPortInFlag());
 								serviceLineTreatment.setServiceAction(serviceLineTreatmentReq.getServiceAction());
-								serviceLineTreatment.setServiceType(serviceLineTreatmentReq.getServiceAction());
+								serviceLineTreatment.setServiceType(serviceLineTreatmentReq.getServiceType());
 								serviceLineTreatment.setSimValue(serviceLineTreatmentReq.getSiM2Value());
 								serviceLineTreatment.setVicCode(serviceLineTreatmentReq.getViCCode());
 								AccessLine accessLineForJourney = new AccessLine();
