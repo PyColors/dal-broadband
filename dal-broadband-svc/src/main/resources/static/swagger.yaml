@@ -10,16 +10,17 @@ basePath: /api/v1
 produces:
   - application/json
 paths:
-  /broadband/availability/check :
+  /broadband/availability/check:
     post:
       summary: check the availability checker for the braod band journey
       description: >-
-        This service accepts address, calls the GSA and creates / update the journey with the service point information.
+        This service accepts address, calls the GSA and creates / update the
+        journey with the service point information.
       operationId: COMM_001_AvailabilityChecker
       parameters:
         - name: availabilityCheckerRequest
           in: body
-          description: Sends the availability check request 
+          description: Sends the availability check request
           required: true
           schema:
             $ref: '#/definitions/AvailabilityCheckRequest'
@@ -30,6 +31,41 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/AvailabilityCheckResponse'
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+  /broadband/availablity/serviceStartDates:
+    get:
+      summary: check the availability checker for the braod band journey
+      description: >-
+        This service accepts address, calls the GSA and creates / update the
+        journey with the service point information.
+      operationId: BB_002_ServiceDatesUtility
+      parameters:
+        - name: earliestAvailableStartDate
+          in: query
+          description: EarliestAvailableStartDate
+          required: true
+          type: string
+        - name: range
+          in: query
+          description: >-
+            The range of days , based on which the service will send the
+            available service startDates
+          required: true
+          type: number
+      tags:
+        - AvailabilityCheck
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ServiceStartDates'
+        '400':
+          description: Bad Request
         '404':
           description: Not found
         '500':
@@ -49,7 +85,8 @@ paths:
           description: >-
             To identify the User, the possible values are "consumer" or
             "business" for get bundle list and consumer , enterprise and soho
-            for compatible plans Accepts Consumer, Enterprose and Soho. If none is passed then by default it takes consumer.
+            for compatible plans Accepts Consumer, Enterprose and Soho. If none
+            is passed then by default it takes consumer.
           required: false
           type: string
         - name: offerCode
@@ -62,20 +99,26 @@ paths:
         - name: journeyType
           in: query
           description: >-
-            Indicates the journeyType of the customer. For eg. upgrade Accepts SecondLine, Upgrade. Upgrade is currently not supported. The provision is there but should not be sent until backend starts supporting. If nothing is passed then we default it to Acquisition or New Customer
-            secondline, etc.
+            Indicates the journeyType of the customer. For eg. upgrade Accepts
+            SecondLine, Upgrade. Upgrade is currently not supported. The
+            provision is there but should not be sent until backend starts
+            supporting. If nothing is passed then we default it to Acquisition
+            or New Customer secondline, etc.
           required: false
           type: string
         - name: duration
           in: query
-          description: bundles will be filter based on duration like 18 months or 24 months. Format is 18 Months or 24 Months or 12 Months
+          description: >-
+            bundles will be filter based on duration like 18 months or 24
+            months. Format is 18 Months or 24 Months or 12 Months
           required: false
           type: string
         - name: classificationCode
           in: query
           description: >-
             Filter based on speed. Accepts single and comma seperated aswell Eg:
-            Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed then we show all the packages for corresponding journeyType.
+            Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed
+            then we show all the packages for corresponding journeyType.
           required: false
           type: string
       tags:
@@ -90,45 +133,45 @@ paths:
         '500':
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Error'          
+            $ref: '#/definitions/Error'
 definitions:
   AvailabilityCheckResponse:
     type: object
     properties:
       journeyId:
         type: string
-        description : 'Journey id of the broadband - Unique'
+        description: Journey id of the broadband - Unique
       installationAddress:
         $ref: '#/definitions/InstallationAddress'
       appointmentAndAvailabilityDetail:
         type: array
         items:
-          $ref: '#/definitions/AppointmentAndAvailabilityDetail'  
-        
-      
+          $ref: '#/definitions/AppointmentAndAvailabilityDetail'
       engineeringVisitCharge:
         type: number
-        format : float
+        format: float
       lineSpeeds:
-        $ref: '#/definitions/LineSpeeds'  
+        $ref: '#/definitions/LineSpeeds'
       classificationCode:
         type: array
         items:
-          type: string 
-  
+          type: string
   AppointmentAndAvailabilityDetail:
     type: object
     properties:
       appointmentNeeded:
         type: boolean
-        description: 'Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option' 
+        description: >-
+          Whether the appointment is needed or not. If appointmenr needed flag
+          is false, it means customer has existing line if it is true it means
+          customer does not have existing line and should only take a new line
+          option
       earliestAvailableDate:
         type: string
-        description : 'The earliest available date when the service will be available'
+        description: The earliest available date when the service will be available
       lineTreatmentType:
         type: string
-        description : 'EXISTING OR NEW'  
-  
+        description: EXISTING OR NEW
   LineRef:
     type: object
     properties:
@@ -139,18 +182,22 @@ definitions:
     properties:
       fllandlineNumber:
         type: string
-        description: 'The directory number currently associated with the copper pair'
+        description: The directory number currently associated with the copper pair
       typeCode:
         type: string
-        description: 'Flag that identifies the type of Business Customer'
+        description: Flag that identifies the type of Business Customer
       serviceClassificationCode:
         type: string
-        description: 'Represents the type of Business service to query for service availability. This is optional field'  
+        description: >-
+          Represents the type of Business service to query for service
+          availability. This is optional field
       moveFromPostCode:
         type: string
-        description: 'Specifies the post code from which the prospective customer is willing to move'
+        description: >-
+          Specifies the post code from which the prospective customer is willing
+          to move
       installationAddress:
-        $ref: '#/definitions/InstallationAddress'        
+        $ref: '#/definitions/InstallationAddress'
   AvailabilityCheckRequest:
     type: object
     properties:
@@ -158,23 +205,23 @@ definitions:
         $ref: '#/definitions/LineRef'
       journeyId:
         type: string
-        description : 'Existing journey id, for logged in customer journey id will not be null else null' 
+        description: >-
+          Existing journey id, for logged in customer journey id will not be
+          null else null
       classificationCode:
         type: array
         items:
-          type: string  
-  
-  
-  
+          type: string
   Identification:
     type: object
     properties:
       id:
         type: string
-        description: 'This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system'
+        description: >-
+          This is the Wholesale address reference identifier that uniquely
+          identifies the address in the Fixed Line or PostOffice system
       contextId:
         type: string
-  
   InstallationAddress:
     type: object
     properties:
@@ -182,85 +229,69 @@ definitions:
         $ref: '#/definitions/Identification'
       postCode:
         type: string
-        description: 'The postcode of the prospective customer as per the Fixed Line system'
+        description: The postcode of the prospective customer as per the Fixed Line system
       houseName:
         type: string
-        description: 'House Name'
+        description: House Name
       houseNumber:
         type: string
-        description : 'House number'
+        description: House number
       flatNumber:
         type: string
-        description: 'flat number'
+        description: flat number
       streetName:
         type: string
-        description : 'street name'
+        description: street name
       town:
         type: string
-        description : 'town'
+        description: town
       county:
         type: string
-        description: 'county'
+        description: county
       country:
         type: string
-        description: 'country'
+        description: country
       locality:
         type: string
-        description : 'locality'
+        description: locality
       citySubDivisionName:
         type: string
-        description : 'city sub division code'
-      moveTypeCode: 
+        description: city sub division code
+      moveTypeCode:
         type: string
-        description : 'Code identifying whether it is change of address scenario'
-        
-  
-  
-    
-          
-  
-  
-      
-  
-  
-  
+        description: Code identifying whether it is change of address scenario
   LineSpeeds:
     type: object
     properties:
       maxDownSpeed:
         type: number
         format: double
-        description : 'The maximum download speed offered
-        (in kilobits per second [kbps])'
+        description: 'The maximum download speed offered (in kilobits per second [kbps])'
       minDownSpeed:
         type: number
         format: double
-        description : 'The minimum download speed offered
-        (in kilobits per second [kbps])'
+        description: 'The minimum download speed offered (in kilobits per second [kbps])'
       avgDownSpeed:
         type: number
         format: double
-        description : 'The average download speed offered
-        (in kilobits per second [kbps])'
+        description: 'The average download speed offered (in kilobits per second [kbps])'
       minGuaranteedDownSpeed:
         type: number
         format: double
-        description : 'The minimum guaranteed download speed offered
-        (in kilobits per second [kbps])'
+        description: >-
+          The minimum guaranteed download speed offered (in kilobits per second
+          [kbps])
       maxUpSpeed:
         type: number
         format: double
-        description : 'The max  upload speed offered
-        (in kilobits per second [kbps])'
+        description: 'The max  upload speed offered (in kilobits per second [kbps])'
       minUpSpeed:
         type: number
         format: double
-        description : 'The min upload speed offered
-        (in kilobits per second [kbps])'
+        description: 'The min upload speed offered (in kilobits per second [kbps])'
       bandwidthMeasure:
-        type: string  
-        description : 'Indicates whether the best speed is predicted or actual'
-        
+        type: string
+        description: Indicates whether the best speed is predicted or actual
   FlbBundle:
     type: object
     properties:
@@ -293,7 +324,9 @@ definitions:
         description: Usage of the bundle as provided in the merchandising file
       classificationCode:
         type: string
-        description: ClassificationCode of the Flb bundle as provided in the Product catalogue   
+        description: >-
+          ClassificationCode of the Flb bundle as provided in the Product
+          catalogue
       commitmentPeriod:
         type: string
         description: Commitment period of the bundle
@@ -341,7 +374,7 @@ definitions:
         type: array
         description: List of packageTypes available for the MediaLink
         items:
-          type: string      
+          type: string
   PriceForBundleAndHardware:
     type: object
     properties:
@@ -466,8 +499,17 @@ definitions:
         description: Net value of the item
       vat:
         type: string
-        description: VAT component of the item price        
-
+        description: VAT component of the item price
+  ServiceStartDates:
+    type: object
+    properties:
+      dates:
+        type: array
+        description: >-
+          Array of possible service start dates within the requested range of
+          working days - FORMAT - "DD-MM-YYYY"
+        items:
+          type: string
   Error:
     type: object
     properties:
