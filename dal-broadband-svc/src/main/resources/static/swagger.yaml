@@ -39,15 +39,21 @@ paths:
             $ref: '#/definitions/Error'
   /broadband/availablity/serviceStartDates:
     get:
-      summary: check the availability checker for the braod band journey
+      summary: >-
+        Utility Service which accepts earliest available service start date
+        returned by GSA service and returns the next possible service start
+        dates (working days - excluding weekends and bank holidays), within the
+        requested date range.
       description: >-
-        This service accepts address, calls the GSA and creates / update the
-        journey with the service point information.
+        This service accepts earliest available service start date returned by
+        GSA service and returns the next possible service start dates (working
+        days - excluding weekends and bank holidays), within the requested date
+        range. The 
       operationId: BB_002_ServiceDatesUtility
       parameters:
         - name: earliestAvailableStartDate
           in: query
-          description: EarliestAvailableStartDate
+          description: earliest available service start date returned by GSA service
           required: true
           type: string
         - name: range
