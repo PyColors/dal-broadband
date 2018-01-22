@@ -1,7 +1,14 @@
 package com.vf.uk.dal.broadband.dao.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +26,7 @@ import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
 import com.vf.uk.dal.broadband.helper.SolrHelper;
+import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
@@ -29,101 +37,104 @@ import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
+import com.vodafone.bankHolidays.pojo.BankHolidays;
 import com.vodafone.business.service.RequestManager;
+import com.vodafone.dal.domain.repository.BankHolidaysRepository;
 import com.vodafone.solrmodels.ProductModel;
 
 @Component("broadbandDao")
 public class BroadbandDaoImpl implements BroadbandDao {
-	 
+
 	@Autowired
 	private RegistryClient registryClient;
-	
+
 	@Autowired
 	private BroadbandRepoProvider broadbandRepoProvider;
-	
+
+	@Autowired
+	private BroadbandCoherenceRepoProvider cohRepoProvider;
+
 	private RequestManager requestManager = null;
 
 	@Override
 	public GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest) {
-		
+
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		GetServiceAvailibilityResponse availabilityCheckResponse = null;
-		GetServiceAvailibilityRequest request = ConverterUtils.createGetServiceAvailibilityRequest(availabilityCheckRequest);
-		try{
-			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate
-					.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability", request, GetServiceAvailibilityResponse.class);
+		GetServiceAvailibilityRequest request = ConverterUtils
+				.createGetServiceAvailibilityRequest(availabilityCheckRequest);
+		try {
+			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate.postForEntity(
+					"http://UTILITY-V1/utility/broadbandServiceAvailability", request,
+					GetServiceAvailibilityResponse.class);
 			if (client != null)
 				availabilityCheckResponse = client.getBody();
-		}catch(Exception e){
+		} catch (Exception e) {
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
 			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
 		}
-		
 
 		return availabilityCheckResponse;
 	}
 
 	@Override
 	public void updateJourneyWithFLBBDetails(String journeyId, FLBBJourneyRequest flbbRequestForJourney) {
-		try{
+		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			restTemplate.put("http://JOURNEY-V1/journey/"+journeyId+"/flbb", flbbRequestForJourney);
-		}catch(Exception e){
+			restTemplate.put("http://JOURNEY-V1/journey/" + journeyId + "/flbb", flbbRequestForJourney);
+		} catch (Exception e) {
 			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
 			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
 		}
-		
-		
+
 	}
 
 	@Override
 	public String createJourneyWithFLBBDetails(FLBBJourneyRequest flbbRequestForJourney) {
 		ResponseEntity<FLBBJourneyResponse> client = null;
-		try{
+		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			client = restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb", flbbRequestForJourney, FLBBJourneyResponse.class);
+			client = restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb", flbbRequestForJourney,
+					FLBBJourneyResponse.class);
 
-		}catch(Exception e){
+		} catch (Exception e) {
 			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
 			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
 		}
-				
-		if(client!=null){
+
+		if (client != null) {
 			FLBBJourneyResponse flbbResponse = client.getBody();
-			if(flbbResponse!=null){
+			if (flbbResponse != null) {
 				return flbbResponse.getJourneyId();
 			}
 			return null;
 		}
 		return null;
 	}
-	
+
 	@Override
 	public BundleDetails getBundleDetailsFromGetBundleListAPI(String url) {
 		LogHelper.info(this, "Start -->  calling  getBundleDetailsFromGetBundleListAPI");
 		BundleDetails client = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
-		try{
+		try {
 			client = restTemplate.getForObject(url, BundleDetails.class);
-		}
-		catch (HttpClientErrorException e) 
-		{
-		    LogHelper.error(CommonUtility.class, "" + e);
+		} catch (HttpClientErrorException e) {
+			LogHelper.error(CommonUtility.class, "" + e);
 			if (e.getStatusCode().value() == 400) {
 				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
 				s = s.substring(1, s.length() - 1);
 				LogHelper.error(CommonUtility.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.INVALID_API_REQUEST);
-			}else if (e.getStatusCode().value() == 404) {
+			} else if (e.getStatusCode().value() == 404) {
 				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
 				s = s.substring(1, s.length() - 1);
 				LogHelper.error(CommonUtility.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.NO_DATA_RECIEVED);
 			}
-		}
-		catch (HttpServerErrorException e) {
+		} catch (HttpServerErrorException e) {
 			LogHelper.error(CommonUtility.class, "" + e);
 			if (e.getStatusCode().value() == 500) {
 				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
@@ -132,19 +143,19 @@ public class BroadbandDaoImpl implements BroadbandDao {
 				LogHelper.error(CommonUtility.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.HTTP_SERVER_EXP_ERROR);
 			}
-		}
-		catch(Exception e){
-			LogHelper.error(CommonUtility.class, "getBundleDetailsFromGetBundleListAPI API Exception---------------"+e);
-			//throw new ApplicationException(e.getLocalizedMessage());
+		} catch (Exception e) {
+			LogHelper.error(CommonUtility.class,
+					"getBundleDetailsFromGetBundleListAPI API Exception---------------" + e);
+			// throw new ApplicationException(e.getLocalizedMessage());
 			throw new ApplicationException(ExceptionMessages.INTERNAL_API_CALL_EXP);
-	}
-		
+		}
+
 		LogHelper.info(this, "End --> calling getBundleDetailsFromGetBundleListAPI");
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.convertValue(client, new TypeReference<BundleDetails>() {
 		});
 	}
-	
+
 	/**
 	 * This method gets the list of Product Modles from Solr based on the list
 	 * of Product Ids received as input in parameter.
@@ -165,10 +176,28 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return productModels;
 
 	}
-	
+
 	@Override
 	public void getSolrConnection() {
 		requestManager = SolrConnectionProvider.getSolrConnection();
 	}
 
+	@Override
+	public List<LocalDate> getHolidayList(String earliestAvailableStartDate, int range) throws ParseException{
+		final BankHolidaysRepository repo = cohRepoProvider.getBankHolidayRepository();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = sdf.parse(earliestAvailableStartDate);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		java.sql.Date startDate = new java.sql.Date(cal.getTime().getTime());
+		cal.add(Calendar.DATE, range);
+		java.sql.Date endDate = new java.sql.Date((cal.getTime()).getTime());
+		List<BankHolidays> bankHolidays = cohRepoProvider.getBankHolidayList(repo, startDate, endDate);
+		List<LocalDate> dateList = new ArrayList<>();
+		if (CollectionUtils.isNotEmpty(bankHolidays)) {
+			bankHolidays.forEach(a -> dateList.add(a.getDateOfHoliday().toLocalDate()));
+		}
+		return dateList;
+
+	}
 }

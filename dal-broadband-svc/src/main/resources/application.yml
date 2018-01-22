@@ -1,7 +1,10 @@
 spring:
   application:
     name: BROADBAND-V1
-
+info:
+  build:
+    version: @project.version@
+    projectName: @project.artifactId@
 server:
   contextPath: /broadband
   port: 8080

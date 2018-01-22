@@ -1,8 +1,23 @@
 <?xml version="1.0"?>
 
 <cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config">
+	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config
+   coherence-cache-config.xsd">
 	<caching-scheme-mapping>
+		<cache-mapping>
+			<cache-name>BasketCache</cache-name>
+			<scheme-name>BasketCacheScheme</scheme-name>
+			<key-type>java.lang.String</key-type>
+			<value-type>com.vodafone.dal.domain.basket.Basket</value-type>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>DBDetailsCache</cache-name>
+			<scheme-name>DBDetailsCacheScheme</scheme-name>
+			<key-type>java.lang.String</key-type>
+			<value-type>com.vodafone.dbDetails.pojo.DBDetails
+			</value-type>
+		</cache-mapping> 
 		<cache-mapping>
 			<cache-name>ProductCache</cache-name>
 			<scheme-name>ProductCacheScheme</scheme-name>
@@ -30,17 +45,10 @@
 			</value-type>
 		</cache-mapping>
 		<cache-mapping>
-			<cache-name>ProductCompatibilityCache</cache-name>
-			<scheme-name>ProductCompatibilityCacheScheme</scheme-name>
-			<key-type>java.lang.String</key-type>
-			<value-type>com.vodafone.RexRules.pojo.ProductCompatibility
-			</value-type>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>DatagramCache</cache-name>
-			<scheme-name>DatagramCacheScheme</scheme-name>
-			<key-type>java.lang.String</key-type>
-			<value-type>com.vodafone.datagram.DatagramDetails
+			<cache-name>BankHolidaysCache</cache-name>
+			<scheme-name>BankHolidaysCacheScheme</scheme-name>
+			<key-type>java.sql.Date</key-type>
+			<value-type>com.vodafone.bankHolidays.pojo.BankHolidays
 			</value-type>
 		</cache-mapping>
 		<cache-mapping>
@@ -49,39 +57,13 @@
 			<key-type>java.lang.String</key-type>
 			<value-type>com.vodafone.stockAvailability.pojo.StockAvailability
 			</value-type>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>AccountCache</cache-name>
-			<scheme-name>AccountCacheScheme</scheme-name>
-			<key-type>java.lang.String</key-type>
-			<value-type>com.vodafone.dal.domain.account.Account</value-type>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>SubscriptionCache</cache-name>
-			<scheme-name>SubscriptionCacheScheme</scheme-name>
-			<key-type>java.lang.String</key-type>
-			<value-type>com.vodafone.dal.domain.subscription.Subscription
-			</value-type>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>SubscriptionAccountCache</cache-name>
-			<scheme-name>SubscriptionAccountCacheScheme</scheme-name>
-			<key-type>java.lang.String</key-type>
-			<value-type>com.vodafone.dal.subscriptionaccount.SubscriptionAccount
-			</value-type>
-		</cache-mapping>
-		<cache-mapping>
-			<cache-name>AccountContactCache</cache-name>
-			<scheme-name>AccountContactCacheScheme</scheme-name>
-			<key-type>java.lang.String</key-type>
-			<value-type>com.vodafone.dal.domain.accountcontact.CustomerAccount
-			</value-type>
-		</cache-mapping>
+		</cache-mapping> 
+
 	</caching-scheme-mapping>
 
 	<caching-schemes>
 		<remote-cache-scheme>
-			<scheme-name>ProductCompatibilityCacheScheme</scheme-name>
+			<scheme-name>StockAvailabilityCacheScheme</scheme-name>
 			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
 			</service-name>
 			<initiator-config>
@@ -103,7 +85,7 @@
 					<name-service-addresses>
 						<!--name-service-addresses:address-provider-instance -->
 						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
 							</class-name>
 						</address-provider>
 					</name-service-addresses>
@@ -125,7 +107,6 @@
 				</serializer>
 			</initiator-config>
 		</remote-cache-scheme>
-
 		<remote-cache-scheme>
 			<scheme-name>ProductCacheScheme</scheme-name>
 			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
@@ -149,7 +130,7 @@
 					<name-service-addresses>
 						<!--name-service-addresses:address-provider-instance -->
 						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
 							</class-name>
 						</address-provider>
 					</name-service-addresses>
@@ -171,6 +152,55 @@
 				</serializer>
 			</initiator-config>
 		</remote-cache-scheme>
+		
+		<remote-cache-scheme>
+			<scheme-name>DBDetailsCacheScheme</scheme-name>
+			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
+			</service-name>
+			<initiator-config>
+				<tcp-initiator>
+					<socket-provider>
+						<ssl>
+							<protocol>TLS</protocol>
+							<trust-manager>
+								<algorithm>SunX509</algorithm>
+								<key-store>
+								<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
+									<password>p@ssw0rd</password>
+									<type>JKS</type>
+								</key-store>
+							</trust-manager>
+							<socket-provider>tcp</socket-provider>
+						</ssl>
+					</socket-provider>
+					<name-service-addresses>
+						<!--name-service-addresses:address-provider-instance -->
+						<address-provider>
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
+							</class-name>
+						</address-provider>
+					</name-service-addresses>
+				</tcp-initiator>
+				<outgoing-message-handler>
+					<request-timeout>15s</request-timeout>
+				</outgoing-message-handler>
+				<serializer>
+					<instance>
+						<class-name>com.tangosol.io.pof.ConfigurablePofContext
+						</class-name>
+						<init-params>
+							<init-param>
+								<param-type>string</param-type>
+								<param-value>config/client-pof-config.xml</param-value>
+							</init-param>
+						</init-params>
+					</instance>
+				</serializer>
+			</initiator-config>
+		</remote-cache-scheme>
+
+		
+		
 		<remote-cache-scheme>
 			<scheme-name>BundleCacheScheme</scheme-name>
 			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
@@ -183,7 +213,7 @@
 							<trust-manager>
 								<algorithm>SunX509</algorithm>
 								<key-store>
-									<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
+								<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
 									<password>p@ssw0rd</password>
 									<type>JKS</type>
 								</key-store>
@@ -194,7 +224,7 @@
 					<name-service-addresses>
 						<!--name-service-addresses:address-provider-instance -->
 						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
 							</class-name>
 						</address-provider>
 					</name-service-addresses>
@@ -239,7 +269,7 @@
 					<name-service-addresses>
 						<!--name-service-addresses:address-provider-instance -->
 						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
 							</class-name>
 						</address-provider>
 					</name-service-addresses>
@@ -261,10 +291,9 @@
 				</serializer>
 			</initiator-config>
 		</remote-cache-scheme>
-
 		<remote-cache-scheme>
-			<scheme-name>ProductGroupCacheScheme</scheme-name>
-			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
+			<scheme-name>BasketCacheScheme</scheme-name>
+			<service-name>DALCoherenceBasketDatagrid:ExtendTcpProxyBasket
 			</service-name>
 			<initiator-config>
 				<tcp-initiator>
@@ -285,7 +314,7 @@
 					<name-service-addresses>
 						<!--name-service-addresses:address-provider-instance -->
 						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
 							</class-name>
 						</address-provider>
 					</name-service-addresses>
@@ -308,97 +337,7 @@
 			</initiator-config>
 		</remote-cache-scheme>
 		<remote-cache-scheme>
-			<scheme-name>DatagramCacheScheme</scheme-name>
-			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
-			</service-name>
-			<initiator-config>
-				<tcp-initiator>
-					<socket-provider>
-						<ssl>
-							<protocol>TLS</protocol>
-							<trust-manager>
-								<algorithm>SunX509</algorithm>
-								<key-store>
-									<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
-									<password>p@ssw0rd</password>
-									<type>JKS</type>
-								</key-store>
-							</trust-manager>
-							<socket-provider>tcp</socket-provider>
-						</ssl>
-					</socket-provider>
-					<name-service-addresses>
-						<!--name-service-addresses:address-provider-instance -->
-						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
-							</class-name>
-						</address-provider>
-					</name-service-addresses>
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>15s</request-timeout>
-				</outgoing-message-handler>
-				<serializer>
-					<instance>
-						<class-name>com.tangosol.io.pof.ConfigurablePofContext
-						</class-name>
-						<init-params>
-							<init-param>
-								<param-type>string</param-type>
-								<param-value>config/client-pof-config.xml</param-value>
-							</init-param>
-						</init-params>
-					</instance>
-				</serializer>
-			</initiator-config>
-		</remote-cache-scheme>
-		<remote-cache-scheme>
-			<scheme-name>StockAvailabilityCacheScheme</scheme-name>
-			<service-name>DALCoherenceProductDatagrid:ExtendTcpProxyProduct
-			</service-name>
-			<initiator-config>
-				<tcp-initiator>
-					<socket-provider>
-						<ssl>
-							<protocol>TLS</protocol>
-							<trust-manager>
-								<algorithm>SunX509</algorithm>
-								<key-store>
-									<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
-									<password>p@ssw0rd</password>
-									<type>JKS</type>
-								</key-store>
-							</trust-manager>
-							<socket-provider>tcp</socket-provider>
-						</ssl>
-					</socket-provider>
-					<name-service-addresses>
-						<!--name-service-addresses:address-provider-instance -->
-						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
-							</class-name>
-						</address-provider>
-					</name-service-addresses>
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>15s</request-timeout>
-				</outgoing-message-handler>
-				<serializer>
-					<instance>
-						<class-name>com.tangosol.io.pof.ConfigurablePofContext
-						</class-name>
-						<init-params>
-							<init-param>
-								<param-type>string</param-type>
-								<param-value>config/client-pof-config.xml</param-value>
-							</init-param>
-						</init-params>
-					</instance>
-				</serializer>
-			</initiator-config>
-		</remote-cache-scheme>
-		<remote-cache-scheme>
-			<scheme-name>AccountCacheScheme</scheme-name>
+			<scheme-name>BankHolidaysCacheScheme</scheme-name>
 			<service-name>DALCoherenceCustomerDatagrid:ExtendTcpProxyCustomer
 			</service-name>
 			<initiator-config>
@@ -420,142 +359,7 @@
 					<name-service-addresses>
 						<!--name-service-addresses:address-provider-instance -->
 						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
-							</class-name>
-						</address-provider>
-					</name-service-addresses>
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>15s</request-timeout>
-				</outgoing-message-handler>
-				<serializer>
-					<instance>
-						<class-name>com.tangosol.io.pof.ConfigurablePofContext
-						</class-name>
-						<init-params>
-							<init-param>
-								<param-type>string</param-type>
-								<param-value>config/client-pof-config.xml</param-value>
-							</init-param>
-						</init-params>
-					</instance>
-				</serializer>
-			</initiator-config>
-		</remote-cache-scheme>
-		<remote-cache-scheme>
-			<scheme-name>SubscriptionCacheScheme</scheme-name>
-			<service-name>DALCoherenceCustomerDatagrid:ExtendTcpProxyCustomer
-			</service-name>
-			<initiator-config>
-				<tcp-initiator>
-					<socket-provider>
-						<ssl>
-							<protocol>TLS</protocol>
-							<trust-manager>
-								<algorithm>SunX509</algorithm>
-								<key-store>
-									<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
-									<password>p@ssw0rd</password>
-									<type>JKS</type>
-								</key-store>
-							</trust-manager>
-							<socket-provider>tcp</socket-provider>
-						</ssl>
-					</socket-provider>
-					<name-service-addresses>
-						<!--name-service-addresses:address-provider-instance -->
-						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
-							</class-name>
-						</address-provider>
-					</name-service-addresses>
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>15s</request-timeout>
-				</outgoing-message-handler>
-				<serializer>
-					<instance>
-						<class-name>com.tangosol.io.pof.ConfigurablePofContext
-						</class-name>
-						<init-params>
-							<init-param>
-								<param-type>string</param-type>
-								<param-value>config/client-pof-config.xml</param-value>
-							</init-param>
-						</init-params>
-					</instance>
-				</serializer>
-			</initiator-config>
-		</remote-cache-scheme>
-		<remote-cache-scheme>
-			<scheme-name>SubscriptionAccountCacheScheme</scheme-name>
-			<service-name>DALCoherenceCustomerDatagrid:ExtendTcpProxyCustomer
-			</service-name>
-			<initiator-config>
-				<tcp-initiator>
-					<socket-provider>
-						<ssl>
-							<protocol>TLS</protocol>
-							<trust-manager>
-								<algorithm>SunX509</algorithm>
-								<key-store>
-									<url>file:/apps/sb/coh-cert/cohadmin.jks</url>
-									<password>p@ssw0rd</password>
-									<type>JKS</type>
-								</key-store>
-							</trust-manager>
-							<socket-provider>tcp</socket-provider>
-						</ssl>
-					</socket-provider>
-					<name-service-addresses>
-						<!--name-service-addresses:address-provider-instance -->
-						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
-							</class-name>
-						</address-provider>
-					</name-service-addresses>
-				</tcp-initiator>
-				<outgoing-message-handler>
-					<request-timeout>15s</request-timeout>
-				</outgoing-message-handler>
-				<serializer>
-					<instance>
-						<class-name>com.tangosol.io.pof.ConfigurablePofContext
-						</class-name>
-						<init-params>
-							<init-param>
-								<param-type>string</param-type>
-								<param-value>config/client-pof-config.xml</param-value>
-							</init-param>
-						</init-params>
-					</instance>
-				</serializer>
-			</initiator-config>
-		</remote-cache-scheme>
-		<remote-cache-scheme>
-			<scheme-name>AccountContactCacheScheme</scheme-name>
-			<service-name>DALCoherenceCustomerDatagrid:ExtendTcpProxyCustomer
-			</service-name>
-			<initiator-config>
-				<tcp-initiator>
-				<socket-provider>
-                       <ssl>
-                          <protocol>TLS</protocol>
-                          <trust-manager>
-                             <algorithm>SunX509</algorithm>
-                             <key-store>
-                                <url>file:/apps/sb/coh-cert/cohadmin.jks</url>
-                                <password>p@ssw0rd</password>
-                                <type>JKS</type>
-                             </key-store>
-                          </trust-manager>
-                          <socket-provider>tcp</socket-provider>
-                       </ssl>
-                    </socket-provider>
-					<name-service-addresses>
-						<!--name-service-addresses:address-provider-instance -->
-						<address-provider>
-							<class-name>com.vf.uk.dal.journey.utils.CoherenceAddressProvider
+							<class-name>com.vf.uk.dal.broadband.utils.CoherenceAddressProvider
 							</class-name>
 						</address-provider>
 					</name-service-addresses>
