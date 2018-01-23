@@ -1,5 +1,7 @@
 package com.vf.uk.dal.broadband.dao;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
@@ -15,11 +17,12 @@ public interface BroadbandDao {
 	void updateJourneyWithFLBBDetails(String journeyId, FLBBJourneyRequest flbbRequestForJourney);
 
 	String createJourneyWithFLBBDetails(FLBBJourneyRequest flbbRequestForJourney);
-	
+
 	BundleDetails getBundleDetailsFromGetBundleListAPI(String url);
 
 	List<ProductModel> getListOfProductModelsBasedOnProductIdList(List<String> productIdList);
 
 	void getSolrConnection();
 
+	List<LocalDate> getHolidayList(LocalDate startDate, LocalDate endDate) throws ParseException;
 }
