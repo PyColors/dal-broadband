@@ -1,11 +1,8 @@
 package com.vf.uk.dal.broadband.dao.impl;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -183,16 +180,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public List<LocalDate> getHolidayList(String earliestAvailableStartDate, int range) throws ParseException{
+	public List<LocalDate> getHolidayList(LocalDate startDate, LocalDate endDate) throws ParseException {
 		final BankHolidaysRepository repo = cohRepoProvider.getBankHolidayRepository();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = sdf.parse(earliestAvailableStartDate);
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		java.sql.Date startDate = new java.sql.Date(cal.getTime().getTime());
-		cal.add(Calendar.DATE, range);
-		java.sql.Date endDate = new java.sql.Date((cal.getTime()).getTime());
-		List<BankHolidays> bankHolidays = cohRepoProvider.getBankHolidayList(repo, startDate, endDate);
+
+		java.sql.Date startDateSQ = java.sql.Date.valueOf(startDate);
+		java.sql.Date endDateSQ = java.sql.Date.valueOf(endDate);
+		List<BankHolidays> bankHolidays = cohRepoProvider.getBankHolidayList(repo, startDateSQ, endDateSQ);
 		List<LocalDate> dateList = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(bankHolidays)) {
 			bankHolidays.forEach(a -> dateList.add(a.getDateOfHoliday().toLocalDate()));

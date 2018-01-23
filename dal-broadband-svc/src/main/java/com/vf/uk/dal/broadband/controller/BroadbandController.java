@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,8 +87,8 @@ public class BroadbandController {
 	@RequestMapping(value = "/availablity/serviceStartDates", produces = {
 			"application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<ServiceStartDates> getAvailableServiceStartDates(
-			@NotNull @ApiParam(value = "earliest available service start date returned by GSA service", required = true) @RequestParam(value = "earliestAvailableStartDate", required = true) String earliestAvailableStartDate,
-			@NotNull @ApiParam(value = "The range of days , based on which the service will send the available service startDates", required = true) @RequestParam(value = "range", required = true) BigDecimal range) {
+			@NotNull @ApiParam(value = "earliest available service start date returned by GSA service in dd-MMM-yyyy", required = true) @RequestParam(value = "earliestAvailableStartDate", required = true) String earliestAvailableStartDate,
+			@Size(min = 1, max = 3, message = "Max range is 3 chars") @NotNull @ApiParam(value = "The range of days , based on which the service will send the available service startDates", required = true) @RequestParam(value = "range", required = true) BigDecimal range) {
 		return new ResponseEntity<ServiceStartDates>(
 				broadbandService.getAvailableServiceStartDates(earliestAvailableStartDate, range), HttpStatus.OK);
 	}
@@ -98,7 +99,7 @@ public class BroadbandController {
 			MissingServletRequestParameterException ex) {
 
 		return new com.vf.uk.dal.common.exception.ErrorResponse(400, "BROADBAND_INVALID_INPUT",
-				"Missing mandatory parameter " + ex.getParameterName());
+				"Missing mandatory parameter " + ex.getParameterName().toUpperCase());
 
 	}
 }

@@ -19,13 +19,14 @@ public class BroadbandCoherenceRepoProvider {
 	}
 
 	/**
-	 * 
-	 * @param holidayRepo
-	 * @param currentDate
-	 * @param after2MonthsDate
-	 * @return
+	 * Gets the bank holiday list.
+	 *
+	 * @param holidayRepo the holiday repo
+	 * @param startDate the start date
+	 * @param endDate the end date
+	 * @return the bank holiday list
 	 */
-	public List<BankHolidays> getBankHolidayList(BankHolidaysRepository holidayRepo, Date currentDate, Date after2MonthsDate) {
-		return holidayRepo.getHolidays(currentDate, after2MonthsDate);
+	public List<BankHolidays> getBankHolidayList(BankHolidaysRepository holidayRepo, Date startDate, Date endDate) {
+		return holidayRepo.getHolidays(startDate, endDate);
 	}
 }

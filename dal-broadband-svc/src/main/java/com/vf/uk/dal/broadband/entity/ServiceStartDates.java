@@ -31,10 +31,10 @@ public class ServiceStartDates   {
   }
 
    /**
-   * Array of possible service start dates within the requested range of working days - FORMAT - \"DD-MM-YYYY\"
+   * Array of possible service start dates within the requested range of working days - FORMAT - \"dd-MMM-yyyy\"
    * @return dates
   **/
-  @ApiModelProperty(value = "Array of possible service start dates within the requested range of working days - FORMAT - \"DD-MM-YYYY\"")
+  @ApiModelProperty(value = "Array of possible service start dates within the requested range of working days - FORMAT - \"dd-MMM-yyyy\"")
 
 
   public List<String> getDates() {

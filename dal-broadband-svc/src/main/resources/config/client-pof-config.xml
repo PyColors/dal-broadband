@@ -2,6 +2,8 @@
 <pof-config xmlns="http://xmlns.oracle.com/coherence/coherence-pof-config"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<user-type-list>
+		<!-- include all "standard" Coherence POF user types -->
+		<include>coherence-pof-config.xml</include>
 		<user-type>
 			<type-id>9500</type-id>
 			<class-name>com.vodafone.bankHolidays.pojo.BankHolidays</class-name>

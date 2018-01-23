@@ -79,7 +79,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 				}
 			}
 		}
-		if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode().isEmpty()) {
+		if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
+				|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
 			FLBBJourneyRequest flbbRequestForJourney = ConverterUtils
 					.createFLBBRequestForJourney(availabilityCheckRequest, getServiceAvailabilityResponse);
 			if (StringUtils.isNotBlank(availabilityCheckRequest.getJourneyId())) {
@@ -268,17 +269,15 @@ public class BroadbandServiceImpl implements BroadbandService {
 				"Enter getAvailableServiceStartDates for startDate: " + earliestAvailableStartDate + "range: " + range);
 		List<String> datesStringArray = new ArrayList<>();
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy").withZone(ZoneId.of("Europe/London"))
-					.withLocale(Locale.UK);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
+					.withZone(ZoneId.of("Europe/London")).withLocale(Locale.UK);
 			LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
 			LocalDate endDate = starDate.plusDays(range.intValue());
-			// List<LocalDate> holidayList =
-			// broadbandDao.getHolidayList(earliestAvailableStartDate,
-			// range.intValue());
+			List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
 			List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
 					.limit(ChronoUnit.DAYS.between(starDate, endDate)).filter(a -> {
 						if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
-								|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0)) {
+								|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) || (holidayList.contains(a))) {
 							return false;
 						}
 						return true;
@@ -294,9 +293,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 					datesStringArray.add(a.format(formatter));
 				});
 			}
-		} catch (DateTimeParseException ex) {
+		} catch (DateTimeParseException | ParseException ex) {
 			LogHelper.error("%s is not parsable!%n", earliestAvailableStartDate);
-			throw ex; // Rethrow the exception.
+			ex.printStackTrace();
 		}
 
 		ServiceStartDates serv = new ServiceStartDates();

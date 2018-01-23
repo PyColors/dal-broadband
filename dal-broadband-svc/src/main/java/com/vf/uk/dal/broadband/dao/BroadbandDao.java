@@ -24,5 +24,5 @@ public interface BroadbandDao {
 
 	void getSolrConnection();
 
-	List<LocalDate> getHolidayList(String earliestAvailableStartDate, int range) throws ParseException;
+	List<LocalDate> getHolidayList(LocalDate startDate, LocalDate endDate) throws ParseException;
 }
