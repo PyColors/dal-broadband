@@ -27,6 +27,7 @@ import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.ServiceStartDates;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.common.exception.ErrorResponse;
+import com.vf.uk.dal.common.logger.LogHelper;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -130,11 +131,13 @@ public class BroadbandController {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(broadbandService.getAvailableServiceStartDates(earliestAvailableStartDate, range));
 		} catch (DateTimeParseException | ParseException e) {
+			LogHelper.error(getClass(), "ParseException occurred: " + e.getMessage());
 			com.vf.uk.dal.common.exception.ErrorResponse error = new com.vf.uk.dal.common.exception.ErrorResponse(400,
 					"BROADBAND_INVALID_INPUT", "Invalid parameter value :  " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 
 		} catch (Exception e) {
+			LogHelper.error(getClass(), "Broadband Exception occurred: " + e.getMessage());
 			com.vf.uk.dal.common.exception.ErrorResponse error = new com.vf.uk.dal.common.exception.ErrorResponse(500,
 					"BROADBAND_COHERENCE_EXCEPTION", "RECORD NOT FOUND :  " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
