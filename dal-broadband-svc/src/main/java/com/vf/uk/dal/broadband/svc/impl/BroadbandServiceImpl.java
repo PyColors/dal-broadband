@@ -8,7 +8,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -264,38 +263,34 @@ public class BroadbandServiceImpl implements BroadbandService {
 	}
 
 	@Override
-	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range) {
+	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
+			throws DateTimeParseException, ParseException {
 		LogHelper.info(getClass(),
 				"Enter getAvailableServiceStartDates for startDate: " + earliestAvailableStartDate + "range: " + range);
 		List<String> datesStringArray = new ArrayList<>();
-		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
-					.withZone(ZoneId.of("Europe/London")).withLocale(Locale.UK);
-			LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
-			LocalDate endDate = starDate.plusDays(range.intValue());
-			List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
-			List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
-					.limit(ChronoUnit.DAYS.between(starDate, endDate)).filter(a -> {
-						if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
-								|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) || (holidayList.contains(a))) {
-							return false;
-						}
-						return true;
-					}).collect(Collectors.toList());
-			if (CollectionUtils.isNotEmpty(dates)) {
-				dates.sort(new Comparator<LocalDate>() {
-					@Override
-					public int compare(LocalDate d1, LocalDate d2) {
-						return d1.compareTo(d2);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy").withZone(ZoneId.of("Europe/London"))
+				.withLocale(Locale.UK);
+		LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
+		LocalDate endDate = starDate.plusDays(range.intValue());
+		List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
+		List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
+				.limit(ChronoUnit.DAYS.between(starDate, endDate)).filter((LocalDate a) -> {
+					if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
+							|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) || (holidayList.contains(a))) {
+						return false;
 					}
-				});
-				dates.forEach(a -> {
-					datesStringArray.add(a.format(formatter));
-				});
-			}
-		} catch (DateTimeParseException | ParseException ex) {
-			LogHelper.error("%s is not parsable!%n", earliestAvailableStartDate);
-			ex.printStackTrace();
+					return true;
+				}).collect(Collectors.toList());
+		if (CollectionUtils.isNotEmpty(dates)) {
+			dates.sort(new Comparator<LocalDate>() {
+				@Override
+				public int compare(LocalDate d1, LocalDate d2) {
+					return d1.compareTo(d2);
+				}
+			});
+			dates.forEach(a -> {
+				datesStringArray.add(a.format(formatter));
+			});
 		}
 
 		ServiceStartDates serv = new ServiceStartDates();
