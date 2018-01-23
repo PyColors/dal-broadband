@@ -1,6 +1,8 @@
 package com.vf.uk.dal.broadband.svc;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
@@ -11,9 +13,10 @@ import com.vf.uk.dal.broadband.entity.ServiceStartDates;
 
 public interface BroadbandService {
 
-	AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest);
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest);
 
-	List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
+	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
 
-	ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range);
+	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
+			throws DateTimeParseException, ParseException;
 }
