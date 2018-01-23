@@ -1,8 +1,22 @@
 package com.vf.uk.dal.broadband.svc.impl;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +29,7 @@ import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.MediaLink;
+import com.vf.uk.dal.broadband.entity.ServiceStartDates;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
@@ -29,57 +44,62 @@ import com.vodafone.solrmodels.ProductModel;
 
 @Component("broadbandService")
 public class BroadbandServiceImpl implements BroadbandService {
-	
+
 	@Autowired
 	BroadbandDao broadbandDao;
 
 	@Override
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
-		GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao.getServiceAvailability(availabilityCheckRequest);
-		
-		if(getServiceAvailabilityResponse==null){
+		GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
+				.getServiceAvailability(availabilityCheckRequest);
+
+		if (getServiceAvailabilityResponse == null) {
 			LogHelper.error(this, "Invalid classification code !!!");
 			throw new ApplicationException(ExceptionMessages.EMPTY_GSA_RESPONSE);
-		}else if(getServiceAvailabilityResponse.getServiceAvailabilityLine()!=null
+		} else if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()==null){
+				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() == null) {
 			LogHelper.error(this, "No Service Lines Recieved From TIL !!!");
 			throw new ApplicationException(ExceptionMessages.INVALID_SERVICE_LINE);
-			
+
 		}
-		
+
 		boolean isClassificationCodePresent = false;
-		if(getServiceAvailabilityResponse.getServiceAvailabilityLine()!=null
+		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()!=null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()){
-			for(ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
-				if(availabilityCheckRequest.getClassificationCode()!=null
-						&& availabilityCheckRequest.getClassificationCode().contains(serviceLines.getClassificationCode())){
+				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()) {
+			for (ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
+					.getServiceLines()) {
+				if (availabilityCheckRequest.getClassificationCode() != null && availabilityCheckRequest
+						.getClassificationCode().contains(serviceLines.getClassificationCode())) {
 					isClassificationCodePresent = true;
 					break;
 				}
 			}
 		}
-		if(isClassificationCodePresent
-				|| availabilityCheckRequest.getClassificationCode().isEmpty()){
-			FLBBJourneyRequest flbbRequestForJourney = ConverterUtils.createFLBBRequestForJourney(availabilityCheckRequest,getServiceAvailabilityResponse);
-			if(StringUtils.isNotBlank(availabilityCheckRequest.getJourneyId())){
-				broadbandDao.updateJourneyWithFLBBDetails(availabilityCheckRequest.getJourneyId(), flbbRequestForJourney);
+		if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
+				|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
+			FLBBJourneyRequest flbbRequestForJourney = ConverterUtils
+					.createFLBBRequestForJourney(availabilityCheckRequest, getServiceAvailabilityResponse);
+			if (StringUtils.isNotBlank(availabilityCheckRequest.getJourneyId())) {
+				broadbandDao.updateJourneyWithFLBBDetails(availabilityCheckRequest.getJourneyId(),
+						flbbRequestForJourney);
 				response.setJourneyId(availabilityCheckRequest.getJourneyId());
-			}else{
-				String	journeyId = broadbandDao.createJourneyWithFLBBDetails(flbbRequestForJourney);
+			} else {
+				String journeyId = broadbandDao.createJourneyWithFLBBDetails(flbbRequestForJourney);
 				response.setJourneyId(journeyId);
 			}
-			response = ConverterUtils.createAvailabilityCheckResponse(response,getServiceAvailabilityResponse,availabilityCheckRequest);
-		}else{
+			response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
+					availabilityCheckRequest);
+		} else {
 			LogHelper.error(this, "Invalid classification code !!!");
 			throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
 		}
 		return response;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -98,7 +118,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
-		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType,journeyType,offerCode,classificationCode, duration); 
+		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
+				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
 		List<String> listOfProducts = new ArrayList<>();
 
@@ -113,7 +134,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 			List<ProductModel> listOfProductModel = broadbandDao
 					.getListOfProductModelsBasedOnProductIdList(listOfProducts);
-			if (listOfProductModel!=null && !listOfProductModel.isEmpty()) {
+			if (listOfProductModel != null && !listOfProductModel.isEmpty()) {
 				listOfProductModel.forEach(productModel -> {
 					listOfFlbBundle.forEach(flbBundle -> {
 						if (productModel.getProductId()
@@ -240,6 +261,46 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		}
 		return listOfFlbBundle;
+	}
+
+	@Override
+	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range) {
+		LogHelper.info(getClass(),
+				"Enter getAvailableServiceStartDates for startDate: " + earliestAvailableStartDate + "range: " + range);
+		List<String> datesStringArray = new ArrayList<>();
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy")
+					.withZone(ZoneId.of("Europe/London")).withLocale(Locale.UK);
+			LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
+			LocalDate endDate = starDate.plusDays(range.intValue());
+			List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
+			List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
+					.limit(ChronoUnit.DAYS.between(starDate, endDate)).filter(a -> {
+						if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
+								|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) || (holidayList.contains(a))) {
+							return false;
+						}
+						return true;
+					}).collect(Collectors.toList());
+			if (CollectionUtils.isNotEmpty(dates)) {
+				dates.sort(new Comparator<LocalDate>() {
+					@Override
+					public int compare(LocalDate d1, LocalDate d2) {
+						return d1.compareTo(d2);
+					}
+				});
+				dates.forEach(a -> {
+					datesStringArray.add(a.format(formatter));
+				});
+			}
+		} catch (DateTimeParseException | ParseException ex) {
+			LogHelper.error("%s is not parsable!%n", earliestAvailableStartDate);
+			ex.printStackTrace();
+		}
+
+		ServiceStartDates serv = new ServiceStartDates();
+		serv.setDates(datesStringArray);
+		return serv;
 	}
 
 }

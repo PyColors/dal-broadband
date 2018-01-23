@@ -6,6 +6,10 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vodafone.pojos.fromjson.bundle.ILSPromoAppliedPrice;
+
 /**
  * BundleHeader.
  */
@@ -74,12 +78,26 @@ public class BundleHeader {
 
 	private MiscellaneousAttributes miscAttributes = null;
 
+	/** The allowance. */
+	private List<BundleAllowance> allowance = new ArrayList<>();
+
+	/** The roaming allowance. */
+	private List<BundleAllowance> roamingAllowance = new ArrayList<>();
+
 	/** The merchandising media. */
 	private List<MediaLink> merchandisingMedia = new ArrayList<>();
 
 	/** The price info. */
 	private PriceForBundleAndHardware priceInfo = null;
 
+	/** The mcs. */
+	private List<MonthlyCostSaver> mcs = new ArrayList<>();
+
+	/** The ILS promo applied price list. */
+	private List<ILSPromoAppliedPrice> iLSPromoAppliedPriceList = new ArrayList<>();
+
+	@JsonProperty("promotionsPackage")
+	private MerchandisingPromotionsPackage promotionsPackage = null;
 
 	/**
 	 * Gets the secure net flag.
@@ -613,7 +631,92 @@ public class BundleHeader {
 		this.commitmentPeriod = commitmentPeriod;
 	}
 
-	
+	/**
+	 * Allowance.
+	 *
+	 * @param allowance
+	 *            the allowance
+	 * @return the bundle header
+	 */
+	public BundleHeader allowance(List<BundleAllowance> allowance) {
+		this.allowance = allowance;
+		return this;
+	}
+
+	/**
+	 * Adds the allowance item.
+	 *
+	 * @param allowanceItem
+	 *            the allowance item
+	 * @return the bundle header
+	 */
+	public BundleHeader addAllowanceItem(BundleAllowance allowanceItem) {
+		this.allowance.add(allowanceItem);
+		return this;
+	}
+
+	/**
+	 * Get allowance.
+	 *
+	 * @return allowance
+	 */
+	public List<BundleAllowance> getAllowance() {
+		return allowance;
+	}
+
+	/**
+	 * Sets the allowance.
+	 *
+	 * @param allowance
+	 *            the new allowance
+	 */
+	public void setAllowance(List<BundleAllowance> allowance) {
+		this.allowance = allowance;
+	}
+
+	/**
+	 * Roaming allowance.
+	 *
+	 * @param roamingAllowance
+	 *            the roaming allowance
+	 * @return the bundle header
+	 */
+	public BundleHeader roamingAllowance(List<BundleAllowance> roamingAllowance) {
+		this.roamingAllowance = roamingAllowance;
+		return this;
+	}
+
+	/**
+	 * Adds the roaming allowance item.
+	 *
+	 * @param roamingAllowanceItem
+	 *            the roaming allowance item
+	 * @return the bundle header
+	 */
+	public BundleHeader addRoamingAllowanceItem(BundleAllowance roamingAllowanceItem) {
+		this.roamingAllowance.add(roamingAllowanceItem);
+		return this;
+	}
+
+	/**
+	 * Get roamingAllowance.
+	 *
+	 * @return roamingAllowance
+	 */
+	public List<BundleAllowance> getRoamingAllowance() {
+		return roamingAllowance;
+	}
+
+	/**
+	 * Sets the roaming allowance.
+	 *
+	 * @param roamingAllowance
+	 *            the new roaming allowance
+	 */
+	public void setRoamingAllowance(List<BundleAllowance> roamingAllowance) {
+		this.roamingAllowance = roamingAllowance;
+	}
+
 	/**
 	 * Merchandising media.
 	 *
@@ -688,7 +791,67 @@ public class BundleHeader {
 		this.priceInfo = priceInfo;
 	}
 
-	
+	/**
+	 * Mcs.
+	 *
+	 * @param mcs
+	 *            the mcs
+	 * @return the bundle header
+	 */
+	public BundleHeader mcs(List<MonthlyCostSaver> mcs) {
+		this.mcs = mcs;
+		return this;
+	}
+
+	/**
+	 * Adds the mcs item.
+	 *
+	 * @param mcsItem
+	 *            the mcs item
+	 * @return the bundle header
+	 */
+	public BundleHeader addMcsItem(MonthlyCostSaver mcsItem) {
+		this.mcs.add(mcsItem);
+		return this;
+	}
+
+	/**
+	 * Get mcs.
+	 *
+	 * @return mcs
+	 */
+	public List<MonthlyCostSaver> getMcs() {
+		return mcs;
+	}
+
+	/**
+	 * Sets the mcs.
+	 *
+	 * @param mcs
+	 *            the new mcs
+	 */
+	public void setMcs(List<MonthlyCostSaver> mcs) {
+		this.mcs = mcs;
+	}
+
+	public BundleHeader promotionsPackage(MerchandisingPromotionsPackage promotionsPackage) {
+		this.promotionsPackage = promotionsPackage;
+		return this;
+	}
+
+	/**
+	 * Get promotionsPackage
+	 * 
+	 * @return promotionsPackage
+	 **/
+	public MerchandisingPromotionsPackage getPromotionsPackage() {
+		return promotionsPackage;
+	}
+
+	public void setPromotionsPackage(MerchandisingPromotionsPackage promotionsPackage) {
+		this.promotionsPackage = promotionsPackage;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -720,7 +883,11 @@ public class BundleHeader {
 				&& Objects.equals(this.planCoupleLabel, bundleHeader.planCoupleLabel)
 				&& Objects.equals(this.globalRoamingFlag, bundleHeader.globalRoamingFlag)
 				&& Objects.equals(this.commitmentPeriod, bundleHeader.commitmentPeriod)
-				&& Objects.equals(this.merchandisingMedia, bundleHeader.merchandisingMedia);
+				&& Objects.equals(this.allowance, bundleHeader.allowance)
+				&& Objects.equals(this.roamingAllowance, bundleHeader.roamingAllowance)
+				&& Objects.equals(this.merchandisingMedia, bundleHeader.merchandisingMedia)
+				&& Objects.equals(this.priceInfo, bundleHeader.priceInfo) && Objects.equals(this.mcs, bundleHeader.mcs)
+				&& Objects.equals(this.promotionsPackage, bundleHeader.promotionsPackage);
 	}
 
 	/*
@@ -732,8 +899,8 @@ public class BundleHeader {
 	public int hashCode() {
 		return Objects.hash(skuId, name, description, bundleName, bundleDescription, bundleClass, productClass,
 				paymentType, bundleType, planCoupleId, planCoupleFlag, planCoupleLabel, globalRoamingFlag,
-				commitmentPeriod, speed, usage, classificationCode, miscAttributes, merchandisingMedia,
-				priceInfo);
+				commitmentPeriod, allowance, speed, usage, classificationCode, miscAttributes, roamingAllowance, merchandisingMedia,
+				priceInfo, mcs, promotionsPackage);
 	}
 
 	/*
@@ -764,8 +931,12 @@ public class BundleHeader {
 		sb.append("    planCoupleLabel: ").append(toIndentedString(planCoupleLabel)).append("\n");
 		sb.append("    globalRoamingFlag: ").append(toIndentedString(globalRoamingFlag)).append("\n");
 		sb.append("    commitmentPeriod: ").append(toIndentedString(commitmentPeriod)).append("\n");
+		sb.append("    allowance: ").append(toIndentedString(allowance)).append("\n");
+		sb.append("    roamingAllowance: ").append(toIndentedString(roamingAllowance)).append("\n");
 		sb.append("    merchandisingMedia: ").append(toIndentedString(merchandisingMedia)).append("\n");
 		sb.append("    priceInfo: ").append(toIndentedString(priceInfo)).append("\n");
+		sb.append("    mcs: ").append(toIndentedString(mcs)).append("\n");
+		sb.append("    promotionsPackage: ").append(toIndentedString(promotionsPackage)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -823,5 +994,24 @@ public class BundleHeader {
 		this.mobileServiceId = mobileServiceId;
 	}
 
+	/**
+	 * Gets the i LS promo applied price list.
+	 *
+	 * @return the i LS promo applied price list
+	 */
+	@JsonIgnore
+	public List<ILSPromoAppliedPrice> getiLSPromoAppliedPriceList() {
+		return iLSPromoAppliedPriceList;
+	}
+
+	/**
+	 * Sets the i LS promo applied price list.
+	 *
+	 * @param iLSPromoAppliedPriceList
+	 *            the new i LS promo applied price list
+	 */
+	public void setiLSPromoAppliedPriceList(List<ILSPromoAppliedPrice> iLSPromoAppliedPriceList) {
+		this.iLSPromoAppliedPriceList = iLSPromoAppliedPriceList;
+	}
 
 }

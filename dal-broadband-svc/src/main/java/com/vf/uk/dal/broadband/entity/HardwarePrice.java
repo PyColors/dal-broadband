@@ -1,148 +1,125 @@
 package com.vf.uk.dal.broadband.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
- * HardwarePrice.
+ * HardwarePrice
  */
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class HardwarePrice   {
-  
-  /** The hardware id. */
+  @JsonProperty("hardwareId")
   private String hardwareId = null;
 
-  /** The one off price. */
+  @JsonProperty("oneOffPrice")
   private Price oneOffPrice = null;
 
-  /** The one off discount price. */
+  @JsonProperty("oneOffDiscountPrice")
   private Price oneOffDiscountPrice = null;
 
-  
-  /** The merchandising promotions. */
-  private MerchandisingPromotion merchandisingPromotions = null;
+  @JsonProperty("merchandisingPromotions")
+  private List<MerchandisingPromotion> merchandisingPromotions = null;
 
-  /**
-   * Hardware id.
-   *
-   * @param hardwareId the hardware id
-   * @return the hardware price
-   */
   public HardwarePrice hardwareId(String hardwareId) {
     this.hardwareId = hardwareId;
     return this;
   }
 
    /**
-    * Hardware id of the price to be calculated.
-    *
-    * @return hardwareId
-    */
+   * Hardware id of the price to be calculated
+   * @return hardwareId
+  **/
+  @ApiModelProperty(value = "Hardware id of the price to be calculated")
+
+
   public String getHardwareId() {
     return hardwareId;
   }
 
-  /**
-   * Sets the hardware id.
-   *
-   * @param hardwareId the new hardware id
-   */
   public void setHardwareId(String hardwareId) {
     this.hardwareId = hardwareId;
   }
 
-  /**
-   * One off price.
-   *
-   * @param oneOffPrice the one off price
-   * @return the hardware price
-   */
   public HardwarePrice oneOffPrice(Price oneOffPrice) {
     this.oneOffPrice = oneOffPrice;
     return this;
   }
 
    /**
-    * Get oneOffPrice.
-    *
-    * @return oneOffPrice
-    */
+   * Get oneOffPrice
+   * @return oneOffPrice
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
   public Price getOneOffPrice() {
     return oneOffPrice;
   }
 
-  /**
-   * Sets the one off price.
-   *
-   * @param oneOffPrice the new one off price
-   */
   public void setOneOffPrice(Price oneOffPrice) {
     this.oneOffPrice = oneOffPrice;
   }
 
-  /**
-   * One off discount price.
-   *
-   * @param oneOffDiscountPrice the one off discount price
-   * @return the hardware price
-   */
   public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
     return this;
   }
 
    /**
-    * Get oneOffDiscountPrice.
-    *
-    * @return oneOffDiscountPrice
-    */
+   * Get oneOffDiscountPrice
+   * @return oneOffDiscountPrice
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
   public Price getOneOffDiscountPrice() {
     return oneOffDiscountPrice;
   }
 
-  /**
-   * Sets the one off discount price.
-   *
-   * @param oneOffDiscountPrice the new one off discount price
-   */
   public void setOneOffDiscountPrice(Price oneOffDiscountPrice) {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
   }
 
+  public HardwarePrice merchandisingPromotions(List<MerchandisingPromotion> merchandisingPromotions) {
+    this.merchandisingPromotions = merchandisingPromotions;
+    return this;
+  }
+
+  public HardwarePrice addMerchandisingPromotionsItem(MerchandisingPromotion merchandisingPromotionsItem) {
+    if (this.merchandisingPromotions == null) {
+      this.merchandisingPromotions = new ArrayList<MerchandisingPromotion>();
+    }
+    this.merchandisingPromotions.add(merchandisingPromotionsItem);
+    return this;
+  }
+
    /**
-    * Merchandising promotions applicable for the bundle.
-    *
-    * @param merchandisingPromotions the merchandising promotions
-    * @return merchandisingPromotions
-    */
-  public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
-	    this.merchandisingPromotions = merchandisingPromotions;
-	    return this;
-	  }
+   * Merchandising promotions applicable for the bundle
+   * @return merchandisingPromotions
+  **/
+  @ApiModelProperty(value = "Merchandising promotions applicable for the bundle")
 
-	   /**
-   	 * Get merchandisingPromotions.
-   	 *
-   	 * @return merchandisingPromotions
-   	 */
+  @Valid
 
+  public List<MerchandisingPromotion> getMerchandisingPromotions() {
+    return merchandisingPromotions;
+  }
 
-	  public MerchandisingPromotion getMerchandisingPromotions() {
-	    return merchandisingPromotions;
-	  }
-
-	  /**
-  	 * Sets the merchandising promotions.
-  	 *
-  	 * @param merchandisingPromotions the new merchandising promotions
-  	 */
-  	public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
-	    this.merchandisingPromotions = merchandisingPromotions;
-	  }
+  public void setMerchandisingPromotions(List<MerchandisingPromotion> merchandisingPromotions) {
+    this.merchandisingPromotions = merchandisingPromotions;
+  }
 
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -158,17 +135,11 @@ public class HardwarePrice   {
         Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions);
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
   @Override
   public int hashCode() {
     return Objects.hash(hardwareId, oneOffPrice, oneOffDiscountPrice, merchandisingPromotions);
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -185,9 +156,6 @@ public class HardwarePrice   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
-   *
-   * @param o the o
-   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

@@ -120,5 +120,8 @@ public class BroadbandModelTest {
 		BeanTest.test(com.vf.uk.dal.broadband.entity.PriceForBundleAndHardware.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.SecureNet.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.StepPricingInfo.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.MerchandisingPromotionsPackage.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.MerchandisingPromotionsWrapper.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.ServiceStartDates.class);
  	}
 }
