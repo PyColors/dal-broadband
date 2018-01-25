@@ -1,0 +1,32 @@
+{
+  "existing":false,
+  "appointmentDetails": {
+    "appointmentWindow": {
+      "startTimePeriod": "2018-10-19 00:00:00",
+      "operationalPreferenceCode": "STANDARD",
+      "timeSlot": "PM"
+    },
+    "serviceRequest": {
+      "typeCode": "INSTALL",
+      "classificationCode": "LINE",
+      "SubClassificationCode": "WLR_SINGLE_LINE",
+      "categoryCode": "BASIC"
+    },
+    "addressDetails": {
+      "address": {
+        "lineOne": "New Road",
+        "lineTwo": "Tunstall",
+        "lineThree": "905",
+        "cityName": "Norwich",
+        "countyName": "Norfolk",
+        "countryCode": "United Kingdom",
+        "citySubDivisionName": "CL",
+        "PostalCode": "NR13 3QE",
+        "identificationId": "A00028347905"
+      },
+      "organisation": {
+        "name": "Vodafone"
+      }
+    }
+  }
+}

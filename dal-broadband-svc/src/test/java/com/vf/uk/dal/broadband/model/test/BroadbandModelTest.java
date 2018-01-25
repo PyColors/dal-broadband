@@ -123,5 +123,41 @@ public class BroadbandModelTest {
 		BeanTest.test(com.vf.uk.dal.broadband.entity.MerchandisingPromotionsPackage.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.MerchandisingPromotionsWrapper.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.ServiceStartDates.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.JourneyData.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.Journey.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.CurrentJourney.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.CustomerDetails.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.JourneyState.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.LineDetailsRequest.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.Error.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.JourneyRequestDetails.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.CreditDetails.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.JourneyRequest.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.CryptogramRequest.class);
+		
+		
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.Address.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.ServiceRequest.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.AppointmentWindow.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.AppointmentDetails.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.Error.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.GetAppointment.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.AppointmentWindowList.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.CreateAppointment.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
+		
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.ItemReference.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.SiteNote.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.CustomerPartyReference.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.appointment.Organisation.class);
+		
+		BeanTest.test(com.vf.uk.dal.broadband.entity.CreateAppointmentRequest.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.BundleAllowance.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.SiteNote.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.CreateAppointmentResponse.class);
+		
+		
+ 	
  	}
 }

@@ -1,0 +1,9 @@
+{
+  "appointmentWindow": {
+    "identificationId": "string",
+    "startDateTime": "2018-10-19 00:00:00",
+    "operationalPreferenceCode": "STANDARD",
+    "timeSlot": "PM"
+  },
+  "siteNote": {}
+}

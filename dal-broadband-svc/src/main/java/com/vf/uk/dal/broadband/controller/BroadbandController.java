@@ -7,7 +7,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.ServiceStartDates;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
+import com.vf.uk.dal.broadband.utils.ExceptionMessages;
+import com.vf.uk.dal.broadband.validator.BroadbandValidator;
+import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.exception.ErrorResponse;
 import com.vf.uk.dal.common.logger.LogHelper;
 
@@ -33,6 +40,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
 
 /**
  * The Class BroadbandController.
@@ -144,6 +152,31 @@ public class BroadbandController {
 
 		}
 	}
+	
+	
+	@ApiOperation(value = "Creates the appointment, updates the journey and basket", notes = "This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date", response = CreateAppointmentResponse.class, tags={ "Appointment", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Success", response = CreateAppointmentResponse.class),
+        @ApiResponse(code = 400, message = "Bad Request", response = Void.class),
+        @ApiResponse(code = 404, message = "Not found", response = Void.class),
+        @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+    
+    @RequestMapping(value = "/appointment",
+        produces = { "application/json" }, 
+        method = RequestMethod.POST)
+	
+	public ResponseEntity<CreateAppointmentResponse> createAppointmentForFLBB(@ApiParam(value = "Sends the availability check request" ,required=true )  @Valid @RequestBody CreateAppointmentRequest createAppointmentRequest) {
+		BroadbandValidator.isCreateAppointmentRequestValid(createAppointmentRequest);
+		CreateAppointmentResponse createAppointmentResponse = broadbandService.createAppointmentForFLBB(createAppointmentRequest);
+		if(StringUtils.isNotBlank(createAppointmentResponse.getApplicationId())){
+			return new ResponseEntity<>(createAppointmentResponse,HttpStatus.OK);
+		}else{
+			LogHelper.error(this, "Create Appointment failed!!!");
+			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
+		}
+		
+	}
+
 
 	/**
 	 * Handle missing params.

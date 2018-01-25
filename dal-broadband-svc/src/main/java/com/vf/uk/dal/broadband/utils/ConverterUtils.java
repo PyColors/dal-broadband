@@ -8,6 +8,13 @@ import org.apache.commons.lang.StringUtils;
 import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.appointment.Address;
+import com.vf.uk.dal.broadband.entity.appointment.AddressDetails;
+import com.vf.uk.dal.broadband.entity.appointment.AppointmentDetails;
+import com.vf.uk.dal.broadband.entity.appointment.AppointmentWindow;
+import com.vf.uk.dal.broadband.entity.appointment.Organisation;
+import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
 import com.vf.uk.dal.broadband.entity.journey.AccessLine;
 import com.vf.uk.dal.broadband.entity.journey.AvailableServices;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyDetails;
@@ -15,6 +22,7 @@ import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.Identification;
 import com.vf.uk.dal.broadband.entity.journey.InstallationAddress;
 import com.vf.uk.dal.broadband.entity.journey.ItemReference;
+import com.vf.uk.dal.broadband.entity.journey.Journey;
 import com.vf.uk.dal.broadband.entity.journey.LineDirectory;
 import com.vf.uk.dal.broadband.entity.journey.LineLocator;
 import com.vf.uk.dal.broadband.entity.journey.LineReference;
@@ -24,11 +32,13 @@ import com.vf.uk.dal.broadband.entity.journey.LineStatus;
 import com.vf.uk.dal.broadband.entity.journey.LineTreatment;
 import com.vf.uk.dal.broadband.entity.journey.MiscReference;
 import com.vf.uk.dal.broadband.entity.journey.PendingOrder;
+import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.journey.ServiceLine;
 import com.vf.uk.dal.broadband.entity.journey.ServiceLineTreatment;
 import com.vf.uk.dal.broadband.entity.journey.ServiceLines;
 import com.vf.uk.dal.broadband.entity.journey.ServicePoint;
 import com.vf.uk.dal.broadband.entity.journey.ServiceReference;
+import com.vf.uk.dal.broadband.entity.journey.SiteNote;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
@@ -445,10 +455,68 @@ public class ConverterUtils {
 				lineSpeedForResponse.setMinUpSpeed(serviceLine.getLineSpeeds().getMinUpSpeed());
 			}
 		}
-		
-		
-		
 		return lineSpeedForResponse;
+	}
+
+	public static com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(CreateAppointmentRequest createAppointmentRequest, Journey journey) {
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest request = new com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest();
+		
+		if(journey!=null && journey.getServicePoint()!=null && journey.getServicePoint().getLineRefernece()!=null
+				&& journey.getServicePoint().getLineRefernece().getInstallationAddress()!=null){
+			AppointmentDetails appointmentDetails = new AppointmentDetails();
+			AddressDetails addressDetails = new AddressDetails();
+			Address address = new Address();
+			address.setCityName(journey.getServicePoint().getLineRefernece().getInstallationAddress().getTown());
+			address.setCitySubDivisionName(journey.getServicePoint().getLineRefernece().getInstallationAddress().getCitySubDivisionName());
+			address.setCountryCode(journey.getServicePoint().getLineRefernece().getInstallationAddress().getCountry());
+			address.setCountyName(journey.getServicePoint().getLineRefernece().getInstallationAddress().getCounty());
+			address.setLineFour(journey.getServicePoint().getLineRefernece().getInstallationAddress().getFlatNumber());
+			address.setLineOne(journey.getServicePoint().getLineRefernece().getInstallationAddress().getStreetName());
+			address.setLineThree(journey.getServicePoint().getLineRefernece().getInstallationAddress().getHouseNumber());
+			address.setLineTwo(journey.getServicePoint().getLineRefernece().getInstallationAddress().getLocality());
+			address.setBuilding(journey.getServicePoint().getLineRefernece().getInstallationAddress().getHouseName());
+			address.setPostalCode(journey.getServicePoint().getLineRefernece().getInstallationAddress().getPostCode());
+			if(journey.getServicePoint().getLineRefernece().getInstallationAddress().getIdentification()!=null){
+				address.setIdentificationId(journey.getServicePoint().getLineRefernece().getInstallationAddress().getIdentification().getId());
+			}
+			addressDetails.setAddress(address);
+			Organisation organisation = new Organisation();
+			organisation.setName("Vodafone");
+			addressDetails.setOrganisation(organisation);
+			appointmentDetails.setAddressDetails(addressDetails);
+			ServiceRequest serviceRequest = new ServiceRequest();
+			serviceRequest.setCategoryCode("BASIC");
+			serviceRequest.setClassificationCode("LINE");
+			serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+			serviceRequest.setTypeCode("INSTALL");
+			appointmentDetails.setServiceRequest(serviceRequest);
+			AppointmentWindow appointmentWindow = new AppointmentWindow();
+			appointmentWindow.setStartTimePeriod(createAppointmentRequest.getStartTimePeriod());
+			appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
+			appointmentWindow.setOperationalPreferenceCode("STANDARD");
+			appointmentDetails.setAppointmentWindow(appointmentWindow);
+			request.setAppointmentDetails(appointmentDetails);
+			request.setExisting(false);
+		}
+		return request;
+	}
+
+	public static SalesOrderAppointmentRequest createSalesOrderAppointmentRequest(
+			CreateAppointmentRequest createAppointmentRequest, String identificationId) {
+		SalesOrderAppointmentRequest request = new SalesOrderAppointmentRequest();
+		com.vf.uk.dal.broadband.entity.journey.AppointmentWindow appointmentWindow = new com.vf.uk.dal.broadband.entity.journey.AppointmentWindow();
+		appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
+		appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
+		appointmentWindow.setIdentificationId(identificationId);
+		request.setAppointmentWindow(appointmentWindow);
+		if(createAppointmentRequest.getSiteNote()!=null){
+			SiteNote siteNote = new SiteNote();
+			siteNote.setNotes(createAppointmentRequest.getSiteNote().getNotes());
+			siteNote.setTypeCode("ENGINEER");
+			request.setSiteNote(siteNote);
+		}
+		
+		return request;
 	}
 
 }

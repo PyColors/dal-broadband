@@ -20,8 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
+import com.vf.uk.dal.broadband.entity.journey.Journey;
+import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
 import com.vf.uk.dal.broadband.helper.SolrHelper;
 import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
@@ -193,4 +197,45 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return dateList;
 
 	}
+
+	@Override
+	public Journey getJourney(String journeyId) {
+		final String jounreyUrl = "http://JOURNEY-V1/journey/" + journeyId;
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		ResponseEntity<Journey> response = restTemplate.getForEntity(jounreyUrl, Journey.class);
+		return response.getBody();
+	}
+
+	@Override
+	public CreateAppointment createAppointment(CreateAppointmentRequest createAppointmentReq) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		CreateAppointment createAppointment = null;
+		try {
+			ResponseEntity<CreateAppointment> client = restTemplate.postForEntity(
+					"http://APPOINTMENT-V1/appointment/createAppointment", createAppointmentReq,
+					CreateAppointment.class);
+			if (client != null)
+				createAppointment = client.getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(e.getMessage());
+		}
+		return createAppointment;
+	}
+
+	@Override
+	public void updateJourneyStateForAppointment(String journeyId, SalesOrderAppointmentRequest appointmentRequest) {
+		try {
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			restTemplate.put("http://JOURNEY-V1/journey/" + journeyId + "/flbb/appointmentDetails", appointmentRequest);
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
+			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
+		}
+		
+	}
+
+	
 }
