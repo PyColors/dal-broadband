@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.ServiceStartDates;
@@ -19,4 +21,5 @@ public interface BroadbandService {
 
 	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
 			throws DateTimeParseException, ParseException;
+	CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest);
 }

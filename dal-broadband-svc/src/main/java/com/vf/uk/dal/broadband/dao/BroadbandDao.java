@@ -6,7 +6,10 @@ import java.util.List;
 
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
+import com.vf.uk.dal.broadband.entity.journey.Journey;
+import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vodafone.solrmodels.ProductModel;
 
@@ -25,4 +28,11 @@ public interface BroadbandDao {
 	void getSolrConnection();
 
 	List<LocalDate> getHolidayList(LocalDate startDate, LocalDate endDate) throws ParseException;
+
+	Journey getJourney(String journeyId);
+
+	CreateAppointment createAppointment(
+			com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq);
+
+	void updateJourneyStateForAppointment(String journeyId, SalesOrderAppointmentRequest appointmentRequest);
 }
