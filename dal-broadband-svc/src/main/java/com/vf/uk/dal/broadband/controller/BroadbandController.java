@@ -66,7 +66,7 @@ public class BroadbandController {
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
 
-	@RequestMapping(value = "/avaiability/check", produces = { "application/json" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/availability/check", produces = { "application/json" }, method = RequestMethod.POST)
 	public ResponseEntity<AvailabilityCheckResponse> checkAvailabilityForBroadband(
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody AvailabilityCheckRequest availabilityCheckerRequest) {
 
