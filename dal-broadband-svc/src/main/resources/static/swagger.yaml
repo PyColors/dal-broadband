@@ -37,6 +37,34 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/Error'
+  
+  /broadband/appointment :
+    post:
+      summary: check the availability checker for the braod band journey
+      description: >-
+        This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date
+      operationId: COMM_001_CreateAppointment
+      parameters:
+        - name: CreateAppointmentRequest
+          in: body
+          description: Sends the availability check request
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAppointmentRequest'
+      tags:
+        - CreateAppointment
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateAppointmentResponse'
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+  
   /broadband/availablity/serviceStartDates:
     get:
       summary: >-
@@ -64,7 +92,7 @@ paths:
           required: true
           type: number
       tags:
-        - AvailabilityCheck
+        - ServiceStartDates
       responses:
         '200':
           description: Success
@@ -141,6 +169,42 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 definitions:
+
+  CreateAppointmentResponse:
+    type: object
+    properties:
+      applicationId:
+        type: string
+        description: Unique Id created by TIL on confirmation of appointment
+      
+
+  CreateAppointmentRequest:
+    type: object
+    properties:
+      journeyId:
+        type: string
+        description: Journey id of the broadband - Unique
+      basketId:
+        type: string
+        description: Basket id - Unique
+      startTimePeriod:
+        type: string
+        description: Earliest required appointment date. The format should be yyyy-mm-dd hh:mm:ss or Date at which appointment needs ot be booked.
+      timeSlot:
+        type: string
+        description: 'AM PM EV etc'
+      siteNote:
+        $ref: '#/definitions/SiteNote'  
+  SiteNote:
+    type: object
+    properties:
+      notes:
+        type: string
+        description : 'Note for the engineer'
+      typeCode:
+        type: string
+        description : 'Engineer'
+      
   AvailabilityCheckResponse:
     type: object
     properties:

@@ -25,11 +25,16 @@ import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.MediaLink;
 import com.vf.uk.dal.broadband.entity.ServiceStartDates;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
+import com.vf.uk.dal.broadband.entity.journey.Journey;
+import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
@@ -298,4 +303,21 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return serv;
 	}
 
+	@Override
+	public CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest) {
+		CreateAppointmentResponse response = new CreateAppointmentResponse();
+		Journey journey = broadbandDao.getJourney(createAppointmentRequest.getJourneyId());
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq = ConverterUtils.createAppointmentRequest(createAppointmentRequest,journey);
+		CreateAppointment createAppointment = broadbandDao.createAppointment(createAppointmentReq);
+		if(createAppointment!=null && 
+				 createAppointment.getAppointmentWindow()!=null && StringUtils.isNotEmpty(createAppointment.getAppointmentWindow().getApplicationId())){
+			SalesOrderAppointmentRequest appointmentRequest = ConverterUtils.createSalesOrderAppointmentRequest(createAppointmentRequest,createAppointment.getAppointmentWindow().getApplicationId());
+			broadbandDao.updateJourneyStateForAppointment(createAppointmentRequest.getJourneyId(),appointmentRequest);
+			response.setApplicationId(createAppointment.getAppointmentWindow().getApplicationId());
+		}else{
+			LogHelper.error(this, "Create Appointment failed!!!");
+			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
+		}
+		return response;
+	}
 }
