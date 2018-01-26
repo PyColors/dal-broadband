@@ -202,10 +202,15 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	@Override
 	public Journey getJourney(String journeyId) {
-		final String jounreyUrl = "http://JOURNEY-V1/journey/" + journeyId;
-		RestTemplate restTemplate = registryClient.getRestTemplate();
-		ResponseEntity<Journey> response = restTemplate.getForEntity(jounreyUrl, Journey.class);
-		return response.getBody();
+		try{
+			final String jounreyUrl = "http://JOURNEY-V1/journey/" + journeyId;
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			ResponseEntity<Journey> response = restTemplate.getForEntity(jounreyUrl, Journey.class);
+			return response.getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
+			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
+		}
 	}
 
 	@Override
