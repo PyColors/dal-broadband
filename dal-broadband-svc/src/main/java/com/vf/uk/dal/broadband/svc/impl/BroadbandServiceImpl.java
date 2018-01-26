@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -276,16 +275,16 @@ public class BroadbandServiceImpl implements BroadbandService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy").withZone(ZoneId.of("Europe/London"))
 				.withLocale(Locale.UK);
 		LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
-		LocalDate endDate = starDate.plusDays(range.intValue());
+		LocalDate endDate = starDate.plusDays(range.longValue() + 20);
 		List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
 		List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
-				.limit(ChronoUnit.DAYS.between(starDate, endDate)).filter((LocalDate a) -> {
+				.filter((LocalDate a) -> {
 					if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
 							|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) || (holidayList.contains(a))) {
 						return false;
 					}
 					return true;
-				}).collect(Collectors.toList());
+				}).limit(range.longValue()).collect(Collectors.toList());
 		if (CollectionUtils.isNotEmpty(dates)) {
 			dates.sort(new Comparator<LocalDate>() {
 				@Override
