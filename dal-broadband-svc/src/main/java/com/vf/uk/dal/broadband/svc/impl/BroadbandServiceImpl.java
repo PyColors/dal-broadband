@@ -275,7 +275,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy").withZone(ZoneId.of("Europe/London"))
 				.withLocale(Locale.UK);
 		LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
-		LocalDate endDate = starDate.plusDays(range.intValue() + 10);
+		LocalDate endDate = starDate.plusDays(range.longValue() + 20);
 		List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
 		List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
 				.filter((LocalDate a) -> {
