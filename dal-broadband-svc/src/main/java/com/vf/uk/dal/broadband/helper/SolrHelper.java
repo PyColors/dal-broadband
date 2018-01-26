@@ -20,5 +20,12 @@ public class SolrHelper {
 	public void getSolrConnection() {
 		requestManager = SolrConnectionProvider.getSolrConnection();
 	}
+
+	public List<ProductModel> getProductModel(List<String> productClassList, List<String> productNameList) {
+		if (requestManager == null) {
+			getSolrConnection();
+		}
+		return requestManager.getProductModel(productClassList,productNameList);
+	}
 	
 }

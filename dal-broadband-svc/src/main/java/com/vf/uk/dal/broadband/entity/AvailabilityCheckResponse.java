@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * AvailabilityCheckResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-26T12:06:28.563Z")
 
 public class AvailabilityCheckResponse   {
   @JsonProperty("journeyId")
@@ -26,7 +26,7 @@ public class AvailabilityCheckResponse   {
   private List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail = null;
 
   @JsonProperty("engineeringVisitCharge")
-  private Float engineeringVisitCharge = null;
+  private Price engineeringVisitCharge = null;
 
   @JsonProperty("lineSpeeds")
   private LineSpeeds lineSpeeds = null;
@@ -104,7 +104,7 @@ public class AvailabilityCheckResponse   {
     this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
   }
 
-  public AvailabilityCheckResponse engineeringVisitCharge(Float engineeringVisitCharge) {
+  public AvailabilityCheckResponse engineeringVisitCharge(Price engineeringVisitCharge) {
     this.engineeringVisitCharge = engineeringVisitCharge;
     return this;
   }
@@ -115,12 +115,13 @@ public class AvailabilityCheckResponse   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Float getEngineeringVisitCharge() {
+  public Price getEngineeringVisitCharge() {
     return engineeringVisitCharge;
   }
 
-  public void setEngineeringVisitCharge(Float engineeringVisitCharge) {
+  public void setEngineeringVisitCharge(Price engineeringVisitCharge) {
     this.engineeringVisitCharge = engineeringVisitCharge;
   }
 

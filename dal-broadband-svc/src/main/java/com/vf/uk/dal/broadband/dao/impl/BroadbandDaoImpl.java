@@ -242,5 +242,22 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		
 	}
 
-	
+	@Override
+	public List<ProductModel> getEngineeringVisitProduct() {
+		
+		List<ProductModel> productModels = null;
+		List<String> productClassList = new ArrayList<>();
+		List<String> productNameList = new ArrayList<>();
+		
+		try {
+			productClassList.add("Fee");
+			productNameList.add("Engineer Visit");
+			final SolrHelper solrHelper = broadbandRepoProvider.getSolrHelper();
+			productModels = broadbandRepoProvider.getEngineeringVisitProduct(solrHelper,productNameList, productClassList);
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception From Solr getProductModel::::::" + e);
+			throw new ApplicationException(ExceptionMessages.SOLR_GETPRODUCTMODEL_EXCEPTION);
+		} 
+		return productModels;
+	}
 }
