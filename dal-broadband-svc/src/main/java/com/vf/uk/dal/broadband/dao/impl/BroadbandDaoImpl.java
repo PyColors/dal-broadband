@@ -13,10 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
@@ -218,9 +220,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 					CreateAppointment.class);
 			if (client != null)
 				createAppointment = client.getBody();
-		} catch (Exception e) {
+		} catch (RestClientResponseException e) {
+			Gson gson = new Gson(); 
+			String jsonInString = e.getResponseBodyAsString();
+			com.vf.uk.dal.common.exception.ErrorResponse staff = gson.fromJson(jsonInString, com.vf.uk.dal.common.exception.ErrorResponse.class);
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(e.getMessage());
+			throw new ApplicationException(staff.getErrorMessage());
 		}
 		return createAppointment;
 	}
