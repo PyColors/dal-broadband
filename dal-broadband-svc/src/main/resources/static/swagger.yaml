@@ -218,8 +218,7 @@ definitions:
         items:
           $ref: '#/definitions/AppointmentAndAvailabilityDetail'
       engineeringVisitCharge:
-        type: number
-        format: float
+        $ref: '#/definitions/Price'
       lineSpeeds:
         $ref: '#/definitions/LineSpeeds'
       classificationCode:

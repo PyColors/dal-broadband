@@ -94,8 +94,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 				String journeyId = broadbandDao.createJourneyWithFLBBDetails(flbbRequestForJourney);
 				response.setJourneyId(journeyId);
 			}
+			List<ProductModel> productModel = broadbandDao.getEngineeringVisitProduct();
+			
 			response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
-					availabilityCheckRequest);
+					availabilityCheckRequest,productModel);
 		} else {
 			LogHelper.error(this, "Invalid classification code !!!");
 			throw new ApplicationException("INVALID_CLASSIFICATION_CODE");

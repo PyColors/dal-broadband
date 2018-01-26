@@ -35,4 +35,6 @@ public interface BroadbandDao {
 			com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq);
 
 	void updateJourneyStateForAppointment(String journeyId, SalesOrderAppointmentRequest appointmentRequest);
+
+	List<ProductModel> getEngineeringVisitProduct();
 }

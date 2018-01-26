@@ -19,6 +19,12 @@ public class BroadbandRepoProvider {
 	public List<ProductModel> getProductModelList(SolrHelper solrHelper, List<String> productIdList){
 		return solrHelper.productModelList(productIdList);
 	}
+
+
+	public List<ProductModel> getEngineeringVisitProduct(SolrHelper solrHelper, List<String> productClassList,
+			List<String> productNameList) {
+		return solrHelper.getProductModel (productClassList,productNameList);
+	}
 	
 	
 }
