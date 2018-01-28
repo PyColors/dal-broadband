@@ -6,11 +6,6 @@ package com.vf.uk.dal.broadband.utils;
  */
 public class Constants {
 
-	
-	private Constants(){
-		
-	}
-	
 	/** The Constant USER_TYPE. */
 	public static final String USER_TYPE = "userType";
 
@@ -70,4 +65,8 @@ public class Constants {
 	public static final String NEW = "NEW";
 
 	public static final String No_CHARGE = "No Charge";
+
+	private Constants() {
+
+	}
 }
