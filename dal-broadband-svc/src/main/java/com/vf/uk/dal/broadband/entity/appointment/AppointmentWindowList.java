@@ -16,6 +16,10 @@ public class AppointmentWindowList {
 	@JsonProperty("timeSlot")
 	private String timeSlot = null;
 
+	/**
+	 * @param startTimePeriod
+	 * @return
+	 */
 	public AppointmentWindowList startTimePeriod(String startTimePeriod) {
 		this.startTimePeriod = startTimePeriod;
 		return this;
@@ -36,6 +40,10 @@ public class AppointmentWindowList {
 		this.startTimePeriod = startTimePeriod;
 	}
 
+	/**
+	 * @param timeSlot
+	 * @return
+	 */
 	public AppointmentWindowList timeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 		return this;

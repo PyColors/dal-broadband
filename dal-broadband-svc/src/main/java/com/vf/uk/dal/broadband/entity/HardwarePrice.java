@@ -28,6 +28,11 @@ public class HardwarePrice   {
   @JsonProperty("merchandisingPromotions")
   private List<MerchandisingPromotion> merchandisingPromotions = null;
 
+  /**
+   * 
+   * @param hardwareId
+   * @return
+   */
   public HardwarePrice hardwareId(String hardwareId) {
     this.hardwareId = hardwareId;
     return this;
@@ -48,6 +53,11 @@ public class HardwarePrice   {
     this.hardwareId = hardwareId;
   }
 
+  /**
+   * 
+   * @param oneOffPrice
+   * @return
+   */
   public HardwarePrice oneOffPrice(Price oneOffPrice) {
     this.oneOffPrice = oneOffPrice;
     return this;
@@ -69,6 +79,11 @@ public class HardwarePrice   {
     this.oneOffPrice = oneOffPrice;
   }
 
+  /**
+   * 
+   * @param oneOffDiscountPrice
+   * @return
+   */
   public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
     return this;
@@ -90,11 +105,21 @@ public class HardwarePrice   {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
   }
 
+  /**
+   * 
+   * @param merchandisingPromotions
+   * @return
+   */
   public HardwarePrice merchandisingPromotions(List<MerchandisingPromotion> merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
     return this;
   }
 
+  /**
+   * 
+   * @param merchandisingPromotionsItem
+   * @return
+   */
   public HardwarePrice addMerchandisingPromotionsItem(MerchandisingPromotion merchandisingPromotionsItem) {
     if (this.merchandisingPromotions == null) {
       this.merchandisingPromotions = new ArrayList<MerchandisingPromotion>();

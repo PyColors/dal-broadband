@@ -22,11 +22,19 @@ import java.util.Objects;
 public class AvailableServices {
 	private List<String> service = null;
 
+	/**
+	 * @param service
+	 * @return
+	 */
 	public AvailableServices service(List<String> service) {
 		this.service = service;
 		return this;
 	}
 
+	/**
+	 * @param serviceItem
+	 * @return
+	 */
 	public AvailableServices addServiceItem(String serviceItem) {
 		if (this.service == null) {
 			this.service = new ArrayList<String>();

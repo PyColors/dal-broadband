@@ -22,6 +22,10 @@ public class OfferDetails {
 
 	private String code = null;
 
+	/**
+	 * @param type
+	 * @return
+	 */
 	public OfferDetails type(String type) {
 		this.type = type;
 		return this;
@@ -40,6 +44,10 @@ public class OfferDetails {
 		this.type = type;
 	}
 
+	/**
+	 * @param code
+	 * @return
+	 */
 	public OfferDetails code(String code) {
 		this.code = code;
 		return this;

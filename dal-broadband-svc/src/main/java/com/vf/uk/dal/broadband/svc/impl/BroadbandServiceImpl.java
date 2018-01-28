@@ -45,12 +45,25 @@ import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 import com.vodafone.solrmodels.ProductModel;
 
+/**
+ * @author Infosys Limited.
+ *
+ */
 @Component("broadbandService")
 public class BroadbandServiceImpl implements BroadbandService {
 
 	@Autowired
 	BroadbandDao broadbandDao;
 
+	
+	
+	
+	/* 
+	 * This methods calls Get Service Availability MS, if the response and successful, then creates or update the journey with the service point information for anonymous or logged 
+	 * in customer respectively, post which creates a very sleek response and present to FE.
+	 *(non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#checkAvailabilityForBroadband(com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest)
+	 */
 	@Override
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
@@ -68,20 +81,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		}
 
-		boolean isClassificationCodePresent = false;
-		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()) {
-			for (ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
-					.getServiceLines()) {
-				if (availabilityCheckRequest.getClassificationCode() != null && availabilityCheckRequest
-						.getClassificationCode().contains(serviceLines.getClassificationCode())) {
-					isClassificationCodePresent = true;
-					break;
-				}
-			}
-		}
+		boolean isClassificationCodePresent = checkIfClassificationCodePresent(availabilityCheckRequest,
+				getServiceAvailabilityResponse);
 		if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
 				|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
 			FLBBJourneyRequest flbbRequestForJourney = ConverterUtils
@@ -103,6 +104,30 @@ public class BroadbandServiceImpl implements BroadbandService {
 			throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
 		}
 		return response;
+	}
+
+	/*
+	 * Check if the classification code selected by the user is present by the GSA or not. If not throws error message.
+	 * 
+	 */
+	
+	private boolean checkIfClassificationCodePresent(AvailabilityCheckRequest availabilityCheckRequest,
+			GetServiceAvailibilityResponse getServiceAvailabilityResponse) {
+		boolean isClassificationCodePresent = false;
+		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
+				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()) {
+			for (ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0)
+					.getServiceLines()) {
+				if (availabilityCheckRequest.getClassificationCode() != null && availabilityCheckRequest
+						.getClassificationCode().contains(serviceLines.getClassificationCode())) {
+					isClassificationCodePresent = true;
+					break;
+				}
+			}
+		}
+		return isClassificationCodePresent;
 	}
 
 	/*
@@ -268,6 +293,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return listOfFlbBundle;
 	}
 
+	/*
+	 * 
+	 * Logic to get the x working days from the date the service is available for the customer.
+	 * (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#getAvailableServiceStartDates(java.lang.String, java.math.BigDecimal)
+	 */
+	
 	@Override
 	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
 			throws DateTimeParseException, ParseException {
@@ -304,6 +336,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return serv;
 	}
 
+	/*
+	 * This method calls create appointment MS. Upon succesful response update the journey and basket with the appointment information.
+	 * 
+	 * (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#createAppointmentForFLBB(com.vf.uk.dal.broadband.entity.CreateAppointmentRequest)
+	 */
+	
 	@Override
 	public CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest) {
 		CreateAppointmentResponse response = new CreateAppointmentResponse();

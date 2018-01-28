@@ -18,6 +18,10 @@ public class AddressDetails {
 	@JsonProperty("organisation")
 	private Organisation organisation = null;
 
+	/**
+	 * @param address
+	 * @return
+	 */
 	public AddressDetails address(Address address) {
 		this.address = address;
 		return this;
@@ -39,6 +43,10 @@ public class AddressDetails {
 		this.address = address;
 	}
 
+	/**
+	 * @param organisation
+	 * @return
+	 */
 	public AddressDetails organisation(Organisation organisation) {
 		this.organisation = organisation;
 		return this;

@@ -21,6 +21,10 @@ public class AppointmentDetails {
 	@JsonProperty("addressDetails")
 	private AddressDetails addressDetails = null;
 
+	/**
+	 * @param appointmentWindow
+	 * @return
+	 */
 	public AppointmentDetails appointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 		return this;
@@ -42,6 +46,10 @@ public class AppointmentDetails {
 		this.appointmentWindow = appointmentWindow;
 	}
 
+	/**
+	 * @param serviceRequest
+	 * @return
+	 */
 	public AppointmentDetails serviceRequest(ServiceRequest serviceRequest) {
 		this.serviceRequest = serviceRequest;
 		return this;
@@ -63,6 +71,10 @@ public class AppointmentDetails {
 		this.serviceRequest = serviceRequest;
 	}
 
+	/**
+	 * @param addressDetails
+	 * @return
+	 */
 	public AppointmentDetails addressDetails(AddressDetails addressDetails) {
 		this.addressDetails = addressDetails;
 		return this;

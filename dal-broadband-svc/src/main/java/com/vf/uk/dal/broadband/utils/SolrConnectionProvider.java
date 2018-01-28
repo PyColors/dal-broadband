@@ -11,6 +11,10 @@ import com.vodafone.business.service.RequestManagerFactory;
 /**
  * Solr connection and closing details.
  */
+/**
+ * @author Infosys Limited
+ *
+ */
 public class SolrConnectionProvider {
 	
 	/**

@@ -40,6 +40,10 @@ public class ServiceLineTreatment {
 
 	private AccessLine accessLine = null;
 
+	/**
+	 * @param parentIdentification
+	 * @return
+	 */
 	public ServiceLineTreatment parentIdentification(String parentIdentification) {
 		this.parentIdentification = parentIdentification;
 		return this;
@@ -58,6 +62,10 @@ public class ServiceLineTreatment {
 		this.parentIdentification = parentIdentification;
 	}
 
+	/**
+	 * @param serviceType
+	 * @return
+	 */
 	public ServiceLineTreatment serviceType(String serviceType) {
 		this.serviceType = serviceType;
 		return this;
@@ -75,6 +83,10 @@ public class ServiceLineTreatment {
 		this.serviceType = serviceType;
 	}
 
+	/**
+	 * @param serviceAction
+	 * @return
+	 */
 	public ServiceLineTreatment serviceAction(String serviceAction) {
 		this.serviceAction = serviceAction;
 		return this;
@@ -93,6 +105,10 @@ public class ServiceLineTreatment {
 		this.serviceAction = serviceAction;
 	}
 
+	/**
+	 * @param simValue
+	 * @return
+	 */
 	public ServiceLineTreatment simValue(String simValue) {
 		this.simValue = simValue;
 		return this;
@@ -111,6 +127,10 @@ public class ServiceLineTreatment {
 		this.simValue = simValue;
 	}
 
+	/**
+	 * @param lineInfo
+	 * @return
+	 */
 	public ServiceLineTreatment lineInfo(String lineInfo) {
 		this.lineInfo = lineInfo;
 		return this;
@@ -129,6 +149,10 @@ public class ServiceLineTreatment {
 		this.lineInfo = lineInfo;
 	}
 
+	/**
+	 * @param canNumberBeRetained
+	 * @return
+	 */
 	public ServiceLineTreatment canNumberBeRetained(String canNumberBeRetained) {
 		this.canNumberBeRetained = canNumberBeRetained;
 		return this;
@@ -147,6 +171,10 @@ public class ServiceLineTreatment {
 		this.canNumberBeRetained = canNumberBeRetained;
 	}
 
+	/**
+	 * @param portInFlag
+	 * @return
+	 */
 	public ServiceLineTreatment portInFlag(String portInFlag) {
 		this.portInFlag = portInFlag;
 		return this;
@@ -165,6 +193,10 @@ public class ServiceLineTreatment {
 		this.portInFlag = portInFlag;
 	}
 
+	/**
+	 * @param vicCode
+	 * @return
+	 */
 	public ServiceLineTreatment vicCode(String vicCode) {
 		this.vicCode = vicCode;
 		return this;
@@ -183,11 +215,19 @@ public class ServiceLineTreatment {
 		this.vicCode = vicCode;
 	}
 
+	/**
+	 * @param pendingOrders
+	 * @return
+	 */
 	public ServiceLineTreatment pendingOrders(List<PendingOrder> pendingOrders) {
 		this.pendingOrders = pendingOrders;
 		return this;
 	}
 
+	/**
+	 * @param pendingOrdersItem
+	 * @return
+	 */
 	public ServiceLineTreatment addPendingOrdersItem(PendingOrder pendingOrdersItem) {
 		if (this.pendingOrders == null) {
 			this.pendingOrders = new ArrayList<PendingOrder>();
@@ -209,6 +249,10 @@ public class ServiceLineTreatment {
 		this.pendingOrders = pendingOrders;
 	}
 
+	/**
+	 * @param accessLine
+	 * @return
+	 */
 	public ServiceLineTreatment accessLine(AccessLine accessLine) {
 		this.accessLine = accessLine;
 		return this;

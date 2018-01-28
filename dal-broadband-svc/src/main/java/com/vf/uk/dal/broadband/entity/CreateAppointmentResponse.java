@@ -15,6 +15,11 @@ public class CreateAppointmentResponse   {
   @JsonProperty("applicationId")
   private String applicationId = null;
 
+  /**
+   * 
+   * @param applicationId
+   * @return
+   */
   public CreateAppointmentResponse applicationId(String applicationId) {
     this.applicationId = applicationId;
     return this;

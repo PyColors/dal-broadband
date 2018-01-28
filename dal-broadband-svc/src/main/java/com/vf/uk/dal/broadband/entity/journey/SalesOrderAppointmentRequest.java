@@ -22,6 +22,10 @@ public class SalesOrderAppointmentRequest {
 
 	private SiteNote siteNote = null;
 
+	/**
+	 * @param appointmentWindow
+	 * @return
+	 */
 	public SalesOrderAppointmentRequest appointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 		return this;
@@ -40,6 +44,10 @@ public class SalesOrderAppointmentRequest {
 		this.appointmentWindow = appointmentWindow;
 	}
 
+	/**
+	 * @param siteNote
+	 * @return
+	 */
 	public SalesOrderAppointmentRequest siteNote(SiteNote siteNote) {
 		this.siteNote = siteNote;
 		return this;

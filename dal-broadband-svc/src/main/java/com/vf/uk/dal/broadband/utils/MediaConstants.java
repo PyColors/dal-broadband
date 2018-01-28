@@ -5,8 +5,16 @@ package com.vf.uk.dal.broadband.utils;
  * *.
  */
 
+/**
+ * @author Infosys Limited
+ *
+ */
 public class MediaConstants {
 	
+	
+	private MediaConstants(){
+		
+	}
 	
 	/** The Constant STRING_FOR_IMAGE_THUMBS_FRONT. */
 	public static final String STRING_FOR_IMAGE_THUMBS_FRONT = "imagesURLs.thumbs.front";

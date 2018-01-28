@@ -33,6 +33,10 @@ public class ServiceRequest {
 	@JsonProperty("itemReference")
 	private ItemReference itemReference = null;
 
+	/**
+	 * @param typeCode
+	 * @return
+	 */
 	public ServiceRequest typeCode(String typeCode) {
 		this.typeCode = typeCode;
 		return this;
@@ -53,6 +57,10 @@ public class ServiceRequest {
 		this.typeCode = typeCode;
 	}
 
+	/**
+	 * @param classificationCode
+	 * @return
+	 */
 	public ServiceRequest classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -73,6 +81,10 @@ public class ServiceRequest {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * @param subClassificationCode
+	 * @return
+	 */
 	public ServiceRequest subClassificationCode(String subClassificationCode) {
 		this.subClassificationCode = subClassificationCode;
 		return this;
@@ -104,6 +116,10 @@ public class ServiceRequest {
 		this.subClassificationCode = subClassificationCode;
 	}
 
+	/**
+	 * @param priorityCode
+	 * @return
+	 */
 	public ServiceRequest priorityCode(String priorityCode) {
 		this.priorityCode = priorityCode;
 		return this;
@@ -124,6 +140,10 @@ public class ServiceRequest {
 		this.priorityCode = priorityCode;
 	}
 
+	/**
+	 * @param categoryCode
+	 * @return
+	 */
 	public ServiceRequest categoryCode(String categoryCode) {
 		this.categoryCode = categoryCode;
 		return this;
@@ -144,6 +164,10 @@ public class ServiceRequest {
 		this.categoryCode = categoryCode;
 	}
 
+	/**
+	 * @param customerPartyReference
+	 * @return
+	 */
 	public ServiceRequest customerPartyReference(CustomerPartyReference customerPartyReference) {
 		this.customerPartyReference = customerPartyReference;
 		return this;
@@ -165,6 +189,10 @@ public class ServiceRequest {
 		this.customerPartyReference = customerPartyReference;
 	}
 
+	/**
+	 * @param itemReference
+	 * @return
+	 */
 	public ServiceRequest itemReference(ItemReference itemReference) {
 		this.itemReference = itemReference;
 		return this;

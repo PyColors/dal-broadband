@@ -20,6 +20,10 @@ import java.util.Objects;
 public class FLBBJourneyResponse {
 	private String journeyId = null;
 
+	/**
+	 * @param journeyId
+	 * @return
+	 */
 	public FLBBJourneyResponse journeyId(String journeyId) {
 		this.journeyId = journeyId;
 		return this;

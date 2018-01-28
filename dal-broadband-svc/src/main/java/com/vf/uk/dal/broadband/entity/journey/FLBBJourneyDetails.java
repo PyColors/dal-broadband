@@ -20,6 +20,10 @@ import java.util.Objects;
 public class FLBBJourneyDetails {
 	private ServicePoint servicePoint = null;
 
+	/**
+	 * @param servicePoint
+	 * @return
+	 */
 	public FLBBJourneyDetails servicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 		return this;

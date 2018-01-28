@@ -29,6 +29,11 @@ public class LineIdentification   {
   @JsonProperty("installationAddress")
   private InstallationAddress installationAddress = null;
 
+  /**
+   * 
+   * @param fllandlineNumber
+   * @return
+   */
   public LineIdentification fllandlineNumber(String fllandlineNumber) {
     this.fllandlineNumber = fllandlineNumber;
     return this;
@@ -49,6 +54,11 @@ public class LineIdentification   {
     this.fllandlineNumber = fllandlineNumber;
   }
 
+  /**
+   * 
+   * @param typeCode
+   * @return
+   */
   public LineIdentification typeCode(String typeCode) {
     this.typeCode = typeCode;
     return this;
@@ -69,6 +79,11 @@ public class LineIdentification   {
     this.typeCode = typeCode;
   }
 
+  /**
+   * 
+   * @param serviceClassificationCode
+   * @return
+   */
   public LineIdentification serviceClassificationCode(String serviceClassificationCode) {
     this.serviceClassificationCode = serviceClassificationCode;
     return this;
@@ -89,6 +104,11 @@ public class LineIdentification   {
     this.serviceClassificationCode = serviceClassificationCode;
   }
 
+  /**
+   * 
+   * @param moveFromPostCode
+   * @return
+   */
   public LineIdentification moveFromPostCode(String moveFromPostCode) {
     this.moveFromPostCode = moveFromPostCode;
     return this;
@@ -109,6 +129,11 @@ public class LineIdentification   {
     this.moveFromPostCode = moveFromPostCode;
   }
 
+  /**
+   * 
+   * @param installationAddress
+   * @return
+   */
   public LineIdentification installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;

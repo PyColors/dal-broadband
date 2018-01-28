@@ -26,6 +26,12 @@ public class BundlePrice   {
   @JsonProperty("merchandisingPromotions")
   private MerchandisingPromotion merchandisingPromotions = null;
 
+  /**
+   * 
+   * @param bundleId
+   * @return
+   */
+  
   public BundlePrice bundleId(String bundleId) {
     this.bundleId = bundleId;
     return this;
@@ -46,6 +52,12 @@ public class BundlePrice   {
     this.bundleId = bundleId;
   }
 
+  /**
+   * 
+   * @param monthlyPrice
+   * @return
+   */
+  
   public BundlePrice monthlyPrice(Price monthlyPrice) {
     this.monthlyPrice = monthlyPrice;
     return this;
@@ -67,6 +79,11 @@ public class BundlePrice   {
     this.monthlyPrice = monthlyPrice;
   }
 
+  /**
+   * 
+   * @param monthlyDiscountPrice
+   * @return
+   */
   public BundlePrice monthlyDiscountPrice(Price monthlyDiscountPrice) {
     this.monthlyDiscountPrice = monthlyDiscountPrice;
     return this;
@@ -88,6 +105,12 @@ public class BundlePrice   {
     this.monthlyDiscountPrice = monthlyDiscountPrice;
   }
 
+  /**
+   * 
+   * @param merchandisingPromotions
+   * @return
+   */
+  
   public BundlePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
     return this;

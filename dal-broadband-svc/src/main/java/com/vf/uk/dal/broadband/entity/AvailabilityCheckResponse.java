@@ -54,6 +54,12 @@ public class AvailabilityCheckResponse   {
     this.journeyId = journeyId;
   }
 
+  /**
+   * 
+   * @param installationAddress
+   * @return
+   */
+  
   public AvailabilityCheckResponse installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
@@ -75,11 +81,23 @@ public class AvailabilityCheckResponse   {
     this.installationAddress = installationAddress;
   }
 
+  /**
+   * 
+   * @param appointmentAndAvailabilityDetail
+   * @return
+   */
+  
   public AvailabilityCheckResponse appointmentAndAvailabilityDetail(List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail) {
     this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
     return this;
   }
 
+  /**
+   * 
+   * @param appointmentAndAvailabilityDetailItem
+   * @return
+   */
+  
   public AvailabilityCheckResponse addAppointmentAndAvailabilityDetailItem(AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetailItem) {
     if (this.appointmentAndAvailabilityDetail == null) {
       this.appointmentAndAvailabilityDetail = new ArrayList<AppointmentAndAvailabilityDetail>();
@@ -104,6 +122,12 @@ public class AvailabilityCheckResponse   {
     this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
   }
 
+  /**
+   * 
+   * @param engineeringVisitCharge
+   * @return
+   */
+  
   public AvailabilityCheckResponse engineeringVisitCharge(Price engineeringVisitCharge) {
     this.engineeringVisitCharge = engineeringVisitCharge;
     return this;
@@ -125,6 +149,12 @@ public class AvailabilityCheckResponse   {
     this.engineeringVisitCharge = engineeringVisitCharge;
   }
 
+  /**
+   * 
+   * @param lineSpeeds
+   * @return
+   */
+  
   public AvailabilityCheckResponse lineSpeeds(LineSpeeds lineSpeeds) {
     this.lineSpeeds = lineSpeeds;
     return this;
@@ -146,11 +176,23 @@ public class AvailabilityCheckResponse   {
     this.lineSpeeds = lineSpeeds;
   }
 
+  /**
+   * 
+   * @param classificationCode
+   * @return
+   */
+  
   public AvailabilityCheckResponse classificationCode(List<String> classificationCode) {
     this.classificationCode = classificationCode;
     return this;
   }
 
+  /**
+   * 
+   * @param classificationCodeItem
+   * @return
+   */
+  
   public AvailabilityCheckResponse addClassificationCodeItem(String classificationCodeItem) {
     if (this.classificationCode == null) {
       this.classificationCode = new ArrayList<String>();

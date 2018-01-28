@@ -11,217 +11,250 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
-public class LineSpeeds   {
-  @JsonProperty("maxDownSpeed")
-  private Double maxDownSpeed = null;
+public class LineSpeeds {
+	@JsonProperty("maxDownSpeed")
+	private Double maxDownSpeed = null;
 
-  @JsonProperty("minDownSpeed")
-  private Double minDownSpeed = null;
+	@JsonProperty("minDownSpeed")
+	private Double minDownSpeed = null;
 
-  @JsonProperty("avgDownSpeed")
-  private Double avgDownSpeed = null;
+	@JsonProperty("avgDownSpeed")
+	private Double avgDownSpeed = null;
 
-  @JsonProperty("minGuaranteedDownSpeed")
-  private Double minGuaranteedDownSpeed = null;
+	@JsonProperty("minGuaranteedDownSpeed")
+	private Double minGuaranteedDownSpeed = null;
 
-  @JsonProperty("maxUpSpeed")
-  private Double maxUpSpeed = null;
+	@JsonProperty("maxUpSpeed")
+	private Double maxUpSpeed = null;
 
-  @JsonProperty("minUpSpeed")
-  private Double minUpSpeed = null;
+	@JsonProperty("minUpSpeed")
+	private Double minUpSpeed = null;
 
-  @JsonProperty("bandwidthMeasure")
-  private String bandwidthMeasure = null;
+	@JsonProperty("bandwidthMeasure")
+	private String bandwidthMeasure = null;
 
-  public LineSpeeds maxDownSpeed(Double maxDownSpeed) {
-    this.maxDownSpeed = maxDownSpeed;
-    return this;
-  }
+	/**
+	 * 
+	 * @param maxDownSpeed
+	 * @return
+	 */
+	public LineSpeeds maxDownSpeed(Double maxDownSpeed) {
+		this.maxDownSpeed = maxDownSpeed;
+		return this;
+	}
 
-   /**
-   * The maximum download speed offered (in kilobits per second [kbps])
-   * @return maxDownSpeed
-  **/
-  @ApiModelProperty(value = "The maximum download speed offered (in kilobits per second [kbps])")
+	/**
+	 * The maximum download speed offered (in kilobits per second [kbps])
+	 * 
+	 * @return maxDownSpeed
+	 **/
+	@ApiModelProperty(value = "The maximum download speed offered (in kilobits per second [kbps])")
 
+	public Double getMaxDownSpeed() {
+		return maxDownSpeed;
+	}
 
-  public Double getMaxDownSpeed() {
-    return maxDownSpeed;
-  }
+	public void setMaxDownSpeed(Double maxDownSpeed) {
+		this.maxDownSpeed = maxDownSpeed;
+	}
 
-  public void setMaxDownSpeed(Double maxDownSpeed) {
-    this.maxDownSpeed = maxDownSpeed;
-  }
+	/**
+	 * 
+	 * @param minDownSpeed
+	 * @return
+	 */
+	public LineSpeeds minDownSpeed(Double minDownSpeed) {
+		this.minDownSpeed = minDownSpeed;
+		return this;
+	}
 
-  public LineSpeeds minDownSpeed(Double minDownSpeed) {
-    this.minDownSpeed = minDownSpeed;
-    return this;
-  }
+	/**
+	 * The minimum download speed offered (in kilobits per second [kbps])
+	 * 
+	 * @return minDownSpeed
+	 **/
+	@ApiModelProperty(value = "The minimum download speed offered (in kilobits per second [kbps])")
 
-   /**
-   * The minimum download speed offered (in kilobits per second [kbps])
-   * @return minDownSpeed
-  **/
-  @ApiModelProperty(value = "The minimum download speed offered (in kilobits per second [kbps])")
+	public Double getMinDownSpeed() {
+		return minDownSpeed;
+	}
 
+	public void setMinDownSpeed(Double minDownSpeed) {
+		this.minDownSpeed = minDownSpeed;
+	}
 
-  public Double getMinDownSpeed() {
-    return minDownSpeed;
-  }
+	/**
+	 * 
+	 * @param avgDownSpeed
+	 * @return
+	 */
+	public LineSpeeds avgDownSpeed(Double avgDownSpeed) {
+		this.avgDownSpeed = avgDownSpeed;
+		return this;
+	}
 
-  public void setMinDownSpeed(Double minDownSpeed) {
-    this.minDownSpeed = minDownSpeed;
-  }
+	/**
+	 * The average download speed offered (in kilobits per second [kbps])
+	 * 
+	 * @return avgDownSpeed
+	 **/
+	@ApiModelProperty(value = "The average download speed offered (in kilobits per second [kbps])")
 
-  public LineSpeeds avgDownSpeed(Double avgDownSpeed) {
-    this.avgDownSpeed = avgDownSpeed;
-    return this;
-  }
+	public Double getAvgDownSpeed() {
+		return avgDownSpeed;
+	}
 
-   /**
-   * The average download speed offered (in kilobits per second [kbps])
-   * @return avgDownSpeed
-  **/
-  @ApiModelProperty(value = "The average download speed offered (in kilobits per second [kbps])")
+	public void setAvgDownSpeed(Double avgDownSpeed) {
+		this.avgDownSpeed = avgDownSpeed;
+	}
 
+	/**
+	 * 
+	 * @param minGuaranteedDownSpeed
+	 * @return
+	 */
+	public LineSpeeds minGuaranteedDownSpeed(Double minGuaranteedDownSpeed) {
+		this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
+		return this;
+	}
 
-  public Double getAvgDownSpeed() {
-    return avgDownSpeed;
-  }
+	/**
+	 * The minimum guaranteed download speed offered (in kilobits per second
+	 * [kbps])
+	 * 
+	 * @return minGuaranteedDownSpeed
+	 **/
+	@ApiModelProperty(value = "The minimum guaranteed download speed offered (in kilobits per second [kbps])")
 
-  public void setAvgDownSpeed(Double avgDownSpeed) {
-    this.avgDownSpeed = avgDownSpeed;
-  }
+	public Double getMinGuaranteedDownSpeed() {
+		return minGuaranteedDownSpeed;
+	}
 
-  public LineSpeeds minGuaranteedDownSpeed(Double minGuaranteedDownSpeed) {
-    this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
-    return this;
-  }
+	public void setMinGuaranteedDownSpeed(Double minGuaranteedDownSpeed) {
+		this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
+	}
 
-   /**
-   * The minimum guaranteed download speed offered (in kilobits per second [kbps])
-   * @return minGuaranteedDownSpeed
-  **/
-  @ApiModelProperty(value = "The minimum guaranteed download speed offered (in kilobits per second [kbps])")
+	/**
+	 * 
+	 * @param maxUpSpeed
+	 * @return
+	 */
+	public LineSpeeds maxUpSpeed(Double maxUpSpeed) {
+		this.maxUpSpeed = maxUpSpeed;
+		return this;
+	}
 
+	/**
+	 * The max upload speed offered (in kilobits per second [kbps])
+	 * 
+	 * @return maxUpSpeed
+	 **/
+	@ApiModelProperty(value = "The max  upload speed offered (in kilobits per second [kbps])")
 
-  public Double getMinGuaranteedDownSpeed() {
-    return minGuaranteedDownSpeed;
-  }
+	public Double getMaxUpSpeed() {
+		return maxUpSpeed;
+	}
 
-  public void setMinGuaranteedDownSpeed(Double minGuaranteedDownSpeed) {
-    this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
-  }
+	public void setMaxUpSpeed(Double maxUpSpeed) {
+		this.maxUpSpeed = maxUpSpeed;
+	}
 
-  public LineSpeeds maxUpSpeed(Double maxUpSpeed) {
-    this.maxUpSpeed = maxUpSpeed;
-    return this;
-  }
+	/**
+	 * @param minUpSpeed
+	 * @return
+	 */
+	public LineSpeeds minUpSpeed(Double minUpSpeed) {
+		this.minUpSpeed = minUpSpeed;
+		return this;
+	}
 
-   /**
-   * The max  upload speed offered (in kilobits per second [kbps])
-   * @return maxUpSpeed
-  **/
-  @ApiModelProperty(value = "The max  upload speed offered (in kilobits per second [kbps])")
+	/**
+	 * The min upload speed offered (in kilobits per second [kbps])
+	 * 
+	 * @return minUpSpeed
+	 **/
+	@ApiModelProperty(value = "The min upload speed offered (in kilobits per second [kbps])")
 
+	public Double getMinUpSpeed() {
+		return minUpSpeed;
+	}
 
-  public Double getMaxUpSpeed() {
-    return maxUpSpeed;
-  }
+	public void setMinUpSpeed(Double minUpSpeed) {
+		this.minUpSpeed = minUpSpeed;
+	}
 
-  public void setMaxUpSpeed(Double maxUpSpeed) {
-    this.maxUpSpeed = maxUpSpeed;
-  }
+	/**
+	 * @param bandwidthMeasure
+	 * @return
+	 */
+	public LineSpeeds bandwidthMeasure(String bandwidthMeasure) {
+		this.bandwidthMeasure = bandwidthMeasure;
+		return this;
+	}
 
-  public LineSpeeds minUpSpeed(Double minUpSpeed) {
-    this.minUpSpeed = minUpSpeed;
-    return this;
-  }
+	/**
+	 * Indicates whether the best speed is predicted or actual
+	 * 
+	 * @return bandwidthMeasure
+	 **/
+	@ApiModelProperty(value = "Indicates whether the best speed is predicted or actual")
 
-   /**
-   * The min upload speed offered (in kilobits per second [kbps])
-   * @return minUpSpeed
-  **/
-  @ApiModelProperty(value = "The min upload speed offered (in kilobits per second [kbps])")
+	public String getBandwidthMeasure() {
+		return bandwidthMeasure;
+	}
 
+	public void setBandwidthMeasure(String bandwidthMeasure) {
+		this.bandwidthMeasure = bandwidthMeasure;
+	}
 
-  public Double getMinUpSpeed() {
-    return minUpSpeed;
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		LineSpeeds lineSpeeds = (LineSpeeds) o;
+		return Objects.equals(this.maxDownSpeed, lineSpeeds.maxDownSpeed)
+				&& Objects.equals(this.minDownSpeed, lineSpeeds.minDownSpeed)
+				&& Objects.equals(this.avgDownSpeed, lineSpeeds.avgDownSpeed)
+				&& Objects.equals(this.minGuaranteedDownSpeed, lineSpeeds.minGuaranteedDownSpeed)
+				&& Objects.equals(this.maxUpSpeed, lineSpeeds.maxUpSpeed)
+				&& Objects.equals(this.minUpSpeed, lineSpeeds.minUpSpeed)
+				&& Objects.equals(this.bandwidthMeasure, lineSpeeds.bandwidthMeasure);
+	}
 
-  public void setMinUpSpeed(Double minUpSpeed) {
-    this.minUpSpeed = minUpSpeed;
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(maxDownSpeed, minDownSpeed, avgDownSpeed, minGuaranteedDownSpeed, maxUpSpeed, minUpSpeed,
+				bandwidthMeasure);
+	}
 
-  public LineSpeeds bandwidthMeasure(String bandwidthMeasure) {
-    this.bandwidthMeasure = bandwidthMeasure;
-    return this;
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class LineSpeeds {\n");
 
-   /**
-   * Indicates whether the best speed is predicted or actual
-   * @return bandwidthMeasure
-  **/
-  @ApiModelProperty(value = "Indicates whether the best speed is predicted or actual")
+		sb.append("    maxDownSpeed: ").append(toIndentedString(maxDownSpeed)).append("\n");
+		sb.append("    minDownSpeed: ").append(toIndentedString(minDownSpeed)).append("\n");
+		sb.append("    avgDownSpeed: ").append(toIndentedString(avgDownSpeed)).append("\n");
+		sb.append("    minGuaranteedDownSpeed: ").append(toIndentedString(minGuaranteedDownSpeed)).append("\n");
+		sb.append("    maxUpSpeed: ").append(toIndentedString(maxUpSpeed)).append("\n");
+		sb.append("    minUpSpeed: ").append(toIndentedString(minUpSpeed)).append("\n");
+		sb.append("    bandwidthMeasure: ").append(toIndentedString(bandwidthMeasure)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-
-  public String getBandwidthMeasure() {
-    return bandwidthMeasure;
-  }
-
-  public void setBandwidthMeasure(String bandwidthMeasure) {
-    this.bandwidthMeasure = bandwidthMeasure;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    LineSpeeds lineSpeeds = (LineSpeeds) o;
-    return Objects.equals(this.maxDownSpeed, lineSpeeds.maxDownSpeed) &&
-        Objects.equals(this.minDownSpeed, lineSpeeds.minDownSpeed) &&
-        Objects.equals(this.avgDownSpeed, lineSpeeds.avgDownSpeed) &&
-        Objects.equals(this.minGuaranteedDownSpeed, lineSpeeds.minGuaranteedDownSpeed) &&
-        Objects.equals(this.maxUpSpeed, lineSpeeds.maxUpSpeed) &&
-        Objects.equals(this.minUpSpeed, lineSpeeds.minUpSpeed) &&
-        Objects.equals(this.bandwidthMeasure, lineSpeeds.bandwidthMeasure);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(maxDownSpeed, minDownSpeed, avgDownSpeed, minGuaranteedDownSpeed, maxUpSpeed, minUpSpeed, bandwidthMeasure);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class LineSpeeds {\n");
-    
-    sb.append("    maxDownSpeed: ").append(toIndentedString(maxDownSpeed)).append("\n");
-    sb.append("    minDownSpeed: ").append(toIndentedString(minDownSpeed)).append("\n");
-    sb.append("    avgDownSpeed: ").append(toIndentedString(avgDownSpeed)).append("\n");
-    sb.append("    minGuaranteedDownSpeed: ").append(toIndentedString(minGuaranteedDownSpeed)).append("\n");
-    sb.append("    maxUpSpeed: ").append(toIndentedString(maxUpSpeed)).append("\n");
-    sb.append("    minUpSpeed: ").append(toIndentedString(minUpSpeed)).append("\n");
-    sb.append("    bandwidthMeasure: ").append(toIndentedString(bandwidthMeasure)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

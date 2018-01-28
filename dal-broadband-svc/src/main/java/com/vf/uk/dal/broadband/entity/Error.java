@@ -21,6 +21,11 @@ public class Error   {
   @JsonProperty("referenceId")
   private String referenceId = null;
 
+  /**
+   * 
+   * @param code
+   * @return
+   */
   public Error code(String code) {
     this.code = code;
     return this;
@@ -41,6 +46,11 @@ public class Error   {
     this.code = code;
   }
 
+  /**
+   * 
+   * @param message
+   * @return
+   */
   public Error message(String message) {
     this.message = message;
     return this;
@@ -61,6 +71,11 @@ public class Error   {
     this.message = message;
   }
 
+  /**
+   * 
+   * @param referenceId
+   * @return
+   */
   public Error referenceId(String referenceId) {
     this.referenceId = referenceId;
     return this;

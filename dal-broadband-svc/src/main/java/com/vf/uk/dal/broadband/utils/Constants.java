@@ -1,7 +1,16 @@
 package com.vf.uk.dal.broadband.utils;
 
+/**
+ * @author Infosys Limited
+ *
+ */
 public class Constants {
 
+	
+	private Constants(){
+		
+	}
+	
 	/** The Constant USER_TYPE. */
 	public static final String USER_TYPE = "userType";
 

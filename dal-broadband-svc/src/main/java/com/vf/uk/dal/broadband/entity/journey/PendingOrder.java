@@ -24,6 +24,10 @@ public class PendingOrder {
 
 	private String thirdPartyFlag = null;
 
+	/**
+	 * @param completionDate
+	 * @return
+	 */
 	public PendingOrder completionDate(String completionDate) {
 		this.completionDate = completionDate;
 		return this;
@@ -42,6 +46,10 @@ public class PendingOrder {
 		this.completionDate = completionDate;
 	}
 
+	/**
+	 * @param typeCode
+	 * @return
+	 */
 	public PendingOrder typeCode(String typeCode) {
 		this.typeCode = typeCode;
 		return this;
@@ -60,6 +68,10 @@ public class PendingOrder {
 		this.typeCode = typeCode;
 	}
 
+	/**
+	 * @param thirdPartyFlag
+	 * @return
+	 */
 	public PendingOrder thirdPartyFlag(String thirdPartyFlag) {
 		this.thirdPartyFlag = thirdPartyFlag;
 		return this;

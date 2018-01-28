@@ -18,6 +18,11 @@ public class Duration   {
   @JsonProperty("value")
   private String value = null;
 
+  /**
+   * 
+   * @param uom
+   * @return
+   */
   public Duration uom(String uom) {
     this.uom = uom;
     return this;
@@ -38,6 +43,11 @@ public class Duration   {
     this.uom = uom;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public Duration value(String value) {
     this.value = value;
     return this;

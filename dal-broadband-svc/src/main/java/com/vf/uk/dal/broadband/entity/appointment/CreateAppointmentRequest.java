@@ -18,6 +18,10 @@ public class CreateAppointmentRequest implements RequestMessage{
 	@JsonProperty("appointmentDetails")
 	private AppointmentDetails appointmentDetails = null;
 
+	/**
+	 * @param existing
+	 * @return
+	 */
 	public CreateAppointmentRequest existing(Boolean existing) {
 		this.existing = existing;
 		return this;
@@ -37,6 +41,10 @@ public class CreateAppointmentRequest implements RequestMessage{
 		this.existing = existing;
 	}
 
+	/**
+	 * @param appointmentDetails
+	 * @return
+	 */
 	public CreateAppointmentRequest appointmentDetails(AppointmentDetails appointmentDetails) {
 		this.appointmentDetails = appointmentDetails;
 		return this;
