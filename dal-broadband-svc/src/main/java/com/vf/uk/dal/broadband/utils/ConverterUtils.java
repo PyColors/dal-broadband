@@ -367,8 +367,8 @@ public class ConverterUtils {
 				}
 				appointmentAndAvailabilityList.add(appointmentDetails);
 				
-				if(StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), "NEW")
-						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(), "No Charge")
+				if(StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), Constants.NEW)
+						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(), Constants.No_CHARGE)
 						&& productModel!=null && !productModel.isEmpty()){
 					Price engineeringVisitCharge = new Price();
 					if(productModel.get(0).getPriceGrossOVR()!=null){
