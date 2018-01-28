@@ -5,11 +5,7 @@ package com.vf.uk.dal.broadband.utils;
  *
  */
 public class ExceptionMessages {
-	
-	private ExceptionMessages(){
-		
-	}
-	
+
 	public static final String HTTP_SERVER_EXP_ERROR = "HTTP Server exception error occured";
 	public static final String HTTP_CLIENT_EXP_ERROR = "HTTP Client exception error occured";
 	public static final String INTERNAL_API_CALL_EXP = "Exception in calling internal API";
@@ -17,7 +13,7 @@ public class ExceptionMessages {
 	/** The Constant SOLR_GETPRODUCTMODEL_EXCEPTION. */
 	public static final String SOLR_GETPRODUCTMODEL_EXCEPTION = "Exception From Solr getProductModel";
 	/** The Constant SOLR_CONNECTION_CLOSE_EXCEPTION. */
-	public static final String SOLR_CONNECTION_CLOSE_EXCEPTION ="Exception occured while closing solr connection";
+	public static final String SOLR_CONNECTION_CLOSE_EXCEPTION = "Exception occured while closing solr connection";
 	public static final String NO_DATA_RECIEVED = "No Data Found in solr.";
 	public static final String EMPTY_GSA_RESPONSE = "No Data recieved from TIL";
 	public static final String INVALID_SERVICE_LINE = "No Service Line recieved from TIL";
@@ -29,4 +25,7 @@ public class ExceptionMessages {
 	public static final String TIME_SLOT_EMPTY = "Time Slot is empty";
 	public static final String BASKET_ID_EMPTY = "Basket Id is empty";
 
+	private ExceptionMessages() {
+
+	}
 }
