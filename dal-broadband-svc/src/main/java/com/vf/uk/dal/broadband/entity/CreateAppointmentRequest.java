@@ -29,6 +29,11 @@ public class CreateAppointmentRequest   {
   @JsonProperty("siteNote")
   private SiteNote siteNote = null;
 
+  /**
+   * 
+   * @param journeyId
+   * @return
+   */
   public CreateAppointmentRequest journeyId(String journeyId) {
     this.journeyId = journeyId;
     return this;
@@ -49,6 +54,11 @@ public class CreateAppointmentRequest   {
     this.journeyId = journeyId;
   }
 
+  /**
+   * 
+   * @param basketId
+   * @return
+   */
   public CreateAppointmentRequest basketId(String basketId) {
     this.basketId = basketId;
     return this;
@@ -69,6 +79,11 @@ public class CreateAppointmentRequest   {
     this.basketId = basketId;
   }
 
+  /**
+   * 
+   * @param startTimePeriod
+   * @return
+   */
   public CreateAppointmentRequest startTimePeriod(String startTimePeriod) {
     this.startTimePeriod = startTimePeriod;
     return this;
@@ -89,6 +104,11 @@ public class CreateAppointmentRequest   {
     this.startTimePeriod = startTimePeriod;
   }
 
+  /**
+   * 
+   * @param timeSlot
+   * @return
+   */
   public CreateAppointmentRequest timeSlot(String timeSlot) {
     this.timeSlot = timeSlot;
     return this;
@@ -109,6 +129,11 @@ public class CreateAppointmentRequest   {
     this.timeSlot = timeSlot;
   }
 
+  /**
+   * 
+   * @param siteNote
+   * @return
+   */
   public CreateAppointmentRequest siteNote(SiteNote siteNote) {
     this.siteNote = siteNote;
     return this;

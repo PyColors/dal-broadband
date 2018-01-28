@@ -22,6 +22,10 @@ public class ServicePoint {
 
 	private ServiceReference serviceReference = null;
 
+	/**
+	 * @param lineRefernece
+	 * @return
+	 */
 	public ServicePoint lineRefernece(LineReference lineRefernece) {
 		this.lineRefernece = lineRefernece;
 		return this;
@@ -40,6 +44,10 @@ public class ServicePoint {
 		this.lineRefernece = lineRefernece;
 	}
 
+	/**
+	 * @param serviceReference
+	 * @return
+	 */
 	public ServicePoint serviceReference(ServiceReference serviceReference) {
 		this.serviceReference = serviceReference;
 		return this;

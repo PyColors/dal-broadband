@@ -30,6 +30,10 @@ public class LineLocator {
 
 	private String distributionPoint = null;
 
+	/**
+	 * @param exchangeCode
+	 * @return
+	 */
 	public LineLocator exchangeCode(String exchangeCode) {
 		this.exchangeCode = exchangeCode;
 		return this;
@@ -48,6 +52,10 @@ public class LineLocator {
 		this.exchangeCode = exchangeCode;
 	}
 
+	/**
+	 * @param exchangeName
+	 * @return
+	 */
 	public LineLocator exchangeName(String exchangeName) {
 		this.exchangeName = exchangeName;
 		return this;
@@ -66,6 +74,10 @@ public class LineLocator {
 		this.exchangeName = exchangeName;
 	}
 
+	/**
+	 * @param districtCode
+	 * @return
+	 */
 	public LineLocator districtCode(String districtCode) {
 		this.districtCode = districtCode;
 		return this;
@@ -84,6 +96,10 @@ public class LineLocator {
 		this.districtCode = districtCode;
 	}
 
+	/**
+	 * @param l2SID
+	 * @return
+	 */
 	public LineLocator l2SID(String l2SID) {
 		this.l2SID = l2SID;
 		return this;
@@ -102,6 +118,10 @@ public class LineLocator {
 		this.l2SID = l2SID;
 	}
 
+	/**
+	 * @param cableLinkID
+	 * @return
+	 */
 	public LineLocator cableLinkID(String cableLinkID) {
 		this.cableLinkID = cableLinkID;
 		return this;
@@ -120,6 +140,10 @@ public class LineLocator {
 		this.cableLinkID = cableLinkID;
 	}
 
+	/**
+	 * @param distributionPoint
+	 * @return
+	 */
 	public LineLocator distributionPoint(String distributionPoint) {
 		this.distributionPoint = distributionPoint;
 		return this;

@@ -17,6 +17,11 @@ public class LineRef   {
   @JsonProperty("lineIdentification")
   private LineIdentification lineIdentification = null;
 
+  /**
+   * 
+   * @param lineIdentification
+   * @return
+   */
   public LineRef lineIdentification(LineIdentification lineIdentification) {
     this.lineIdentification = lineIdentification;
     return this;

@@ -24,7 +24,7 @@ public class Address {
 
 	@JsonProperty("building")
 	private String building = null;
-	
+
 	@JsonProperty("cityName")
 	private String cityName = null;
 
@@ -43,6 +43,10 @@ public class Address {
 	@JsonProperty("identificationId")
 	private String identificationId = null;
 
+	/**
+	 * @param lineOne
+	 * @return
+	 */
 	public Address lineOne(String lineOne) {
 		this.lineOne = lineOne;
 		return this;
@@ -62,6 +66,10 @@ public class Address {
 		this.lineOne = lineOne;
 	}
 
+	/**
+	 * @param lineTwo
+	 * @return
+	 */
 	public Address lineTwo(String lineTwo) {
 		this.lineTwo = lineTwo;
 		return this;
@@ -81,6 +89,10 @@ public class Address {
 		this.lineTwo = lineTwo;
 	}
 
+	/**
+	 * @param lineThree
+	 * @return
+	 */
 	public Address lineThree(String lineThree) {
 		this.lineThree = lineThree;
 		return this;
@@ -100,6 +112,10 @@ public class Address {
 		this.lineThree = lineThree;
 	}
 
+	/**
+	 * @param lineFour
+	 * @return
+	 */
 	public Address lineFour(String lineFour) {
 		this.lineFour = lineFour;
 		return this;
@@ -119,6 +135,10 @@ public class Address {
 		this.lineFour = lineFour;
 	}
 
+	/**
+	 * @param cityName
+	 * @return
+	 */
 	public Address cityName(String cityName) {
 		this.cityName = cityName;
 		return this;
@@ -138,6 +158,10 @@ public class Address {
 		this.cityName = cityName;
 	}
 
+	/**
+	 * @param countyName
+	 * @return
+	 */
 	public Address countyName(String countyName) {
 		this.countyName = countyName;
 		return this;
@@ -157,6 +181,10 @@ public class Address {
 		this.countyName = countyName;
 	}
 
+	/**
+	 * @param countryCode
+	 * @return
+	 */
 	public Address countryCode(String countryCode) {
 		this.countryCode = countryCode;
 		return this;
@@ -184,6 +212,10 @@ public class Address {
 		this.countryCode = countryCode;
 	}
 
+	/**
+	 * @param citySubDivisionName
+	 * @return
+	 */
 	public Address citySubDivisionName(String citySubDivisionName) {
 		this.citySubDivisionName = citySubDivisionName;
 		return this;
@@ -203,6 +235,10 @@ public class Address {
 		this.citySubDivisionName = citySubDivisionName;
 	}
 
+	/**
+	 * @param postalCode
+	 * @return
+	 */
 	public Address postalCode(String postalCode) {
 		this.postalCode = postalCode;
 		return this;
@@ -222,6 +258,10 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 
+	/**
+	 * @param identificationId
+	 * @return
+	 */
 	public Address identificationId(String identificationId) {
 		this.identificationId = identificationId;
 		return this;

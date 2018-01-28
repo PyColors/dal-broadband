@@ -1,6 +1,14 @@
 package com.vf.uk.dal.broadband.utils;
 
+/**
+ * @author Infosys Limited
+ *
+ */
 public class ExceptionMessages {
+	
+	private ExceptionMessages(){
+		
+	}
 	
 	public static final String HTTP_SERVER_EXP_ERROR = "HTTP Server exception error occured";
 	public static final String HTTP_CLIENT_EXP_ERROR = "HTTP Client exception error occured";

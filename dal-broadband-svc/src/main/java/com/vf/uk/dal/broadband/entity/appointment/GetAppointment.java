@@ -20,6 +20,10 @@ public class GetAppointment {
 	@JsonProperty("appointmentWindowList")
 	private List<AppointmentWindowList> appointmentWindowList = null;
 
+	/**
+	 * @param resultStatus
+	 * @return
+	 */
 	public GetAppointment resultStatus(String resultStatus) {
 		this.resultStatus = resultStatus;
 		return this;
@@ -39,11 +43,19 @@ public class GetAppointment {
 		this.resultStatus = resultStatus;
 	}
 
+	/**
+	 * @param appointmentWindowList
+	 * @return
+	 */
 	public GetAppointment appointmentWindowList(List<AppointmentWindowList> appointmentWindowList) {
 		this.appointmentWindowList = appointmentWindowList;
 		return this;
 	}
 
+	/**
+	 * @param appointmentWindowListItem
+	 * @return
+	 */
 	public GetAppointment addAppointmentWindowListItem(AppointmentWindowList appointmentWindowListItem) {
 		if (this.appointmentWindowList == null) {
 			this.appointmentWindowList = new ArrayList<AppointmentWindowList>();

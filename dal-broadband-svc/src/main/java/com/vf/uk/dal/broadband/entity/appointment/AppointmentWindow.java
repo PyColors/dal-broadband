@@ -22,6 +22,10 @@ public class AppointmentWindow {
 	@JsonProperty("applicationId")
 	private String applicationId = null;
 
+	/**
+	 * @param startTimePeriod
+	 * @return
+	 */
 	public AppointmentWindow startTimePeriod(String startTimePeriod) {
 		this.startTimePeriod = startTimePeriod;
 		return this;
@@ -42,6 +46,10 @@ public class AppointmentWindow {
 		this.startTimePeriod = startTimePeriod;
 	}
 
+	/**
+	 * @param operationalPreferenceCode
+	 * @return
+	 */
 	public AppointmentWindow operationalPreferenceCode(String operationalPreferenceCode) {
 		this.operationalPreferenceCode = operationalPreferenceCode;
 		return this;
@@ -62,6 +70,10 @@ public class AppointmentWindow {
 		this.operationalPreferenceCode = operationalPreferenceCode;
 	}
 
+	/**
+	 * @param timeSlot
+	 * @return
+	 */
 	public AppointmentWindow timeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 		return this;
@@ -81,6 +93,10 @@ public class AppointmentWindow {
 		this.timeSlot = timeSlot;
 	}
 
+	/**
+	 * @param applicationId
+	 * @return
+	 */
 	public AppointmentWindow applicationId(String applicationId) {
 		this.applicationId = applicationId;
 		return this;

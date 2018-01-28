@@ -26,6 +26,10 @@ public class AppointmentWindow {
 
 	private String timeSlot = null;
 
+	/**
+	 * @param identificationId
+	 * @return
+	 */
 	public AppointmentWindow identificationId(String identificationId) {
 		this.identificationId = identificationId;
 		return this;
@@ -44,6 +48,10 @@ public class AppointmentWindow {
 		this.identificationId = identificationId;
 	}
 
+	/**
+	 * @param startDateTime
+	 * @return
+	 */
 	public AppointmentWindow startDateTime(String startDateTime) {
 		this.startDateTime = startDateTime;
 		return this;
@@ -62,6 +70,10 @@ public class AppointmentWindow {
 		this.startDateTime = startDateTime;
 	}
 
+	/**
+	 * @param operationalPreferenceCode
+	 * @return
+	 */
 	public AppointmentWindow operationalPreferenceCode(String operationalPreferenceCode) {
 		this.operationalPreferenceCode = operationalPreferenceCode;
 		return this;
@@ -81,6 +93,10 @@ public class AppointmentWindow {
 		this.operationalPreferenceCode = operationalPreferenceCode;
 	}
 
+	/**
+	 * @param timeSlot
+	 * @return
+	 */
 	public AppointmentWindow timeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 		return this;

@@ -30,6 +30,10 @@ public class MiscReference {
 
 	private String anfp = null;
 
+	/**
+	 * @param serviceProviderName
+	 * @return
+	 */
 	public MiscReference serviceProviderName(String serviceProviderName) {
 		this.serviceProviderName = serviceProviderName;
 		return this;
@@ -49,6 +53,10 @@ public class MiscReference {
 		this.serviceProviderName = serviceProviderName;
 	}
 
+	/**
+	 * @param lineLength
+	 * @return
+	 */
 	public MiscReference lineLength(String lineLength) {
 		this.lineLength = lineLength;
 		return this;
@@ -67,6 +75,10 @@ public class MiscReference {
 		this.lineLength = lineLength;
 	}
 
+	/**
+	 * @param classificationCode
+	 * @return
+	 */
 	public MiscReference classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -85,6 +97,10 @@ public class MiscReference {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * @param customerAgreedDate
+	 * @return
+	 */
 	public MiscReference customerAgreedDate(String customerAgreedDate) {
 		this.customerAgreedDate = customerAgreedDate;
 		return this;
@@ -103,6 +119,10 @@ public class MiscReference {
 		this.customerAgreedDate = customerAgreedDate;
 	}
 
+	/**
+	 * @param readyForServiceDate
+	 * @return
+	 */
 	public MiscReference readyForServiceDate(String readyForServiceDate) {
 		this.readyForServiceDate = readyForServiceDate;
 		return this;
@@ -122,6 +142,10 @@ public class MiscReference {
 		this.readyForServiceDate = readyForServiceDate;
 	}
 
+	/**
+	 * @param anfp
+	 * @return
+	 */
 	public MiscReference anfp(String anfp) {
 		this.anfp = anfp;
 		return this;

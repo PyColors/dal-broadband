@@ -18,6 +18,10 @@ public class CreateAppointment {
 	@JsonProperty("appointmentWindow")
 	private AppointmentWindow appointmentWindow = null;
 
+	/**
+	 * @param resultStatus
+	 * @return
+	 */
 	public CreateAppointment resultStatus(String resultStatus) {
 		this.resultStatus = resultStatus;
 		return this;
@@ -37,6 +41,10 @@ public class CreateAppointment {
 		this.resultStatus = resultStatus;
 	}
 
+	/**
+	 * @param appointmentWindow
+	 * @return
+	 */
 	public CreateAppointment appointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 		return this;

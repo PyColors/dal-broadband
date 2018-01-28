@@ -32,6 +32,10 @@ public class LineSpeeds {
 
 	private String bandwidthMeasure = null;
 
+	/**
+	 * @param maxDownSpeed
+	 * @return
+	 */
 	public LineSpeeds maxDownSpeed(String maxDownSpeed) {
 		this.maxDownSpeed = maxDownSpeed;
 		return this;
@@ -50,6 +54,10 @@ public class LineSpeeds {
 		this.maxDownSpeed = maxDownSpeed;
 	}
 
+	/**
+	 * @param minDownSpeed
+	 * @return
+	 */
 	public LineSpeeds minDownSpeed(String minDownSpeed) {
 		this.minDownSpeed = minDownSpeed;
 		return this;
@@ -68,6 +76,10 @@ public class LineSpeeds {
 		this.minDownSpeed = minDownSpeed;
 	}
 
+	/**
+	 * @param avgDownSpeed
+	 * @return
+	 */
 	public LineSpeeds avgDownSpeed(String avgDownSpeed) {
 		this.avgDownSpeed = avgDownSpeed;
 		return this;
@@ -86,6 +98,10 @@ public class LineSpeeds {
 		this.avgDownSpeed = avgDownSpeed;
 	}
 
+	/**
+	 * @param minGuaranteedDownSpeed
+	 * @return
+	 */
 	public LineSpeeds minGuaranteedDownSpeed(String minGuaranteedDownSpeed) {
 		this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
 		return this;
@@ -105,6 +121,10 @@ public class LineSpeeds {
 		this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
 	}
 
+	/**
+	 * @param maxUpSpeed
+	 * @return
+	 */
 	public LineSpeeds maxUpSpeed(String maxUpSpeed) {
 		this.maxUpSpeed = maxUpSpeed;
 		return this;
@@ -123,6 +143,10 @@ public class LineSpeeds {
 		this.maxUpSpeed = maxUpSpeed;
 	}
 
+	/**
+	 * @param minUpSpeed
+	 * @return
+	 */
 	public LineSpeeds minUpSpeed(String minUpSpeed) {
 		this.minUpSpeed = minUpSpeed;
 		return this;
@@ -141,6 +165,10 @@ public class LineSpeeds {
 		this.minUpSpeed = minUpSpeed;
 	}
 
+	/**
+	 * @param bandwidthMeasure
+	 * @return
+	 */
 	public LineSpeeds bandwidthMeasure(String bandwidthMeasure) {
 		this.bandwidthMeasure = bandwidthMeasure;
 		return this;

@@ -22,6 +22,10 @@ public class AccessLine {
 
 	private String channelId = null;
 
+	/**
+	 * @param id
+	 * @return
+	 */
 	public AccessLine id(String id) {
 		this.id = id;
 		return this;
@@ -41,6 +45,10 @@ public class AccessLine {
 		this.id = id;
 	}
 
+	/**
+	 * @param channelId
+	 * @return
+	 */
 	public AccessLine channelId(String channelId) {
 		this.channelId = channelId;
 		return this;

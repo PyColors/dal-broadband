@@ -16,6 +16,10 @@ public class ItemReference {
 	@JsonProperty("typeCode")
 	private String typeCode = null;
 
+	/**
+	 * @param classificationCode
+	 * @return
+	 */
 	public ItemReference classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -37,6 +41,10 @@ public class ItemReference {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * @param typeCode
+	 * @return
+	 */
 	public ItemReference typeCode(String typeCode) {
 		this.typeCode = typeCode;
 		return this;

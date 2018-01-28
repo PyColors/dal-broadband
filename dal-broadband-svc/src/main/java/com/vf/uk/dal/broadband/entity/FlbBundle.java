@@ -70,6 +70,11 @@ public class FlbBundle   {
   @JsonProperty("priceInfo")
   private PriceForBundleAndHardware priceInfo = null;
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public FlbBundle skuId(String skuId) {
     this.skuId = skuId;
     return this;
@@ -90,6 +95,11 @@ public class FlbBundle   {
     this.skuId = skuId;
   }
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public FlbBundle name(String name) {
     this.name = name;
     return this;
@@ -110,6 +120,11 @@ public class FlbBundle   {
     this.name = name;
   }
 
+  /**
+   * 
+   * @param description
+   * @return
+   */
   public FlbBundle description(String description) {
     this.description = description;
     return this;
@@ -130,6 +145,11 @@ public class FlbBundle   {
     this.description = description;
   }
 
+  /**
+   * 
+   * @param bundleName
+   * @return
+   */
   public FlbBundle bundleName(String bundleName) {
     this.bundleName = bundleName;
     return this;
@@ -150,6 +170,11 @@ public class FlbBundle   {
     this.bundleName = bundleName;
   }
 
+  /**
+   * 
+   * @param bundleDescription
+   * @return
+   */
   public FlbBundle bundleDescription(String bundleDescription) {
     this.bundleDescription = bundleDescription;
     return this;
@@ -170,6 +195,11 @@ public class FlbBundle   {
     this.bundleDescription = bundleDescription;
   }
 
+  /**
+   * 
+   * @param speed
+   * @return
+   */
   public FlbBundle speed(String speed) {
     this.speed = speed;
     return this;
@@ -190,6 +220,11 @@ public class FlbBundle   {
     this.speed = speed;
   }
 
+  /**
+   * 
+   * @param minSpeed
+   * @return
+   */
   public FlbBundle minSpeed(String minSpeed) {
     this.minSpeed = minSpeed;
     return this;
@@ -210,6 +245,11 @@ public class FlbBundle   {
     this.minSpeed = minSpeed;
   }
 
+  /**
+   * 
+   * @param maxSpeed
+   * @return
+   */
   public FlbBundle maxSpeed(String maxSpeed) {
     this.maxSpeed = maxSpeed;
     return this;
@@ -230,6 +270,11 @@ public class FlbBundle   {
     this.maxSpeed = maxSpeed;
   }
 
+  /**
+   * 
+   * @param usage
+   * @return
+   */
   public FlbBundle usage(String usage) {
     this.usage = usage;
     return this;
@@ -250,6 +295,11 @@ public class FlbBundle   {
     this.usage = usage;
   }
 
+  /**
+   * 
+   * @param classificationCode
+   * @return
+   */
   public FlbBundle classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
@@ -270,6 +320,11 @@ public class FlbBundle   {
     this.classificationCode = classificationCode;
   }
 
+  /**
+   * 
+   * @param commitmentPeriod
+   * @return
+   */
   public FlbBundle commitmentPeriod(String commitmentPeriod) {
     this.commitmentPeriod = commitmentPeriod;
     return this;
@@ -290,6 +345,11 @@ public class FlbBundle   {
     this.commitmentPeriod = commitmentPeriod;
   }
 
+  /**
+   * 
+   * @param planCoupleId
+   * @return
+   */
   public FlbBundle planCoupleId(String planCoupleId) {
     this.planCoupleId = planCoupleId;
     return this;
@@ -310,6 +370,11 @@ public class FlbBundle   {
     this.planCoupleId = planCoupleId;
   }
 
+  /**
+   * 
+   * @param planCoupleFlag
+   * @return
+   */
   public FlbBundle planCoupleFlag(Boolean planCoupleFlag) {
     this.planCoupleFlag = planCoupleFlag;
     return this;
@@ -330,6 +395,11 @@ public class FlbBundle   {
     this.planCoupleFlag = planCoupleFlag;
   }
 
+  /**
+   * 
+   * @param planCoupleLabel
+   * @return
+   */
   public FlbBundle planCoupleLabel(String planCoupleLabel) {
     this.planCoupleLabel = planCoupleLabel;
     return this;
@@ -350,6 +420,11 @@ public class FlbBundle   {
     this.planCoupleLabel = planCoupleLabel;
   }
 
+  /**
+   * 
+   * @param productName
+   * @return
+   */
   public FlbBundle productName(String productName) {
     this.productName = productName;
     return this;
@@ -370,6 +445,11 @@ public class FlbBundle   {
     this.productName = productName;
   }
 
+  /**
+   * 
+   * @param productDescription
+   * @return
+   */
   public FlbBundle productDescription(String productDescription) {
     this.productDescription = productDescription;
     return this;
@@ -390,6 +470,11 @@ public class FlbBundle   {
     this.productDescription = productDescription;
   }
 
+  /**
+   * 
+   * @param merchandisingMedia
+   * @return
+   */
   public FlbBundle merchandisingMedia(List<MediaLink> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
@@ -419,6 +504,11 @@ public class FlbBundle   {
     this.merchandisingMedia = merchandisingMedia;
   }
 
+  /**
+   * 
+   * @param priceInfo
+   * @return
+   */
   public FlbBundle priceInfo(PriceForBundleAndHardware priceInfo) {
     this.priceInfo = priceInfo;
     return this;
