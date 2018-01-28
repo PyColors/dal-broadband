@@ -228,9 +228,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		} catch (RestClientResponseException e) {
 			Gson gson = new Gson(); 
 			String jsonInString = e.getResponseBodyAsString();
-			com.vf.uk.dal.common.exception.ErrorResponse staff = gson.fromJson(jsonInString, com.vf.uk.dal.common.exception.ErrorResponse.class);
+			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString, com.vf.uk.dal.common.exception.ErrorResponse.class);
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(staff.getErrorMessage());
+			throw new ApplicationException(error.getErrorMessage());
 		}
 		return createAppointment;
 	}

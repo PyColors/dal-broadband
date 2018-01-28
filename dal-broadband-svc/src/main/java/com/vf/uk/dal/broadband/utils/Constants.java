@@ -57,4 +57,8 @@ public class Constants {
 
 	public static final String DEFAULT_COHERENCE_IP = LOCALHOST;
 	public static final int DEFAULT_COHERENCE_PORT = 7574;
+
+	public static final String NEW = "NEW";
+
+	public static final String No_CHARGE = "No Charge";
 }
