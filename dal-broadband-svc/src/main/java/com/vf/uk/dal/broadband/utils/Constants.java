@@ -66,6 +66,14 @@ public class Constants {
 
 	public static final String No_CHARGE = "No Charge";
 
+	public static final String PRODUCT_CLASS = "PRODUCT_CLASS_ENG_VISIT";
+
+	public static final String DEFAULT_PRODUCT_CLASS_VALUE = "Fee";
+
+	public static final String PRODUCT_NAME = "PRODUCT_NAME_ENG_VISIT";
+
+	public static final String DEFAULT_PRODUCT_NAME = "Engineer Visit";
+
 	private Constants() {
 
 	}

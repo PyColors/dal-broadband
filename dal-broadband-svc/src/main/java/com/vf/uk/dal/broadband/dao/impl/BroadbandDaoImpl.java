@@ -32,9 +32,11 @@ import com.vf.uk.dal.broadband.helper.SolrHelper;
 import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
+import com.vf.uk.dal.broadband.utils.Constants;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.broadband.utils.SolrConnectionProvider;
+import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
@@ -63,14 +65,14 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	private RequestManager requestManager = null;
 
-	
-	
 	/*
-	 *  calls the get service availability MS.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getServiceAvailability(com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest)
+	 * calls the get service availability MS. (non-Javadoc)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#getServiceAvailability(com.vf.uk
+	 * .dal.broadband.entity.AvailabilityCheckRequest)
 	 */
-	
+
 	@Override
 	public GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest) {
 
@@ -95,12 +97,17 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	/*
-	 * Update the journey with the FLBB service point information. This will be invoked for logged in customer only.
+	 * Update the journey with the FLBB service point information. This will be
+	 * invoked for logged in customer only.
 	 * 
 	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updateJourneyWithFLBBDetails(java.lang.String, com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#updateJourneyWithFLBBDetails(
+	 * java.lang.String,
+	 * com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest)
 	 */
-	
+
 	@Override
 	public void updateJourneyWithFLBBDetails(String journeyId, FLBBJourneyRequest flbbRequestForJourney) {
 		try {
@@ -113,11 +120,15 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	}
 
-	/* 
-	 * Creates the FLBB journey with service point information. This will be invoked for anonymous customer only.
+	/*
+	 * Creates the FLBB journey with service point information. This will be
+	 * invoked for anonymous customer only.
 	 * 
 	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#createJourneyWithFLBBDetails(com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#createJourneyWithFLBBDetails(com
+	 * .vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest)
 	 */
 	@Override
 	public String createJourneyWithFLBBDetails(FLBBJourneyRequest flbbRequestForJourney) {
@@ -142,10 +153,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return null;
 	}
 
-	/* 
-	 * This calls the Get Bundle List API which sites in Bundle MS to get the package details of BB.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getBundleDetailsFromGetBundleListAPI(java.lang.String)
+	/*
+	 * This calls the Get Bundle List API which sites in Bundle MS to get the
+	 * package details of BB. (non-Javadoc)
+	 * 
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#
+	 * getBundleDetailsFromGetBundleListAPI(java.lang.String)
 	 */
 	@Override
 	public BundleDetails getBundleDetailsFromGetBundleListAPI(String url) {
@@ -214,18 +227,21 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 * Get the Solr connections
 	 * 
 	 * (non-Javadoc)
+	 * 
 	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getSolrConnection()
 	 */
-	
+
 	@Override
 	public void getSolrConnection() {
 		requestManager = SolrConnectionProvider.getSolrConnection();
 	}
-	
+
 	/*
-	 * Get the holiday list in order to remove from the service availability dates.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getHolidayList(java.time.LocalDate, java.time.LocalDate)
+	 * Get the holiday list in order to remove from the service availability
+	 * dates. (non-Javadoc)
+	 * 
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getHolidayList(java.time.
+	 * LocalDate, java.time.LocalDate)
 	 */
 
 	@Override
@@ -244,14 +260,15 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	/*
-	 * Get the journey details based on the journey id provided.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getJourney(java.lang.String)
+	 * Get the journey details based on the journey id provided. (non-Javadoc)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#getJourney(java.lang.String)
 	 */
-	
+
 	@Override
 	public Journey getJourney(String journeyId) {
-		try{
+		try {
 			final String jounreyUrl = "http://JOURNEY-V1/journey/" + journeyId;
 			RestTemplate restTemplate = registryClient.getRestTemplate();
 			ResponseEntity<Journey> response = restTemplate.getForEntity(jounreyUrl, Journey.class);
@@ -263,11 +280,14 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	/*
-	 * Calls create Appointment MS to create the appointment selected by the user.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#createAppointment(com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest)
+	 * Calls create Appointment MS to create the appointment selected by the
+	 * user. (non-Javadoc)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#createAppointment(com.vf.uk.dal.
+	 * broadband.entity.appointment.CreateAppointmentRequest)
 	 */
-	
+
 	@Override
 	public CreateAppointment createAppointment(CreateAppointmentRequest createAppointmentReq) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
@@ -281,9 +301,10 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			if (client != null)
 				createAppointment = client.getBody();
 		} catch (RestClientResponseException e) {
-			Gson gson = new Gson(); 
+			Gson gson = new Gson();
 			String jsonInString = e.getResponseBodyAsString();
-			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString, com.vf.uk.dal.common.exception.ErrorResponse.class);
+			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
+					com.vf.uk.dal.common.exception.ErrorResponse.class);
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
 			throw new ApplicationException(error.getErrorMessage());
 		}
@@ -293,9 +314,13 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	/*
 	 * Update the journey state with the appointment and site note information.
 	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updateJourneyStateForAppointment(java.lang.String, com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#updateJourneyStateForAppointment
+	 * (java.lang.String,
+	 * com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest)
 	 */
-	
+
 	@Override
 	public void updateJourneyStateForAppointment(String journeyId, SalesOrderAppointmentRequest appointmentRequest) {
 		try {
@@ -305,31 +330,34 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
 			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
 		}
-		
+
 	}
 
 	/*
-	 * Get the Engineering Vist Product from the Solr.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getEngineeringVisitProduct()
+	 * Get the Engineering Vist Product from the Solr. (non-Javadoc)
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.dao.BroadbandDao#getEngineeringVisitProduct()
 	 */
-	
+
 	@Override
 	public List<ProductModel> getEngineeringVisitProduct() {
-		
+
 		List<ProductModel> productModels = null;
 		List<String> productClassList = new ArrayList<>();
 		List<String> productNameList = new ArrayList<>();
-		
+
 		try {
-			productClassList.add("Fee");
-			productNameList.add("Engineer Visit");
+			productClassList
+					.add(ConfigHelper.getString(Constants.PRODUCT_CLASS, Constants.DEFAULT_PRODUCT_CLASS_VALUE));
+			productNameList.add(ConfigHelper.getString(Constants.PRODUCT_NAME, Constants.DEFAULT_PRODUCT_NAME));
 			final SolrHelper solrHelper = broadbandRepoProvider.getSolrHelper();
-			productModels = broadbandRepoProvider.getEngineeringVisitProduct(solrHelper,productNameList, productClassList);
+			productModels = broadbandRepoProvider.getEngineeringVisitProduct(solrHelper, productNameList,
+					productClassList);
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception From Solr getProductModel::::::" + e);
 			throw new ApplicationException(ExceptionMessages.SOLR_GETPRODUCTMODEL_EXCEPTION);
-		} 
+		}
 		return productModels;
 	}
 }
