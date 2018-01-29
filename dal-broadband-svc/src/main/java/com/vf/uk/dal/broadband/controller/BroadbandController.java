@@ -71,7 +71,7 @@ public class BroadbandController {
 
 		AvailabilityCheckResponse availabilityCheckResponse = broadbandService
 				.checkAvailabilityForBroadband(availabilityCheckerRequest);
-		return new ResponseEntity<AvailabilityCheckResponse>(availabilityCheckResponse, HttpStatus.OK);
+		return new ResponseEntity<>(availabilityCheckResponse, HttpStatus.OK);
 
 	}
 
@@ -111,7 +111,7 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setDuration(duration);
 		getBundleListSearchCriteria.setBundleClass("FLBALL");
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
-		return new ResponseEntity<List<FlbBundle>>(listOfFlbBundle, HttpStatus.OK);
+		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
 	}
 
 	/**

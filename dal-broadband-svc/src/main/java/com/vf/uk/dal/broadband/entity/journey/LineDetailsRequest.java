@@ -15,6 +15,10 @@ public class LineDetailsRequest {
 
 	private String earliestAvailableDate = null;
 
+	/**
+	 * @param lineTreatmentType
+	 * @return
+	 */
 	public LineDetailsRequest lineTreatmentType(String lineTreatmentType) {
 		this.lineTreatmentType = lineTreatmentType;
 		return this;
@@ -35,6 +39,10 @@ public class LineDetailsRequest {
 		this.lineTreatmentType = lineTreatmentType;
 	}
 
+	/**
+	 * @param flbbNumber
+	 * @return
+	 */
 	public LineDetailsRequest flbbNumber(String flbbNumber) {
 		this.flbbNumber = flbbNumber;
 		return this;
@@ -55,6 +63,10 @@ public class LineDetailsRequest {
 		this.flbbNumber = flbbNumber;
 	}
 
+	/**
+	 * @param classificationCode
+	 * @return
+	 */
 	public LineDetailsRequest classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -75,6 +87,10 @@ public class LineDetailsRequest {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * @param earliestAvailableDate
+	 * @return
+	 */
 	public LineDetailsRequest earliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 		return this;

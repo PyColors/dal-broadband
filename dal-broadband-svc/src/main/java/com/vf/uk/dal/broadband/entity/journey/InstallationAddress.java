@@ -42,6 +42,10 @@ public class InstallationAddress {
 
 	private String moveTypeCode = null;
 
+	/**
+	 * @param identification
+	 * @return
+	 */
 	public InstallationAddress identification(Identification identification) {
 		this.identification = identification;
 		return this;
@@ -60,6 +64,10 @@ public class InstallationAddress {
 		this.identification = identification;
 	}
 
+	/**
+	 * @param postCode
+	 * @return
+	 */
 	public InstallationAddress postCode(String postCode) {
 		this.postCode = postCode;
 		return this;
@@ -78,6 +86,10 @@ public class InstallationAddress {
 		this.postCode = postCode;
 	}
 
+	/**
+	 * @param houseName
+	 * @return
+	 */
 	public InstallationAddress houseName(String houseName) {
 		this.houseName = houseName;
 		return this;
@@ -96,6 +108,10 @@ public class InstallationAddress {
 		this.houseName = houseName;
 	}
 
+	/**
+	 * @param houseNumber
+	 * @return
+	 */
 	public InstallationAddress houseNumber(String houseNumber) {
 		this.houseNumber = houseNumber;
 		return this;
@@ -114,6 +130,10 @@ public class InstallationAddress {
 		this.houseNumber = houseNumber;
 	}
 
+	/**
+	 * @param flatNumber
+	 * @return
+	 */
 	public InstallationAddress flatNumber(String flatNumber) {
 		this.flatNumber = flatNumber;
 		return this;
@@ -132,6 +152,10 @@ public class InstallationAddress {
 		this.flatNumber = flatNumber;
 	}
 
+	/**
+	 * @param streetName
+	 * @return
+	 */
 	public InstallationAddress streetName(String streetName) {
 		this.streetName = streetName;
 		return this;
@@ -150,6 +174,10 @@ public class InstallationAddress {
 		this.streetName = streetName;
 	}
 
+	/**
+	 * @param town
+	 * @return
+	 */
 	public InstallationAddress town(String town) {
 		this.town = town;
 		return this;
@@ -168,6 +196,10 @@ public class InstallationAddress {
 		this.town = town;
 	}
 
+	/**
+	 * @param county
+	 * @return
+	 */
 	public InstallationAddress county(String county) {
 		this.county = county;
 		return this;
@@ -186,6 +218,10 @@ public class InstallationAddress {
 		this.county = county;
 	}
 
+	/**
+	 * @param country
+	 * @return
+	 */
 	public InstallationAddress country(String country) {
 		this.country = country;
 		return this;
@@ -204,6 +240,10 @@ public class InstallationAddress {
 		this.country = country;
 	}
 
+	/**
+	 * @param locality
+	 * @return
+	 */
 	public InstallationAddress locality(String locality) {
 		this.locality = locality;
 		return this;
@@ -222,6 +262,10 @@ public class InstallationAddress {
 		this.locality = locality;
 	}
 
+	/**
+	 * @param citySubDivisionName
+	 * @return
+	 */
 	public InstallationAddress citySubDivisionName(String citySubDivisionName) {
 		this.citySubDivisionName = citySubDivisionName;
 		return this;
@@ -240,6 +284,10 @@ public class InstallationAddress {
 		this.citySubDivisionName = citySubDivisionName;
 	}
 
+	/**
+	 * @param moveTypeCode
+	 * @return
+	 */
 	public InstallationAddress moveTypeCode(String moveTypeCode) {
 		this.moveTypeCode = moveTypeCode;
 		return this;

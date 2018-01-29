@@ -9,6 +9,7 @@ import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.appointment.Address;
 import com.vf.uk.dal.broadband.entity.appointment.AddressDetails;
 import com.vf.uk.dal.broadband.entity.appointment.AppointmentDetails;
@@ -44,9 +45,24 @@ import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
+import com.vodafone.solrmodels.ProductModel;
 
+/**
+ * @author Infosys limited
+ *
+ */
 public class ConverterUtils {
 
+	private ConverterUtils() {
+	}
+
+	
+	/**
+	 * 
+	 * @param availabilityCheckRequest
+	 * @return GetServiceAvailibilityRequest
+	 */
+	
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
 			AvailabilityCheckRequest availabilityCheckRequest) {
 		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest(); 
@@ -83,6 +99,13 @@ public class ConverterUtils {
 		return request;
 	}
 
+	/**
+	 * 
+	 * @param availabilityCheckRequest
+	 * @param getServiceAvailabilityResponse
+	 * @return FLBBJourneyRequest
+	 */
+	
 	public static FLBBJourneyRequest createFLBBRequestForJourney(AvailabilityCheckRequest availabilityCheckRequest,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse) {
 		FLBBJourneyRequest request = new FLBBJourneyRequest();
@@ -345,9 +368,18 @@ public class ConverterUtils {
 		return request;
 	}
 
+	/**
+	 * 
+	 * @param response
+	 * @param getServiceAvailabilityResponse
+	 * @param availabilityCheckRequest
+	 * @param productModel
+	 * @return AvailabilityCheckResponse
+	 */
+	
 	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse,
-			AvailabilityCheckRequest availabilityCheckRequest) {
+			AvailabilityCheckRequest availabilityCheckRequest, List<ProductModel> productModel) {
 
 		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
@@ -364,9 +396,27 @@ public class ConverterUtils {
 					appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
 				}
 				appointmentAndAvailabilityList.add(appointmentDetails);
+				
+				if(StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), Constants.NEW)
+						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(), Constants.No_CHARGE)
+						&& productModel!=null && !productModel.isEmpty()){
+					Price engineeringVisitCharge = new Price();
+					if(productModel.get(0).getPriceGrossOVR()!=null){
+						engineeringVisitCharge.setGross(String.valueOf(productModel.get(0).getPriceGrossOVR()));
+					}
+					if(productModel.get(0).getPriceNetOVR()!=null){
+						engineeringVisitCharge.setNet(String.valueOf(productModel.get(0).getPriceNetOVR()));
+					}
+					if(productModel.get(0).getPriceVatOVR()!=null){
+						engineeringVisitCharge.setVat(String.valueOf(productModel.get(0).getPriceVatOVR()));
+					}
+					response.setEngineeringVisitCharge(engineeringVisitCharge);
+				}
 			}
 			response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 		}
+		
+		
 		List<String> classificationCodesList = new ArrayList<>();
 		boolean is76FibreAvailable = false;
 		boolean is38FibreAvailable = false;
@@ -441,6 +491,13 @@ public class ConverterUtils {
 		return response;
 	}
 
+	/**
+	 * 
+	 * @param serviceLines
+	 * @param speed
+	 * @return LineSpeeds
+	 */
+	
 	private static com.vf.uk.dal.broadband.entity.LineSpeeds setLineSpeedForBroadband(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines,String speed) {
 		com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 		for(com.vf.uk.dal.entity.serviceavailability.ServiceLine serviceLine : serviceLines.getServiceLine()){
@@ -458,6 +515,13 @@ public class ConverterUtils {
 		return lineSpeedForResponse;
 	}
 
+	/**
+	 * 
+	 * @param createAppointmentRequest
+	 * @param journey
+	 * @return CreateAppointmentRequest
+	 */
+	
 	public static com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(CreateAppointmentRequest createAppointmentRequest, Journey journey) {
 		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest request = new com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest();
 		
@@ -501,6 +565,13 @@ public class ConverterUtils {
 		return request;
 	}
 
+	/**
+	 * 
+	 * @param createAppointmentRequest
+	 * @param identificationId
+	 * @return SalesOrderAppointmentRequest
+	 */
+	
 	public static SalesOrderAppointmentRequest createSalesOrderAppointmentRequest(
 			CreateAppointmentRequest createAppointmentRequest, String identificationId) {
 		SalesOrderAppointmentRequest request = new SalesOrderAppointmentRequest();
@@ -508,6 +579,7 @@ public class ConverterUtils {
 		appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
 		appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
 		appointmentWindow.setIdentificationId(identificationId);
+		appointmentWindow.setOperationalPreferenceCode("STANDARD");
 		request.setAppointmentWindow(appointmentWindow);
 		if(createAppointmentRequest.getSiteNote()!=null){
 			SiteNote siteNote = new SiteNote();

@@ -37,6 +37,10 @@ public class MerchandisingPromotionsWrapper {
 	@JsonProperty("pricePromotion")
 	private MerchandisingPromotion pricePromotion = null;
 
+	/**
+	 * @param dataPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper dataPromotion(MerchandisingPromotion dataPromotion) {
 		this.dataPromotion = dataPromotion;
 		return this;
@@ -55,6 +59,10 @@ public class MerchandisingPromotionsWrapper {
 		this.dataPromotion = dataPromotion;
 	}
 
+	/**
+	 * @param textPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper textPromotion(MerchandisingPromotion textPromotion) {
 		this.textPromotion = textPromotion;
 		return this;
@@ -74,6 +82,10 @@ public class MerchandisingPromotionsWrapper {
 		this.textPromotion = textPromotion;
 	}
 
+	/**
+	 * @param talkTimePromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper talkTimePromotion(MerchandisingPromotion talkTimePromotion) {
 		this.talkTimePromotion = talkTimePromotion;
 		return this;
@@ -92,6 +104,10 @@ public class MerchandisingPromotionsWrapper {
 		this.talkTimePromotion = talkTimePromotion;
 	}
 
+	/**
+	 * @param entertainmentPackPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper entertainmentPackPromotion(
 			MerchandisingPromotion entertainmentPackPromotion) {
 		this.entertainmentPackPromotion = entertainmentPackPromotion;
@@ -112,6 +128,10 @@ public class MerchandisingPromotionsWrapper {
 		this.entertainmentPackPromotion = entertainmentPackPromotion;
 	}
 
+	/**
+	 * @param secureNetPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper secureNetPromotion(MerchandisingPromotion secureNetPromotion) {
 		this.secureNetPromotion = secureNetPromotion;
 		return this;
@@ -130,6 +150,10 @@ public class MerchandisingPromotionsWrapper {
 		this.secureNetPromotion = secureNetPromotion;
 	}
 
+	/**
+	 * @param sashBannerPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper sashBannerPromotion(MerchandisingPromotion sashBannerPromotion) {
 		this.sashBannerPromotion = sashBannerPromotion;
 		return this;
@@ -148,6 +172,10 @@ public class MerchandisingPromotionsWrapper {
 		this.sashBannerPromotion = sashBannerPromotion;
 	}
 
+	/**
+	 * @param freeExtraPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper freeExtraPromotion(MerchandisingPromotion freeExtraPromotion) {
 		this.freeExtraPromotion = freeExtraPromotion;
 		return this;
@@ -166,6 +194,10 @@ public class MerchandisingPromotionsWrapper {
 		this.freeExtraPromotion = freeExtraPromotion;
 	}
 
+	/**
+	 * @param freeAccessoryPromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper freeAccessoryPromotion(MerchandisingPromotion freeAccessoryPromotion) {
 		this.freeAccessoryPromotion = freeAccessoryPromotion;
 		return this;
@@ -185,6 +217,10 @@ public class MerchandisingPromotionsWrapper {
 		this.freeAccessoryPromotion = freeAccessoryPromotion;
 	}
 
+	/**
+	 * @param pricePromotion
+	 * @return
+	 */
 	public MerchandisingPromotionsWrapper pricePromotion(MerchandisingPromotion pricePromotion) {
 		this.pricePromotion = pricePromotion;
 		return this;

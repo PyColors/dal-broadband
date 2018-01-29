@@ -36,6 +36,10 @@ public class LineStatus {
 
 	private String narrowBandServicesAvailable = null;
 
+	/**
+	 * @param statusCode
+	 * @return
+	 */
 	public LineStatus statusCode(String statusCode) {
 		this.statusCode = statusCode;
 		return this;
@@ -54,6 +58,10 @@ public class LineStatus {
 		this.statusCode = statusCode;
 	}
 
+	/**
+	 * @param accessLineStatus
+	 * @return
+	 */
 	public LineStatus accessLineStatus(String accessLineStatus) {
 		this.accessLineStatus = accessLineStatus;
 		return this;
@@ -72,6 +80,10 @@ public class LineStatus {
 		this.accessLineStatus = accessLineStatus;
 	}
 
+	/**
+	 * @param gnpStatus
+	 * @return
+	 */
 	public LineStatus gnpStatus(String gnpStatus) {
 		this.gnpStatus = gnpStatus;
 		return this;
@@ -90,6 +102,10 @@ public class LineStatus {
 		this.gnpStatus = gnpStatus;
 	}
 
+	/**
+	 * @param lineOption
+	 * @return
+	 */
 	public LineStatus lineOption(String lineOption) {
 		this.lineOption = lineOption;
 		return this;
@@ -109,6 +125,10 @@ public class LineStatus {
 		this.lineOption = lineOption;
 	}
 
+	/**
+	 * @param technology
+	 * @return
+	 */
 	public LineStatus technology(String technology) {
 		this.technology = technology;
 		return this;
@@ -127,6 +147,10 @@ public class LineStatus {
 		this.technology = technology;
 	}
 
+	/**
+	 * @param lineType
+	 * @return
+	 */
 	public LineStatus lineType(String lineType) {
 		this.lineType = lineType;
 		return this;
@@ -146,6 +170,10 @@ public class LineStatus {
 		this.lineType = lineType;
 	}
 
+	/**
+	 * @param tempStructure
+	 * @return
+	 */
 	public LineStatus tempStructure(String tempStructure) {
 		this.tempStructure = tempStructure;
 		return this;
@@ -164,6 +192,10 @@ public class LineStatus {
 		this.tempStructure = tempStructure;
 	}
 
+	/**
+	 * @param standbyPowerRequired
+	 * @return
+	 */
 	public LineStatus standbyPowerRequired(String standbyPowerRequired) {
 		this.standbyPowerRequired = standbyPowerRequired;
 		return this;
@@ -182,6 +214,10 @@ public class LineStatus {
 		this.standbyPowerRequired = standbyPowerRequired;
 	}
 
+	/**
+	 * @param narrowBandServicesAvailable
+	 * @return
+	 */
 	public LineStatus narrowBandServicesAvailable(String narrowBandServicesAvailable) {
 		this.narrowBandServicesAvailable = narrowBandServicesAvailable;
 		return this;

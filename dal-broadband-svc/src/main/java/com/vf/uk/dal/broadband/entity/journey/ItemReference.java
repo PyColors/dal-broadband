@@ -24,6 +24,10 @@ public class ItemReference {
 
 	private String classificationCode = null;
 
+	/**
+	 * @param identificationId
+	 * @return
+	 */
 	public ItemReference identificationId(String identificationId) {
 		this.identificationId = identificationId;
 		return this;
@@ -42,6 +46,10 @@ public class ItemReference {
 		this.identificationId = identificationId;
 	}
 
+	/**
+	 * @param name
+	 * @return
+	 */
 	public ItemReference name(String name) {
 		this.name = name;
 		return this;
@@ -60,6 +68,10 @@ public class ItemReference {
 		this.name = name;
 	}
 
+	/**
+	 * @param classificationCode
+	 * @return
+	 */
 	public ItemReference classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;

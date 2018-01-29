@@ -24,6 +24,10 @@ public class LineSettings {
 
 	private String terminationCode = null;
 
+	/**
+	 * @param serviceCode
+	 * @return
+	 */
 	public LineSettings serviceCode(String serviceCode) {
 		this.serviceCode = serviceCode;
 		return this;
@@ -42,6 +46,10 @@ public class LineSettings {
 		this.serviceCode = serviceCode;
 	}
 
+	/**
+	 * @param installationCode
+	 * @return
+	 */
 	public LineSettings installationCode(String installationCode) {
 		this.installationCode = installationCode;
 		return this;
@@ -61,6 +69,10 @@ public class LineSettings {
 		this.installationCode = installationCode;
 	}
 
+	/**
+	 * @param terminationCode
+	 * @return
+	 */
 	public LineSettings terminationCode(String terminationCode) {
 		this.terminationCode = terminationCode;
 		return this;

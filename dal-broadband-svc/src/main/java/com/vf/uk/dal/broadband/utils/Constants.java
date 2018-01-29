@@ -1,5 +1,9 @@
 package com.vf.uk.dal.broadband.utils;
 
+/**
+ * @author Infosys Limited
+ *
+ */
 public class Constants {
 
 	/** The Constant USER_TYPE. */
@@ -57,4 +61,20 @@ public class Constants {
 
 	public static final String DEFAULT_COHERENCE_IP = LOCALHOST;
 	public static final int DEFAULT_COHERENCE_PORT = 7574;
+
+	public static final String NEW = "NEW";
+
+	public static final String No_CHARGE = "No Charge";
+
+	public static final String PRODUCT_CLASS = "PRODUCT_CLASS_ENG_VISIT";
+
+	public static final String DEFAULT_PRODUCT_CLASS_VALUE = "Fee";
+
+	public static final String PRODUCT_NAME = "PRODUCT_NAME_ENG_VISIT";
+
+	public static final String DEFAULT_PRODUCT_NAME = "Engineer Visit";
+
+	private Constants() {
+
+	}
 }

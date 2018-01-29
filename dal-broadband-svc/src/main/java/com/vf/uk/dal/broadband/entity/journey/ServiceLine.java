@@ -28,6 +28,10 @@ public class ServiceLine {
 
 	private List<ServiceLineTreatment> serviceLineTreatments = null;
 
+	/**
+	 * @param itemReference
+	 * @return
+	 */
 	public ServiceLine itemReference(ItemReference itemReference) {
 		this.itemReference = itemReference;
 		return this;
@@ -46,6 +50,10 @@ public class ServiceLine {
 		this.itemReference = itemReference;
 	}
 
+	/**
+	 * @param lineSpeeds
+	 * @return
+	 */
 	public ServiceLine lineSpeeds(LineSpeeds lineSpeeds) {
 		this.lineSpeeds = lineSpeeds;
 		return this;
@@ -64,6 +72,10 @@ public class ServiceLine {
 		this.lineSpeeds = lineSpeeds;
 	}
 
+	/**
+	 * @param miscRefernce
+	 * @return
+	 */
 	public ServiceLine miscRefernce(MiscReference miscRefernce) {
 		this.miscRefernce = miscRefernce;
 		return this;
@@ -82,11 +94,19 @@ public class ServiceLine {
 		this.miscRefernce = miscRefernce;
 	}
 
+	/**
+	 * @param serviceLineTreatments
+	 * @return
+	 */
 	public ServiceLine serviceLineTreatments(List<ServiceLineTreatment> serviceLineTreatments) {
 		this.serviceLineTreatments = serviceLineTreatments;
 		return this;
 	}
 
+	/**
+	 * @param serviceLineTreatmentsItem
+	 * @return
+	 */
 	public ServiceLine addServiceLineTreatmentsItem(ServiceLineTreatment serviceLineTreatmentsItem) {
 		if (this.serviceLineTreatments == null) {
 			this.serviceLineTreatments = new ArrayList<ServiceLineTreatment>();

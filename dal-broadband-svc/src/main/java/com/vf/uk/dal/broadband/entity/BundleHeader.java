@@ -180,6 +180,12 @@ public class BundleHeader {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @param speed
+	 * @return
+	 */
+	
 	public BundleHeader speed(String speed) {
 		this.speed = speed;
 		return this;
@@ -199,6 +205,11 @@ public class BundleHeader {
 		this.speed = speed;
 	}
 
+	/**
+	 * 
+	 * @param usage
+	 * @return
+	 */
 	public BundleHeader usage(String usage) {
 		this.usage = usage;
 		return this;
@@ -218,6 +229,11 @@ public class BundleHeader {
 		this.usage = usage;
 	}
 	
+	/**
+	 * 
+	 * @param classificationCode
+	 * @return
+	 */
 	public BundleHeader classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -237,6 +253,11 @@ public class BundleHeader {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * 
+	 * @param miscAttributes
+	 * @return
+	 */
 	public BundleHeader miscAttributes(MiscellaneousAttributes miscAttributes) {
 		this.miscAttributes = miscAttributes;
 		return this;

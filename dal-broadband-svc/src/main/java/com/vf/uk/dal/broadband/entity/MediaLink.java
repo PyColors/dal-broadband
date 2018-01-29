@@ -13,175 +13,196 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
-public class MediaLink   {
-  @JsonProperty("id")
-  private String id = null;
+public class MediaLink {
+	@JsonProperty("id")
+	private String id = null;
 
-  @JsonProperty("value")
-  private String value = null;
+	@JsonProperty("value")
+	private String value = null;
 
-  @JsonProperty("type")
-  private String type = null;
+	@JsonProperty("type")
+	private String type = null;
 
-  @JsonProperty("priority")
-  private Integer priority = null;
+	@JsonProperty("priority")
+	private Integer priority = null;
 
-  @JsonProperty("packageType")
-  private List<String> packageType = null;
+	@JsonProperty("packageType")
+	private List<String> packageType = null;
 
-  public MediaLink id(String id) {
-    this.id = id;
-    return this;
-  }
+	/**
+	 * @param id
+	 * @return
+	 */
+	public MediaLink id(String id) {
+		this.id = id;
+		return this;
+	}
 
-   /**
-   * Unique id given for this link which provide a reference for UI to place this on the screen
-   * @return id
-  **/
-  @ApiModelProperty(value = "Unique id given for this link which provide a reference for UI to place this on the screen")
+	/**
+	 * Unique id given for this link which provide a reference for UI to place
+	 * this on the screen
+	 * 
+	 * @return id
+	 **/
+	@ApiModelProperty(value = "Unique id given for this link which provide a reference for UI to place this on the screen")
 
+	public String getId() {
+		return id;
+	}
 
-  public String getId() {
-    return id;
-  }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-  public void setId(String id) {
-    this.id = id;
-  }
+	/**
+	 * @param value
+	 * @return
+	 */
+	public MediaLink value(String value) {
+		this.value = value;
+		return this;
+	}
 
-  public MediaLink value(String value) {
-    this.value = value;
-    return this;
-  }
+	/**
+	 * URL Link from the content site for the media
+	 * 
+	 * @return value
+	 **/
+	@ApiModelProperty(value = "URL Link from the content site for the media")
 
-   /**
-   * URL Link from the content site for the media
-   * @return value
-  **/
-  @ApiModelProperty(value = "URL Link from the content site for the media")
+	public String getValue() {
+		return value;
+	}
 
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-  public String getValue() {
-    return value;
-  }
+	/**
+	 * @param type
+	 * @return
+	 */
+	public MediaLink type(String type) {
+		this.type = type;
+		return this;
+	}
 
-  public void setValue(String value) {
-    this.value = value;
-  }
+	/**
+	 * Will provide UI information on the type of the link (like URL)
+	 * 
+	 * @return type
+	 **/
+	@ApiModelProperty(value = "Will provide UI information on the type of the link (like URL)")
 
-  public MediaLink type(String type) {
-    this.type = type;
-    return this;
-  }
+	public String getType() {
+		return type;
+	}
 
-   /**
-   * Will provide UI information on the type of the link (like URL)
-   * @return type
-  **/
-  @ApiModelProperty(value = "Will provide UI information on the type of the link (like URL)")
+	public void setType(String type) {
+		this.type = type;
+	}
 
+	/**
+	 * @param priority
+	 * @return
+	 */
+	public MediaLink priority(Integer priority) {
+		this.priority = priority;
+		return this;
+	}
 
-  public String getType() {
-    return type;
-  }
+	/**
+	 * priority of the media link
+	 * 
+	 * @return priority
+	 **/
+	@ApiModelProperty(value = "priority of the media link")
 
-  public void setType(String type) {
-    this.type = type;
-  }
+	public Integer getPriority() {
+		return priority;
+	}
 
-  public MediaLink priority(Integer priority) {
-    this.priority = priority;
-    return this;
-  }
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
 
-   /**
-   * priority of the media link
-   * @return priority
-  **/
-  @ApiModelProperty(value = "priority of the media link")
+	/**
+	 * @param packageType
+	 * @return
+	 */
+	public MediaLink packageType(List<String> packageType) {
+		this.packageType = packageType;
+		return this;
+	}
 
+	/**
+	 * @param packageTypeItem
+	 * @return
+	 */
+	public MediaLink addPackageTypeItem(String packageTypeItem) {
+		if (this.packageType == null) {
+			this.packageType = new ArrayList<String>();
+		}
+		this.packageType.add(packageTypeItem);
+		return this;
+	}
 
-  public Integer getPriority() {
-    return priority;
-  }
+	/**
+	 * List of packageTypes available for the MediaLink
+	 * 
+	 * @return packageType
+	 **/
+	@ApiModelProperty(value = "List of packageTypes available for the MediaLink")
 
-  public void setPriority(Integer priority) {
-    this.priority = priority;
-  }
+	public List<String> getPackageType() {
+		return packageType;
+	}
 
-  public MediaLink packageType(List<String> packageType) {
-    this.packageType = packageType;
-    return this;
-  }
+	public void setPackageType(List<String> packageType) {
+		this.packageType = packageType;
+	}
 
-  public MediaLink addPackageTypeItem(String packageTypeItem) {
-    if (this.packageType == null) {
-      this.packageType = new ArrayList<String>();
-    }
-    this.packageType.add(packageTypeItem);
-    return this;
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		MediaLink mediaLink = (MediaLink) o;
+		return Objects.equals(this.id, mediaLink.id) && Objects.equals(this.value, mediaLink.value)
+				&& Objects.equals(this.type, mediaLink.type) && Objects.equals(this.priority, mediaLink.priority)
+				&& Objects.equals(this.packageType, mediaLink.packageType);
+	}
 
-   /**
-   * List of packageTypes available for the MediaLink
-   * @return packageType
-  **/
-  @ApiModelProperty(value = "List of packageTypes available for the MediaLink")
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, value, type, priority, packageType);
+	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class MediaLink {\n");
 
-  public List<String> getPackageType() {
-    return packageType;
-  }
+		sb.append("    id: ").append(toIndentedString(id)).append("\n");
+		sb.append("    value: ").append(toIndentedString(value)).append("\n");
+		sb.append("    type: ").append(toIndentedString(type)).append("\n");
+		sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
+		sb.append("    packageType: ").append(toIndentedString(packageType)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  public void setPackageType(List<String> packageType) {
-    this.packageType = packageType;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    MediaLink mediaLink = (MediaLink) o;
-    return Objects.equals(this.id, mediaLink.id) &&
-        Objects.equals(this.value, mediaLink.value) &&
-        Objects.equals(this.type, mediaLink.type) &&
-        Objects.equals(this.priority, mediaLink.priority) &&
-        Objects.equals(this.packageType, mediaLink.packageType);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, value, type, priority, packageType);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class MediaLink {\n");
-    
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
-    sb.append("    packageType: ").append(toIndentedString(packageType)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

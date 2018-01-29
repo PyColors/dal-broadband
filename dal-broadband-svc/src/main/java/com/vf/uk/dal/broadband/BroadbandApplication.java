@@ -6,7 +6,7 @@ import com.vf.uk.dal.common.annotation.Service;
 
 
 /**
- * The Journey Application, will start the service as spring boot application
+ * The BroadBand Application, will start the service as spring boot application
  */
 @Service
 public class BroadbandApplication

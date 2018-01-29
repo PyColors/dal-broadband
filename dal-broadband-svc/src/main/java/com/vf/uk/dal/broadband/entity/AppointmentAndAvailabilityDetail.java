@@ -21,6 +21,12 @@ public class AppointmentAndAvailabilityDetail   {
   @JsonProperty("lineTreatmentType")
   private String lineTreatmentType = null;
 
+  /**
+   * 
+   * @param appointmentNeeded
+   * @return AppointmentAndAvailabilityDetail
+   */
+  
   public AppointmentAndAvailabilityDetail appointmentNeeded(Boolean appointmentNeeded) {
     this.appointmentNeeded = appointmentNeeded;
     return this;
@@ -41,6 +47,12 @@ public class AppointmentAndAvailabilityDetail   {
     this.appointmentNeeded = appointmentNeeded;
   }
 
+  /**
+   * 
+   * @param earliestAvailableDate
+   * @return
+   */
+  
   public AppointmentAndAvailabilityDetail earliestAvailableDate(String earliestAvailableDate) {
     this.earliestAvailableDate = earliestAvailableDate;
     return this;
@@ -61,6 +73,12 @@ public class AppointmentAndAvailabilityDetail   {
     this.earliestAvailableDate = earliestAvailableDate;
   }
 
+  /**
+   * 
+   * @param lineTreatmentType
+   * @return
+   */
+  
   public AppointmentAndAvailabilityDetail lineTreatmentType(String lineTreatmentType) {
     this.lineTreatmentType = lineTreatmentType;
     return this;

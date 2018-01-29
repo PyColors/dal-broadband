@@ -33,7 +33,11 @@ public class LineReference {
 
   private List<LineDirectory> lineDirectory = null;
 
-  public LineReference installationAddress(InstallationAddress installationAddress) {
+  /**
+ * @param installationAddress
+ * @return
+ */
+public LineReference installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
   }
@@ -50,7 +54,11 @@ public class LineReference {
     this.installationAddress = installationAddress;
   }
 
-  public LineReference lineLocator(LineLocator lineLocator) {
+  /**
+ * @param lineLocator
+ * @return
+ */
+public LineReference lineLocator(LineLocator lineLocator) {
     this.lineLocator = lineLocator;
     return this;
   }
@@ -67,7 +75,11 @@ public class LineReference {
     this.lineLocator = lineLocator;
   }
 
-  public LineReference lineSettings(LineSettings lineSettings) {
+  /**
+ * @param lineSettings
+ * @return
+ */
+public LineReference lineSettings(LineSettings lineSettings) {
     this.lineSettings = lineSettings;
     return this;
   }
@@ -85,7 +97,11 @@ public class LineReference {
     this.lineSettings = lineSettings;
   }
 
-  public LineReference lineStatus(LineStatus lineStatus) {
+  /**
+ * @param lineStatus
+ * @return
+ */
+public LineReference lineStatus(LineStatus lineStatus) {
     this.lineStatus = lineStatus;
     return this;
   }
@@ -103,7 +119,11 @@ public class LineReference {
     this.lineStatus = lineStatus;
   }
 
-  public LineReference availableServices(AvailableServices availableServices) {
+  /**
+ * @param availableServices
+ * @return
+ */
+public LineReference availableServices(AvailableServices availableServices) {
     this.availableServices = availableServices;
     return this;
   }
@@ -121,12 +141,20 @@ public class LineReference {
     this.availableServices = availableServices;
   }
 
-  public LineReference lineDirectory(List<LineDirectory> lineDirectory) {
+  /**
+ * @param lineDirectory
+ * @return
+ */
+public LineReference lineDirectory(List<LineDirectory> lineDirectory) {
     this.lineDirectory = lineDirectory;
     return this;
   }
 
-  public LineReference addLineDirectoryItem(LineDirectory lineDirectoryItem) {
+  /**
+ * @param lineDirectoryItem
+ * @return
+ */
+public LineReference addLineDirectoryItem(LineDirectory lineDirectoryItem) {
     if (this.lineDirectory == null) {
       this.lineDirectory = new ArrayList<LineDirectory>();
     }

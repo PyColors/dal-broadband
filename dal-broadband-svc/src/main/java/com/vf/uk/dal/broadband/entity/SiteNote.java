@@ -18,6 +18,10 @@ public class SiteNote {
 	@JsonProperty("typeCode")
 	private String typeCode = null;
 
+	/**
+	 * @param notes
+	 * @return
+	 */
 	public SiteNote notes(String notes) {
 		this.notes = notes;
 		return this;
@@ -38,6 +42,10 @@ public class SiteNote {
 		this.notes = notes;
 	}
 
+	/**
+	 * @param typeCode
+	 * @return
+	 */
 	public SiteNote typeCode(String typeCode) {
 		this.typeCode = typeCode;
 		return this;

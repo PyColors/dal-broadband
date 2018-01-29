@@ -16,179 +16,205 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
-public class StepPricingInfo   {
-  @JsonProperty("sequence")
-  private String sequence = null;
+public class StepPricingInfo {
+	@JsonProperty("sequence")
+	private String sequence = null;
 
-  @JsonProperty("oneOffPrice")
-  private Price oneOffPrice = null;
+	@JsonProperty("oneOffPrice")
+	private Price oneOffPrice = null;
 
-  @JsonProperty("monthlyPrice")
-  private Price monthlyPrice = null;
+	@JsonProperty("monthlyPrice")
+	private Price monthlyPrice = null;
 
-  @JsonProperty("duration")
-  private Duration duration = null;
+	@JsonProperty("duration")
+	private Duration duration = null;
 
-  @JsonProperty("discountSkuIds")
-  private List<UUID> discountSkuIds = null;
+	@JsonProperty("discountSkuIds")
+	private List<UUID> discountSkuIds = null;
 
-  public StepPricingInfo sequence(String sequence) {
-    this.sequence = sequence;
-    return this;
-  }
+	/**
+	 * @param sequence
+	 * @return
+	 */
+	public StepPricingInfo sequence(String sequence) {
+		this.sequence = sequence;
+		return this;
+	}
 
-   /**
-   * Sequence no of the line item
-   * @return sequence
-  **/
-  @ApiModelProperty(value = "Sequence no of the line item")
+	/**
+	 * Sequence no of the line item
+	 * 
+	 * @return sequence
+	 **/
+	@ApiModelProperty(value = "Sequence no of the line item")
 
+	public String getSequence() {
+		return sequence;
+	}
 
-  public String getSequence() {
-    return sequence;
-  }
+	public void setSequence(String sequence) {
+		this.sequence = sequence;
+	}
 
-  public void setSequence(String sequence) {
-    this.sequence = sequence;
-  }
+	/**
+	 * @param oneOffPrice
+	 * @return
+	 */
+	public StepPricingInfo oneOffPrice(Price oneOffPrice) {
+		this.oneOffPrice = oneOffPrice;
+		return this;
+	}
 
-  public StepPricingInfo oneOffPrice(Price oneOffPrice) {
-    this.oneOffPrice = oneOffPrice;
-    return this;
-  }
+	/**
+	 * Get oneOffPrice
+	 * 
+	 * @return oneOffPrice
+	 **/
+	@ApiModelProperty(value = "")
 
-   /**
-   * Get oneOffPrice
-   * @return oneOffPrice
-  **/
-  @ApiModelProperty(value = "")
+	@Valid
 
-  @Valid
+	public Price getOneOffPrice() {
+		return oneOffPrice;
+	}
 
-  public Price getOneOffPrice() {
-    return oneOffPrice;
-  }
+	public void setOneOffPrice(Price oneOffPrice) {
+		this.oneOffPrice = oneOffPrice;
+	}
 
-  public void setOneOffPrice(Price oneOffPrice) {
-    this.oneOffPrice = oneOffPrice;
-  }
+	/**
+	 * @param monthlyPrice
+	 * @return
+	 */
+	public StepPricingInfo monthlyPrice(Price monthlyPrice) {
+		this.monthlyPrice = monthlyPrice;
+		return this;
+	}
 
-  public StepPricingInfo monthlyPrice(Price monthlyPrice) {
-    this.monthlyPrice = monthlyPrice;
-    return this;
-  }
+	/**
+	 * Get monthlyPrice
+	 * 
+	 * @return monthlyPrice
+	 **/
+	@ApiModelProperty(value = "")
 
-   /**
-   * Get monthlyPrice
-   * @return monthlyPrice
-  **/
-  @ApiModelProperty(value = "")
+	@Valid
 
-  @Valid
+	public Price getMonthlyPrice() {
+		return monthlyPrice;
+	}
 
-  public Price getMonthlyPrice() {
-    return monthlyPrice;
-  }
+	public void setMonthlyPrice(Price monthlyPrice) {
+		this.monthlyPrice = monthlyPrice;
+	}
 
-  public void setMonthlyPrice(Price monthlyPrice) {
-    this.monthlyPrice = monthlyPrice;
-  }
+	/**
+	 * @param duration
+	 * @return
+	 */
+	public StepPricingInfo duration(Duration duration) {
+		this.duration = duration;
+		return this;
+	}
 
-  public StepPricingInfo duration(Duration duration) {
-    this.duration = duration;
-    return this;
-  }
+	/**
+	 * Get duration
+	 * 
+	 * @return duration
+	 **/
+	@ApiModelProperty(value = "")
 
-   /**
-   * Get duration
-   * @return duration
-  **/
-  @ApiModelProperty(value = "")
+	@Valid
 
-  @Valid
+	public Duration getDuration() {
+		return duration;
+	}
 
-  public Duration getDuration() {
-    return duration;
-  }
+	public void setDuration(Duration duration) {
+		this.duration = duration;
+	}
 
-  public void setDuration(Duration duration) {
-    this.duration = duration;
-  }
+	/**
+	 * @param discountSkuIds
+	 * @return
+	 */
+	public StepPricingInfo discountSkuIds(List<UUID> discountSkuIds) {
+		this.discountSkuIds = discountSkuIds;
+		return this;
+	}
 
-  public StepPricingInfo discountSkuIds(List<UUID> discountSkuIds) {
-    this.discountSkuIds = discountSkuIds;
-    return this;
-  }
+	/**
+	 * @param discountSkuIdsItem
+	 * @return
+	 */
+	public StepPricingInfo addDiscountSkuIdsItem(UUID discountSkuIdsItem) {
+		if (this.discountSkuIds == null) {
+			this.discountSkuIds = new ArrayList<UUID>();
+		}
+		this.discountSkuIds.add(discountSkuIdsItem);
+		return this;
+	}
 
-  public StepPricingInfo addDiscountSkuIdsItem(UUID discountSkuIdsItem) {
-    if (this.discountSkuIds == null) {
-      this.discountSkuIds = new ArrayList<UUID>();
-    }
-    this.discountSkuIds.add(discountSkuIdsItem);
-    return this;
-  }
+	/**
+	 * List of applicable discount sku Ids for this duration
+	 * 
+	 * @return discountSkuIds
+	 **/
+	@ApiModelProperty(value = "List of applicable discount sku Ids for this duration")
 
-   /**
-   * List of applicable discount sku Ids for this duration
-   * @return discountSkuIds
-  **/
-  @ApiModelProperty(value = "List of applicable discount sku Ids for this duration")
+	@Valid
 
-  @Valid
+	public List<UUID> getDiscountSkuIds() {
+		return discountSkuIds;
+	}
 
-  public List<UUID> getDiscountSkuIds() {
-    return discountSkuIds;
-  }
+	public void setDiscountSkuIds(List<UUID> discountSkuIds) {
+		this.discountSkuIds = discountSkuIds;
+	}
 
-  public void setDiscountSkuIds(List<UUID> discountSkuIds) {
-    this.discountSkuIds = discountSkuIds;
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		StepPricingInfo stepPricingInfo = (StepPricingInfo) o;
+		return Objects.equals(this.sequence, stepPricingInfo.sequence)
+				&& Objects.equals(this.oneOffPrice, stepPricingInfo.oneOffPrice)
+				&& Objects.equals(this.monthlyPrice, stepPricingInfo.monthlyPrice)
+				&& Objects.equals(this.duration, stepPricingInfo.duration)
+				&& Objects.equals(this.discountSkuIds, stepPricingInfo.discountSkuIds);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(sequence, oneOffPrice, monthlyPrice, duration, discountSkuIds);
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    StepPricingInfo stepPricingInfo = (StepPricingInfo) o;
-    return Objects.equals(this.sequence, stepPricingInfo.sequence) &&
-        Objects.equals(this.oneOffPrice, stepPricingInfo.oneOffPrice) &&
-        Objects.equals(this.monthlyPrice, stepPricingInfo.monthlyPrice) &&
-        Objects.equals(this.duration, stepPricingInfo.duration) &&
-        Objects.equals(this.discountSkuIds, stepPricingInfo.discountSkuIds);
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class StepPricingInfo {\n");
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(sequence, oneOffPrice, monthlyPrice, duration, discountSkuIds);
-  }
+		sb.append("    sequence: ").append(toIndentedString(sequence)).append("\n");
+		sb.append("    oneOffPrice: ").append(toIndentedString(oneOffPrice)).append("\n");
+		sb.append("    monthlyPrice: ").append(toIndentedString(monthlyPrice)).append("\n");
+		sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
+		sb.append("    discountSkuIds: ").append(toIndentedString(discountSkuIds)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class StepPricingInfo {\n");
-    
-    sb.append("    sequence: ").append(toIndentedString(sequence)).append("\n");
-    sb.append("    oneOffPrice: ").append(toIndentedString(oneOffPrice)).append("\n");
-    sb.append("    monthlyPrice: ").append(toIndentedString(monthlyPrice)).append("\n");
-    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
-    sb.append("    discountSkuIds: ").append(toIndentedString(discountSkuIds)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

@@ -18,6 +18,11 @@ public class Identification   {
   @JsonProperty("contextId")
   private String contextId = null;
 
+  /**
+   * 
+   * @param id
+   * @return
+   */
   public Identification id(String id) {
     this.id = id;
     return this;
@@ -38,6 +43,11 @@ public class Identification   {
     this.id = id;
   }
 
+  /**
+   * 
+   * @param contextId
+   * @return
+   */
   public Identification contextId(String contextId) {
     this.contextId = contextId;
     return this;

@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * AvailabilityCheckResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-26T12:06:28.563Z")
 
 public class AvailabilityCheckResponse   {
   @JsonProperty("journeyId")
@@ -26,7 +26,7 @@ public class AvailabilityCheckResponse   {
   private List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail = null;
 
   @JsonProperty("engineeringVisitCharge")
-  private Float engineeringVisitCharge = null;
+  private Price engineeringVisitCharge = null;
 
   @JsonProperty("lineSpeeds")
   private LineSpeeds lineSpeeds = null;
@@ -54,6 +54,12 @@ public class AvailabilityCheckResponse   {
     this.journeyId = journeyId;
   }
 
+  /**
+   * 
+   * @param installationAddress
+   * @return
+   */
+  
   public AvailabilityCheckResponse installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
@@ -75,11 +81,23 @@ public class AvailabilityCheckResponse   {
     this.installationAddress = installationAddress;
   }
 
+  /**
+   * 
+   * @param appointmentAndAvailabilityDetail
+   * @return
+   */
+  
   public AvailabilityCheckResponse appointmentAndAvailabilityDetail(List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail) {
     this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
     return this;
   }
 
+  /**
+   * 
+   * @param appointmentAndAvailabilityDetailItem
+   * @return
+   */
+  
   public AvailabilityCheckResponse addAppointmentAndAvailabilityDetailItem(AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetailItem) {
     if (this.appointmentAndAvailabilityDetail == null) {
       this.appointmentAndAvailabilityDetail = new ArrayList<AppointmentAndAvailabilityDetail>();
@@ -104,7 +122,13 @@ public class AvailabilityCheckResponse   {
     this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
   }
 
-  public AvailabilityCheckResponse engineeringVisitCharge(Float engineeringVisitCharge) {
+  /**
+   * 
+   * @param engineeringVisitCharge
+   * @return
+   */
+  
+  public AvailabilityCheckResponse engineeringVisitCharge(Price engineeringVisitCharge) {
     this.engineeringVisitCharge = engineeringVisitCharge;
     return this;
   }
@@ -115,15 +139,22 @@ public class AvailabilityCheckResponse   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Float getEngineeringVisitCharge() {
+  public Price getEngineeringVisitCharge() {
     return engineeringVisitCharge;
   }
 
-  public void setEngineeringVisitCharge(Float engineeringVisitCharge) {
+  public void setEngineeringVisitCharge(Price engineeringVisitCharge) {
     this.engineeringVisitCharge = engineeringVisitCharge;
   }
 
+  /**
+   * 
+   * @param lineSpeeds
+   * @return
+   */
+  
   public AvailabilityCheckResponse lineSpeeds(LineSpeeds lineSpeeds) {
     this.lineSpeeds = lineSpeeds;
     return this;
@@ -145,11 +176,23 @@ public class AvailabilityCheckResponse   {
     this.lineSpeeds = lineSpeeds;
   }
 
+  /**
+   * 
+   * @param classificationCode
+   * @return
+   */
+  
   public AvailabilityCheckResponse classificationCode(List<String> classificationCode) {
     this.classificationCode = classificationCode;
     return this;
   }
 
+  /**
+   * 
+   * @param classificationCodeItem
+   * @return
+   */
+  
   public AvailabilityCheckResponse addClassificationCodeItem(String classificationCodeItem) {
     if (this.classificationCode == null) {
       this.classificationCode = new ArrayList<String>();

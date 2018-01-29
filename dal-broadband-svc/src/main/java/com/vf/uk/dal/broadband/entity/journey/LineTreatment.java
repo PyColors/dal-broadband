@@ -26,6 +26,10 @@ public class LineTreatment {
 
 	private String connectionCharge = null;
 
+	/**
+	 * @param identification
+	 * @return
+	 */
 	public LineTreatment identification(String identification) {
 		this.identification = identification;
 		return this;
@@ -45,6 +49,10 @@ public class LineTreatment {
 		this.identification = identification;
 	}
 
+	/**
+	 * @param earliestAvailableDate
+	 * @return
+	 */
 	public LineTreatment earliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 		return this;
@@ -64,6 +72,10 @@ public class LineTreatment {
 		this.earliestAvailableDate = earliestAvailableDate;
 	}
 
+	/**
+	 * @param appointmentNeeded
+	 * @return
+	 */
 	public LineTreatment appointmentNeeded(Boolean appointmentNeeded) {
 		this.appointmentNeeded = appointmentNeeded;
 		return this;
@@ -82,6 +94,10 @@ public class LineTreatment {
 		this.appointmentNeeded = appointmentNeeded;
 	}
 
+	/**
+	 * @param connectionCharge
+	 * @return
+	 */
 	public LineTreatment connectionCharge(String connectionCharge) {
 		this.connectionCharge = connectionCharge;
 		return this;

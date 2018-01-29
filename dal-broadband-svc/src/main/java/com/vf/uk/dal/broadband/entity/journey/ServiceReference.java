@@ -22,11 +22,19 @@ import java.util.Objects;
 public class ServiceReference {
 	private List<ServiceLines> serviceLines = null;
 
+	/**
+	 * @param serviceLines
+	 * @return
+	 */
 	public ServiceReference serviceLines(List<ServiceLines> serviceLines) {
 		this.serviceLines = serviceLines;
 		return this;
 	}
 
+	/**
+	 * @param serviceLinesItem
+	 * @return
+	 */
 	public ServiceReference addServiceLinesItem(ServiceLines serviceLinesItem) {
 		if (this.serviceLines == null) {
 			this.serviceLines = new ArrayList<ServiceLines>();

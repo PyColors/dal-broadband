@@ -20,6 +20,10 @@ import java.util.Objects;
 public class FLBBJourneyRequest {
 	private FLBBJourneyDetails flbbJourneyDetails = null;
 
+	/**
+	 * @param flbbJourneyDetails
+	 * @return
+	 */
 	public FLBBJourneyRequest flbbJourneyDetails(FLBBJourneyDetails flbbJourneyDetails) {
 		this.flbbJourneyDetails = flbbJourneyDetails;
 		return this;

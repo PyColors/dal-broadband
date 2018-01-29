@@ -13,6 +13,10 @@ public class Organisation {
 	@JsonProperty("name")
 	private String name = null;
 
+	/**
+	 * @param name
+	 * @return
+	 */
 	public Organisation name(String name) {
 		this.name = name;
 		return this;

@@ -13,6 +13,10 @@ public class CustomerPartyReference {
 	@JsonProperty("customerPartyAccountTypeCode")
 	private String customerPartyAccountTypeCode = null;
 
+	/**
+	 * @param customerPartyAccountTypeCode
+	 * @return
+	 */
 	public CustomerPartyReference customerPartyAccountTypeCode(String customerPartyAccountTypeCode) {
 		this.customerPartyAccountTypeCode = customerPartyAccountTypeCode;
 		return this;

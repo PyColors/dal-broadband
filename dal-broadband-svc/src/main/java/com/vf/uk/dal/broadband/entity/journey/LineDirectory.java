@@ -24,6 +24,10 @@ public class LineDirectory {
 
 	private String locationCode = null;
 
+	/**
+	 * @param featureCode
+	 * @return
+	 */
 	public LineDirectory featureCode(String featureCode) {
 		this.featureCode = featureCode;
 		return this;
@@ -43,6 +47,10 @@ public class LineDirectory {
 		this.featureCode = featureCode;
 	}
 
+	/**
+	 * @param directoryCode
+	 * @return
+	 */
 	public LineDirectory directoryCode(String directoryCode) {
 		this.directoryCode = directoryCode;
 		return this;
@@ -61,6 +69,10 @@ public class LineDirectory {
 		this.directoryCode = directoryCode;
 	}
 
+	/**
+	 * @param locationCode
+	 * @return
+	 */
 	public LineDirectory locationCode(String locationCode) {
 		this.locationCode = locationCode;
 		return this;
