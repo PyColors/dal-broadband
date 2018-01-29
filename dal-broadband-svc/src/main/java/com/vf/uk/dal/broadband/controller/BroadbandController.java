@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.PathParam;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
 
 /**
  * The Class BroadbandController.
@@ -129,7 +129,7 @@ public class BroadbandController {
 			@ApiResponse(code = 400, message = "Bad Request", response = ErrorResponse.class),
 			@ApiResponse(code = 404, message = "Not found", response = ErrorResponse.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = ErrorResponse.class) })
-	@RequestMapping(value = "/availability/serviceStartDates", produces = {
+	@RequestMapping(value = "/availableServiceStartDates", produces = {
 			"application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<?> getAvailableServiceStartDates(
 			@NotNull @ApiParam(value = "Earliest available service start date returned by GSA service in dd-MMM-yyyy", required = true) @RequestParam(value = "earliestAvailableStartDate", required = true) String earliestAvailableStartDate,
@@ -151,31 +151,33 @@ public class BroadbandController {
 
 		}
 	}
-	
-	
-	@ApiOperation(value = "Creates the appointment, updates the journey and basket", notes = "This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date", response = CreateAppointmentResponse.class, tags={ "Appointment", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Success", response = CreateAppointmentResponse.class),
-        @ApiResponse(code = 400, message = "Bad Request", response = Void.class),
-        @ApiResponse(code = 404, message = "Not found", response = Void.class),
-        @ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
-    
-    @RequestMapping(value = "/appointment",
-        produces = { "application/json" }, 
-        method = RequestMethod.POST)
-	
-	public ResponseEntity<CreateAppointmentResponse> createAppointmentForFLBB(@ApiParam(value = "Sends the availability check request" ,required=true )  @Valid @RequestBody CreateAppointmentRequest createAppointmentRequest) {
+
+	@ApiOperation(value = "Creates the appointment, updates the journey and basket", notes = "This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date", response = CreateAppointmentResponse.class, tags = {
+			"Appointment", })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = CreateAppointmentResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = Void.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+
+	@RequestMapping(value = "/{journeyId}/appointment", produces = { "application/json" }, method = RequestMethod.POST)
+
+	public ResponseEntity<CreateAppointmentResponse> createAppointmentForFLBB(
+			@ApiParam(value = "Journey id of the broadband - Unique", required = true) @Valid @PathParam(value = "journeyId") String journeyId,
+			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody CreateAppointmentRequest createAppointmentRequest) {
+		if (createAppointmentRequest != null) {
+			createAppointmentRequest.setJourneyId(journeyId);
+		}
 		BroadbandValidator.isCreateAppointmentRequestValid(createAppointmentRequest);
-		CreateAppointmentResponse createAppointmentResponse = broadbandService.createAppointmentForFLBB(createAppointmentRequest);
-		if(StringUtils.isNotBlank(createAppointmentResponse.getApplicationId())){
-			return new ResponseEntity<>(createAppointmentResponse,HttpStatus.OK);
-		}else{
+		CreateAppointmentResponse createAppointmentResponse = broadbandService
+				.createAppointmentForFLBB(createAppointmentRequest);
+		if (StringUtils.isNotBlank(createAppointmentResponse.getApplicationId())) {
+			return new ResponseEntity<>(createAppointmentResponse, HttpStatus.OK);
+		} else {
 			LogHelper.error(this, "Create Appointment failed!!!");
 			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
 		}
-		
-	}
 
+	}
 
 	/**
 	 * Handle missing params.
