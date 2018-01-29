@@ -38,13 +38,18 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   
-  /broadband/appointment :
+  /broadband/{journeyId}/appointment :
     post:
-      summary: check the availability checker for the braod band journey
+      summary: check the availability checker for the broad band journey
       description: >-
         This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date
       operationId: COMM_001_CreateAppointment
       parameters:
+        - name: journeyId
+          in: path
+          description: Journey id of the broadband - Unique
+          required: true
+          type: string
         - name: CreateAppointmentRequest
           in: body
           description: Sends the availability check request
@@ -65,7 +70,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   
-  /broadband/availablity/serviceStartDates:
+  /broadband/availableServiceStartDates:
     get:
       summary: >-
         Utility Service which accepts earliest available service start date

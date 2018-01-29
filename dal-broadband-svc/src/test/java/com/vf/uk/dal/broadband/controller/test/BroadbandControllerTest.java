@@ -35,7 +35,6 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
 import com.vf.uk.dal.broadband.entity.journey.Journey;
-import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
 import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -83,31 +82,31 @@ public class BroadbandControllerTest {
 
 		String jsonString3 = new String(Utility.readFile("\\rest-mock\\FLBBREQUESTFORUPDATE.json"));
 		FLBBJourneyRequest requestForFLBB = new ObjectMapper().readValue(jsonString3, FLBBJourneyRequest.class);
-		
-		
+
 		String jsonString4 = new String(Utility.readFile("\\rest-mock\\GetJourneyResponse.json"));
 		Journey journey = new ObjectMapper().readValue(jsonString4, Journey.class);
-		
-		
+
 		String jsonString5 = new String(Utility.readFile("\\rest-mock\\CreateAppointmentRequest.json"));
-		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = new ObjectMapper().readValue(jsonString5, com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
-		
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = new ObjectMapper()
+				.readValue(jsonString5, com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
+
 		String jsonString6 = new String(Utility.readFile("\\rest-mock\\CreateAppointment_Response.json"));
 		CreateAppointment responseCA = new ObjectMapper().readValue(jsonString6, CreateAppointment.class);
-		
-		
-		/*String jsonString7 = new String(Utility.readFile("\\rest-mock\\Update_Apoointment.json"));
-		SalesOrderAppointmentRequest salesOrderAptRequest = new ObjectMapper().readValue(jsonString7, SalesOrderAppointmentRequest.class);*/
-		
-		
+
+		/*
+		 * String jsonString7 = new
+		 * String(Utility.readFile("\\rest-mock\\Update_Apoointment.json"));
+		 * SalesOrderAppointmentRequest salesOrderAptRequest = new
+		 * ObjectMapper().readValue(jsonString7,
+		 * SalesOrderAppointmentRequest.class);
+		 */
+
 		given(restTemplate.postForEntity("http://APPOINTMENT-V1/appointment/createAppointment", apptRequest,
-				CreateAppointment.class))
-						.willReturn(new ResponseEntity<CreateAppointment>(responseCA, HttpStatus.OK));
-		 
+				CreateAppointment.class)).willReturn(new ResponseEntity<CreateAppointment>(responseCA, HttpStatus.OK));
+
 		given(restTemplate.getForEntity("http://JOURNEY-V1/journey/709cf962-1771-400c-a5fd-371756d58985",
-				Journey.class))
-						.willReturn(new ResponseEntity<Journey>(journey, HttpStatus.OK));
-		
+				Journey.class)).willReturn(new ResponseEntity<Journey>(journey, HttpStatus.OK));
+
 		given(restTemplate.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability", request,
 				GetServiceAvailibilityResponse.class))
 						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(response, HttpStatus.OK));
@@ -262,7 +261,7 @@ public class BroadbandControllerTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testCreateAppointmentWithInvalidRequest() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -277,12 +276,13 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.createAppointmentForFLBB(request);
+			broadBandController.createAppointmentForFLBB(request.getJourneyId(), request);
 		} catch (Exception e) {
 			assertNotNull(e);
 		}
 
 	}
+
 	@Test
 	public void testCreateAppointmentWithInvalidRequest2() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -297,12 +297,13 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.createAppointmentForFLBB(request);
+			broadBandController.createAppointmentForFLBB(request.getJourneyId(), request);
 		} catch (Exception e) {
 			assertNotNull(e);
 		}
 
 	}
+
 	@Test
 	public void testCreateAppointmentWithInvalidRequest3() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -317,13 +318,13 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.createAppointmentForFLBB(request);
+			broadBandController.createAppointmentForFLBB(request.getJourneyId(), request);
 		} catch (Exception e) {
 			assertNotNull(e);
 		}
 
 	}
-	
+
 	@Test
 	public void testCreateAppointmentWithInvalidRequest4() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -338,14 +339,13 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			assertNotNull(broadBandController.createAppointmentForFLBB(request));
+			assertNotNull(broadBandController.createAppointmentForFLBB(request.getJourneyId(), request));
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 
 	}
-	
-	
+
 	@Test
 	public void testCreateAppointmentWithValidRequest() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -360,12 +360,11 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			assertNotNull(broadBandController.createAppointmentForFLBB(request));
+			assertNotNull(broadBandController.createAppointmentForFLBB(request.getJourneyId(), request));
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 
 	}
-	
-	
+
 }
