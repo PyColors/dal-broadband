@@ -5,7 +5,7 @@
 
 	<groupId>com.vf.uk.dal</groupId>
 	<artifactId>dal-broadband-svc</artifactId>
-	<version>7.2.6</version>
+	<version>8.1.0</version>
 	<packaging>jar</packaging>
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
@@ -328,6 +328,14 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<springfox-version>2.6.1</springfox-version>
+		<sonar.coverage.exclusions>
+			**/entity/**,
+			**/pojo/**,
+			**/responsebeans/**,
+			**/requestbeans/**,
+			**/BroadbandApplication.java
+		</sonar.coverage.exclusions> 
 	</properties>
 
 
