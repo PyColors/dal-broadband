@@ -95,7 +95,7 @@ public class BroadbandController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = FlbBundle.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
-	@RequestMapping(value = "/bundle", produces = { "application/json" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/plan", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<FlbBundle>> getFlbbList(
 			@ApiParam(value = "To identify the User, the possible values are \"consumer\" or \"business\" for get bundle list and consumer , enterprise and soho for compatible plans Accepts Consumer, Enterprose and Soho. If none is passed then by default it takes consumer.") @RequestParam(value = "userType", required = false) String userType,
 			@ApiParam(value = "Offercode sets the pricing information based on the offercode sent, and gets the data from promotions API.") @RequestParam(value = "offerCode", required = false) String offerCode,
