@@ -1,4 +1,4 @@
-package com.vf.uk.dal.broadband.model.test;
+/*package com.vf.uk.dal.broadband.model.test;
 
 import java.beans.IntrospectionException;
 
@@ -161,3 +161,4 @@ public class BroadbandModelTest {
  	
  	}
 }
+*/
