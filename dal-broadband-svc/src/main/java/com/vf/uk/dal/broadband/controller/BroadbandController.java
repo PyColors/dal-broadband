@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.PathParam;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -162,9 +162,9 @@ public class BroadbandController {
 	@RequestMapping(value = "/{journeyId}/appointment", produces = { "application/json" }, method = RequestMethod.POST)
 
 	public ResponseEntity<CreateAppointmentResponse> createAppointmentForFLBB(
-			@ApiParam(value = "Journey id of the broadband - Unique", required = true) @Valid @PathParam(value = "journeyId") String journeyId,
+			@ApiParam(value = "Journey id of the broadband - Unique", required = true) @Valid @PathVariable(value = "journeyId") String journeyId,
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody CreateAppointmentRequest createAppointmentRequest) {
-		if (createAppointmentRequest != null) {
+		if (StringUtils.isEmpty(createAppointmentRequest.getJourneyId())) {
 			createAppointmentRequest.setJourneyId(journeyId);
 		}
 		BroadbandValidator.isCreateAppointmentRequestValid(createAppointmentRequest);

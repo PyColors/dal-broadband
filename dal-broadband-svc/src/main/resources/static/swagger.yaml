@@ -10,7 +10,7 @@ basePath: /api/v1
 produces:
   - application/json
 paths:
-  /broadband/availability/check:
+  /broadband/lineOptions:
     post:
       summary: check the availability checker for the braod band journey
       description: >-
