@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -26,7 +24,7 @@ public class HardwarePrice   {
   private Price oneOffDiscountPrice = null;
 
   @JsonProperty("merchandisingPromotions")
-  private List<MerchandisingPromotion> merchandisingPromotions = null;
+  private MerchandisingPromotion merchandisingPromotions = null;
 
   /**
    * 
@@ -110,21 +108,8 @@ public class HardwarePrice   {
    * @param merchandisingPromotions
    * @return
    */
-  public HardwarePrice merchandisingPromotions(List<MerchandisingPromotion> merchandisingPromotions) {
+  public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
-    return this;
-  }
-
-  /**
-   * 
-   * @param merchandisingPromotionsItem
-   * @return
-   */
-  public HardwarePrice addMerchandisingPromotionsItem(MerchandisingPromotion merchandisingPromotionsItem) {
-    if (this.merchandisingPromotions == null) {
-      this.merchandisingPromotions = new ArrayList<MerchandisingPromotion>();
-    }
-    this.merchandisingPromotions.add(merchandisingPromotionsItem);
     return this;
   }
 
@@ -136,11 +121,11 @@ public class HardwarePrice   {
 
   @Valid
 
-  public List<MerchandisingPromotion> getMerchandisingPromotions() {
+  public MerchandisingPromotion getMerchandisingPromotions() {
     return merchandisingPromotions;
   }
 
-  public void setMerchandisingPromotions(List<MerchandisingPromotion> merchandisingPromotions) {
+  public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
   }
 
