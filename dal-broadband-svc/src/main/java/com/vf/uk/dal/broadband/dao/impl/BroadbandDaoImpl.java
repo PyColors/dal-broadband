@@ -84,7 +84,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 				.createGetServiceAvailibilityRequest(availabilityCheckRequest);
 		try {
 			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate.postForEntity(
-					"http://UTILITY-V1/utility/broadbandServiceAvailability", request,
+					"http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability", request,
 					GetServiceAvailibilityResponse.class);
 			if (client != null)
 				availabilityCheckResponse = client.getBody();

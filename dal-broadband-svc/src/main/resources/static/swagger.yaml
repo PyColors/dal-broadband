@@ -10,7 +10,7 @@ basePath: /api/v1
 produces:
   - application/json
 paths:
-  /broadband/availability/check:
+  /broadband/lineOptions:
     post:
       summary: check the availability checker for the braod band journey
       description: >-
@@ -111,7 +111,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/Error'
-  /broadband/bundle:
+  /broadband/plan:
     get:
       summary: Get the list of bundle(FLBB)  based on the filter criteria.
       description: >-

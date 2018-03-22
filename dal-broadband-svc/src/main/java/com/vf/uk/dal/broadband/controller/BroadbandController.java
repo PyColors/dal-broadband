@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.PathParam;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +65,7 @@ public class BroadbandController {
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
 
-	@RequestMapping(value = "/availability/check", produces = { "application/json" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/lineOptions", produces = { "application/json" }, method = RequestMethod.POST)
 	public ResponseEntity<AvailabilityCheckResponse> checkAvailabilityForBroadband(
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody AvailabilityCheckRequest availabilityCheckerRequest) {
 
@@ -95,7 +95,7 @@ public class BroadbandController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = FlbBundle.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
-	@RequestMapping(value = "/bundle", produces = { "application/json" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/plan", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<FlbBundle>> getFlbbList(
 			@ApiParam(value = "To identify the User, the possible values are \"consumer\" or \"business\" for get bundle list and consumer , enterprise and soho for compatible plans Accepts Consumer, Enterprose and Soho. If none is passed then by default it takes consumer.") @RequestParam(value = "userType", required = false) String userType,
 			@ApiParam(value = "Offercode sets the pricing information based on the offercode sent, and gets the data from promotions API.") @RequestParam(value = "offerCode", required = false) String offerCode,
@@ -162,9 +162,9 @@ public class BroadbandController {
 	@RequestMapping(value = "/{journeyId}/appointment", produces = { "application/json" }, method = RequestMethod.POST)
 
 	public ResponseEntity<CreateAppointmentResponse> createAppointmentForFLBB(
-			@ApiParam(value = "Journey id of the broadband - Unique", required = true) @Valid @PathParam(value = "journeyId") String journeyId,
+			@ApiParam(value = "Journey id of the broadband - Unique", required = true) @Valid @PathVariable(value = "journeyId") String journeyId,
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody CreateAppointmentRequest createAppointmentRequest) {
-		if (createAppointmentRequest != null) {
+		if (StringUtils.isEmpty(createAppointmentRequest.getJourneyId())) {
 			createAppointmentRequest.setJourneyId(journeyId);
 		}
 		BroadbandValidator.isCreateAppointmentRequestValid(createAppointmentRequest);
