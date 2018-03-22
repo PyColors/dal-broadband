@@ -10,6 +10,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.Journey;
 import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vodafone.solrmodels.ProductModel;
 
@@ -106,4 +107,6 @@ public interface BroadbandDao {
 	 */
 	
 	List<ProductModel> getEngineeringVisitProduct();
+
+	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
 }

@@ -12,6 +12,7 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.ServiceStartDates;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
 /**
  * @author Infosys limited.
@@ -53,4 +54,11 @@ public interface BroadbandService {
 	 * @return CreateAppointmentResponse
 	 */
 	CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest);
+
+	/**
+	 * Get address list by post code from Premise
+	 * @param postCode
+	 * @return AddressInfo
+	 */
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
 }

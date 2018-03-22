@@ -34,6 +34,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.Journey;
 import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
@@ -359,5 +360,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
 		}
 		return response;
+	}
+
+	@Override
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
+		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode);
 	}
 }
