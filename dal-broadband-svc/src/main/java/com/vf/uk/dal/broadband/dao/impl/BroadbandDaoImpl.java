@@ -364,13 +364,16 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	@Override
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
+		AddressInfo addressInfo = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			AddressInfo addressInfo = restTemplate.getForObject("http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
-			return addressInfo;
+			ResponseEntity<AddressInfo> client = restTemplate.getForEntity("http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
+			if(client != null)
+				addressInfo = client.getBody();
 		} catch (Exception e) {
-			LogHelper.error(this, "::::::Invalid Journey Id or details" + e);
-			throw new ApplicationException(ExceptionMessages.INVALID_JOURNEY_DETAILS);
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
 		}
+		return addressInfo;
 	}
 }

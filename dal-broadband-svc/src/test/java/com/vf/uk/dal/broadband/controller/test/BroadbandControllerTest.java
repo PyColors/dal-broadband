@@ -1,6 +1,7 @@
 package com.vf.uk.dal.broadband.controller.test;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
 import com.vf.uk.dal.broadband.entity.journey.Journey;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -92,7 +94,9 @@ public class BroadbandControllerTest {
 
 		String jsonString6 = new String(Utility.readFile("\\rest-mock\\CreateAppointment_Response.json"));
 		CreateAppointment responseCA = new ObjectMapper().readValue(jsonString6, CreateAppointment.class);
-
+		
+		String jsonString7 = new String(Utility.readFile("\\rest-mock\\GetAddressByPostCode_Response.json"));
+		AddressInfo responseGAL = new ObjectMapper().readValue(jsonString7, AddressInfo.class);
 		/*
 		 * String jsonString7 = new
 		 * String(Utility.readFile("\\rest-mock\\Update_Apoointment.json"));
@@ -107,9 +111,12 @@ public class BroadbandControllerTest {
 		given(restTemplate.getForEntity("http://JOURNEY-V1/journey/709cf962-1771-400c-a5fd-371756d58985",
 				Journey.class)).willReturn(new ResponseEntity<Journey>(journey, HttpStatus.OK));
 
-		given(restTemplate.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability", request,
+		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability", request,
 				GetServiceAvailibilityResponse.class))
 						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(response, HttpStatus.OK));
+		
+		given(restTemplate.getForEntity("http://PREMISE-V1/premise/address/LS290JJ?qualified=true", AddressInfo.class))
+						.willReturn(new ResponseEntity<AddressInfo>(responseGAL, HttpStatus.OK));
 
 		FLBBJourneyResponse responeForFLBB = new FLBBJourneyResponse();
 		responeForFLBB.setJourneyId("123456789");
@@ -365,6 +372,13 @@ public class BroadbandControllerTest {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 
+	}
+	
+	@Test
+	public void testGetAddressByPostCodeFromPremise()
+	{
+		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ");
+		assertEquals("Success", addressInfo.getStatusInfo().getStatus());
 	}
 
 }
