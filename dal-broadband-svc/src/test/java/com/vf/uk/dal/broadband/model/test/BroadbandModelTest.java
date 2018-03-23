@@ -1,4 +1,4 @@
-/*package com.vf.uk.dal.broadband.model.test;
+package com.vf.uk.dal.broadband.model.test;
 
 import java.beans.IntrospectionException;
 
@@ -157,8 +157,9 @@ public class BroadbandModelTest {
 		BeanTest.test(com.vf.uk.dal.broadband.entity.SiteNote.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.CreateAppointmentResponse.class);
 		
-		
+		BeanTest.test(com.vf.uk.dal.broadband.entity.premise.AddressInfo.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.premise.Address.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.premise.StatusInfo.class);
  	
  	}
 }
-*/

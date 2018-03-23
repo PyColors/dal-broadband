@@ -28,6 +28,7 @@ import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
 import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
 import com.vf.uk.dal.broadband.entity.journey.Journey;
 import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.helper.SolrHelper;
 import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
@@ -359,5 +360,20 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			throw new ApplicationException(ExceptionMessages.SOLR_GETPRODUCTMODEL_EXCEPTION);
 		}
 		return productModels;
+	}
+
+	@Override
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
+		AddressInfo addressInfo = null;
+		try {
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			ResponseEntity<AddressInfo> client = restTemplate.getForEntity("http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
+			if(client != null)
+				addressInfo = client.getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+		}
+		return addressInfo;
 	}
 }
