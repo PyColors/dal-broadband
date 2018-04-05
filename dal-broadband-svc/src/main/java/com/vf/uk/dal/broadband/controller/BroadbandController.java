@@ -1,6 +1,8 @@
 package com.vf.uk.dal.broadband.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -29,6 +31,7 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.ServiceStartDates;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
@@ -178,6 +181,17 @@ public class BroadbandController {
 		}
 
 	}
+	
+	
+	@ApiOperation(value = "Gets the list of addresses for a given postal code", notes = "Gets the list of addresses for a given postal code", response = AddressInfo.class, tags = { "Premise"})
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AddressInfo.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class)})
+	@RequestMapping(value = "/premise/{postCode}", produces = { "application/json" }, method = RequestMethod.GET)
+	public AddressInfo getAddressByPostcode(
+			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode) {
+			return broadbandService.getAddressInfoByPostcodeFromPremise(postCode);
+	}
+	
 
 	/**
 	 * Handle missing params.
