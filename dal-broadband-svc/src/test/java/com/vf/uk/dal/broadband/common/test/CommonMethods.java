@@ -1,4 +1,4 @@
-package com.vf.uk.dal.broadband.common.test;
+/*package com.vf.uk.dal.broadband.common.test;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -89,3 +89,4 @@ public class CommonMethods {
 	}
 
 }
+*/

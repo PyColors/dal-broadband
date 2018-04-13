@@ -1,6 +1,18 @@
 spring:
   application:
     name: BROADBAND-V1
+  redis:
+    cluster:
+      enabled: false
+      max-redirects: 2
+      nodes:
+      - master.dal-sit2-jrny-red.m6ipwu.euw1.cache.amazonaws.com:6379
+    host: master.dal-sit2-jrny-red.m6ipwu.euw1.cache.amazonaws.com
+    port: 6379
+    password: digitalx2018jrny
+    ssl: true
+    timeout: 5000
+    ttl: 3600  
 info:
   build:
     version: @project.version@
@@ -51,7 +63,7 @@ icp:
       port: 9092
       logTopic: logs
   config:
-    jdbcUrl: jdbc:oracle:thin:@100.66.65.222:1521:oradb
+    jdbcUrl: jdbc:oracle:thin:@e18dbref.cqrpvr4944ct.eu-west-1.rds.amazonaws.com:1521:e18dbref
     jdbcUserName: daluser
     jdbcUserPwd: simple4u
   

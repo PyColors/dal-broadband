@@ -1,0 +1,28 @@
+{
+ "lineRef": {
+    "lineIdentification": {
+      "fllandlineNumber": null,
+      "typeCode": null,
+      "serviceClassificationCode": null,
+      "moveFromPostCode": null,
+      "installationAddress": {
+        "identification": {
+          "id": "A90000121249",
+          "contextId": "Gold"
+        },
+        "postCode": "L29 0JJ",
+        "houseName": "",
+        "houseNumber": "1",
+        "flatNumber": "",
+        "streetName": "Craven Crescent",
+        "town": null,
+        "county": "Norfolk",
+        "country": null,
+        "locality": "Brooke",
+        "citySubDivisionName": "LS",
+        "moveTypeCode": null
+      }
+    }
+  },
+  "classificationCode" : ["Line and ADSL"]
+}
