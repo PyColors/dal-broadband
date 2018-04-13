@@ -19,9 +19,6 @@ public class AvailabilityCheckRequest {
 	@JsonProperty("lineRef")
 	private LineRef lineRef = null;
 
-	@JsonProperty("journeyId")
-	private String journeyId = null;
-
 	@JsonProperty("classificationCode")
 	private List<String> classificationCode = null;
 
@@ -53,37 +50,6 @@ public class AvailabilityCheckRequest {
 		this.lineRef = lineRef;
 	}
 
-	/**
-	 * 
-	 * @param journeyId
-	 * @return
-	 */
-
-	public AvailabilityCheckRequest journeyId(String journeyId) {
-		this.journeyId = journeyId;
-		return this;
-	}
-
-	/**
-	 * Existing journey id, for logged in customer journey id will not be null
-	 * else null
-	 * 
-	 * @return journeyId
-	 **/
-	@ApiModelProperty(value = "Existing journey id, for logged in customer journey id will not be null else null")
-
-	public String getJourneyId() {
-		return journeyId;
-	}
-
-	/**
-	 * 
-	 * @param journeyId
-	 */
-
-	public void setJourneyId(String journeyId) {
-		this.journeyId = journeyId;
-	}
 
 	/**
 	 * 
@@ -133,8 +99,6 @@ public class AvailabilityCheckRequest {
 		this.classificationCode = classificationCode;
 	}
 
-	
-	
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -145,13 +109,12 @@ public class AvailabilityCheckRequest {
 		}
 		AvailabilityCheckRequest availabilityCheckRequest = (AvailabilityCheckRequest) o;
 		return Objects.equals(this.lineRef, availabilityCheckRequest.lineRef)
-				&& Objects.equals(this.journeyId, availabilityCheckRequest.journeyId)
 				&& Objects.equals(this.classificationCode, availabilityCheckRequest.classificationCode);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lineRef, journeyId, classificationCode);
+		return Objects.hash(lineRef, classificationCode);
 	}
 
 	@Override
@@ -160,7 +123,6 @@ public class AvailabilityCheckRequest {
 		sb.append("class AvailabilityCheckRequest {\n");
 
 		sb.append("    lineRef: ").append(toIndentedString(lineRef)).append("\n");
-		sb.append("    journeyId: ").append(toIndentedString(journeyId)).append("\n");
 		sb.append("    classificationCode: ").append(toIndentedString(classificationCode)).append("\n");
 		sb.append("}");
 		return sb.toString();

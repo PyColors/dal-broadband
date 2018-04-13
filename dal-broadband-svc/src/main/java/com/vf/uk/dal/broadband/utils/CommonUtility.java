@@ -1,18 +1,18 @@
-package com.vf.uk.dal.broadband.utils;
+/*package com.vf.uk.dal.broadband.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
+*//**
  * @author Infosys Limited
  *
- */
+ *//*
 public class CommonUtility {
 
 	private CommonUtility() {
 
 	}
 
-	/**
+	*//**
 	 * Gets the bundle details from get bundle list API.
 	 *
 	 * @param bundleClass
@@ -34,7 +34,7 @@ public class CommonUtility {
 	 * @param registryClient
 	 *            the registry client
 	 * @return the bundle details from get bundle list API
-	 */
+	 *//*
 	public static String getRequestUrlForFlbb(String bundleClass, String userType, String journeyType, String offerCode,
 			String classificationCode, String duration) {
 		// RestTemplate restTemplate = registryClient.getRestTemplate();
@@ -61,3 +61,4 @@ public class CommonUtility {
 	}
 
 }
+*/

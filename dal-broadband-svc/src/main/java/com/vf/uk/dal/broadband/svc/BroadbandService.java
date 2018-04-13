@@ -1,17 +1,7 @@
 package com.vf.uk.dal.broadband.svc;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
-import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
-import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
-import com.vf.uk.dal.broadband.entity.FlbBundle;
-import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
-import com.vf.uk.dal.broadband.entity.ServiceStartDates;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
 /**
@@ -23,10 +13,11 @@ public interface BroadbandService {
 	/**
 	 * check availability service for broadband
 	 * @param availabilityCheckRequest
+	 * @param broadbandId 
 	 * @return AvailabilityCheckResponse
 	 */
 	
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest);
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId);
 
 	
 	/**
@@ -34,7 +25,7 @@ public interface BroadbandService {
 	 * @param getBundleListSearchCriteria
 	 * @return List<FlbBundle> 
 	 */
-	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
+	//public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
 
 	/**
 	 * Service Start date
@@ -45,15 +36,16 @@ public interface BroadbandService {
 	 * @throws ParseException
 	 */
 	
-	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
-			throws DateTimeParseException, ParseException;
+	/*public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
+			throws DateTimeParseException, ParseException;*/
 	
 	/**
 	 * Create the appointment.
 	 * @param createAppointmentRequest
+	 * @param journeyId 
 	 * @return CreateAppointmentResponse
 	 */
-	CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest);
+	/*CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest, String journeyId);*/
 
 	/**
 	 * Get address list by post code from Premise

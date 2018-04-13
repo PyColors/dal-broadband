@@ -11,135 +11,147 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
-public class AppointmentAndAvailabilityDetail   {
-  @JsonProperty("appointmentNeeded")
-  private Boolean appointmentNeeded = null;
+public class AppointmentAndAvailabilityDetail {
+	@JsonProperty("appointmentNeeded")
+	private Boolean appointmentNeeded = null;
 
-  @JsonProperty("earliestAvailableDate")
-  private String earliestAvailableDate = null;
+	@JsonProperty("earliestAvailableDate")
+	private String earliestAvailableDate = null;
 
-  @JsonProperty("lineTreatmentType")
-  private String lineTreatmentType = null;
+	@JsonProperty("lineTreatmentType")
+	private String lineTreatmentType = null;
 
-  /**
-   * 
-   * @param appointmentNeeded
-   * @return AppointmentAndAvailabilityDetail
-   */
-  
-  public AppointmentAndAvailabilityDetail appointmentNeeded(Boolean appointmentNeeded) {
-    this.appointmentNeeded = appointmentNeeded;
-    return this;
-  }
+	@JsonProperty("canNumberBeRetained")
+	private String canNumberBeRetained = null;
 
-   /**
-   * Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option
-   * @return appointmentNeeded
-  **/
-  @ApiModelProperty(value = "Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option")
+	/**
+	 * 
+	 * @param appointmentNeeded
+	 * @return AppointmentAndAvailabilityDetail
+	 */
 
+	public AppointmentAndAvailabilityDetail appointmentNeeded(Boolean appointmentNeeded) {
+		this.appointmentNeeded = appointmentNeeded;
+		return this;
+	}
 
-  public Boolean getAppointmentNeeded() {
-    return appointmentNeeded;
-  }
+	/**
+	 * Whether the appointment is needed or not. If appointmenr needed flag is
+	 * false, it means customer has existing line if it is true it means
+	 * customer does not have existing line and should only take a new line
+	 * option
+	 * 
+	 * @return appointmentNeeded
+	 **/
+	@ApiModelProperty(value = "Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option")
 
-  public void setAppointmentNeeded(Boolean appointmentNeeded) {
-    this.appointmentNeeded = appointmentNeeded;
-  }
+	public Boolean getAppointmentNeeded() {
+		return appointmentNeeded;
+	}
 
-  /**
-   * 
-   * @param earliestAvailableDate
-   * @return
-   */
-  
-  public AppointmentAndAvailabilityDetail earliestAvailableDate(String earliestAvailableDate) {
-    this.earliestAvailableDate = earliestAvailableDate;
-    return this;
-  }
+	public void setAppointmentNeeded(Boolean appointmentNeeded) {
+		this.appointmentNeeded = appointmentNeeded;
+	}
 
-   /**
-   * The earliest available date when the service will be available
-   * @return earliestAvailableDate
-  **/
-  @ApiModelProperty(value = "The earliest available date when the service will be available")
+	/**
+	 * 
+	 * @param earliestAvailableDate
+	 * @return
+	 */
 
+	public AppointmentAndAvailabilityDetail earliestAvailableDate(String earliestAvailableDate) {
+		this.earliestAvailableDate = earliestAvailableDate;
+		return this;
+	}
 
-  public String getEarliestAvailableDate() {
-    return earliestAvailableDate;
-  }
+	/**
+	 * The earliest available date when the service will be available
+	 * 
+	 * @return earliestAvailableDate
+	 **/
+	@ApiModelProperty(value = "The earliest available date when the service will be available")
 
-  public void setEarliestAvailableDate(String earliestAvailableDate) {
-    this.earliestAvailableDate = earliestAvailableDate;
-  }
+	public String getEarliestAvailableDate() {
+		return earliestAvailableDate;
+	}
 
-  /**
-   * 
-   * @param lineTreatmentType
-   * @return
-   */
-  
-  public AppointmentAndAvailabilityDetail lineTreatmentType(String lineTreatmentType) {
-    this.lineTreatmentType = lineTreatmentType;
-    return this;
-  }
+	public void setEarliestAvailableDate(String earliestAvailableDate) {
+		this.earliestAvailableDate = earliestAvailableDate;
+	}
 
-   /**
-   * EXISTING OR NEW
-   * @return lineTreatmentType
-  **/
-  @ApiModelProperty(value = "EXISTING OR NEW")
+	/**
+	 * 
+	 * @param lineTreatmentType
+	 * @return
+	 */
 
+	public AppointmentAndAvailabilityDetail lineTreatmentType(String lineTreatmentType) {
+		this.lineTreatmentType = lineTreatmentType;
+		return this;
+	}
 
-  public String getLineTreatmentType() {
-    return lineTreatmentType;
-  }
+	/**
+	 * EXISTING OR NEW
+	 * 
+	 * @return lineTreatmentType
+	 **/
+	@ApiModelProperty(value = "EXISTING OR NEW")
 
-  public void setLineTreatmentType(String lineTreatmentType) {
-    this.lineTreatmentType = lineTreatmentType;
-  }
+	public String getLineTreatmentType() {
+		return lineTreatmentType;
+	}
 
+	public void setLineTreatmentType(String lineTreatmentType) {
+		this.lineTreatmentType = lineTreatmentType;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetail = (AppointmentAndAvailabilityDetail) o;
-    return Objects.equals(this.appointmentNeeded, appointmentAndAvailabilityDetail.appointmentNeeded) &&
-        Objects.equals(this.earliestAvailableDate, appointmentAndAvailabilityDetail.earliestAvailableDate) &&
-        Objects.equals(this.lineTreatmentType, appointmentAndAvailabilityDetail.lineTreatmentType);
-  }
+	public String getCanNumberBeRetained() {
+		return canNumberBeRetained;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(appointmentNeeded, earliestAvailableDate, lineTreatmentType);
-  }
+	public void setCanNumberBeRetained(String canNumberBeRetained) {
+		this.canNumberBeRetained = canNumberBeRetained;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class AppointmentAndAvailabilityDetail {\n");
-    
-    sb.append("    appointmentNeeded: ").append(toIndentedString(appointmentNeeded)).append("\n");
-    sb.append("    earliestAvailableDate: ").append(toIndentedString(earliestAvailableDate)).append("\n");
-    sb.append("    lineTreatmentType: ").append(toIndentedString(lineTreatmentType)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetail = (AppointmentAndAvailabilityDetail) o;
+		return Objects.equals(this.appointmentNeeded, appointmentAndAvailabilityDetail.appointmentNeeded)
+				&& Objects.equals(this.earliestAvailableDate, appointmentAndAvailabilityDetail.earliestAvailableDate)
+				&& Objects.equals(this.lineTreatmentType, appointmentAndAvailabilityDetail.lineTreatmentType);
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(appointmentNeeded, earliestAvailableDate, lineTreatmentType);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class AppointmentAndAvailabilityDetail {\n");
+
+		sb.append("    appointmentNeeded: ").append(toIndentedString(appointmentNeeded)).append("\n");
+		sb.append("    earliestAvailableDate: ").append(toIndentedString(earliestAvailableDate)).append("\n");
+		sb.append("    lineTreatmentType: ").append(toIndentedString(lineTreatmentType)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-
