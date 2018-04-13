@@ -38,7 +38,7 @@ public class ServiceLine implements Serializable {
 	private MiscReference miscRefernce = null;
 
 	@JsonProperty("serviceLineTreatments")
-	private List<ServiceLineTreatment> serviceLineTreatments = null;
+	private List<ServiceLineTreatment> serviceLineTreatments = new ArrayList<>();
 
 	public ServiceLine itemReference(ItemReference itemReference) {
 		this.itemReference = itemReference;
