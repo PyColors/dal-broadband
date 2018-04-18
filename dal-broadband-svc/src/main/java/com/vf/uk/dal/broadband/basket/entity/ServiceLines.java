@@ -4,20 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ServiceLines
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-25T06:31:48.127Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class ServiceLines   {
+  @JsonProperty("classificationCode")
   private String classificationCode = null;
 
-  private String networkType = null;
-
+  @JsonProperty("lineTreatments")
+  @Valid
   private List<LineTreatment> lineTreatments = null;
 
+  @JsonProperty("networkType")
+  private String networkType = null;
+
+  @JsonProperty("serviceLines")
+  @Valid
   private List<ServiceLine> serviceLines = null;
 
   public ServiceLines classificationCode(String classificationCode) {
@@ -25,10 +38,11 @@ public class ServiceLines   {
     return this;
   }
 
-   /**
-   * The category the technical product falls into
+  /**
+   * Get classificationCode
    * @return classificationCode
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getClassificationCode() {
@@ -37,25 +51,6 @@ public class ServiceLines   {
 
   public void setClassificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
-  }
-
-  public ServiceLines networkType(String networkType) {
-    this.networkType = networkType;
-    return this;
-  }
-
-   /**
-   * Denotes which network the offered service/ service bundle would be available
-   * @return networkType
-  **/
-
-
-  public String getNetworkType() {
-    return networkType;
-  }
-
-  public void setNetworkType(String networkType) {
-    this.networkType = networkType;
   }
 
   public ServiceLines lineTreatments(List<LineTreatment> lineTreatments) {
@@ -71,11 +66,13 @@ public class ServiceLines   {
     return this;
   }
 
-   /**
+  /**
    * Get lineTreatments
    * @return lineTreatments
   **/
+  @ApiModelProperty(value = "")
 
+  @Valid
 
   public List<LineTreatment> getLineTreatments() {
     return lineTreatments;
@@ -83,6 +80,26 @@ public class ServiceLines   {
 
   public void setLineTreatments(List<LineTreatment> lineTreatments) {
     this.lineTreatments = lineTreatments;
+  }
+
+  public ServiceLines networkType(String networkType) {
+    this.networkType = networkType;
+    return this;
+  }
+
+  /**
+   * Get networkType
+   * @return networkType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getNetworkType() {
+    return networkType;
+  }
+
+  public void setNetworkType(String networkType) {
+    this.networkType = networkType;
   }
 
   public ServiceLines serviceLines(List<ServiceLine> serviceLines) {
@@ -98,10 +115,13 @@ public class ServiceLines   {
     return this;
   }
 
-   /**
+  /**
    * Get serviceLines
    * @return serviceLines
   **/
+  @ApiModelProperty(value = "")
+
+  @Valid
 
   public List<ServiceLine> getServiceLines() {
     return serviceLines;
@@ -122,14 +142,14 @@ public class ServiceLines   {
     }
     ServiceLines serviceLines = (ServiceLines) o;
     return Objects.equals(this.classificationCode, serviceLines.classificationCode) &&
-        Objects.equals(this.networkType, serviceLines.networkType) &&
         Objects.equals(this.lineTreatments, serviceLines.lineTreatments) &&
+        Objects.equals(this.networkType, serviceLines.networkType) &&
         Objects.equals(this.serviceLines, serviceLines.serviceLines);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(classificationCode, networkType, lineTreatments, serviceLines);
+    return Objects.hash(classificationCode, lineTreatments, networkType, serviceLines);
   }
 
   @Override
@@ -138,8 +158,8 @@ public class ServiceLines   {
     sb.append("class ServiceLines {\n");
     
     sb.append("    classificationCode: ").append(toIndentedString(classificationCode)).append("\n");
-    sb.append("    networkType: ").append(toIndentedString(networkType)).append("\n");
     sb.append("    lineTreatments: ").append(toIndentedString(lineTreatments)).append("\n");
+    sb.append("    networkType: ").append(toIndentedString(networkType)).append("\n");
     sb.append("    serviceLines: ").append(toIndentedString(serviceLines)).append("\n");
     sb.append("}");
     return sb.toString();

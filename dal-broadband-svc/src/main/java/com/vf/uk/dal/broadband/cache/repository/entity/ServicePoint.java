@@ -13,37 +13,28 @@ public class ServicePoint implements Serializable {
 	private static final long serialVersionUID = -1543418061981155540L;
 
 	/** The Constant LINEREFERNCE. */
-	private static final String LINEREFERNCE = "lineRefernce";
+	private static final String LINEREFERENCE = "lineReference";
 
 	/** The Constant SERVICEREFERENCE. */
 	private static final String SERVICEREFERENCE = "serviceReference";
 
 	/** The line refernce. */
-	@JsonProperty(LINEREFERNCE)
-	private LineReference lineRefernce;
+	@JsonProperty(LINEREFERENCE)
+	private LineReference lineReference;
+
+	public LineReference getLineReference() {
+		return lineReference;
+	}
+
+	public void setLineReference(LineReference lineReference) {
+		this.lineReference = lineReference;
+	}
 
 	/** The service reference. */
 	@JsonProperty(SERVICEREFERENCE)
 	private ServiceReference serviceReference;
 
-	/**
-	 * Gets the line refernce.
-	 *
-	 * @return the line refernce
-	 */
-	public LineReference getLineRefernce() {
-		return lineRefernce;
-	}
-
-	/**
-	 * Sets the line refernce.
-	 *
-	 * @param lineRefernce
-	 *            the new line refernce
-	 */
-	public void setLineRefernce(LineReference lineRefernce) {
-		this.lineRefernce = lineRefernce;
-	}
+	
 
 	/**
 	 * Gets the service reference.
@@ -73,7 +64,7 @@ public class ServicePoint implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((lineRefernce == null) ? 0 : lineRefernce.hashCode());
+		result = prime * result + ((lineReference == null) ? 0 : lineReference.hashCode());
 		result = prime * result + ((serviceReference == null) ? 0 : serviceReference.hashCode());
 		return result;
 	}
@@ -92,10 +83,10 @@ public class ServicePoint implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ServicePoint other = (ServicePoint) obj;
-		if (lineRefernce == null) {
-			if (other.lineRefernce != null)
+		if (lineReference == null) {
+			if (other.lineReference != null)
 				return false;
-		} else if (!lineRefernce.equals(other.lineRefernce))
+		} else if (!lineReference.equals(other.lineReference))
 			return false;
 		if (serviceReference == null) {
 			if (other.serviceReference != null)
@@ -112,7 +103,7 @@ public class ServicePoint implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "ServicePoint [lineRefernce=" + lineRefernce + ", serviceReference=" + serviceReference + "]";
+		return "ServicePoint [lineRefernce=" + lineReference + ", serviceReference=" + serviceReference + "]";
 	}
 
 }

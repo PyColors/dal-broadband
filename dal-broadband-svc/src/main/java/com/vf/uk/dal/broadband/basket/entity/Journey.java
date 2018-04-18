@@ -2,27 +2,37 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Journey
  */
-public class Journey {
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+
+public class Journey   {
+  @JsonProperty("journeyType")
   private String journeyType = null;
 
+  @JsonProperty("offerCode")
   private String offerCode = null;
-/**
- * 
- * @param journeyType
- * @return
- */
+
   public Journey journeyType(String journeyType) {
     this.journeyType = journeyType;
     return this;
   }
 
-   /**
-   * The type of the user journey
+  /**
+   * Get journeyType
    * @return journeyType
   **/
+  @ApiModelProperty(value = "")
+
+
   public String getJourneyType() {
     return journeyType;
   }
@@ -30,20 +40,19 @@ public class Journey {
   public void setJourneyType(String journeyType) {
     this.journeyType = journeyType;
   }
-/**
- * 
- * @param offerCode
- * @return
- */
+
   public Journey offerCode(String offerCode) {
     this.offerCode = offerCode;
     return this;
   }
 
-   /**
-   * The type of the user journey
+  /**
+   * Get offerCode
    * @return offerCode
   **/
+  @ApiModelProperty(value = "")
+
+
   public String getOfferCode() {
     return offerCode;
   }
@@ -71,7 +80,6 @@ public class Journey {
     return Objects.hash(journeyType, offerCode);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -93,6 +101,5 @@ public class Journey {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
 }
 

@@ -1,15 +1,24 @@
 package com.vf.uk.dal.broadband.svc.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.ServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
@@ -27,6 +36,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 	@Autowired
 	BroadbandDao broadbandDao;
+	
+	@Autowired
+	DozerBeanMapper mapper;
 
 	/*
 	 * This methods calls Get Service Availability MS, if the response and
@@ -71,6 +83,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 				throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
 			}
 		}
+		if(broadBand!=null && StringUtils.isNotEmpty(broadBand.getBasketId())){
+			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(mapper.map(broadBand.getServicePoint(), ServicePoint.class),broadBand);
+			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest,broadBand.getPackageId(),broadBand.getBasketId());
+		}
+		
 		return response;
 	}
 
@@ -82,8 +99,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 	private boolean checkIfAddressIsSame(AvailabilityCheckRequest availabilityCheckRequest, Broadband broadBand) {
 		if(broadBand.getServicePoint()!=null
-				&& broadBand.getServicePoint().getLineRefernce()!=null){
-			InstallationAddress installationAddress =broadBand.getServicePoint().getLineRefernce().getInstallationAddress();
+				&& broadBand.getServicePoint().getLineReference()!=null){
+			InstallationAddress installationAddress =broadBand.getServicePoint().getLineReference().getInstallationAddress();
 			if(StringUtils.equalsIgnoreCase(installationAddress.getPostCode().replaceAll("\\s",""), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode().replaceAll("\\s",""))){
 					if(StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())
 							&& StringUtils.equalsIgnoreCase(installationAddress.getFlatNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())){
@@ -363,5 +380,44 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
 		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode);
+	}
+
+	@Override
+	public Basket createOrUpdatePackage(BasketRequest basketRequest, String broadbandId) {
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		Basket basket = null;
+		if(broadband!=null){
+			String basketId = broadband.getBasketId();
+			String journeyId = broadband.getJourneyId();
+			//broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+			CurrentJourney journey = null;
+			if(StringUtils.isNotEmpty(journeyId)){
+				journey = broadbandDao.getJourney(journeyId);
+			}
+			if(StringUtils.isBlank(basketId)){
+				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,broadband,mapper.map(broadband.getServicePoint(), ServicePoint.class),journey);
+				basket =  broadbandDao.createBasket(createBasketRequest);
+				broadband.setBasketId(basket.getBasketId());
+				
+			}else{
+				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest,journey,broadband);
+				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(),basketId);
+				basket =  broadbandDao.getBasket(basketId);
+			}
+			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest);
+			broadbandDao.setBroadBandInCache(broadband);
+		}else{
+			CreateBasketRequest createBasketRequest  = ConverterUtils.createBasketRequest(basketRequest, broadband, null, null);
+			basket =  broadbandDao.createBasket(createBasketRequest);
+			Broadband broadbandToSave = new Broadband();
+			broadbandToSave.setBasketId(basket.getBasketId());
+			broadbandDao.setBroadBandInCache(broadbandToSave);
+		}
+		return basket;
+	}
+
+	@Override
+	public Broadband getBroadbandFromCache(String broadbandId) {
+		return broadbandDao.getBroadbandFromCache(broadbandId);
 	}
 }

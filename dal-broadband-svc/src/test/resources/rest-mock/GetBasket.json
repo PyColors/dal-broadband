@@ -1,0 +1,515 @@
+{
+  "basketId": "2b23e0a1-eefd-409c-a919-e0ca774b9017",
+  "affiliateId": "11",
+  "affiliateFlag": true,
+  "source": "WCS",
+  "customerRequestedDate": "2017-10-01T09:45:00.000+00:00",
+  "metadata": {
+    "returnURL": null,
+    "basketStatus": "INCOMPLETE",
+    "salesOrderId": null,
+    "reason": null
+  },
+  "customer": null,
+  "journey": null,
+  "packages": [
+    {
+      "packageId": "23506317-018e-4f1b-888e-ea181b625305",
+      "accountCategory": "Consumer",
+      "sequence": 1,
+      "packageType": "Acquisition",
+      "removable": true,
+      "dependentOn": null,
+      "voucherCode": null,
+      "bundle": {
+        "packageLineId": "43eefee0-104d-4718-9589-c55e52c2b7f3",
+        "action": "ADD",
+        "skuId": "110265",
+        "name": "Home Broadband - Unlimited Fibre 38 and Phone - FTR4 -18 m",
+        "description": "This is a consumer line and Unlimited Fibre 38  Broadband package for customers with no Vodafone mobile service",
+        "displayName": "Unlimited Fibre 38",
+        "displayDescription": null,
+        "bundleClass": "HANDSET",
+        "productClass": null,
+        "serviceId": "107551",
+        "paymentType": "Postpaid",
+        "bundleType": null,
+        "commitmentPeriod": {
+          "uom": "Months",
+          "value": "18"
+        },
+        "displayOrder": 187,
+        "showInSummary": false,
+        "allowances": [],
+        "merchandisingMedia": [
+          {
+            "id": "PB_IMAGE_URLS_THUMBS_FRONT",
+            "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+            "type": "URL"
+          }
+        ],
+        "attributes": null,
+        "priceDetails": {
+          "monthlyPrice": {
+            "gross": "25",
+            "net": "20.83",
+            "vat": "4.17"
+          },
+          "monthlyDiscountPrice": {
+            "gross": "25",
+            "net": "20.83",
+            "vat": "4.17"
+          },
+          "merchandisingPromotions": null
+        },
+        "isChanged": false,
+        "isVodafoneGlobalRoaming": false,
+        "bundledServiceProducts": [
+          {
+            "skuId": "107552",
+            "name": "Fixed Broadband Service",
+            "description": "Fixed Broadband Service",
+            "productClass": "Fixed Broadband Service",
+            "priceDetail": {
+              "oneOffPrice": null,
+              "oneOffDiscountPrice": null,
+              "monthlyPrice": {
+                "gross": "25",
+                "net": "20.83",
+                "vat": "4.17"
+              },
+              "monthlyDiscountPrice": {
+                "gross": "25",
+                "net": "20.83",
+                "vat": "4.17"
+              },
+              "merchandisingPromotions": null
+            },
+            "miscellaneous": [
+              {
+                "name": "SERVICE POINT",
+                "value": "Unlimited Fibre 38"
+              }
+            ]
+          },
+          {
+            "skuId": "107551",
+            "name": "Fixed Line Service",
+            "description": "Fixed Line Service",
+            "productClass": "Fixed Line",
+            "priceDetail": {
+              "oneOffPrice": null,
+              "oneOffDiscountPrice": null,
+              "monthlyPrice": {
+                "gross": "0",
+                "net": "0",
+                "vat": "0"
+              },
+              "monthlyDiscountPrice": {
+                "gross": "0",
+                "net": "0",
+                "vat": "0"
+              },
+              "merchandisingPromotions": null
+            },
+            "miscellaneous": [
+              {
+                "name": "SERVICE POINT",
+                "value": "Land Line"
+              }
+            ]
+          }
+        ]
+      },
+      "hardwares": [
+        {
+          "packageLineId": "ee351287-30fa-493e-be1e-e9fc9e1d8bf4",
+          "action": "ADD",
+          "skuId": "085897",
+          "name": "Vodafone Broadband router",
+          "description": "Vodafone Broadband router",
+          "displayName": "Vodafone Broadband router",
+          "displayDescription": null,
+          "deviceBriefDescription": [],
+          "deviceColor": null,
+          "memorySize": null,
+          "make": null,
+          "model": null,
+          "groupType": null,
+          "productClass": "Fixed Broadband Equipment",
+          "displayOrder": 0,
+          "showInSummary": false,
+          "merchandisingMedia": [
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_FRONT",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_LEFT",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_RIGHT",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_SIDE",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_BACK",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_HERO",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_FRONT",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_LEFT",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_RIGHT",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_SIDE",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_BACK",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_GRID",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_SMALL",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_MRKTING1",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_MRKTING2",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_MRKTING3",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_FRNTANGLE",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_THUMBS_BACKANGLE",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_MARKETING1",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_MARKETING2",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_MARKETING3",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_FRONTANGLE",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            },
+            {
+              "id": "PR_IMAGE_URLS_FULL_BACKANGLE",
+              "value": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png",
+              "type": "URL"
+            }
+          ],
+          "attributes": [],
+          "priceDetails": {
+            "oneOffPrice": {
+              "gross": "0",
+              "net": "0",
+              "vat": "0"
+            },
+            "oneOffDiscountPrice": {
+              "gross": "0",
+              "net": "0",
+              "vat": "0"
+            },
+            "merchandisingPromotions": null
+          },
+          "isChanged": false,
+          "boxPrice": {
+            "gross": "50.736",
+            "net": "42.28",
+            "vat": "8.456"
+          },
+          "freeGift": false
+        }
+      ],
+      "services": [
+        {
+          "packageLineId": "46dd0a2d-8731-4719-b3bb-ed6214675c6e",
+          "action": "ADD",
+          "skuId": "107573",
+          "name": "Engineer Visit",
+          "description": null,
+          "displayName": "Engineer Visit",
+          "displayDescription": null,
+          "specificationGroup": [],
+          "merchandisingMedia": [],
+          "attributes": [],
+          "priceDetails": {
+            "oneOffPrice": {
+              "gross": "60",
+              "net": "50",
+              "vat": "10"
+            },
+            "oneOffDiscountPrice": {
+              "gross": "60",
+              "net": "50",
+              "vat": "10"
+            },
+            "monthlyPrice": null,
+            "monthlyDiscountPrice": null,
+            "merchandisingPromotions": null
+          },
+          "isChanged": false,
+          "freeGift": false,
+          "productClass": "Fee",
+          "dataRollover": null,
+          "allowances": null,
+          "rewardPoints": null,
+          "planDuration": null
+        }
+      ],
+      "discounts": [],
+      "priceDetails": {
+        "oneOffPrice": {
+          "gross": "60",
+          "net": "50",
+          "vat": "10"
+        },
+        "oneOffDiscountPrice": {
+          "gross": "60",
+          "net": "50",
+          "vat": "10"
+        },
+        "monthlyPrice": {
+          "gross": "25",
+          "net": "20.83",
+          "vat": "4.17"
+        },
+        "monthlyDiscountPrice": {
+          "gross": "25",
+          "net": "20.83",
+          "vat": "4.17"
+        },
+        "stepPrices": null
+      },
+      "isChanged": false,
+      "installationAddress": {
+        "identification": {
+          "id": "234234",
+          "contextId": "HI"
+        },
+        "postCode": "RG14 2BN",
+        "houseName": "XYZ",
+        "houseNumber": "250",
+        "flatNumber": "250",
+        "streetName": "London Street",
+        "town": "Newbury",
+        "county": "Berkshire",
+        "country": "UK",
+        "locality": "Newbury 1",
+        "citySubDivisionName": "West Berkshire",
+        "moveTypeCode": "03"
+      },
+      "appointmentWindow": {
+        "identificationId": "234234",
+        "startDateTime": "2017-10-01T09:45:00.000+02:00",
+        "operationalPreferenceCode": "2321231",
+        "timeSlot": "8:00AM",
+        "siteNotes": [
+          {
+            "notes": "hello",
+            "typeCode": "06"
+          }
+        ]
+      },
+      "servicePoint": {
+        "lineRefernece": {
+          "lineLocator": {
+            "exchangeCode": "324324",
+            "exchangeName": "Newbury",
+            "districtCode": "RG14",
+            "l2SID": "ABC",
+            "cableLinkID": "2133",
+            "distributionPoint": "2002"
+          },
+          "lineSettings": {
+            "serviceCode": "009",
+            "installationCode": "001",
+            "terminationCode": "100"
+          },
+          "lineStatus": {
+            "statusCode": "6777",
+            "accessLineStatus": "OPEN",
+            "gnpStatus": "32424",
+            "lineOption": "4",
+            "technology": "BB",
+            "lineType": "Cable",
+            "tempStructure": true,
+            "standbyPowerRequired": true,
+            "narrowBandServicesAvailable": "Yes"
+          },
+          "availableServices": {
+            "service": [
+              "Broadband"
+            ]
+          },
+          "lineDirectory": [
+            {
+              "featureCode": "67",
+              "directoryCode": "23423",
+              "locationCode": "67456"
+            }
+          ]
+        },
+        "serviceReference": {
+          "serviceLines": [
+            {
+              "classificationCode": "345",
+              "networkType": "Cable",
+              "lineTreatments": [
+                {
+                  "identification": "Name",
+                  "earliestAvailableDate": "2017-10-01T09:45:00.000+02:00",
+                  "appointmentNeeded": true,
+                  "connectionCharge": "100"
+                }
+              ],
+              "serviceLines": [
+                {
+                  "itemReference": {
+                    "identificationId": "34545",
+                    "name": "Alok",
+                    "classificationCode": "345345"
+                  },
+                  "lineSpeeds": {
+                    "maxDownSpeed": "1",
+                    "minDownSpeed": "1",
+                    "avgDownSpeed": "1",
+                    "minGuaranteedDownSpeed": "1",
+                    "maxUpSpeed": "1",
+                    "minUpSpeed": "1",
+                    "bandwidthMeasure": "1"
+                  },
+                  "miscRefernce": {
+                    "serviceProviderName": "Vodafone",
+                    "lineLength": "30m",
+                    "classificationCode": "345345",
+                    "customerAgreedDate": "2017-10-01T09:45:00.000+02:00",
+                    "readyForServiceDate": "2017-10-01T09:45:00.000+02:00",
+                    "anfp": "234234"
+                  },
+                  "serviceLineTreatments": [
+                    {
+                      "parentIdentification": "2324",
+                      "serviceType": "Broadband",
+                      "serviceAction": "ADD",
+                      "simValue": "54234234",
+                      "lineInfo": "Fixed",
+                      "canNumberBeRetained": true,
+                      "portInFlag": "1",
+                      "vicCode": "24234234",
+                      "pendingOrders": [
+                        {
+                          "completionDate": "2017-10-01T09:45:00.000+02:00",
+                          "typeCode": "07",
+                          "thirdPartyFlag": "Yes"
+                        }
+                      ],
+                      "accessLine": {
+                        "id": "2343243244",
+                        "channelId": "23423"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "serviceStartDate": "2017-10-01T18:45:00.000+00:00",
+      "phoneNumber": "9391666621"
+    }
+  ],
+  "vetOutcome": null,
+  "priceDetails": {
+    "oneOffPrice": {
+      "gross": "60",
+      "net": "50",
+      "vat": "10"
+    },
+    "oneOffDiscountPrice": {
+      "gross": "60",
+      "net": "50",
+      "vat": "10"
+    },
+    "monthlyPrice": {
+      "gross": "25",
+      "net": "20.83",
+      "vat": "4.17"
+    },
+    "monthlyDiscountPrice": {
+      "gross": "25",
+      "net": "20.83",
+      "vat": "4.17"
+    },
+    "stepPrices": null
+  },
+  "totalOneoffPriceSaving": "0",
+  "totalMonthlyPriceSaving": "0",
+  "deliveryInfo": null,
+  "voucherCode": null,
+  "voucherDescription": null,
+  "validated": null,
+  "hashvalue": null,
+  "isChanged": false,
+  "changeCode": null,
+  "voucherErrorMessage": null
+}

@@ -36,10 +36,10 @@ public class ServiceLineTreatment implements Serializable {
 	private static final String CANNUMBERBERETAINED = "canNumberBeRetained";
 	
 	/** The Constant PORTINFLAG. */
-	private static final String PORTINFLAG = "PortInFlag";
+	private static final String PORTINFLAG = "portInFlag";
 	
 	/** The Constant VICCODE. */
-	private static final String VICCODE = "vICCode";
+	private static final String VICCODE = "vicCode";
 	
 	/** The Constant PENDINGORDERS. */
 	private static final String PENDINGORDERS = "pendingOrders";
@@ -70,15 +70,15 @@ public class ServiceLineTreatment implements Serializable {
 	
 	/** The can number be retained. */
 	@JsonProperty(CANNUMBERBERETAINED)
-	private String canNumberBeRetained;
+	private boolean canNumberBeRetained;
 	
 	/** The Port in flag. */
 	@JsonProperty(PORTINFLAG)
-	private String PortInFlag;
+	private String portInFlag;
 	
 	/** The v IC code. */
 	@JsonProperty(VICCODE)
-	private String vICCode;
+	private String vicCode;
 	
 	/** The pending orders. */
 	@JsonProperty(PENDINGORDERS)
@@ -197,18 +197,7 @@ public class ServiceLineTreatment implements Serializable {
 	 *
 	 * @return the can number be retained
 	 */
-	public String getCanNumberBeRetained() {
-		return canNumberBeRetained;
-	}
 	
-	/**
-	 * Sets the can number be retained.
-	 *
-	 * @param canNumberBeRetained the new can number be retained
-	 */
-	public void setCanNumberBeRetained(String canNumberBeRetained) {
-		this.canNumberBeRetained = canNumberBeRetained;
-	}
 	
 	/**
 	 * Gets the port in flag.
@@ -216,7 +205,7 @@ public class ServiceLineTreatment implements Serializable {
 	 * @return the port in flag
 	 */
 	public String getPortInFlag() {
-		return PortInFlag;
+		return portInFlag;
 	}
 	
 	/**
@@ -225,7 +214,7 @@ public class ServiceLineTreatment implements Serializable {
 	 * @param portInFlag the new port in flag
 	 */
 	public void setPortInFlag(String portInFlag) {
-		PortInFlag = portInFlag;
+		portInFlag = portInFlag;
 	}
 	
 	/**
@@ -233,8 +222,8 @@ public class ServiceLineTreatment implements Serializable {
 	 *
 	 * @return the v IC code
 	 */
-	public String getvICCode() {
-		return vICCode;
+	public String getVicCode() {
+		return vicCode;
 	}
 	
 	/**
@@ -242,8 +231,8 @@ public class ServiceLineTreatment implements Serializable {
 	 *
 	 * @param vICCode the new v IC code
 	 */
-	public void setvICCode(String vICCode) {
-		this.vICCode = vICCode;
+	public void setVicCode(String vicCode) {
+		this.vicCode = vicCode;
 	}
 	
 	/**
@@ -264,6 +253,16 @@ public class ServiceLineTreatment implements Serializable {
 		this.pendingOrders = pendingOrders;
 	}
 	
+	
+
+	public boolean isCanNumberBeRetained() {
+		return canNumberBeRetained;
+	}
+
+	public void setCanNumberBeRetained(boolean canNumberBeRetained) {
+		this.canNumberBeRetained = canNumberBeRetained;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -272,15 +271,14 @@ public class ServiceLineTreatment implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((accessLine == null) ? 0 : accessLine.hashCode());
-		result = prime * result + ((PortInFlag == null) ? 0 : PortInFlag.hashCode());
-		result = prime * result + ((canNumberBeRetained == null) ? 0 : canNumberBeRetained.hashCode());
+		result = prime * result + ((portInFlag == null) ? 0 : portInFlag.hashCode());
 		result = prime * result + ((lineInfo == null) ? 0 : lineInfo.hashCode());
 		result = prime * result + ((parentIdentification == null) ? 0 : parentIdentification.hashCode());
 		result = prime * result + ((pendingOrders == null) ? 0 : pendingOrders.hashCode());
 		result = prime * result + ((sIM2Value == null) ? 0 : sIM2Value.hashCode());
 		result = prime * result + ((serviceAction == null) ? 0 : serviceAction.hashCode());
 		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
-		result = prime * result + ((vICCode == null) ? 0 : vICCode.hashCode());
+		result = prime * result + ((vicCode == null) ? 0 : vicCode.hashCode());
 		return result;
 	}
 	
@@ -301,16 +299,12 @@ public class ServiceLineTreatment implements Serializable {
 				return false;
 		} else if (!accessLine.equals(other.accessLine))
 			return false;
-		if (PortInFlag == null) {
-			if (other.PortInFlag != null)
+		if (portInFlag == null) {
+			if (other.portInFlag != null)
 				return false;
-		} else if (!PortInFlag.equals(other.PortInFlag))
+		} else if (!portInFlag.equals(other.portInFlag))
 			return false;
-		if (canNumberBeRetained == null) {
-			if (other.canNumberBeRetained != null)
-				return false;
-		} else if (!canNumberBeRetained.equals(other.canNumberBeRetained))
-			return false;
+		
 		if (lineInfo == null) {
 			if (other.lineInfo != null)
 				return false;
@@ -341,10 +335,10 @@ public class ServiceLineTreatment implements Serializable {
 				return false;
 		} else if (!serviceType.equals(other.serviceType))
 			return false;
-		if (vICCode == null) {
-			if (other.vICCode != null)
+		if (vicCode == null) {
+			if (other.vicCode != null)
 				return false;
-		} else if (!vICCode.equals(other.vICCode))
+		} else if (!vicCode.equals(other.vicCode))
 			return false;
 		return true;
 	}
@@ -357,7 +351,7 @@ public class ServiceLineTreatment implements Serializable {
 		return "ServiceLineTreatment [parentIdentification=" + parentIdentification + ", AccessLine=" + accessLine
 				+ ", serviceType=" + serviceType + ", serviceAction=" + serviceAction + ", sIM2Value=" + sIM2Value
 				+ ", lineInfo=" + lineInfo + ", canNumberBeRetained=" + canNumberBeRetained + ", PortInFlag="
-				+ PortInFlag + ", vICCode=" + vICCode + ", pendingOrders=" + pendingOrders + "]";
+				+ portInFlag + ", vICCode=" + vicCode + ", pendingOrders=" + pendingOrders + "]";
 	}
 	
 	

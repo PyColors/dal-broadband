@@ -19,7 +19,7 @@ public class LineStatus implements Serializable {
 	private static final String ACCESSLINESTATUS = "accessLineStatus";
 	
 	/** The Constant GNPSTATUS. */
-	private static final String GNPSTATUS = "gNPStatus";
+	private static final String GNPSTATUS = "gnpStatus";
 	
 	/** The Constant LINEOPTION. */
 	private static final String LINEOPTION = "lineOption";
@@ -49,7 +49,7 @@ public class LineStatus implements Serializable {
 	
 	/** The g NP status. */
 	@JsonProperty(GNPSTATUS)
-	private String gNPStatus;
+	private String gnpStatus;
 	
 	/** The line option. */
 	@JsonProperty(LINEOPTION)
@@ -116,8 +116,8 @@ public class LineStatus implements Serializable {
 	 *
 	 * @return the g NP status
 	 */
-	public String getgNPStatus() {
-		return gNPStatus;
+	public String getGnpStatus() {
+		return gnpStatus;
 	}
 
 	/**
@@ -125,8 +125,8 @@ public class LineStatus implements Serializable {
 	 *
 	 * @param gNPStatus the new g NP status
 	 */
-	public void setgNPStatus(String gNPStatus) {
-		this.gNPStatus = gNPStatus;
+	public void setGnpStatus(String gnpStatus) {
+		this.gnpStatus = gnpStatus;
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class LineStatus implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((accessLineStatus == null) ? 0 : accessLineStatus.hashCode());
-		result = prime * result + ((gNPStatus == null) ? 0 : gNPStatus.hashCode());
+		result = prime * result + ((gnpStatus == null) ? 0 : gnpStatus.hashCode());
 		result = prime * result + ((lineOption == null) ? 0 : lineOption.hashCode());
 		result = prime * result + ((lineType == null) ? 0 : lineType.hashCode());
 		result = prime * result + ((narrowBandServicesAvailable == null) ? 0 : narrowBandServicesAvailable.hashCode());
@@ -273,10 +273,10 @@ public class LineStatus implements Serializable {
 				return false;
 		} else if (!accessLineStatus.equals(other.accessLineStatus))
 			return false;
-		if (gNPStatus == null) {
-			if (other.gNPStatus != null)
+		if (gnpStatus == null) {
+			if (other.gnpStatus != null)
 				return false;
-		} else if (!gNPStatus.equals(other.gNPStatus))
+		} else if (!gnpStatus.equals(other.gnpStatus))
 			return false;
 		if (lineOption == null) {
 			if (other.lineOption != null)
@@ -322,7 +322,7 @@ public class LineStatus implements Serializable {
 	@Override
 	public String toString() {
 		return "LineStatus [statusCode=" + statusCode + ", accessLineStatus=" + accessLineStatus + ", gNPStatus="
-				+ gNPStatus + ", lineOption=" + lineOption + ", technology=" + technology + ", lineType=" + lineType
+				+ gnpStatus + ", lineOption=" + lineOption + ", technology=" + technology + ", lineType=" + lineType
 				+ ", tempStructure=" + tempStructure + ", standbyPowerRequired=" + standbyPowerRequired
 				+ ", narrowBandServicesAvailable=" + narrowBandServicesAvailable + "]";
 	}

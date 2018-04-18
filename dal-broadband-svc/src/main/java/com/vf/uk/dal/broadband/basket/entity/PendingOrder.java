@@ -2,27 +2,38 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * PendingOrder
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class PendingOrder   {
+  @JsonProperty("completionDate")
   private String completionDate = null;
 
-  private String typeCode = null;
-
+  @JsonProperty("thirdPartyFlag")
   private String thirdPartyFlag = null;
+
+  @JsonProperty("typeCode")
+  private String typeCode = null;
 
   public PendingOrder completionDate(String completionDate) {
     this.completionDate = completionDate;
     return this;
   }
 
-   /**
-   * The date by which the pending order would be completed.
+  /**
+   * Get completionDate
    * @return completionDate
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getCompletionDate() {
@@ -33,34 +44,16 @@ public class PendingOrder   {
     this.completionDate = completionDate;
   }
 
-  public PendingOrder typeCode(String typeCode) {
-    this.typeCode = typeCode;
-    return this;
-  }
-
-   /**
-   * The type of pending order
-   * @return typeCode
-  **/
-
-
-  public String getTypeCode() {
-    return typeCode;
-  }
-
-  public void setTypeCode(String typeCode) {
-    this.typeCode = typeCode;
-  }
-
   public PendingOrder thirdPartyFlag(String thirdPartyFlag) {
     this.thirdPartyFlag = thirdPartyFlag;
     return this;
   }
 
-   /**
-   * Specifies if the pending order on the line is by a third party (a party other than the line owner Communications Provider)
+  /**
+   * Get thirdPartyFlag
    * @return thirdPartyFlag
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getThirdPartyFlag() {
@@ -69,6 +62,26 @@ public class PendingOrder   {
 
   public void setThirdPartyFlag(String thirdPartyFlag) {
     this.thirdPartyFlag = thirdPartyFlag;
+  }
+
+  public PendingOrder typeCode(String typeCode) {
+    this.typeCode = typeCode;
+    return this;
+  }
+
+  /**
+   * Get typeCode
+   * @return typeCode
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getTypeCode() {
+    return typeCode;
+  }
+
+  public void setTypeCode(String typeCode) {
+    this.typeCode = typeCode;
   }
 
 
@@ -82,13 +95,13 @@ public class PendingOrder   {
     }
     PendingOrder pendingOrder = (PendingOrder) o;
     return Objects.equals(this.completionDate, pendingOrder.completionDate) &&
-        Objects.equals(this.typeCode, pendingOrder.typeCode) &&
-        Objects.equals(this.thirdPartyFlag, pendingOrder.thirdPartyFlag);
+        Objects.equals(this.thirdPartyFlag, pendingOrder.thirdPartyFlag) &&
+        Objects.equals(this.typeCode, pendingOrder.typeCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(completionDate, typeCode, thirdPartyFlag);
+    return Objects.hash(completionDate, thirdPartyFlag, typeCode);
   }
 
   @Override
@@ -97,8 +110,8 @@ public class PendingOrder   {
     sb.append("class PendingOrder {\n");
     
     sb.append("    completionDate: ").append(toIndentedString(completionDate)).append("\n");
-    sb.append("    typeCode: ").append(toIndentedString(typeCode)).append("\n");
     sb.append("    thirdPartyFlag: ").append(toIndentedString(thirdPartyFlag)).append("\n");
+    sb.append("    typeCode: ").append(toIndentedString(typeCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

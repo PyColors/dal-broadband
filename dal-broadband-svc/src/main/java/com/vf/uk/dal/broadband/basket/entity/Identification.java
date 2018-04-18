@@ -2,51 +2,63 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Identification
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-01-29T10:34:26.484Z")
-public class Identification {
-  private String id = null;
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
+public class Identification   {
+  @JsonProperty("contextId")
   private String contextId = null;
 
-  public Identification id(String id) {
-    this.id = id;
-    return this;
-  }
-
-   /**
-   * This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system
-   * @return id
-  **/
-  @ApiModelProperty(value = "This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system")
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
+  @JsonProperty("id")
+  private String id = null;
 
   public Identification contextId(String contextId) {
     this.contextId = contextId;
     return this;
   }
 
-   /**
+  /**
    * Get contextId
    * @return contextId
   **/
   @ApiModelProperty(value = "")
+
+
   public String getContextId() {
     return contextId;
   }
 
   public void setContextId(String contextId) {
     this.contextId = contextId;
+  }
+
+  public Identification id(String id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system
+   * @return id
+  **/
+  @ApiModelProperty(value = "This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system")
+
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
 
@@ -59,23 +71,22 @@ public class Identification {
       return false;
     }
     Identification identification = (Identification) o;
-    return Objects.equals(this.id, identification.id) &&
-        Objects.equals(this.contextId, identification.contextId);
+    return Objects.equals(this.contextId, identification.contextId) &&
+        Objects.equals(this.id, identification.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, contextId);
+    return Objects.hash(contextId, id);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Identification {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    contextId: ").append(toIndentedString(contextId)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -90,7 +101,5 @@ public class Identification {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
 }
-
 

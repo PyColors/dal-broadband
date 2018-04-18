@@ -2,60 +2,55 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * MiscReference
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class MiscReference   {
-  private String serviceProviderName = null;
-
-  private String lineLength = null;
-
-  private String classificationCode = null;
-
-  private String customerAgreedDate = null;
-
-  private String readyForServiceDate = null;
-
+  @JsonProperty("anfp")
   private String anfp = null;
 
-  public MiscReference serviceProviderName(String serviceProviderName) {
-    this.serviceProviderName = serviceProviderName;
+  @JsonProperty("classificationCode")
+  private String classificationCode = null;
+
+  @JsonProperty("customerAgreedDate")
+  private String customerAgreedDate = null;
+
+  @JsonProperty("lineLength")
+  private String lineLength = null;
+
+  @JsonProperty("readyForServiceDate")
+  private String readyForServiceDate = null;
+
+  @JsonProperty("serviceProviderName")
+  private String serviceProviderName = null;
+
+  public MiscReference anfp(String anfp) {
+    this.anfp = anfp;
     return this;
   }
 
-   /**
-   * Included when ADSL is already on the line, or when ADSL is being provided.
-   * @return serviceProviderName
+  /**
+   * Get anfp
+   * @return anfp
   **/
+  @ApiModelProperty(value = "")
 
 
-  public String getServiceProviderName() {
-    return serviceProviderName;
+  public String getAnfp() {
+    return anfp;
   }
 
-  public void setServiceProviderName(String serviceProviderName) {
-    this.serviceProviderName = serviceProviderName;
-  }
-
-  public MiscReference lineLength(String lineLength) {
-    this.lineLength = lineLength;
-    return this;
-  }
-
-   /**
-   * Estimate of the line length
-   * @return lineLength
-  **/
-
-
-  public String getLineLength() {
-    return lineLength;
-  }
-
-  public void setLineLength(String lineLength) {
-    this.lineLength = lineLength;
+  public void setAnfp(String anfp) {
+    this.anfp = anfp;
   }
 
   public MiscReference classificationCode(String classificationCode) {
@@ -63,10 +58,11 @@ public class MiscReference   {
     return this;
   }
 
-   /**
+  /**
    * Get classificationCode
    * @return classificationCode
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getClassificationCode() {
@@ -82,10 +78,11 @@ public class MiscReference   {
     return this;
   }
 
-   /**
-   * Detailed when an ADSL provide or cease is in progress.
+  /**
+   * Get customerAgreedDate
    * @return customerAgreedDate
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getCustomerAgreedDate() {
@@ -96,15 +93,36 @@ public class MiscReference   {
     this.customerAgreedDate = customerAgreedDate;
   }
 
+  public MiscReference lineLength(String lineLength) {
+    this.lineLength = lineLength;
+    return this;
+  }
+
+  /**
+   * Get lineLength
+   * @return lineLength
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getLineLength() {
+    return lineLength;
+  }
+
+  public void setLineLength(String lineLength) {
+    this.lineLength = lineLength;
+  }
+
   public MiscReference readyForServiceDate(String readyForServiceDate) {
     this.readyForServiceDate = readyForServiceDate;
     return this;
   }
 
-   /**
-   * If GEA-FTTC is planned, but not yet enabled this field holds the Ready For Service date.
+  /**
+   * Get readyForServiceDate
    * @return readyForServiceDate
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getReadyForServiceDate() {
@@ -115,23 +133,24 @@ public class MiscReference   {
     this.readyForServiceDate = readyForServiceDate;
   }
 
-  public MiscReference anfp(String anfp) {
-    this.anfp = anfp;
+  public MiscReference serviceProviderName(String serviceProviderName) {
+    this.serviceProviderName = serviceProviderName;
     return this;
   }
 
-   /**
-   * The Access Network Frequency Plan. The DP category which describes the length of the line from the cabinet, and thereby providing a view on the services that are allowed to run.
-   * @return anfp
+  /**
+   * Get serviceProviderName
+   * @return serviceProviderName
   **/
+  @ApiModelProperty(value = "")
 
 
-  public String getAnfp() {
-    return anfp;
+  public String getServiceProviderName() {
+    return serviceProviderName;
   }
 
-  public void setAnfp(String anfp) {
-    this.anfp = anfp;
+  public void setServiceProviderName(String serviceProviderName) {
+    this.serviceProviderName = serviceProviderName;
   }
 
 
@@ -144,17 +163,17 @@ public class MiscReference   {
       return false;
     }
     MiscReference miscReference = (MiscReference) o;
-    return Objects.equals(this.serviceProviderName, miscReference.serviceProviderName) &&
-        Objects.equals(this.lineLength, miscReference.lineLength) &&
+    return Objects.equals(this.anfp, miscReference.anfp) &&
         Objects.equals(this.classificationCode, miscReference.classificationCode) &&
         Objects.equals(this.customerAgreedDate, miscReference.customerAgreedDate) &&
+        Objects.equals(this.lineLength, miscReference.lineLength) &&
         Objects.equals(this.readyForServiceDate, miscReference.readyForServiceDate) &&
-        Objects.equals(this.anfp, miscReference.anfp);
+        Objects.equals(this.serviceProviderName, miscReference.serviceProviderName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(serviceProviderName, lineLength, classificationCode, customerAgreedDate, readyForServiceDate, anfp);
+    return Objects.hash(anfp, classificationCode, customerAgreedDate, lineLength, readyForServiceDate, serviceProviderName);
   }
 
   @Override
@@ -162,12 +181,12 @@ public class MiscReference   {
     StringBuilder sb = new StringBuilder();
     sb.append("class MiscReference {\n");
     
-    sb.append("    serviceProviderName: ").append(toIndentedString(serviceProviderName)).append("\n");
-    sb.append("    lineLength: ").append(toIndentedString(lineLength)).append("\n");
+    sb.append("    anfp: ").append(toIndentedString(anfp)).append("\n");
     sb.append("    classificationCode: ").append(toIndentedString(classificationCode)).append("\n");
     sb.append("    customerAgreedDate: ").append(toIndentedString(customerAgreedDate)).append("\n");
+    sb.append("    lineLength: ").append(toIndentedString(lineLength)).append("\n");
     sb.append("    readyForServiceDate: ").append(toIndentedString(readyForServiceDate)).append("\n");
-    sb.append("    anfp: ").append(toIndentedString(anfp)).append("\n");
+    sb.append("    serviceProviderName: ").append(toIndentedString(serviceProviderName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

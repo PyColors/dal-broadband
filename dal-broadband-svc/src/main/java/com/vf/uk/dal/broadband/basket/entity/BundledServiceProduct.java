@@ -1,84 +1,53 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * BundledServiceProduct
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-25T06:31:48.127Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class BundledServiceProduct   {
-  private String skuId = null;
-
-  private String name = null;
-
+  @JsonProperty("description")
   private String description = null;
 
-  private String productClass = null;
-
-  private ServicePrice priceDetail = null;
-
+  @JsonProperty("miscellaneous")
+  @Valid
   private List<Attribute> miscellaneous = null;
 
-  public List<Attribute> getMiscellaneous() {
-    return miscellaneous;
-  }
+  @JsonProperty("name")
+  private String name = null;
 
-  public void setMiscellaneous(List<Attribute> miscellaneous) {
-    this.miscellaneous = miscellaneous;
-  }
+  @JsonProperty("priceDetail")
+  private ServicePrice priceDetail = null;
 
-  public BundledServiceProduct skuId(String skuId) {
-    this.skuId = skuId;
-    return this;
-  }
+  @JsonProperty("productClass")
+  private String productClass = null;
 
-   /**
-   * Get skuId
-   * @return skuId
-  **/
-
-
-  public String getSkuId() {
-    return skuId;
-  }
-
-  public void setSkuId(String skuId) {
-    this.skuId = skuId;
-  }
-
-  public BundledServiceProduct name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Name of Bundled Service Product
-   * @return name
-  **/
-
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
+  @JsonProperty("skuId")
+  private String skuId = null;
 
   public BundledServiceProduct description(String description) {
     this.description = description;
     return this;
   }
 
-   /**
-   * Description of Bundled Service Product
+  /**
+   * Get description
    * @return description
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getDescription() {
@@ -89,15 +58,86 @@ public class BundledServiceProduct   {
     this.description = description;
   }
 
+  public BundledServiceProduct miscellaneous(List<Attribute> miscellaneous) {
+    this.miscellaneous = miscellaneous;
+    return this;
+  }
+
+  public BundledServiceProduct addMiscellaneousItem(Attribute miscellaneousItem) {
+    if (this.miscellaneous == null) {
+      this.miscellaneous = new ArrayList<Attribute>();
+    }
+    this.miscellaneous.add(miscellaneousItem);
+    return this;
+  }
+
+  /**
+   * Get miscellaneous
+   * @return miscellaneous
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<Attribute> getMiscellaneous() {
+    return miscellaneous;
+  }
+
+  public void setMiscellaneous(List<Attribute> miscellaneous) {
+    this.miscellaneous = miscellaneous;
+  }
+
+  public BundledServiceProduct name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Get name
+   * @return name
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public BundledServiceProduct priceDetail(ServicePrice priceDetail) {
+    this.priceDetail = priceDetail;
+    return this;
+  }
+
+  /**
+   * Get priceDetail
+   * @return priceDetail
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public ServicePrice getPriceDetail() {
+    return priceDetail;
+  }
+
+  public void setPriceDetail(ServicePrice priceDetail) {
+    this.priceDetail = priceDetail;
+  }
+
   public BundledServiceProduct productClass(String productClass) {
     this.productClass = productClass;
     return this;
   }
 
-   /**
-   * product Class of of bundled Service Products
+  /**
+   * Get productClass
    * @return productClass
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getProductClass() {
@@ -108,24 +148,24 @@ public class BundledServiceProduct   {
     this.productClass = productClass;
   }
 
-  public BundledServiceProduct priceDetail(ServicePrice priceDetail) {
-    this.priceDetail = priceDetail;
+  public BundledServiceProduct skuId(String skuId) {
+    this.skuId = skuId;
     return this;
   }
 
-   /**
-   * Get priceDetail
-   * @return priceDetail
+  /**
+   * Get skuId
+   * @return skuId
   **/
+  @ApiModelProperty(value = "")
 
-  @Valid
 
-  public ServicePrice getPriceDetail() {
-    return priceDetail;
+  public String getSkuId() {
+    return skuId;
   }
 
-  public void setPriceDetail(ServicePrice priceDetail) {
-    this.priceDetail = priceDetail;
+  public void setSkuId(String skuId) {
+    this.skuId = skuId;
   }
 
 
@@ -138,16 +178,17 @@ public class BundledServiceProduct   {
       return false;
     }
     BundledServiceProduct bundledServiceProduct = (BundledServiceProduct) o;
-    return Objects.equals(this.skuId, bundledServiceProduct.skuId) &&
+    return Objects.equals(this.description, bundledServiceProduct.description) &&
+        Objects.equals(this.miscellaneous, bundledServiceProduct.miscellaneous) &&
         Objects.equals(this.name, bundledServiceProduct.name) &&
-        Objects.equals(this.description, bundledServiceProduct.description) &&
+        Objects.equals(this.priceDetail, bundledServiceProduct.priceDetail) &&
         Objects.equals(this.productClass, bundledServiceProduct.productClass) &&
-        Objects.equals(this.priceDetail, bundledServiceProduct.priceDetail);
+        Objects.equals(this.skuId, bundledServiceProduct.skuId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(skuId, name, description, productClass, priceDetail);
+    return Objects.hash(description, miscellaneous, name, priceDetail, productClass, skuId);
   }
 
   @Override
@@ -155,11 +196,12 @@ public class BundledServiceProduct   {
     StringBuilder sb = new StringBuilder();
     sb.append("class BundledServiceProduct {\n");
     
-    sb.append("    skuId: ").append(toIndentedString(skuId)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    productClass: ").append(toIndentedString(productClass)).append("\n");
+    sb.append("    miscellaneous: ").append(toIndentedString(miscellaneous)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    priceDetail: ").append(toIndentedString(priceDetail)).append("\n");
+    sb.append("    productClass: ").append(toIndentedString(productClass)).append("\n");
+    sb.append("    skuId: ").append(toIndentedString(skuId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

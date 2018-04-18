@@ -1,22 +1,60 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
+import java.util.Objects;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * UpdateDevice
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class UpdateDevice   {
-  private String productLineId = null;
-
+  @JsonProperty("action")
   private String action = null;
 
+  @JsonProperty("productLineId")
+  private String productLineId = null;
+
+  @JsonProperty("skuId")
   private String skuId = null;
 
-  
+  public UpdateDevice action(String action) {
+    this.action = action;
+    return this;
+  }
 
-   /**
-package com.vf.uk.dal.broadband.basket;
+  /**
+   * Get action
+   * @return action
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getAction() {
+    return action;
+  }
+
+  public void setAction(String action) {
+    this.action = action;
+  }
+
+  public UpdateDevice productLineId(String productLineId) {
+    this.productLineId = productLineId;
+    return this;
+  }
+
+  /**
+   * Get productLineId
    * @return productLineId
   **/
+  @ApiModelProperty(value = "")
+
 
   public String getProductLineId() {
     return productLineId;
@@ -26,26 +64,18 @@ package com.vf.uk.dal.broadband.basket;
     this.productLineId = productLineId;
   }
 
- 
-
-   /**
-   * Expected list is ADD/REMOVE/MODIFY
-   * @return action
-  **/
-  public String getAction() {
-    return action;
+  public UpdateDevice skuId(String skuId) {
+    this.skuId = skuId;
+    return this;
   }
 
-  public void setAction(String action) {
-    this.action = action;
-  }
-
- 
-
-   /**
-   * Id of the device as given in the product catalogue
+  /**
+   * Get skuId
    * @return skuId
   **/
+  @ApiModelProperty(value = "")
+
+
   public String getSkuId() {
     return skuId;
   }
@@ -55,5 +85,46 @@ package com.vf.uk.dal.broadband.basket;
   }
 
 
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    UpdateDevice updateDevice = (UpdateDevice) o;
+    return Objects.equals(this.action, updateDevice.action) &&
+        Objects.equals(this.productLineId, updateDevice.productLineId) &&
+        Objects.equals(this.skuId, updateDevice.skuId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(action, productLineId, skuId);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class UpdateDevice {\n");
+    
+    sb.append("    action: ").append(toIndentedString(action)).append("\n");
+    sb.append("    productLineId: ").append(toIndentedString(productLineId)).append("\n");
+    sb.append("    skuId: ").append(toIndentedString(skuId)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
 

@@ -6,65 +6,45 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * CompatiblityResponse
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class CompatiblityResponse   {
+  @JsonProperty("packages")
+  @Valid
+  private List<CompatibilityPackage> packages = null;
+
+  @JsonProperty("valid")
   private Boolean valid = null;
 
-  private List<CompatibilityPackage> packages = null;
-/**
- * 
- * @param valid
- * @return
- */
-  public CompatiblityResponse valid(Boolean valid) {
-    this.valid = valid;
-    return this;
-  }
-
-   /**
-   * true indicates that there are no incompatibilities identified.
-   * @return valid
-  **/
-
-  public Boolean getValid() {
-    return valid;
-  }
-/**
- * 
- * @param valid
- */
-  public void setValid(Boolean valid) {
-    this.valid = valid;
-  }
-/**
- * 
- * @param packages
- * @return
- */
   public CompatiblityResponse packages(List<CompatibilityPackage> packages) {
     this.packages = packages;
     return this;
   }
-/**
- * 
- * @param packagesItem
- * @return
- */
+
   public CompatiblityResponse addPackagesItem(CompatibilityPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<>();
+      this.packages = new ArrayList<CompatibilityPackage>();
     }
     this.packages.add(packagesItem);
     return this;
   }
 
-   /**
+  /**
    * Get packages
    * @return packages
   **/
+  @ApiModelProperty(value = "")
+
   @Valid
 
   public List<CompatibilityPackage> getPackages() {
@@ -73,6 +53,26 @@ public class CompatiblityResponse   {
 
   public void setPackages(List<CompatibilityPackage> packages) {
     this.packages = packages;
+  }
+
+  public CompatiblityResponse valid(Boolean valid) {
+    this.valid = valid;
+    return this;
+  }
+
+  /**
+   * Get valid
+   * @return valid
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Boolean isValid() {
+    return valid;
+  }
+
+  public void setValid(Boolean valid) {
+    this.valid = valid;
   }
 
 
@@ -85,13 +85,13 @@ public class CompatiblityResponse   {
       return false;
     }
     CompatiblityResponse compatiblityResponse = (CompatiblityResponse) o;
-    return Objects.equals(this.valid, compatiblityResponse.valid) &&
-        Objects.equals(this.packages, compatiblityResponse.packages);
+    return Objects.equals(this.packages, compatiblityResponse.packages) &&
+        Objects.equals(this.valid, compatiblityResponse.valid);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(valid, packages);
+    return Objects.hash(packages, valid);
   }
 
   @Override
@@ -99,8 +99,8 @@ public class CompatiblityResponse   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CompatiblityResponse {\n");
     
-    sb.append("    valid: ").append(toIndentedString(valid)).append("\n");
     sb.append("    packages: ").append(toIndentedString(packages)).append("\n");
+    sb.append("    valid: ").append(toIndentedString(valid)).append("\n");
     sb.append("}");
     return sb.toString();
   }

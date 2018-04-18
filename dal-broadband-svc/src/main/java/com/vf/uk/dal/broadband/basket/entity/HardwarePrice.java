@@ -1,54 +1,65 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
+
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * HardwarePrice
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class HardwarePrice   {
-  private Price oneOffPrice = null;
-
-  private Price oneOffDiscountPrice = null;
-
+  @JsonProperty("merchandisingPromotions")
   private MerchandisingPromotion merchandisingPromotions = null;
 
- 
+  @JsonProperty("oneOffDiscountPrice")
+  private Price oneOffDiscountPrice = null;
 
-	/**
-	 * @param oneOffPrice
-	 * @return HardwarePrice
-	 **/
-  
- public HardwarePrice oneOffPrice(Price oneOffPrice) {
-    this.oneOffPrice = oneOffPrice;
+  @JsonProperty("oneOffPrice")
+  private Price oneOffPrice = null;
+
+  public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+    this.merchandisingPromotions = merchandisingPromotions;
     return this;
   }
 
-   /**
-   * Get oneOffPrice
-   * @return oneOffPrice
+  /**
+   * Get merchandisingPromotions
+   * @return merchandisingPromotions
   **/
-  public Price getOneOffPrice() {
-    return oneOffPrice;
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public MerchandisingPromotion getMerchandisingPromotions() {
+    return merchandisingPromotions;
   }
 
-  public void setOneOffPrice(Price oneOffPrice) {
-    this.oneOffPrice = oneOffPrice;
+  public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+    this.merchandisingPromotions = merchandisingPromotions;
   }
-/**
- * 
- * @param oneOffDiscountPrice
- * @return
- */
+
   public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
     return this;
   }
 
-   /**
+  /**
    * Get oneOffDiscountPrice
    * @return oneOffDiscountPrice
   **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
   public Price getOneOffDiscountPrice() {
     return oneOffDiscountPrice;
   }
@@ -57,30 +68,26 @@ public class HardwarePrice   {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
   }
 
- /**
-  * 
-  * @param merchandisingPromotions
-  * @return
-  */
-  public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
-	    this.merchandisingPromotions = merchandisingPromotions;
-	    return this;
-	  }
+  public HardwarePrice oneOffPrice(Price oneOffPrice) {
+    this.oneOffPrice = oneOffPrice;
+    return this;
+  }
 
-	   /**
-	   * Get merchandisingPromotions
-	   * @return merchandisingPromotions
-	  **/
+  /**
+   * Get oneOffPrice
+   * @return oneOffPrice
+  **/
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-	  public MerchandisingPromotion getMerchandisingPromotions() {
-	    return merchandisingPromotions;
-	  }
+  public Price getOneOffPrice() {
+    return oneOffPrice;
+  }
 
-	  public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
-	    this.merchandisingPromotions = merchandisingPromotions;
-	  }
-   
+  public void setOneOffPrice(Price oneOffPrice) {
+    this.oneOffPrice = oneOffPrice;
+  }
 
 
   @Override
@@ -92,15 +99,14 @@ public class HardwarePrice   {
       return false;
     }
     HardwarePrice hardwarePrice = (HardwarePrice) o;
-    return 
-        Objects.equals(this.oneOffPrice, hardwarePrice.oneOffPrice) &&
+    return Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions) &&
         Objects.equals(this.oneOffDiscountPrice, hardwarePrice.oneOffDiscountPrice) &&
-        Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions);
+        Objects.equals(this.oneOffPrice, hardwarePrice.oneOffPrice);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(oneOffPrice, oneOffDiscountPrice, merchandisingPromotions);
+    return Objects.hash(merchandisingPromotions, oneOffDiscountPrice, oneOffPrice);
   }
 
   @Override
@@ -108,10 +114,9 @@ public class HardwarePrice   {
     StringBuilder sb = new StringBuilder();
     sb.append("class HardwarePrice {\n");
     
-  
-    sb.append("    oneOffPrice: ").append(toIndentedString(oneOffPrice)).append("\n");
-    sb.append("    oneOffDiscountPrice: ").append(toIndentedString(oneOffDiscountPrice)).append("\n");
     sb.append("    merchandisingPromotions: ").append(toIndentedString(merchandisingPromotions)).append("\n");
+    sb.append("    oneOffDiscountPrice: ").append(toIndentedString(oneOffDiscountPrice)).append("\n");
+    sb.append("    oneOffPrice: ").append(toIndentedString(oneOffPrice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

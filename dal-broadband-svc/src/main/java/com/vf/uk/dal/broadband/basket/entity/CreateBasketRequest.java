@@ -4,249 +4,267 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * CreateBasketRequest
  */
-public class CreateBasketRequest {
-	private String affiliateId = null;
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-	private boolean affiliateFlag;
+public class CreateBasketRequest   {
+  @JsonProperty("affiliateFlag")
+  private Boolean affiliateFlag = null;
 
-	private String source = null;
+  @JsonProperty("affiliateId")
+  private String affiliateId = null;
 
-	private Journey journey = null;
+  @JsonProperty("customerRequestedDate")
+  private String customerRequestedDate = null;
 
-	private String customerRequestedDate = null;
+  @JsonProperty("journey")
+  private Journey journey = null;
 
-	private String returnURL = null;
+  @JsonProperty("packages")
+  @Valid
+  private List<AddPackage> packages = null;
 
-	private List<AddPackage> packages = null;
+  @JsonProperty("returnURL")
+  private String returnURL = null;
 
-	private String ttl = null;
+  @JsonProperty("source")
+  private String source = null;
 
-	public String getTtl() {
-		return ttl;
-	}
+  @JsonProperty("ttl")
+  private String ttl = null;
 
-	public void setTtl(String ttl) {
-		this.ttl = ttl;
-	}
+  public CreateBasketRequest affiliateFlag(Boolean affiliateFlag) {
+    this.affiliateFlag = affiliateFlag;
+    return this;
+  }
 
-	/**
-	 * 
-	 * @param affiliateId
-	 * @return
-	 */
-	public CreateBasketRequest affiliateId(String affiliateId) {
-		this.affiliateId = affiliateId;
-		return this;
-	}
+  /**
+   * Get affiliateFlag
+   * @return affiliateFlag
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * Id of affiliate from which the basket creation was invoked
-	 * 
-	 * @return affiliateId
-	 **/
-	public String getAffiliateId() {
-		return affiliateId;
-	}
 
-	public void setAffiliateId(String affiliateId) {
-		this.affiliateId = affiliateId;
-	}
+  public Boolean isAffiliateFlag() {
+    return affiliateFlag;
+  }
 
-	/**
-	 * 
-	 * @param source
-	 * @return
-	 */
-	public CreateBasketRequest source(String source) {
-		this.source = source;
-		return this;
-	}
+  public void setAffiliateFlag(Boolean affiliateFlag) {
+    this.affiliateFlag = affiliateFlag;
+  }
 
-	/**
-	 * Source system identifier (OnlineShop, MobileShop etc)
-	 * 
-	 * @return source
-	 **/
-	public String getSource() {
-		return source;
-	}
+  public CreateBasketRequest affiliateId(String affiliateId) {
+    this.affiliateId = affiliateId;
+    return this;
+  }
 
-	public void setSource(String source) {
-		this.source = source;
-	}
+  /**
+   * Get affiliateId
+   * @return affiliateId
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * 
-	 * @param journey
-	 * @return
-	 */
-	public CreateBasketRequest journey(Journey journey) {
-		this.journey = journey;
-		return this;
-	}
 
-	/**
-	 * Get journey
-	 * 
-	 * @return journey
-	 **/
-	public Journey getJourney() {
-		return journey;
-	}
+  public String getAffiliateId() {
+    return affiliateId;
+  }
 
-	public void setJourney(Journey journey) {
-		this.journey = journey;
-	}
+  public void setAffiliateId(String affiliateId) {
+    this.affiliateId = affiliateId;
+  }
 
-	/**
-	 * 
-	 * @param customerRequestedDate
-	 * @return
-	 */
-	public CreateBasketRequest customerRequestedDate(String customerRequestedDate) {
-		this.customerRequestedDate = customerRequestedDate;
-		return this;
-	}
+  public CreateBasketRequest customerRequestedDate(String customerRequestedDate) {
+    this.customerRequestedDate = customerRequestedDate;
+    return this;
+  }
 
-	/**
-	 * Service request date specified by the customer
-	 * 
-	 * @return customerRequestedDate
-	 **/
-	public String getCustomerRequestedDate() {
-		return customerRequestedDate;
-	}
+  /**
+   * Get customerRequestedDate
+   * @return customerRequestedDate
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * 
-	 * @param customerRequestedDate
-	 */
-	public void setCustomerRequestedDate(String customerRequestedDate) {
-		this.customerRequestedDate = customerRequestedDate;
-	}
 
-	/**
-	 * 
-	 * @param returnURL
-	 * @return
-	 */
-	public CreateBasketRequest returnURL(String returnURL) {
-		this.returnURL = returnURL;
-		return this;
-	}
+  public String getCustomerRequestedDate() {
+    return customerRequestedDate;
+  }
 
-	/**
-	 * WCS URL to be used by checkout to redirect back
-	 * 
-	 * @return returnURL
-	 **/
-	public String getReturnURL() {
-		return returnURL;
-	}
+  public void setCustomerRequestedDate(String customerRequestedDate) {
+    this.customerRequestedDate = customerRequestedDate;
+  }
 
-	public void setReturnURL(String returnURL) {
-		this.returnURL = returnURL;
-	}
+  public CreateBasketRequest journey(Journey journey) {
+    this.journey = journey;
+    return this;
+  }
 
-	/**
-	 * 
-	 * @param packages
-	 * @return
-	 */
-	public CreateBasketRequest packages(List<AddPackage> packages) {
-		this.packages = packages;
-		return this;
-	}
+  /**
+   * Get journey
+   * @return journey
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * 
-	 * @param packagesItem
-	 * @return
-	 */
-	public CreateBasketRequest addPackagesItem(AddPackage packagesItem) {
-		if (this.packages == null) {
-			this.packages = new ArrayList<>();
-		}
-		this.packages.add(packagesItem);
-		return this;
-	}
+  @Valid
 
-	/**
-	 * Get packages
-	 * 
-	 * @return packages
-	 **/
-	public List<AddPackage> getPackages() {
-		return packages;
-	}
+  public Journey getJourney() {
+    return journey;
+  }
 
-	public void setPackages(List<AddPackage> packages) {
-		this.packages = packages;
-	}
+  public void setJourney(Journey journey) {
+    this.journey = journey;
+  }
 
-	public CreateBasketRequest affiliateFlag(boolean affiliateFlag) {
-		this.affiliateFlag = affiliateFlag;
-		return this;
-	}
+  public CreateBasketRequest packages(List<AddPackage> packages) {
+    this.packages = packages;
+    return this;
+  }
 
-	public boolean isAffiliateFlag() {
-		return affiliateFlag;
-	}
+  public CreateBasketRequest addPackagesItem(AddPackage packagesItem) {
+    if (this.packages == null) {
+      this.packages = new ArrayList<AddPackage>();
+    }
+    this.packages.add(packagesItem);
+    return this;
+  }
 
-	public void setAffiliateFlag(boolean affiliateFlag) {
-		this.affiliateFlag = affiliateFlag;
-	}
+  /**
+   * Get packages
+   * @return packages
+  **/
+  @ApiModelProperty(value = "")
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		CreateBasketRequest createBasketRequest = (CreateBasketRequest) o;
-		return Objects.equals(this.affiliateId, createBasketRequest.affiliateId)
-				&& Objects.equals(this.affiliateFlag, createBasketRequest.affiliateFlag)
-				&& Objects.equals(this.source, createBasketRequest.source)
-				&& Objects.equals(this.journey, createBasketRequest.journey)
-				&& Objects.equals(this.customerRequestedDate, createBasketRequest.customerRequestedDate)
-				&& Objects.equals(this.returnURL, createBasketRequest.returnURL)
-				&& Objects.equals(this.packages, createBasketRequest.packages);
-	}
+  @Valid
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(affiliateId, affiliateFlag, source, journey, customerRequestedDate, returnURL, packages);
-	}
+  public List<AddPackage> getPackages() {
+    return packages;
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class CreateBasketRequest {\n");
+  public void setPackages(List<AddPackage> packages) {
+    this.packages = packages;
+  }
 
-		sb.append("    affiliateId: ").append(toIndentedString(affiliateId)).append("\n");
-		sb.append("    source: ").append(toIndentedString(source)).append("\n");
-		sb.append("    journey: ").append(toIndentedString(journey)).append("\n");
-		sb.append("    customerRequestedDate: ").append(toIndentedString(customerRequestedDate)).append("\n");
-		sb.append("    returnURL: ").append(toIndentedString(returnURL)).append("\n");
-		sb.append("    packages: ").append(toIndentedString(packages)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
+  public CreateBasketRequest returnURL(String returnURL) {
+    this.returnURL = returnURL;
+    return this;
+  }
 
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
+  /**
+   * Get returnURL
+   * @return returnURL
+  **/
+  @ApiModelProperty(value = "")
 
+
+  public String getReturnURL() {
+    return returnURL;
+  }
+
+  public void setReturnURL(String returnURL) {
+    this.returnURL = returnURL;
+  }
+
+  public CreateBasketRequest source(String source) {
+    this.source = source;
+    return this;
+  }
+
+  /**
+   * Get source
+   * @return source
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getSource() {
+    return source;
+  }
+
+  public void setSource(String source) {
+    this.source = source;
+  }
+
+  public CreateBasketRequest ttl(String ttl) {
+    this.ttl = ttl;
+    return this;
+  }
+
+  /**
+   * Get ttl
+   * @return ttl
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getTtl() {
+    return ttl;
+  }
+
+  public void setTtl(String ttl) {
+    this.ttl = ttl;
+  }
+
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CreateBasketRequest createBasketRequest = (CreateBasketRequest) o;
+    return Objects.equals(this.affiliateFlag, createBasketRequest.affiliateFlag) &&
+        Objects.equals(this.affiliateId, createBasketRequest.affiliateId) &&
+        Objects.equals(this.customerRequestedDate, createBasketRequest.customerRequestedDate) &&
+        Objects.equals(this.journey, createBasketRequest.journey) &&
+        Objects.equals(this.packages, createBasketRequest.packages) &&
+        Objects.equals(this.returnURL, createBasketRequest.returnURL) &&
+        Objects.equals(this.source, createBasketRequest.source) &&
+        Objects.equals(this.ttl, createBasketRequest.ttl);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(affiliateFlag, affiliateId, customerRequestedDate, journey, packages, returnURL, source, ttl);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class CreateBasketRequest {\n");
+    
+    sb.append("    affiliateFlag: ").append(toIndentedString(affiliateFlag)).append("\n");
+    sb.append("    affiliateId: ").append(toIndentedString(affiliateId)).append("\n");
+    sb.append("    customerRequestedDate: ").append(toIndentedString(customerRequestedDate)).append("\n");
+    sb.append("    journey: ").append(toIndentedString(journey)).append("\n");
+    sb.append("    packages: ").append(toIndentedString(packages)).append("\n");
+    sb.append("    returnURL: ").append(toIndentedString(returnURL)).append("\n");
+    sb.append("    source: ").append(toIndentedString(source)).append("\n");
+    sb.append("    ttl: ").append(toIndentedString(ttl)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

@@ -1,8 +1,13 @@
 package com.vf.uk.dal.broadband.dao;
 
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
 /**
@@ -97,6 +102,16 @@ public interface BroadbandDao {
 	void setBroadBandInCache(Broadband broadBand);
 
 	Broadband getBroadbandFromCache(String broadBandSessionId);
+
+	CurrentJourney getJourney(String journeyId);
+
+	Basket createBasket(CreateBasketRequest createBasketRequest);
+
+	void updatePackage(UpdatePackage updatePackageRequest, String packageId, String basketId);
+
+	Basket getBasket(String basketId);
+
+	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
 
 
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
