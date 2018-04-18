@@ -24,6 +24,10 @@ public class ExceptionMessages {
 	/*public static final String START_DATE_EMPTY = "Start date is empty";
 	public static final String TIME_SLOT_EMPTY = "Time Slot is empty";
 	public static final String BASKET_ID_EMPTY = "Basket Id is empty";*/
+	public static final String GEN_PACKAGE_EXCEPTION = "General Exception issue while calling update package";
+	public static final String GEN_BASKET_EXCEPTION = "General Exception while calling get basket";
+	public static final String GEN_UPT_SP_EXCEPTION = "General Exception while calling update premise and service point in Basket";
+	public static final String GEN_EXP_PRODUCT = "General Exception occured while invoking product API for Engineering Visit Product";
 
 	private ExceptionMessages() {
 

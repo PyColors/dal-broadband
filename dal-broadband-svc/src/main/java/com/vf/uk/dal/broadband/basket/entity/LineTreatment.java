@@ -2,71 +2,44 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * LineTreatment
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-25T06:31:48.127Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class LineTreatment   {
-  private String identification = null;
-
-  private String earliestAvailableDate = null;
-
+  @JsonProperty("appointmentNeeded")
   private Boolean appointmentNeeded = null;
 
+  @JsonProperty("connectionCharge")
   private String connectionCharge = null;
 
-  public LineTreatment identification(String identification) {
-    this.identification = identification;
-    return this;
-  }
+  @JsonProperty("earliestAvailableDate")
+  private String earliestAvailableDate = null;
 
-   /**
-   * The Identification number for the treatment 1 -> Existing Line Treatment 2 -> New (additional) Line Treatment
-   * @return identification
-  **/
-
-
-  public String getIdentification() {
-    return identification;
-  }
-
-  public void setIdentification(String identification) {
-    this.identification = identification;
-  }
-
-  public LineTreatment earliestAvailableDate(String earliestAvailableDate) {
-    this.earliestAvailableDate = earliestAvailableDate;
-    return this;
-  }
-
-   /**
-   * The earliest date by which the services offered can be made available to the prospective customer
-   * @return earliestAvailableDate
-  **/
-
-
-  public String getEarliestAvailableDate() {
-    return earliestAvailableDate;
-  }
-
-  public void setEarliestAvailableDate(String earliestAvailableDate) {
-    this.earliestAvailableDate = earliestAvailableDate;
-  }
+  @JsonProperty("identification")
+  private String identification = null;
 
   public LineTreatment appointmentNeeded(Boolean appointmentNeeded) {
     this.appointmentNeeded = appointmentNeeded;
     return this;
   }
 
-   /**
-   * Flag specifying if an appointment is needed or not
+  /**
+   * Get appointmentNeeded
    * @return appointmentNeeded
   **/
+  @ApiModelProperty(value = "")
 
 
-  public Boolean getAppointmentNeeded() {
+  public Boolean isAppointmentNeeded() {
     return appointmentNeeded;
   }
 
@@ -79,10 +52,11 @@ public class LineTreatment   {
     return this;
   }
 
-   /**
-   * The connection charge flag
+  /**
+   * Get connectionCharge
    * @return connectionCharge
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getConnectionCharge() {
@@ -91,6 +65,46 @@ public class LineTreatment   {
 
   public void setConnectionCharge(String connectionCharge) {
     this.connectionCharge = connectionCharge;
+  }
+
+  public LineTreatment earliestAvailableDate(String earliestAvailableDate) {
+    this.earliestAvailableDate = earliestAvailableDate;
+    return this;
+  }
+
+  /**
+   * Get earliestAvailableDate
+   * @return earliestAvailableDate
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getEarliestAvailableDate() {
+    return earliestAvailableDate;
+  }
+
+  public void setEarliestAvailableDate(String earliestAvailableDate) {
+    this.earliestAvailableDate = earliestAvailableDate;
+  }
+
+  public LineTreatment identification(String identification) {
+    this.identification = identification;
+    return this;
+  }
+
+  /**
+   * Get identification
+   * @return identification
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getIdentification() {
+    return identification;
+  }
+
+  public void setIdentification(String identification) {
+    this.identification = identification;
   }
 
 
@@ -103,15 +117,15 @@ public class LineTreatment   {
       return false;
     }
     LineTreatment lineTreatment = (LineTreatment) o;
-    return Objects.equals(this.identification, lineTreatment.identification) &&
+    return Objects.equals(this.appointmentNeeded, lineTreatment.appointmentNeeded) &&
+        Objects.equals(this.connectionCharge, lineTreatment.connectionCharge) &&
         Objects.equals(this.earliestAvailableDate, lineTreatment.earliestAvailableDate) &&
-        Objects.equals(this.appointmentNeeded, lineTreatment.appointmentNeeded) &&
-        Objects.equals(this.connectionCharge, lineTreatment.connectionCharge);
+        Objects.equals(this.identification, lineTreatment.identification);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(identification, earliestAvailableDate, appointmentNeeded, connectionCharge);
+    return Objects.hash(appointmentNeeded, connectionCharge, earliestAvailableDate, identification);
   }
 
   @Override
@@ -119,10 +133,10 @@ public class LineTreatment   {
     StringBuilder sb = new StringBuilder();
     sb.append("class LineTreatment {\n");
     
-    sb.append("    identification: ").append(toIndentedString(identification)).append("\n");
-    sb.append("    earliestAvailableDate: ").append(toIndentedString(earliestAvailableDate)).append("\n");
     sb.append("    appointmentNeeded: ").append(toIndentedString(appointmentNeeded)).append("\n");
     sb.append("    connectionCharge: ").append(toIndentedString(connectionCharge)).append("\n");
+    sb.append("    earliestAvailableDate: ").append(toIndentedString(earliestAvailableDate)).append("\n");
+    sb.append("    identification: ").append(toIndentedString(identification)).append("\n");
     sb.append("}");
     return sb.toString();
   }

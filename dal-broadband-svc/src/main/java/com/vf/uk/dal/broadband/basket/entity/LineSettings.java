@@ -2,47 +2,38 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * LineSettings
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-25T06:31:48.127Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class LineSettings   {
-  private String serviceCode = null;
-
+  @JsonProperty("installationCode")
   private String installationCode = null;
 
+  @JsonProperty("serviceCode")
+  private String serviceCode = null;
+
+  @JsonProperty("terminationCode")
   private String terminationCode = null;
-
-  public LineSettings serviceCode(String serviceCode) {
-    this.serviceCode = serviceCode;
-    return this;
-  }
-
-   /**
-   * The type of service this is. LOV - PSTN_SINGLE_LINE, PSTN_MULTI_LINE_AUX
-   * @return serviceCode
-  **/
-
-
-  public String getServiceCode() {
-    return serviceCode;
-  }
-
-  public void setServiceCode(String serviceCode) {
-    this.serviceCode = serviceCode;
-  }
 
   public LineSettings installationCode(String installationCode) {
     this.installationCode = installationCode;
     return this;
   }
 
-   /**
-   * The type of installation. LOV - STANDARD, NSP, SITE, COMPLEX, COMPLEX_HOTSITE, COMPLEX_SHIP, COMPLEX_SITE, STANDARD_NEWHOUSE
+  /**
+   * Get installationCode
    * @return installationCode
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getInstallationCode() {
@@ -53,15 +44,36 @@ public class LineSettings   {
     this.installationCode = installationCode;
   }
 
+  public LineSettings serviceCode(String serviceCode) {
+    this.serviceCode = serviceCode;
+    return this;
+  }
+
+  /**
+   * Get serviceCode
+   * @return serviceCode
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getServiceCode() {
+    return serviceCode;
+  }
+
+  public void setServiceCode(String serviceCode) {
+    this.serviceCode = serviceCode;
+  }
+
   public LineSettings terminationCode(String terminationCode) {
     this.terminationCode = terminationCode;
     return this;
   }
 
-   /**
-   * The type of termination technology the line terminates in LOV - NTTP, LINE_BOX, NTE, SECURE_NTE, TYPE_NINE
+  /**
+   * Get terminationCode
    * @return terminationCode
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getTerminationCode() {
@@ -82,14 +94,14 @@ public class LineSettings   {
       return false;
     }
     LineSettings lineSettings = (LineSettings) o;
-    return Objects.equals(this.serviceCode, lineSettings.serviceCode) &&
-        Objects.equals(this.installationCode, lineSettings.installationCode) &&
+    return Objects.equals(this.installationCode, lineSettings.installationCode) &&
+        Objects.equals(this.serviceCode, lineSettings.serviceCode) &&
         Objects.equals(this.terminationCode, lineSettings.terminationCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(serviceCode, installationCode, terminationCode);
+    return Objects.hash(installationCode, serviceCode, terminationCode);
   }
 
   @Override
@@ -97,8 +109,8 @@ public class LineSettings   {
     StringBuilder sb = new StringBuilder();
     sb.append("class LineSettings {\n");
     
-    sb.append("    serviceCode: ").append(toIndentedString(serviceCode)).append("\n");
     sb.append("    installationCode: ").append(toIndentedString(installationCode)).append("\n");
+    sb.append("    serviceCode: ").append(toIndentedString(serviceCode)).append("\n");
     sb.append("    terminationCode: ").append(toIndentedString(terminationCode)).append("\n");
     sb.append("}");
     return sb.toString();

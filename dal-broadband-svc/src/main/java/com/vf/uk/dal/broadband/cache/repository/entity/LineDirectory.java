@@ -20,7 +20,7 @@ public class LineDirectory implements Serializable{
 	private static final String DIRECTORYCODE = "directoryCode";
 	
 	/** The Constant LOCALTIONCODE. */
-	private static final String LOCALTIONCODE = "localtionCode";
+	private static final String LOCATIONCODE = "locationCode";
 
 	/** The feature code. */
 	@JsonProperty(FEATURECODE)
@@ -31,8 +31,8 @@ public class LineDirectory implements Serializable{
 	private String directoryCode;
 	
 	/** The localtion code. */
-	@JsonProperty(LOCALTIONCODE)
-	private String localtionCode;
+	@JsonProperty(LOCATIONCODE)
+	private String locationCode;
 	
 	/**
 	 * Gets the feature code.
@@ -75,8 +75,8 @@ public class LineDirectory implements Serializable{
 	 *
 	 * @return the localtion code
 	 */
-	public String getLocaltionCode() {
-		return localtionCode;
+	public String getLocationCode() {
+		return locationCode;
 	}
 	
 	/**
@@ -84,8 +84,8 @@ public class LineDirectory implements Serializable{
 	 *
 	 * @param localtionCode the new localtion code
 	 */
-	public void setLocaltionCode(String localtionCode) {
-		this.localtionCode = localtionCode;
+	public void setLocationCode(String locationCode) {
+		this.locationCode = locationCode;
 	}
 	
 	/* (non-Javadoc)
@@ -97,7 +97,7 @@ public class LineDirectory implements Serializable{
 		int result = 1;
 		result = prime * result + ((directoryCode == null) ? 0 : directoryCode.hashCode());
 		result = prime * result + ((featureCode == null) ? 0 : featureCode.hashCode());
-		result = prime * result + ((localtionCode == null) ? 0 : localtionCode.hashCode());
+		result = prime * result + ((locationCode == null) ? 0 : locationCode.hashCode());
 		return result;
 	}
 	
@@ -123,10 +123,10 @@ public class LineDirectory implements Serializable{
 				return false;
 		} else if (!featureCode.equals(other.featureCode))
 			return false;
-		if (localtionCode == null) {
-			if (other.localtionCode != null)
+		if (locationCode == null) {
+			if (other.locationCode != null)
 				return false;
-		} else if (!localtionCode.equals(other.localtionCode))
+		} else if (!locationCode.equals(other.locationCode))
 			return false;
 		return true;
 	}
@@ -137,7 +137,7 @@ public class LineDirectory implements Serializable{
 	@Override
 	public String toString() {
 		return "LineDirectory [featureCode=" + featureCode + ", directoryCode=" + directoryCode + ", localtionCode="
-				+ localtionCode + "]";
+				+ locationCode + "]";
 	}
 	
 }

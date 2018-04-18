@@ -4,42 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
- * Populated only when excludes rules are not met.
+ * ExcludesIncompatibility
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-10-16T16:44:04.709Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class ExcludesIncompatibility   {
   @JsonProperty("productIds")
+  @Valid
   private List<String> productIds = null;
-/**
- * 
- * @param productIds
- * @return
- */
+
   public ExcludesIncompatibility productIds(List<String> productIds) {
     this.productIds = productIds;
     return this;
   }
-/**
- * 
- * @param productIdsItem
- * @return
- */
+
   public ExcludesIncompatibility addProductIdsItem(String productIdsItem) {
     if (this.productIds == null) {
-      this.productIds = new ArrayList<>();
+      this.productIds = new ArrayList<String>();
     }
     this.productIds.add(productIdsItem);
     return this;
   }
 
-   /**
-   * List of productIds which need to be exluded against this product.
+  /**
+   * Get productIds
    * @return productIds
   **/
+  @ApiModelProperty(value = "")
 
 
   public List<String> getProductIds() {

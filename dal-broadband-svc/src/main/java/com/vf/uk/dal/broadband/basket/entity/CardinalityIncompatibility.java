@@ -4,66 +4,69 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Populated only when cardinality rules are not met.
+ * CardinalityIncompatibility
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class CardinalityIncompatibility   {
-  private String relationCardinality = null;
+  @JsonProperty("groupCardinality")
+  private String groupCardinality = null;
 
+  @JsonProperty("productIds")
+  @Valid
   private List<String> productIds = null;
 
-  private String groupCardinality = null;
-/**
- * 
- * @param relationCardinality
- * @return
- */
-  public CardinalityIncompatibility relationCardinality(String relationCardinality) {
-    this.relationCardinality = relationCardinality;
+  @JsonProperty("relationCardinality")
+  private String relationCardinality = null;
+
+  public CardinalityIncompatibility groupCardinality(String groupCardinality) {
+    this.groupCardinality = groupCardinality;
     return this;
   }
 
-   /**
-   * populated if relationShip cardinality has failed.
-   * @return relationCardinality
+  /**
+   * Get groupCardinality
+   * @return groupCardinality
   **/
+  @ApiModelProperty(value = "")
 
 
-  public String getRelationCardinality() {
-    return relationCardinality;
+  public String getGroupCardinality() {
+    return groupCardinality;
   }
 
-  public void setRelationCardinality(String relationCardinality) {
-    this.relationCardinality = relationCardinality;
+  public void setGroupCardinality(String groupCardinality) {
+    this.groupCardinality = groupCardinality;
   }
-/**
- * 
- * @param productIds
- * @return
- */
+
   public CardinalityIncompatibility productIds(List<String> productIds) {
     this.productIds = productIds;
     return this;
   }
-/**
- * 
- * @param productIdsItem
- * @return
- */
+
   public CardinalityIncompatibility addProductIdsItem(String productIdsItem) {
     if (this.productIds == null) {
-      this.productIds = new ArrayList<>();
+      this.productIds = new ArrayList<String>();
     }
     this.productIds.add(productIdsItem);
     return this;
   }
 
-   /**
-   * List of productIds when group cardinality is broken for a service product. Populated along with Group Cardinality.
+  /**
+   * Get productIds
    * @return productIds
   **/
+  @ApiModelProperty(value = "")
 
 
   public List<String> getProductIds() {
@@ -73,28 +76,25 @@ public class CardinalityIncompatibility   {
   public void setProductIds(List<String> productIds) {
     this.productIds = productIds;
   }
-/**
- * 
- * @param groupCardinality
- * @return
- */
-  public CardinalityIncompatibility groupCardinality(String groupCardinality) {
-    this.groupCardinality = groupCardinality;
+
+  public CardinalityIncompatibility relationCardinality(String relationCardinality) {
+    this.relationCardinality = relationCardinality;
     return this;
   }
 
-   /**
-   * group cardinality when a parent relation cardinality is broken.populated aling with product Ids.
-   * @return groupCardinality
+  /**
+   * Get relationCardinality
+   * @return relationCardinality
   **/
+  @ApiModelProperty(value = "")
 
 
-  public String getGroupCardinality() {
-    return groupCardinality;
+  public String getRelationCardinality() {
+    return relationCardinality;
   }
 
-  public void setGroupCardinality(String groupCardinality) {
-    this.groupCardinality = groupCardinality;
+  public void setRelationCardinality(String relationCardinality) {
+    this.relationCardinality = relationCardinality;
   }
 
 
@@ -107,14 +107,14 @@ public class CardinalityIncompatibility   {
       return false;
     }
     CardinalityIncompatibility cardinalityIncompatibility = (CardinalityIncompatibility) o;
-    return Objects.equals(this.relationCardinality, cardinalityIncompatibility.relationCardinality) &&
+    return Objects.equals(this.groupCardinality, cardinalityIncompatibility.groupCardinality) &&
         Objects.equals(this.productIds, cardinalityIncompatibility.productIds) &&
-        Objects.equals(this.groupCardinality, cardinalityIncompatibility.groupCardinality);
+        Objects.equals(this.relationCardinality, cardinalityIncompatibility.relationCardinality);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(relationCardinality, productIds, groupCardinality);
+    return Objects.hash(groupCardinality, productIds, relationCardinality);
   }
 
   @Override
@@ -122,9 +122,9 @@ public class CardinalityIncompatibility   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CardinalityIncompatibility {\n");
     
-    sb.append("    relationCardinality: ").append(toIndentedString(relationCardinality)).append("\n");
-    sb.append("    productIds: ").append(toIndentedString(productIds)).append("\n");
     sb.append("    groupCardinality: ").append(toIndentedString(groupCardinality)).append("\n");
+    sb.append("    productIds: ").append(toIndentedString(productIds)).append("\n");
+    sb.append("    relationCardinality: ").append(toIndentedString(relationCardinality)).append("\n");
     sb.append("}");
     return sb.toString();
   }

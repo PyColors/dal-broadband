@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ServiceReference
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class ServiceReference   {
+  @JsonProperty("serviceLines")
+  @Valid
   private List<ServiceLines> serviceLines = null;
 
   public ServiceReference serviceLines(List<ServiceLines> serviceLines) {
@@ -26,11 +36,13 @@ public class ServiceReference   {
     return this;
   }
 
-   /**
+  /**
    * Get serviceLines
    * @return serviceLines
   **/
+  @ApiModelProperty(value = "")
 
+  @Valid
 
   public List<ServiceLines> getServiceLines() {
     return serviceLines;

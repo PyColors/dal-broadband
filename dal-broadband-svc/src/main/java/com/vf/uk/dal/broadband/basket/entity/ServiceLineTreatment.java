@@ -4,116 +4,91 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ServiceLineTreatment
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-25T06:31:48.127Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class ServiceLineTreatment   {
-  private String parentIdentification = null;
-
-  private String serviceType = null;
-
-  private String serviceAction = null;
-
-  private String simValue = null;
-
-  private String lineInfo = null;
-
-  private boolean canNumberBeRetained;
-
-  public boolean isCanNumberBeRetained() {
-	return canNumberBeRetained;
-}
-
-public void setCanNumberBeRetained(boolean canNumberBeRetained) {
-	this.canNumberBeRetained = canNumberBeRetained;
-}
-
-private String portInFlag = null;
-
-  private String vicCode = null;
-
-  private List<PendingOrder> pendingOrders = null;
-
+  @JsonProperty("accessLine")
   private AccessLine accessLine = null;
 
-  public ServiceLineTreatment parentIdentification(String parentIdentification) {
-    this.parentIdentification = parentIdentification;
+  @JsonProperty("canNumberBeRetained")
+  private Boolean canNumberBeRetained = null;
+
+  @JsonProperty("lineInfo")
+  private String lineInfo = null;
+
+  @JsonProperty("parentIdentification")
+  private String parentIdentification = null;
+
+  @JsonProperty("pendingOrders")
+  @Valid
+  private List<PendingOrder> pendingOrders = null;
+
+  @JsonProperty("portInFlag")
+  private String portInFlag = null;
+
+  @JsonProperty("serviceAction")
+  private String serviceAction = null;
+
+  @JsonProperty("serviceType")
+  private String serviceType = null;
+
+  @JsonProperty("simValue")
+  private String simValue = null;
+
+  @JsonProperty("vicCode")
+  private String vicCode = null;
+
+  public ServiceLineTreatment accessLine(AccessLine accessLine) {
+    this.accessLine = accessLine;
     return this;
   }
 
-   /**
-   * Get parentIdentification
-   * @return parentIdentification
+  /**
+   * Get accessLine
+   * @return accessLine
   **/
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getParentIdentification() {
-    return parentIdentification;
+  public AccessLine getAccessLine() {
+    return accessLine;
   }
 
-  public void setParentIdentification(String parentIdentification) {
-    this.parentIdentification = parentIdentification;
+  public void setAccessLine(AccessLine accessLine) {
+    this.accessLine = accessLine;
   }
 
-  public ServiceLineTreatment serviceType(String serviceType) {
-    this.serviceType = serviceType;
+  public ServiceLineTreatment canNumberBeRetained(Boolean canNumberBeRetained) {
+    this.canNumberBeRetained = canNumberBeRetained;
     return this;
   }
 
-   /**
-   * 
-   * @return serviceType
+  /**
+   * Get canNumberBeRetained
+   * @return canNumberBeRetained
   **/
+  @ApiModelProperty(value = "")
 
 
-  public String getServiceType() {
-    return serviceType;
+  public Boolean isCanNumberBeRetained() {
+    return canNumberBeRetained;
   }
 
-  public void setServiceType(String serviceType) {
-    this.serviceType = serviceType;
-  }
-
-  public ServiceLineTreatment serviceAction(String serviceAction) {
-    this.serviceAction = serviceAction;
-    return this;
-  }
-
-   /**
-   * Identifies the action that needs to be applied to the line
-   * @return serviceAction
-  **/
-
-
-  public String getServiceAction() {
-    return serviceAction;
-  }
-
-  public void setServiceAction(String serviceAction) {
-    this.serviceAction = serviceAction;
-  }
-
-  public ServiceLineTreatment simValue(String simValue) {
-    this.simValue = simValue;
-    return this;
-  }
-
-   /**
-   * Flag specifying if a SIM2 is needed or not (SIM2 – Simultaneous Provide)
-   * @return simValue
-  **/
-
-
-  public String getSimValue() {
-    return simValue;
-  }
-
-  public void setSimValue(String simValue) {
-    this.simValue = simValue;
+  public void setCanNumberBeRetained(Boolean canNumberBeRetained) {
+    this.canNumberBeRetained = canNumberBeRetained;
   }
 
   public ServiceLineTreatment lineInfo(String lineInfo) {
@@ -121,10 +96,11 @@ private String portInFlag = null;
     return this;
   }
 
-   /**
-   * Information given to the agent regarding the treatment of the line
+  /**
+   * Get lineInfo
    * @return lineInfo
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getLineInfo() {
@@ -135,43 +111,24 @@ private String portInFlag = null;
     this.lineInfo = lineInfo;
   }
 
-  
-  public ServiceLineTreatment portInFlag(String portInFlag) {
-    this.portInFlag = portInFlag;
+  public ServiceLineTreatment parentIdentification(String parentIdentification) {
+    this.parentIdentification = parentIdentification;
     return this;
   }
 
-   /**
-   * A flag which specifies how the number needs to be ported in.
-   * @return portInFlag
+  /**
+   * Get parentIdentification
+   * @return parentIdentification
   **/
+  @ApiModelProperty(value = "")
 
 
-  public String getPortInFlag() {
-    return portInFlag;
+  public String getParentIdentification() {
+    return parentIdentification;
   }
 
-  public void setPortInFlag(String portInFlag) {
-    this.portInFlag = portInFlag;
-  }
-
-  public ServiceLineTreatment vicCode(String vicCode) {
-    this.vicCode = vicCode;
-    return this;
-  }
-
-   /**
-   * An identifier issued to allow an import to occur.
-   * @return vicCode
-  **/
-
-
-  public String getVicCode() {
-    return vicCode;
-  }
-
-  public void setVicCode(String vicCode) {
-    this.vicCode = vicCode;
+  public void setParentIdentification(String parentIdentification) {
+    this.parentIdentification = parentIdentification;
   }
 
   public ServiceLineTreatment pendingOrders(List<PendingOrder> pendingOrders) {
@@ -187,11 +144,13 @@ private String portInFlag = null;
     return this;
   }
 
-   /**
+  /**
    * Get pendingOrders
    * @return pendingOrders
   **/
+  @ApiModelProperty(value = "")
 
+  @Valid
 
   public List<PendingOrder> getPendingOrders() {
     return pendingOrders;
@@ -201,23 +160,104 @@ private String portInFlag = null;
     this.pendingOrders = pendingOrders;
   }
 
-  public ServiceLineTreatment accessLine(AccessLine accessLine) {
-    this.accessLine = accessLine;
+  public ServiceLineTreatment portInFlag(String portInFlag) {
+    this.portInFlag = portInFlag;
     return this;
   }
 
-   /**
-   * Get accessLine
-   * @return accessLine
+  /**
+   * Get portInFlag
+   * @return portInFlag
   **/
+  @ApiModelProperty(value = "")
 
 
-  public AccessLine getAccessLine() {
-    return accessLine;
+  public String getPortInFlag() {
+    return portInFlag;
   }
 
-  public void setAccessLine(AccessLine accessLine) {
-    this.accessLine = accessLine;
+  public void setPortInFlag(String portInFlag) {
+    this.portInFlag = portInFlag;
+  }
+
+  public ServiceLineTreatment serviceAction(String serviceAction) {
+    this.serviceAction = serviceAction;
+    return this;
+  }
+
+  /**
+   * Get serviceAction
+   * @return serviceAction
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getServiceAction() {
+    return serviceAction;
+  }
+
+  public void setServiceAction(String serviceAction) {
+    this.serviceAction = serviceAction;
+  }
+
+  public ServiceLineTreatment serviceType(String serviceType) {
+    this.serviceType = serviceType;
+    return this;
+  }
+
+  /**
+   * Get serviceType
+   * @return serviceType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getServiceType() {
+    return serviceType;
+  }
+
+  public void setServiceType(String serviceType) {
+    this.serviceType = serviceType;
+  }
+
+  public ServiceLineTreatment simValue(String simValue) {
+    this.simValue = simValue;
+    return this;
+  }
+
+  /**
+   * Get simValue
+   * @return simValue
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getSimValue() {
+    return simValue;
+  }
+
+  public void setSimValue(String simValue) {
+    this.simValue = simValue;
+  }
+
+  public ServiceLineTreatment vicCode(String vicCode) {
+    this.vicCode = vicCode;
+    return this;
+  }
+
+  /**
+   * Get vicCode
+   * @return vicCode
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getVicCode() {
+    return vicCode;
+  }
+
+  public void setVicCode(String vicCode) {
+    this.vicCode = vicCode;
   }
 
 
@@ -230,21 +270,21 @@ private String portInFlag = null;
       return false;
     }
     ServiceLineTreatment serviceLineTreatment = (ServiceLineTreatment) o;
-    return Objects.equals(this.parentIdentification, serviceLineTreatment.parentIdentification) &&
-        Objects.equals(this.serviceType, serviceLineTreatment.serviceType) &&
-        Objects.equals(this.serviceAction, serviceLineTreatment.serviceAction) &&
-        Objects.equals(this.simValue, serviceLineTreatment.simValue) &&
-        Objects.equals(this.lineInfo, serviceLineTreatment.lineInfo) &&
+    return Objects.equals(this.accessLine, serviceLineTreatment.accessLine) &&
         Objects.equals(this.canNumberBeRetained, serviceLineTreatment.canNumberBeRetained) &&
-        Objects.equals(this.portInFlag, serviceLineTreatment.portInFlag) &&
-        Objects.equals(this.vicCode, serviceLineTreatment.vicCode) &&
+        Objects.equals(this.lineInfo, serviceLineTreatment.lineInfo) &&
+        Objects.equals(this.parentIdentification, serviceLineTreatment.parentIdentification) &&
         Objects.equals(this.pendingOrders, serviceLineTreatment.pendingOrders) &&
-        Objects.equals(this.accessLine, serviceLineTreatment.accessLine);
+        Objects.equals(this.portInFlag, serviceLineTreatment.portInFlag) &&
+        Objects.equals(this.serviceAction, serviceLineTreatment.serviceAction) &&
+        Objects.equals(this.serviceType, serviceLineTreatment.serviceType) &&
+        Objects.equals(this.simValue, serviceLineTreatment.simValue) &&
+        Objects.equals(this.vicCode, serviceLineTreatment.vicCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(parentIdentification, serviceType, serviceAction, simValue, lineInfo, canNumberBeRetained, portInFlag, vicCode, pendingOrders, accessLine);
+    return Objects.hash(accessLine, canNumberBeRetained, lineInfo, parentIdentification, pendingOrders, portInFlag, serviceAction, serviceType, simValue, vicCode);
   }
 
   @Override
@@ -252,16 +292,16 @@ private String portInFlag = null;
     StringBuilder sb = new StringBuilder();
     sb.append("class ServiceLineTreatment {\n");
     
-    sb.append("    parentIdentification: ").append(toIndentedString(parentIdentification)).append("\n");
-    sb.append("    serviceType: ").append(toIndentedString(serviceType)).append("\n");
-    sb.append("    serviceAction: ").append(toIndentedString(serviceAction)).append("\n");
-    sb.append("    simValue: ").append(toIndentedString(simValue)).append("\n");
-    sb.append("    lineInfo: ").append(toIndentedString(lineInfo)).append("\n");
-    sb.append("    canNumberBeRetained: ").append(toIndentedString(canNumberBeRetained)).append("\n");
-    sb.append("    portInFlag: ").append(toIndentedString(portInFlag)).append("\n");
-    sb.append("    vicCode: ").append(toIndentedString(vicCode)).append("\n");
-    sb.append("    pendingOrders: ").append(toIndentedString(pendingOrders)).append("\n");
     sb.append("    accessLine: ").append(toIndentedString(accessLine)).append("\n");
+    sb.append("    canNumberBeRetained: ").append(toIndentedString(canNumberBeRetained)).append("\n");
+    sb.append("    lineInfo: ").append(toIndentedString(lineInfo)).append("\n");
+    sb.append("    parentIdentification: ").append(toIndentedString(parentIdentification)).append("\n");
+    sb.append("    pendingOrders: ").append(toIndentedString(pendingOrders)).append("\n");
+    sb.append("    portInFlag: ").append(toIndentedString(portInFlag)).append("\n");
+    sb.append("    serviceAction: ").append(toIndentedString(serviceAction)).append("\n");
+    sb.append("    serviceType: ").append(toIndentedString(serviceType)).append("\n");
+    sb.append("    simValue: ").append(toIndentedString(simValue)).append("\n");
+    sb.append("    vicCode: ").append(toIndentedString(vicCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

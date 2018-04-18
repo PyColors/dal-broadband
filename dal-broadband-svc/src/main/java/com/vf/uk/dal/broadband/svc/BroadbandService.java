@@ -1,5 +1,8 @@
 package com.vf.uk.dal.broadband.svc;
 
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
@@ -53,4 +56,10 @@ public interface BroadbandService {
 	 * @return AddressInfo
 	 */
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+
+
+	public Basket createOrUpdatePackage(BasketRequest basketRequest, String broadbandId);
+
+
+	public Broadband getBroadbandFromCache(String broadbandId);
 }

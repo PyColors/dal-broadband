@@ -47,6 +47,18 @@ public class Broadband implements Serializable {
 	private String broadBandId = null;
 	@JsonProperty("journeyId")
 	private String journeyId = null;
+	
+	@JsonProperty("basketId")
+	private String basketId = null;
+	
+	@JsonProperty("accountCategory")
+	private String accountCategory = null;
+	
+	@JsonProperty("packageId")
+	private String packageId = null;
+	
+	
+	
 
 	public Broadband servicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
@@ -96,6 +108,30 @@ public class Broadband implements Serializable {
 
 	public void setJourneyId(String journeyId) {
 		this.journeyId = journeyId;
+	}
+
+	public String getBasketId() {
+		return basketId;
+	}
+
+	public void setBasketId(String basketId) {
+		this.basketId = basketId;
+	}
+
+	public String getAccountCategory() {
+		return accountCategory;
+	}
+
+	public void setAccountCategory(String accountCategory) {
+		this.accountCategory = accountCategory;
+	}
+
+	public String getPackageId() {
+		return packageId;
+	}
+
+	public void setPackageId(String packageId) {
+		this.packageId = packageId;
 	}
 
 	@Override

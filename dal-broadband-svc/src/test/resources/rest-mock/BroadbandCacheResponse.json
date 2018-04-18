@@ -1,6 +1,6 @@
 {
   "servicePoint": {
-    "lineRefernce": {
+    "lineReference": {
       "installationAddress": {
         "identification": {
           "id": "A90000221048",
@@ -31,7 +31,7 @@
       "lineStatus": {
         "statusCode": "Working",
         "accessLineStatus": "Working",
-        "gNPStatus": null,
+        "gnpStatus": null,
         "lineOption": null,
         "technology": null,
         "lineType": null,
@@ -92,7 +92,6 @@
               },
               "serviceLineTreatmentList": [
                 {
-                  "portInFlag": "BT",
                   "parentIdentification": "EXISTING",
                   "accessLine": {
                     "id": "C002086814083",
@@ -102,9 +101,9 @@
                   "serviceAction": "Provide",
                   "sIM2Value": null,
                   "lineInfo": "PSTN Working Line Takeover",
-                  "canNumberBeRetained": "false",
-                  "PortInFlag": "BT",
-                  "vICCode": null,
+                  "canNumberBeRetained": false,
+                  "portInFlag": "BT",
+                  "vicCode": null,
                   "pendingOrders": [
                     {
                       "completionDate": null,
@@ -121,9 +120,8 @@
                   "serviceAction": "Provide",
                   "sIM2Value": null,
                   "lineInfo": "Spare Pair",
-                  "canNumberBeRetained": "false",
-                  "PortInFlag": null,
-                  "vICCode": null,
+                  "canNumberBeRetained": false,
+                  "vicCode": null,
                   "pendingOrders": []
                 }
               ],
@@ -135,6 +133,15 @@
     }
   },
   "salesOrderAppointment": null,
-  "lineDetails": null,
-  "broadBandId": "12345678907888"
+  "lineDetails": {
+    "classificationCode": "string",
+    "earliestAvailableDate": "string",
+    "flbbNumber": "string",
+    "lineTreatmentType": "string"
+  },
+  "broadBandId": "12345678907888",
+  "basketId":"2b23e0a1-eefd-409c-a919-e0ca774b9017",
+  "accountCategory":"Consumer",
+  "packageId": null,
+  "journeyId" : null
 }

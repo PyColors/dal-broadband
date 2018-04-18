@@ -5,12 +5,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.gson.Gson;
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
@@ -57,9 +64,13 @@ public class BroadbandDaoImpl implements BroadbandDao {
 					GetServiceAvailibilityResponse.class);
 			if (client != null)
 				availabilityCheckResponse = client.getBody();
-		} catch (Exception e) {
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+		}catch (RestClientResponseException e) {
+			Gson gson = new Gson();
+			String jsonInString = e.getResponseBodyAsString();
+			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
+					com.vf.uk.dal.common.exception.ErrorResponse.class);
+			LogHelper.error(this, "::::::No Data recieved from GSA TIL" + e);
+			throw new ApplicationException(error.getErrorMessage());
 		}
 
 		return availabilityCheckResponse;
@@ -203,6 +214,97 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	@Override
 	public Broadband getBroadbandFromCache(String broadBandSessionId) {
 		return broadbandRepoProvider.getBroadbandFromCache(broadBandSessionId);
+		
+	}
+
+
+
+
+
+	@Override
+	public CurrentJourney getJourney(String journeyId) {
+		CurrentJourney currentJourney = null;
+		try {
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			ResponseEntity<CurrentJourney> client = restTemplate.getForEntity("http://JOURNEY-V1/journey/"+journeyId+"/queries/currentJourney", CurrentJourney.class);
+			if(client != null)
+				currentJourney = client.getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+		}
+		return currentJourney;
+	}
+
+
+
+
+
+	@Override
+	public Basket createBasket(CreateBasketRequest createBasketRequest) {
+		Basket basket = null;
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			ResponseEntity<Basket> client = restTemplate.postForEntity(
+					"http://BASKET-V1/basket/basket/", createBasketRequest,
+					Basket.class);
+			if (client != null)
+				basket = client.getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+		}
+
+		return basket;
+	}
+
+
+
+
+
+	@Override
+	public void updatePackage(UpdatePackage updatePackageRequest, String packageId,String basketId) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			String url = "http://BASKET-V1/basket/basket/"+basketId+"/package/"+packageId;
+			restTemplate.put(url, updatePackageRequest);
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception while invoking update package request" + e);
+			throw new ApplicationException(ExceptionMessages.GEN_PACKAGE_EXCEPTION);
+		}
+	}
+
+	@Override
+	public Basket getBasket(String basketId) {
+		Basket basket = null;
+		try {
+			RestTemplate restTemplate = registryClient.getRestTemplate();
+			ResponseEntity<Basket> client = restTemplate.getForEntity("http://BASKET-V1/basket/basket/"+basketId, Basket.class);
+			if(client != null)
+				basket = client.getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception while calling get basket" + e);
+			throw new ApplicationException(ExceptionMessages.GEN_BASKET_EXCEPTION);
+		}
+		return basket;
+	}
+
+	@Override
+	public void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			String url = "http://BASKET-V1/basket/basket/"+basketId+"/package/"+packageId;
+			restTemplate.put(url, premiseAndServicePointRequest);
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception while invoking update package request for premise and Service point" + e);
+			throw new ApplicationException(ExceptionMessages.GEN_UPT_SP_EXCEPTION);
+		}
 		
 	}
 

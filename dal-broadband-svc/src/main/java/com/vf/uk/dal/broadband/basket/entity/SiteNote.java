@@ -2,14 +2,23 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.swagger.annotations.ApiModelProperty;
 
 /**
  * SiteNote
  */
-public class SiteNote {
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+
+public class SiteNote   {
+  @JsonProperty("notes")
   private String notes = null;
 
+  @JsonProperty("typeCode")
   private String typeCode = null;
 
   public SiteNote notes(String notes) {
@@ -17,11 +26,13 @@ public class SiteNote {
     return this;
   }
 
-   /**
+  /**
    * Note for the engineer
    * @return notes
   **/
   @ApiModelProperty(value = "Note for the engineer")
+
+
   public String getNotes() {
     return notes;
   }
@@ -35,11 +46,13 @@ public class SiteNote {
     return this;
   }
 
-   /**
+  /**
    * Engineer
    * @return typeCode
   **/
   @ApiModelProperty(value = "Engineer")
+
+
   public String getTypeCode() {
     return typeCode;
   }
@@ -67,7 +80,6 @@ public class SiteNote {
     return Objects.hash(notes, typeCode);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -89,5 +101,5 @@ public class SiteNote {
     }
     return o.toString().replace("\n", "\n    ");
   }
-  
 }
+

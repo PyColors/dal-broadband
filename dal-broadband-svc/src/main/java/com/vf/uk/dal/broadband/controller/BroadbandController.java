@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
@@ -165,6 +168,34 @@ public class BroadbandController {
 	public AddressInfo getAddressByPostcode(
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode) {
 			return broadbandService.getAddressInfoByPostcodeFromPremise(postCode);
-	}	
+	}
 	
+	
+	@ApiOperation(value = "Create or updates the basket when the user selects the package", notes = "Create or update the basket when the user selects the the package", response = Basket.class, tags = { "Broadband Basket"})
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Basket.class),
+	@ApiResponse(code = 404, message = "Not found", response = Void.class),
+	@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+	@RequestMapping(value = "/{broadbandId}/package", produces = { "application/json" }, method = RequestMethod.POST)
+	public Basket createOrUpdatePackage(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody BasketRequest basketRequest) {
+			
+		
+		return broadbandService.createOrUpdatePackage(basketRequest,broadbandId);
+	}
+	
+	
+	
+	
+	
+	
+	@ApiOperation(value = "Gives the Broadband cache using broadband id", notes = "Gets the broadband cache using broadband id", response = Broadband.class, tags = { "Broadband"})
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Broadband.class),
+	@ApiResponse(code = 404, message = "Not found", response = Void.class),
+	@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+	@RequestMapping(value = "/broadband/{broadbandId}", produces = { "application/json" }, method = RequestMethod.GET)
+	public Broadband getBroadbandInfo(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+		return broadbandService.getBroadbandFromCache(broadbandId);
+	}
 }

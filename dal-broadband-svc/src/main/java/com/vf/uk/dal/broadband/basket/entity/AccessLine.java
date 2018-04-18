@@ -2,44 +2,35 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * AccessLine
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class AccessLine   {
-  private String id = null;
-
+  @JsonProperty("channelId")
   private String channelId = null;
 
-  public AccessLine id(String id) {
-    this.id = id;
-    return this;
-  }
-
-   /**
-   * A unique identifier for copper line. This field can be used as an alternative means of identifying a working line
-   * @return id
-  **/
-
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
+  @JsonProperty("id")
+  private String id = null;
 
   public AccessLine channelId(String channelId) {
     this.channelId = channelId;
     return this;
   }
 
-   /**
+  /**
    * Get channelId
    * @return channelId
   **/
+  @ApiModelProperty(value = "")
 
 
   public String getChannelId() {
@@ -48,6 +39,26 @@ public class AccessLine   {
 
   public void setChannelId(String channelId) {
     this.channelId = channelId;
+  }
+
+  public AccessLine id(String id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
 
@@ -60,13 +71,13 @@ public class AccessLine   {
       return false;
     }
     AccessLine accessLine = (AccessLine) o;
-    return Objects.equals(this.id, accessLine.id) &&
-        Objects.equals(this.channelId, accessLine.channelId);
+    return Objects.equals(this.channelId, accessLine.channelId) &&
+        Objects.equals(this.id, accessLine.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, channelId);
+    return Objects.hash(channelId, id);
   }
 
   @Override
@@ -74,8 +85,8 @@ public class AccessLine   {
     StringBuilder sb = new StringBuilder();
     sb.append("class AccessLine {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    channelId: ").append(toIndentedString(channelId)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
   }

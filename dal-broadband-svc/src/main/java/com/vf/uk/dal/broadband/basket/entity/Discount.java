@@ -2,51 +2,66 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Discount
  */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class Discount   {
-  private String productLineId = null;
-
+  @JsonProperty("action")
   private String action = null;
 
-  private String skuId = null;
-
-  private String tag = null;
-
-  private String label = null;
-
-  private String tenure = null;
-
-  private String duration = null;
-
+  @JsonProperty("confirmedRequired")
   private String confirmedRequired = null;
 
-  private List<MediaLink> merchandisingMedia = new ArrayList<>();
-
+  @JsonProperty("discountValue")
   private DiscountValue discountValue = null;
 
- 
+  @JsonProperty("duration")
+  private String duration = null;
 
-   /**
-   * line id of the discount in the package
-   * @return productLineId
-  **/
-  public String getProductLineId() {
-    return productLineId;
+  @JsonProperty("label")
+  private String label = null;
+
+  @JsonProperty("merchandisingMedia")
+  @Valid
+  private List<MediaLink> merchandisingMedia = null;
+
+  @JsonProperty("productLineId")
+  private String productLineId = null;
+
+  @JsonProperty("skuId")
+  private String skuId = null;
+
+  @JsonProperty("tag")
+  private String tag = null;
+
+  @JsonProperty("tenure")
+  private String tenure = null;
+
+  public Discount action(String action) {
+    this.action = action;
+    return this;
   }
 
-  public void setProductLineId(String productLineId) {
-    this.productLineId = productLineId;
-  }
-
- 
-
-   /**
-   * Expected list is ADD/REMOVE/MODIFY
+  /**
+   * Get action
    * @return action
   **/
+  @ApiModelProperty(value = "")
+
+
   public String getAction() {
     return action;
   }
@@ -55,40 +70,79 @@ public class Discount   {
     this.action = action;
   }
 
-  
+  public Discount confirmedRequired(String confirmedRequired) {
+    this.confirmedRequired = confirmedRequired;
+    return this;
+  }
 
-   /**
-   * Id of the discount as given in the product catalogue
-   * @return skuId
+  /**
+   * Get confirmedRequired
+   * @return confirmedRequired
   **/
-  public String getSkuId() {
-    return skuId;
+  @ApiModelProperty(value = "")
+
+
+  public String getConfirmedRequired() {
+    return confirmedRequired;
   }
 
-  public void setSkuId(String skuId) {
-    this.skuId = skuId;
+  public void setConfirmedRequired(String confirmedRequired) {
+    this.confirmedRequired = confirmedRequired;
   }
 
+  public Discount discountValue(DiscountValue discountValue) {
+    this.discountValue = discountValue;
+    return this;
+  }
 
-
-   /**
-   * Name of the discount as provided in the product catalogue
-   * @return tag
+  /**
+   * Get discountValue
+   * @return discountValue
   **/
-  public String getTag() {
-    return tag;
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public DiscountValue getDiscountValue() {
+    return discountValue;
   }
 
-  public void setTag(String tag) {
-    this.tag = tag;
+  public void setDiscountValue(DiscountValue discountValue) {
+    this.discountValue = discountValue;
   }
 
- 
+  public Discount duration(String duration) {
+    this.duration = duration;
+    return this;
+  }
 
-   /**
-   * Label of the discount as provided in the product catalogue
+  /**
+   * Get duration
+   * @return duration
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getDuration() {
+    return duration;
+  }
+
+  public void setDuration(String duration) {
+    this.duration = duration;
+  }
+
+  public Discount label(String label) {
+    this.label = label;
+    return this;
+  }
+
+  /**
+   * Get label
    * @return label
   **/
+  @ApiModelProperty(value = "")
+
+
   public String getLabel() {
     return label;
   }
@@ -97,11 +151,107 @@ public class Discount   {
     this.label = label;
   }
 
+  public Discount merchandisingMedia(List<MediaLink> merchandisingMedia) {
+    this.merchandisingMedia = merchandisingMedia;
+    return this;
+  }
 
-   /**
-   * Tenure of the discount as provided in the product catalogue (can possibly take the values - PARTIAL or FULL)
+  public Discount addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
+    if (this.merchandisingMedia == null) {
+      this.merchandisingMedia = new ArrayList<MediaLink>();
+    }
+    this.merchandisingMedia.add(merchandisingMediaItem);
+    return this;
+  }
+
+  /**
+   * Get merchandisingMedia
+   * @return merchandisingMedia
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<MediaLink> getMerchandisingMedia() {
+    return merchandisingMedia;
+  }
+
+  public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
+    this.merchandisingMedia = merchandisingMedia;
+  }
+
+  public Discount productLineId(String productLineId) {
+    this.productLineId = productLineId;
+    return this;
+  }
+
+  /**
+   * Get productLineId
+   * @return productLineId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getProductLineId() {
+    return productLineId;
+  }
+
+  public void setProductLineId(String productLineId) {
+    this.productLineId = productLineId;
+  }
+
+  public Discount skuId(String skuId) {
+    this.skuId = skuId;
+    return this;
+  }
+
+  /**
+   * Get skuId
+   * @return skuId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getSkuId() {
+    return skuId;
+  }
+
+  public void setSkuId(String skuId) {
+    this.skuId = skuId;
+  }
+
+  public Discount tag(String tag) {
+    this.tag = tag;
+    return this;
+  }
+
+  /**
+   * Get tag
+   * @return tag
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getTag() {
+    return tag;
+  }
+
+  public void setTag(String tag) {
+    this.tag = tag;
+  }
+
+  public Discount tenure(String tenure) {
+    this.tenure = tenure;
+    return this;
+  }
+
+  /**
+   * Get tenure
    * @return tenure
   **/
+  @ApiModelProperty(value = "")
+
+
   public String getTenure() {
     return tenure;
   }
@@ -111,59 +261,60 @@ public class Discount   {
   }
 
 
-
-   /**
-   * Duration from the start of the subscription for which the discount would be applicable
-   * @return duration
-  **/
-  public String getDuration() {
-    return duration;
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Discount discount = (Discount) o;
+    return Objects.equals(this.action, discount.action) &&
+        Objects.equals(this.confirmedRequired, discount.confirmedRequired) &&
+        Objects.equals(this.discountValue, discount.discountValue) &&
+        Objects.equals(this.duration, discount.duration) &&
+        Objects.equals(this.label, discount.label) &&
+        Objects.equals(this.merchandisingMedia, discount.merchandisingMedia) &&
+        Objects.equals(this.productLineId, discount.productLineId) &&
+        Objects.equals(this.skuId, discount.skuId) &&
+        Objects.equals(this.tag, discount.tag) &&
+        Objects.equals(this.tenure, discount.tenure);
   }
 
-  public void setDuration(String duration) {
-    this.duration = duration;
+  @Override
+  public int hashCode() {
+    return Objects.hash(action, confirmedRequired, discountValue, duration, label, merchandisingMedia, productLineId, skuId, tag, tenure);
   }
 
-
-
-   /**
-   * Flag to indicate whether user consent should be taken before applying the discount
-   * @return confirmedRequired
-  **/
-  public String getConfirmedRequired() {
-    return confirmedRequired;
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class Discount {\n");
+    
+    sb.append("    action: ").append(toIndentedString(action)).append("\n");
+    sb.append("    confirmedRequired: ").append(toIndentedString(confirmedRequired)).append("\n");
+    sb.append("    discountValue: ").append(toIndentedString(discountValue)).append("\n");
+    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
+    sb.append("    label: ").append(toIndentedString(label)).append("\n");
+    sb.append("    merchandisingMedia: ").append(toIndentedString(merchandisingMedia)).append("\n");
+    sb.append("    productLineId: ").append(toIndentedString(productLineId)).append("\n");
+    sb.append("    skuId: ").append(toIndentedString(skuId)).append("\n");
+    sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
+    sb.append("    tenure: ").append(toIndentedString(tenure)).append("\n");
+    sb.append("}");
+    return sb.toString();
   }
 
-  public void setConfirmedRequired(String confirmedRequired) {
-    this.confirmedRequired = confirmedRequired;
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
   }
-
-
-
-   /**
-   * Get merchandisingMedia
-   * @return merchandisingMedia
-  **/
-  public List<MediaLink> getMerchandisingMedia() {
-    return merchandisingMedia;
-  }
-
-  public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
-    this.merchandisingMedia = merchandisingMedia;
-  }
-
- 
-   /**
-   * Get discountValue
-   * @return discountValue
-  **/
-  public DiscountValue getDiscountValue() {
-    return discountValue;
-  }
-
-  public void setDiscountValue(DiscountValue discountValue) {
-    this.discountValue = discountValue;
-  }
-
 }
 
