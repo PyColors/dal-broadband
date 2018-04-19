@@ -214,7 +214,8 @@ public class ServiceLineTreatment implements Serializable {
 	 * @param portInFlag the new port in flag
 	 */
 	public void setPortInFlag(String portInFlag) {
-		portInFlag = portInFlag;
+
+		this.portInFlag = portInFlag;
 	}
 	
 	/**
