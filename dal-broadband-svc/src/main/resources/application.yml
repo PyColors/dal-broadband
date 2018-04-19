@@ -6,8 +6,8 @@ spring:
       enabled: false
       max-redirects: 2
       nodes:
-      - master.dal-sit2-jrny-red.m6ipwu.euw1.cache.amazonaws.com:6379
-    host: master.dal-sit2-jrny-red.m6ipwu.euw1.cache.amazonaws.com
+      - master.dal-st2-bband-red.m6ipwu.euw1.cache.amazonaws.com:6379
+    host: master.dal-st2-bband-red.m6ipwu.euw1.cache.amazonaws.com
     port: 6379
     password: digitalx2018jrny
     ssl: true
