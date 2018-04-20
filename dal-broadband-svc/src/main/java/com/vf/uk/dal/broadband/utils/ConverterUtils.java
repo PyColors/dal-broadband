@@ -564,7 +564,7 @@ public class ConverterUtils {
 					for(ServiceLines serLines : serviceLinesList){
 						classificationCodeList.add(serLines.getClassificationCode());
 						
-						com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
+						
 						List<LineTreatment> lineTreatmentList = serLines.getLineTreatmentList();
 						List<ServieLine> serviceLineList = serLines.getServiceLineList();
 						for(LineTreatment lineTreatment : lineTreatmentList){
@@ -585,8 +585,9 @@ public class ConverterUtils {
 							appointmentAndAvailabilityList.add(appointmentDetails);
 						}
 						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
-						lineSpeedsForRes.setPackageName(serLines.getClassificationCode());
+						
 						for(ServieLine servieLine : serviceLineList){
+							com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 							if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
 								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
 									lineSpeedsForRes.setAvgDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getAvgDownSpeed()));
@@ -608,6 +609,7 @@ public class ConverterUtils {
 									lineSpeedsForRes.setMinUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
 								}
 							}
+							lineSpeedsForRes.setPackageName(serLines.getClassificationCode());
 							lineSpeedForResponse.add(lineSpeedsForRes);
 						}
 						response.setLineSpeeds(lineSpeedForResponse);
