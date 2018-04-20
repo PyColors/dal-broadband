@@ -114,6 +114,7 @@ public class ConverterUtils {
 				&& StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())){
 			LineDetails lineDetails = new LineDetails();
 			lineDetails.setFlbbNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
+			broadband.setLineDetails(lineDetails);
 		}
 		ServicePoint servicePoint = new ServicePoint();
 		LineReference lineRefernce = new LineReference();
