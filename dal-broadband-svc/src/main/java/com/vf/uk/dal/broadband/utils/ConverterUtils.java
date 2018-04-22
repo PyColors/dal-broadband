@@ -622,7 +622,7 @@ public class ConverterUtils {
 									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinUpSpeed())){
 										lineSpeedsForRes.setMinUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
 									}
-									lineSpeedsForRes.setPackageName(servieLine.getClassificationCode());
+									lineSpeedsForRes.setPackageName(serviceLineListForAll.getClassificationCode());
 									lineSpeedForResponse.add(lineSpeedsForRes);
 								}
 							}
@@ -669,7 +669,7 @@ public class ConverterUtils {
 	}
 
 
-	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest) {
+	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest, String broadbandId) {
 		
 		LineDetails lineDetails = broadband.getLineDetails();
 		
@@ -677,6 +677,7 @@ public class ConverterUtils {
 			lineDetails = new LineDetails();
 			lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 		}
+		broadband.setBroadBandId(broadbandId);
 		broadband.setLineDetails(lineDetails);
 		return broadband;
 	}

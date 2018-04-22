@@ -5,7 +5,6 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
@@ -404,12 +403,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(),basketId);
 				basket =  broadbandDao.getBasket(basketId);
 			}
-			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest);
+			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest,broadbandId);
 			broadbandDao.setBroadBandInCache(broadband);
 		}else{
 			CreateBasketRequest createBasketRequest  = ConverterUtils.createBasketRequest(basketRequest, broadband, null, null);
 			basket =  broadbandDao.createBasket(createBasketRequest);
 			Broadband broadbandToSave = new Broadband();
+			broadbandToSave.setBroadBandId(broadbandId);
 			broadbandToSave.setBasketId(basket.getBasketId());
 			broadbandDao.setBroadBandInCache(broadbandToSave);
 		}
