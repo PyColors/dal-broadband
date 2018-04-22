@@ -560,6 +560,11 @@ public class ConverterUtils {
 				ServiceReference serviceReference = broadBand.getServicePoint().getServiceReference();
 				List<ServiceLines> serviceLinesList = serviceReference.getServiceLinesList();
 				List<String> classificationCodeList = new ArrayList<>();
+				for(ServiceLines sLines : serviceLinesList){
+					classificationCodeList.add(sLines.getClassificationCode());
+				}
+				response.setClassificationCode(classificationCodeList);
+				
 				if(CollectionUtils.isNotEmpty(serviceLinesList)){
 					
 					List<com.vf.uk.dal.broadband.entity.LineSpeeds> lineSpeedForResponse = new ArrayList<>();
@@ -595,7 +600,7 @@ public class ConverterUtils {
 						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 						for(ServiceLines serviceLineListForAll : serviceLinesList){
 							for(ServieLine servieLine : serviceLineListForAll.getServiceLineList()){
-								classificationCodeList.add(servieLine.getClassificationCode());
+								
 								if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
 									com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
@@ -624,7 +629,7 @@ public class ConverterUtils {
 						}
 						response.setLineSpeeds(lineSpeedForResponse);
 						
-					response.setClassificationCode(classificationCodeList);
+					
 				}
 			}
 			if(broadBand.getServicePoint().getLineReference()!=null
