@@ -593,31 +593,33 @@ public class ConverterUtils {
 						
 						
 						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
-						for(ServieLine servieLine : serviceLineList){
-							classificationCodeList.add(serLines.getClassificationCode());
-							if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
-								com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
-								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
-									lineSpeedsForRes.setAvgDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getAvgDownSpeed()));
+						for(ServiceLines serviceLineListForAll : serviceLinesList){
+							for(ServieLine servieLine : serviceLineListForAll.getServiceLineList()){
+								classificationCodeList.add(serLines.getClassificationCode());
+								if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
+									com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
+									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
+										lineSpeedsForRes.setAvgDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getAvgDownSpeed()));
+									}
+									lineSpeedsForRes.setBandwidthMeasure(servieLine.getLineSpeeds().getBandwidthMeasure());
+									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxDownSpeed())){
+										lineSpeedsForRes.setMaxDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMaxDownSpeed()));
+									}
+									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxUpSpeed())){
+										lineSpeedsForRes.setMaxUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMaxUpSpeed()));
+									}
+									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinDownSpeed())){
+										lineSpeedsForRes.setMinDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinDownSpeed()));
+									}
+									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed())){
+										lineSpeedsForRes.setMinGuaranteedDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed()));
+									}
+									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinUpSpeed())){
+										lineSpeedsForRes.setMinUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
+									}
+									lineSpeedsForRes.setPackageName(serLines.getClassificationCode());
+									lineSpeedForResponse.add(lineSpeedsForRes);
 								}
-								lineSpeedsForRes.setBandwidthMeasure(servieLine.getLineSpeeds().getBandwidthMeasure());
-								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxDownSpeed())){
-									lineSpeedsForRes.setMaxDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMaxDownSpeed()));
-								}
-								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxUpSpeed())){
-									lineSpeedsForRes.setMaxUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMaxUpSpeed()));
-								}
-								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinDownSpeed())){
-									lineSpeedsForRes.setMinDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinDownSpeed()));
-								}
-								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed())){
-									lineSpeedsForRes.setMinGuaranteedDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed()));
-								}
-								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinUpSpeed())){
-									lineSpeedsForRes.setMinUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
-								}
-								lineSpeedsForRes.setPackageName(serLines.getClassificationCode());
-								lineSpeedForResponse.add(lineSpeedsForRes);
 							}
 						}
 						response.setLineSpeeds(lineSpeedForResponse);
