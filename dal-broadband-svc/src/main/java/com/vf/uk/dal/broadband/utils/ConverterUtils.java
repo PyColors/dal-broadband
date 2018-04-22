@@ -400,20 +400,21 @@ public class ConverterUtils {
 				if(lineTreatment.getLineTreatmentType()!=null){
 					appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
 				}
-				 
-				
+				appointmentAndAvailabilityList.add(appointmentDetails);
+			}
+			for(AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList){
 				for(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
 					List<com.vf.uk.dal.entity.serviceavailability.ServiceLine> serviceLineList= serviceLines.getServiceLine();
 					for(com.vf.uk.dal.entity.serviceavailability.ServiceLine sLine : serviceLineList){
 						if(!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")){
 							List<com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment> serviceLineTreatmentList = sLine.getLineTreatment();
 							for(com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList){
+								if(StringUtils.equalsIgnoreCase(appointmentDetails.getLineTreatmentType(), serviceLineTreatment.getLineTreatmentType().toString()))
 								appointmentDetails.setCanNumberBeRetained(String.valueOf(serviceLineTreatment.getCanNumberBeRetained()));
 							}
 						}
 					}
 				}
-				appointmentAndAvailabilityList.add(appointmentDetails);
 			}
 			response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 		}
@@ -560,9 +561,7 @@ public class ConverterUtils {
 				List<ServiceLines> serviceLinesList = serviceReference.getServiceLinesList();
 				List<String> classificationCodeList = new ArrayList<>();
 				if(CollectionUtils.isNotEmpty(serviceLinesList)){
-					for(ServiceLines serLines : serviceLinesList){
-						classificationCodeList.add(serLines.getClassificationCode());
-					}
+					
 					List<com.vf.uk.dal.broadband.entity.LineSpeeds> lineSpeedForResponse = new ArrayList<>();
 					List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityList = new ArrayList<>();
 						ServiceLines serLines = serviceLinesList.get(0);
@@ -575,20 +574,27 @@ public class ConverterUtils {
 							if(lineTreatment.getLineTreatmentType()!=null){
 								appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType());
 							}
+							
+							appointmentAndAvailabilityList.add(appointmentDetails);
+						}
+						
+						
+						for(AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList){
 							for(ServieLine servieLine : serviceLineList){
 								if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
 									List<ServiceLineTreatment> serviceLineTreatmentList = servieLine.getServiceLineTreatmentList();
 									for(ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList){
+										if(StringUtils.equalsIgnoreCase(serviceLineTreatment.getParentIdentification(), appointmentDetails.getLineTreatmentType()))
 										appointmentDetails.setCanNumberBeRetained(String.valueOf(serviceLineTreatment.isCanNumberBeRetained()));
 									}
 								}
-							}
-							appointmentAndAvailabilityList.add(appointmentDetails);
+							}	
 						}
-						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 						
+						
+						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 						for(ServieLine servieLine : serviceLineList){
-							
+							classificationCodeList.add(serLines.getClassificationCode());
 							if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
 								com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
