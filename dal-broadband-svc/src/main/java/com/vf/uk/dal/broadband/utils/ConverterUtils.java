@@ -588,8 +588,9 @@ public class ConverterUtils {
 						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
 						
 						for(ServieLine servieLine : serviceLineList){
-							com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
+							
 							if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
+								com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
 									lineSpeedsForRes.setAvgDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getAvgDownSpeed()));
 								}
@@ -609,9 +610,9 @@ public class ConverterUtils {
 								if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinUpSpeed())){
 									lineSpeedsForRes.setMinUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
 								}
+								lineSpeedsForRes.setPackageName(serLines.getClassificationCode());
+								lineSpeedForResponse.add(lineSpeedsForRes);
 							}
-							lineSpeedsForRes.setPackageName(serLines.getClassificationCode());
-							lineSpeedForResponse.add(lineSpeedsForRes);
 						}
 						response.setLineSpeeds(lineSpeedForResponse);
 						
