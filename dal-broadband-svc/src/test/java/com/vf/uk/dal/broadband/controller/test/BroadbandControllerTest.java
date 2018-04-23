@@ -269,6 +269,13 @@ public class BroadbandControllerTest {
 
 	}
 	
+	@Test
+	public void testBroadbandFromCache()
+	{
+		Broadband resonse = broadBandController
+				.getBroadbandInfo("12345678907888");
+		assertNotNull(resonse);
+	}
 	
 	
 	
