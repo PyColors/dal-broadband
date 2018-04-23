@@ -65,7 +65,7 @@
 		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceLineTreatment</class-a>
 		<class-b>com.vf.uk.dal.broadband.basket.entity.ServiceLineTreatment</class-b>
 		<field>
-			<a>sIM2Value</a>
+			<a>SIM2Value</a>
 			<b>simValue</b>
 		</field>
 		
