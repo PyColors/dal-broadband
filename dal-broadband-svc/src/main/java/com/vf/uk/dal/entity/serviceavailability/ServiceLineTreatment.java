@@ -28,7 +28,7 @@ public class ServiceLineTreatment {
 	private String serviceAction = null;
 
 	@JsonProperty("SIM2Value")
-	private String siM2Value = null;
+	private String SIM2Value = null;
 
 	@JsonProperty("lineInfo")
 	private String lineInfo = null;
@@ -145,23 +145,7 @@ public class ServiceLineTreatment {
 		this.serviceAction = serviceAction;
 	}
 
-	public ServiceLineTreatment siM2Value(String siM2Value) {
-		this.siM2Value = siM2Value;
-		return this;
-	}
-
-	/**
-	 * Flag specifying if a SIM2 is needed or not (SIM2 – Simultaneous Provide)
-	 * 
-	 * @return siM2Value
-	 **/
-	public String getSiM2Value() {
-		return siM2Value;
-	}
-
-	public void setSiM2Value(String siM2Value) {
-		this.siM2Value = siM2Value;
-	}
+	
 
 	public ServiceLineTreatment lineInfo(String lineInfo) {
 		this.lineInfo = lineInfo;
@@ -276,6 +260,14 @@ public class ServiceLineTreatment {
 		this.note = note;
 	}
 
+	public String getSIM2Value() {
+		return SIM2Value;
+	}
+
+	public void setSIM2Value(String sIM2Value) {
+		SIM2Value = sIM2Value;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -290,7 +282,7 @@ public class ServiceLineTreatment {
 				&& Objects.equals(this.accessLineType, serviceLineTreatment.accessLineType)
 				&& Objects.equals(this.serviceType, serviceLineTreatment.serviceType)
 				&& Objects.equals(this.serviceAction, serviceLineTreatment.serviceAction)
-				&& Objects.equals(this.siM2Value, serviceLineTreatment.siM2Value)
+				&& Objects.equals(this.SIM2Value, serviceLineTreatment.SIM2Value)
 				&& Objects.equals(this.lineInfo, serviceLineTreatment.lineInfo)
 				&& Objects.equals(this.canNumberBeRetained, serviceLineTreatment.canNumberBeRetained)
 				&& Objects.equals(this.portInFlag, serviceLineTreatment.portInFlag)
@@ -301,7 +293,7 @@ public class ServiceLineTreatment {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lineTreatmentType, accessLineID, accessLineType, serviceType, serviceAction, siM2Value,
+		return Objects.hash(lineTreatmentType, accessLineID, accessLineType, serviceType, serviceAction, SIM2Value,
 				lineInfo, canNumberBeRetained, portInFlag, viCCode, pendingOrder, note);
 	}
 
@@ -315,7 +307,7 @@ public class ServiceLineTreatment {
 		sb.append("    accessLineType: ").append(toIndentedString(accessLineType)).append("\n");
 		sb.append("    serviceType: ").append(toIndentedString(serviceType)).append("\n");
 		sb.append("    serviceAction: ").append(toIndentedString(serviceAction)).append("\n");
-		sb.append("    siM2Value: ").append(toIndentedString(siM2Value)).append("\n");
+		sb.append("    siM2Value: ").append(toIndentedString(SIM2Value)).append("\n");
 		sb.append("    lineInfo: ").append(toIndentedString(lineInfo)).append("\n");
 		sb.append("    canNumberBeRetained: ").append(toIndentedString(canNumberBeRetained)).append("\n");
 		sb.append("    portInFlag: ").append(toIndentedString(portInFlag)).append("\n");

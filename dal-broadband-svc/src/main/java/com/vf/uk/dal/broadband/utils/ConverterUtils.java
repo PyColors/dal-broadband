@@ -334,7 +334,7 @@ public class ConverterUtils {
 								serviceLineTreatment.setPortInFlag(serviceLineTreatmentReq.getPortInFlag());
 								serviceLineTreatment.setServiceAction(serviceLineTreatmentReq.getServiceAction());
 								serviceLineTreatment.setServiceType(serviceLineTreatmentReq.getServiceType());
-								serviceLineTreatment.setsIM2Value(serviceLineTreatmentReq.getSiM2Value());
+								serviceLineTreatment.setsIM2Value(serviceLineTreatmentReq.getSIM2Value());
 								serviceLineTreatment.setVicCode(serviceLineTreatmentReq.getViCCode());
 								AccessLine accessLineForJourney = new AccessLine();
 								accessLineForJourney.setId(serviceLineTreatmentReq.getAccessLineID());
