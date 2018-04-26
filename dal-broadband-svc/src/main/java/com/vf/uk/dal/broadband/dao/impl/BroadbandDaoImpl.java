@@ -1,7 +1,9 @@
 package com.vf.uk.dal.broadband.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
@@ -24,6 +27,7 @@ import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
+import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
@@ -60,7 +64,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 				.createGetServiceAvailibilityRequest(availabilityCheckRequest);
 		try {
 			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate.postForEntity(
-					"http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability", request,
+					BroadBandConstant.SERVICE_AVAILABILITY_URL_CONSTANT, request,
 					GetServiceAvailibilityResponse.class);
 			if (client != null)
 				availabilityCheckResponse = client.getBody();
@@ -248,7 +252,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			ResponseEntity<Basket> client = restTemplate.postForEntity(
-					"http://BASKET-V1/basket/basket/", createBasketRequest,
+					BroadBandConstant.BASKET_URL, createBasketRequest,
 					Basket.class);
 			if (client != null)
 				basket = client.getBody();
@@ -269,9 +273,13 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
+		Gson gson = new Gson();
+        gson.toJson(updatePackageRequest); 
 		try {
-			String url = "http://BASKET-V1/basket/basket/"+basketId+"/package/"+packageId;
-			restTemplate.put(url, updatePackageRequest);
+			
+			final HttpEntity<UpdatePackage> entity = new HttpEntity<>(updatePackageRequest, headers);
+			String url = BroadBandConstant.BASKET_URL+basketId+"/package/"+packageId;
+            restTemplate.exchange(url, HttpMethod.PUT, entity, ModelPackage.class);
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception while invoking update package request" + e);
 			throw new ApplicationException(ExceptionMessages.GEN_PACKAGE_EXCEPTION);
@@ -283,7 +291,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		Basket basket = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			ResponseEntity<Basket> client = restTemplate.getForEntity("http://BASKET-V1/basket/basket/"+basketId, Basket.class);
+			ResponseEntity<Basket> client = restTemplate.getForEntity(BroadBandConstant.BASKET_URL+basketId, Basket.class);
 			if(client != null)
 				basket = client.getBody();
 		} catch (Exception e) {
@@ -299,8 +307,10 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
-			String url = "http://BASKET-V1/basket/basket/"+basketId+"/package/"+packageId;
-			restTemplate.put(url, premiseAndServicePointRequest);
+			final HttpEntity<PremiseAndServicePoint> entity = new HttpEntity<>(premiseAndServicePointRequest, headers);
+			String url = BroadBandConstant.BASKET_URL+basketId+"/broadbandPackage/"+packageId+"/premiseAndServicePoint";
+            restTemplate.exchange(url, HttpMethod.PUT, entity, ResponseEntity.class);
+			
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception while invoking update package request for premise and Service point" + e);
 			throw new ApplicationException(ExceptionMessages.GEN_UPT_SP_EXCEPTION);

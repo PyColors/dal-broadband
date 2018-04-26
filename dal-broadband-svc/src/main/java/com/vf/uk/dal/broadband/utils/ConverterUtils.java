@@ -8,8 +8,10 @@ import org.apache.commons.lang.StringUtils;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
+import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdateBundle;
 import com.vf.uk.dal.broadband.basket.entity.UpdateDevice;
@@ -102,12 +104,16 @@ public class ConverterUtils {
 	 * @param availabilityCheckRequest
 	 * @param getServiceAvailabilityResponse
 	 * @param broadbandId 
+	 * @param broadBand 
 	 * @return FLBBJourneyRequest
 	 */
 	
 	public static Broadband createBroadbandInCache(AvailabilityCheckRequest availabilityCheckRequest,
-			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId) {
-		Broadband broadband = new Broadband();
+			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId, Broadband broadBand) {
+		Broadband broadband = broadBand;
+		if(broadband == null){
+			broadband = new Broadband();
+		}
 		broadband.setBroadBandId(broadbandId);
 		
 		if(availabilityCheckRequest.getLineRef()!=null && availabilityCheckRequest.getLineRef().getLineIdentification()!=null
@@ -669,7 +675,7 @@ public class ConverterUtils {
 	}
 
 
-	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest, String broadbandId) {
+	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest, String broadbandId, Basket basket) {
 		
 		LineDetails lineDetails = broadband.getLineDetails();
 		
@@ -677,11 +683,18 @@ public class ConverterUtils {
 			lineDetails = new LineDetails();
 			lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 		}
+		
+		if(CollectionUtils.isNotEmpty(basket.getPackages())){
+			for(ModelPackage modelPackage : basket.getPackages()){
+				if(StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")){
+					broadband.setPackageId(modelPackage.getPackageId());
+				}
+			}
+		}
 		broadband.setBroadBandId(broadbandId);
 		broadband.setLineDetails(lineDetails);
 		return broadband;
 	}
-
 
 	public static CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband, com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, CurrentJourney journey) {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
@@ -758,110 +771,6 @@ public class ConverterUtils {
 		
 		packages.add(addPackage);
 		createBasket.setPackages(packages);
-		/*if(broadband.getServicePoint()!=null && broadband.getServicePoint().getLineReference() 
-				!=null ){
-			if( broadband.getServicePoint().getLineReference().getInstallationAddress()!=null){
-				com.vf.uk.dal.broadband.basket.entity.InstallationAddress installationAddress = new com.vf.uk.dal.broadband.basket.entity.InstallationAddress();
-				installationAddress.setCitySubDivisionName(broadband.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
-				installationAddress.setCountry(broadband.getServicePoint().getLineReference().getInstallationAddress().getCountry());
-				installationAddress.setCounty(broadband.getServicePoint().getLineReference().getInstallationAddress().getCounty());
-				installationAddress.setFlatNumber(broadband.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
-				installationAddress.setHouseName(broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
-				installationAddress.setHouseNumber(broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
-				installationAddress.setLocality(broadband.getServicePoint().getLineReference().getInstallationAddress().getLocality());
-				installationAddress.setMoveTypeCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
-				installationAddress.setPostCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
-				installationAddress.setStreetName(broadband.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
-				installationAddress.setTown(broadband.getServicePoint().getLineReference().getInstallationAddress().getTown());
-				if(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification()!=null){
-					com.vf.uk.dal.broadband.basket.entity.Identification identification = new com.vf.uk.dal.broadband.basket.entity.Identification();
-					identification.setContextId(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getContextId());
-					identification.setId(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getId());
-					installationAddress.setIdentification(identification);
-					addPackage.setInstallationAddress(installationAddress);
-				}
-			}
-			if(broadband.getServicePoint()!=null){
-				com.vf.uk.dal.broadband.basket.entity.ServicePoint basketServicePoint = new com.vf.uk.dal.broadband.basket.entity.ServicePoint();
-				if(broadband.getServicePoint().getLineReference()!=null){
-					com.vf.uk.dal.broadband.basket.entity.LineReference basketLineReference = new com.vf.uk.dal.broadband.basket.entity.LineReference();
-					if( broadband.getServicePoint().getLineReference().getAvailableServices()!=null
-							&& CollectionUtils.isNotEmpty(broadband.getServicePoint().getLineReference().getAvailableServices().getService())){
-						com.vf.uk.dal.broadband.basket.entity.AvailableServices basketAvailableService = new com.vf.uk.dal.broadband.basket.entity.AvailableServices();
-						List<String> basketService = new ArrayList<>();
-						for(String service : broadband.getServicePoint().getLineReference().getAvailableServices().getService()){
-							basketService.add(service);
-						}
-						basketAvailableService.service(basketService);
-						basketLineReference.setAvailableServices(basketAvailableService);
-					}
-					if(CollectionUtils.isNotEmpty(broadband.getServicePoint().getLineReference().getLineDirectoryList())){
-						List<com.vf.uk.dal.broadband.basket.entity.LineDirectory> basketLineDirectoryList = new ArrayList<>();
-						for(LineDirectory lineDirectory : broadband.getServicePoint().getLineReference().getLineDirectoryList()){
-							com.vf.uk.dal.broadband.basket.entity.LineDirectory basketLineDirectory = new com.vf.uk.dal.broadband.basket.entity.LineDirectory();
-							basketLineDirectory.setDirectoryCode(lineDirectory.getDirectoryCode());
-							basketLineDirectory.setFeatureCode(lineDirectory.getFeatureCode());
-							basketLineDirectory.setLocationCode(lineDirectory.getLocaltionCode());
-							basketLineDirectoryList.add(basketLineDirectory);
-						}
-						basketLineReference.setLineDirectory(basketLineDirectoryList);
-					}
-					
-					if(broadband.getServicePoint().getLineReference().getLineLocator()!=null){
-						com.vf.uk.dal.broadband.basket.entity.LineLocator basketLineLocator = new com.vf.uk.dal.broadband.basket.entity.LineLocator();
-						basketLineLocator.setCableLinkID(broadband.getServicePoint().getLineReference().getLineLocator().getCableLinkID());
-						basketLineLocator.setDistributionPoint(broadband.getServicePoint().getLineReference().getLineLocator().getDistributionPoint());
-						basketLineLocator.setDistrictCode(broadband.getServicePoint().getLineReference().getLineLocator().getDistrictCode());
-						basketLineLocator.setExchangeCode(broadband.getServicePoint().getLineReference().getLineLocator().getExchangeCode());
-						basketLineLocator.setExchangeName(broadband.getServicePoint().getLineReference().getLineLocator().getExchangeName());
-						basketLineLocator.setL2SID(broadband.getServicePoint().getLineReference().getLineLocator().getL2SID());
-						basketLineReference.setLineLocator(basketLineLocator);
-					}
-					if(broadband.getServicePoint().getLineReference().getLineSettings()!=null){
-						com.vf.uk.dal.broadband.basket.entity.LineSettings basketLineSettings = new com.vf.uk.dal.broadband.basket.entity.LineSettings();
-						basketLineSettings.setInstallationCode(broadband.getServicePoint().getLineReference().getLineSettings().getInstallationCode());
-						basketLineSettings.setServiceCode(broadband.getServicePoint().getLineReference().getLineSettings().getServiceCode());
-						basketLineSettings.setTerminationCode(broadband.getServicePoint().getLineReference().getLineSettings().getTerminationCode());
-						basketLineReference.setLineSettings(basketLineSettings);
-					}
-					
-					if(broadband.getServicePoint().getLineReference().getLineStatus()!=null){
-						com.vf.uk.dal.broadband.basket.entity.LineStatus basketLineStatus = new com.vf.uk.dal.broadband.basket.entity.LineStatus();
-						basketLineStatus.setAccessLineStatus(broadband.getServicePoint().getLineReference().getLineStatus().getAccessLineStatus());
-						basketLineStatus.setGnpStatus(broadband.getServicePoint().getLineReference().getLineStatus().getgNPStatus());
-						basketLineStatus.setLineOption(broadband.getServicePoint().getLineReference().getLineStatus().getLineOption());
-						basketLineStatus.setLineType(broadband.getServicePoint().getLineReference().getLineStatus().getLineType());
-						basketLineStatus.setNarrowBandServicesAvailable(broadband.getServicePoint().getLineReference().getLineStatus().getNarrowBandServicesAvailable());
-						if(StringUtils.isNotEmpty(broadband.getServicePoint().getLineReference().getLineStatus().getStandbyPowerRequired())){
-							basketLineStatus.setStandbyPowerRequired(Boolean.parseBoolean(broadband.getServicePoint().getLineReference().getLineStatus().getStandbyPowerRequired()));
-						}
-						basketLineStatus.setStatusCode(broadband.getServicePoint().getLineReference().getLineStatus().getStatusCode());
-						basketLineStatus.setTechnology(broadband.getServicePoint().getLineReference().getLineStatus().getTechnology());
-						if(StringUtils.isNotEmpty(broadband.getServicePoint().getLineReference().getLineStatus().getTempStructure())){
-							basketLineStatus.setTempStructure(Boolean.parseBoolean(broadband.getServicePoint().getLineReference().getLineStatus().getTempStructure()));
-						}
-						basketLineReference.setLineStatus(basketLineStatus);
-					}
-					basketServicePoint.setLineRefernece(basketLineReference);
-				}
-				if(broadband.getServicePoint().getServiceReference()!=null
-						&& CollectionUtils.isNotEmpty(broadband.getServicePoint().getServiceReference().getServiceLinesList())){
-					List<com.vf.uk.dal.broadband.basket.entity.ServiceLines> basketServiceLinesList = new ArrayList<>();
-					for(ServiceLines serviceLines : broadband.getServicePoint().getServiceReference().getServiceLinesList()){
-						if(StringUtils.equalsIgnoreCase(serviceLines.getClassificationCode(), basketRequest.getSelectedPackageCode())){
-							com.vf.uk.dal.broadband.basket.entity.ServiceLines basketServiceLines = new com.vf.uk.dal.broadband.basket.entity.ServiceLines();
-							basketServiceLines.setClassificationCode(serviceLines.getClassificationCode());
-							basketServiceLines.setNetworkType(serviceLines.getNetworkType());
-						}
-					}
-				}
-			}
-			
-			
-			
-			
-			
-		}*/
 		return createBasket;
 	}
 
@@ -909,10 +818,15 @@ public class ConverterUtils {
 
 
 	public static PremiseAndServicePoint setPremiseAndServicePointRequest(
-			com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, Broadband broadband) {
+			com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, Broadband broadband, AvailabilityCheckRequest availabilityCheckRequest) {
 		PremiseAndServicePoint premiseAndServicePoint = new PremiseAndServicePoint();
 		if(servicePoint!=null){
 			premiseAndServicePoint.setServicePoint(servicePoint);
+		}
+		
+		if(availabilityCheckRequest.getLineRef()!=null && availabilityCheckRequest.getLineRef().getLineIdentification()!=null
+				&& StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())){
+			premiseAndServicePoint.setPhoneNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		}
 
 		if( broadband.getServicePoint().getLineReference().getInstallationAddress()!=null){

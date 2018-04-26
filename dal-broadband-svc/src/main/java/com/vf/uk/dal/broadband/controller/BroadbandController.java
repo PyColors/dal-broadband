@@ -18,6 +18,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
+import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -181,7 +182,9 @@ public class BroadbandController {
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody BasketRequest basketRequest) {
 			
 		
-		return broadbandService.createOrUpdatePackage(basketRequest,broadbandId);
+		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
+		BroadbandValidator.isBasketCreateOrUpdateRequestValid(basketRequest,broadband);
+		return broadbandService.createOrUpdatePackage(basketRequest,broadband,broadbandId);
 	}
 	
 	

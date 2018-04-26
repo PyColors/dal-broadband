@@ -14,11 +14,20 @@ import io.swagger.annotations.ApiModelProperty;
  * PremiseAndServicePoint
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-24T11:14:47.535Z")
 
 public class PremiseAndServicePoint   {
   @JsonProperty("installationAddress")
   private InstallationAddress installationAddress = null;
+
+  @JsonProperty("linePackageType")
+  private String linePackageType = null;
+
+  @JsonProperty("lineTreatmentType")
+  private String lineTreatmentType = null;
+
+  @JsonProperty("phoneNumber")
+  private String phoneNumber = null;
 
   @JsonProperty("servicePoint")
   private ServicePoint servicePoint = null;
@@ -42,6 +51,66 @@ public class PremiseAndServicePoint   {
 
   public void setInstallationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
+  }
+
+  public PremiseAndServicePoint linePackageType(String linePackageType) {
+    this.linePackageType = linePackageType;
+    return this;
+  }
+
+  /**
+   * Get linePackageType
+   * @return linePackageType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getLinePackageType() {
+    return linePackageType;
+  }
+
+  public void setLinePackageType(String linePackageType) {
+    this.linePackageType = linePackageType;
+  }
+
+  public PremiseAndServicePoint lineTreatmentType(String lineTreatmentType) {
+    this.lineTreatmentType = lineTreatmentType;
+    return this;
+  }
+
+  /**
+   * Get lineTreatmentType
+   * @return lineTreatmentType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getLineTreatmentType() {
+    return lineTreatmentType;
+  }
+
+  public void setLineTreatmentType(String lineTreatmentType) {
+    this.lineTreatmentType = lineTreatmentType;
+  }
+
+  public PremiseAndServicePoint phoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  /**
+   * Get phoneNumber
+   * @return phoneNumber
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public PremiseAndServicePoint servicePoint(ServicePoint servicePoint) {
@@ -76,12 +145,15 @@ public class PremiseAndServicePoint   {
     }
     PremiseAndServicePoint premiseAndServicePoint = (PremiseAndServicePoint) o;
     return Objects.equals(this.installationAddress, premiseAndServicePoint.installationAddress) &&
+        Objects.equals(this.linePackageType, premiseAndServicePoint.linePackageType) &&
+        Objects.equals(this.lineTreatmentType, premiseAndServicePoint.lineTreatmentType) &&
+        Objects.equals(this.phoneNumber, premiseAndServicePoint.phoneNumber) &&
         Objects.equals(this.servicePoint, premiseAndServicePoint.servicePoint);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(installationAddress, servicePoint);
+    return Objects.hash(installationAddress, linePackageType, lineTreatmentType, phoneNumber, servicePoint);
   }
 
   @Override
@@ -90,6 +162,9 @@ public class PremiseAndServicePoint   {
     sb.append("class PremiseAndServicePoint {\n");
     
     sb.append("    installationAddress: ").append(toIndentedString(installationAddress)).append("\n");
+    sb.append("    linePackageType: ").append(toIndentedString(linePackageType)).append("\n");
+    sb.append("    lineTreatmentType: ").append(toIndentedString(lineTreatmentType)).append("\n");
+    sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    servicePoint: ").append(toIndentedString(servicePoint)).append("\n");
     sb.append("}");
     return sb.toString();

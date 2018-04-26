@@ -11,6 +11,8 @@ public class BroadBandConstant {
 	public static final String NEW = "NEW";
 
 	public static final String No_CHARGE = "No Charge";
+	public static final String BASKET_URL = "http://BASKET-V1/basketv2/basket/";
+	public static final String SERVICE_AVAILABILITY_URL_CONSTANT = "http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability";
 
 	private BroadBandConstant() {
 	}
