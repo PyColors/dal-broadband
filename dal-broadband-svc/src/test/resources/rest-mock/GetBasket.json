@@ -21,6 +21,7 @@
       "removable": true,
       "dependentOn": null,
       "voucherCode": null,
+      "planType" : "Broadband",
       "bundle": {
         "packageLineId": "43eefee0-104d-4718-9589-c55e52c2b7f3",
         "action": "ADD",

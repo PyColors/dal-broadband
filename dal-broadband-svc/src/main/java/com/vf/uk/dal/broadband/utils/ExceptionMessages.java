@@ -28,6 +28,11 @@ public class ExceptionMessages {
 	public static final String GEN_BASKET_EXCEPTION = "General Exception while calling get basket";
 	public static final String GEN_UPT_SP_EXCEPTION = "General Exception while calling update premise and service point in Basket";
 	public static final String GEN_EXP_PRODUCT = "General Exception occured while invoking product API for Engineering Visit Product";
+	public static final String PACKAGE_ID_EMPTY = "Package id is empty. Not a valid request whule updating the basket";
+	public static final String BUNDLE_ID_EMPTY = "Bundle Id or Package Id is null. Not a valid request while updating";
+	public static final String HARDWARE_ID_EMPTY = "Hardware Id or Package Id is null. Not a valid request while updating";
+	public static final String EMPTY_SOURCE = "Source cannot be null while creating or updating the basket";
+	public static final String EMPTY_CUSTOMER_REQUESTED_DATE = "Customer Requested date cannot be null while creating or updating the basket";
 
 	private ExceptionMessages() {
 

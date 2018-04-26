@@ -1,5 +1,6 @@
 package com.vf.uk.dal.broadband.svc.impl;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.ServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
@@ -53,7 +55,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		Broadband broadBand = broadbandDao.getBroadbandFromCache(broadbandId);
-		if (broadBand!=null && checkIfAddressIsSame(availabilityCheckRequest,broadBand ) ) {
+		if (broadBand!=null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest,broadBand ) ) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
 		} else {
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
@@ -73,7 +75,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
 					|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
-						getServiceAvailabilityResponse,broadbandId);
+						getServiceAvailabilityResponse,broadbandId,broadBand);
 				broadbandDao.setBroadBandInCache(broadBand);
 				response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
 						availabilityCheckRequest);
@@ -83,7 +85,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 		}
 		if(broadBand!=null && StringUtils.isNotEmpty(broadBand.getBasketId())){
-			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(mapper.map(broadBand.getServicePoint(), ServicePoint.class),broadBand);
+			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(mapper.map(broadBand.getServicePoint(), ServicePoint.class),broadBand,availabilityCheckRequest);
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest,broadBand.getPackageId(),broadBand.getBasketId());
 		}
 		
@@ -96,26 +98,27 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 * 
 	 */
 
-	private boolean checkIfAddressIsSame(AvailabilityCheckRequest availabilityCheckRequest, Broadband broadBand) {
+	private boolean checkIfAddressAndPhoneNumberIsSame(AvailabilityCheckRequest availabilityCheckRequest, Broadband broadBand) {
 		if(broadBand.getServicePoint()!=null
 				&& broadBand.getServicePoint().getLineReference()!=null){
 			InstallationAddress installationAddress =broadBand.getServicePoint().getLineReference().getInstallationAddress();
-			if(StringUtils.equalsIgnoreCase(installationAddress.getPostCode().replaceAll("\\s",""), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode().replaceAll("\\s",""))){
-					if(StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())
-							&& StringUtils.equalsIgnoreCase(installationAddress.getFlatNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())){
-						
-							return true;
-					}else if(StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseNumber())
-							&& StringUtils.equalsIgnoreCase(installationAddress.getHouseNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseNumber())){
-						
-							return true;
-					}else if(StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName())
-							&& StringUtils.equalsIgnoreCase(installationAddress.getHouseName(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName())){
-						
-							return true;
-					}
-						
-					}
+			boolean isAddressSame = false;
+			if((StringUtils.equalsIgnoreCase(installationAddress.getPostCode().replaceAll("\\s",""), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode().replaceAll("\\s","")))
+					&& ((StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())
+							&& StringUtils.equalsIgnoreCase(installationAddress.getFlatNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())
+							|| (StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseNumber())
+									&& StringUtils.equalsIgnoreCase(installationAddress.getHouseNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseNumber()))
+							|| (StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName())
+									&& StringUtils.equalsIgnoreCase(installationAddress.getHouseName(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName()))))){
+				
+				isAddressSame = true;
+			}
+			if(isAddressSame
+					&& (broadBand.getLineDetails()==null && StringUtils.isEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())
+					|| (broadBand.getLineDetails()!=null && StringUtils.equalsIgnoreCase(broadBand.getLineDetails().getFlbbNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))) ){
+				return true;
+			}
+			
 		}
 		return false;
 	}
@@ -382,8 +385,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	}
 
 	@Override
-	public Basket createOrUpdatePackage(BasketRequest basketRequest, String broadbandId) {
-		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+	public Basket createOrUpdatePackage(BasketRequest basketRequest,Broadband broadband, String broadbandId) {
 		Basket basket = null;
 		if(broadband!=null){
 			String basketId = broadband.getBasketId();
@@ -396,14 +398,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if(StringUtils.isBlank(basketId)){
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,broadband,mapper.map(broadband.getServicePoint(), ServicePoint.class),journey);
 				basket =  broadbandDao.createBasket(createBasketRequest);
-				broadband.setBasketId(basket.getBasketId());
-				
+				broadband.setBasketId(basket.getBasketId());	
 			}else{
 				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest,journey,broadband);
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(),basketId);
 				basket =  broadbandDao.getBasket(basketId);
 			}
-			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest,broadbandId);
+			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest,broadbandId,basket);
+			
 			broadbandDao.setBroadBandInCache(broadband);
 		}else{
 			CreateBasketRequest createBasketRequest  = ConverterUtils.createBasketRequest(basketRequest, broadband, null, null);
@@ -411,6 +413,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 			Broadband broadbandToSave = new Broadband();
 			broadbandToSave.setBroadBandId(broadbandId);
 			broadbandToSave.setBasketId(basket.getBasketId());
+			if(CollectionUtils.isNotEmpty(basket.getPackages())){
+				for(ModelPackage modelPackage : basket.getPackages()){
+					if(StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")){
+						broadbandToSave.setPackageId(modelPackage.getPackageId());
+					}
+				}
+			}
 			broadbandDao.setBroadBandInCache(broadbandToSave);
 		}
 		return basket;
