@@ -113,8 +113,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				
 				isAddressSame = true;
 			}
-			if(isAddressSame
-					&& (broadBand.getLineDetails()==null && StringUtils.isEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())
+			if(isAddressSame && ((broadBand.getLineDetails()==null && StringUtils.isEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))
 					|| (broadBand.getLineDetails()!=null && StringUtils.equalsIgnoreCase(broadBand.getLineDetails().getFlbbNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))) ){
 				return true;
 			}
