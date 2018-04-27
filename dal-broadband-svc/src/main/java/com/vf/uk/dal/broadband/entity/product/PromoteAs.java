@@ -1,6 +1,10 @@
 package com.vf.uk.dal.broadband.entity.product;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import javax.validation.Valid;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -9,33 +13,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Category
+ * PromoteAs
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
-public class Category   {
-  @JsonProperty("category")
-  private String category = null;
+public class PromoteAs   {
+  @JsonProperty("promotionName")
+  @Valid
+  private List<String> promotionName = null;
 
-  public Category category(String category) {
-    this.category = category;
+  public PromoteAs promotionName(List<String> promotionName) {
+    this.promotionName = promotionName;
+    return this;
+  }
+
+  public PromoteAs addPromotionNameItem(String promotionNameItem) {
+    if (this.promotionName == null) {
+      this.promotionName = new ArrayList<String>();
+    }
+    this.promotionName.add(promotionNameItem);
     return this;
   }
 
   /**
-   * Get category
-   * @return category
+   * Get promotionName
+   * @return promotionName
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getCategory() {
-    return category;
+  public List<String> getPromotionName() {
+    return promotionName;
   }
 
-  public void setCategory(String category) {
-    this.category = category;
+  public void setPromotionName(List<String> promotionName) {
+    this.promotionName = promotionName;
   }
 
 
@@ -47,21 +60,21 @@ public class Category   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Category category = (Category) o;
-    return Objects.equals(this.category, category.category);
+    PromoteAs promoteAs = (PromoteAs) o;
+    return Objects.equals(this.promotionName, promoteAs.promotionName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(category);
+    return Objects.hash(promotionName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Category {\n");
+    sb.append("class PromoteAs {\n");
     
-    sb.append("    category: ").append(toIndentedString(category)).append("\n");
+    sb.append("    promotionName: ").append(toIndentedString(promotionName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

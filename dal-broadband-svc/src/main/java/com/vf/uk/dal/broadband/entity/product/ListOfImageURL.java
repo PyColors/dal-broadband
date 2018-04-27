@@ -9,56 +9,56 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Equipment
+ * ListOfImageURL
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
-public class Equipment   {
-  @JsonProperty("make")
-  private String make = null;
+public class ListOfImageURL   {
+  @JsonProperty("imageName")
+  private String imageName = null;
 
-  @JsonProperty("model")
-  private String model = null;
+  @JsonProperty("imageURL")
+  private String imageURL = null;
 
-  public Equipment make(String make) {
-    this.make = make;
+  public ListOfImageURL imageName(String imageName) {
+    this.imageName = imageName;
     return this;
   }
 
   /**
-   * Get make
-   * @return make
+   * Get imageName
+   * @return imageName
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getMake() {
-    return make;
+  public String getImageName() {
+    return imageName;
   }
 
-  public void setMake(String make) {
-    this.make = make;
+  public void setImageName(String imageName) {
+    this.imageName = imageName;
   }
 
-  public Equipment model(String model) {
-    this.model = model;
+  public ListOfImageURL imageURL(String imageURL) {
+    this.imageURL = imageURL;
     return this;
   }
 
   /**
-   * Get model
-   * @return model
+   * Get imageURL
+   * @return imageURL
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getModel() {
-    return model;
+  public String getImageURL() {
+    return imageURL;
   }
 
-  public void setModel(String model) {
-    this.model = model;
+  public void setImageURL(String imageURL) {
+    this.imageURL = imageURL;
   }
 
 
@@ -70,23 +70,23 @@ public class Equipment   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Equipment equipment = (Equipment) o;
-    return Objects.equals(this.make, equipment.make) &&
-        Objects.equals(this.model, equipment.model);
+    ListOfImageURL listOfImageURL = (ListOfImageURL) o;
+    return Objects.equals(this.imageName, listOfImageURL.imageName) &&
+        Objects.equals(this.imageURL, listOfImageURL.imageURL);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(make, model);
+    return Objects.hash(imageName, imageURL);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Equipment {\n");
+    sb.append("class ListOfImageURL {\n");
     
-    sb.append("    make: ").append(toIndentedString(make)).append("\n");
-    sb.append("    model: ").append(toIndentedString(model)).append("\n");
+    sb.append("    imageName: ").append(toIndentedString(imageName)).append("\n");
+    sb.append("    imageURL: ").append(toIndentedString(imageURL)).append("\n");
     sb.append("}");
     return sb.toString();
   }

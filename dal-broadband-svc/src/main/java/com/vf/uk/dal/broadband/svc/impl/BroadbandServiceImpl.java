@@ -1,5 +1,7 @@
 package com.vf.uk.dal.broadband.svc.impl;
 
+import java.util.List;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
@@ -19,6 +21,7 @@ import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
@@ -52,7 +55,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 * AvailabilityCheckRequest)
 	 */
 	@Override
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId) {
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, String acceptVersion) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		Broadband broadBand = broadbandDao.getBroadbandFromCache(broadbandId);
 		if (broadBand!=null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest,broadBand ) ) {
@@ -74,11 +77,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 					getServiceAvailabilityResponse);
 			if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
 					|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
+				
+				List<ProductDetails> productDetailsList = broadbandDao.getEngineeringVisitFee(acceptVersion);
+				
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
-						getServiceAvailabilityResponse,broadbandId,broadBand);
+						getServiceAvailabilityResponse,broadbandId,broadBand,productDetailsList);
 				broadbandDao.setBroadBandInCache(broadBand);
 				response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
-						availabilityCheckRequest);
+						availabilityCheckRequest,productDetailsList);
 			} else {
 				LogHelper.error(this, "Invalid classification code !!!");
 				throw new ApplicationException("INVALID_CLASSIFICATION_CODE");

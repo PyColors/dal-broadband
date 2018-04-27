@@ -143,5 +143,10 @@
   "basketId":"2b23e0a1-eefd-409c-a919-e0ca774b9017",
   "accountCategory":"Consumer",
   "packageId": null,
-  "journeyId" : null
+  "journeyId" : null,
+  "engineeringVisitCharge":{
+  "gross" :"100.00",
+  "net" : "80.00",
+  "vat" : "20"
+  }
 }

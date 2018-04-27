@@ -9,33 +9,56 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Category
+ * Discount
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
-public class Category   {
-  @JsonProperty("category")
-  private String category = null;
+public class Discount   {
+  @JsonProperty("amount")
+  private String amount = null;
 
-  public Category category(String category) {
-    this.category = category;
+  @JsonProperty("type")
+  private String type = null;
+
+  public Discount amount(String amount) {
+    this.amount = amount;
     return this;
   }
 
   /**
-   * Get category
-   * @return category
+   * Get amount
+   * @return amount
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getCategory() {
-    return category;
+  public String getAmount() {
+    return amount;
   }
 
-  public void setCategory(String category) {
-    this.category = category;
+  public void setAmount(String amount) {
+    this.amount = amount;
+  }
+
+  public Discount type(String type) {
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   * @return type
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 
@@ -47,21 +70,23 @@ public class Category   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Category category = (Category) o;
-    return Objects.equals(this.category, category.category);
+    Discount discount = (Discount) o;
+    return Objects.equals(this.amount, discount.amount) &&
+        Objects.equals(this.type, discount.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(category);
+    return Objects.hash(amount, type);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Category {\n");
+    sb.append("class Discount {\n");
     
-    sb.append("    category: ").append(toIndentedString(category)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

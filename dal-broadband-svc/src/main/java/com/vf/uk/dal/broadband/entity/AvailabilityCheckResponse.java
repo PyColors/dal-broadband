@@ -30,6 +30,9 @@ public class AvailabilityCheckResponse {
 
 	@JsonProperty("classificationCode")
 	private List<String> classificationCode = null;
+	
+	@JsonProperty("engineeringVisitCharge")
+	private Price engineeringVisitCharge = null;
 
 	public AvailabilityCheckResponse journeyId(String journeyId) {
 		this.journeyId = journeyId;
@@ -170,6 +173,14 @@ public class AvailabilityCheckResponse {
 
 	public void setLineSpeeds(List<LineSpeeds> lineSpeeds) {
 		this.lineSpeeds = lineSpeeds;
+	}
+
+	public Price getEngineeringVisitCharge() {
+		return engineeringVisitCharge;
+	}
+
+	public void setEngineeringVisitCharge(Price engineeringVisitCharge) {
+		this.engineeringVisitCharge = engineeringVisitCharge;
 	}
 
 	@Override
