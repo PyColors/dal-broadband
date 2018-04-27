@@ -41,6 +41,11 @@ public class Broadband implements Serializable {
 	/** The line details. */
 	@JsonProperty("lineDetails")
 	private LineDetails lineDetails;
+	
+	
+	@JsonProperty("engineeringVisitCharge")
+	private Price engineeringVisitCharge = null;;
+	
 
 	@JsonProperty("broadBandId")
 	@Id
@@ -132,6 +137,14 @@ public class Broadband implements Serializable {
 
 	public void setPackageId(String packageId) {
 		this.packageId = packageId;
+	}
+
+	public Price getEngineeringVisitCharge() {
+		return engineeringVisitCharge;
+	}
+
+	public void setEngineeringVisitCharge(Price engineeringVisitCharge) {
+		this.engineeringVisitCharge = engineeringVisitCharge;
 	}
 
 	@Override

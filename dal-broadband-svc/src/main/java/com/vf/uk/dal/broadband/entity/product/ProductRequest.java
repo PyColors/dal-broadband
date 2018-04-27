@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * ProductRequest
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-17T20:40:09.952Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
 public class ProductRequest   {
   @JsonProperty("productId")

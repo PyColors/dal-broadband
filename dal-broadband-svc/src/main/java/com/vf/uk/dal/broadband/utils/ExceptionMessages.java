@@ -33,6 +33,7 @@ public class ExceptionMessages {
 	public static final String HARDWARE_ID_EMPTY = "Hardware Id or Package Id is null. Not a valid request while updating";
 	public static final String EMPTY_SOURCE = "Source cannot be null while creating or updating the basket";
 	public static final String EMPTY_CUSTOMER_REQUESTED_DATE = "Customer Requested date cannot be null while creating or updating the basket";
+	public static final String NO_VALID_DATA_PRODUCT_ENGINEERING_FEE = "No Valid data recieved while calling product MS";
 
 	private ExceptionMessages() {
 

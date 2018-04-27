@@ -17,10 +17,11 @@ public interface BroadbandService {
 	 * check availability service for broadband
 	 * @param availabilityCheckRequest
 	 * @param broadbandId 
+	 * @param acceptVersion 
 	 * @return AvailabilityCheckResponse
 	 */
 	
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId);
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, String acceptVersion);
 
 	
 	/**

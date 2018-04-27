@@ -1,0 +1,79 @@
+[{
+  "id": "107573",
+  "order": 41810,
+  "name": "Engineer Visit",
+  "productClass": "Fee",
+  "isServicesProduct": true,
+  "duration": null,
+  "discount": null,
+  "warranty": null,
+  "condition": "New",
+  "categories": null,
+  "productLines":    [
+     "Acc Sol",
+     "Available FL Packages CBU",
+     "Available FL Packages EBU",
+     "Service"
+  ],
+  "priceDetail":    {
+     "priceType": "one-time",
+     "isInvoiceChargeable": false,
+     "priceNet": "50.0",
+     "priceGross": "60.0",
+     "priceVAT": "10.0",
+     "vatCode": "0.2",
+     "priceStartDate": null,
+     "priceEndDate": null,
+     "recurrence": "Each"
+  },
+  "productAllowance": null,
+  "boxPrice": null,
+  "productAvailability":    {
+     "start": null,
+     "end": null,
+     "salesExpired": false
+  },
+  "isDeviceProduct": false,
+  "inclusiveEligibility": null,
+  "omniChannelDiscountEligible": false,
+  "productSubClass": null,
+  "equipment":    {
+     "make": null,
+     "model": null
+  },
+  "eligibilitySubflow": null,
+  "delivery":    {
+     "classification": null,
+     "partner": null,
+     "soaDeliveryMethod": null,
+     "weekend": false
+  },
+  "displayName": "Engineer Visit",
+  "preDesc": null,
+  "postDesc": null,
+  "preDescMobile": null,
+  "postDescMobile": null,
+  "listOfimageURLs": null,
+  "listOfmediaURLs": null,
+  "specificationGroups": null,
+  "inTheBox": null,
+  "productControl":    {
+     "isDisplayableinLife": false,
+     "isSellableinLife": false,
+     "isDisplayableAcq": true,
+     "isSellableRet": true,
+     "isDisplayableRet": true,
+     "isSellableAcq": true,
+     "isDisplayableSavedBasket": false
+  },
+  "productGroups": null,
+  "misc": null,
+  "promoteAs": null,
+  "leadPlanId": null,
+  "recommendataions": null,
+  "fastMoving": false,
+  "stockThresholdLimit": null,
+  "listOfEligibleChannels": null,
+  "paymentType": "Postpaid",
+  "battery": false
+}]

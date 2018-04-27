@@ -1,6 +1,10 @@
 package com.vf.uk.dal.broadband.entity.product;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import javax.validation.Valid;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -9,33 +13,43 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Category
+ * ProductGroups
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
-public class Category   {
-  @JsonProperty("category")
-  private String category = null;
+public class ProductGroups   {
+  @JsonProperty("productGroup")
+  @Valid
+  private List<ProductGroup> productGroup = null;
 
-  public Category category(String category) {
-    this.category = category;
+  public ProductGroups productGroup(List<ProductGroup> productGroup) {
+    this.productGroup = productGroup;
+    return this;
+  }
+
+  public ProductGroups addProductGroupItem(ProductGroup productGroupItem) {
+    if (this.productGroup == null) {
+      this.productGroup = new ArrayList<ProductGroup>();
+    }
+    this.productGroup.add(productGroupItem);
     return this;
   }
 
   /**
-   * Get category
-   * @return category
+   * Get productGroup
+   * @return productGroup
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getCategory() {
-    return category;
+  public List<ProductGroup> getProductGroup() {
+    return productGroup;
   }
 
-  public void setCategory(String category) {
-    this.category = category;
+  public void setProductGroup(List<ProductGroup> productGroup) {
+    this.productGroup = productGroup;
   }
 
 
@@ -47,21 +61,21 @@ public class Category   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Category category = (Category) o;
-    return Objects.equals(this.category, category.category);
+    ProductGroups productGroups = (ProductGroups) o;
+    return Objects.equals(this.productGroup, productGroups.productGroup);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(category);
+    return Objects.hash(productGroup);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Category {\n");
+    sb.append("class ProductGroups {\n");
     
-    sb.append("    category: ").append(toIndentedString(category)).append("\n");
+    sb.append("    productGroup: ").append(toIndentedString(productGroup)).append("\n");
     sb.append("}");
     return sb.toString();
   }

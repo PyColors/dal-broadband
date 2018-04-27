@@ -12,14 +12,14 @@ import io.swagger.annotations.ApiModelProperty;
  * PriceDetail
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-17T20:40:09.952Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
 public class PriceDetail   {
   @JsonProperty("priceType")
   private String priceType = null;
 
   @JsonProperty("isInvoiceChargeable")
-  private String isInvoiceChargeable = null;
+  private Boolean isInvoiceChargeable = null;
 
   @JsonProperty("priceNet")
   private String priceNet = null;
@@ -62,7 +62,7 @@ public class PriceDetail   {
     this.priceType = priceType;
   }
 
-  public PriceDetail isInvoiceChargeable(String isInvoiceChargeable) {
+  public PriceDetail isInvoiceChargeable(Boolean isInvoiceChargeable) {
     this.isInvoiceChargeable = isInvoiceChargeable;
     return this;
   }
@@ -74,11 +74,11 @@ public class PriceDetail   {
   @ApiModelProperty(value = "")
 
 
-  public String getIsInvoiceChargeable() {
+  public Boolean isIsInvoiceChargeable() {
     return isInvoiceChargeable;
   }
 
-  public void setIsInvoiceChargeable(String isInvoiceChargeable) {
+  public void setIsInvoiceChargeable(Boolean isInvoiceChargeable) {
     this.isInvoiceChargeable = isInvoiceChargeable;
   }
 

@@ -9,12 +9,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * BoxPrice
+ * ProductPriceOverride
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
-public class BoxPrice   {
+public class ProductPriceOverride   {
   @JsonProperty("priceNet")
   private String priceNet = null;
 
@@ -24,7 +24,7 @@ public class BoxPrice   {
   @JsonProperty("priceVAT")
   private String priceVAT = null;
 
-  public BoxPrice priceNet(String priceNet) {
+  public ProductPriceOverride priceNet(String priceNet) {
     this.priceNet = priceNet;
     return this;
   }
@@ -44,7 +44,7 @@ public class BoxPrice   {
     this.priceNet = priceNet;
   }
 
-  public BoxPrice priceGross(String priceGross) {
+  public ProductPriceOverride priceGross(String priceGross) {
     this.priceGross = priceGross;
     return this;
   }
@@ -64,7 +64,7 @@ public class BoxPrice   {
     this.priceGross = priceGross;
   }
 
-  public BoxPrice priceVAT(String priceVAT) {
+  public ProductPriceOverride priceVAT(String priceVAT) {
     this.priceVAT = priceVAT;
     return this;
   }
@@ -93,10 +93,10 @@ public class BoxPrice   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BoxPrice boxPrice = (BoxPrice) o;
-    return Objects.equals(this.priceNet, boxPrice.priceNet) &&
-        Objects.equals(this.priceGross, boxPrice.priceGross) &&
-        Objects.equals(this.priceVAT, boxPrice.priceVAT);
+    ProductPriceOverride productPriceOverride = (ProductPriceOverride) o;
+    return Objects.equals(this.priceNet, productPriceOverride.priceNet) &&
+        Objects.equals(this.priceGross, productPriceOverride.priceGross) &&
+        Objects.equals(this.priceVAT, productPriceOverride.priceVAT);
   }
 
   @Override
@@ -107,7 +107,7 @@ public class BoxPrice   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class BoxPrice {\n");
+    sb.append("class ProductPriceOverride {\n");
     
     sb.append("    priceNet: ").append(toIndentedString(priceNet)).append("\n");
     sb.append("    priceGross: ").append(toIndentedString(priceGross)).append("\n");

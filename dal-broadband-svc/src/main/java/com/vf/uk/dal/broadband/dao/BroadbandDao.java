@@ -1,5 +1,7 @@
 package com.vf.uk.dal.broadband.dao;
 
+import java.util.List;
+
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
@@ -7,6 +9,7 @@ import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
@@ -112,6 +115,8 @@ public interface BroadbandDao {
 	Basket getBasket(String basketId);
 
 	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
+
+	List<ProductDetails> getEngineeringVisitFee(String acceptVersion);
 
 
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
