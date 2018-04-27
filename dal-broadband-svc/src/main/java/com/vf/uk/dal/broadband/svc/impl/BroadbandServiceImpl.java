@@ -1,49 +1,32 @@
 package com.vf.uk.dal.broadband.svc.impl;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
+import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.ServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
+import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
-import com.vf.uk.dal.broadband.entity.BundleDetails;
-import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
-import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
-import com.vf.uk.dal.broadband.entity.FlbBundle;
-import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
-import com.vf.uk.dal.broadband.entity.MediaLink;
-import com.vf.uk.dal.broadband.entity.ServiceStartDates;
-import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
-import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
-import com.vf.uk.dal.broadband.entity.journey.Journey;
-import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
-import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
-import com.vf.uk.dal.broadband.utils.MediaConstants;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
-import com.vodafone.solrmodels.ProductModel;
 
 /**
  * @author Infosys Limited.
@@ -54,63 +37,91 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 	@Autowired
 	BroadbandDao broadbandDao;
+	
+	@Autowired
+	DozerBeanMapper mapper;
 
-	
-	
-	
-	/* 
-	 * This methods calls Get Service Availability MS, if the response and successful, then creates or update the journey with the service point information for anonymous or logged 
-	 * in customer respectively, post which creates a very sleek response and present to FE.
-	 *(non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#checkAvailabilityForBroadband(com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest)
+	/*
+	 * This methods calls Get Service Availability MS, if the response and
+	 * successful, then creates or update the journey with the service point
+	 * information for anonymous or logged in customer respectively, post which
+	 * creates a very sleek response and present to FE. (non-Javadoc)
+	 * 
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#
+	 * checkAvailabilityForBroadband(com.vf.uk.dal.broadband.entity.
+	 * AvailabilityCheckRequest)
 	 */
 	@Override
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest) {
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
-		GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
-				.getServiceAvailability(availabilityCheckRequest);
-
-		if (getServiceAvailabilityResponse == null) {
-			LogHelper.error(this, "Invalid classification code !!!");
-			throw new ApplicationException(ExceptionMessages.EMPTY_GSA_RESPONSE);
-		} else if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() == null) {
-			LogHelper.error(this, "No Service Lines Recieved From TIL !!!");
-			throw new ApplicationException(ExceptionMessages.INVALID_SERVICE_LINE);
-
-		}
-
-		boolean isClassificationCodePresent = checkIfClassificationCodePresent(availabilityCheckRequest,
-				getServiceAvailabilityResponse);
-		if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
-				|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
-			FLBBJourneyRequest flbbRequestForJourney = ConverterUtils
-					.createFLBBRequestForJourney(availabilityCheckRequest, getServiceAvailabilityResponse);
-			if (StringUtils.isNotBlank(availabilityCheckRequest.getJourneyId())) {
-				broadbandDao.updateJourneyWithFLBBDetails(availabilityCheckRequest.getJourneyId(),
-						flbbRequestForJourney);
-				response.setJourneyId(availabilityCheckRequest.getJourneyId());
-			} else {
-				String journeyId = broadbandDao.createJourneyWithFLBBDetails(flbbRequestForJourney);
-				response.setJourneyId(journeyId);
-			}
-			List<ProductModel> productModel = broadbandDao.getEngineeringVisitProduct();
-			
-			response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
-					availabilityCheckRequest,productModel);
+		Broadband broadBand = broadbandDao.getBroadbandFromCache(broadbandId);
+		if (broadBand!=null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest,broadBand ) ) {
+			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
 		} else {
-			LogHelper.error(this, "Invalid classification code !!!");
-			throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
+			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
+					.getServiceAvailability(availabilityCheckRequest);
+			if (getServiceAvailabilityResponse == null) {
+				LogHelper.error(this, "Invalid classification code !!!");
+				throw new ApplicationException(ExceptionMessages.EMPTY_GSA_RESPONSE);
+			} else if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
+					&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
+					&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() == null) {
+				LogHelper.error(this, "No Service Lines Recieved From TIL !!!");
+				throw new ApplicationException(ExceptionMessages.INVALID_SERVICE_LINE);
+
+			}
+			boolean isClassificationCodePresent = checkIfClassificationCodePresent(availabilityCheckRequest,
+					getServiceAvailabilityResponse);
+			if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
+					|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
+				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
+						getServiceAvailabilityResponse,broadbandId,broadBand);
+				broadbandDao.setBroadBandInCache(broadBand);
+				response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
+						availabilityCheckRequest);
+			} else {
+				LogHelper.error(this, "Invalid classification code !!!");
+				throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
+			}
 		}
+		if(broadBand!=null && StringUtils.isNotEmpty(broadBand.getBasketId())){
+			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(mapper.map(broadBand.getServicePoint(), ServicePoint.class),broadBand,availabilityCheckRequest);
+			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest,broadBand.getPackageId(),broadBand.getBasketId());
+		}
+		
 		return response;
 	}
 
 	/*
-	 * Check if the classification code selected by the user is present by the GSA or not. If not throws error message.
+	 * Check if the classification code selected by the user is present by the
+	 * GSA or not. If not throws error message.
 	 * 
 	 */
-	
+
+	private boolean checkIfAddressAndPhoneNumberIsSame(AvailabilityCheckRequest availabilityCheckRequest, Broadband broadBand) {
+		if(broadBand.getServicePoint()!=null
+				&& broadBand.getServicePoint().getLineReference()!=null){
+			InstallationAddress installationAddress =broadBand.getServicePoint().getLineReference().getInstallationAddress();
+			boolean isAddressSame = false;
+			if((StringUtils.equalsIgnoreCase(installationAddress.getPostCode().replaceAll("\\s",""), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode().replaceAll("\\s","")))
+					&& ((StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())
+							&& StringUtils.equalsIgnoreCase(installationAddress.getFlatNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getFlatNumber())
+							|| (StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseNumber())
+									&& StringUtils.equalsIgnoreCase(installationAddress.getHouseNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseNumber()))
+							|| (StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName())
+									&& StringUtils.equalsIgnoreCase(installationAddress.getHouseName(), availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName()))))){
+				
+				isAddressSame = true;
+			}
+			if(isAddressSame && ((broadBand.getLineDetails()==null && StringUtils.isEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))
+					|| (broadBand.getLineDetails()!=null && StringUtils.equalsIgnoreCase(broadBand.getLineDetails().getFlbbNumber(), availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))) ){
+				return true;
+			}
+			
+		}
+		return false;
+	}
+
 	private boolean checkIfClassificationCodePresent(AvailabilityCheckRequest availabilityCheckRequest,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse) {
 		boolean isClassificationCodePresent = false;
@@ -137,7 +148,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 * com.vf.uk.dal.bundle.svc.BundleService#getFlbList(com.vf.uk.dal.bundle.
 	 * entity.GetBundleListSearchCriteria)
 	 */
-	@Override
+	/*@Override
 	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria) {
 		LogHelper.debug(getClass(), "Enter getBundleListBySearchCriteria");
 		BundleDetails bundleDetails;
@@ -291,16 +302,18 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		}
 		return listOfFlbBundle;
-	}
+	}*/
 
 	/*
 	 * 
-	 * Logic to get the x working days from the date the service is available for the customer.
-	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#getAvailableServiceStartDates(java.lang.String, java.math.BigDecimal)
+	 * Logic to get the x working days from the date the service is available
+	 * for the customer. (non-Javadoc)
+	 * 
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#
+	 * getAvailableServiceStartDates(java.lang.String, java.math.BigDecimal)
 	 */
-	
-	@Override
+
+	/*@Override
 	public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
 			throws DateTimeParseException, ParseException {
 		LogHelper.info(getClass(),
@@ -309,16 +322,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy").withZone(ZoneId.of("Europe/London"))
 				.withLocale(Locale.UK);
 		LocalDate starDate = LocalDate.parse(earliestAvailableStartDate, formatter);
-		LocalDate endDate = starDate.plusDays(range.longValue() + 20);
-		List<LocalDate> holidayList = broadbandDao.getHolidayList(starDate, endDate);
-		List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1))
-				.filter((LocalDate a) -> {
-					if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
-							|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0) || (holidayList.contains(a))) {
-						return false;
-					}
-					return true;
-				}).limit(range.longValue()).collect(Collectors.toList());
+		List<LocalDate> dates = Stream.iterate(starDate, date -> date.plusDays(1)).filter((LocalDate a) -> {
+			if ((a.getDayOfWeek().compareTo(DayOfWeek.SUNDAY) == 0)
+					|| (a.getDayOfWeek().compareTo(DayOfWeek.SATURDAY) == 0)) {
+				return false;
+			}
+			return true;
+		}).limit(range.longValue()).collect(Collectors.toList());
 		if (CollectionUtils.isNotEmpty(dates)) {
 			dates.sort(new Comparator<LocalDate>() {
 				@Override
@@ -336,28 +346,86 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return serv;
 	}
 
-	/*
-	 * This method calls create appointment MS. Upon succesful response update the journey and basket with the appointment information.
+	
+	 * This method calls create appointment MS. Upon succesful response update
+	 * the journey and basket with the appointment information.
 	 * 
 	 * (non-Javadoc)
-	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#createAppointmentForFLBB(com.vf.uk.dal.broadband.entity.CreateAppointmentRequest)
-	 */
-	
+	 * 
+	 * @see
+	 * com.vf.uk.dal.broadband.svc.BroadbandService#createAppointmentForFLBB(com
+	 * .vf.uk.dal.broadband.entity.CreateAppointmentRequest)
+	 
+
 	@Override
-	public CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest) {
+	public CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest,String journeyId) {
 		CreateAppointmentResponse response = new CreateAppointmentResponse();
-		Journey journey = broadbandDao.getJourney(createAppointmentRequest.getJourneyId());
-		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq = ConverterUtils.createAppointmentRequest(createAppointmentRequest,journey);
+		Broadband broadBand = broadbandDao.getBroadbandFromCache(journeyId);
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq = ConverterUtils
+				.createAppointmentRequest(createAppointmentRequest, broadBand);
 		CreateAppointment createAppointment = broadbandDao.createAppointment(createAppointmentReq);
-		if(createAppointment!=null && 
-				 createAppointment.getAppointmentWindow()!=null && StringUtils.isNotEmpty(createAppointment.getAppointmentWindow().getApplicationId())){
-			SalesOrderAppointmentRequest appointmentRequest = ConverterUtils.createSalesOrderAppointmentRequest(createAppointmentRequest,createAppointment.getAppointmentWindow().getApplicationId());
-			broadbandDao.updateJourneyStateForAppointment(createAppointmentRequest.getJourneyId(),appointmentRequest);
-			response.setApplicationId(createAppointment.getAppointmentWindow().getApplicationId());
-		}else{
+		if (createAppointment != null && createAppointment.getAppointmentWindow() != null
+				&& StringUtils.isNotEmpty(createAppointment.getAppointmentWindow().getApplicationId())) {
+			 broadBand = ConverterUtils.addAppointmentInfoToBroadbandCache(broadBand,createAppointmentRequest,createAppointment.getAppointmentWindow().getApplicationId());
+			 broadbandDao.setBroadBandInCache(broadBand);
+			 AppointmentWindow appointmentWindowRequest = ConverterUtils.updateBasketWithAppointmentRequest(createAppointmentRequest);
+			 broadbandDao.updateBasketWithAppointmentInformation(appointmentWindowRequest);
+			 response.setApplicationId(createAppointment.getAppointmentWindow().getApplicationId());
+		} else {
 			LogHelper.error(this, "Create Appointment failed!!!");
 			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
 		}
 		return response;
+	}*/
+
+	@Override
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
+		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode);
+	}
+
+	@Override
+	public Basket createOrUpdatePackage(BasketRequest basketRequest,Broadband broadband, String broadbandId) {
+		Basket basket = null;
+		if(broadband!=null){
+			String basketId = broadband.getBasketId();
+			String journeyId = broadband.getJourneyId();
+			//broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+			CurrentJourney journey = null;
+			if(StringUtils.isNotEmpty(journeyId)){
+				journey = broadbandDao.getJourney(journeyId);
+			}
+			if(StringUtils.isBlank(basketId)){
+				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,broadband,mapper.map(broadband.getServicePoint(), ServicePoint.class),journey);
+				basket =  broadbandDao.createBasket(createBasketRequest);
+				broadband.setBasketId(basket.getBasketId());	
+			}else{
+				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest,journey,broadband);
+				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(),basketId);
+				basket =  broadbandDao.getBasket(basketId);
+			}
+			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest,broadbandId,basket);
+			
+			broadbandDao.setBroadBandInCache(broadband);
+		}else{
+			CreateBasketRequest createBasketRequest  = ConverterUtils.createBasketRequest(basketRequest, broadband, null, null);
+			basket =  broadbandDao.createBasket(createBasketRequest);
+			Broadband broadbandToSave = new Broadband();
+			broadbandToSave.setBroadBandId(broadbandId);
+			broadbandToSave.setBasketId(basket.getBasketId());
+			if(CollectionUtils.isNotEmpty(basket.getPackages())){
+				for(ModelPackage modelPackage : basket.getPackages()){
+					if(StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")){
+						broadbandToSave.setPackageId(modelPackage.getPackageId());
+					}
+				}
+			}
+			broadbandDao.setBroadBandInCache(broadbandToSave);
+		}
+		return basket;
+	}
+
+	@Override
+	public Broadband getBroadbandFromCache(String broadbandId) {
+		return broadbandDao.getBroadbandFromCache(broadbandId);
 	}
 }

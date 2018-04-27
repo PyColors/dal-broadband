@@ -1,5 +1,9 @@
 package com.vf.uk.dal.broadband.beans.test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.dozer.DozerBeanMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,6 +30,16 @@ public class BroadbandTestBeans {
 	@Bean
 	public BroadbandDao getBroadbandDaoImpl(){
 		return new BroadbandDaoImpl();
+	}
+	
+	
+	@Bean
+	public DozerBeanMapper getDozerBeanMapper() {
+
+		List<String> mappingFiles = Arrays.asList("dozer-config-mapping.xml");
+		DozerBeanMapper dozerBean = new DozerBeanMapper();
+		dozerBean.setMappingFiles(mappingFiles);
+		return dozerBean;
 	}
 	
 }

@@ -1,19 +1,14 @@
 package com.vf.uk.dal.broadband.controller.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,25 +19,20 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.beans.test.BroadbandTestBeans;
-import com.vf.uk.dal.broadband.common.test.CommonMethods;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
-import com.vf.uk.dal.broadband.entity.BundleDetails;
-import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
-import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
-import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
-import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyResponse;
-import com.vf.uk.dal.broadband.entity.journey.Journey;
-import com.vf.uk.dal.broadband.utils.BroadbandCoherenceRepoProvider;
+import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
-import com.vodafone.bankHolidays.pojo.BankHolidays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BroadbandTestBeans.class)
@@ -56,18 +46,21 @@ public class BroadbandControllerTest {
 
 	@MockBean
 	RestTemplate restTemplate;
-
 	@MockBean
-	BroadbandRepoProvider broadBandProvider;
+	BroadbandRepoProvider broadBandRepoProvider;
 
-	@MockBean
-	BroadbandCoherenceRepoProvider cohRepoProvider;
-
-	@Autowired
-	private BroadbandRepoProvider broadbandRepoProvider;
+	
 
 	@Before
 	public void setupMockBehaviour() throws Exception {
+		
+		
+		given(registryClient.getRestTemplate()).willReturn(restTemplate);
+		String jsonStringGsa = new String(Utility.readFile("\\rest-mock\\GSAREQUEST1.json"));
+		GetServiceAvailibilityRequest requestGsa = new ObjectMapper().readValue(jsonStringGsa,
+				GetServiceAvailibilityRequest.class);
+		
+		
 		given(registryClient.getRestTemplate()).willReturn(restTemplate);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\GSAREQUEST.json"));
 		GetServiceAvailibilityRequest request = new ObjectMapper().readValue(jsonString,
@@ -77,64 +70,49 @@ public class BroadbandControllerTest {
 		GetServiceAvailibilityResponse response = new ObjectMapper().readValue(jsonString1,
 				GetServiceAvailibilityResponse.class);
 
-		String jsonString2 = new String(Utility.readFile("\\rest-mock\\FLBBREQUEST.json"));
-		FLBBJourneyRequest flbbRequestForJourney = new ObjectMapper().readValue(jsonString2, FLBBJourneyRequest.class);
+		
+		
+		String jsonString7 = new String(Utility.readFile("\\rest-mock\\GetAddressByPostCode_Response.json"));
+		AddressInfo responseGAL = new ObjectMapper().readValue(jsonString7, AddressInfo.class);
+		
+		
+		String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse.json"));
+		Broadband broadband = new ObjectMapper().readValue(jsonString8, Broadband.class);
+		
+		String jsonString10 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse2.json"));
+		Broadband newBroadband = new ObjectMapper().readValue(jsonString10, Broadband.class);
+		
+		
+		String jsonString9 = new String(Utility.readFile("\\rest-mock\\GetBasket.json"));
+		Basket basket = new ObjectMapper().readValue(jsonString9, Basket.class);
+		
+		
+		
+		
+		
 
-		String jsonString3 = new String(Utility.readFile("\\rest-mock\\FLBBREQUESTFORUPDATE.json"));
-		FLBBJourneyRequest requestForFLBB = new ObjectMapper().readValue(jsonString3, FLBBJourneyRequest.class);
+		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888"))
+		.willReturn(broadband);
+		
+		given(broadBandRepoProvider.getBroadbandFromCache("12345678907899"))
+		.willReturn(newBroadband);
 
-		String jsonString4 = new String(Utility.readFile("\\rest-mock\\GetJourneyResponse.json"));
-		Journey journey = new ObjectMapper().readValue(jsonString4, Journey.class);
+		
+		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability", requestGsa,
+				GetServiceAvailibilityResponse.class))
+						.willReturn(null);
+		
 
-		String jsonString5 = new String(Utility.readFile("\\rest-mock\\CreateAppointmentRequest.json"));
-		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = new ObjectMapper()
-				.readValue(jsonString5, com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
-
-		String jsonString6 = new String(Utility.readFile("\\rest-mock\\CreateAppointment_Response.json"));
-		CreateAppointment responseCA = new ObjectMapper().readValue(jsonString6, CreateAppointment.class);
-
-		/*
-		 * String jsonString7 = new
-		 * String(Utility.readFile("\\rest-mock\\Update_Apoointment.json"));
-		 * SalesOrderAppointmentRequest salesOrderAptRequest = new
-		 * ObjectMapper().readValue(jsonString7,
-		 * SalesOrderAppointmentRequest.class);
-		 */
-
-		given(restTemplate.postForEntity("http://APPOINTMENT-V1/appointment/createAppointment", apptRequest,
-				CreateAppointment.class)).willReturn(new ResponseEntity<CreateAppointment>(responseCA, HttpStatus.OK));
-
-		given(restTemplate.getForEntity("http://JOURNEY-V1/journey/709cf962-1771-400c-a5fd-371756d58985",
-				Journey.class)).willReturn(new ResponseEntity<Journey>(journey, HttpStatus.OK));
-
-		given(restTemplate.postForEntity("http://UTILITY-V1/utility/broadbandServiceAvailability", request,
+		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability", request,
 				GetServiceAvailibilityResponse.class))
 						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(response, HttpStatus.OK));
+		
+		given(restTemplate.getForEntity("http://PREMISE-V1/premise/address/LS290JJ?qualified=true", AddressInfo.class))
+						.willReturn(new ResponseEntity<AddressInfo>(responseGAL, HttpStatus.OK));
+		
+		given(restTemplate.getForEntity("http://BASKET-V1/basket/basket/2b23e0a1-eefd-409c-a919-e0ca774b9017", Basket.class))
+		.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
 
-		FLBBJourneyResponse responeForFLBB = new FLBBJourneyResponse();
-		responeForFLBB.setJourneyId("123456789");
-		System.out.println(flbbRequestForJourney);
-		given(restTemplate.postForEntity("http://JOURNEY-V1/journey/flbb", requestForFLBB, FLBBJourneyResponse.class))
-				.willReturn(new ResponseEntity<FLBBJourneyResponse>(responeForFLBB, HttpStatus.OK));
-
-		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
-				BundleDetails.class)).willReturn(CommonMethods.getFlbList());
-
-		given(broadBandProvider.getProductModelList(broadbandRepoProvider.getSolrHelper(),
-				Arrays.asList("085897", "085897"))).willReturn(CommonMethods.getProductModelsListFromDeviceIdList());
-
-		// setting holiday config list
-		Calendar cal = Calendar.getInstance();
-		java.sql.Date currentDate = new java.sql.Date(cal.getTime().getTime());
-		cal.add(Calendar.MONTH, 2);
-		java.sql.Date after2MonthsDate = new java.sql.Date((cal.getTime()).getTime());
-		List<BankHolidays> bankHoldayList = new ArrayList<>();
-		BankHolidays bankHoliday = new BankHolidays();
-		bankHoliday.setDateOfHoliday(after2MonthsDate);
-		bankHoldayList.add(bankHoliday);
-		given(cohRepoProvider.getBankHolidayList(Matchers.any(), Matchers.any(), Matchers.any()))
-				.willReturn(bankHoldayList);
 	}
 
 	@Test
@@ -150,12 +128,12 @@ public class BroadbandControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request);
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"123456789078");
 		assertNotNull(resonse);
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadbandForNonLoggedInCustomer() {
+	public void testCheckAvailabilityForBroadbandFromCache() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -167,7 +145,7 @@ public class BroadbandControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request);
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"12345678907888");
 		assertNotNull(resonse);
 	}
 
@@ -185,7 +163,7 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.checkAvailabilityForBroadband(request);
+			broadBandController.checkAvailabilityForBroadband(request,"12345678907888");
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
@@ -207,7 +185,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request);
+					.checkAvailabilityForBroadband(request,"12345678907888");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -215,156 +193,210 @@ public class BroadbandControllerTest {
 
 	}
 
+
+	
 	@Test
-	public void testGetFlbList() {
-		assertNotNull(broadBandController.getFlbbList("Consumer", "", "", "", ""));
-	}
-
-	@Test
-	public void testNullFlbList() {
-
-		try {
-			broadBandController.getFlbbList(null, null, null, null, null);
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testGetAvailableServiceStartDates() {
-
-		try {
-			assertNotNull(broadBandController.getAvailableServiceStartDates("05-Aug-2018", new BigDecimal("15")));
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testGetAvailableServiceStartDatesForInavlidDate() {
-		try {
-			assertNotNull(broadBandController.getAvailableServiceStartDates("05-08-2018", new BigDecimal("15")));
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testGetAvailableServiceStartDatesForInavlidRange() {
-		try {
-			assertNotNull(broadBandController.getAvailableServiceStartDates("05-Aug-2018", null));
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testCreateAppointmentWithInvalidRequest() {
+	public void testCheckAvailabilityForBroadbandForEmptyGSAResponse() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		CreateAppointmentRequest request = null;
+		AvailabilityCheckRequest request = null;
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\INV_REQ.json"));
-			request = new ObjectMapper().readValue(jsonString, CreateAppointmentRequest.class);
+			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.createAppointmentForFLBB(request.getJourneyId(), request);
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testCreateAppointmentWithInvalidRequest2() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		CreateAppointmentRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\INV_REQ2.json"));
-			request = new ObjectMapper().readValue(jsonString, CreateAppointmentRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			broadBandController.createAppointmentForFLBB(request.getJourneyId(), request);
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testCreateAppointmentWithInvalidRequest3() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		CreateAppointmentRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\INV_REQ3.json"));
-			request = new ObjectMapper().readValue(jsonString, CreateAppointmentRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			broadBandController.createAppointmentForFLBB(request.getJourneyId(), request);
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
-
-	}
-
-	@Test
-	public void testCreateAppointmentWithInvalidRequest4() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		CreateAppointmentRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\INV_REQ4.json"));
-			request = new ObjectMapper().readValue(jsonString, CreateAppointmentRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			assertNotNull(broadBandController.createAppointmentForFLBB(request.getJourneyId(), request));
+			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
+					.checkAvailabilityForBroadband(request,"12345678907888");
+			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 
 	}
-
+	
+	
+	
 	@Test
-	public void testCreateAppointmentWithValidRequest() {
+	public void testCheckAvailabilityForBroadbandForUpdateBasket() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		CreateAppointmentRequest request = null;
+		AvailabilityCheckRequest request = null;
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateAppointment_Request.json"));
-			request = new ObjectMapper().readValue(jsonString, CreateAppointmentRequest.class);
+			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			assertNotNull(broadBandController.createAppointmentForFLBB(request.getJourneyId(), request));
+			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
+					.checkAvailabilityForBroadband(request,"12345678907888");
+			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 
+	}
+	
+	
+	@Test
+	public void testCreateOrUpdateBasket() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	@Test
+	public void testCreateOrUpdateBasketWithInvalidRequest() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("1234907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	
+	
+	@Test
+	public void testCreateOrUpdateBasketWIthInvRequest3() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest3.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	@Test
+	public void testCreateOrUpdateBasketWIthInvRequest4() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest4.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	@Test
+	public void testCreateOrUpdateBasketWIthInvRequest5() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest5.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	
+	
+	
+	@Test
+	public void testCreateOrUpdateBasketWIthInvRequest2() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest2.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("1234907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	
+	
+	@Test
+	public void testBroadbandFromCache()
+	{
+		Broadband resonse = broadBandController
+				.getBroadbandInfo("12345678907888");
+		assertNotNull(resonse);
+	}
+	
+	
+	
+	
+	@Test
+	public void testGetAddressByPostCodeFromPremise()
+	{
+		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ");
+		assertEquals("Success", addressInfo.getStatusInfo().getStatus());
 	}
 
 }

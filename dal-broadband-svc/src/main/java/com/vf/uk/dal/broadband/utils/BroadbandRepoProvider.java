@@ -1,52 +1,31 @@
 package com.vf.uk.dal.broadband.utils;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.vf.uk.dal.broadband.helper.SolrHelper;
-import com.vodafone.solrmodels.ProductModel;
+import com.vf.uk.dal.broadband.cache.repo.IBroadbandRepository;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 
-/**
- * @author Infosys Limited
- *
- */
 @Component("broadbandRepoProvider")
 public class BroadbandRepoProvider {
 
-	/**
-	 * 
-	 * @return SolrHelper
-	 */
-	
-	public SolrHelper getSolrHelper(){
-		return new SolrHelper();
-	}
-	
-	/**
-	 * 
-	 * @param solrHelper
-	 * @param productIdList
-	 * @return List
-	 */
-	
-	public List<ProductModel> getProductModelList(SolrHelper solrHelper, List<String> productIdList){
-		return solrHelper.productModelList(productIdList);
+	@Autowired
+	@Qualifier(value = "broadbandRepository")
+	private IBroadbandRepository broadbandRepository;
+
+	public void saveBroadbandInCache(Broadband broadBand) {
+		broadbandRepository.save(broadBand);
+		
 	}
 
-
-	/**
-	 * 
-	 * @param solrHelper
-	 * @param productClassList
-	 * @param productNameList
-	 * @return List
-	 */
-	
-	public List<ProductModel> getEngineeringVisitProduct(SolrHelper solrHelper, List<String> productClassList,
-			List<String> productNameList) {
-		return solrHelper.getProductModel (productClassList,productNameList);
+	public Broadband getBroadbandFromCache(String broadBandSessionId) {
+		return broadbandRepository.findOne(broadBandSessionId);
 	}
+	
+	
+	
+	
 	
 	
 }

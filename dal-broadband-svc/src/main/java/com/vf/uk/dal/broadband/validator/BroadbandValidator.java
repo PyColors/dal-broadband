@@ -1,33 +1,61 @@
 package com.vf.uk.dal.broadband.validator;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 
-/**
- * @author Infosys Limited
- *
- */
 public class BroadbandValidator {
 
 	private BroadbandValidator() {
 
 	}
 
-	/**
-	 * checks if the request is valid or not.
-	 * @param createAppointment
-	 */
+	
+	
+	public static void isBasketCreateOrUpdateRequestValid(BasketRequest basketRequest, Broadband broadband){
+		
+		
+		if(org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getSource())){
+			LogHelper.error(BroadbandValidator.class, "Source cannot be null while creating or updating package");
+			throw new ApplicationException(ExceptionMessages.EMPTY_SOURCE);
+		}
+		
+		
+		if(org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getCustomerRequestedDate())){
+			LogHelper.error(BroadbandValidator.class, "Customer Requested date cannot be null while creating or updating package");
+			throw new ApplicationException(ExceptionMessages.EMPTY_CUSTOMER_REQUESTED_DATE);
+		}
+		
+		if(broadband!=null && org.apache.commons.lang.StringUtils.isNotEmpty(broadband.getBasketId())){
+			if(org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getPackageId())){
+				LogHelper.error(BroadbandValidator.class, "Package Id cannot be empty while updating");
+				throw new ApplicationException(ExceptionMessages.PACKAGE_ID_EMPTY);
+			}
+			if(basketRequest.getAddBundle()!=null && (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddBundle().getPackageLineId())
+					|| org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddBundle().getBundleId()))){
+				LogHelper.error(BroadbandValidator.class, "Bundle Id and Package line id of bundle cannot be null while updating");
+				throw new ApplicationException(ExceptionMessages.BUNDLE_ID_EMPTY);
+			}
+			if(basketRequest.getAddHardware()!=null && (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddHardware().getPackageLineId())
+					|| org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddHardware().getHardwareId()))){
+				LogHelper.error(BroadbandValidator.class, "hardware Id and Package line id of bundle cannot be null while updating");
+				throw new ApplicationException(ExceptionMessages.HARDWARE_ID_EMPTY);
+			}
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
 
-	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointment) {
+	/*public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointment) {
 
-		if (StringUtils.isEmpty(createAppointment.getJourneyId())) {
-			LogHelper.error(BroadbandValidator.class, "Journey Id cannot be empty");
-			throw new ApplicationException(ExceptionMessages.JOURNEY_ID_EMPTY);
-		} else if (StringUtils.isEmpty(createAppointment.getStartTimePeriod())) {
+		if (StringUtils.isEmpty(createAppointment.getStartTimePeriod())) {
 			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
 			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
 		} else if (StringUtils.isEmpty(createAppointment.getTimeSlot())) {
@@ -38,6 +66,6 @@ public class BroadbandValidator {
 			throw new ApplicationException(ExceptionMessages.BASKET_ID_EMPTY);
 		}
 
-	}
+	}*/
 
 }
