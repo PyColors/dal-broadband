@@ -393,28 +393,29 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public Basket createOrUpdatePackage(BasketRequest basketRequest,Broadband broadband, String broadbandId) {
 		Basket basket = null;
-		if(broadband!=null){
-			String basketId = broadband.getBasketId();
-			String journeyId = broadband.getJourneyId();
+		Broadband broadbandCache  = broadband;
+		if(broadbandCache!=null){
+			String basketId = broadbandCache.getBasketId();
+			String journeyId = broadbandCache.getJourneyId();
 			//broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 			CurrentJourney journey = null;
 			if(StringUtils.isNotEmpty(journeyId)){
 				journey = broadbandDao.getJourney(journeyId);
 			}
 			if(StringUtils.isBlank(basketId)){
-				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,broadband,mapper.map(broadband.getServicePoint(), ServicePoint.class),journey);
+				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,broadbandCache,mapper.map(broadbandCache.getServicePoint(), ServicePoint.class),journey);
 				basket =  broadbandDao.createBasket(createBasketRequest);
-				broadband.setBasketId(basket.getBasketId());	
+				broadbandCache.setBasketId(basket.getBasketId());	
 			}else{
-				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest,journey,broadband);
+				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest,journey,broadbandCache);
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(),basketId);
 				basket =  broadbandDao.getBasket(basketId);
 			}
-			broadband = ConverterUtils.createUpdateCacheRequest(broadband,basketRequest,broadbandId,basket);
+			broadbandCache = ConverterUtils.createUpdateCacheRequest(broadbandCache,basketRequest,broadbandId,basket);
 			
-			broadbandDao.setBroadBandInCache(broadband);
+			broadbandDao.setBroadBandInCache(broadbandCache);
 		}else{
-			CreateBasketRequest createBasketRequest  = ConverterUtils.createBasketRequest(basketRequest, broadband, null, null);
+			CreateBasketRequest createBasketRequest  = ConverterUtils.createBasketRequest(basketRequest, broadbandCache, null, null);
 			basket =  broadbandDao.createBasket(createBasketRequest);
 			Broadband broadbandToSave = new Broadband();
 			broadbandToSave.setBroadBandId(broadbandId);
