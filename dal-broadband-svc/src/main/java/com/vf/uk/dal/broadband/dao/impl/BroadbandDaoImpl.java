@@ -330,7 +330,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("Accept-Version", acceptVersion);
 		try {
-			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity("http://PRODUCTS-V1/es/products/catalogue/products?class:name=Fee:Engineer Visit", ProductDetails[].class);
+			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit", ProductDetails[].class);
 			if(client != null)
 				productDetails =Arrays.asList(client.getBody());
 		} catch (Exception e) {
