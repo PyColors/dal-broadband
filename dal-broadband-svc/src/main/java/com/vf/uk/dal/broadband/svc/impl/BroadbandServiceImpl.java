@@ -17,6 +17,7 @@ import com.vf.uk.dal.broadband.basket.entity.ServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
+import com.vf.uk.dal.broadband.cache.repository.entity.LineDetails;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
@@ -418,6 +419,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 			Broadband broadbandToSave = new Broadband();
 			broadbandToSave.setBroadBandId(broadbandId);
 			broadbandToSave.setBasketId(basket.getBasketId());
+			LineDetails lineDetails = new LineDetails();
+			lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
+			broadbandToSave.setLineDetails(lineDetails);
 			if(CollectionUtils.isNotEmpty(basket.getPackages())){
 				for(ModelPackage modelPackage : basket.getPackages()){
 					if(StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")){
