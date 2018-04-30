@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.beans.test.BroadbandTestBeans;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
@@ -97,6 +98,16 @@ public class BroadbandControllerTest {
 		
 		
 		
+		String jsonString13 = new String(Utility.readFile("\\rest-mock\\CreateBasketRequest.json"));
+		
+		CreateBasketRequest createBasketRequest = new ObjectMapper().readValue(jsonString13, CreateBasketRequest.class);
+		
+		
+		given(restTemplate.postForEntity("http://BASKET-V1/basketv2/basket/", createBasketRequest,
+				Basket.class))
+						.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+		
+		
 
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888"))
 		.willReturn(broadband);
@@ -105,7 +116,7 @@ public class BroadbandControllerTest {
 		.willReturn(newBroadband);
 
 		
-		given(restTemplate.getForEntity("http://PRODUCTS-V1/es/products/catalogue/products?class:name=Fee:Engineer Visit",
+		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
 				ProductDetails[].class))
 						.willReturn(new ResponseEntity<ProductDetails[]>(productDetails, HttpStatus.OK));
 		
@@ -415,6 +426,33 @@ public class BroadbandControllerTest {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 	}
+	
+	
+	
+	@Test
+	public void testCreateOrUpdateBasketWithValidReq() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket3.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("178907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	
+	
 	
 	
 	
