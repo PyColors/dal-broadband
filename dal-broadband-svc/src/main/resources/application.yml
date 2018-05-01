@@ -6,10 +6,10 @@ spring:
       enabled: false
       max-redirects: 2
       nodes:
-      - master.dal-st2-bband-red.m6ipwu.euw1.cache.amazonaws.com:6379
-    host: master.dal-st2-bband-red.m6ipwu.euw1.cache.amazonaws.com
+      - master.dal-dev-bband-red.m6ipwu.euw1.cache.amazonaws.com:6379
+    host: master.dal-dev-bband-red.m6ipwu.euw1.cache.amazonaws.com
     port: 6379
-    password: digitalx2018jrny
+    password: digitalx2018bband
     ssl: true
     timeout: 5000
     ttl: 3600  
