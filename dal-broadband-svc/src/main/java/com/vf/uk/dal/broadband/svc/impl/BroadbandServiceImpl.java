@@ -197,7 +197,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		//bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
 		List<String> listOfProducts = new ArrayList<>();
 
-		if (bundleDetails != null) {
+		//if (bundleDetails != null) {
 			bundleDetails.getPlanList().forEach(bundleHeader -> {
 				DozerBeanMapper beanMapper = new DozerBeanMapper();
 				FlbBundle flbBundle = new FlbBundle();
@@ -333,7 +333,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				});
 			}*/
 
-		}
+		//}
 		return listOfFlbBundle;
 	}
 
