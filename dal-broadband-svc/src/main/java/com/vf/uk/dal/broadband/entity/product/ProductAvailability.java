@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * ProductAvailability
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-17T20:40:09.952Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
 public class ProductAvailability   {
   @JsonProperty("start")
@@ -22,7 +22,7 @@ public class ProductAvailability   {
   private String end = null;
 
   @JsonProperty("salesExpired")
-  private String salesExpired = null;
+  private Boolean salesExpired = null;
 
   public ProductAvailability start(String start) {
     this.start = start;
@@ -64,7 +64,7 @@ public class ProductAvailability   {
     this.end = end;
   }
 
-  public ProductAvailability salesExpired(String salesExpired) {
+  public ProductAvailability salesExpired(Boolean salesExpired) {
     this.salesExpired = salesExpired;
     return this;
   }
@@ -76,11 +76,11 @@ public class ProductAvailability   {
   @ApiModelProperty(value = "")
 
 
-  public String getSalesExpired() {
+  public Boolean isSalesExpired() {
     return salesExpired;
   }
 
-  public void setSalesExpired(String salesExpired) {
+  public void setSalesExpired(Boolean salesExpired) {
     this.salesExpired = salesExpired;
   }
 

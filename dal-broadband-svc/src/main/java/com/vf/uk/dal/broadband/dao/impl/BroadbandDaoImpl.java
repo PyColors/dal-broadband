@@ -1,5 +1,8 @@
 package com.vf.uk.dal.broadband.dao.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +23,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
@@ -317,8 +321,28 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		}
 		
 	}
+	@Override
+	public List<ProductDetails> getEngineeringVisitFee(String acceptVersion) {
+		
+		List<ProductDetails> productDetails = null;
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("Accept-Version", acceptVersion);
+		try {
+			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit", ProductDetails[].class);
+			if(client != null)
+				productDetails =Arrays.asList(client.getBody());
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from Product Miscro service" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_PRODUCT_ENGINEERING_FEE);
+		}
+		return productDetails;
+	
+		
+	}
 
-	/*@Override
+	/*@Override	
 	public void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest) {
 		// TODO Auto-generated method stub
 		

@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  * ProductDetails
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-17T20:40:09.952Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
 public class ProductDetails   {
   @JsonProperty("id")
@@ -32,13 +32,13 @@ public class ProductDetails   {
   private String productClass = null;
 
   @JsonProperty("isServicesProduct")
-  private String isServicesProduct = null;
+  private Boolean isServicesProduct = null;
 
   @JsonProperty("duration")
-  private String duration = null;
+  private Duration duration = null;
 
   @JsonProperty("discount")
-  private String discount = null;
+  private Discount discount = null;
 
   @JsonProperty("warranty")
   private String warranty = null;
@@ -48,71 +48,45 @@ public class ProductDetails   {
 
   @JsonProperty("categories")
   @Valid
-  private List<Category> categories = null;
+  private List<String> categories = null;
 
   @JsonProperty("productLines")
   @Valid
-  private List<ProductLines> productLines = null;
+  private List<String> productLines = null;
 
   @JsonProperty("priceDetail")
-  private Object priceDetail = null;
+  private PriceDetail priceDetail = null;
 
   @JsonProperty("productAllowance")
-  private String productAllowance = null;
+  @Valid
+  private List<ProductAllowance> productAllowance = null;
 
   @JsonProperty("boxPrice")
-  private Object boxPrice = null;
+  private BoxPrice boxPrice = null;
 
   @JsonProperty("productAvailability")
-  private Object productAvailability = null;
-
-  @JsonProperty("productRelationshipList")
-  private String productRelationshipList = null;
+  private ProductAvailability productAvailability = null;
 
   @JsonProperty("isDeviceProduct")
-  private String isDeviceProduct = null;
+  private Boolean isDeviceProduct = null;
 
   @JsonProperty("inclusiveEligibility")
   private String inclusiveEligibility = null;
 
   @JsonProperty("omniChannelDiscountEligible")
-  private String omniChannelDiscountEligible = null;
-
-  @JsonProperty("version")
-  private String version = null;
-
-  @JsonProperty("seoCanonical")
-  private String seoCanonical = null;
-
-  @JsonProperty("seoDescription")
-  private String seoDescription = null;
-
-  @JsonProperty("seoKeywords")
-  private String seoKeywords = null;
-
-  @JsonProperty("seoIndex")
-  private String seoIndex = null;
-
-  @JsonProperty("seoRobots")
-  private String seoRobots = null;
+  private Boolean omniChannelDiscountEligible = null;
 
   @JsonProperty("productSubClass")
   private String productSubClass = null;
 
   @JsonProperty("equipment")
-  private Object equipment = null;
+  private Equipment equipment = null;
 
   @JsonProperty("eligibilitySubflow")
   private String eligibilitySubflow = null;
 
-  @JsonProperty("allowanceDisplay")
-  private String allowanceDisplay = null;
-
   @JsonProperty("delivery")
-  private Object delivery = null;
-
-  @JsonProperty("metadataVersion")
-  private String metadataVersion = null;
+  private Delivery delivery = null;
 
   @JsonProperty("displayName")
   private String displayName = null;
@@ -130,64 +104,54 @@ public class ProductDetails   {
   private String postDescMobile = null;
 
   @JsonProperty("listOfimageURLs")
-  private String listOfimageURLs = null;
+  @Valid
+  private List<ListOfImageURL> listOfimageURLs = null;
 
   @JsonProperty("listOfmediaURLs")
-  private String listOfmediaURLs = null;
-
-  @JsonProperty("listOfhelpURLs")
-  private String listOfhelpURLs = null;
+  @Valid
+  private List<ListOfMediaURL> listOfmediaURLs = null;
 
   @JsonProperty("specificationGroups")
-  private String specificationGroups = null;
+  @Valid
+  private List<SpecificationGroups> specificationGroups = null;
 
   @JsonProperty("inTheBox")
   private String inTheBox = null;
 
-  @JsonProperty("contentVersion")
-  private String contentVersion = null;
-
   @JsonProperty("productControl")
-  private Object productControl = null;
+  private ProductControl productControl = null;
 
   @JsonProperty("productGroups")
-  private String productGroups = null;
+  private ProductGroups productGroups = null;
 
   @JsonProperty("misc")
-  private String misc = null;
-
-  @JsonProperty("productPriceOverride")
-  private String productPriceOverride = null;
+  private Misc misc = null;
 
   @JsonProperty("promoteAs")
-  private String promoteAs = null;
+  private PromoteAs promoteAs = null;
 
   @JsonProperty("leadPlanId")
   private String leadPlanId = null;
 
   @JsonProperty("recommendataions")
-  private String recommendataions = null;
+  @Valid
+  private List<Recommendations> recommendataions = null;
 
   @JsonProperty("fastMoving")
-  private String fastMoving = null;
+  private Boolean fastMoving = null;
 
   @JsonProperty("stockThresholdLimit")
   private String stockThresholdLimit = null;
 
   @JsonProperty("listOfEligibleChannels")
-  private String listOfEligibleChannels = null;
+  @Valid
+  private List<ListOfEligibleChannel> listOfEligibleChannels = null;
 
   @JsonProperty("paymentType")
   private String paymentType = null;
 
   @JsonProperty("battery")
-  private String battery = null;
-
-  @JsonProperty("merchandisingVersion")
-  private String merchandisingVersion = null;
-
-  @JsonProperty("listOfCompatibleBundles")
-  private String listOfCompatibleBundles = null;
+  private Boolean battery = null;
 
   public ProductDetails id(String id) {
     this.id = id;
@@ -269,7 +233,7 @@ public class ProductDetails   {
     this.productClass = productClass;
   }
 
-  public ProductDetails isServicesProduct(String isServicesProduct) {
+  public ProductDetails isServicesProduct(Boolean isServicesProduct) {
     this.isServicesProduct = isServicesProduct;
     return this;
   }
@@ -281,51 +245,53 @@ public class ProductDetails   {
   @ApiModelProperty(value = "Boolean attribute service product")
 
 
-  public String getIsServicesProduct() {
+  public Boolean isIsServicesProduct() {
     return isServicesProduct;
   }
 
-  public void setIsServicesProduct(String isServicesProduct) {
+  public void setIsServicesProduct(Boolean isServicesProduct) {
     this.isServicesProduct = isServicesProduct;
   }
 
-  public ProductDetails duration(String duration) {
+  public ProductDetails duration(Duration duration) {
     this.duration = duration;
     return this;
   }
 
   /**
-   * Duration of the product
+   * Get duration
    * @return duration
   **/
-  @ApiModelProperty(value = "Duration of the product")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getDuration() {
+  public Duration getDuration() {
     return duration;
   }
 
-  public void setDuration(String duration) {
+  public void setDuration(Duration duration) {
     this.duration = duration;
   }
 
-  public ProductDetails discount(String discount) {
+  public ProductDetails discount(Discount discount) {
     this.discount = discount;
     return this;
   }
 
   /**
-   * Discount on product
+   * Get discount
    * @return discount
   **/
-  @ApiModelProperty(value = "Discount on product")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getDiscount() {
+  public Discount getDiscount() {
     return discount;
   }
 
-  public void setDiscount(String discount) {
+  public void setDiscount(Discount discount) {
     this.discount = discount;
   }
 
@@ -369,14 +335,14 @@ public class ProductDetails   {
     this.condition = condition;
   }
 
-  public ProductDetails categories(List<Category> categories) {
+  public ProductDetails categories(List<String> categories) {
     this.categories = categories;
     return this;
   }
 
-  public ProductDetails addCategoriesItem(Category categoriesItem) {
+  public ProductDetails addCategoriesItem(String categoriesItem) {
     if (this.categories == null) {
-      this.categories = new ArrayList<Category>();
+      this.categories = new ArrayList<String>();
     }
     this.categories.add(categoriesItem);
     return this;
@@ -388,24 +354,23 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "categories")
 
-  @Valid
 
-  public List<Category> getCategories() {
+  public List<String> getCategories() {
     return categories;
   }
 
-  public void setCategories(List<Category> categories) {
+  public void setCategories(List<String> categories) {
     this.categories = categories;
   }
 
-  public ProductDetails productLines(List<ProductLines> productLines) {
+  public ProductDetails productLines(List<String> productLines) {
     this.productLines = productLines;
     return this;
   }
 
-  public ProductDetails addProductLinesItem(ProductLines productLinesItem) {
+  public ProductDetails addProductLinesItem(String productLinesItem) {
     if (this.productLines == null) {
-      this.productLines = new ArrayList<ProductLines>();
+      this.productLines = new ArrayList<String>();
     }
     this.productLines.add(productLinesItem);
     return this;
@@ -417,117 +382,108 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "productlines")
 
-  @Valid
 
-  public List<ProductLines> getProductLines() {
+  public List<String> getProductLines() {
     return productLines;
   }
 
-  public void setProductLines(List<ProductLines> productLines) {
+  public void setProductLines(List<String> productLines) {
     this.productLines = productLines;
   }
 
-  public ProductDetails priceDetail(Object priceDetail) {
+  public ProductDetails priceDetail(PriceDetail priceDetail) {
     this.priceDetail = priceDetail;
     return this;
   }
 
   /**
-   * pricedetails
+   * Get priceDetail
    * @return priceDetail
   **/
-  @ApiModelProperty(value = "pricedetails")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Object getPriceDetail() {
+  public PriceDetail getPriceDetail() {
     return priceDetail;
   }
 
-  public void setPriceDetail(Object priceDetail) {
+  public void setPriceDetail(PriceDetail priceDetail) {
     this.priceDetail = priceDetail;
   }
 
-  public ProductDetails productAllowance(String productAllowance) {
+  public ProductDetails productAllowance(List<ProductAllowance> productAllowance) {
     this.productAllowance = productAllowance;
     return this;
   }
 
+  public ProductDetails addProductAllowanceItem(ProductAllowance productAllowanceItem) {
+    if (this.productAllowance == null) {
+      this.productAllowance = new ArrayList<ProductAllowance>();
+    }
+    this.productAllowance.add(productAllowanceItem);
+    return this;
+  }
+
   /**
-   * product allowance
+   * Get productAllowance
    * @return productAllowance
   **/
-  @ApiModelProperty(value = "product allowance")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getProductAllowance() {
+  public List<ProductAllowance> getProductAllowance() {
     return productAllowance;
   }
 
-  public void setProductAllowance(String productAllowance) {
+  public void setProductAllowance(List<ProductAllowance> productAllowance) {
     this.productAllowance = productAllowance;
   }
 
-  public ProductDetails boxPrice(Object boxPrice) {
+  public ProductDetails boxPrice(BoxPrice boxPrice) {
     this.boxPrice = boxPrice;
     return this;
   }
 
   /**
-   * box price
+   * Get boxPrice
    * @return boxPrice
   **/
-  @ApiModelProperty(value = "box price")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Object getBoxPrice() {
+  public BoxPrice getBoxPrice() {
     return boxPrice;
   }
 
-  public void setBoxPrice(Object boxPrice) {
+  public void setBoxPrice(BoxPrice boxPrice) {
     this.boxPrice = boxPrice;
   }
 
-  public ProductDetails productAvailability(Object productAvailability) {
+  public ProductDetails productAvailability(ProductAvailability productAvailability) {
     this.productAvailability = productAvailability;
     return this;
   }
 
   /**
-   * product availability
+   * Get productAvailability
    * @return productAvailability
   **/
-  @ApiModelProperty(value = "product availability")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Object getProductAvailability() {
+  public ProductAvailability getProductAvailability() {
     return productAvailability;
   }
 
-  public void setProductAvailability(Object productAvailability) {
+  public void setProductAvailability(ProductAvailability productAvailability) {
     this.productAvailability = productAvailability;
   }
 
-  public ProductDetails productRelationshipList(String productRelationshipList) {
-    this.productRelationshipList = productRelationshipList;
-    return this;
-  }
-
-  /**
-   * product relationship list
-   * @return productRelationshipList
-  **/
-  @ApiModelProperty(value = "product relationship list")
-
-
-  public String getProductRelationshipList() {
-    return productRelationshipList;
-  }
-
-  public void setProductRelationshipList(String productRelationshipList) {
-    this.productRelationshipList = productRelationshipList;
-  }
-
-  public ProductDetails isDeviceProduct(String isDeviceProduct) {
+  public ProductDetails isDeviceProduct(Boolean isDeviceProduct) {
     this.isDeviceProduct = isDeviceProduct;
     return this;
   }
@@ -539,11 +495,11 @@ public class ProductDetails   {
   @ApiModelProperty(value = "Boolean attribute to identify all device products")
 
 
-  public String getIsDeviceProduct() {
+  public Boolean isIsDeviceProduct() {
     return isDeviceProduct;
   }
 
-  public void setIsDeviceProduct(String isDeviceProduct) {
+  public void setIsDeviceProduct(Boolean isDeviceProduct) {
     this.isDeviceProduct = isDeviceProduct;
   }
 
@@ -567,7 +523,7 @@ public class ProductDetails   {
     this.inclusiveEligibility = inclusiveEligibility;
   }
 
-  public ProductDetails omniChannelDiscountEligible(String omniChannelDiscountEligible) {
+  public ProductDetails omniChannelDiscountEligible(Boolean omniChannelDiscountEligible) {
     this.omniChannelDiscountEligible = omniChannelDiscountEligible;
     return this;
   }
@@ -579,132 +535,12 @@ public class ProductDetails   {
   @ApiModelProperty(value = "boolean value for omni channel discount eligibility")
 
 
-  public String getOmniChannelDiscountEligible() {
+  public Boolean isOmniChannelDiscountEligible() {
     return omniChannelDiscountEligible;
   }
 
-  public void setOmniChannelDiscountEligible(String omniChannelDiscountEligible) {
+  public void setOmniChannelDiscountEligible(Boolean omniChannelDiscountEligible) {
     this.omniChannelDiscountEligible = omniChannelDiscountEligible;
-  }
-
-  public ProductDetails version(String version) {
-    this.version = version;
-    return this;
-  }
-
-  /**
-   * version
-   * @return version
-  **/
-  @ApiModelProperty(value = "version")
-
-
-  public String getVersion() {
-    return version;
-  }
-
-  public void setVersion(String version) {
-    this.version = version;
-  }
-
-  public ProductDetails seoCanonical(String seoCanonical) {
-    this.seoCanonical = seoCanonical;
-    return this;
-  }
-
-  /**
-   * seoCanonical
-   * @return seoCanonical
-  **/
-  @ApiModelProperty(value = "seoCanonical")
-
-
-  public String getSeoCanonical() {
-    return seoCanonical;
-  }
-
-  public void setSeoCanonical(String seoCanonical) {
-    this.seoCanonical = seoCanonical;
-  }
-
-  public ProductDetails seoDescription(String seoDescription) {
-    this.seoDescription = seoDescription;
-    return this;
-  }
-
-  /**
-   * seo description
-   * @return seoDescription
-  **/
-  @ApiModelProperty(value = "seo description")
-
-
-  public String getSeoDescription() {
-    return seoDescription;
-  }
-
-  public void setSeoDescription(String seoDescription) {
-    this.seoDescription = seoDescription;
-  }
-
-  public ProductDetails seoKeywords(String seoKeywords) {
-    this.seoKeywords = seoKeywords;
-    return this;
-  }
-
-  /**
-   * seo keywords
-   * @return seoKeywords
-  **/
-  @ApiModelProperty(value = "seo keywords")
-
-
-  public String getSeoKeywords() {
-    return seoKeywords;
-  }
-
-  public void setSeoKeywords(String seoKeywords) {
-    this.seoKeywords = seoKeywords;
-  }
-
-  public ProductDetails seoIndex(String seoIndex) {
-    this.seoIndex = seoIndex;
-    return this;
-  }
-
-  /**
-   * seo index
-   * @return seoIndex
-  **/
-  @ApiModelProperty(value = "seo index")
-
-
-  public String getSeoIndex() {
-    return seoIndex;
-  }
-
-  public void setSeoIndex(String seoIndex) {
-    this.seoIndex = seoIndex;
-  }
-
-  public ProductDetails seoRobots(String seoRobots) {
-    this.seoRobots = seoRobots;
-    return this;
-  }
-
-  /**
-   * seo robots
-   * @return seoRobots
-  **/
-  @ApiModelProperty(value = "seo robots")
-
-
-  public String getSeoRobots() {
-    return seoRobots;
-  }
-
-  public void setSeoRobots(String seoRobots) {
-    this.seoRobots = seoRobots;
   }
 
   public ProductDetails productSubClass(String productSubClass) {
@@ -727,23 +563,24 @@ public class ProductDetails   {
     this.productSubClass = productSubClass;
   }
 
-  public ProductDetails equipment(Object equipment) {
+  public ProductDetails equipment(Equipment equipment) {
     this.equipment = equipment;
     return this;
   }
 
   /**
-   * equipment details
+   * Get equipment
    * @return equipment
   **/
-  @ApiModelProperty(value = "equipment details")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Object getEquipment() {
+  public Equipment getEquipment() {
     return equipment;
   }
 
-  public void setEquipment(Object equipment) {
+  public void setEquipment(Equipment equipment) {
     this.equipment = equipment;
   }
 
@@ -767,27 +604,7 @@ public class ProductDetails   {
     this.eligibilitySubflow = eligibilitySubflow;
   }
 
-  public ProductDetails allowanceDisplay(String allowanceDisplay) {
-    this.allowanceDisplay = allowanceDisplay;
-    return this;
-  }
-
-  /**
-   * Get allowanceDisplay
-   * @return allowanceDisplay
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getAllowanceDisplay() {
-    return allowanceDisplay;
-  }
-
-  public void setAllowanceDisplay(String allowanceDisplay) {
-    this.allowanceDisplay = allowanceDisplay;
-  }
-
-  public ProductDetails delivery(Object delivery) {
+  public ProductDetails delivery(Delivery delivery) {
     this.delivery = delivery;
     return this;
   }
@@ -798,33 +615,14 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Object getDelivery() {
+  public Delivery getDelivery() {
     return delivery;
   }
 
-  public void setDelivery(Object delivery) {
+  public void setDelivery(Delivery delivery) {
     this.delivery = delivery;
-  }
-
-  public ProductDetails metadataVersion(String metadataVersion) {
-    this.metadataVersion = metadataVersion;
-    return this;
-  }
-
-  /**
-   * Get metadataVersion
-   * @return metadataVersion
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getMetadataVersion() {
-    return metadataVersion;
-  }
-
-  public void setMetadataVersion(String metadataVersion) {
-    this.metadataVersion = metadataVersion;
   }
 
   public ProductDetails displayName(String displayName) {
@@ -927,8 +725,16 @@ public class ProductDetails   {
     this.postDescMobile = postDescMobile;
   }
 
-  public ProductDetails listOfimageURLs(String listOfimageURLs) {
+  public ProductDetails listOfimageURLs(List<ListOfImageURL> listOfimageURLs) {
     this.listOfimageURLs = listOfimageURLs;
+    return this;
+  }
+
+  public ProductDetails addListOfimageURLsItem(ListOfImageURL listOfimageURLsItem) {
+    if (this.listOfimageURLs == null) {
+      this.listOfimageURLs = new ArrayList<ListOfImageURL>();
+    }
+    this.listOfimageURLs.add(listOfimageURLsItem);
     return this;
   }
 
@@ -938,17 +744,26 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getListOfimageURLs() {
+  public List<ListOfImageURL> getListOfimageURLs() {
     return listOfimageURLs;
   }
 
-  public void setListOfimageURLs(String listOfimageURLs) {
+  public void setListOfimageURLs(List<ListOfImageURL> listOfimageURLs) {
     this.listOfimageURLs = listOfimageURLs;
   }
 
-  public ProductDetails listOfmediaURLs(String listOfmediaURLs) {
+  public ProductDetails listOfmediaURLs(List<ListOfMediaURL> listOfmediaURLs) {
     this.listOfmediaURLs = listOfmediaURLs;
+    return this;
+  }
+
+  public ProductDetails addListOfmediaURLsItem(ListOfMediaURL listOfmediaURLsItem) {
+    if (this.listOfmediaURLs == null) {
+      this.listOfmediaURLs = new ArrayList<ListOfMediaURL>();
+    }
+    this.listOfmediaURLs.add(listOfmediaURLsItem);
     return this;
   }
 
@@ -958,37 +773,26 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getListOfmediaURLs() {
+  public List<ListOfMediaURL> getListOfmediaURLs() {
     return listOfmediaURLs;
   }
 
-  public void setListOfmediaURLs(String listOfmediaURLs) {
+  public void setListOfmediaURLs(List<ListOfMediaURL> listOfmediaURLs) {
     this.listOfmediaURLs = listOfmediaURLs;
   }
 
-  public ProductDetails listOfhelpURLs(String listOfhelpURLs) {
-    this.listOfhelpURLs = listOfhelpURLs;
+  public ProductDetails specificationGroups(List<SpecificationGroups> specificationGroups) {
+    this.specificationGroups = specificationGroups;
     return this;
   }
 
-  /**
-   * Get listOfhelpURLs
-   * @return listOfhelpURLs
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getListOfhelpURLs() {
-    return listOfhelpURLs;
-  }
-
-  public void setListOfhelpURLs(String listOfhelpURLs) {
-    this.listOfhelpURLs = listOfhelpURLs;
-  }
-
-  public ProductDetails specificationGroups(String specificationGroups) {
-    this.specificationGroups = specificationGroups;
+  public ProductDetails addSpecificationGroupsItem(SpecificationGroups specificationGroupsItem) {
+    if (this.specificationGroups == null) {
+      this.specificationGroups = new ArrayList<SpecificationGroups>();
+    }
+    this.specificationGroups.add(specificationGroupsItem);
     return this;
   }
 
@@ -998,12 +802,13 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getSpecificationGroups() {
+  public List<SpecificationGroups> getSpecificationGroups() {
     return specificationGroups;
   }
 
-  public void setSpecificationGroups(String specificationGroups) {
+  public void setSpecificationGroups(List<SpecificationGroups> specificationGroups) {
     this.specificationGroups = specificationGroups;
   }
 
@@ -1027,27 +832,7 @@ public class ProductDetails   {
     this.inTheBox = inTheBox;
   }
 
-  public ProductDetails contentVersion(String contentVersion) {
-    this.contentVersion = contentVersion;
-    return this;
-  }
-
-  /**
-   * Get contentVersion
-   * @return contentVersion
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getContentVersion() {
-    return contentVersion;
-  }
-
-  public void setContentVersion(String contentVersion) {
-    this.contentVersion = contentVersion;
-  }
-
-  public ProductDetails productControl(Object productControl) {
+  public ProductDetails productControl(ProductControl productControl) {
     this.productControl = productControl;
     return this;
   }
@@ -1058,16 +843,17 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Object getProductControl() {
+  public ProductControl getProductControl() {
     return productControl;
   }
 
-  public void setProductControl(Object productControl) {
+  public void setProductControl(ProductControl productControl) {
     this.productControl = productControl;
   }
 
-  public ProductDetails productGroups(String productGroups) {
+  public ProductDetails productGroups(ProductGroups productGroups) {
     this.productGroups = productGroups;
     return this;
   }
@@ -1078,16 +864,17 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getProductGroups() {
+  public ProductGroups getProductGroups() {
     return productGroups;
   }
 
-  public void setProductGroups(String productGroups) {
+  public void setProductGroups(ProductGroups productGroups) {
     this.productGroups = productGroups;
   }
 
-  public ProductDetails misc(String misc) {
+  public ProductDetails misc(Misc misc) {
     this.misc = misc;
     return this;
   }
@@ -1098,36 +885,17 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getMisc() {
+  public Misc getMisc() {
     return misc;
   }
 
-  public void setMisc(String misc) {
+  public void setMisc(Misc misc) {
     this.misc = misc;
   }
 
-  public ProductDetails productPriceOverride(String productPriceOverride) {
-    this.productPriceOverride = productPriceOverride;
-    return this;
-  }
-
-  /**
-   * Get productPriceOverride
-   * @return productPriceOverride
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getProductPriceOverride() {
-    return productPriceOverride;
-  }
-
-  public void setProductPriceOverride(String productPriceOverride) {
-    this.productPriceOverride = productPriceOverride;
-  }
-
-  public ProductDetails promoteAs(String promoteAs) {
+  public ProductDetails promoteAs(PromoteAs promoteAs) {
     this.promoteAs = promoteAs;
     return this;
   }
@@ -1138,12 +906,13 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getPromoteAs() {
+  public PromoteAs getPromoteAs() {
     return promoteAs;
   }
 
-  public void setPromoteAs(String promoteAs) {
+  public void setPromoteAs(PromoteAs promoteAs) {
     this.promoteAs = promoteAs;
   }
 
@@ -1167,8 +936,16 @@ public class ProductDetails   {
     this.leadPlanId = leadPlanId;
   }
 
-  public ProductDetails recommendataions(String recommendataions) {
+  public ProductDetails recommendataions(List<Recommendations> recommendataions) {
     this.recommendataions = recommendataions;
+    return this;
+  }
+
+  public ProductDetails addRecommendataionsItem(Recommendations recommendataionsItem) {
+    if (this.recommendataions == null) {
+      this.recommendataions = new ArrayList<Recommendations>();
+    }
+    this.recommendataions.add(recommendataionsItem);
     return this;
   }
 
@@ -1178,16 +955,17 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getRecommendataions() {
+  public List<Recommendations> getRecommendataions() {
     return recommendataions;
   }
 
-  public void setRecommendataions(String recommendataions) {
+  public void setRecommendataions(List<Recommendations> recommendataions) {
     this.recommendataions = recommendataions;
   }
 
-  public ProductDetails fastMoving(String fastMoving) {
+  public ProductDetails fastMoving(Boolean fastMoving) {
     this.fastMoving = fastMoving;
     return this;
   }
@@ -1199,11 +977,11 @@ public class ProductDetails   {
   @ApiModelProperty(value = "")
 
 
-  public String getFastMoving() {
+  public Boolean isFastMoving() {
     return fastMoving;
   }
 
-  public void setFastMoving(String fastMoving) {
+  public void setFastMoving(Boolean fastMoving) {
     this.fastMoving = fastMoving;
   }
 
@@ -1227,8 +1005,16 @@ public class ProductDetails   {
     this.stockThresholdLimit = stockThresholdLimit;
   }
 
-  public ProductDetails listOfEligibleChannels(String listOfEligibleChannels) {
+  public ProductDetails listOfEligibleChannels(List<ListOfEligibleChannel> listOfEligibleChannels) {
     this.listOfEligibleChannels = listOfEligibleChannels;
+    return this;
+  }
+
+  public ProductDetails addListOfEligibleChannelsItem(ListOfEligibleChannel listOfEligibleChannelsItem) {
+    if (this.listOfEligibleChannels == null) {
+      this.listOfEligibleChannels = new ArrayList<ListOfEligibleChannel>();
+    }
+    this.listOfEligibleChannels.add(listOfEligibleChannelsItem);
     return this;
   }
 
@@ -1238,12 +1024,13 @@ public class ProductDetails   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getListOfEligibleChannels() {
+  public List<ListOfEligibleChannel> getListOfEligibleChannels() {
     return listOfEligibleChannels;
   }
 
-  public void setListOfEligibleChannels(String listOfEligibleChannels) {
+  public void setListOfEligibleChannels(List<ListOfEligibleChannel> listOfEligibleChannels) {
     this.listOfEligibleChannels = listOfEligibleChannels;
   }
 
@@ -1267,7 +1054,7 @@ public class ProductDetails   {
     this.paymentType = paymentType;
   }
 
-  public ProductDetails battery(String battery) {
+  public ProductDetails battery(Boolean battery) {
     this.battery = battery;
     return this;
   }
@@ -1279,52 +1066,12 @@ public class ProductDetails   {
   @ApiModelProperty(value = "")
 
 
-  public String getBattery() {
+  public Boolean isBattery() {
     return battery;
   }
 
-  public void setBattery(String battery) {
+  public void setBattery(Boolean battery) {
     this.battery = battery;
-  }
-
-  public ProductDetails merchandisingVersion(String merchandisingVersion) {
-    this.merchandisingVersion = merchandisingVersion;
-    return this;
-  }
-
-  /**
-   * Get merchandisingVersion
-   * @return merchandisingVersion
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getMerchandisingVersion() {
-    return merchandisingVersion;
-  }
-
-  public void setMerchandisingVersion(String merchandisingVersion) {
-    this.merchandisingVersion = merchandisingVersion;
-  }
-
-  public ProductDetails listOfCompatibleBundles(String listOfCompatibleBundles) {
-    this.listOfCompatibleBundles = listOfCompatibleBundles;
-    return this;
-  }
-
-  /**
-   * Get listOfCompatibleBundles
-   * @return listOfCompatibleBundles
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getListOfCompatibleBundles() {
-    return listOfCompatibleBundles;
-  }
-
-  public void setListOfCompatibleBundles(String listOfCompatibleBundles) {
-    this.listOfCompatibleBundles = listOfCompatibleBundles;
   }
 
 
@@ -1352,22 +1099,13 @@ public class ProductDetails   {
         Objects.equals(this.productAllowance, productDetails.productAllowance) &&
         Objects.equals(this.boxPrice, productDetails.boxPrice) &&
         Objects.equals(this.productAvailability, productDetails.productAvailability) &&
-        Objects.equals(this.productRelationshipList, productDetails.productRelationshipList) &&
         Objects.equals(this.isDeviceProduct, productDetails.isDeviceProduct) &&
         Objects.equals(this.inclusiveEligibility, productDetails.inclusiveEligibility) &&
         Objects.equals(this.omniChannelDiscountEligible, productDetails.omniChannelDiscountEligible) &&
-        Objects.equals(this.version, productDetails.version) &&
-        Objects.equals(this.seoCanonical, productDetails.seoCanonical) &&
-        Objects.equals(this.seoDescription, productDetails.seoDescription) &&
-        Objects.equals(this.seoKeywords, productDetails.seoKeywords) &&
-        Objects.equals(this.seoIndex, productDetails.seoIndex) &&
-        Objects.equals(this.seoRobots, productDetails.seoRobots) &&
         Objects.equals(this.productSubClass, productDetails.productSubClass) &&
         Objects.equals(this.equipment, productDetails.equipment) &&
         Objects.equals(this.eligibilitySubflow, productDetails.eligibilitySubflow) &&
-        Objects.equals(this.allowanceDisplay, productDetails.allowanceDisplay) &&
         Objects.equals(this.delivery, productDetails.delivery) &&
-        Objects.equals(this.metadataVersion, productDetails.metadataVersion) &&
         Objects.equals(this.displayName, productDetails.displayName) &&
         Objects.equals(this.preDesc, productDetails.preDesc) &&
         Objects.equals(this.postDesc, productDetails.postDesc) &&
@@ -1375,14 +1113,11 @@ public class ProductDetails   {
         Objects.equals(this.postDescMobile, productDetails.postDescMobile) &&
         Objects.equals(this.listOfimageURLs, productDetails.listOfimageURLs) &&
         Objects.equals(this.listOfmediaURLs, productDetails.listOfmediaURLs) &&
-        Objects.equals(this.listOfhelpURLs, productDetails.listOfhelpURLs) &&
         Objects.equals(this.specificationGroups, productDetails.specificationGroups) &&
         Objects.equals(this.inTheBox, productDetails.inTheBox) &&
-        Objects.equals(this.contentVersion, productDetails.contentVersion) &&
         Objects.equals(this.productControl, productDetails.productControl) &&
         Objects.equals(this.productGroups, productDetails.productGroups) &&
         Objects.equals(this.misc, productDetails.misc) &&
-        Objects.equals(this.productPriceOverride, productDetails.productPriceOverride) &&
         Objects.equals(this.promoteAs, productDetails.promoteAs) &&
         Objects.equals(this.leadPlanId, productDetails.leadPlanId) &&
         Objects.equals(this.recommendataions, productDetails.recommendataions) &&
@@ -1390,14 +1125,12 @@ public class ProductDetails   {
         Objects.equals(this.stockThresholdLimit, productDetails.stockThresholdLimit) &&
         Objects.equals(this.listOfEligibleChannels, productDetails.listOfEligibleChannels) &&
         Objects.equals(this.paymentType, productDetails.paymentType) &&
-        Objects.equals(this.battery, productDetails.battery) &&
-        Objects.equals(this.merchandisingVersion, productDetails.merchandisingVersion) &&
-        Objects.equals(this.listOfCompatibleBundles, productDetails.listOfCompatibleBundles);
+        Objects.equals(this.battery, productDetails.battery);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, order, name, productClass, isServicesProduct, duration, discount, warranty, condition, categories, productLines, priceDetail, productAllowance, boxPrice, productAvailability, productRelationshipList, isDeviceProduct, inclusiveEligibility, omniChannelDiscountEligible, version, seoCanonical, seoDescription, seoKeywords, seoIndex, seoRobots, productSubClass, equipment, eligibilitySubflow, allowanceDisplay, delivery, metadataVersion, displayName, preDesc, postDesc, preDescMobile, postDescMobile, listOfimageURLs, listOfmediaURLs, listOfhelpURLs, specificationGroups, inTheBox, contentVersion, productControl, productGroups, misc, productPriceOverride, promoteAs, leadPlanId, recommendataions, fastMoving, stockThresholdLimit, listOfEligibleChannels, paymentType, battery, merchandisingVersion, listOfCompatibleBundles);
+    return Objects.hash(id, order, name, productClass, isServicesProduct, duration, discount, warranty, condition, categories, productLines, priceDetail, productAllowance, boxPrice, productAvailability, isDeviceProduct, inclusiveEligibility, omniChannelDiscountEligible, productSubClass, equipment, eligibilitySubflow, delivery, displayName, preDesc, postDesc, preDescMobile, postDescMobile, listOfimageURLs, listOfmediaURLs, specificationGroups, inTheBox, productControl, productGroups, misc, promoteAs, leadPlanId, recommendataions, fastMoving, stockThresholdLimit, listOfEligibleChannels, paymentType, battery);
   }
 
   @Override
@@ -1420,22 +1153,13 @@ public class ProductDetails   {
     sb.append("    productAllowance: ").append(toIndentedString(productAllowance)).append("\n");
     sb.append("    boxPrice: ").append(toIndentedString(boxPrice)).append("\n");
     sb.append("    productAvailability: ").append(toIndentedString(productAvailability)).append("\n");
-    sb.append("    productRelationshipList: ").append(toIndentedString(productRelationshipList)).append("\n");
     sb.append("    isDeviceProduct: ").append(toIndentedString(isDeviceProduct)).append("\n");
     sb.append("    inclusiveEligibility: ").append(toIndentedString(inclusiveEligibility)).append("\n");
     sb.append("    omniChannelDiscountEligible: ").append(toIndentedString(omniChannelDiscountEligible)).append("\n");
-    sb.append("    version: ").append(toIndentedString(version)).append("\n");
-    sb.append("    seoCanonical: ").append(toIndentedString(seoCanonical)).append("\n");
-    sb.append("    seoDescription: ").append(toIndentedString(seoDescription)).append("\n");
-    sb.append("    seoKeywords: ").append(toIndentedString(seoKeywords)).append("\n");
-    sb.append("    seoIndex: ").append(toIndentedString(seoIndex)).append("\n");
-    sb.append("    seoRobots: ").append(toIndentedString(seoRobots)).append("\n");
     sb.append("    productSubClass: ").append(toIndentedString(productSubClass)).append("\n");
     sb.append("    equipment: ").append(toIndentedString(equipment)).append("\n");
     sb.append("    eligibilitySubflow: ").append(toIndentedString(eligibilitySubflow)).append("\n");
-    sb.append("    allowanceDisplay: ").append(toIndentedString(allowanceDisplay)).append("\n");
     sb.append("    delivery: ").append(toIndentedString(delivery)).append("\n");
-    sb.append("    metadataVersion: ").append(toIndentedString(metadataVersion)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    preDesc: ").append(toIndentedString(preDesc)).append("\n");
     sb.append("    postDesc: ").append(toIndentedString(postDesc)).append("\n");
@@ -1443,14 +1167,11 @@ public class ProductDetails   {
     sb.append("    postDescMobile: ").append(toIndentedString(postDescMobile)).append("\n");
     sb.append("    listOfimageURLs: ").append(toIndentedString(listOfimageURLs)).append("\n");
     sb.append("    listOfmediaURLs: ").append(toIndentedString(listOfmediaURLs)).append("\n");
-    sb.append("    listOfhelpURLs: ").append(toIndentedString(listOfhelpURLs)).append("\n");
     sb.append("    specificationGroups: ").append(toIndentedString(specificationGroups)).append("\n");
     sb.append("    inTheBox: ").append(toIndentedString(inTheBox)).append("\n");
-    sb.append("    contentVersion: ").append(toIndentedString(contentVersion)).append("\n");
     sb.append("    productControl: ").append(toIndentedString(productControl)).append("\n");
     sb.append("    productGroups: ").append(toIndentedString(productGroups)).append("\n");
     sb.append("    misc: ").append(toIndentedString(misc)).append("\n");
-    sb.append("    productPriceOverride: ").append(toIndentedString(productPriceOverride)).append("\n");
     sb.append("    promoteAs: ").append(toIndentedString(promoteAs)).append("\n");
     sb.append("    leadPlanId: ").append(toIndentedString(leadPlanId)).append("\n");
     sb.append("    recommendataions: ").append(toIndentedString(recommendataions)).append("\n");
@@ -1459,8 +1180,6 @@ public class ProductDetails   {
     sb.append("    listOfEligibleChannels: ").append(toIndentedString(listOfEligibleChannels)).append("\n");
     sb.append("    paymentType: ").append(toIndentedString(paymentType)).append("\n");
     sb.append("    battery: ").append(toIndentedString(battery)).append("\n");
-    sb.append("    merchandisingVersion: ").append(toIndentedString(merchandisingVersion)).append("\n");
-    sb.append("    listOfCompatibleBundles: ").append(toIndentedString(listOfCompatibleBundles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

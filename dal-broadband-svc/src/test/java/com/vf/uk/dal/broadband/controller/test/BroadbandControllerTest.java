@@ -21,12 +21,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.beans.test.BroadbandTestBeans;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
@@ -90,6 +92,22 @@ public class BroadbandControllerTest {
 		
 		
 		
+		String jsonString12 = new String(Utility.readFile("\\rest-mock\\GetProducts.json"));
+		
+		ProductDetails[] productDetails = new ObjectMapper().readValue(jsonString12, ProductDetails[].class);
+		
+		
+		
+		String jsonString13 = new String(Utility.readFile("\\rest-mock\\CreateBasketRequest.json"));
+		
+		CreateBasketRequest createBasketRequest = new ObjectMapper().readValue(jsonString13, CreateBasketRequest.class);
+		
+		
+		given(restTemplate.postForEntity("http://BASKET-V1/basketv2/basket/", createBasketRequest,
+				Basket.class))
+						.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+		
+		
 
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888"))
 		.willReturn(broadband);
@@ -97,6 +115,12 @@ public class BroadbandControllerTest {
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907899"))
 		.willReturn(newBroadband);
 
+		
+		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
+				ProductDetails[].class))
+						.willReturn(new ResponseEntity<ProductDetails[]>(productDetails, HttpStatus.OK));
+		
+		
 		
 		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability", requestGsa,
 				GetServiceAvailibilityResponse.class))
@@ -128,10 +152,35 @@ public class BroadbandControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"123456789078");
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"123456789078","cat1");
 		assertNotNull(resonse);
 	}
 
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandWithEngineeringVisitFee() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		AvailabilityCheckRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
+			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"123456789078","cat1");
+		assertNotNull(resonse);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	public void testCheckAvailabilityForBroadbandFromCache() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -145,7 +194,7 @@ public class BroadbandControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"12345678907888");
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,"12345678907888","cat1");
 		assertNotNull(resonse);
 	}
 
@@ -163,7 +212,7 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.checkAvailabilityForBroadband(request,"12345678907888");
+			broadBandController.checkAvailabilityForBroadband(request,"12345678907888","cat1");
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
@@ -185,7 +234,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request,"12345678907888");
+					.checkAvailabilityForBroadband(request,"12345678907888","cat1");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -210,7 +259,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request,"12345678907888");
+					.checkAvailabilityForBroadband(request,"12345678907888","cat1");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -235,7 +284,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request,"12345678907888");
+					.checkAvailabilityForBroadband(request,"12345678907888","cat1");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -377,6 +426,33 @@ public class BroadbandControllerTest {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 	}
+	
+	
+	
+	@Test
+	public void testCreateOrUpdateBasketWithValidReq() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		BasketRequest request = null;
+		try {
+			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket3.json"));
+			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Basket resonse = broadBandController.createOrUpdatePackage("178907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	
+	
 	
 	
 	

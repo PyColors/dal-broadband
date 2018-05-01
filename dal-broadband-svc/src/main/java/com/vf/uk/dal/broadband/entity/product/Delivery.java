@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Delivery
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-17T20:40:09.952Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
 public class Delivery   {
   @JsonProperty("classification")
@@ -25,7 +25,7 @@ public class Delivery   {
   private String soaDeliveryMethod = null;
 
   @JsonProperty("weekend")
-  private String weekend = null;
+  private Boolean weekend = null;
 
   public Delivery classification(String classification) {
     this.classification = classification;
@@ -87,7 +87,7 @@ public class Delivery   {
     this.soaDeliveryMethod = soaDeliveryMethod;
   }
 
-  public Delivery weekend(String weekend) {
+  public Delivery weekend(Boolean weekend) {
     this.weekend = weekend;
     return this;
   }
@@ -99,11 +99,11 @@ public class Delivery   {
   @ApiModelProperty(value = "")
 
 
-  public String getWeekend() {
+  public Boolean isWeekend() {
     return weekend;
   }
 
-  public void setWeekend(String weekend) {
+  public void setWeekend(Boolean weekend) {
     this.weekend = weekend;
   }
 

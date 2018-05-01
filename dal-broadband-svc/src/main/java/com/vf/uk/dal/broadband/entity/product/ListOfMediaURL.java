@@ -9,56 +9,56 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Equipment
+ * ListOfMediaURL
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
 
-public class Equipment   {
-  @JsonProperty("make")
-  private String make = null;
+public class ListOfMediaURL   {
+  @JsonProperty("mediaName")
+  private String mediaName = null;
 
-  @JsonProperty("model")
-  private String model = null;
+  @JsonProperty("mediaURL")
+  private String mediaURL = null;
 
-  public Equipment make(String make) {
-    this.make = make;
+  public ListOfMediaURL mediaName(String mediaName) {
+    this.mediaName = mediaName;
     return this;
   }
 
   /**
-   * Get make
-   * @return make
+   * Get mediaName
+   * @return mediaName
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getMake() {
-    return make;
+  public String getMediaName() {
+    return mediaName;
   }
 
-  public void setMake(String make) {
-    this.make = make;
+  public void setMediaName(String mediaName) {
+    this.mediaName = mediaName;
   }
 
-  public Equipment model(String model) {
-    this.model = model;
+  public ListOfMediaURL mediaURL(String mediaURL) {
+    this.mediaURL = mediaURL;
     return this;
   }
 
   /**
-   * Get model
-   * @return model
+   * Get mediaURL
+   * @return mediaURL
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getModel() {
-    return model;
+  public String getMediaURL() {
+    return mediaURL;
   }
 
-  public void setModel(String model) {
-    this.model = model;
+  public void setMediaURL(String mediaURL) {
+    this.mediaURL = mediaURL;
   }
 
 
@@ -70,23 +70,23 @@ public class Equipment   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Equipment equipment = (Equipment) o;
-    return Objects.equals(this.make, equipment.make) &&
-        Objects.equals(this.model, equipment.model);
+    ListOfMediaURL listOfMediaURL = (ListOfMediaURL) o;
+    return Objects.equals(this.mediaName, listOfMediaURL.mediaName) &&
+        Objects.equals(this.mediaURL, listOfMediaURL.mediaURL);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(make, model);
+    return Objects.hash(mediaName, mediaURL);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Equipment {\n");
+    sb.append("class ListOfMediaURL {\n");
     
-    sb.append("    make: ").append(toIndentedString(make)).append("\n");
-    sb.append("    model: ").append(toIndentedString(model)).append("\n");
+    sb.append("    mediaName: ").append(toIndentedString(mediaName)).append("\n");
+    sb.append("    mediaURL: ").append(toIndentedString(mediaURL)).append("\n");
     sb.append("}");
     return sb.toString();
   }
