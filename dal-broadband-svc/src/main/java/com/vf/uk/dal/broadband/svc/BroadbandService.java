@@ -1,10 +1,14 @@
 package com.vf.uk.dal.broadband.svc;
 
+import java.util.List;
+
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.FlbBundle;
+import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
 /**
@@ -29,7 +33,7 @@ public interface BroadbandService {
 	 * @param getBundleListSearchCriteria
 	 * @return List<FlbBundle> 
 	 */
-	//public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
+	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
 
 	/**
 	 * Service Start date
