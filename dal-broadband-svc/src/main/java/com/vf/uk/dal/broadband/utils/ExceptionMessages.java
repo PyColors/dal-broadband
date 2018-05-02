@@ -34,6 +34,8 @@ public class ExceptionMessages {
 	public static final String EMPTY_SOURCE = "Source cannot be null while creating or updating the basket";
 	public static final String EMPTY_CUSTOMER_REQUESTED_DATE = "Customer Requested date cannot be null while creating or updating the basket";
 	public static final String NO_VALID_DATA_PRODUCT_ENGINEERING_FEE = "No Valid data recieved while calling product MS";
+	public static final String LINE_TREATEMENT_TYPE_EMPTY = "Line treatment type cannot be null.";
+	public static final String GEN_EXCP_CREATE_BASKET = "General Exception occured while creating the basket";
 
 	private ExceptionMessages() {
 

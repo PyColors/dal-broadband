@@ -9,6 +9,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
 /**
@@ -67,4 +68,7 @@ public interface BroadbandService {
 
 
 	public Broadband getBroadbandFromCache(String broadbandId);
+
+
+	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest);
 }

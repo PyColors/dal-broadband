@@ -41,6 +41,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.ServieLine;
 import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.constant.BroadBandConstant;
@@ -865,15 +866,22 @@ public class ConverterUtils {
 
 
 	public static PremiseAndServicePoint setPremiseAndServicePointRequest(
-			com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, Broadband broadband, AvailabilityCheckRequest availabilityCheckRequest) {
+			com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, Broadband broadband, AvailabilityCheckRequest availabilityCheckRequest,UpdateLineRequest updateLineRequest) {
 		PremiseAndServicePoint premiseAndServicePoint = new PremiseAndServicePoint();
 		if(servicePoint!=null){
 			premiseAndServicePoint.setServicePoint(servicePoint);
 		}
 		
-		if(availabilityCheckRequest.getLineRef()!=null && availabilityCheckRequest.getLineRef().getLineIdentification()!=null
+		if(broadband.getLineDetails()!=null && StringUtils.isNotEmpty(broadband.getLineDetails().getClassificationCode())){
+			premiseAndServicePoint.setLinePackageType(broadband.getLineDetails().getClassificationCode());
+		}
+		if(availabilityCheckRequest!=null && availabilityCheckRequest.getLineRef()!=null && availabilityCheckRequest.getLineRef().getLineIdentification()!=null
 				&& StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())){
 			premiseAndServicePoint.setPhoneNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
+		}
+		
+		if(updateLineRequest!=null && StringUtils.isNotEmpty(updateLineRequest.getLineTreatmentType())){
+			premiseAndServicePoint.setLineTreatmentType(updateLineRequest.getLineTreatmentType());
 		}
 
 		if( broadband.getServicePoint().getLineReference().getInstallationAddress()!=null){
