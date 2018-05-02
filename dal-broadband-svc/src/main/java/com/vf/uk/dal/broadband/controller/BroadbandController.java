@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.controller;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
@@ -29,7 +26,6 @@ import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
-import com.vf.uk.dal.common.logger.LogHelper;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -76,16 +72,13 @@ public class BroadbandController {
 	/**
 	 * Gets the flbb list.
 	 *
-	 * @param userType
-	 *            the user type
-	 * @param offerCode
-	 *            the offer code
-	 * @param journeyType
-	 *            the journey type
-	 * @param duration
-	 *            the duration
-	 * @param classificationCode
-	 *            the classification code
+	 * @param broadbandId the broadband id
+	 * @param userType            the user type
+	 * @param offerCode            the offer code
+	 * @param journeyType            the journey type
+	 * @param duration            the duration
+	 * @param classificationCode            the classification code
+	 * @param acceptVersion the accept version
 	 * @return the flbb list
 	 */
 	@ApiOperation(value = "Get the list of bundle(FLBB)  based on the filter criteria.", notes = "The service gets the details of the bundles from solr based on the filter criteria in the response.", response = FlbBundle.class, tags = {
@@ -111,11 +104,10 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setClassificationCode(classificationCode);
 		getBundleListSearchCriteria.setDuration(duration);
 		getBundleListSearchCriteria.setBundleClass("FLBALL");
-		// listOfFlbBundle =
-		// broadbandService.getFlbList(getBundleListSearchCriteria);
-		// return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
+		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
+		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
+		//ObjectMapper objectMapper = new ObjectMapper();
+		/*try {
 			FlbBundle[] flbbArry = objectMapper.readValue(
 					"[{\"bundleDescription\":\"string\",\"bundleName\":\"string\",\"classificationCode\":\"string\",\"commitmentPeriod\":\"string\",\"description\":\"string\",\"merchandisingMedia\":[{\"id\":\"string\",\"packageType\":[\"string\"],\"priority\":0,\"type\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"priceInfo\":{\"bundlePrice\":{\"bundleId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"monthlyDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"monthlyPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"deliveryPrice\":{\"hardwareId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"oneOffDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"oneOffPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"engineerVisitFees\":{\"hardwareId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"oneOffDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"oneOffPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"routerPrice\":{\"hardwareId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"oneOffDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"oneOffPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"totalCost\":{\"gross\":0,\"net\":0,\"vat\":0}},\"productDescription\":\"string\",\"productName\":\"string\",\"skuId\":\"string\",\"speed\":{\"maxSpeed\":\"string\",\"minSpeed\":\"string\",\"speed\":\"string\"},\"usage\":\"string\"}]",
 					FlbBundle[].class);
@@ -124,7 +116,7 @@ public class BroadbandController {
 			LogHelper.error(BroadbandController.class,
 					"Couldn't serialize response for content type application/json  " + e);
 			return new ResponseEntity<List<FlbBundle>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}*/
 
 	}
 

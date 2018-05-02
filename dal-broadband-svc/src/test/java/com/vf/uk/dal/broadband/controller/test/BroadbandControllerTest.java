@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,9 +28,12 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
@@ -444,4 +448,111 @@ public class BroadbandControllerTest {
 
 	}
 
+	@Test
+	public void testGetFlbbListForExistingAndNew() {
+		try {
+			String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseV3.json"));
+			Broadband broadbandV3 = new ObjectMapper().readValue(jsonString8, Broadband.class);
+			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
+			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+					BundleDetails.class)).willReturn(bundleDetails);
+
+			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+			DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+			given(restTemplate.getForEntity(
+					"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+					DeliveryMethods[].class))
+							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
+					null, null, null, null, null);
+			assertNotNull(flbbList);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
+	}
+	
+	@Test
+	public void testGetFlbbListForExistingAndNewForSelectionNew() {
+		try {
+			String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseV6.json"));
+			Broadband broadbandV3 = new ObjectMapper().readValue(jsonString8, Broadband.class);
+			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
+			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+					BundleDetails.class)).willReturn(bundleDetails);
+
+			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+			DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+			given(restTemplate.getForEntity(
+					"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+					DeliveryMethods[].class))
+							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
+					null, null, null, null, null);
+			assertNotNull(flbbList);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
+	}
+	
+	@Test
+	public void testGetFlbbListForExistingLine() {
+		try {
+			String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseV4.json"));
+			Broadband broadbandV3 = new ObjectMapper().readValue(jsonString8, Broadband.class);
+			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
+			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+					BundleDetails.class)).willReturn(bundleDetails);
+
+			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+			DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+			given(restTemplate.getForEntity(
+					"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+					DeliveryMethods[].class))
+							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
+					null, null, null, null, null);
+			assertNotNull(flbbList);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
+	}
+	
+	@Test
+	public void testGetFlbbListForNew() {
+		try {
+			String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseV5.json"));
+			Broadband broadbandV3 = new ObjectMapper().readValue(jsonString8, Broadband.class);
+			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
+			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+					BundleDetails.class)).willReturn(bundleDetails);
+
+			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+			DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+			given(restTemplate.getForEntity(
+					"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+					DeliveryMethods[].class))
+							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
+					null, null, null, null, null);
+			assertNotNull(flbbList);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
+	}
 }

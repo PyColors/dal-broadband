@@ -32,7 +32,6 @@ import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
-import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
@@ -102,29 +101,29 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		try {
 			client = restTemplate.getForObject(url, BundleDetails.class);
 		} catch (HttpClientErrorException e) {
-			LogHelper.error(CommonUtility.class, "" + e);
+			LogHelper.error(BroadbandDaoImpl.class, "" + e);
 			if (e.getStatusCode().value() == 400) {
 				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
 				s = s.substring(1, s.length() - 1);
-				LogHelper.error(CommonUtility.class, "" + s);
+				LogHelper.error(BroadbandDaoImpl.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.INVALID_API_REQUEST);
 			} else if (e.getStatusCode().value() == 404) {
 				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
 				s = s.substring(1, s.length() - 1);
-				LogHelper.error(CommonUtility.class, "" + s);
+				LogHelper.error(BroadbandDaoImpl.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.NO_DATA_RECIEVED);
 			}
 		} catch (HttpServerErrorException e) {
-			LogHelper.error(CommonUtility.class, "" + e);
+			LogHelper.error(BroadbandDaoImpl.class, "" + e);
 			if (e.getStatusCode().value() == 500) {
 				String s = e.getResponseBodyAsString().split(",")[1].split(":")[1];
 				s = s.substring(1, s.length() - 1);
 
-				LogHelper.error(CommonUtility.class, "" + s);
+				LogHelper.error(BroadbandDaoImpl.class, "" + s);
 				throw new ApplicationException(ExceptionMessages.HTTP_SERVER_EXP_ERROR);
 			}
 		} catch (Exception e) {
-			LogHelper.error(CommonUtility.class,
+			LogHelper.error(BroadbandDaoImpl.class,
 					"getBundleDetailsFromGetBundleListAPI API Exception---------------" + e);
 			// throw new ApplicationException(e.getLocalizedMessage());
 			throw new ApplicationException(ExceptionMessages.INTERNAL_API_CALL_EXP);
