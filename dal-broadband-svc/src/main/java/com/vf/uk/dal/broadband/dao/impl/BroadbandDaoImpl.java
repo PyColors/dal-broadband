@@ -243,8 +243,8 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			if (client != null)
 				basket = client.getBody();
 		} catch (Exception e) {
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+			LogHelper.error(this, "::::::Exception occured while calling create basket" + e);
+			throw new ApplicationException(ExceptionMessages.GEN_EXCP_CREATE_BASKET);
 		}
 
 		return basket;

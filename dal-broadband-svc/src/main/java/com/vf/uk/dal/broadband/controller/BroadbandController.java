@@ -25,6 +25,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
@@ -264,4 +265,19 @@ public class BroadbandController {
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
 		return broadbandService.getBroadbandFromCache(broadbandId);
 	}
+
+	@ApiOperation(value = "Updates the basket and cache with the line option selected and the selected package code of the plan", notes = "Update the basket with the line options and package code, to be used by checkout for creating the Service point info in the CSO", response = HttpStatus.class, tags = {
+			"Broadband, Selected Line API" })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+	@RequestMapping(value = "/{broadbandId}/lineType", produces = { "application/json" }, method = RequestMethod.PUT)
+	public ResponseEntity<HttpStatus> updateLineTypeInBasket(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@ApiParam(value = "Request to update the line treatment type in the basket and cache", required = true) @Valid @RequestBody UpdateLineRequest updateLineRequest) {
+		BroadbandValidator.isUpdateLineTreatmentRequestValid(updateLineRequest);
+		broadbandService.updateBasketWithLineTreatmentType(broadbandId,updateLineRequest);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
 }
