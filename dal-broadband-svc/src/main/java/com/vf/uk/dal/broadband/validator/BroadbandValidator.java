@@ -1,7 +1,10 @@
 package com.vf.uk.dal.broadband.validator;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -46,6 +49,16 @@ public class BroadbandValidator {
 		}
 		
 		
+		
+	}
+
+
+
+	public static void isUpdateLineTreatmentRequestValid(UpdateLineRequest updateLineRequest) {
+		if(StringUtils.isEmpty(updateLineRequest.getLineTreatmentType())){
+			LogHelper.error(BroadbandValidator.class, "Line Treatment Type cannot be null whule updating the basket for line treatment type");
+			throw new ApplicationException(ExceptionMessages.LINE_TREATEMENT_TYPE_EMPTY);
+		}
 		
 	}
 	

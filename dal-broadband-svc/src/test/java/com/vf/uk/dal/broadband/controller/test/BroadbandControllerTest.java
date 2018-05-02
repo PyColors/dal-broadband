@@ -27,6 +27,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
@@ -415,6 +416,32 @@ public class BroadbandControllerTest {
 	public void testGetAddressByPostCodeFromPremise() {
 		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ");
 		assertEquals("Success", addressInfo.getStatusInfo().getStatus());
+	}
+
+	@Test
+	public void testUpdateLineTreatmentType() {
+		try {
+			UpdateLineRequest updateLineReq = new UpdateLineRequest();
+			updateLineReq.setLineTreatmentType("NEW");
+			broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq);
+			// assertNotNull(object);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
+	}
+
+	@Test
+	public void testUpdateLineTreatmentTypeWithInvalidRequest() {
+		try {
+			UpdateLineRequest updateLineReq = new UpdateLineRequest();
+			// updateLineReq.setLineTreatmentType("NEW");
+			broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq);
+			// assertNotNull(object);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
 	}
 
 }

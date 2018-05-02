@@ -25,6 +25,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
@@ -98,7 +99,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 		if (broadBand != null && StringUtils.isNotEmpty(broadBand.getBasketId())) {
 			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(
-					mapper.map(broadBand.getServicePoint(), ServicePoint.class), broadBand, availabilityCheckRequest);
+					mapper.map(broadBand.getServicePoint(), ServicePoint.class), broadBand, availabilityCheckRequest,null);
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest, broadBand.getPackageId(),
 					broadBand.getBasketId());
 		}
@@ -468,5 +469,15 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public Broadband getBroadbandFromCache(String broadbandId) {
 		LogHelper.info(getClass(), "Retrieveing Data from BB Cache : " + broadbandId);
 		return broadbandDao.getBroadbandFromCache(broadbandId);
+	}
+
+	@Override
+	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest) {
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
+				mapper.map(broadband.getServicePoint(), ServicePoint.class), broadband, null,updateLineRequest);
+		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint, broadband.getPackageId(),
+				broadband.getBasketId());
+		
 	}
 }
