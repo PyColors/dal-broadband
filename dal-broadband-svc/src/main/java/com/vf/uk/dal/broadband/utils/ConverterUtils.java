@@ -16,6 +16,7 @@ import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdateBundle;
 import com.vf.uk.dal.broadband.basket.entity.UpdateDevice;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
+import com.vf.uk.dal.broadband.basket.entity.UpdateService;
 import com.vf.uk.dal.broadband.cache.repository.entity.AccessLine;
 import com.vf.uk.dal.broadband.cache.repository.entity.AvailableServices;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
@@ -32,7 +33,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.LineStatus;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineTreatment;
 import com.vf.uk.dal.broadband.cache.repository.entity.MiscReference;
 import com.vf.uk.dal.broadband.cache.repository.entity.PendingOrder;
-import com.vf.uk.dal.broadband.cache.repository.entity.Price;
+import com.vf.uk.dal.broadband.cache.repository.entity.PriceForHardware;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServiceLineTreatment;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint;
@@ -279,7 +280,7 @@ public class ConverterUtils {
 						if(StringUtils.equalsIgnoreCase(lineTreatments.getLineTreatmentType().toString(), BroadBandConstant.NEW)
 								&& !StringUtils.equalsIgnoreCase(lineTreatments.getConnectionCharge().toString(), BroadBandConstant.No_CHARGE)
 								&& CollectionUtils.isNotEmpty(productDetailsList)){
-							Price engineeringVisitCharge = new Price();
+							PriceForHardware engineeringVisitCharge = new PriceForHardware();
 							if(productDetailsList.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceGross())){
 								engineeringVisitCharge.setGross(String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceGross()));
 							}
@@ -288,6 +289,10 @@ public class ConverterUtils {
 							}
 							if(productDetailsList.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceVAT())){
 								engineeringVisitCharge.setVat(String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceVAT()));
+							}
+							
+							if(StringUtils.isNotEmpty(productDetailsList.get(0).getId())){
+								engineeringVisitCharge.setEngVisitProductId(productDetailsList.get(0).getId());
 							}
 							broadband.setEngineeringVisitCharge(engineeringVisitCharge);
 						}
@@ -729,9 +734,8 @@ public class ConverterUtils {
 		
 		if(lineDetails==null){
 			lineDetails = new LineDetails();
-			lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 		}
-		
+		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 		if(CollectionUtils.isNotEmpty(basket.getPackages())){
 			for(ModelPackage modelPackage : basket.getPackages()){
 				if(StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")){
@@ -841,7 +845,7 @@ public class ConverterUtils {
 		}else{
 			updatePackage.setPackageType("Acquisition");
 		}
-		if(basketRequest.getAddBundle()!=null
+		if(basketRequest!=null && basketRequest.getAddBundle()!=null
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getPackageLineId())){
 			UpdateBundle updateBundle = new UpdateBundle();
@@ -851,7 +855,7 @@ public class ConverterUtils {
 			updatePackage.setBundle(updateBundle);
 		}
 		List<UpdateDevice> hardwares = new ArrayList<>();
-		if(basketRequest.getAddHardware()!=null
+		if(basketRequest!=null && basketRequest.getAddHardware()!=null
 				&& StringUtils.isNotEmpty(basketRequest.getAddHardware().getHardwareId())
 				&& StringUtils.isNotEmpty(basketRequest.getAddHardware().getPackageLineId())){
 			UpdateDevice updateDevice = new UpdateDevice();
@@ -860,6 +864,16 @@ public class ConverterUtils {
 			updateDevice.setProductLineId(basketRequest.getAddHardware().getPackageLineId());
 			hardwares.add(updateDevice);
 			updatePackage.addHardwaresItem(updateDevice);
+		}
+
+		if(broadband.getEngineeringVisitCharge()!=null
+				&& StringUtils.isNotEmpty(broadband.getEngineeringVisitCharge().getEngVisitProductId())){
+			List<UpdateService> services = new ArrayList<>();
+			UpdateService updateService = new UpdateService();
+			updateService.setProductLineId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
+			updateService.setAction("ADD");
+			services.add(updateService);
+			updatePackage.setServices(services);
 		}
 		return updatePackage;
 	}
@@ -906,6 +920,19 @@ public class ConverterUtils {
 			}
 		}
 		return premiseAndServicePoint;
+	}
+
+
+	public static Broadband updateBroadbandCache(Broadband broadband, UpdateLineRequest updateLineRequest, String broadbandId) {
+		Broadband broadBand = broadband;
+		broadBand.setBroadBandId(broadbandId);
+		LineDetails lineDetails  = broadBand.getLineDetails();
+		if(lineDetails == null){
+			lineDetails = new LineDetails();
+		}
+		lineDetails.setLineTreatmentType(updateLineRequest.getLineTreatmentType());
+		broadBand.setLineDetails(lineDetails);
+		return broadBand;
 	}
 
 

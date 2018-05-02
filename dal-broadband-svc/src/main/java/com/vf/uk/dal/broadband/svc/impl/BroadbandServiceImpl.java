@@ -411,10 +411,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		broadband = ConverterUtils.updateBroadbandCache(broadband,updateLineRequest,broadbandId);
+		broadbandDao.setBroadBandInCache(broadband);
 		PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
 				mapper.map(broadband.getServicePoint(), ServicePoint.class), broadband, null,updateLineRequest);
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint, broadband.getPackageId(),
 				broadband.getBasketId());
+		UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, null, broadband);
+		broadbandDao.updatePackage(updatePackageRequest, broadband.getPackageId(), broadband.getBasketId());
 		
 	}
 }
