@@ -8,8 +8,10 @@ import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
@@ -47,7 +49,7 @@ public interface BroadbandDao {
 	 * @param url
 	 * @return BundleDetails
 	 */
-	/*BundleDetails getBundleDetailsFromGetBundleListAPI(String url);*/
+	BundleDetails getBundleDetailsFromGetBundleListAPI(String url);
 
 	/**
 	 *  Get the list of Product
@@ -118,6 +120,7 @@ public interface BroadbandDao {
 
 	List<ProductDetails> getEngineeringVisitFee(String acceptVersion);
 
-
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
+	
+	List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache);
 }

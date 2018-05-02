@@ -10,9 +10,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
@@ -22,10 +26,13 @@ import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
+import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
+import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
@@ -44,10 +51,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	@Autowired
 	private RegistryClient registryClient;
-	
+
 	@Autowired
 	private BroadbandRepoProvider broadbandRepoProvider;
-	
 
 	/*
 	 * calls the get service availability MS. (non-Javadoc)
@@ -61,18 +67,15 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	public GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest) {
 
 		RestTemplate restTemplate = registryClient.getRestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
 		GetServiceAvailibilityResponse availabilityCheckResponse = null;
 		GetServiceAvailibilityRequest request = ConverterUtils
 				.createGetServiceAvailibilityRequest(availabilityCheckRequest);
 		try {
 			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate.postForEntity(
-					BroadBandConstant.SERVICE_AVAILABILITY_URL_CONSTANT, request,
-					GetServiceAvailibilityResponse.class);
+					BroadBandConstant.SERVICE_AVAILABILITY_URL_CONSTANT, request, GetServiceAvailibilityResponse.class);
 			if (client != null)
 				availabilityCheckResponse = client.getBody();
-		}catch (RestClientResponseException e) {
+		} catch (RestClientResponseException e) {
 			Gson gson = new Gson();
 			String jsonInString = e.getResponseBodyAsString();
 			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
@@ -84,10 +87,6 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return availabilityCheckResponse;
 	}
 
-	
-
-
-
 	/*
 	 * This calls the Get Bundle List API which sites in Bundle MS to get the
 	 * package details of BB. (non-Javadoc)
@@ -95,7 +94,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#
 	 * getBundleDetailsFromGetBundleListAPI(java.lang.String)
 	 */
-	/*@Override
+	@Override
 	public BundleDetails getBundleDetailsFromGetBundleListAPI(String url) {
 		LogHelper.info(this, "Start -->  calling  getBundleDetailsFromGetBundleListAPI");
 		BundleDetails client = null;
@@ -135,7 +134,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.convertValue(client, new TypeReference<BundleDetails>() {
 		});
-	}*/
+	}
 
 	/**
 	 * This method gets the list of Product Modles from Solr based on the list
@@ -144,20 +143,19 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 * @param productIdList
 	 * @return List<ProductModel>
 	 */
-	/*@Override
-	public List<ProductModel> getListOfProductModelsBasedOnProductIdList(List<String> productIdList) {
-		List<ProductModel> productModels = null;
-		try {
-			final SolrHelper solrHelper = broadbandRepoProvider.getSolrHelper();
-			productModels = broadbandRepoProvider.getProductModelList(solrHelper, productIdList);
-		} catch (Exception e) {
-			LogHelper.error(this, "::::::Exception From Solr getProductModel::::::" + e);
-			throw new ApplicationException(ExceptionMessages.SOLR_GETPRODUCTMODEL_EXCEPTION);
-		}
-		return productModels;
-
-	}*/
-
+	/*
+	 * @Override public List<ProductModel>
+	 * getListOfProductModelsBasedOnProductIdList(List<String> productIdList) {
+	 * List<ProductModel> productModels = null; try { final SolrHelper
+	 * solrHelper = broadbandRepoProvider.getSolrHelper(); productModels =
+	 * broadbandRepoProvider.getProductModelList(solrHelper, productIdList); }
+	 * catch (Exception e) { LogHelper.error(this,
+	 * "::::::Exception From Solr getProductModel::::::" + e); throw new
+	 * ApplicationException(ExceptionMessages.SOLR_GETPRODUCTMODEL_EXCEPTION); }
+	 * return productModels;
+	 * 
+	 * }
+	 */
 
 	/*
 	 * Calls create Appointment MS to create the appointment selected by the
@@ -168,40 +166,35 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 * broadband.entity.appointment.CreateAppointmentRequest)
 	 */
 
-	/*@Override
-	public CreateAppointment createAppointment(CreateAppointmentRequest createAppointmentReq) {
-		RestTemplate restTemplate = registryClient.getRestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		CreateAppointment createAppointment = null;
-		try {
-			ResponseEntity<CreateAppointment> client = restTemplate.postForEntity(
-					"http://APPOINTMENT-V1/appointment/createAppointment", createAppointmentReq,
-					CreateAppointment.class);
-			if (client != null)
-				createAppointment = client.getBody();
-		} catch (RestClientResponseException e) {
-			Gson gson = new Gson();
-			String jsonInString = e.getResponseBodyAsString();
-			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
-					com.vf.uk.dal.common.exception.ErrorResponse.class);
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(error.getErrorMessage());
-		}
-		return createAppointment;
-	}*/
-
-	
-
-	
+	/*
+	 * @Override public CreateAppointment
+	 * createAppointment(CreateAppointmentRequest createAppointmentReq) {
+	 * RestTemplate restTemplate = registryClient.getRestTemplate(); HttpHeaders
+	 * headers = new HttpHeaders();
+	 * headers.setContentType(MediaType.APPLICATION_JSON); CreateAppointment
+	 * createAppointment = null; try { ResponseEntity<CreateAppointment> client
+	 * = restTemplate.postForEntity(
+	 * "http://APPOINTMENT-V1/appointment/createAppointment",
+	 * createAppointmentReq, CreateAppointment.class); if (client != null)
+	 * createAppointment = client.getBody(); } catch
+	 * (RestClientResponseException e) { Gson gson = new Gson(); String
+	 * jsonInString = e.getResponseBodyAsString();
+	 * com.vf.uk.dal.common.exception.ErrorResponse error =
+	 * gson.fromJson(jsonInString,
+	 * com.vf.uk.dal.common.exception.ErrorResponse.class);
+	 * LogHelper.error(this, "::::::No Data recieved from TIL" + e); throw new
+	 * ApplicationException(error.getErrorMessage()); } return
+	 * createAppointment; }
+	 */
 
 	@Override
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
 		AddressInfo addressInfo = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			ResponseEntity<AddressInfo> client = restTemplate.getForEntity("http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
-			if(client != null)
+			ResponseEntity<AddressInfo> client = restTemplate.getForEntity(
+					"http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
+			if (client != null)
 				addressInfo = client.getBody();
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
@@ -210,32 +203,26 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return addressInfo;
 	}
 
-	
-
 	@Override
 	public void setBroadBandInCache(Broadband broadBand) {
 		broadbandRepoProvider.saveBroadbandInCache(broadBand);
-		
-		
+
 	}
 
 	@Override
 	public Broadband getBroadbandFromCache(String broadBandSessionId) {
 		return broadbandRepoProvider.getBroadbandFromCache(broadBandSessionId);
-		
+
 	}
-
-
-
-
 
 	@Override
 	public CurrentJourney getJourney(String journeyId) {
 		CurrentJourney currentJourney = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			ResponseEntity<CurrentJourney> client = restTemplate.getForEntity("http://JOURNEY-V1/journey/"+journeyId+"/queries/currentJourney", CurrentJourney.class);
-			if(client != null)
+			ResponseEntity<CurrentJourney> client = restTemplate.getForEntity(
+					"http://JOURNEY-V1/journey/" + journeyId + "/queries/currentJourney", CurrentJourney.class);
+			if (client != null)
 				currentJourney = client.getBody();
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
@@ -244,10 +231,6 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return currentJourney;
 	}
 
-
-
-
-
 	@Override
 	public Basket createBasket(CreateBasketRequest createBasketRequest) {
 		Basket basket = null;
@@ -255,9 +238,8 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
-			ResponseEntity<Basket> client = restTemplate.postForEntity(
-					BroadBandConstant.BASKET_URL, createBasketRequest,
-					Basket.class);
+			ResponseEntity<Basket> client = restTemplate.postForEntity(BroadBandConstant.BASKET_URL,
+					createBasketRequest, Basket.class);
 			if (client != null)
 				basket = client.getBody();
 		} catch (Exception e) {
@@ -268,22 +250,16 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return basket;
 	}
 
-
-
-
-
 	@Override
-	public void updatePackage(UpdatePackage updatePackageRequest, String packageId,String basketId) {
+	public void updatePackage(UpdatePackage updatePackageRequest, String packageId, String basketId) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		Gson gson = new Gson();
-        gson.toJson(updatePackageRequest); 
 		try {
-			
+
 			final HttpEntity<UpdatePackage> entity = new HttpEntity<>(updatePackageRequest, headers);
-			String url = BroadBandConstant.BASKET_URL+basketId+"/package/"+packageId;
-            restTemplate.exchange(url, HttpMethod.PUT, entity, ModelPackage.class);
+			String url = BroadBandConstant.BASKET_URL + basketId + "/package/" + packageId;
+			restTemplate.exchange(url, HttpMethod.PUT, entity, ModelPackage.class);
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception while invoking update package request" + e);
 			throw new ApplicationException(ExceptionMessages.GEN_PACKAGE_EXCEPTION);
@@ -295,8 +271,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		Basket basket = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			ResponseEntity<Basket> client = restTemplate.getForEntity(BroadBandConstant.BASKET_URL+basketId, Basket.class);
-			if(client != null)
+			ResponseEntity<Basket> client = restTemplate.getForEntity(BroadBandConstant.BASKET_URL + basketId,
+					Basket.class);
+			if (client != null)
 				basket = client.getBody();
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception while calling get basket" + e);
@@ -306,45 +283,70 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId) {
+	public void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest,
+			String packageId, String basketId) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			final HttpEntity<PremiseAndServicePoint> entity = new HttpEntity<>(premiseAndServicePointRequest, headers);
-			String url = BroadBandConstant.BASKET_URL+basketId+"/broadbandPackage/"+packageId+"/premiseAndServicePoint";
-            restTemplate.exchange(url, HttpMethod.PUT, entity, ResponseEntity.class);
-			
+			String url = BroadBandConstant.BASKET_URL + basketId + "/broadbandPackage/" + packageId
+					+ "/premiseAndServicePoint";
+			restTemplate.exchange(url, HttpMethod.PUT, entity, ResponseEntity.class);
+
 		} catch (Exception e) {
-			LogHelper.error(this, "::::::Exception while invoking update package request for premise and Service point" + e);
+			LogHelper.error(this,
+					"::::::Exception while invoking update package request for premise and Service point" + e);
 			throw new ApplicationException(ExceptionMessages.GEN_UPT_SP_EXCEPTION);
 		}
-		
+
 	}
+
 	@Override
 	public List<ProductDetails> getEngineeringVisitFee(String acceptVersion) {
-		
+
 		List<ProductDetails> productDetails = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Accept-Version", acceptVersion);
 		try {
-			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit", ProductDetails[].class);
-			if(client != null)
-				productDetails =Arrays.asList(client.getBody());
+			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity(
+					"http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
+					ProductDetails[].class);
+			if (client != null)
+				productDetails = Arrays.asList(client.getBody());
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::No Data recieved from Product Miscro service" + e);
 			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_PRODUCT_ENGINEERING_FEE);
 		}
 		return productDetails;
-	
-		
+
 	}
 
-	/*@Override	
-	public void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest) {
-		// TODO Auto-generated method stub
-		
-	}*/
+	@Override
+	public List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache) {
+		// BundleDetails client = null;
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append(
+				"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=" + productId + "&useCache=" + useCache);
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		List<DeliveryMethods> deliveryMethods = null;
+		try {
+			ResponseEntity<DeliveryMethods[]> response = restTemplate.getForEntity(urlBuilder.toString(),
+					DeliveryMethods[].class);
+			if (response != null && response.getBody() != null) {
+				deliveryMethods = Arrays.asList(response.getBody());
+			}
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from Inventory Miscro service" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_DELIVERY_METHODS);
+		}
+		return deliveryMethods;
+	}
+
+	/*
+	 * @Override public void
+	 * updateBasketWithAppointmentInformation(AppointmentWindow
+	 * appointmentWindowRequest) { // TODO Auto-generated method stub
+	 * 
+	 * }
+	 */
 }
