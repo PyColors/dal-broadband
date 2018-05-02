@@ -2,6 +2,7 @@ package com.vf.uk.dal.broadband.entity;
 
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class GetBundleListSearchCriteria.
  */
@@ -36,27 +37,48 @@ public class GetBundleListSearchCriteria {
 
 	/** The journey type. */
 	private String journeyType;
-	
+
 	/** The credit limit. */
 	private String creditLimit;
-	
+
 	/** The offer code. */
 	private String offerCode;
-	
+
 	/** The customer identification number. */
 	private String customerIdentificationNumber;
-	
+
 	/** The skip chordiant. */
 	private Boolean skipChordiant;
-	
+
 	/** The duration. */
 	private String duration;
-	
+
 	/** The classification code. */
 	private String classificationCode;
-	
+
 	/** The status. */
 	private String status;
+
+	/** The broadband id. */
+	private String broadbandId;
+
+	/**
+	 * Gets the broadband id.
+	 *
+	 * @return the broadband id
+	 */
+	public String getBroadbandId() {
+		return broadbandId;
+	}
+
+	/**
+	 * Sets the broadband id.
+	 *
+	 * @param broadbandId the new broadband id
+	 */
+	public void setBroadbandId(String broadbandId) {
+		this.broadbandId = broadbandId;
+	}
 
 	/**
 	 * Gets the duration.
@@ -70,7 +92,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the duration.
 	 *
-	 * @param duration the new duration
+	 * @param duration
+	 *            the new duration
 	 */
 	public void setDuration(String duration) {
 		this.duration = duration;
@@ -88,7 +111,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the classification code.
 	 *
-	 * @param classificationCode the new classification code
+	 * @param classificationCode
+	 *            the new classification code
 	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
@@ -106,7 +130,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the status.
 	 *
-	 * @param status the new status
+	 * @param status
+	 *            the new status
 	 */
 	public void setStatus(String status) {
 		this.status = status;
@@ -295,7 +320,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the journey type.
 	 *
-	 * @param journeyType the new journey type
+	 * @param journeyType
+	 *            the new journey type
 	 */
 	public void setJourneyType(String journeyType) {
 		this.journeyType = journeyType;
@@ -313,7 +339,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the credit limit.
 	 *
-	 * @param creditLimit the new credit limit
+	 * @param creditLimit
+	 *            the new credit limit
 	 */
 	public void setCreditLimit(String creditLimit) {
 		this.creditLimit = creditLimit;
@@ -331,7 +358,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the offer code.
 	 *
-	 * @param offerCode the new offer code
+	 * @param offerCode
+	 *            the new offer code
 	 */
 	public void setOfferCode(String offerCode) {
 		this.offerCode = offerCode;
@@ -349,7 +377,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the customer identification number.
 	 *
-	 * @param customerIdentificationNumber the new customer identification number
+	 * @param customerIdentificationNumber
+	 *            the new customer identification number
 	 */
 	public void setCustomerIdentificationNumber(String customerIdentificationNumber) {
 		this.customerIdentificationNumber = customerIdentificationNumber;
@@ -367,7 +396,8 @@ public class GetBundleListSearchCriteria {
 	/**
 	 * Sets the skip chordiant.
 	 *
-	 * @param skipChordiant the new skip chordiant
+	 * @param skipChordiant
+	 *            the new skip chordiant
 	 */
 	public void setSkipChordiant(Boolean skipChordiant) {
 		this.skipChordiant = skipChordiant;

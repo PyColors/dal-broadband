@@ -6,10 +6,10 @@ package com.vf.uk.dal.broadband.utils;
  */
 public class ExceptionMessages {
 
-	/*public static final String HTTP_SERVER_EXP_ERROR = "HTTP Server exception error occured";
+	public static final String HTTP_SERVER_EXP_ERROR = "HTTP Server exception error occured";
 	public static final String HTTP_CLIENT_EXP_ERROR = "HTTP Client exception error occured";
 	public static final String INTERNAL_API_CALL_EXP = "Exception in calling internal API";
-	public static final String INVALID_API_REQUEST = "Invalid request to the API call";*/
+	public static final String INVALID_API_REQUEST = "Invalid request to the API call";
 	/** The Constant SOLR_GETPRODUCTMODEL_EXCEPTION. */
 	//public static final String SOLR_GETPRODUCTMODEL_EXCEPTION = "Exception From Solr getProductModel";
 	/** The Constant SOLR_CONNECTION_CLOSE_EXCEPTION. */
@@ -36,6 +36,7 @@ public class ExceptionMessages {
 	public static final String NO_VALID_DATA_PRODUCT_ENGINEERING_FEE = "No Valid data recieved while calling product MS";
 	public static final String LINE_TREATEMENT_TYPE_EMPTY = "Line treatment type cannot be null.";
 	public static final String GEN_EXCP_CREATE_BASKET = "General Exception occured while creating the basket";
+	public static final String NO_VALID_DATA_DELIVERY_METHODS = "No Valid data recieved while calling Inventory MS";
 
 	private ExceptionMessages() {
 
