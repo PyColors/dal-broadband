@@ -109,7 +109,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 		if (broadBand != null && StringUtils.isNotEmpty(broadBand.getBasketId())) {
 			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(
-					mapper.map(broadBand.getServicePoint(), ServicePoint.class), broadBand, availabilityCheckRequest);
+					mapper.map(broadBand.getServicePoint(), ServicePoint.class), broadBand, availabilityCheckRequest,null);
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest, broadBand.getPackageId(),
 					broadBand.getBasketId());
 		}
