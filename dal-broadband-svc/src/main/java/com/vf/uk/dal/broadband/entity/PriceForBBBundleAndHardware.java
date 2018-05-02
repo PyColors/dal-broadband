@@ -33,7 +33,7 @@ public class PriceForBBBundleAndHardware {
 
 	/** The total cost. */
 	@JsonProperty("totalCost")
-	private Price totalCost = null;
+	private Price totalOneOffCost = null;
 
 	/**
 	 * Bundle price.
@@ -178,8 +178,8 @@ public class PriceForBBBundleAndHardware {
 	 * @param totalCost the total cost
 	 * @return the price for bundle and hardware
 	 */
-	public PriceForBBBundleAndHardware totalCost(Price totalCost) {
-		this.totalCost = totalCost;
+	public PriceForBBBundleAndHardware totalOneOffCost(Price totalOneOffCost) {
+		this.totalOneOffCost = totalOneOffCost;
 		return this;
 	}
 
@@ -193,8 +193,8 @@ public class PriceForBBBundleAndHardware {
 
 	@Valid
 
-	public Price getTotalCost() {
-		return totalCost;
+	public Price getTotalOneOffCost() {
+		return totalOneOffCost;
 	}
 
 	/**
@@ -202,8 +202,8 @@ public class PriceForBBBundleAndHardware {
 	 *
 	 * @param totalCost the new total cost
 	 */
-	public void setTotalCost(Price totalCost) {
-		this.totalCost = totalCost;
+	public void setTotalOneOffCost(Price totalOneOffCost) {
+		this.totalOneOffCost = totalOneOffCost;
 	}
 
 	/* (non-Javadoc)
@@ -222,7 +222,7 @@ public class PriceForBBBundleAndHardware {
 				&& Objects.equals(this.routerPrice, priceForBundleAndHardware.routerPrice)
 				&& Objects.equals(this.deliveryPrice, priceForBundleAndHardware.deliveryPrice)
 				&& Objects.equals(this.engineerVisitFees, priceForBundleAndHardware.engineerVisitFees)
-				&& Objects.equals(this.totalCost, priceForBundleAndHardware.totalCost);
+				&& Objects.equals(this.totalOneOffCost, priceForBundleAndHardware.totalOneOffCost);
 	}
 
 	/* (non-Javadoc)
@@ -230,7 +230,7 @@ public class PriceForBBBundleAndHardware {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(bundlePrice, routerPrice, deliveryPrice, engineerVisitFees, totalCost);
+		return Objects.hash(bundlePrice, routerPrice, deliveryPrice, engineerVisitFees, totalOneOffCost);
 	}
 
 	/* (non-Javadoc)
@@ -245,7 +245,7 @@ public class PriceForBBBundleAndHardware {
 		sb.append("    routerPrice: ").append(toIndentedString(routerPrice)).append("\n");
 		sb.append("    deliveryPrice: ").append(toIndentedString(deliveryPrice)).append("\n");
 		sb.append("    engineerVisitFees: ").append(toIndentedString(engineerVisitFees)).append("\n");
-		sb.append("    totalCost: ").append(toIndentedString(totalCost)).append("\n");
+		sb.append("    totalOneOffCost: ").append(toIndentedString(totalOneOffCost)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
