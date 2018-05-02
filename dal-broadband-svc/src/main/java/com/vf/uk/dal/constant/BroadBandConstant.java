@@ -14,6 +14,9 @@ public class BroadBandConstant {
 	public static final String BASKET_URL = "http://BASKET-V1/basketv2/basket/";
 	public static final String SERVICE_AVAILABILITY_URL_CONSTANT = "http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability";
 
+	public static final String LINE_TREATMENT_TYPE_EXISTING = "EXISTING";
+	public static final String LINE_TREATMENT_TYPE_NEW = "NEW";
+	
 	private BroadBandConstant() {
 	}
 }

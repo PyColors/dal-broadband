@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +103,7 @@ public class BroadbandController {
 			@RequestHeader(value = "dal-catalogue-version", required = false) String acceptVersion) {
 		List<FlbBundle> listOfFlbBundle;
 		GetBundleListSearchCriteria getBundleListSearchCriteria = new GetBundleListSearchCriteria();
+		getBundleListSearchCriteria.setBroadbandId(broadbandId);
 		getBundleListSearchCriteria.setUserType(userType);
 		getBundleListSearchCriteria.setJourneyType(journeyType);
 		getBundleListSearchCriteria.setOfferCode(offerCode);

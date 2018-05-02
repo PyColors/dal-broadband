@@ -1,7 +1,12 @@
 package com.vf.uk.dal.broadband.svc.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -19,20 +24,26 @@ import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineDetails;
+import com.vf.uk.dal.broadband.cache.repository.entity.LineTreatment;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.Price;
+import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
+import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
+import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 
@@ -180,10 +191,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 * com.vf.uk.dal.bundle.svc.BundleService#getFlbList(com.vf.uk.dal.bundle.
 	 * entity.GetBundleListSearchCriteria)
 	 */
-@Override
+	@Override
 	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria) {
 		LogHelper.debug(getClass(), "Enter getBundleListBySearchCriteria");
-		BundleDetails bundleDetails = new BundleDetails();
+		BundleDetails bundleDetails = null;
 		List<FlbBundle> listOfFlbBundle = new ArrayList<>();
 		String userType = getBundleListSearchCriteria.getUserType();
 		String journeyType = getBundleListSearchCriteria.getJourneyType();
@@ -191,149 +202,75 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
-		String url = "";
-//		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
-//				classificationCode, duration);
-		//bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
-		List<String> listOfProducts = new ArrayList<>();
-
-		//if (bundleDetails != null) {
+		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
+				classificationCode, duration);
+		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
+		Set<String> routerProductIds = new HashSet<>();
+		DozerBeanMapper beanMapper = new DozerBeanMapper();
+		if (bundleDetails != null && CollectionUtils.isNotEmpty(bundleDetails.getPlanList())) {
+			Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
 			bundleDetails.getPlanList().forEach(bundleHeader -> {
-				DozerBeanMapper beanMapper = new DozerBeanMapper();
+
 				FlbBundle flbBundle = new FlbBundle();
 				beanMapper.map(bundleHeader, flbBundle);
+				PriceForBBBundleAndHardware priceBB = new PriceForBBBundleAndHardware();
+				priceBB.setBundlePrice(bundleHeader.getPriceInfo().getBundlePrice());
+				priceBB.setRouterPrice(bundleHeader.getPriceInfo().getHardwarePrice());
+				flbBundle.setPriceInfo(priceBB);
+				routerProductIds.add(bundleHeader.getPriceInfo().getHardwarePrice().getHardwareId());
 				listOfFlbBundle.add(flbBundle);
-				//listOfProducts.add(bundleHeader.getPriceInfo().getHardwarePrice().getHardwareId());
+				// listOfProducts.add(bundleHeader.getPriceInfo().getHardwarePrice().getHardwareId());
 			});
-
-			/*List<ProductModel> listOfProductModel = broadbandDao
-					.getListOfProductModelsBasedOnProductIdList(listOfProducts);
-			if (listOfProductModel != null && !listOfProductModel.isEmpty()) {
-				listOfProductModel.forEach(productModel -> {
+			if (CollectionUtils.isNotEmpty(routerProductIds)) {
+				List<DeliveryMethods> deliveryMethods = broadbandDao
+						.getDeliveryMethods(String.join(",", routerProductIds), false);
+				if (CollectionUtils.isNotEmpty(deliveryMethods)) {
+					Map<String, DeliveryMethods> deliveryMethodsMap = deliveryMethods.stream()
+							.collect(Collectors.toMap(DeliveryMethods::getProductId, Function.identity()));
 					listOfFlbBundle.forEach(flbBundle -> {
-						if (productModel.getProductId()
-								.equalsIgnoreCase(flbBundle.getPriceInfo().getHardwarePrice().getHardwareId())) {
-							flbBundle.setProductName(productModel.getProductName());
-							flbBundle.setProductDescription(productModel.getPreDesc());
-							// Merchadising Media
-							List<MediaLink> mediaList = new ArrayList<>();
-							if (StringUtils.isNotBlank(productModel.getImageURLsThumbsFront())) {
-								MediaLink mediaThumbsFrontLink = new MediaLink();
-								mediaThumbsFrontLink.setId(MediaConstants.STRING_FOR_IMAGE_THUMBS_FRONT);
-								mediaThumbsFrontLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaThumbsFrontLink.setValue(productModel.getImageURLsThumbsFront());
-								mediaList.add(mediaThumbsFrontLink);
+						PriceForBBBundleAndHardware priceBB = flbBundle.getPriceInfo();
+						// Setting of Delivery Price
+						if (deliveryMethodsMap.containsKey(priceBB.getRouterPrice().getHardwareId())) {
+							DeliveryMethods deliveryMeth = deliveryMethodsMap
+									.get(priceBB.getRouterPrice().getHardwareId());
+							com.vf.uk.dal.broadband.entity.HardwarePrice deliveryPrice = new com.vf.uk.dal.broadband.entity.HardwarePrice();
+							Price dp = new Price();
+							beanMapper.map(deliveryMeth.getPrice(), dp);
+							deliveryPrice.setOneOffPrice(dp);
+							priceBB.setDeliveryPrice(deliveryPrice);
+						}
+						// Setting of EngineerVisitFee Price
+						if (broadBand.getServicePoint() != null
+								&& broadBand.getServicePoint().getServiceReference() != null
+								&& CollectionUtils.isNotEmpty(
+										broadBand.getServicePoint().getServiceReference().getServiceLinesList())) {
+							List<LineTreatment> lineTreatmentList = broadBand.getServicePoint().getServiceReference()
+									.getServiceLinesList().get(0).getLineTreatmentList();
+							if (CollectionUtils.isNotEmpty(lineTreatmentList)) {
+								String lineTreatmentType = null;
+								if (broadBand.getLineDetails() != null) {
+									lineTreatmentType = broadBand.getLineDetails().getLineTreatmentType();
+								}
+								com.vf.uk.dal.broadband.entity.HardwarePrice engineeringFee = new com.vf.uk.dal.broadband.entity.HardwarePrice();
+								if ((lineTreatmentList.size() == 1 && lineTreatmentList.get(0).getIdentification()
+										.equalsIgnoreCase(BroadBandConstant.LINE_TREATMENT_TYPE_NEW)) || (lineTreatmentList.size() == 2
+										&& (StringUtils.isNotBlank(lineTreatmentType) && lineTreatmentType
+												.equalsIgnoreCase(BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))) {
+									// engineeringFee.setHardwareId(hardwareId);
+									Price engFee = new Price();
+									beanMapper.map(broadBand.getEngineeringVisitCharge(), engFee);
+									engineeringFee.setOneOffPrice(engFee);
+								} else {
+									engineeringFee = null;
+								}
+								priceBB.setEngineerVisitFees(engineeringFee);
 							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsThumbsLeft())) {
-								MediaLink mediaThumbsLeftLink = new MediaLink();
-								mediaThumbsLeftLink.setId(MediaConstants.STRING_FOR_IMAGE_THUMBS_LEFT);
-								mediaThumbsLeftLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaThumbsLeftLink.setValue(productModel.getImageURLsThumbsLeft());
-								mediaList.add(mediaThumbsLeftLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsThumbsRight())) {
-								MediaLink mediaThumbsRightLink = new MediaLink();
-								mediaThumbsRightLink.setId(MediaConstants.STRING_FOR_IMAGE_THUMBS_RIGHT);
-								mediaThumbsRightLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaThumbsRightLink.setValue(productModel.getImageURLsThumbsRight());
-								mediaList.add(mediaThumbsRightLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsThumbsSide())) {
-								MediaLink mediaThumbsSideLink = new MediaLink();
-								mediaThumbsSideLink.setId(MediaConstants.STRING_FOR_IMAGE_THUMBS_SIDE);
-								mediaThumbsSideLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaThumbsSideLink.setValue(productModel.getImageURLsThumbsSide());
-								mediaList.add(mediaThumbsSideLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsFullLeft())) {
-								MediaLink mediaFullLeftLink = new MediaLink();
-								mediaFullLeftLink.setId(MediaConstants.STRING_FOR_IMAGE_FULL_LEFT);
-								mediaFullLeftLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaFullLeftLink.setValue(productModel.getImageURLsFullLeft());
-								mediaList.add(mediaFullLeftLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsFullRight())) {
-								MediaLink mediaFullRightLink = new MediaLink();
-								mediaFullRightLink.setId(MediaConstants.STRING_FOR_IMAGE_FULL_RIGHT);
-								mediaFullRightLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaFullRightLink.setValue(productModel.getImageURLsFullRight());
-								mediaList.add(mediaFullRightLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsFullSide())) {
-								MediaLink mediaFullSideLink = new MediaLink();
-								mediaFullSideLink.setId(MediaConstants.STRING_FOR_IMAGE_FULL_SIDE);
-								mediaFullSideLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaFullSideLink.setValue(productModel.getImageURLsFullSide());
-								mediaList.add(mediaFullSideLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsFullBack())) {
-								MediaLink mediaFullBackLink = new MediaLink();
-								mediaFullBackLink.setId(MediaConstants.STRING_FOR_IMAGE_FULL_BACK);
-								mediaFullBackLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaFullBackLink.setValue(productModel.getImageURLsFullBack());
-								mediaList.add(mediaFullBackLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsGrid())) {
-								MediaLink mediaGridLink = new MediaLink();
-								mediaGridLink.setId(MediaConstants.STRING_FOR_IMAGE_GRID);
-								mediaGridLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaGridLink.setValue(productModel.getImageURLsGrid());
-								mediaList.add(mediaGridLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsSmall())) {
-								MediaLink mediaSmallLink = new MediaLink();
-								mediaSmallLink.setId(MediaConstants.STRING_FOR_IMAGE_SMALL);
-								mediaSmallLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaSmallLink.setValue(productModel.getImageURLsSmall());
-								mediaList.add(mediaSmallLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsSticker())) {
-								MediaLink mediaStickerLink = new MediaLink();
-								mediaStickerLink.setId(MediaConstants.STRING_FOR_IMAGE_STICKER);
-								mediaStickerLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaStickerLink.setValue(productModel.getImageURLsSticker());
-								mediaList.add(mediaStickerLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getImageURLsIcon())) {
-								MediaLink mediaIconLink = new MediaLink();
-								mediaIconLink.setId(MediaConstants.STRING_FOR_IMAGE_ICON);
-								mediaIconLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaIconLink.setValue(productModel.getImageURLsIcon());
-								mediaList.add(mediaIconLink);
-							}
-							if (StringUtils.isNotBlank(productModel.getThreeDSpin())) {
-								MediaLink media3DSpinLink = new MediaLink();
-								media3DSpinLink.setId(MediaConstants.STRING_FOR_IMAGE_3DSPIN);
-								media3DSpinLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								media3DSpinLink.setValue(productModel.getThreeDSpin());
-								mediaList.add(media3DSpinLink);
-							}
-
-							if (StringUtils.isNotBlank(productModel.getSupport())) {
-								MediaLink mediaSupportLink = new MediaLink();
-								mediaSupportLink.setId(MediaConstants.STRING_FOR_IMAGE_SUPPORT);
-								mediaSupportLink.setType(MediaConstants.STRING_FOR_MEDIA_TYPE);
-								mediaSupportLink.setValue(productModel.getSupport());
-								mediaList.add(mediaSupportLink);
-							}
-							flbBundle.setMerchandisingMedia(mediaList);
 						}
 					});
-				});
-			}*/
+				}
+			}
 
-		//}
+		}
 		return listOfFlbBundle;
 	}
 
