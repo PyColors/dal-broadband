@@ -7,12 +7,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
-public class Price implements Serializable {
+public class PriceForHardware implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6342890537527020273L;
 
+	
+	@JsonProperty("engVisitProductId")
+	private String engVisitProductId = null;
+	
 	@JsonProperty("gross")
 	private String gross = null;
 
@@ -26,7 +30,7 @@ public class Price implements Serializable {
 	 * @param gross
 	 * @return
 	 */
-	public Price gross(String gross) {
+	public PriceForHardware gross(String gross) {
 		this.gross = gross;
 		return this;
 	}
@@ -50,7 +54,7 @@ public class Price implements Serializable {
 	 * @param net
 	 * @return
 	 */
-	public Price net(String net) {
+	public PriceForHardware net(String net) {
 		this.net = net;
 		return this;
 	}
@@ -74,7 +78,7 @@ public class Price implements Serializable {
 	 * @param vat
 	 * @return
 	 */
-	public Price vat(String vat) {
+	public PriceForHardware vat(String vat) {
 		this.vat = vat;
 		return this;
 	}
@@ -94,6 +98,14 @@ public class Price implements Serializable {
 		this.vat = vat;
 	}
 
+	public String getEngVisitProductId() {
+		return engVisitProductId;
+	}
+
+	public void setEngVisitProductId(String engVisitProductId) {
+		this.engVisitProductId = engVisitProductId;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -102,7 +114,7 @@ public class Price implements Serializable {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Price price = (Price) o;
+		PriceForHardware price = (PriceForHardware) o;
 		return Objects.equals(this.gross, price.gross) && Objects.equals(this.net, price.net)
 				&& Objects.equals(this.vat, price.vat);
 	}
