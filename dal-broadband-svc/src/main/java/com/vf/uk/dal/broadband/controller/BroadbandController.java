@@ -58,7 +58,7 @@ public class BroadbandController {
 			"AvailabilityCheck", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AvailabilityCheckResponse.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
-			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 
 	@RequestMapping(value = "/{broadbandId}/lineOptions", produces = {
 			"application/json" }, method = RequestMethod.POST)
@@ -92,7 +92,7 @@ public class BroadbandController {
 			"Bundle", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = FlbBundle.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
-			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/plan", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<FlbBundle>> getFlbbList(
 			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId,
@@ -202,7 +202,7 @@ public class BroadbandController {
 	 * @ApiResponse(code = 404, message = "Not found", response = Void.class),
 	 * 
 	 * @ApiResponse(code = 500, message = "Internal Server Error", response =
-	 * Error.class) })
+	 * com.vf.uk.dal.broadband.entity.Error.class) })
 	 * 
 	 * @RequestMapping(value = "/{journeyId}/appointment", produces = {
 	 * "application/json" }, method = RequestMethod.POST)
@@ -243,7 +243,7 @@ public class BroadbandController {
 			"Broadband Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Basket.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
-			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/package", produces = { "application/json" }, method = RequestMethod.POST)
 	public Basket createOrUpdatePackage(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
@@ -259,7 +259,7 @@ public class BroadbandController {
 			"Broadband" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Broadband.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
-			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/broadband/{broadbandId}", produces = { "application/json" }, method = RequestMethod.GET)
 	public Broadband getBroadbandInfo(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
@@ -270,7 +270,7 @@ public class BroadbandController {
 			"Broadband, Selected Line API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = HttpStatus.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
-			@ApiResponse(code = 500, message = "Internal Server Error", response = Error.class) })
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/lineType", produces = { "application/json" }, method = RequestMethod.PUT)
 	public ResponseEntity<HttpStatus> updateLineTypeInBasket(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
