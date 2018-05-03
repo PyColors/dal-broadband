@@ -77,7 +77,7 @@ public class Hardware   {
   private String packageLineId = null;
 
   @JsonProperty("priceDetails")
-  private HardwarePrice priceDetails = null;
+  private HardwarePrices priceDetails = null;
 
   @JsonProperty("productClass")
   private String productClass = null;
@@ -476,7 +476,7 @@ public class Hardware   {
     this.packageLineId = packageLineId;
   }
 
-  public Hardware priceDetails(HardwarePrice priceDetails) {
+  public Hardware priceDetails(HardwarePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
   }
@@ -489,11 +489,11 @@ public class Hardware   {
 
   @Valid
 
-  public HardwarePrice getPriceDetails() {
+  public HardwarePrices getPriceDetails() {
     return priceDetails;
   }
 
-  public void setPriceDetails(HardwarePrice priceDetails) {
+  public void setPriceDetails(HardwarePrices priceDetails) {
     this.priceDetails = priceDetails;
   }
 
