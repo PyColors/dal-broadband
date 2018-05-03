@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineSettings   {
+public class BasketLineSettings   {
   @JsonProperty("installationCode")
   private String installationCode = null;
 
@@ -24,7 +24,7 @@ public class LineSettings   {
   @JsonProperty("terminationCode")
   private String terminationCode = null;
 
-  public LineSettings installationCode(String installationCode) {
+  public BasketLineSettings installationCode(String installationCode) {
     this.installationCode = installationCode;
     return this;
   }
@@ -44,7 +44,7 @@ public class LineSettings   {
     this.installationCode = installationCode;
   }
 
-  public LineSettings serviceCode(String serviceCode) {
+  public BasketLineSettings serviceCode(String serviceCode) {
     this.serviceCode = serviceCode;
     return this;
   }
@@ -64,7 +64,7 @@ public class LineSettings   {
     this.serviceCode = serviceCode;
   }
 
-  public LineSettings terminationCode(String terminationCode) {
+  public BasketLineSettings terminationCode(String terminationCode) {
     this.terminationCode = terminationCode;
     return this;
   }
@@ -93,7 +93,7 @@ public class LineSettings   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineSettings lineSettings = (LineSettings) o;
+    BasketLineSettings lineSettings = (BasketLineSettings) o;
     return Objects.equals(this.installationCode, lineSettings.installationCode) &&
         Objects.equals(this.serviceCode, lineSettings.serviceCode) &&
         Objects.equals(this.terminationCode, lineSettings.terminationCode);

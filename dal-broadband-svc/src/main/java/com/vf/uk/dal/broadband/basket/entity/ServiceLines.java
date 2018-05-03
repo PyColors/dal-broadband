@@ -24,7 +24,7 @@ public class ServiceLines   {
 
   @JsonProperty("lineTreatments")
   @Valid
-  private List<LineTreatment> lineTreatments = null;
+  private List<BasketLineTreatment> lineTreatments = null;
 
   @JsonProperty("networkType")
   private String networkType = null;
@@ -53,14 +53,14 @@ public class ServiceLines   {
     this.classificationCode = classificationCode;
   }
 
-  public ServiceLines lineTreatments(List<LineTreatment> lineTreatments) {
+  public ServiceLines lineTreatments(List<BasketLineTreatment> lineTreatments) {
     this.lineTreatments = lineTreatments;
     return this;
   }
 
-  public ServiceLines addLineTreatmentsItem(LineTreatment lineTreatmentsItem) {
+  public ServiceLines addLineTreatmentsItem(BasketLineTreatment lineTreatmentsItem) {
     if (this.lineTreatments == null) {
-      this.lineTreatments = new ArrayList<LineTreatment>();
+      this.lineTreatments = new ArrayList<BasketLineTreatment>();
     }
     this.lineTreatments.add(lineTreatmentsItem);
     return this;
@@ -74,11 +74,11 @@ public class ServiceLines   {
 
   @Valid
 
-  public List<LineTreatment> getLineTreatments() {
+  public List<BasketLineTreatment> getLineTreatments() {
     return lineTreatments;
   }
 
-  public void setLineTreatments(List<LineTreatment> lineTreatments) {
+  public void setLineTreatments(List<BasketLineTreatment> lineTreatments) {
     this.lineTreatments = lineTreatments;
   }
 

@@ -18,24 +18,24 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineReference   {
+public class BasketLineReference   {
   @JsonProperty("availableServices")
   private AvailableServices availableServices = null;
 
   @JsonProperty("lineDirectory")
   @Valid
-  private List<LineDirectory> lineDirectory = null;
+  private List<BasketLineDirectory> lineDirectory = null;
 
   @JsonProperty("lineLocator")
-  private LineLocator lineLocator = null;
+  private BasketLineLocator lineLocator = null;
 
   @JsonProperty("lineSettings")
-  private LineSettings lineSettings = null;
+  private BasketLineSettings lineSettings = null;
 
   @JsonProperty("lineStatus")
-  private LineStatus lineStatus = null;
+  private BasketLineStatus lineStatus = null;
 
-  public LineReference availableServices(AvailableServices availableServices) {
+  public BasketLineReference availableServices(AvailableServices availableServices) {
     this.availableServices = availableServices;
     return this;
   }
@@ -56,14 +56,14 @@ public class LineReference   {
     this.availableServices = availableServices;
   }
 
-  public LineReference lineDirectory(List<LineDirectory> lineDirectory) {
+  public BasketLineReference lineDirectory(List<BasketLineDirectory> lineDirectory) {
     this.lineDirectory = lineDirectory;
     return this;
   }
 
-  public LineReference addLineDirectoryItem(LineDirectory lineDirectoryItem) {
+  public BasketLineReference addLineDirectoryItem(BasketLineDirectory lineDirectoryItem) {
     if (this.lineDirectory == null) {
-      this.lineDirectory = new ArrayList<LineDirectory>();
+      this.lineDirectory = new ArrayList<BasketLineDirectory>();
     }
     this.lineDirectory.add(lineDirectoryItem);
     return this;
@@ -77,15 +77,15 @@ public class LineReference   {
 
   @Valid
 
-  public List<LineDirectory> getLineDirectory() {
+  public List<BasketLineDirectory> getLineDirectory() {
     return lineDirectory;
   }
 
-  public void setLineDirectory(List<LineDirectory> lineDirectory) {
+  public void setLineDirectory(List<BasketLineDirectory> lineDirectory) {
     this.lineDirectory = lineDirectory;
   }
 
-  public LineReference lineLocator(LineLocator lineLocator) {
+  public BasketLineReference lineLocator(BasketLineLocator lineLocator) {
     this.lineLocator = lineLocator;
     return this;
   }
@@ -98,15 +98,15 @@ public class LineReference   {
 
   @Valid
 
-  public LineLocator getLineLocator() {
+  public BasketLineLocator getLineLocator() {
     return lineLocator;
   }
 
-  public void setLineLocator(LineLocator lineLocator) {
+  public void setLineLocator(BasketLineLocator lineLocator) {
     this.lineLocator = lineLocator;
   }
 
-  public LineReference lineSettings(LineSettings lineSettings) {
+  public BasketLineReference lineSettings(BasketLineSettings lineSettings) {
     this.lineSettings = lineSettings;
     return this;
   }
@@ -119,15 +119,15 @@ public class LineReference   {
 
   @Valid
 
-  public LineSettings getLineSettings() {
+  public BasketLineSettings getLineSettings() {
     return lineSettings;
   }
 
-  public void setLineSettings(LineSettings lineSettings) {
+  public void setLineSettings(BasketLineSettings lineSettings) {
     this.lineSettings = lineSettings;
   }
 
-  public LineReference lineStatus(LineStatus lineStatus) {
+  public BasketLineReference lineStatus(BasketLineStatus lineStatus) {
     this.lineStatus = lineStatus;
     return this;
   }
@@ -140,11 +140,11 @@ public class LineReference   {
 
   @Valid
 
-  public LineStatus getLineStatus() {
+  public BasketLineStatus getLineStatus() {
     return lineStatus;
   }
 
-  public void setLineStatus(LineStatus lineStatus) {
+  public void setLineStatus(BasketLineStatus lineStatus) {
     this.lineStatus = lineStatus;
   }
 
@@ -157,7 +157,7 @@ public class LineReference   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineReference lineReference = (LineReference) o;
+    BasketLineReference lineReference = (BasketLineReference) o;
     return Objects.equals(this.availableServices, lineReference.availableServices) &&
         Objects.equals(this.lineDirectory, lineReference.lineDirectory) &&
         Objects.equals(this.lineLocator, lineReference.lineLocator) &&

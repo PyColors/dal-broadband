@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineSpeeds   {
+public class BasketLineSpeeds   {
   @JsonProperty("avgDownSpeed")
   private String avgDownSpeed = null;
 
@@ -36,7 +36,7 @@ public class LineSpeeds   {
   @JsonProperty("minUpSpeed")
   private String minUpSpeed = null;
 
-  public LineSpeeds avgDownSpeed(String avgDownSpeed) {
+  public BasketLineSpeeds avgDownSpeed(String avgDownSpeed) {
     this.avgDownSpeed = avgDownSpeed;
     return this;
   }
@@ -56,7 +56,7 @@ public class LineSpeeds   {
     this.avgDownSpeed = avgDownSpeed;
   }
 
-  public LineSpeeds bandwidthMeasure(String bandwidthMeasure) {
+  public BasketLineSpeeds bandwidthMeasure(String bandwidthMeasure) {
     this.bandwidthMeasure = bandwidthMeasure;
     return this;
   }
@@ -76,7 +76,7 @@ public class LineSpeeds   {
     this.bandwidthMeasure = bandwidthMeasure;
   }
 
-  public LineSpeeds maxDownSpeed(String maxDownSpeed) {
+  public BasketLineSpeeds maxDownSpeed(String maxDownSpeed) {
     this.maxDownSpeed = maxDownSpeed;
     return this;
   }
@@ -96,7 +96,7 @@ public class LineSpeeds   {
     this.maxDownSpeed = maxDownSpeed;
   }
 
-  public LineSpeeds maxUpSpeed(String maxUpSpeed) {
+  public BasketLineSpeeds maxUpSpeed(String maxUpSpeed) {
     this.maxUpSpeed = maxUpSpeed;
     return this;
   }
@@ -116,7 +116,7 @@ public class LineSpeeds   {
     this.maxUpSpeed = maxUpSpeed;
   }
 
-  public LineSpeeds minDownSpeed(String minDownSpeed) {
+  public BasketLineSpeeds minDownSpeed(String minDownSpeed) {
     this.minDownSpeed = minDownSpeed;
     return this;
   }
@@ -136,7 +136,7 @@ public class LineSpeeds   {
     this.minDownSpeed = minDownSpeed;
   }
 
-  public LineSpeeds minGuaranteedDownSpeed(String minGuaranteedDownSpeed) {
+  public BasketLineSpeeds minGuaranteedDownSpeed(String minGuaranteedDownSpeed) {
     this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
     return this;
   }
@@ -156,7 +156,7 @@ public class LineSpeeds   {
     this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
   }
 
-  public LineSpeeds minUpSpeed(String minUpSpeed) {
+  public BasketLineSpeeds minUpSpeed(String minUpSpeed) {
     this.minUpSpeed = minUpSpeed;
     return this;
   }
@@ -185,7 +185,7 @@ public class LineSpeeds   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineSpeeds lineSpeeds = (LineSpeeds) o;
+    BasketLineSpeeds lineSpeeds = (BasketLineSpeeds) o;
     return Objects.equals(this.avgDownSpeed, lineSpeeds.avgDownSpeed) &&
         Objects.equals(this.bandwidthMeasure, lineSpeeds.bandwidthMeasure) &&
         Objects.equals(this.maxDownSpeed, lineSpeeds.maxDownSpeed) &&

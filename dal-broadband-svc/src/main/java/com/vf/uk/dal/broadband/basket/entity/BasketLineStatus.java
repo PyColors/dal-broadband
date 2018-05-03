@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineStatus   {
+public class BasketLineStatus   {
   @JsonProperty("accessLineStatus")
   private String accessLineStatus = null;
 
@@ -42,7 +42,7 @@ public class LineStatus   {
   @JsonProperty("tempStructure")
   private Boolean tempStructure = null;
 
-  public LineStatus accessLineStatus(String accessLineStatus) {
+  public BasketLineStatus accessLineStatus(String accessLineStatus) {
     this.accessLineStatus = accessLineStatus;
     return this;
   }
@@ -62,7 +62,7 @@ public class LineStatus   {
     this.accessLineStatus = accessLineStatus;
   }
 
-  public LineStatus gnpStatus(String gnpStatus) {
+  public BasketLineStatus gnpStatus(String gnpStatus) {
     this.gnpStatus = gnpStatus;
     return this;
   }
@@ -82,7 +82,7 @@ public class LineStatus   {
     this.gnpStatus = gnpStatus;
   }
 
-  public LineStatus lineOption(String lineOption) {
+  public BasketLineStatus lineOption(String lineOption) {
     this.lineOption = lineOption;
     return this;
   }
@@ -102,7 +102,7 @@ public class LineStatus   {
     this.lineOption = lineOption;
   }
 
-  public LineStatus lineType(String lineType) {
+  public BasketLineStatus lineType(String lineType) {
     this.lineType = lineType;
     return this;
   }
@@ -122,7 +122,7 @@ public class LineStatus   {
     this.lineType = lineType;
   }
 
-  public LineStatus narrowBandServicesAvailable(String narrowBandServicesAvailable) {
+  public BasketLineStatus narrowBandServicesAvailable(String narrowBandServicesAvailable) {
     this.narrowBandServicesAvailable = narrowBandServicesAvailable;
     return this;
   }
@@ -142,7 +142,7 @@ public class LineStatus   {
     this.narrowBandServicesAvailable = narrowBandServicesAvailable;
   }
 
-  public LineStatus standbyPowerRequired(Boolean standbyPowerRequired) {
+  public BasketLineStatus standbyPowerRequired(Boolean standbyPowerRequired) {
     this.standbyPowerRequired = standbyPowerRequired;
     return this;
   }
@@ -162,7 +162,7 @@ public class LineStatus   {
     this.standbyPowerRequired = standbyPowerRequired;
   }
 
-  public LineStatus statusCode(String statusCode) {
+  public BasketLineStatus statusCode(String statusCode) {
     this.statusCode = statusCode;
     return this;
   }
@@ -182,7 +182,7 @@ public class LineStatus   {
     this.statusCode = statusCode;
   }
 
-  public LineStatus technology(String technology) {
+  public BasketLineStatus technology(String technology) {
     this.technology = technology;
     return this;
   }
@@ -202,7 +202,7 @@ public class LineStatus   {
     this.technology = technology;
   }
 
-  public LineStatus tempStructure(Boolean tempStructure) {
+  public BasketLineStatus tempStructure(Boolean tempStructure) {
     this.tempStructure = tempStructure;
     return this;
   }
@@ -231,7 +231,7 @@ public class LineStatus   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineStatus lineStatus = (LineStatus) o;
+    BasketLineStatus lineStatus = (BasketLineStatus) o;
     return Objects.equals(this.accessLineStatus, lineStatus.accessLineStatus) &&
         Objects.equals(this.gnpStatus, lineStatus.gnpStatus) &&
         Objects.equals(this.lineOption, lineStatus.lineOption) &&
