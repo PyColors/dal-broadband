@@ -16,14 +16,14 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ServicePoint   {
+public class BasketServicePoint   {
   @JsonProperty("lineRefernece")
   private LineReference lineRefernece = null;
 
   @JsonProperty("serviceReference")
   private ServiceReference serviceReference = null;
 
-  public ServicePoint lineRefernece(LineReference lineRefernece) {
+  public BasketServicePoint lineRefernece(LineReference lineRefernece) {
     this.lineRefernece = lineRefernece;
     return this;
   }
@@ -44,7 +44,7 @@ public class ServicePoint   {
     this.lineRefernece = lineRefernece;
   }
 
-  public ServicePoint serviceReference(ServiceReference serviceReference) {
+  public BasketServicePoint serviceReference(ServiceReference serviceReference) {
     this.serviceReference = serviceReference;
     return this;
   }
@@ -74,7 +74,7 @@ public class ServicePoint   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServicePoint servicePoint = (ServicePoint) o;
+    BasketServicePoint servicePoint = (BasketServicePoint) o;
     return Objects.equals(this.lineRefernece, servicePoint.lineRefernece) &&
         Objects.equals(this.serviceReference, servicePoint.serviceReference);
   }

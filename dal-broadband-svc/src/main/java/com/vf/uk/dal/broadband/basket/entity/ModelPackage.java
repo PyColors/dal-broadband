@@ -74,7 +74,7 @@ public class ModelPackage {
 	private Integer sequence = null;
 
 	@JsonProperty("servicePoint")
-	private ServicePoint servicePoint = null;
+	private BasketServicePoint servicePoint = null;
 
 	@JsonProperty("serviceStartDate")
 	private String serviceStartDate = null;
@@ -467,7 +467,7 @@ public class ModelPackage {
 		this.sequence = sequence;
 	}
 
-	public ModelPackage servicePoint(ServicePoint servicePoint) {
+	public ModelPackage servicePoint(BasketServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 		return this;
 	}
@@ -481,11 +481,11 @@ public class ModelPackage {
 
 	@Valid
 
-	public ServicePoint getServicePoint() {
+	public BasketServicePoint getServicePoint() {
 		return servicePoint;
 	}
 
-	public void setServicePoint(ServicePoint servicePoint) {
+	public void setServicePoint(BasketServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 	}
 
