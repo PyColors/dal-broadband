@@ -29,7 +29,7 @@
 	
 	<mapping map-null="false">
 		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceReference</class-a>
-		<class-b>com.vf.uk.dal.broadband.basket.entity.ServiceReference</class-b>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceReference</class-b>
 		<field>
 			<a>serviceLinesList</a>
 			<b>serviceLines</b>
@@ -38,7 +38,7 @@
 
 	<mapping map-null="false">
 		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines</class-a>
-		<class-b>com.vf.uk.dal.broadband.basket.entity.ServiceLines</class-b>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceLines</class-b>
 		<field>
 			<a>lineTreatmentList</a>
 			<b>lineTreatments</b>
@@ -52,7 +52,7 @@
 
 	<mapping map-null="false">
 		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServieLine</class-a>
-		<class-b>com.vf.uk.dal.broadband.basket.entity.ServiceLine</class-b>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceLine</class-b>
 		<field>
 			<a>serviceLineTreatmentList</a>
 			<b>serviceLineTreatments</b>
@@ -63,7 +63,7 @@
 	
 	<mapping map-null="false">
 		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceLineTreatment</class-a>
-		<class-b>com.vf.uk.dal.broadband.basket.entity.ServiceLineTreatment</class-b>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceLineTreatment</class-b>
 		<field>
 			<a>SIM2Value</a>
 			<b>simValue</b>

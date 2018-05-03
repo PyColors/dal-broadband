@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ServiceLines   {
+public class BasketServiceLines   {
   @JsonProperty("classificationCode")
   private String classificationCode = null;
 
@@ -31,9 +31,9 @@ public class ServiceLines   {
 
   @JsonProperty("serviceLines")
   @Valid
-  private List<ServiceLine> serviceLines = null;
+  private List<BasketServiceLine> serviceLines = null;
 
-  public ServiceLines classificationCode(String classificationCode) {
+  public BasketServiceLines classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
   }
@@ -53,12 +53,12 @@ public class ServiceLines   {
     this.classificationCode = classificationCode;
   }
 
-  public ServiceLines lineTreatments(List<BasketLineTreatment> lineTreatments) {
+  public BasketServiceLines lineTreatments(List<BasketLineTreatment> lineTreatments) {
     this.lineTreatments = lineTreatments;
     return this;
   }
 
-  public ServiceLines addLineTreatmentsItem(BasketLineTreatment lineTreatmentsItem) {
+  public BasketServiceLines addLineTreatmentsItem(BasketLineTreatment lineTreatmentsItem) {
     if (this.lineTreatments == null) {
       this.lineTreatments = new ArrayList<BasketLineTreatment>();
     }
@@ -82,7 +82,7 @@ public class ServiceLines   {
     this.lineTreatments = lineTreatments;
   }
 
-  public ServiceLines networkType(String networkType) {
+  public BasketServiceLines networkType(String networkType) {
     this.networkType = networkType;
     return this;
   }
@@ -102,14 +102,14 @@ public class ServiceLines   {
     this.networkType = networkType;
   }
 
-  public ServiceLines serviceLines(List<ServiceLine> serviceLines) {
+  public BasketServiceLines serviceLines(List<BasketServiceLine> serviceLines) {
     this.serviceLines = serviceLines;
     return this;
   }
 
-  public ServiceLines addServiceLinesItem(ServiceLine serviceLinesItem) {
+  public BasketServiceLines addServiceLinesItem(BasketServiceLine serviceLinesItem) {
     if (this.serviceLines == null) {
-      this.serviceLines = new ArrayList<ServiceLine>();
+      this.serviceLines = new ArrayList<BasketServiceLine>();
     }
     this.serviceLines.add(serviceLinesItem);
     return this;
@@ -123,11 +123,11 @@ public class ServiceLines   {
 
   @Valid
 
-  public List<ServiceLine> getServiceLines() {
+  public List<BasketServiceLine> getServiceLines() {
     return serviceLines;
   }
 
-  public void setServiceLines(List<ServiceLine> serviceLines) {
+  public void setServiceLines(List<BasketServiceLine> serviceLines) {
     this.serviceLines = serviceLines;
   }
 
@@ -140,7 +140,7 @@ public class ServiceLines   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServiceLines serviceLines = (ServiceLines) o;
+    BasketServiceLines serviceLines = (BasketServiceLines) o;
     return Objects.equals(this.classificationCode, serviceLines.classificationCode) &&
         Objects.equals(this.lineTreatments, serviceLines.lineTreatments) &&
         Objects.equals(this.networkType, serviceLines.networkType) &&

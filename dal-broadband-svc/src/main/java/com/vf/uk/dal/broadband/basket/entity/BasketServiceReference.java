@@ -18,19 +18,19 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ServiceReference   {
+public class BasketServiceReference   {
   @JsonProperty("serviceLines")
   @Valid
-  private List<ServiceLines> serviceLines = null;
+  private List<BasketServiceLines> serviceLines = null;
 
-  public ServiceReference serviceLines(List<ServiceLines> serviceLines) {
+  public BasketServiceReference serviceLines(List<BasketServiceLines> serviceLines) {
     this.serviceLines = serviceLines;
     return this;
   }
 
-  public ServiceReference addServiceLinesItem(ServiceLines serviceLinesItem) {
+  public BasketServiceReference addServiceLinesItem(BasketServiceLines serviceLinesItem) {
     if (this.serviceLines == null) {
-      this.serviceLines = new ArrayList<ServiceLines>();
+      this.serviceLines = new ArrayList<BasketServiceLines>();
     }
     this.serviceLines.add(serviceLinesItem);
     return this;
@@ -44,11 +44,11 @@ public class ServiceReference   {
 
   @Valid
 
-  public List<ServiceLines> getServiceLines() {
+  public List<BasketServiceLines> getServiceLines() {
     return serviceLines;
   }
 
-  public void setServiceLines(List<ServiceLines> serviceLines) {
+  public void setServiceLines(List<BasketServiceLines> serviceLines) {
     this.serviceLines = serviceLines;
   }
 
@@ -61,7 +61,7 @@ public class ServiceReference   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServiceReference serviceReference = (ServiceReference) o;
+    BasketServiceReference serviceReference = (BasketServiceReference) o;
     return Objects.equals(this.serviceLines, serviceReference.serviceLines);
   }
 

@@ -14,14 +14,14 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class AccessLine   {
+public class BasketAccessLine   {
   @JsonProperty("channelId")
   private String channelId = null;
 
   @JsonProperty("id")
   private String id = null;
 
-  public AccessLine channelId(String channelId) {
+  public BasketAccessLine channelId(String channelId) {
     this.channelId = channelId;
     return this;
   }
@@ -41,7 +41,7 @@ public class AccessLine   {
     this.channelId = channelId;
   }
 
-  public AccessLine id(String id) {
+  public BasketAccessLine id(String id) {
     this.id = id;
     return this;
   }
@@ -70,7 +70,7 @@ public class AccessLine   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AccessLine accessLine = (AccessLine) o;
+    BasketAccessLine accessLine = (BasketAccessLine) o;
     return Objects.equals(this.channelId, accessLine.channelId) &&
         Objects.equals(this.id, accessLine.id);
   }
