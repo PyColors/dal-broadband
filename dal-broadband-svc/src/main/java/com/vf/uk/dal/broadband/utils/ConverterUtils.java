@@ -8,11 +8,13 @@ import org.apache.commons.lang.StringUtils;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
+import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.Product;
 import com.vf.uk.dal.broadband.basket.entity.UpdateBundle;
 import com.vf.uk.dal.broadband.basket.entity.UpdateDevice;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
@@ -933,6 +935,19 @@ public class ConverterUtils {
 		lineDetails.setLineTreatmentType(updateLineRequest.getLineTreatmentType());
 		broadBand.setLineDetails(lineDetails);
 		return broadBand;
+	}
+
+
+	public static AddProductRequest addProductRequest(Broadband broadband) {
+		AddProductRequest addProductRequest = new AddProductRequest();
+		List<Product> products = new ArrayList<>();
+		Product product = new Product();
+		product.setAction("ADD");
+		product.setProductType("SERVICE");
+		product.setSkuId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
+		products.add(product);
+		addProductRequest.setProducts(products);
+		return addProductRequest;
 	}
 
 

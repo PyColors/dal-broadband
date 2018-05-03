@@ -30,7 +30,7 @@ public class AvailabilityCheckResponse {
 
 	@JsonProperty("classificationCode")
 	private List<String> classificationCode = null;
-	
+
 	@JsonProperty("engineeringVisitCharge")
 	private Price engineeringVisitCharge = null;
 
@@ -202,8 +202,8 @@ public class AvailabilityCheckResponse {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(journeyId, installationAddress, appointmentAndAvailabilityDetail,
-				lineSpeeds, classificationCode);
+		return Objects.hash(journeyId, installationAddress, appointmentAndAvailabilityDetail, lineSpeeds,
+				classificationCode);
 	}
 
 	@Override

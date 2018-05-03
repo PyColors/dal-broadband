@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class ServicePrice   {
   @JsonProperty("merchandisingPromotions")
-  private MerchandisingPromotion merchandisingPromotions = null;
+  private MerchandisingPromotions merchandisingPromotions = null;
 
   @JsonProperty("monthlyDiscountPrice")
   private Price monthlyDiscountPrice = null;
@@ -32,7 +32,7 @@ public class ServicePrice   {
   @JsonProperty("oneOffPrice")
   private Price oneOffPrice = null;
 
-  public ServicePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+  public ServicePrice merchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
     return this;
   }
@@ -45,11 +45,11 @@ public class ServicePrice   {
 
   @Valid
 
-  public MerchandisingPromotion getMerchandisingPromotions() {
+  public MerchandisingPromotions getMerchandisingPromotions() {
     return merchandisingPromotions;
   }
 
-  public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+  public void setMerchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
   }
 

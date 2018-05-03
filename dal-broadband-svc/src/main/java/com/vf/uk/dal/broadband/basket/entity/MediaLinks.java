@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class MediaLink   {
+public class MediaLinks   {
   @JsonProperty("id")
   private String id = null;
 
@@ -24,7 +24,7 @@ public class MediaLink   {
   @JsonProperty("value")
   private String value = null;
 
-  public MediaLink id(String id) {
+  public MediaLinks id(String id) {
     this.id = id;
     return this;
   }
@@ -44,7 +44,7 @@ public class MediaLink   {
     this.id = id;
   }
 
-  public MediaLink type(String type) {
+  public MediaLinks type(String type) {
     this.type = type;
     return this;
   }
@@ -64,7 +64,7 @@ public class MediaLink   {
     this.type = type;
   }
 
-  public MediaLink value(String value) {
+  public MediaLinks value(String value) {
     this.value = value;
     return this;
   }
@@ -93,7 +93,7 @@ public class MediaLink   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MediaLink mediaLink = (MediaLink) o;
+    MediaLinks mediaLink = (MediaLinks) o;
     return Objects.equals(this.id, mediaLink.id) &&
         Objects.equals(this.type, mediaLink.type) &&
         Objects.equals(this.value, mediaLink.value);

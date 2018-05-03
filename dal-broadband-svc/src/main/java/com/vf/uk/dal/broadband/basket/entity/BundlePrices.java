@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class BundlePrice   {
+public class BundlePrices   {
   @JsonProperty("merchandisingPromotions")
-  private MerchandisingPromotion merchandisingPromotions = null;
+  private MerchandisingPromotions merchandisingPromotions = null;
 
   @JsonProperty("monthlyDiscountPrice")
   private Price monthlyDiscountPrice = null;
@@ -26,7 +26,7 @@ public class BundlePrice   {
   @JsonProperty("monthlyPrice")
   private Price monthlyPrice = null;
 
-  public BundlePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+  public BundlePrices merchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
     return this;
   }
@@ -39,15 +39,15 @@ public class BundlePrice   {
 
   @Valid
 
-  public MerchandisingPromotion getMerchandisingPromotions() {
+  public MerchandisingPromotions getMerchandisingPromotions() {
     return merchandisingPromotions;
   }
 
-  public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+  public void setMerchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
   }
 
-  public BundlePrice monthlyDiscountPrice(Price monthlyDiscountPrice) {
+  public BundlePrices monthlyDiscountPrice(Price monthlyDiscountPrice) {
     this.monthlyDiscountPrice = monthlyDiscountPrice;
     return this;
   }
@@ -68,7 +68,7 @@ public class BundlePrice   {
     this.monthlyDiscountPrice = monthlyDiscountPrice;
   }
 
-  public BundlePrice monthlyPrice(Price monthlyPrice) {
+  public BundlePrices monthlyPrice(Price monthlyPrice) {
     this.monthlyPrice = monthlyPrice;
     return this;
   }
@@ -98,7 +98,7 @@ public class BundlePrice   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BundlePrice bundlePrice = (BundlePrice) o;
+    BundlePrices bundlePrice = (BundlePrices) o;
     return Objects.equals(this.merchandisingPromotions, bundlePrice.merchandisingPromotions) &&
         Objects.equals(this.monthlyDiscountPrice, bundlePrice.monthlyDiscountPrice) &&
         Objects.equals(this.monthlyPrice, bundlePrice.monthlyPrice);
