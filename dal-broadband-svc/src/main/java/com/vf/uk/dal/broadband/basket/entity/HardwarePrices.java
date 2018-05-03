@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class HardwarePrice   {
+public class HardwarePrices   {
   @JsonProperty("merchandisingPromotions")
   private MerchandisingPromotions merchandisingPromotions = null;
 
@@ -26,7 +26,7 @@ public class HardwarePrice   {
   @JsonProperty("oneOffPrice")
   private Price oneOffPrice = null;
 
-  public HardwarePrice merchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
+  public HardwarePrices merchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
     return this;
   }
@@ -47,7 +47,7 @@ public class HardwarePrice   {
     this.merchandisingPromotions = merchandisingPromotions;
   }
 
-  public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
+  public HardwarePrices oneOffDiscountPrice(Price oneOffDiscountPrice) {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
     return this;
   }
@@ -68,7 +68,7 @@ public class HardwarePrice   {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
   }
 
-  public HardwarePrice oneOffPrice(Price oneOffPrice) {
+  public HardwarePrices oneOffPrice(Price oneOffPrice) {
     this.oneOffPrice = oneOffPrice;
     return this;
   }
@@ -98,7 +98,7 @@ public class HardwarePrice   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    HardwarePrice hardwarePrice = (HardwarePrice) o;
+    HardwarePrices hardwarePrice = (HardwarePrices) o;
     return Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions) &&
         Objects.equals(this.oneOffDiscountPrice, hardwarePrice.oneOffDiscountPrice) &&
         Objects.equals(this.oneOffPrice, hardwarePrice.oneOffPrice);
