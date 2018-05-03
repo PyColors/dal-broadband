@@ -750,7 +750,7 @@ public class ConverterUtils {
 		return broadband;
 	}
 
-	public static CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband, com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, CurrentJourney journey) {
+	public static CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband, com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, CurrentJourney journey) {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
 		createBasket.setCustomerRequestedDate(basketRequest.getCustomerRequestedDate());
 		createBasket.setSource(basketRequest.getSource());
@@ -882,7 +882,7 @@ public class ConverterUtils {
 
 
 	public static PremiseAndServicePoint setPremiseAndServicePointRequest(
-			com.vf.uk.dal.broadband.basket.entity.ServicePoint servicePoint, Broadband broadband, AvailabilityCheckRequest availabilityCheckRequest,UpdateLineRequest updateLineRequest) {
+			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, Broadband broadband, AvailabilityCheckRequest availabilityCheckRequest,UpdateLineRequest updateLineRequest) {
 		PremiseAndServicePoint premiseAndServicePoint = new PremiseAndServicePoint();
 		if(servicePoint!=null){
 			premiseAndServicePoint.setServicePoint(servicePoint);
