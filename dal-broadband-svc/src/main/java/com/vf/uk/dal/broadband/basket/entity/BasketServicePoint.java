@@ -18,12 +18,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class BasketServicePoint   {
   @JsonProperty("lineRefernece")
-  private LineReference lineRefernece = null;
+  private BasketLineReference lineRefernece = null;
 
   @JsonProperty("serviceReference")
   private ServiceReference serviceReference = null;
 
-  public BasketServicePoint lineRefernece(LineReference lineRefernece) {
+  public BasketServicePoint lineRefernece(BasketLineReference lineRefernece) {
     this.lineRefernece = lineRefernece;
     return this;
   }
@@ -36,11 +36,11 @@ public class BasketServicePoint   {
 
   @Valid
 
-  public LineReference getLineRefernece() {
+  public BasketLineReference getLineRefernece() {
     return lineRefernece;
   }
 
-  public void setLineRefernece(LineReference lineRefernece) {
+  public void setLineRefernece(BasketLineReference lineRefernece) {
     this.lineRefernece = lineRefernece;
   }
 

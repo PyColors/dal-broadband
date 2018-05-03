@@ -19,7 +19,7 @@
 	
 	<mapping map-null="false">
 		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.LineReference</class-a>
-		<class-b>com.vf.uk.dal.broadband.basket.entity.LineReference</class-b>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketLineReference</class-b>
 		<field>
 			<a>lineDirectoryList</a>
 			<b>lineDirectory</b>

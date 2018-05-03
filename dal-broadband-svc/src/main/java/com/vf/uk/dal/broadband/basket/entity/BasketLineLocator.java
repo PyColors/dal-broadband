@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineLocator   {
+public class BasketLineLocator   {
   @JsonProperty("cableLinkID")
   private String cableLinkID = null;
 
@@ -33,7 +33,7 @@ public class LineLocator   {
   @JsonProperty("l2SID")
   private String l2SID = null;
 
-  public LineLocator cableLinkID(String cableLinkID) {
+  public BasketLineLocator cableLinkID(String cableLinkID) {
     this.cableLinkID = cableLinkID;
     return this;
   }
@@ -53,7 +53,7 @@ public class LineLocator   {
     this.cableLinkID = cableLinkID;
   }
 
-  public LineLocator distributionPoint(String distributionPoint) {
+  public BasketLineLocator distributionPoint(String distributionPoint) {
     this.distributionPoint = distributionPoint;
     return this;
   }
@@ -73,7 +73,7 @@ public class LineLocator   {
     this.distributionPoint = distributionPoint;
   }
 
-  public LineLocator districtCode(String districtCode) {
+  public BasketLineLocator districtCode(String districtCode) {
     this.districtCode = districtCode;
     return this;
   }
@@ -93,7 +93,7 @@ public class LineLocator   {
     this.districtCode = districtCode;
   }
 
-  public LineLocator exchangeCode(String exchangeCode) {
+  public BasketLineLocator exchangeCode(String exchangeCode) {
     this.exchangeCode = exchangeCode;
     return this;
   }
@@ -113,7 +113,7 @@ public class LineLocator   {
     this.exchangeCode = exchangeCode;
   }
 
-  public LineLocator exchangeName(String exchangeName) {
+  public BasketLineLocator exchangeName(String exchangeName) {
     this.exchangeName = exchangeName;
     return this;
   }
@@ -133,7 +133,7 @@ public class LineLocator   {
     this.exchangeName = exchangeName;
   }
 
-  public LineLocator l2SID(String l2SID) {
+  public BasketLineLocator l2SID(String l2SID) {
     this.l2SID = l2SID;
     return this;
   }
@@ -162,7 +162,7 @@ public class LineLocator   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineLocator lineLocator = (LineLocator) o;
+    BasketLineLocator lineLocator = (BasketLineLocator) o;
     return Objects.equals(this.cableLinkID, lineLocator.cableLinkID) &&
         Objects.equals(this.distributionPoint, lineLocator.distributionPoint) &&
         Objects.equals(this.districtCode, lineLocator.districtCode) &&

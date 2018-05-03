@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineDirectory   {
+public class BasketLineDirectory   {
   @JsonProperty("directoryCode")
   private String directoryCode = null;
 
@@ -24,7 +24,7 @@ public class LineDirectory   {
   @JsonProperty("locationCode")
   private String locationCode = null;
 
-  public LineDirectory directoryCode(String directoryCode) {
+  public BasketLineDirectory directoryCode(String directoryCode) {
     this.directoryCode = directoryCode;
     return this;
   }
@@ -44,7 +44,7 @@ public class LineDirectory   {
     this.directoryCode = directoryCode;
   }
 
-  public LineDirectory featureCode(String featureCode) {
+  public BasketLineDirectory featureCode(String featureCode) {
     this.featureCode = featureCode;
     return this;
   }
@@ -64,7 +64,7 @@ public class LineDirectory   {
     this.featureCode = featureCode;
   }
 
-  public LineDirectory locationCode(String locationCode) {
+  public BasketLineDirectory locationCode(String locationCode) {
     this.locationCode = locationCode;
     return this;
   }
@@ -93,7 +93,7 @@ public class LineDirectory   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineDirectory lineDirectory = (LineDirectory) o;
+    BasketLineDirectory lineDirectory = (BasketLineDirectory) o;
     return Objects.equals(this.directoryCode, lineDirectory.directoryCode) &&
         Objects.equals(this.featureCode, lineDirectory.featureCode) &&
         Objects.equals(this.locationCode, lineDirectory.locationCode);

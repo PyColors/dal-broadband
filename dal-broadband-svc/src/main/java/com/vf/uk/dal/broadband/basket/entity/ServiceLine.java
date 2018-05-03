@@ -23,7 +23,7 @@ public class ServiceLine   {
   private ItemReference itemReference = null;
 
   @JsonProperty("lineSpeeds")
-  private LineSpeeds lineSpeeds = null;
+  private BasketLineSpeeds lineSpeeds = null;
 
   @JsonProperty("miscRefernce")
   private MiscReference miscRefernce = null;
@@ -53,7 +53,7 @@ public class ServiceLine   {
     this.itemReference = itemReference;
   }
 
-  public ServiceLine lineSpeeds(LineSpeeds lineSpeeds) {
+  public ServiceLine lineSpeeds(BasketLineSpeeds lineSpeeds) {
     this.lineSpeeds = lineSpeeds;
     return this;
   }
@@ -66,11 +66,11 @@ public class ServiceLine   {
 
   @Valid
 
-  public LineSpeeds getLineSpeeds() {
+  public BasketLineSpeeds getLineSpeeds() {
     return lineSpeeds;
   }
 
-  public void setLineSpeeds(LineSpeeds lineSpeeds) {
+  public void setLineSpeeds(BasketLineSpeeds lineSpeeds) {
     this.lineSpeeds = lineSpeeds;
   }
 
