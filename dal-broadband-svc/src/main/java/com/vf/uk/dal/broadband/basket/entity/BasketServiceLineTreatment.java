@@ -18,9 +18,9 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ServiceLineTreatment   {
+public class BasketServiceLineTreatment   {
   @JsonProperty("accessLine")
-  private AccessLine accessLine = null;
+  private BasketAccessLine accessLine = null;
 
   @JsonProperty("canNumberBeRetained")
   private Boolean canNumberBeRetained = null;
@@ -33,7 +33,7 @@ public class ServiceLineTreatment   {
 
   @JsonProperty("pendingOrders")
   @Valid
-  private List<PendingOrder> pendingOrders = null;
+  private List<BasketPendingOrder> pendingOrders = null;
 
   @JsonProperty("portInFlag")
   private String portInFlag = null;
@@ -50,7 +50,7 @@ public class ServiceLineTreatment   {
   @JsonProperty("vicCode")
   private String vicCode = null;
 
-  public ServiceLineTreatment accessLine(AccessLine accessLine) {
+  public BasketServiceLineTreatment accessLine(BasketAccessLine accessLine) {
     this.accessLine = accessLine;
     return this;
   }
@@ -63,15 +63,15 @@ public class ServiceLineTreatment   {
 
   @Valid
 
-  public AccessLine getAccessLine() {
+  public BasketAccessLine getAccessLine() {
     return accessLine;
   }
 
-  public void setAccessLine(AccessLine accessLine) {
+  public void setAccessLine(BasketAccessLine accessLine) {
     this.accessLine = accessLine;
   }
 
-  public ServiceLineTreatment canNumberBeRetained(Boolean canNumberBeRetained) {
+  public BasketServiceLineTreatment canNumberBeRetained(Boolean canNumberBeRetained) {
     this.canNumberBeRetained = canNumberBeRetained;
     return this;
   }
@@ -91,7 +91,7 @@ public class ServiceLineTreatment   {
     this.canNumberBeRetained = canNumberBeRetained;
   }
 
-  public ServiceLineTreatment lineInfo(String lineInfo) {
+  public BasketServiceLineTreatment lineInfo(String lineInfo) {
     this.lineInfo = lineInfo;
     return this;
   }
@@ -111,7 +111,7 @@ public class ServiceLineTreatment   {
     this.lineInfo = lineInfo;
   }
 
-  public ServiceLineTreatment parentIdentification(String parentIdentification) {
+  public BasketServiceLineTreatment parentIdentification(String parentIdentification) {
     this.parentIdentification = parentIdentification;
     return this;
   }
@@ -131,14 +131,14 @@ public class ServiceLineTreatment   {
     this.parentIdentification = parentIdentification;
   }
 
-  public ServiceLineTreatment pendingOrders(List<PendingOrder> pendingOrders) {
+  public BasketServiceLineTreatment pendingOrders(List<BasketPendingOrder> pendingOrders) {
     this.pendingOrders = pendingOrders;
     return this;
   }
 
-  public ServiceLineTreatment addPendingOrdersItem(PendingOrder pendingOrdersItem) {
+  public BasketServiceLineTreatment addPendingOrdersItem(BasketPendingOrder pendingOrdersItem) {
     if (this.pendingOrders == null) {
-      this.pendingOrders = new ArrayList<PendingOrder>();
+      this.pendingOrders = new ArrayList<BasketPendingOrder>();
     }
     this.pendingOrders.add(pendingOrdersItem);
     return this;
@@ -152,15 +152,15 @@ public class ServiceLineTreatment   {
 
   @Valid
 
-  public List<PendingOrder> getPendingOrders() {
+  public List<BasketPendingOrder> getPendingOrders() {
     return pendingOrders;
   }
 
-  public void setPendingOrders(List<PendingOrder> pendingOrders) {
+  public void setPendingOrders(List<BasketPendingOrder> pendingOrders) {
     this.pendingOrders = pendingOrders;
   }
 
-  public ServiceLineTreatment portInFlag(String portInFlag) {
+  public BasketServiceLineTreatment portInFlag(String portInFlag) {
     this.portInFlag = portInFlag;
     return this;
   }
@@ -180,7 +180,7 @@ public class ServiceLineTreatment   {
     this.portInFlag = portInFlag;
   }
 
-  public ServiceLineTreatment serviceAction(String serviceAction) {
+  public BasketServiceLineTreatment serviceAction(String serviceAction) {
     this.serviceAction = serviceAction;
     return this;
   }
@@ -200,7 +200,7 @@ public class ServiceLineTreatment   {
     this.serviceAction = serviceAction;
   }
 
-  public ServiceLineTreatment serviceType(String serviceType) {
+  public BasketServiceLineTreatment serviceType(String serviceType) {
     this.serviceType = serviceType;
     return this;
   }
@@ -220,7 +220,7 @@ public class ServiceLineTreatment   {
     this.serviceType = serviceType;
   }
 
-  public ServiceLineTreatment simValue(String simValue) {
+  public BasketServiceLineTreatment simValue(String simValue) {
     this.simValue = simValue;
     return this;
   }
@@ -240,7 +240,7 @@ public class ServiceLineTreatment   {
     this.simValue = simValue;
   }
 
-  public ServiceLineTreatment vicCode(String vicCode) {
+  public BasketServiceLineTreatment vicCode(String vicCode) {
     this.vicCode = vicCode;
     return this;
   }
@@ -269,7 +269,7 @@ public class ServiceLineTreatment   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServiceLineTreatment serviceLineTreatment = (ServiceLineTreatment) o;
+    BasketServiceLineTreatment serviceLineTreatment = (BasketServiceLineTreatment) o;
     return Objects.equals(this.accessLine, serviceLineTreatment.accessLine) &&
         Objects.equals(this.canNumberBeRetained, serviceLineTreatment.canNumberBeRetained) &&
         Objects.equals(this.lineInfo, serviceLineTreatment.lineInfo) &&

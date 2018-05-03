@@ -18,21 +18,21 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ServiceLine   {
+public class BasketServiceLine   {
   @JsonProperty("itemReference")
-  private ItemReference itemReference = null;
+  private BasketItemReference itemReference = null;
 
   @JsonProperty("lineSpeeds")
   private BasketLineSpeeds lineSpeeds = null;
 
   @JsonProperty("miscRefernce")
-  private MiscReference miscRefernce = null;
+  private BasketMiscReference miscRefernce = null;
 
   @JsonProperty("serviceLineTreatments")
   @Valid
-  private List<ServiceLineTreatment> serviceLineTreatments = null;
+  private List<BasketServiceLineTreatment> serviceLineTreatments = null;
 
-  public ServiceLine itemReference(ItemReference itemReference) {
+  public BasketServiceLine itemReference(BasketItemReference itemReference) {
     this.itemReference = itemReference;
     return this;
   }
@@ -45,15 +45,15 @@ public class ServiceLine   {
 
   @Valid
 
-  public ItemReference getItemReference() {
+  public BasketItemReference getItemReference() {
     return itemReference;
   }
 
-  public void setItemReference(ItemReference itemReference) {
+  public void setItemReference(BasketItemReference itemReference) {
     this.itemReference = itemReference;
   }
 
-  public ServiceLine lineSpeeds(BasketLineSpeeds lineSpeeds) {
+  public BasketServiceLine lineSpeeds(BasketLineSpeeds lineSpeeds) {
     this.lineSpeeds = lineSpeeds;
     return this;
   }
@@ -74,7 +74,7 @@ public class ServiceLine   {
     this.lineSpeeds = lineSpeeds;
   }
 
-  public ServiceLine miscRefernce(MiscReference miscRefernce) {
+  public BasketServiceLine miscRefernce(BasketMiscReference miscRefernce) {
     this.miscRefernce = miscRefernce;
     return this;
   }
@@ -87,22 +87,22 @@ public class ServiceLine   {
 
   @Valid
 
-  public MiscReference getMiscRefernce() {
+  public BasketMiscReference getMiscRefernce() {
     return miscRefernce;
   }
 
-  public void setMiscRefernce(MiscReference miscRefernce) {
+  public void setMiscRefernce(BasketMiscReference miscRefernce) {
     this.miscRefernce = miscRefernce;
   }
 
-  public ServiceLine serviceLineTreatments(List<ServiceLineTreatment> serviceLineTreatments) {
+  public BasketServiceLine serviceLineTreatments(List<BasketServiceLineTreatment> serviceLineTreatments) {
     this.serviceLineTreatments = serviceLineTreatments;
     return this;
   }
 
-  public ServiceLine addServiceLineTreatmentsItem(ServiceLineTreatment serviceLineTreatmentsItem) {
+  public BasketServiceLine addServiceLineTreatmentsItem(BasketServiceLineTreatment serviceLineTreatmentsItem) {
     if (this.serviceLineTreatments == null) {
-      this.serviceLineTreatments = new ArrayList<ServiceLineTreatment>();
+      this.serviceLineTreatments = new ArrayList<BasketServiceLineTreatment>();
     }
     this.serviceLineTreatments.add(serviceLineTreatmentsItem);
     return this;
@@ -116,11 +116,11 @@ public class ServiceLine   {
 
   @Valid
 
-  public List<ServiceLineTreatment> getServiceLineTreatments() {
+  public List<BasketServiceLineTreatment> getServiceLineTreatments() {
     return serviceLineTreatments;
   }
 
-  public void setServiceLineTreatments(List<ServiceLineTreatment> serviceLineTreatments) {
+  public void setServiceLineTreatments(List<BasketServiceLineTreatment> serviceLineTreatments) {
     this.serviceLineTreatments = serviceLineTreatments;
   }
 
@@ -133,7 +133,7 @@ public class ServiceLine   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServiceLine serviceLine = (ServiceLine) o;
+    BasketServiceLine serviceLine = (BasketServiceLine) o;
     return Objects.equals(this.itemReference, serviceLine.itemReference) &&
         Objects.equals(this.lineSpeeds, serviceLine.lineSpeeds) &&
         Objects.equals(this.miscRefernce, serviceLine.miscRefernce) &&

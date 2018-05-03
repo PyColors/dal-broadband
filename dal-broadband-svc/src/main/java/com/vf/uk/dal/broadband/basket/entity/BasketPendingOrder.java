@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class PendingOrder   {
+public class BasketPendingOrder   {
   @JsonProperty("completionDate")
   private String completionDate = null;
 
@@ -24,7 +24,7 @@ public class PendingOrder   {
   @JsonProperty("typeCode")
   private String typeCode = null;
 
-  public PendingOrder completionDate(String completionDate) {
+  public BasketPendingOrder completionDate(String completionDate) {
     this.completionDate = completionDate;
     return this;
   }
@@ -44,7 +44,7 @@ public class PendingOrder   {
     this.completionDate = completionDate;
   }
 
-  public PendingOrder thirdPartyFlag(String thirdPartyFlag) {
+  public BasketPendingOrder thirdPartyFlag(String thirdPartyFlag) {
     this.thirdPartyFlag = thirdPartyFlag;
     return this;
   }
@@ -64,7 +64,7 @@ public class PendingOrder   {
     this.thirdPartyFlag = thirdPartyFlag;
   }
 
-  public PendingOrder typeCode(String typeCode) {
+  public BasketPendingOrder typeCode(String typeCode) {
     this.typeCode = typeCode;
     return this;
   }
@@ -93,7 +93,7 @@ public class PendingOrder   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PendingOrder pendingOrder = (PendingOrder) o;
+    BasketPendingOrder pendingOrder = (BasketPendingOrder) o;
     return Objects.equals(this.completionDate, pendingOrder.completionDate) &&
         Objects.equals(this.thirdPartyFlag, pendingOrder.thirdPartyFlag) &&
         Objects.equals(this.typeCode, pendingOrder.typeCode);
