@@ -37,6 +37,7 @@ public class ExceptionMessages {
 	public static final String LINE_TREATEMENT_TYPE_EMPTY = "Line treatment type cannot be null.";
 	public static final String GEN_EXCP_CREATE_BASKET = "General Exception occured while creating the basket";
 	public static final String NO_VALID_DATA_DELIVERY_METHODS = "No Valid data recieved while calling Inventory MS";
+	public static final String GEN_EXCP_ADD_PRODUCT = "Generic exception while adding product in basket";
 
 	private ExceptionMessages() {
 

@@ -13,6 +13,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
@@ -428,8 +429,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 				mapper.map(broadband.getServicePoint(), ServicePoint.class), broadband, null, updateLineRequest);
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint, broadband.getPackageId(),
 				broadband.getBasketId());
-		UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, null, broadband);
-		broadbandDao.updatePackage(updatePackageRequest, broadband.getPackageId(), broadband.getBasketId());
+		AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
+		broadbandDao.updateBasketWithServiceId(addProductRequest,broadband.getBasketId(),broadband.getPackageId());
 
 	}
 

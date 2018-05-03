@@ -50,7 +50,7 @@ public class Service   {
 
   @JsonProperty("merchandisingMedia")
   @Valid
-  private List<MediaLink> merchandisingMedia = null;
+  private List<MediaLinks> merchandisingMedia = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -275,14 +275,14 @@ public class Service   {
     this.isChanged = isChanged;
   }
 
-  public Service merchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public Service merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
-  public Service addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
+  public Service addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLink>();
+      this.merchandisingMedia = new ArrayList<MediaLinks>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;
@@ -296,11 +296,11 @@ public class Service   {
 
   @Valid
 
-  public List<MediaLink> getMerchandisingMedia() {
+  public List<MediaLinks> getMerchandisingMedia() {
     return merchandisingMedia;
   }
 
-  public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public void setMerchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
   }
 

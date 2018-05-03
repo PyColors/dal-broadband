@@ -18,8 +18,10 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.CreatePackageResponse;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
@@ -339,6 +341,24 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_DELIVERY_METHODS);
 		}
 		return deliveryMethods;
+	}
+
+	@Override
+	public void updateBasketWithServiceId(AddProductRequest addProductRequest,String basketId, String packageId) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			
+			final HttpEntity<AddProductRequest> entity = new HttpEntity<>(addProductRequest, headers);
+			String url = BroadBandConstant.BASKET_URL + basketId + "/package/" + packageId+"/product";
+			restTemplate.exchange(url, HttpMethod.POST, entity, CreatePackageResponse.class);
+			
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception occured while calling add Product " + e);
+			throw new ApplicationException(ExceptionMessages.GEN_EXCP_ADD_PRODUCT);
+		}
+		
 	}
 
 	/*

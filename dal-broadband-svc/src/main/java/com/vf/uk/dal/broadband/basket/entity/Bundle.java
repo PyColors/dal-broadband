@@ -63,7 +63,7 @@ public class Bundle   {
 
   @JsonProperty("merchandisingMedia")
   @Valid
-  private List<MediaLink> merchandisingMedia = null;
+  private List<MediaLinks> merchandisingMedia = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -75,7 +75,7 @@ public class Bundle   {
   private String paymentType = null;
 
   @JsonProperty("priceDetails")
-  private BundlePrice priceDetails = null;
+  private BundlePrices priceDetails = null;
 
   @JsonProperty("productClass")
   private String productClass = null;
@@ -377,14 +377,14 @@ public class Bundle   {
     this.isVodafoneGlobalRoaming = isVodafoneGlobalRoaming;
   }
 
-  public Bundle merchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public Bundle merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
-  public Bundle addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
+  public Bundle addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLink>();
+      this.merchandisingMedia = new ArrayList<MediaLinks>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;
@@ -398,11 +398,11 @@ public class Bundle   {
 
   @Valid
 
-  public List<MediaLink> getMerchandisingMedia() {
+  public List<MediaLinks> getMerchandisingMedia() {
     return merchandisingMedia;
   }
 
-  public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public void setMerchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
   }
 
@@ -466,7 +466,7 @@ public class Bundle   {
     this.paymentType = paymentType;
   }
 
-  public Bundle priceDetails(BundlePrice priceDetails) {
+  public Bundle priceDetails(BundlePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
   }
@@ -479,11 +479,11 @@ public class Bundle   {
 
   @Valid
 
-  public BundlePrice getPriceDetails() {
+  public BundlePrices getPriceDetails() {
     return priceDetails;
   }
 
-  public void setPriceDetails(BundlePrice priceDetails) {
+  public void setPriceDetails(BundlePrices priceDetails) {
     this.priceDetails = priceDetails;
   }
 

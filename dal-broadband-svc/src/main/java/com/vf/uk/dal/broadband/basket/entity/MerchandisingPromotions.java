@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class MerchandisingPromotion   {
+public class MerchandisingPromotions   {
   @JsonProperty("description")
   private String description = null;
 
@@ -44,7 +44,7 @@ public class MerchandisingPromotion   {
   @JsonProperty("tag")
   private String tag = null;
 
-  public MerchandisingPromotion description(String description) {
+  public MerchandisingPromotions description(String description) {
     this.description = description;
     return this;
   }
@@ -64,7 +64,7 @@ public class MerchandisingPromotion   {
     this.description = description;
   }
 
-  public MerchandisingPromotion discountId(String discountId) {
+  public MerchandisingPromotions discountId(String discountId) {
     this.discountId = discountId;
     return this;
   }
@@ -84,7 +84,7 @@ public class MerchandisingPromotion   {
     this.discountId = discountId;
   }
 
-  public MerchandisingPromotion label(String label) {
+  public MerchandisingPromotions label(String label) {
     this.label = label;
     return this;
   }
@@ -104,7 +104,7 @@ public class MerchandisingPromotion   {
     this.label = label;
   }
 
-  public MerchandisingPromotion mpType(String mpType) {
+  public MerchandisingPromotions mpType(String mpType) {
     this.mpType = mpType;
     return this;
   }
@@ -124,12 +124,12 @@ public class MerchandisingPromotion   {
     this.mpType = mpType;
   }
 
-  public MerchandisingPromotion packageType(List<String> packageType) {
+  public MerchandisingPromotions packageType(List<String> packageType) {
     this.packageType = packageType;
     return this;
   }
 
-  public MerchandisingPromotion addPackageTypeItem(String packageTypeItem) {
+  public MerchandisingPromotions addPackageTypeItem(String packageTypeItem) {
     if (this.packageType == null) {
       this.packageType = new ArrayList<String>();
     }
@@ -152,7 +152,7 @@ public class MerchandisingPromotion   {
     this.packageType = packageType;
   }
 
-  public MerchandisingPromotion priceEstablishedLabel(String priceEstablishedLabel) {
+  public MerchandisingPromotions priceEstablishedLabel(String priceEstablishedLabel) {
     this.priceEstablishedLabel = priceEstablishedLabel;
     return this;
   }
@@ -172,7 +172,7 @@ public class MerchandisingPromotion   {
     this.priceEstablishedLabel = priceEstablishedLabel;
   }
 
-  public MerchandisingPromotion priority(String priority) {
+  public MerchandisingPromotions priority(String priority) {
     this.priority = priority;
     return this;
   }
@@ -192,7 +192,7 @@ public class MerchandisingPromotion   {
     this.priority = priority;
   }
 
-  public MerchandisingPromotion tag(String tag) {
+  public MerchandisingPromotions tag(String tag) {
     this.tag = tag;
     return this;
   }
@@ -221,7 +221,7 @@ public class MerchandisingPromotion   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MerchandisingPromotion merchandisingPromotion = (MerchandisingPromotion) o;
+    MerchandisingPromotions merchandisingPromotion = (MerchandisingPromotions) o;
     return Objects.equals(this.description, merchandisingPromotion.description) &&
         Objects.equals(this.discountId, merchandisingPromotion.discountId) &&
         Objects.equals(this.label, merchandisingPromotion.label) &&
