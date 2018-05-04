@@ -258,7 +258,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if (CollectionUtils.isNotEmpty(routerProductIds)) {
 				Map<String, List<DeliveryMethods>> deliveryMethodsMap = new HashMap<>();
 				routerProductIds.forEach(productId -> {
-					deliveryMethodsMap.put(productId, broadbandDao.getDeliveryMethods(productId, false));
+					deliveryMethodsMap.put(productId, broadbandDao.getDeliveryMethods(productId, true));
 				});
 				if (CollectionUtils.isNotEmpty(deliveryMethodsMap.keySet())) {
 					listOfFlbBundle.forEach(flbBundle -> {
