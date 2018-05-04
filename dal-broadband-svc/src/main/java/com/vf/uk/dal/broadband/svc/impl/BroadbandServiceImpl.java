@@ -13,12 +13,13 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
-import com.vf.uk.dal.broadband.basket.entity.ServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.BasketServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
@@ -109,7 +110,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 		if (broadBand != null && StringUtils.isNotEmpty(broadBand.getBasketId())) {
 			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(
-					mapper.map(broadBand.getServicePoint(), ServicePoint.class), broadBand, availabilityCheckRequest,
+					mapper.map(broadBand.getServicePoint(), BasketServicePoint.class), broadBand, availabilityCheckRequest,
 					null);
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest, broadBand.getPackageId(),
 					broadBand.getBasketId());
@@ -378,7 +379,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 			if (StringUtils.isBlank(basketId)) {
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,
-						broadbandCache, mapper.map(broadbandCache.getServicePoint(), ServicePoint.class), journey);
+						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class), journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
@@ -425,11 +426,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 		broadband = ConverterUtils.updateBroadbandCache(broadband, updateLineRequest, broadbandId);
 		broadbandDao.setBroadBandInCache(broadband);
 		PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
-				mapper.map(broadband.getServicePoint(), ServicePoint.class), broadband, null, updateLineRequest);
+				mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, updateLineRequest);
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint, broadband.getPackageId(),
 				broadband.getBasketId());
-		UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, null, broadband);
-		broadbandDao.updatePackage(updatePackageRequest, broadband.getPackageId(), broadband.getBasketId());
+		AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
+		broadbandDao.updateBasketWithServiceId(addProductRequest,broadband.getBasketId(),broadband.getPackageId());
 
 	}
 

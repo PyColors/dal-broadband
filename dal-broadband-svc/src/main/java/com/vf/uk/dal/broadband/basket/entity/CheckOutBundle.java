@@ -39,7 +39,7 @@ public class CheckOutBundle   {
   private String paymentType = null;
 
   @JsonProperty("priceDetails")
-  private BundlePrice priceDetails = null;
+  private BundlePrices priceDetails = null;
 
   @JsonProperty("productClass")
   private String productClass = null;
@@ -179,7 +179,7 @@ public class CheckOutBundle   {
     this.paymentType = paymentType;
   }
 
-  public CheckOutBundle priceDetails(BundlePrice priceDetails) {
+  public CheckOutBundle priceDetails(BundlePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
   }
@@ -192,11 +192,11 @@ public class CheckOutBundle   {
 
   @Valid
 
-  public BundlePrice getPriceDetails() {
+  public BundlePrices getPriceDetails() {
     return priceDetails;
   }
 
-  public void setPriceDetails(BundlePrice priceDetails) {
+  public void setPriceDetails(BundlePrices priceDetails) {
     this.priceDetails = priceDetails;
   }
 

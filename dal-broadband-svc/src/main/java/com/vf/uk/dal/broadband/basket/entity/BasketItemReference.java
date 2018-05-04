@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ItemReference   {
+public class BasketItemReference   {
   @JsonProperty("classificationCode")
   private String classificationCode = null;
 
@@ -24,7 +24,7 @@ public class ItemReference   {
   @JsonProperty("name")
   private String name = null;
 
-  public ItemReference classificationCode(String classificationCode) {
+  public BasketItemReference classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
   }
@@ -44,7 +44,7 @@ public class ItemReference   {
     this.classificationCode = classificationCode;
   }
 
-  public ItemReference identificationId(String identificationId) {
+  public BasketItemReference identificationId(String identificationId) {
     this.identificationId = identificationId;
     return this;
   }
@@ -64,7 +64,7 @@ public class ItemReference   {
     this.identificationId = identificationId;
   }
 
-  public ItemReference name(String name) {
+  public BasketItemReference name(String name) {
     this.name = name;
     return this;
   }
@@ -93,7 +93,7 @@ public class ItemReference   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ItemReference itemReference = (ItemReference) o;
+    BasketItemReference itemReference = (BasketItemReference) o;
     return Objects.equals(this.classificationCode, itemReference.classificationCode) &&
         Objects.equals(this.identificationId, itemReference.identificationId) &&
         Objects.equals(this.name, itemReference.name);

@@ -16,14 +16,14 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class ServicePoint   {
+public class BasketServicePoint   {
   @JsonProperty("lineRefernece")
-  private LineReference lineRefernece = null;
+  private BasketLineReference lineRefernece = null;
 
   @JsonProperty("serviceReference")
-  private ServiceReference serviceReference = null;
+  private BasketServiceReference serviceReference = null;
 
-  public ServicePoint lineRefernece(LineReference lineRefernece) {
+  public BasketServicePoint lineRefernece(BasketLineReference lineRefernece) {
     this.lineRefernece = lineRefernece;
     return this;
   }
@@ -36,15 +36,15 @@ public class ServicePoint   {
 
   @Valid
 
-  public LineReference getLineRefernece() {
+  public BasketLineReference getLineRefernece() {
     return lineRefernece;
   }
 
-  public void setLineRefernece(LineReference lineRefernece) {
+  public void setLineRefernece(BasketLineReference lineRefernece) {
     this.lineRefernece = lineRefernece;
   }
 
-  public ServicePoint serviceReference(ServiceReference serviceReference) {
+  public BasketServicePoint serviceReference(BasketServiceReference serviceReference) {
     this.serviceReference = serviceReference;
     return this;
   }
@@ -57,11 +57,11 @@ public class ServicePoint   {
 
   @Valid
 
-  public ServiceReference getServiceReference() {
+  public BasketServiceReference getServiceReference() {
     return serviceReference;
   }
 
-  public void setServiceReference(ServiceReference serviceReference) {
+  public void setServiceReference(BasketServiceReference serviceReference) {
     this.serviceReference = serviceReference;
   }
 
@@ -74,7 +74,7 @@ public class ServicePoint   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServicePoint servicePoint = (ServicePoint) o;
+    BasketServicePoint servicePoint = (BasketServicePoint) o;
     return Objects.equals(this.lineRefernece, servicePoint.lineRefernece) &&
         Objects.equals(this.serviceReference, servicePoint.serviceReference);
   }

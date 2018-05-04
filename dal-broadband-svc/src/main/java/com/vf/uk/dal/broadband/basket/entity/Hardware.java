@@ -65,7 +65,7 @@ public class Hardware   {
 
   @JsonProperty("merchandisingMedia")
   @Valid
-  private List<MediaLink> merchandisingMedia = null;
+  private List<MediaLinks> merchandisingMedia = null;
 
   @JsonProperty("model")
   private String model = null;
@@ -77,7 +77,7 @@ public class Hardware   {
   private String packageLineId = null;
 
   @JsonProperty("priceDetails")
-  private HardwarePrice priceDetails = null;
+  private HardwarePrices priceDetails = null;
 
   @JsonProperty("productClass")
   private String productClass = null;
@@ -387,14 +387,14 @@ public class Hardware   {
     this.memorySize = memorySize;
   }
 
-  public Hardware merchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public Hardware merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
-  public Hardware addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
+  public Hardware addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLink>();
+      this.merchandisingMedia = new ArrayList<MediaLinks>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;
@@ -408,11 +408,11 @@ public class Hardware   {
 
   @Valid
 
-  public List<MediaLink> getMerchandisingMedia() {
+  public List<MediaLinks> getMerchandisingMedia() {
     return merchandisingMedia;
   }
 
-  public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public void setMerchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
   }
 
@@ -476,7 +476,7 @@ public class Hardware   {
     this.packageLineId = packageLineId;
   }
 
-  public Hardware priceDetails(HardwarePrice priceDetails) {
+  public Hardware priceDetails(HardwarePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
   }
@@ -489,11 +489,11 @@ public class Hardware   {
 
   @Valid
 
-  public HardwarePrice getPriceDetails() {
+  public HardwarePrices getPriceDetails() {
     return priceDetails;
   }
 
-  public void setPriceDetails(HardwarePrice priceDetails) {
+  public void setPriceDetails(HardwarePrices priceDetails) {
     this.priceDetails = priceDetails;
   }
 

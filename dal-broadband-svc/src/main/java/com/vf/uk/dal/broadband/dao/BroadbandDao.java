@@ -2,6 +2,7 @@ package com.vf.uk.dal.broadband.dao;
 
 import java.util.List;
 
+import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
@@ -123,4 +124,6 @@ public interface BroadbandDao {
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
 	
 	List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache);
+
+	void updateBasketWithServiceId(AddProductRequest addProductRequest, String basketId, String packageId);
 }

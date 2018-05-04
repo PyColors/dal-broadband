@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class LineTreatment   {
+public class BasketLineTreatment   {
   @JsonProperty("appointmentNeeded")
   private Boolean appointmentNeeded = null;
 
@@ -27,7 +27,7 @@ public class LineTreatment   {
   @JsonProperty("identification")
   private String identification = null;
 
-  public LineTreatment appointmentNeeded(Boolean appointmentNeeded) {
+  public BasketLineTreatment appointmentNeeded(Boolean appointmentNeeded) {
     this.appointmentNeeded = appointmentNeeded;
     return this;
   }
@@ -47,7 +47,7 @@ public class LineTreatment   {
     this.appointmentNeeded = appointmentNeeded;
   }
 
-  public LineTreatment connectionCharge(String connectionCharge) {
+  public BasketLineTreatment connectionCharge(String connectionCharge) {
     this.connectionCharge = connectionCharge;
     return this;
   }
@@ -67,7 +67,7 @@ public class LineTreatment   {
     this.connectionCharge = connectionCharge;
   }
 
-  public LineTreatment earliestAvailableDate(String earliestAvailableDate) {
+  public BasketLineTreatment earliestAvailableDate(String earliestAvailableDate) {
     this.earliestAvailableDate = earliestAvailableDate;
     return this;
   }
@@ -87,7 +87,7 @@ public class LineTreatment   {
     this.earliestAvailableDate = earliestAvailableDate;
   }
 
-  public LineTreatment identification(String identification) {
+  public BasketLineTreatment identification(String identification) {
     this.identification = identification;
     return this;
   }
@@ -116,7 +116,7 @@ public class LineTreatment   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LineTreatment lineTreatment = (LineTreatment) o;
+    BasketLineTreatment lineTreatment = (BasketLineTreatment) o;
     return Objects.equals(this.appointmentNeeded, lineTreatment.appointmentNeeded) &&
         Objects.equals(this.connectionCharge, lineTreatment.connectionCharge) &&
         Objects.equals(this.earliestAvailableDate, lineTreatment.earliestAvailableDate) &&

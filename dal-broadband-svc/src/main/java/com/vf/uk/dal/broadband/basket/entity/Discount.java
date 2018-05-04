@@ -36,7 +36,7 @@ public class Discount   {
 
   @JsonProperty("merchandisingMedia")
   @Valid
-  private List<MediaLink> merchandisingMedia = null;
+  private List<MediaLinks> merchandisingMedia = null;
 
   @JsonProperty("productLineId")
   private String productLineId = null;
@@ -151,14 +151,14 @@ public class Discount   {
     this.label = label;
   }
 
-  public Discount merchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public Discount merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
-  public Discount addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
+  public Discount addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLink>();
+      this.merchandisingMedia = new ArrayList<MediaLinks>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;
@@ -172,11 +172,11 @@ public class Discount   {
 
   @Valid
 
-  public List<MediaLink> getMerchandisingMedia() {
+  public List<MediaLinks> getMerchandisingMedia() {
     return merchandisingMedia;
   }
 
-  public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
+  public void setMerchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
   }
 

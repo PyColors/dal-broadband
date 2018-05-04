@@ -42,7 +42,7 @@ public class AddPackage   {
   private String phoneNumber = null;
 
   @JsonProperty("servicePoint")
-  private ServicePoint servicePoint = null;
+  private BasketServicePoint servicePoint = null;
 
   @JsonProperty("serviceStartDate")
   private String serviceStartDate = null;
@@ -203,7 +203,7 @@ public class AddPackage   {
     this.phoneNumber = phoneNumber;
   }
 
-  public AddPackage servicePoint(ServicePoint servicePoint) {
+  public AddPackage servicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
     return this;
   }
@@ -216,11 +216,11 @@ public class AddPackage   {
 
   @Valid
 
-  public ServicePoint getServicePoint() {
+  public BasketServicePoint getServicePoint() {
     return servicePoint;
   }
 
-  public void setServicePoint(ServicePoint servicePoint) {
+  public void setServicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
   }
 

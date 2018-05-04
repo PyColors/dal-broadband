@@ -30,7 +30,7 @@ public class PremiseAndServicePoint   {
   private String phoneNumber = null;
 
   @JsonProperty("servicePoint")
-  private ServicePoint servicePoint = null;
+  private BasketServicePoint servicePoint = null;
 
   public PremiseAndServicePoint installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
@@ -113,7 +113,7 @@ public class PremiseAndServicePoint   {
     this.phoneNumber = phoneNumber;
   }
 
-  public PremiseAndServicePoint servicePoint(ServicePoint servicePoint) {
+  public PremiseAndServicePoint servicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
     return this;
   }
@@ -126,11 +126,11 @@ public class PremiseAndServicePoint   {
 
   @Valid
 
-  public ServicePoint getServicePoint() {
+  public BasketServicePoint getServicePoint() {
     return servicePoint;
   }
 
-  public void setServicePoint(ServicePoint servicePoint) {
+  public void setServicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
   }
 

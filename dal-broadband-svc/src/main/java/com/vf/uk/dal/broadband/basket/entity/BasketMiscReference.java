@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class MiscReference   {
+public class BasketMiscReference   {
   @JsonProperty("anfp")
   private String anfp = null;
 
@@ -33,7 +33,7 @@ public class MiscReference   {
   @JsonProperty("serviceProviderName")
   private String serviceProviderName = null;
 
-  public MiscReference anfp(String anfp) {
+  public BasketMiscReference anfp(String anfp) {
     this.anfp = anfp;
     return this;
   }
@@ -53,7 +53,7 @@ public class MiscReference   {
     this.anfp = anfp;
   }
 
-  public MiscReference classificationCode(String classificationCode) {
+  public BasketMiscReference classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
   }
@@ -73,7 +73,7 @@ public class MiscReference   {
     this.classificationCode = classificationCode;
   }
 
-  public MiscReference customerAgreedDate(String customerAgreedDate) {
+  public BasketMiscReference customerAgreedDate(String customerAgreedDate) {
     this.customerAgreedDate = customerAgreedDate;
     return this;
   }
@@ -93,7 +93,7 @@ public class MiscReference   {
     this.customerAgreedDate = customerAgreedDate;
   }
 
-  public MiscReference lineLength(String lineLength) {
+  public BasketMiscReference lineLength(String lineLength) {
     this.lineLength = lineLength;
     return this;
   }
@@ -113,7 +113,7 @@ public class MiscReference   {
     this.lineLength = lineLength;
   }
 
-  public MiscReference readyForServiceDate(String readyForServiceDate) {
+  public BasketMiscReference readyForServiceDate(String readyForServiceDate) {
     this.readyForServiceDate = readyForServiceDate;
     return this;
   }
@@ -133,7 +133,7 @@ public class MiscReference   {
     this.readyForServiceDate = readyForServiceDate;
   }
 
-  public MiscReference serviceProviderName(String serviceProviderName) {
+  public BasketMiscReference serviceProviderName(String serviceProviderName) {
     this.serviceProviderName = serviceProviderName;
     return this;
   }
@@ -162,7 +162,7 @@ public class MiscReference   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MiscReference miscReference = (MiscReference) o;
+    BasketMiscReference miscReference = (BasketMiscReference) o;
     return Objects.equals(this.anfp, miscReference.anfp) &&
         Objects.equals(this.classificationCode, miscReference.classificationCode) &&
         Objects.equals(this.customerAgreedDate, miscReference.customerAgreedDate) &&
