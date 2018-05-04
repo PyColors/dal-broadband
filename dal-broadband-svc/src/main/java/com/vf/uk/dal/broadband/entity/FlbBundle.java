@@ -55,6 +55,10 @@ public class FlbBundle {
 
 	@JsonProperty("priceInfo")
 	private PriceForBBBundleAndHardware priceInfo = null;
+	
+	
+	@JsonProperty("isSpeedLess")
+	private Boolean isSpeedLess = null;
 
 	/**
 	 * 
@@ -391,6 +395,14 @@ public class FlbBundle {
 
 	public void setPriceInfo(PriceForBBBundleAndHardware priceInfo) {
 		this.priceInfo = priceInfo;
+	}
+
+	public Boolean getIsSpeedLess() {
+		return isSpeedLess;
+	}
+
+	public void setIsSpeedLess(Boolean isSpeedLess) {
+		this.isSpeedLess = isSpeedLess;
 	}
 
 	@Override

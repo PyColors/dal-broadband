@@ -33,6 +33,7 @@ import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
+import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
@@ -215,6 +216,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 				FlbBundle flbBundle = new FlbBundle();
 				beanMapper.map(bundleHeader, flbBundle);
+				Speed speedForBB = new Speed();
+				speedForBB = flbBundle.getSpeed();
+				
 				PriceForBBBundleAndHardware priceBB = new PriceForBBBundleAndHardware();
 				priceBB.setBundlePrice(bundleHeader.getPriceInfo().getBundlePrice());
 				priceBB.setRouterPrice(bundleHeader.getPriceInfo().getHardwarePrice());
