@@ -23,6 +23,9 @@ public class Speed   {
 
   @JsonProperty("speed")
   private String speed = null;
+  
+  @JsonProperty("commercialSpeed")
+  private String commercialSpeed = null;
 
   public Speed minSpeed(String minSpeed) {
     this.minSpeed = minSpeed;
@@ -85,7 +88,15 @@ public class Speed   {
   }
 
 
-  @Override
+  public String getCommercialSpeed() {
+	return commercialSpeed;
+}
+
+public void setCommercialSpeed(String commercialSpeed) {
+	this.commercialSpeed = commercialSpeed;
+}
+
+@Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;

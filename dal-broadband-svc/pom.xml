@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vf.uk.dal</groupId>
-	<artifactId>dal-broadband-svc</artifactId>
-	<version>9.2.8</version>
+	<artifactId>dal-broadband-svc</artifactId> 
+	<version>9.2.9</version>
 	<packaging>jar</packaging>
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
