@@ -24,7 +24,9 @@ import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineDetails;
+import com.vf.uk.dal.broadband.cache.repository.entity.LineSpeeds;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineTreatment;
+import com.vf.uk.dal.broadband.cache.repository.entity.ServieLine;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
@@ -43,6 +45,7 @@ import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
+import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
@@ -215,9 +218,34 @@ public class BroadbandServiceImpl implements BroadbandService {
 			bundleDetails.getPlanList().forEach(bundleHeader -> {
 
 				FlbBundle flbBundle = new FlbBundle();
-				beanMapper.map(bundleHeader, flbBundle);
+				beanMapper.map(bundleHeader, flbBundle); 
 				Speed speedForBB = new Speed();
 				speedForBB = flbBundle.getSpeed();
+				if(StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), BroadBandConstant.LINE_WITH_76)){
+					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_76, "55"));
+				}else if(StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), BroadBandConstant.LINE_WITH_38)){
+					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_38, "25"));
+				}
+				flbBundle.setSpeed(speedForBB);
+				flbBundle.setIsSpeedLess(false);
+				if(broadBand.getServicePoint()!=null && broadBand.getServicePoint().getServiceReference()!=null
+						&& CollectionUtils.isNotEmpty(broadBand.getServicePoint().getServiceReference().getServiceLinesList())){
+					for(com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint().getServiceReference().getServiceLinesList()){
+						if(StringUtils.equalsIgnoreCase(serLines.getClassificationCode(), flbBundle.getClassificationCode())){
+							List<ServieLine> servieLine = serLines.getServiceLineList();
+							for(ServieLine sLine : servieLine){
+								if(!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")){
+									LineSpeeds lineSpeeds = sLine.getLineSpeeds();
+									if(StringUtils.isNotEmpty(lineSpeeds.getMaxDownSpeed())
+											&& StringUtils.isNotEmpty(flbBundle.getSpeed().getCommercialSpeed()) && (Double.parseDouble(lineSpeeds.getMaxDownSpeed())/1000.0)< Double.parseDouble(flbBundle.getSpeed().getCommercialSpeed())){
+										flbBundle.setIsSpeedLess(true);
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
 				
 				PriceForBBBundleAndHardware priceBB = new PriceForBBBundleAndHardware();
 				priceBB.setBundlePrice(bundleHeader.getPriceInfo().getBundlePrice());
