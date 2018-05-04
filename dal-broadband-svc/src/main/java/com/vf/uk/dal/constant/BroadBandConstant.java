@@ -16,6 +16,8 @@ public class BroadBandConstant {
 
 	public static final String LINE_TREATMENT_TYPE_EXISTING = "EXISTING";
 	public static final String LINE_TREATMENT_TYPE_NEW = "NEW";
+	public static final String SPEED_38 = "SPEED_38";
+	public static final String SPEED_76 = "SPEED_76";
 	
 	private BroadBandConstant() {
 	}
