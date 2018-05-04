@@ -228,7 +228,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				}
 				flbBundle.setSpeed(speedForBB);
 				flbBundle.setIsSpeedLess(false);
-				if(broadBand.getServicePoint()!=null && broadBand.getServicePoint().getServiceReference()!=null
+				if(broadBand!=null && broadBand.getServicePoint()!=null && broadBand.getServicePoint().getServiceReference()!=null
 						&& CollectionUtils.isNotEmpty(broadBand.getServicePoint().getServiceReference().getServiceLinesList())){
 					for(com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint().getServiceReference().getServiceLinesList()){
 						if(StringUtils.equalsIgnoreCase(serLines.getClassificationCode(), flbBundle.getClassificationCode())){
