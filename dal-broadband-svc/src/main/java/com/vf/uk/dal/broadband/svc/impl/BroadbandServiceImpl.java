@@ -241,16 +241,18 @@ public class BroadbandServiceImpl implements BroadbandService {
 									.get(priceBB.getRouterPrice().getHardwareId());
 							if (CollectionUtils.isNotEmpty(deliveryMeth)) {
 								com.vf.uk.dal.broadband.entity.HardwarePrice deliveryPrice = new com.vf.uk.dal.broadband.entity.HardwarePrice();
-								Price dp = new Price();
-								beanMapper.map(deliveryMeth.get(0).getPrice(), dp);
-								deliveryPrice.setHardwareId(deliveryMeth.get(0).getProductId());
-								deliveryPrice.setHardwareName(deliveryMeth.get(0).getDisplayName());
-								deliveryPrice.setOneOffPrice(dp);
-								priceBB.setDeliveryPrice(deliveryPrice);
+								if(deliveryMeth.get(0).getPrice()!=null){
+									Price dp = new Price();
+									beanMapper.map(deliveryMeth.get(0).getPrice(), dp);
+									deliveryPrice.setHardwareId(deliveryMeth.get(0).getProductId());
+									deliveryPrice.setHardwareName(deliveryMeth.get(0).getDisplayName());
+									deliveryPrice.setOneOffPrice(dp);
+									priceBB.setDeliveryPrice(deliveryPrice);
+								}
 							}
 						}
 						// Setting of EngineerVisitFee Price
-						if (broadBand.getServicePoint() != null
+						if (broadBand!=null && broadBand.getServicePoint() != null
 								&& broadBand.getServicePoint().getServiceReference() != null
 								&& CollectionUtils.isNotEmpty(
 										broadBand.getServicePoint().getServiceReference().getServiceLinesList())) {
