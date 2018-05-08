@@ -65,7 +65,7 @@ public class BroadbandController {
 	public ResponseEntity<AvailabilityCheckResponse> checkAvailabilityForBroadband(
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody AvailabilityCheckRequest availabilityCheckerRequest,
 			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId,
-			@RequestHeader(value = "dal-catalogue-version", required = false) String acceptVersion) {
+			@RequestHeader(value = "Accept-Version", required = false) String acceptVersion) {
 
 		AvailabilityCheckResponse availabilityCheckResponse = broadbandService
 				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId, acceptVersion);
@@ -98,7 +98,7 @@ public class BroadbandController {
 			@ApiParam(value = "Indicates the journeyType of the customer. For eg. upgrade Accepts SecondLine, Upgrade. Upgrade is currently not supported. The provision is there but should not be sent until backend starts supporting. If nothing is passed then we default it to Acquisition or New Customer secondline, etc.") @RequestParam(value = "journeyType", required = false) String journeyType,
 			@ApiParam(value = "bundles will be filter based on duration like 18 months or 24 months. Format is 18 Months or 24 Months or 12 Months") @RequestParam(value = "duration", required = false) String duration,
 			@ApiParam(value = "Filter based on speed. Accepts single and comma seperated aswell Eg: Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed then we show all the packages for corresponding journeyType.") @RequestParam(value = "classificationCode", required = false) String classificationCode,
-			@RequestHeader(value = "dal-catalogue-version", required = false) String acceptVersion) {
+			@RequestHeader(value = "Accept-Version", required = false) String acceptVersion) {
 		List<FlbBundle> listOfFlbBundle;
 		GetBundleListSearchCriteria getBundleListSearchCriteria = new GetBundleListSearchCriteria();
 		getBundleListSearchCriteria.setBroadbandId(broadbandId);
@@ -244,7 +244,7 @@ public class BroadbandController {
 	public Basket createOrUpdatePackage(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody BasketRequest basketRequest,
-			@RequestHeader(value = "dal-catalogue-version", required = false) String acceptVersion) {
+			@RequestHeader(value = "Accept-Version", required = false) String acceptVersion) {
 
 		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
 		BroadbandValidator.isBasketCreateOrUpdateRequestValid(basketRequest, broadband);
