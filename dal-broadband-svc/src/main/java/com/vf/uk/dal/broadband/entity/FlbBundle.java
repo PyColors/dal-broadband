@@ -31,6 +31,9 @@ public class FlbBundle {
 	@JsonProperty("bundleDescription")
 	private String bundleDescription = null;
 
+	@JsonProperty("bundleFeatures")
+	private String bundleFeatures = null;
+
 	/** The speed. */
 	@JsonProperty("speed")
 	private Speed speed = null;
@@ -55,8 +58,7 @@ public class FlbBundle {
 
 	@JsonProperty("priceInfo")
 	private PriceForBBBundleAndHardware priceInfo = null;
-	
-	
+
 	@JsonProperty("isSpeedLess")
 	private Boolean isSpeedLess = null;
 
@@ -133,6 +135,19 @@ public class FlbBundle {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public FlbBundle bundleFeatures(String bundleFeatures) {
+		this.bundleFeatures = bundleFeatures;
+		return this;
+	}
+
+	public String getBundleFeatures() {
+		return bundleFeatures;
+	}
+
+	public void setBundleFeatures(String bundleFeatures) {
+		this.bundleFeatures = bundleFeatures;
 	}
 
 	/**
@@ -417,8 +432,9 @@ public class FlbBundle {
 		return Objects.equals(this.skuId, flbBundle.skuId) && Objects.equals(this.name, flbBundle.name)
 				&& Objects.equals(this.description, flbBundle.description)
 				&& Objects.equals(this.bundleName, flbBundle.bundleName)
+				&& Objects.equals(this.bundleFeatures, flbBundle.bundleFeatures)
 				&& Objects.equals(this.bundleDescription, flbBundle.bundleDescription)
-				&& Objects.equals(this.speed, flbBundle.speed)  && Objects.equals(this.usage, flbBundle.usage)
+				&& Objects.equals(this.speed, flbBundle.speed) && Objects.equals(this.usage, flbBundle.usage)
 				&& Objects.equals(this.classificationCode, flbBundle.classificationCode)
 				&& Objects.equals(this.commitmentPeriod, flbBundle.commitmentPeriod)
 				&& Objects.equals(this.productName, flbBundle.productName)
@@ -429,8 +445,8 @@ public class FlbBundle {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(skuId, name, description, bundleName, bundleDescription, speed, usage,
-				classificationCode, commitmentPeriod, productName, productDescription, merchandisingMedia, priceInfo);
+		return Objects.hash(skuId, name, description, bundleName, bundleFeatures, bundleDescription, speed, usage, classificationCode,
+				commitmentPeriod, productName, productDescription, merchandisingMedia, priceInfo);
 	}
 
 	@Override
@@ -442,6 +458,7 @@ public class FlbBundle {
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    description: ").append(toIndentedString(description)).append("\n");
 		sb.append("    bundleName: ").append(toIndentedString(bundleName)).append("\n");
+		sb.append("    bundleFeatures: ").append(toIndentedString(bundleFeatures)).append("\n");
 		sb.append("    bundleDescription: ").append(toIndentedString(bundleDescription)).append("\n");
 		sb.append("    speed: ").append(toIndentedString(speed)).append("\n");
 		sb.append("    usage: ").append(toIndentedString(usage)).append("\n");

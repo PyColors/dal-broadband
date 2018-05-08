@@ -114,8 +114,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 		if (broadBand != null && StringUtils.isNotEmpty(broadBand.getBasketId())) {
 			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(
-					mapper.map(broadBand.getServicePoint(), BasketServicePoint.class), broadBand, availabilityCheckRequest,
-					null);
+					mapper.map(broadBand.getServicePoint(), BasketServicePoint.class), broadBand,
+					availabilityCheckRequest, null);
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest, broadBand.getPackageId(),
 					broadBand.getBasketId());
 		}
@@ -218,26 +218,46 @@ public class BroadbandServiceImpl implements BroadbandService {
 			bundleDetails.getPlanList().forEach(bundleHeader -> {
 
 				FlbBundle flbBundle = new FlbBundle();
-				beanMapper.map(bundleHeader, flbBundle); 
+				beanMapper.map(bundleHeader, flbBundle);
+				if (bundleHeader.getMiscAttributes() != null
+						&& StringUtils.isNotBlank(bundleHeader.getMiscAttributes().getPlanCallOut())) {
+					flbBundle.setBundleFeatures(bundleHeader.getMiscAttributes().getPlanCallOut());
+				}
 				Speed speedForBB = new Speed();
 				speedForBB = flbBundle.getSpeed();
-				if(StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), BroadBandConstant.LINE_WITH_76)){
+				if (StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), BroadBandConstant.LINE_WITH_76)) {
 					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_76, "55"));
-				}else if(StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), BroadBandConstant.LINE_WITH_38)){
+				} else if (StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(),
+						BroadBandConstant.LINE_WITH_38)) {
 					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_38, "25"));
 				}
 				flbBundle.setSpeed(speedForBB);
 				flbBundle.setIsSpeedLess(false);
-				if(broadBand!=null && broadBand.getServicePoint()!=null && broadBand.getServicePoint().getServiceReference()!=null
-						&& CollectionUtils.isNotEmpty(broadBand.getServicePoint().getServiceReference().getServiceLinesList())){
-					for(com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint().getServiceReference().getServiceLinesList()){
-						if(StringUtils.equalsIgnoreCase(serLines.getClassificationCode(), flbBundle.getClassificationCode())){
+				if (broadBand != null && broadBand.getServicePoint() != null
+						&& broadBand.getServicePoint().getServiceReference() != null && CollectionUtils
+								.isNotEmpty(broadBand.getServicePoint().getServiceReference().getServiceLinesList())) {
+					for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand
+							.getServicePoint().getServiceReference().getServiceLinesList()) {
+						if (StringUtils.equalsIgnoreCase(serLines.getClassificationCode(),
+								flbBundle.getClassificationCode())) {
 							List<ServieLine> servieLine = serLines.getServiceLineList();
-							for(ServieLine sLine : servieLine){
-								if(!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")){
+							for (ServieLine sLine : servieLine) {
+								if (!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")) {
 									LineSpeeds lineSpeeds = sLine.getLineSpeeds();
-									if(StringUtils.isNotEmpty(lineSpeeds.getMaxDownSpeed())
-											&& StringUtils.isNotEmpty(flbBundle.getSpeed().getCommercialSpeed()) && (Double.parseDouble(lineSpeeds.getMaxDownSpeed())/1000.0)< Double.parseDouble(flbBundle.getSpeed().getCommercialSpeed())){
+									if (lineSpeeds != null) {
+										if (StringUtils.isNotBlank(lineSpeeds.getMaxDownSpeed())) {
+											speedForBB.setMaxSpeed(lineSpeeds.getMaxDownSpeed());
+										}
+										if (StringUtils.isNotBlank(lineSpeeds.getMinDownSpeed())) {
+											speedForBB.setMinSpeed(lineSpeeds.getMinDownSpeed());
+										}
+										flbBundle.setSpeed(speedForBB);
+									}
+
+									if (StringUtils.isNotEmpty(lineSpeeds.getMaxDownSpeed())
+											&& StringUtils.isNotEmpty(flbBundle.getSpeed().getCommercialSpeed())
+											&& (Double.parseDouble(lineSpeeds.getMaxDownSpeed()) / 1000.0) < Double
+													.parseDouble(flbBundle.getSpeed().getCommercialSpeed())) {
 										flbBundle.setIsSpeedLess(true);
 										break;
 									}
@@ -246,7 +266,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						}
 					}
 				}
-				
+
 				PriceForBBBundleAndHardware priceBB = new PriceForBBBundleAndHardware();
 				priceBB.setBundlePrice(bundleHeader.getPriceInfo().getBundlePrice());
 				priceBB.setRouterPrice(bundleHeader.getPriceInfo().getHardwarePrice());
@@ -269,7 +289,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 									.get(priceBB.getRouterPrice().getHardwareId());
 							if (CollectionUtils.isNotEmpty(deliveryMeth)) {
 								com.vf.uk.dal.broadband.entity.HardwarePrice deliveryPrice = new com.vf.uk.dal.broadband.entity.HardwarePrice();
-								if(deliveryMeth.get(0).getPrice()!=null){
+								if (deliveryMeth.get(0).getPrice() != null) {
 									Price dp = new Price();
 									beanMapper.map(deliveryMeth.get(0).getPrice(), dp);
 									deliveryPrice.setHardwareId(deliveryMeth.get(0).getProductId());
@@ -280,7 +300,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 							}
 						}
 						// Setting of EngineerVisitFee Price
-						if (broadBand!=null && broadBand.getServicePoint() != null
+						if (broadBand != null && broadBand.getServicePoint() != null
 								&& broadBand.getServicePoint().getServiceReference() != null
 								&& CollectionUtils.isNotEmpty(
 										broadBand.getServicePoint().getServiceReference().getServiceLinesList())) {
@@ -308,7 +328,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 								priceBB.setEngineerVisitFees(engineeringFee);
 							}
 						}
-						Price totalPrice = new Price() ;
+						Price totalPrice = new Price();
 						totalPrice.setNet(String.valueOf(getTotalNetPrice(priceBB)));
 						totalPrice.setGross(String.valueOf(getTotalGrossPrice(priceBB)));
 						totalPrice.setVat(String.valueOf(getTotalVatPrice(priceBB)));
@@ -413,7 +433,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 			if (StringUtils.isBlank(basketId)) {
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,
-						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class), journey);
+						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class),
+						journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
@@ -464,12 +485,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint, broadband.getPackageId(),
 				broadband.getBasketId());
 		AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
-		broadbandDao.updateBasketWithServiceId(addProductRequest,broadband.getBasketId(),broadband.getPackageId());
+		broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(), broadband.getPackageId());
 
 	}
 
 	private Double getTotalNetPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
-		
+
 		Double routerNetPrice = 0.00;
 		Double deliveryNetPrice = 0.00;
 		Double engineerVisitFeesNet = 0.00;
@@ -478,21 +499,22 @@ public class BroadbandServiceImpl implements BroadbandService {
 				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getNet())) {
 			routerNetPrice = Double.valueOf(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getNet());
 		}
-		if (priceForBBBundleAndHardware.getDeliveryPrice()!= null
+		if (priceForBBBundleAndHardware.getDeliveryPrice() != null
 				&& priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice() != null
 				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getNet())) {
 			deliveryNetPrice = Double.valueOf(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getNet());
 		}
 		if (priceForBBBundleAndHardware.getEngineerVisitFees() != null
-				&& priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice() != null
-				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getNet())) {
-			engineerVisitFeesNet = Double.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getNet());
+				&& priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice() != null && StringUtils
+						.isNotBlank(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getNet())) {
+			engineerVisitFeesNet = Double
+					.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getNet());
 		}
 		return routerNetPrice + deliveryNetPrice + engineerVisitFeesNet;
 	}
-	
-private Double getTotalGrossPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
-		
+
+	private Double getTotalGrossPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
+
 		Double routerGrossPrice = 0.00;
 		Double deliveryGrossPrice = 0.00;
 		Double engineerVisitFeesGross = 0.00;
@@ -501,39 +523,42 @@ private Double getTotalGrossPrice(PriceForBBBundleAndHardware priceForBBBundleAn
 				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getGross())) {
 			routerGrossPrice = Double.valueOf(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getGross());
 		}
-		if (priceForBBBundleAndHardware.getDeliveryPrice()!= null
+		if (priceForBBBundleAndHardware.getDeliveryPrice() != null
 				&& priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice() != null
 				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getGross())) {
-			deliveryGrossPrice = Double.valueOf(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getGross());
+			deliveryGrossPrice = Double
+					.valueOf(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getGross());
 		}
 		if (priceForBBBundleAndHardware.getEngineerVisitFees() != null
-				&& priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice() != null
-				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getGross())) {
-			engineerVisitFeesGross = Double.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getGross());
+				&& priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice() != null && StringUtils
+						.isNotBlank(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getGross())) {
+			engineerVisitFeesGross = Double
+					.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getGross());
 		}
 		return routerGrossPrice + deliveryGrossPrice + engineerVisitFeesGross;
 	}
 
-private Double getTotalVatPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
-	
-	Double routerVatPrice = 0.00;
-	Double deliveryVatPrice = 0.00;
-	Double engineerVisitFeesVat = 0.00;
-	if (priceForBBBundleAndHardware.getRouterPrice() != null
-			&& priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice() != null
-			&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getVat())) {
-		routerVatPrice = Double.valueOf(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getVat());
+	private Double getTotalVatPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
+
+		Double routerVatPrice = 0.00;
+		Double deliveryVatPrice = 0.00;
+		Double engineerVisitFeesVat = 0.00;
+		if (priceForBBBundleAndHardware.getRouterPrice() != null
+				&& priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice() != null
+				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getVat())) {
+			routerVatPrice = Double.valueOf(priceForBBBundleAndHardware.getRouterPrice().getOneOffPrice().getVat());
+		}
+		if (priceForBBBundleAndHardware.getDeliveryPrice() != null
+				&& priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice() != null
+				&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getVat())) {
+			deliveryVatPrice = Double.valueOf(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getVat());
+		}
+		if (priceForBBBundleAndHardware.getEngineerVisitFees() != null
+				&& priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice() != null && StringUtils
+						.isNotBlank(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getVat())) {
+			engineerVisitFeesVat = Double
+					.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getVat());
+		}
+		return routerVatPrice + deliveryVatPrice + engineerVisitFeesVat;
 	}
-	if (priceForBBBundleAndHardware.getDeliveryPrice()!= null
-			&& priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice() != null
-			&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getVat())) {
-		deliveryVatPrice = Double.valueOf(priceForBBBundleAndHardware.getDeliveryPrice().getOneOffPrice().getVat());
-	}
-	if (priceForBBBundleAndHardware.getEngineerVisitFees() != null
-			&& priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice() != null
-			&& StringUtils.isNotBlank(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getVat())) {
-		engineerVisitFeesVat = Double.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getVat());
-	}
-	return routerVatPrice + deliveryVatPrice + engineerVisitFeesVat;
-}
 }
