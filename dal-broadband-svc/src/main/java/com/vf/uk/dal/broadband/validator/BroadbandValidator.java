@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
@@ -60,6 +61,16 @@ public class BroadbandValidator {
 			throw new ApplicationException(ExceptionMessages.LINE_TREATEMENT_TYPE_EMPTY);
 		}
 		
+	}
+
+
+
+	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointmentRequest) {
+		if(StringUtils.isEmpty(createAppointmentRequest.getStartTimePeriod())
+				|| StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())){
+			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
+			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
+		}
 	}
 	
 	

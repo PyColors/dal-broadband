@@ -1,32 +1,32 @@
 {
-  "existing":false,
-  "appointmentDetails": {
-    "appointmentWindow": {
-      "startTimePeriod": "2018-10-19 00:00:00",
-      "operationalPreferenceCode": "STANDARD",
-      "timeSlot": "PM"
-    },
-    "serviceRequest": {
-      "typeCode": "INSTALL",
-      "classificationCode": "LINE",
-      "SubClassificationCode": "WLR_SINGLE_LINE",
-      "categoryCode": "BASIC"
-    },
-    "addressDetails": {
-      "address": {
-        "lineOne": "New Road",
-        "lineTwo": "Tunstall",
-        "lineThree": "905",
-        "cityName": "Norwich",
-        "countyName": "Norfolk",
-        "countryCode": "United Kingdom",
-        "citySubDivisionName": "CL",
-        "PostalCode": "NR13 3QE",
-        "identificationId": "A00028347905"
-      },
-      "organisation": {
-        "name": "Vodafone"
-      }
-    }
-  }
+	"existing": false,
+	"appointmentDetails": {
+		"appointmentWindow": {
+			"startTimePeriod": "2015-10-07+01:00",
+			"operationalPreferenceCode": "STANDARD",
+			"timeSlot": "AM"
+		},
+		"serviceRequest": {
+			"typeCode": "INSTALL",
+			"classificationCode": "LINE",
+			"subClassificationCode": "WLR_SINGLE_LINE",
+			"categoryCode": "BASIC"
+		},
+		"addressDetails": {
+			"address": {
+				"lineOne": "Craven Crescent",
+				"lineTwo": "Brooke",
+				"lineThree": "1",
+				"lineFour": "",
+				"building": "",
+				"countyName": "Norfolk",
+				"citySubDivisionName": "LS",
+				"postalCode": "LS29 0JJ",
+				"identificationId": "A90000221048"
+			},
+			"organisation": {
+				"name": "Vodafone"
+			}
+		}
+	}
 }

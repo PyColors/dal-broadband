@@ -7,6 +7,8 @@ import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
@@ -71,4 +73,8 @@ public interface BroadbandService {
 
 
 	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest);
+
+
+	public CreateAppointmentResponse createAppointment(CreateAppointmentRequest createAppointmentRequest,
+			String broadbandId);
 }

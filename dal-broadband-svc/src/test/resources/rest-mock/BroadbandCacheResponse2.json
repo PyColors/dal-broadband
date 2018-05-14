@@ -141,7 +141,11 @@
   },
   "broadBandId": "12345678907899",
   "basketId":"",
-  "accountCategory":"Consumer",
-  "packageId": null,
+  "basketInfo": {
+    "accountCategory":"Consumer",
+  	"packageId": null,
+  	"planProductLineId" : null,
+  	"hardwareProductLineId" : null
+  },
   "journeyId" : null
 }
