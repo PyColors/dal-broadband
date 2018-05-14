@@ -1080,6 +1080,7 @@ public class ConverterUtils {
 		appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
 		appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
 		appointmentWindow.setOperationalPreferenceCode(applicationId);
+		appointmentWindow.setIdentificationId(applicationId);
 		if (createAppointmentRequest.getSiteNote()!=null && createAppointmentRequest.getSiteNote().getNotes() != null) {
 			List<com.vf.uk.dal.broadband.basket.entity.SiteNote> siteNoteList = new ArrayList<>();
 			com.vf.uk.dal.broadband.basket.entity.SiteNote siteNote = new com.vf.uk.dal.broadband.basket.entity.SiteNote();
