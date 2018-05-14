@@ -15,8 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class CreateAppointmentRequest {
 
-	@JsonProperty("basketId")
-	private String basketId = null;
+	
 
 	@JsonProperty("startTimePeriod")
 	private String startTimePeriod = null;
@@ -26,30 +25,10 @@ public class CreateAppointmentRequest {
 
 	@JsonProperty("siteNote")
 	private SiteNote siteNote = null;
-	/**
-	 * 
-	 * @param basketId
-	 * @return
-	 */
-	public CreateAppointmentRequest basketId(String basketId) {
-		this.basketId = basketId;
-		return this;
-	}
-
-	/**
-	 * Basket id - Unique
-	 * 
-	 * @return basketId
-	 **/
-	@ApiModelProperty(value = "Basket id - Unique")
-
-	public String getBasketId() {
-		return basketId;
-	}
-
-	public void setBasketId(String basketId) {
-		this.basketId = basketId;
-	}
+	
+	@JsonProperty("removeFromPhoneDirectory")
+	private Boolean removeFromPhoneDirectory = null;
+	
 
 	/**
 	 * 
@@ -129,6 +108,14 @@ public class CreateAppointmentRequest {
 		this.siteNote = siteNote;
 	}
 
+	public Boolean getRemoveFromPhoneDirectory() {
+		return removeFromPhoneDirectory;
+	}
+
+	public void setRemoveFromPhoneDirectory(Boolean removeFromPhoneDirectory) {
+		this.removeFromPhoneDirectory = removeFromPhoneDirectory;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -138,15 +125,14 @@ public class CreateAppointmentRequest {
 			return false;
 		}
 		CreateAppointmentRequest createAppointmentRequest = (CreateAppointmentRequest) o;
-		return Objects.equals(this.basketId, createAppointmentRequest.basketId)
-				&& Objects.equals(this.startTimePeriod, createAppointmentRequest.startTimePeriod)
+		return Objects.equals(this.startTimePeriod, createAppointmentRequest.startTimePeriod)
 				&& Objects.equals(this.timeSlot, createAppointmentRequest.timeSlot)
 				&& Objects.equals(this.siteNote, createAppointmentRequest.siteNote);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(basketId, startTimePeriod, timeSlot, siteNote);
+		return Objects.hash(startTimePeriod, timeSlot, siteNote);
 	}
 
 	@Override
@@ -154,7 +140,6 @@ public class CreateAppointmentRequest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class CreateAppointmentRequest {\n");
 
-		sb.append("    basketId: ").append(toIndentedString(basketId)).append("\n");
 		sb.append("    startTimePeriod: ").append(toIndentedString(startTimePeriod)).append("\n");
 		sb.append("    timeSlot: ").append(toIndentedString(timeSlot)).append("\n");
 		sb.append("    siteNote: ").append(toIndentedString(siteNote)).append("\n");

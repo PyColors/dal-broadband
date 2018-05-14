@@ -8,35 +8,43 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
+import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.BasketServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
-import com.vf.uk.dal.broadband.basket.entity.BasketServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
+import com.vf.uk.dal.broadband.cache.repository.entity.BasketInfo;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineDetails;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineSpeeds;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineTreatment;
+import com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServieLine;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -116,8 +124,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 			PremiseAndServicePoint premiseAndServicePointRequest = ConverterUtils.setPremiseAndServicePointRequest(
 					mapper.map(broadBand.getServicePoint(), BasketServicePoint.class), broadBand,
 					availabilityCheckRequest, null);
-			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest, broadBand.getPackageId(),
-					broadBand.getBasketId());
+			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest,
+					broadBand.getBasketInfo().getPackageId(), broadBand.getBasketId());
 		}
 
 		return response;
@@ -457,10 +465,19 @@ public class BroadbandServiceImpl implements BroadbandService {
 			LineDetails lineDetails = new LineDetails();
 			lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 			broadbandToSave.setLineDetails(lineDetails);
+			BasketInfo basketInfo = new BasketInfo();
 			if (CollectionUtils.isNotEmpty(basket.getPackages())) {
 				for (ModelPackage modelPackage : basket.getPackages()) {
 					if (StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")) {
-						broadbandToSave.setPackageId(modelPackage.getPackageId());
+						basketInfo.setPackageId(modelPackage.getPackageId());
+						if (modelPackage.getBundle() != null) {
+							basketInfo.setPlanProductLineId(modelPackage.getBundle().getPackageLineId());
+						}
+						if (modelPackage.getHardwares() != null
+								&& CollectionUtils.isNotEmpty(modelPackage.getHardwares())) {
+							basketInfo.setHardwareProductLineId(modelPackage.getHardwares().get(0).getPackageLineId());
+						}
+						broadbandToSave.setBasketInfo(basketInfo);
 					}
 				}
 			}
@@ -482,10 +499,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 		broadbandDao.setBroadBandInCache(broadband);
 		PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
 				mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, updateLineRequest);
-		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint, broadband.getPackageId(),
-				broadband.getBasketId());
+		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+				broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
 		AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
-		broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(), broadband.getPackageId());
+		broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
+				broadband.getBasketInfo().getPackageId());
 
 	}
 
@@ -560,5 +578,38 @@ public class BroadbandServiceImpl implements BroadbandService {
 					.valueOf(priceForBBBundleAndHardware.getEngineerVisitFees().getOneOffPrice().getVat());
 		}
 		return routerVatPrice + deliveryVatPrice + engineerVisitFeesVat;
+	}
+
+	@Override
+	public CreateAppointmentResponse createAppointment(CreateAppointmentRequest createAppointmentRequest,
+			String broadbandId) {
+		CreateAppointmentResponse response = new CreateAppointmentResponse();
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = ConverterUtils
+				.createAppointmentRequest(createAppointmentRequest, broadband);
+		CreateAppointment createAppointment = broadbandDao.createAppointment(apptRequest);
+		if (createAppointment != null && createAppointment.getAppointmentWindow() != null
+				&& StringUtils.isNotEmpty(createAppointment.getAppointmentWindow().getApplicationId())) {
+			broadband = ConverterUtils.addAppointmentInfoToBroadbandCache(broadband, createAppointmentRequest,
+					createAppointment.getAppointmentWindow().getApplicationId());
+			AppointmentWindow appointmentWindowRequest = ConverterUtils.updateBasketWithAppointmentRequest(
+					createAppointmentRequest, createAppointment.getAppointmentWindow().getApplicationId());
+			broadbandDao.updateBasketWithAppointmentInformation(appointmentWindowRequest,
+					broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+			if (BooleanUtils.toBoolean(createAppointmentRequest.getRemoveFromPhoneDirectory())) {
+				ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
+				broadband.setServicePoint(servicePoint);
+				PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
+						mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
+				broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+						broadband.getBasketInfo().getPackageId(), broadband.getBroadBandId());
+			}
+			broadbandDao.setBroadBandInCache(broadband);
+			response.setApplicationId(createAppointment.getAppointmentWindow().getApplicationId());
+		} else {
+			LogHelper.error(this, "Create Appointment failed!!!");
+			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
+		}
+		return response;
 	}
 }

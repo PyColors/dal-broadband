@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The Class SalesOrderAppointment.
  */
-public class SalesOrderAppointment implements Serializable {
+public class BroadbandSalesOrderAppointment implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6512528605127882904L;
@@ -85,7 +85,7 @@ public class SalesOrderAppointment implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SalesOrderAppointment other = (SalesOrderAppointment) obj;
+		BroadbandSalesOrderAppointment other = (BroadbandSalesOrderAppointment) obj;
 		if (appointmentWindow == null) {
 			if (other.appointmentWindow != null)
 				return false;

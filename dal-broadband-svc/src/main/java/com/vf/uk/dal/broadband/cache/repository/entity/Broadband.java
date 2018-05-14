@@ -36,7 +36,7 @@ public class Broadband implements Serializable {
 
 	/** The sales order appointment. */
 	@JsonProperty("salesOrderAppointment")
-	private SalesOrderAppointment salesOrderAppointment;
+	private BroadbandSalesOrderAppointment salesOrderAppointment;
 
 	/** The line details. */
 	@JsonProperty("lineDetails")
@@ -56,11 +56,10 @@ public class Broadband implements Serializable {
 	@JsonProperty("basketId")
 	private String basketId = null;
 	
-	@JsonProperty("accountCategory")
-	private String accountCategory = null;
+	@JsonProperty("basketInfo")
+	private BasketInfo basketInfo;
 	
-	@JsonProperty("packageId")
-	private String packageId = null;
+	
 	
 	
 	
@@ -83,11 +82,11 @@ public class Broadband implements Serializable {
 		this.servicePoint = servicePoint;
 	}
 
-	public SalesOrderAppointment getSalesOrderAppointment() {
+	public BroadbandSalesOrderAppointment getSalesOrderAppointment() {
 		return salesOrderAppointment;
 	}
 
-	public void setSalesOrderAppointment(SalesOrderAppointment salesOrderAppointment) {
+	public void setSalesOrderAppointment(BroadbandSalesOrderAppointment salesOrderAppointment) {
 		this.salesOrderAppointment = salesOrderAppointment;
 	}
 
@@ -123,21 +122,6 @@ public class Broadband implements Serializable {
 		this.basketId = basketId;
 	}
 
-	public String getAccountCategory() {
-		return accountCategory;
-	}
-
-	public void setAccountCategory(String accountCategory) {
-		this.accountCategory = accountCategory;
-	}
-
-	public String getPackageId() {
-		return packageId;
-	}
-
-	public void setPackageId(String packageId) {
-		this.packageId = packageId;
-	}
 
 	public PriceForHardware getEngineeringVisitCharge() {
 		return engineeringVisitCharge;
@@ -145,6 +129,14 @@ public class Broadband implements Serializable {
 
 	public void setEngineeringVisitCharge(PriceForHardware engineeringVisitCharge) {
 		this.engineeringVisitCharge = engineeringVisitCharge;
+	}
+
+	public BasketInfo getBasketInfo() {
+		return basketInfo;
+	}
+
+	public void setBasketInfo(BasketInfo basketInfo) {
+		this.basketInfo = basketInfo;
 	}
 
 	@Override

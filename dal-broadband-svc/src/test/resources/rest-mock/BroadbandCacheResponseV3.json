@@ -141,9 +141,13 @@
   },
   "broadBandId": "1234567823444",
   "basketId":"2b23e0a1-eefd-409c-a919-e0ca774b9017",
-  "accountCategory":"Consumer",
-  "packageId": null,
-  "journeyId" : null,
+  "basketInfo": {
+    "accountCategory":"Consumer",
+  	"packageId": null,
+  	"planProductLineId" : null,
+  	"hardwareProductLineId" : null
+  },
+  "journeyId" : null, 
   "engineeringVisitCharge":{
   "gross" :"100.00",
   "net" : "80.00",

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
+import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreatePackageResponse;
@@ -29,6 +30,8 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -167,26 +170,28 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 * broadband.entity.appointment.CreateAppointmentRequest)
 	 */
 
-	/*
-	 * @Override public CreateAppointment
-	 * createAppointment(CreateAppointmentRequest createAppointmentReq) {
-	 * RestTemplate restTemplate = registryClient.getRestTemplate(); HttpHeaders
-	 * headers = new HttpHeaders();
-	 * headers.setContentType(MediaType.APPLICATION_JSON); CreateAppointment
-	 * createAppointment = null; try { ResponseEntity<CreateAppointment> client
-	 * = restTemplate.postForEntity(
-	 * "http://APPOINTMENT-V1/appointment/createAppointment",
-	 * createAppointmentReq, CreateAppointment.class); if (client != null)
-	 * createAppointment = client.getBody(); } catch
-	 * (RestClientResponseException e) { Gson gson = new Gson(); String
-	 * jsonInString = e.getResponseBodyAsString();
-	 * com.vf.uk.dal.common.exception.ErrorResponse error =
-	 * gson.fromJson(jsonInString,
-	 * com.vf.uk.dal.common.exception.ErrorResponse.class);
-	 * LogHelper.error(this, "::::::No Data recieved from TIL" + e); throw new
-	 * ApplicationException(error.getErrorMessage()); } return
-	 * createAppointment; }
-	 */
+	@Override
+	public CreateAppointment createAppointment(CreateAppointmentRequest createAppointmentReq) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		CreateAppointment createAppointment = null;
+		try {
+			ResponseEntity<CreateAppointment> client = restTemplate.postForEntity(
+					"http://APPOINTMENT-V1/appointment/createAppointment", createAppointmentReq,
+					CreateAppointment.class);
+			if (client != null)
+				createAppointment = client.getBody();
+		} catch (RestClientResponseException e) {
+			Gson gson = new Gson();
+			String jsonInString = e.getResponseBodyAsString();
+			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
+					com.vf.uk.dal.common.exception.ErrorResponse.class);
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(error.getErrorMessage());
+		}
+		return createAppointment;
+	}
 
 	@Override
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
@@ -344,20 +349,41 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public void updateBasketWithServiceId(AddProductRequest addProductRequest,String basketId, String packageId) {
+	public void updateBasketWithServiceId(AddProductRequest addProductRequest, String basketId, String packageId) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
-			
+
 			final HttpEntity<AddProductRequest> entity = new HttpEntity<>(addProductRequest, headers);
-			String url = BroadBandConstant.BASKET_URL + basketId + "/package/" + packageId+"/product";
+			String url = BroadBandConstant.BASKET_URL + basketId + "/package/" + packageId + "/product";
 			restTemplate.exchange(url, HttpMethod.POST, entity, CreatePackageResponse.class);
-			
+
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception occured while calling add Product " + e);
 			throw new ApplicationException(ExceptionMessages.GEN_EXCP_ADD_PRODUCT);
 		}
+
+	}
+
+	@Override
+	public void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest, String packageId,
+			String basketId) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			final HttpEntity<AppointmentWindow> entity = new HttpEntity<>(appointmentWindowRequest, headers);
+			String url = BroadBandConstant.BASKET_URL + basketId + "/broadbandPackage/" + packageId + "/appointment";
+			restTemplate.exchange(url, HttpMethod.PUT, entity, ResponseEntity.class);
+
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception occured while calling Update Basket with Appontment Information " + e);
+			throw new ApplicationException(ExceptionMessages.GEN_EXCP_UPDATE_APPT);
+		}
+
+	
+		
 		
 	}
 

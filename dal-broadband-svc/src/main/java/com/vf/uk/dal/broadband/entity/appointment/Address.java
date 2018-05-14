@@ -37,7 +37,7 @@ public class Address {
 	@JsonProperty("citySubDivisionName")
 	private String citySubDivisionName = null;
 
-	@JsonProperty("PostalCode")
+	@JsonProperty("postalCode")
 	private String postalCode = null;
 
 	@JsonProperty("identificationId")

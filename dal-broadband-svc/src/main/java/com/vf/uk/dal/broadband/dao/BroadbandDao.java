@@ -3,6 +3,7 @@ package com.vf.uk.dal.broadband.dao;
 import java.util.List;
 
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
+import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
@@ -10,6 +11,7 @@ import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -87,8 +89,8 @@ public interface BroadbandDao {
 	 * @return CreateAppointment
 	 */
 	
-	/*CreateAppointment createAppointment(
-			com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq);*/
+	CreateAppointment createAppointment(
+			com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq);
 
 	/**
 	 * Update the journey
@@ -126,4 +128,7 @@ public interface BroadbandDao {
 	List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache);
 
 	void updateBasketWithServiceId(AddProductRequest addProductRequest, String basketId, String packageId);
+
+	void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest, String packageId,
+			String basketId);
 }

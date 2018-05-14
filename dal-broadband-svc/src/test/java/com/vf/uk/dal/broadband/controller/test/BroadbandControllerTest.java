@@ -29,8 +29,12 @@ import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
+import com.vf.uk.dal.broadband.entity.SiteNote;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -72,7 +76,17 @@ public class BroadbandControllerTest {
 		String jsonString1 = new String(Utility.readFile("\\rest-mock\\GSAResponse.json"));
 		GetServiceAvailibilityResponse response = new ObjectMapper().readValue(jsonString1,
 				GetServiceAvailibilityResponse.class);
-
+		
+		String jsonString5 = new String(Utility.readFile("\\rest-mock\\CreateAppointmentRequest.json"));
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = new ObjectMapper()
+				.readValue(jsonString5, com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
+		
+		String jsonString6 = new String(Utility.readFile("\\rest-mock\\CreateAppointment_Response.json"));
+		CreateAppointment responseCA = new ObjectMapper().readValue(jsonString6, CreateAppointment.class);
+		
+		given(restTemplate.postForEntity("http://APPOINTMENT-V1/appointment/createAppointment", apptRequest,
+				CreateAppointment.class)).willReturn(new ResponseEntity<CreateAppointment>(responseCA, HttpStatus.OK));
+		
 		String jsonString7 = new String(Utility.readFile("\\rest-mock\\GetAddressByPostCode_Response.json"));
 		AddressInfo responseGAL = new ObjectMapper().readValue(jsonString7, AddressInfo.class);
 
@@ -555,4 +569,28 @@ public class BroadbandControllerTest {
 		}
 
 	}
+	
+	
+	
+	@Test
+	public void testCreateAppointmentResponse() {
+		try {
+			CreateAppointmentRequest request = new CreateAppointmentRequest();
+			request.setRemoveFromPhoneDirectory(true);
+			request.setStartTimePeriod("2015-10-07+01:00");
+			request.setTimeSlot("AM");
+			SiteNote siteNote = new SiteNote();
+			siteNote.setNotes("Hello");
+			request.setSiteNote(siteNote);
+			ResponseEntity<CreateAppointmentResponse> resonse = broadBandController
+					.createAppointmentForFLBB("12345678907888", request);
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+
+	
+
+	}
+	
 }
