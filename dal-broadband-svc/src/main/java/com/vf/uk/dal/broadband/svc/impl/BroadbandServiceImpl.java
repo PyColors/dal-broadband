@@ -14,7 +14,6 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -502,12 +501,16 @@ public class BroadbandServiceImpl implements BroadbandService {
 		broadbandDao.setBroadBandInCache(broadband);
 		PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
 				mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, updateLineRequest);
+		
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
 				broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
-		AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
-		broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
-				broadband.getBasketInfo().getPackageId());
-
+		
+		if("NEW".equalsIgnoreCase(updateLineRequest.getLineTreatmentType())
+				&& broadband.getEngineeringVisitCharge()!=null && broadband.getEngineeringVisitCharge().getGross()!=null){
+			AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
+			broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
+					broadband.getBasketInfo().getPackageId());
+		}
 	}
 
 	private Double getTotalNetPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
@@ -601,13 +604,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 					broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
 			if (BooleanUtils.toBoolean(createAppointmentRequest.getRemoveFromPhoneDirectory())) {
 				ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
-				Gson gson = new Gson();
-				gson.toJson(servicePoint);
 				broadband.setServicePoint(servicePoint);
 				PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
 						mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
-				Gson gson1 = new Gson();
-				gson1.toJson(premiseAndServicePoint);
 				broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
 						broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
 			}
