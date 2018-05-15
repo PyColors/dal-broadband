@@ -14,7 +14,6 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -39,12 +38,15 @@ import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
+import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -468,7 +470,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			BasketInfo basketInfo = new BasketInfo();
 			if (CollectionUtils.isNotEmpty(basket.getPackages())) {
 				for (ModelPackage modelPackage : basket.getPackages()) {
-					if (StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")) {
+					if (StringUtils.contains(modelPackage.getPlanType(), "BroadBand")) {
 						basketInfo.setPackageId(modelPackage.getPackageId());
 						if (modelPackage.getBundle() != null) {
 							basketInfo.setPlanProductLineId(modelPackage.getBundle().getPackageLineId());
@@ -611,5 +613,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
 		}
 		return response;
+	}
+
+	@Override
+	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband);
+		GetAppointment  getAppointmentResponse = broadbandDao.getAppointmentList(request);
+		return ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
 	}
 }
