@@ -12,6 +12,8 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -131,4 +133,6 @@ public interface BroadbandDao {
 
 	void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest, String packageId,
 			String basketId);
+
+	GetAppointment getAppointmentList(GetAppointmentRequest request);
 }

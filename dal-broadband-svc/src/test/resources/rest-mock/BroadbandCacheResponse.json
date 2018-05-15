@@ -134,10 +134,10 @@
   },
   "salesOrderAppointment": null,
   "lineDetails": {
-    "classificationCode": "string",
-    "earliestAvailableDate": "string",
+    "classificationCode": "Line and ADSL",
+    "earliestAvailableDate": "2015-10-07+01:00",
     "flbbNumber": "string",
-    "lineTreatmentType": "string"
+    "lineTreatmentType": "NEW"
   },
   "broadBandId": "12345678907888",
   "basketId":"2b23e0a1-eefd-409c-a919-e0ca774b9017",

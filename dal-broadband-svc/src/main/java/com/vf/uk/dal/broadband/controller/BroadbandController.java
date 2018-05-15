@@ -22,6 +22,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
+import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
@@ -282,7 +283,7 @@ public class BroadbandController {
 	}
 
 	@ApiOperation(value = "Creates the appointment and updates the broadband cache and basket with the appointmenr information", notes = "This service calls create appointment TIL service and updates the basket with the appointment information", response = CreateAppointmentResponse.class, tags = {
-			"Broadband, Create Appointment" })
+			"Broadband, Appointment" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = CreateAppointmentResponse.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
@@ -310,6 +311,19 @@ public class BroadbandController {
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
 
 		return null;
+	}
+
+	@ApiOperation(value = "Gets the list of appointment based  ", notes = "This service gets the service start date from the cache and calls getAppointmentList", response = GetAppointmentResponse.class, tags = {
+			"Broadband, Appointment" })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = GetAppointmentResponse.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
+	@RequestMapping(value = "/{broadbandId}/appointment", produces = {
+			"application/json" }, method = RequestMethod.GET)
+	public ResponseEntity<GetAppointmentResponse> getAppointmentForFLBB(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+		return new ResponseEntity<>(broadbandService.getAppointmentForFLBB(broadbandId), HttpStatus.OK);
 	}
 
 }

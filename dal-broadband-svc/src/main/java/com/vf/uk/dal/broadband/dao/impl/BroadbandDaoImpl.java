@@ -32,6 +32,8 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -378,13 +380,35 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			restTemplate.exchange(url, HttpMethod.PUT, entity, ResponseEntity.class);
 
 		} catch (Exception e) {
-			LogHelper.error(this, "::::::Exception occured while calling Update Basket with Appontment Information " + e);
+			LogHelper.error(this,
+					"::::::Exception occured while calling Update Basket with Appontment Information " + e);
 			throw new ApplicationException(ExceptionMessages.GEN_EXCP_UPDATE_APPT);
 		}
 
-	
-		
-		
+	}
+
+	@Override
+	public GetAppointment getAppointmentList(GetAppointmentRequest request) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		GetAppointment getAppointment = null;
+		try {
+			ResponseEntity<GetAppointment> client = restTemplate.postForEntity(
+					"http://APPOINTMENT-V1/appointment/action/getAppointment", request, GetAppointment.class);
+			Gson gson = new Gson();
+			gson.toJson(request);
+			if (client != null)
+				getAppointment = client.getBody();
+		} catch (RestClientResponseException e) {
+			Gson gson = new Gson();
+			String jsonInString = e.getResponseBodyAsString();
+			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
+					com.vf.uk.dal.common.exception.ErrorResponse.class);
+			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
+			throw new ApplicationException(error.getErrorMessage());
+		}
+		return getAppointment;
 	}
 
 	/*
