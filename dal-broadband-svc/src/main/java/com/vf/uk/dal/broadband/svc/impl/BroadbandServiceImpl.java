@@ -637,9 +637,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 	@Override
 	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest) {
-		if(StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())){
+		/*if(StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())){
 			
-		}
+		}*/
 		return null;
 	}
 }

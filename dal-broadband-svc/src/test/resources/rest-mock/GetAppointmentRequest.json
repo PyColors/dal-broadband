@@ -2,7 +2,7 @@
 	"existing": false,
 	"appointmentDetails": {
 		"appointmentWindow": {
-			"startTimePeriod": "2018-04-23",
+			"startTimePeriod": "2018-04-23 00:00:00",
 			"operationalPreferenceCode": "STANDARD"
 		},
 		"serviceRequest": {

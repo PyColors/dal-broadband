@@ -313,7 +313,7 @@ public class BroadbandController {
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Request for optimizing the broadband package", required = true) @Valid @RequestBody OptimizePackageRequest optimizePackageRequest) {
 
-		OptimizePackageResponse optimizePackageResponse = broadbandService.optimizePackageForFLBB(optimizePackageRequest);
+		//OptimizePackageResponse optimizePackageResponse = broadbandService.optimizePackageForFLBB(optimizePackageRequest);
 		
 		return null;
 	}
