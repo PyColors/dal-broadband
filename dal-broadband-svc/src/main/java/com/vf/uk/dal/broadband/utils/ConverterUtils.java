@@ -1190,6 +1190,7 @@ public class ConverterUtils {
 			List<String> slot = new ArrayList<>();
 			slot.add(apptWindow.getTimeSlot());
 			appWondow.setTimeSlots(slot);
+			apptWindowList.add(appWondow);
 		}
 		getAppointmentRes.setAppointmentWindowList(apptWindowList);
 		return getAppointmentRes;
