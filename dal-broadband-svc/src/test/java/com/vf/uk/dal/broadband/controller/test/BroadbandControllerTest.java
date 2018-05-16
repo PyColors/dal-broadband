@@ -488,7 +488,7 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -515,7 +515,7 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -542,7 +542,7 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -569,7 +569,7 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FLBALL&userType=Consumer",
+			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
