@@ -1169,7 +1169,7 @@ public class ConverterUtils {
 						for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
 							if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
 									broadBand.getLineDetails().getLineTreatmentType())) {
-								appointmentWindow.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + "00:00:00");
+								appointmentWindow.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + " 00:00:00");
 							}
 						}
 					}
