@@ -24,6 +24,8 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
+import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
@@ -112,7 +114,7 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setOfferCode(offerCode);
 		getBundleListSearchCriteria.setClassificationCode(classificationCode);
 		getBundleListSearchCriteria.setDuration(duration);
-		getBundleListSearchCriteria.setBundleClass("FLBALL");
+		getBundleListSearchCriteria.setBundleClass("FTTC");
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
 		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
 		// ObjectMapper objectMapper = new ObjectMapper();
@@ -302,14 +304,17 @@ public class BroadbandController {
 	@ApiOperation(value = "Optimize the basket by replacing the package", notes = "This service calls promotion API to get the plan which needs to be replaced and then calls update package", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class, tags = {
 			"Broadband, Optimize Basket" })
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Success", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class),
+			@ApiResponse(code = 200, message = "Success", response = OptimizePackageResponse.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/optimize/package", produces = {
 			"application/json" }, method = RequestMethod.POST)
-	public ResponseEntity<com.vf.uk.dal.broadband.entity.OptimizePackageResponse> optimizePackageForFLBB(
-			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+	public ResponseEntity<OptimizePackageResponse> optimizePackageForFLBB(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@ApiParam(value = "Request for optimizing the broadband package", required = true) @Valid @RequestBody OptimizePackageRequest optimizePackageRequest) {
 
+		OptimizePackageResponse optimizePackageResponse = broadbandService.optimizePackageForFLBB(optimizePackageRequest);
+		
 		return null;
 	}
 

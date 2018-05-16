@@ -802,6 +802,9 @@ public class ConverterUtils {
 		}
 		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 		BasketInfo basketInfo = new BasketInfo();
+		if(basketRequest.getAddBundle()!=null && StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())){
+			basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
+		}
 		if (CollectionUtils.isNotEmpty(basket.getPackages())) {
 			for (ModelPackage modelPackage : basket.getPackages()) {
 				if (StringUtils.contains(modelPackage.getPlanType(), "BroadBand")) {
@@ -1166,7 +1169,7 @@ public class ConverterUtils {
 						for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
 							if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
 									broadBand.getLineDetails().getLineTreatmentType())) {
-								appointmentWindow.setStartTimePeriod(lineTreatment.getEarliestAvailableDate());
+								appointmentWindow.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + "00:00:00");
 							}
 						}
 					}
