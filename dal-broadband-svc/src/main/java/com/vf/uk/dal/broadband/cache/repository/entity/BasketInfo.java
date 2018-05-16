@@ -16,13 +16,15 @@ public class BasketInfo implements Serializable {
 
 	@JsonProperty("packageId")
 	private String packageId = null;
-	
+
 	@JsonProperty("planProductLineId")
 	private String planProductLineId = null;
-	
+
 	@JsonProperty("hardwareProductLineId")
 	private String hardwareProductLineId = null;
-	
+
+	@JsonProperty("planId")
+	private String planId = null;
 
 	public String getAccountCategory() {
 		return accountCategory;
@@ -54,6 +56,14 @@ public class BasketInfo implements Serializable {
 
 	public void setHardwareProductLineId(String hardwareProductLineId) {
 		this.hardwareProductLineId = hardwareProductLineId;
+	}
+
+	public String getPlanId() {
+		return planId;
+	}
+
+	public void setPlanId(String planId) {
+		this.planId = planId;
 	}
 
 }

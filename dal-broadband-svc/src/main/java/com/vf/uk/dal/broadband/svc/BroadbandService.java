@@ -12,6 +12,8 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
+import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
@@ -81,4 +83,7 @@ public interface BroadbandService {
 
 
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId);
+
+
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest);
 }

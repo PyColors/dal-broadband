@@ -2,7 +2,9 @@
 	"existing": false,
 	"appointmentDetails": {
 		"appointmentWindow": {
-			"operationalPreferenceCode": "STANDARD"
+			"operationalPreferenceCode": "STANDARD",
+			"startTimePeriod" : "2015-10-07+01:00",
+			"timeSlot" : "AM"
 		},
 		"serviceRequest": {
 			"typeCode": "INSTALL",
@@ -28,3 +30,4 @@
 		}
 	}
 }
+

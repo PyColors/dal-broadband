@@ -40,6 +40,8 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
+import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.Speed;
@@ -460,6 +462,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		} else {
 			CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest, broadbandCache,
 					null, null);
+
 			basket = broadbandDao.createBasket(createBasketRequest);
 			Broadband broadbandToSave = new Broadband();
 			broadbandToSave.setBroadBandId(broadbandId);
@@ -468,6 +471,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 			lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 			broadbandToSave.setLineDetails(lineDetails);
 			BasketInfo basketInfo = new BasketInfo();
+			if (basketRequest.getAddBundle() != null
+					&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())) {
+				basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
+			}
 			if (CollectionUtils.isNotEmpty(basket.getPackages())) {
 				for (ModelPackage modelPackage : basket.getPackages()) {
 					if (StringUtils.contains(modelPackage.getPlanType(), "BroadBand")) {
@@ -501,12 +508,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		broadbandDao.setBroadBandInCache(broadband);
 		PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
 				mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, updateLineRequest);
-		
+
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
 				broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
-		
-		if("NEW".equalsIgnoreCase(updateLineRequest.getLineTreatmentType())
-				&& broadband.getEngineeringVisitCharge()!=null && broadband.getEngineeringVisitCharge().getGross()!=null){
+
+		if ("NEW".equalsIgnoreCase(updateLineRequest.getLineTreatmentType())
+				&& broadband.getEngineeringVisitCharge() != null
+				&& broadband.getEngineeringVisitCharge().getGross() != null) {
 			AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
 			broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
 					broadband.getBasketInfo().getPackageId());
@@ -623,7 +631,15 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband);
-		GetAppointment  getAppointmentResponse = broadbandDao.getAppointmentList(request);
+		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
 		return ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
+	}
+
+	@Override
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest) {
+		if(StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())){
+			
+		}
+		return null;
 	}
 }
