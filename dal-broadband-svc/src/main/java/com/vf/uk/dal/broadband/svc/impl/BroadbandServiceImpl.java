@@ -44,6 +44,8 @@ import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
+import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
@@ -641,5 +643,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 			
 		}*/
 		return null;
+	}
+
+	@Override
+	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId) {
+		List<RouterDetails> routerDetails = new ArrayList<>();
+		for(RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)){
+			routerDetails.add(mapper.map(routerProductDetails, RouterDetails.class));
+		}
+		return routerDetails;
 	}
 }

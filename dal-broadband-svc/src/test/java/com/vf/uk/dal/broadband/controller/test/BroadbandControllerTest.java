@@ -33,6 +33,8 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
+import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.SiteNote;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
@@ -78,33 +80,31 @@ public class BroadbandControllerTest {
 		String jsonString1 = new String(Utility.readFile("\\rest-mock\\GSAResponse.json"));
 		GetServiceAvailibilityResponse response = new ObjectMapper().readValue(jsonString1,
 				GetServiceAvailibilityResponse.class);
-		
+
 		String jsonString5 = new String(Utility.readFile("\\rest-mock\\CreateAppointmentRequest.json"));
 		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = new ObjectMapper()
 				.readValue(jsonString5, com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
-		
+
 		String jsonString6 = new String(Utility.readFile("\\rest-mock\\CreateAppointment_Response.json"));
 		CreateAppointment responseCA = new ObjectMapper().readValue(jsonString6, CreateAppointment.class);
-		
+
 		given(restTemplate.postForEntity("http://APPOINTMENT-V1/appointment/createAppointment", apptRequest,
 				CreateAppointment.class)).willReturn(new ResponseEntity<CreateAppointment>(responseCA, HttpStatus.OK));
-		
-		
+
 		/////// Get Appointment
-		
+
 		String jsonStringGA = new String(Utility.readFile("\\rest-mock\\GetAppointmentRequest.json"));
 		com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest getApptRequest = new ObjectMapper()
 				.readValue(jsonStringGA, com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest.class);
-		
+
 		String jsonStringGAResponse = new String(Utility.readFile("\\rest-mock\\GetAppointment_Response.json"));
 		GetAppointment responseGA = new ObjectMapper().readValue(jsonStringGAResponse, GetAppointment.class);
-		
+
 		given(restTemplate.postForEntity("http://APPOINTMENT-V1/appointment/action/getAppointment", getApptRequest,
 				GetAppointment.class)).willReturn(new ResponseEntity<GetAppointment>(responseGA, HttpStatus.OK));
-		
+
 		/////
-		
-		
+
 		String jsonString7 = new String(Utility.readFile("\\rest-mock\\GetAddressByPostCode_Response.json"));
 		AddressInfo responseGAL = new ObjectMapper().readValue(jsonString7, AddressInfo.class);
 
@@ -488,7 +488,8 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer",
+			given(restTemplate.getForObject(
+					"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -506,7 +507,7 @@ public class BroadbandControllerTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testGetFlbbListForExistingAndNewForSelectionNew() {
 		try {
@@ -515,7 +516,8 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
+			given(restTemplate.getForObject(
+					"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -533,7 +535,7 @@ public class BroadbandControllerTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testGetFlbbListForExistingLine() {
 		try {
@@ -542,7 +544,8 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
+			given(restTemplate.getForObject(
+					"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -560,7 +563,7 @@ public class BroadbandControllerTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testGetFlbbListForNew() {
 		try {
@@ -569,7 +572,8 @@ public class BroadbandControllerTest {
 			given(broadBandRepoProvider.getBroadbandFromCache("1234567823444")).willReturn(broadbandV3);
 			String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 			BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
-			given(restTemplate.getForObject("http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
+			given(restTemplate.getForObject(
+					"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer",
 					BundleDetails.class)).willReturn(bundleDetails);
 
 			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -587,9 +591,7 @@ public class BroadbandControllerTest {
 		}
 
 	}
-	
-	
-	
+
 	@Test
 	public void testCreateAppointmentResponse() {
 		try {
@@ -607,22 +609,34 @@ public class BroadbandControllerTest {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
 
-	
-
 	}
-	
-	
+
 	@Test
 	public void testGetAppointmentResponse() {
 		try {
-			ResponseEntity<GetAppointmentResponse> resonse = broadBandController.getAppointmentForFLBB("12345678907888");
+			ResponseEntity<GetAppointmentResponse> resonse = broadBandController
+					.getAppointmentForFLBB("12345678907888");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
-
-	
-
 	}
-	
+
+	@Test
+	public void testGetCompatibleDevices() {
+		try {
+			String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetCompatibleDeviceResponse.json"));
+			RouterProductDetails[] productDetails = new ObjectMapper().readValue(jsonString2,
+					RouterProductDetails[].class);
+			given(restTemplate.getForEntity("http://BUNDLES-V1/bundles/catalogue/bundle/110264/compatibleDevices",
+					RouterProductDetails[].class))
+							.willReturn(new ResponseEntity<RouterProductDetails[]>(productDetails, HttpStatus.OK));
+			ResponseEntity<List<RouterDetails>> resonse = broadBandController
+					.getCompatibleDevicesForBundle("12345678907888", "110264", "cat-1");
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+
 }
