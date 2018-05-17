@@ -14,6 +14,7 @@ import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
+import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
@@ -86,4 +87,7 @@ public interface BroadbandService {
 
 
 	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest);
+
+
+	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId);
 }

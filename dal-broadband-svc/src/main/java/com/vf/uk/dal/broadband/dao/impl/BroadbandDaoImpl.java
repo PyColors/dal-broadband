@@ -30,6 +30,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
@@ -411,11 +412,20 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return getAppointment;
 	}
 
-	/*
-	 * @Override public void
-	 * updateBasketWithAppointmentInformation(AppointmentWindow
-	 * appointmentWindowRequest) { // TODO Auto-generated method stub
-	 * 
-	 * }
-	 */
+	@Override
+	public List<RouterProductDetails> getCompatibleDevicesForBundle(String planId) {
+		List<RouterProductDetails> productDetails = null;
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		try {
+			ResponseEntity<RouterProductDetails[]> client = restTemplate.getForEntity(
+					"http://BUNDLES-V1/bundles/catalogue/bundle/"+planId+"/compatibleDevices",
+					RouterProductDetails[].class);
+			if (client != null)
+				productDetails = Arrays.asList(client.getBody());
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::No Data recieved from Product Miscro service" + e);
+			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_PRODUCT_ENGINEERING_FEE);
+		}
+		return productDetails;
+	}
 }
