@@ -647,10 +647,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 	@Override
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId) {
-		List<RouterDetails> routerDetails = new ArrayList<>();
+		List<RouterDetails> routerDetailList = new ArrayList<>();
 		for(RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)){
-			routerDetails.add(mapper.map(routerProductDetails, RouterDetails.class));
+			RouterDetails routerDetails = new RouterDetails();
+			routerDetails = mapper.map(routerProductDetails, RouterDetails.class);
+			routerDetails.setIsDefaultDevice(routerProductDetails.isIsDefaultDevice());
+			routerDetailList.add(routerDetails);
 		}
-		return routerDetails;
+		return routerDetailList;
 	}
 }

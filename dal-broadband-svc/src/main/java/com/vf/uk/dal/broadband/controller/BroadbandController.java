@@ -335,7 +335,7 @@ public class BroadbandController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RouterDetails[].class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
-	@RequestMapping(value = "/{broadbandId}/plan/{planId}/routers", produces = { "application/json" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/{broadbandId}/plan/{planId}/router", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<RouterDetails>> getCompatibleDevicesForBundle(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "plan id based on which we need to query the compatible devices", required = true) @PathVariable("planId") String planId,

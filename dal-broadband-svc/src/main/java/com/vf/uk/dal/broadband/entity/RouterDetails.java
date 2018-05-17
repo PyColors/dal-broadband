@@ -34,20 +34,16 @@ public class RouterDetails {
 	private List<ImageURL> listOfImageURLs = null;
 
 	@JsonProperty("priceInfo")
-	private PriceForBundleAndHardware priceInfo = null;
+	private RouterPriceForHardware priceInfo = null;
 
 	@JsonProperty("productId")
 	private String productId = null;
-
-	@JsonProperty("productLines")
-	@Valid
-	private List<String> productLines = null;
 
 	@JsonProperty("productName")
 	private String productName = null;
 
 	@JsonProperty("promotionPackages")
-	private MerchandisingPromotionsPackage promotionPackages = null;
+	private RouterMerchandisingPromotions promotionPackages = null;
 
 	public RouterDetails description(String description) {
 		this.description = description;
@@ -139,7 +135,7 @@ public class RouterDetails {
 		this.listOfImageURLs = listOfImageURLs;
 	}
 
-	public RouterDetails priceInfo(PriceForBundleAndHardware priceInfo) {
+	public RouterDetails priceInfo(RouterPriceForHardware priceInfo) {
 		this.priceInfo = priceInfo;
 		return this;
 	}
@@ -153,11 +149,11 @@ public class RouterDetails {
 
 	@Valid
 
-	public PriceForBundleAndHardware getPriceInfo() {
+	public RouterPriceForHardware getPriceInfo() {
 		return priceInfo;
 	}
 
-	public void setPriceInfo(PriceForBundleAndHardware priceInfo) {
+	public void setPriceInfo(RouterPriceForHardware priceInfo) {
 		this.priceInfo = priceInfo;
 	}
 
@@ -181,33 +177,7 @@ public class RouterDetails {
 		this.productId = productId;
 	}
 
-	public RouterDetails productLines(List<String> productLines) {
-		this.productLines = productLines;
-		return this;
-	}
-
-	public RouterDetails addProductLinesItem(String productLinesItem) {
-		if (this.productLines == null) {
-			this.productLines = new ArrayList<String>();
-		}
-		this.productLines.add(productLinesItem);
-		return this;
-	}
-
-	/**
-	 * product lines
-	 * 
-	 * @return productLines
-	 **/
-	@ApiModelProperty(value = "product lines")
-
-	public List<String> getProductLines() {
-		return productLines;
-	}
-
-	public void setProductLines(List<String> productLines) {
-		this.productLines = productLines;
-	}
+	
 
 	public RouterDetails productName(String productName) {
 		this.productName = productName;
@@ -229,7 +199,7 @@ public class RouterDetails {
 		this.productName = productName;
 	}
 
-	public RouterDetails promotionPackages(MerchandisingPromotionsPackage promotionPackages) {
+	public RouterDetails promotionPackages(RouterMerchandisingPromotions promotionPackages) {
 		this.promotionPackages = promotionPackages;
 		return this;
 	}
@@ -243,11 +213,11 @@ public class RouterDetails {
 
 	@Valid
 
-	public MerchandisingPromotionsPackage getPromotionPackages() {
+	public RouterMerchandisingPromotions getPromotionPackages() {
 		return promotionPackages;
 	}
 
-	public void setPromotionPackages(MerchandisingPromotionsPackage promotionPackages) {
+	public void setPromotionPackages(RouterMerchandisingPromotions promotionPackages) {
 		this.promotionPackages = promotionPackages;
 	}
 
@@ -269,15 +239,13 @@ public class RouterDetails {
 				Objects.equals(this.priceInfo, productDetails.priceInfo) &&
 
 				Objects.equals(this.productId, productDetails.productId)
-				&& Objects.equals(this.productLines, productDetails.productLines)
 				&& Objects.equals(this.productName, productDetails.productName)
 				&& Objects.equals(this.promotionPackages, productDetails.promotionPackages);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, displayName, isDefaultDevice, listOfImageURLs, priceInfo, productId,
-				productLines, productName, promotionPackages);
+		return Objects.hash(description, displayName, isDefaultDevice, listOfImageURLs, priceInfo, productId, productName, promotionPackages);
 	}
 
 	@Override
@@ -294,7 +262,6 @@ public class RouterDetails {
 		sb.append("    priceInfo: ").append(toIndentedString(priceInfo)).append("\n");
 
 		sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
-		sb.append("    productLines: ").append(toIndentedString(productLines)).append("\n");
 		sb.append("    productName: ").append(toIndentedString(productName)).append("\n");
 		sb.append("    promotionPackages: ").append(toIndentedString(promotionPackages)).append("\n");
 		sb.append("}");
