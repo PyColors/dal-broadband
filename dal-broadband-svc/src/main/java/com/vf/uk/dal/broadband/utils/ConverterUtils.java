@@ -61,6 +61,7 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.Organisation;
 import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
@@ -923,7 +924,7 @@ public class ConverterUtils {
 	}
 
 	public static UpdatePackage updateBasketRequest(BasketRequest basketRequest, CurrentJourney journey,
-			Broadband broadband) {
+			Broadband broadband, String planId) {
 		UpdatePackage updatePackage = new UpdatePackage();
 		if (broadband.getBasketInfo() != null
 				&& StringUtils.isNotEmpty(broadband.getBasketInfo().getAccountCategory())) {
@@ -936,6 +937,15 @@ public class ConverterUtils {
 			updatePackage.setPackageType(journey.getJourneyData().getName());
 		} else {
 			updatePackage.setPackageType("Acquisition");
+		}
+		
+		
+		if (StringUtils.isNotEmpty(planId)) {
+			UpdateBundle updateBundle = new UpdateBundle();
+			updateBundle.setAction("ADD");
+			updateBundle.setSkuId(planId);
+			updateBundle.setProductLineId(broadband.getBasketInfo().getPlanProductLineId());
+			updatePackage.setBundle(updateBundle);
 		}
 		if (basketRequest != null && basketRequest.getAddBundle() != null
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())
@@ -1194,5 +1204,14 @@ public class ConverterUtils {
 		}
 		getAppointmentRes.setAppointmentWindowList(apptWindowList);
 		return getAppointmentRes;
+	}
+
+	public static BundlePromotionRequest createPromotionRequestToOptimize(Broadband broadband, String journeyName) {
+		BundlePromotionRequest bundlePromotionRequest = new BundlePromotionRequest();
+		List<String> bundleIdList = new ArrayList<>();
+		bundleIdList.add(broadband.getBasketInfo().getPlanId());
+		bundlePromotionRequest.setBundleIdList(bundleIdList);
+		bundlePromotionRequest.setJourneyType(journeyName);
+		return bundlePromotionRequest;
 	}
 }

@@ -86,7 +86,7 @@ public interface BroadbandService {
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId);
 
 
-	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest);
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest, String broadbandId);
 
 
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId);

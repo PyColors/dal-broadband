@@ -37,6 +37,8 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
@@ -427,5 +429,25 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_PRODUCT_ENGINEERING_FEE);
 		}
 		return productDetails;
+	}
+
+	@Override
+	public List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest) {
+		
+		List<BundlePromotion> bundlePromotions = null;
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+			ResponseEntity<BundlePromotion[]> client = restTemplate.postForEntity(
+					"http://PROMOTION-V1/promotion/queries/ForBundleList", bundlePromotionRequest,
+					BundlePromotion[].class);
+			if (client != null)
+				bundlePromotions = Arrays.asList(client.getBody());
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception while calling promotion API" + e);
+			throw new ApplicationException(ExceptionMessages.GEN_EXC_PROMOTION_API);
+		}
+		return bundlePromotions;
 	}
 }
