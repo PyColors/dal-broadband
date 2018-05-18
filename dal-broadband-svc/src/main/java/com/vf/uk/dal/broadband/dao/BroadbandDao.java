@@ -17,6 +17,8 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
@@ -138,4 +140,6 @@ public interface BroadbandDao {
 	GetAppointment getAppointmentList(GetAppointmentRequest request);
 
 	List<RouterProductDetails> getCompatibleDevicesForBundle(String planId);
+
+	List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest);
 }

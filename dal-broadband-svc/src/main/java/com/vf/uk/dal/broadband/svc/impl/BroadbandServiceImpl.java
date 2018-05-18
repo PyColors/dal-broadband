@@ -14,6 +14,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -53,6 +54,8 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
@@ -449,11 +452,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,
 						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class),
 						journey);
+				Gson gson = new Gson();
+				gson.toJson(createBasketRequest);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
 				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest, journey,
-						broadbandCache);
+						broadbandCache, null);
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
 				basket = broadbandDao.getBasket(basketId);
 			}
@@ -638,11 +643,43 @@ public class BroadbandServiceImpl implements BroadbandService {
 	}
 
 	@Override
-	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest) {
-		/*if(StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())){
-			
-		}*/
-		return null;
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest, String broadbandId) {
+		OptimizePackageResponse response = new OptimizePackageResponse();
+		response.setHasPackageOptimized(false);
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		if(StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())){
+			broadband.setJourneyId(optimizePackageRequest.getJourneyId());
+		}
+		if(StringUtils.isNotEmpty(broadband.getBasketId())){
+			CurrentJourney journey = null;
+			if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
+				journey = broadbandDao.getJourney(broadband.getJourneyId());
+			}
+			String journeyName = null;
+			if(journey!=null && journey.getJourneyData()!=null && StringUtils.isNotEmpty(journey.getJourneyData().getName())){
+				journeyName = journey.getJourneyData().getName();
+			}
+			BundlePromotionRequest bundlePromotionRequest = ConverterUtils.createPromotionRequestToOptimize(broadband, journeyName);
+			List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
+			String planId = broadband.getBasketInfo().getPlanId();
+			for(BundlePromotion bundlePromotion : bundlePromotions){
+				if(StringUtils.equalsIgnoreCase(bundlePromotion.getBundleId(), planId)
+						&& CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())){
+					planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
+					UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, journey, broadband, planId);
+					broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+					response.setHasPackageOptimized(true);
+					BasketInfo basketInfo = broadband.getBasketInfo();
+					if(basketInfo==null){
+						basketInfo = new BasketInfo();
+					}
+					basketInfo.setPlanId(planId);
+					broadband.setBasketInfo(basketInfo);
+				}
+			}
+		}
+		broadbandDao.setBroadBandInCache(broadband);
+		return response;
 	}
 
 	@Override

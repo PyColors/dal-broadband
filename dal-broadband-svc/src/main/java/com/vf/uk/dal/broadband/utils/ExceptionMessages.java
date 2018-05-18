@@ -41,6 +41,7 @@ public class ExceptionMessages {
 	public static final String START_DATE_EMPTY = "Start Date time or time slot is null. This cannot be null";
 	public static final String GEN_EXCP_UPDATE_APPT = "General Exception occured while updating the basket with the appointment information";
 	public static final String CREATE_APPOINTMENT_FAILED = "Create Appointment Failed.";
+	public static final String GEN_EXC_PROMOTION_API = "General Exception while calling promotion API";
 
 	private ExceptionMessages() {
 

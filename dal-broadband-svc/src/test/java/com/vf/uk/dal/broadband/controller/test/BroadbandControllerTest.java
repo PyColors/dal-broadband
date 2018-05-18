@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -33,6 +34,8 @@ import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
+import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
+import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.SiteNote;
@@ -41,7 +44,10 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
+import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
@@ -102,9 +108,37 @@ public class BroadbandControllerTest {
 
 		given(restTemplate.postForEntity("http://APPOINTMENT-V1/appointment/action/getAppointment", getApptRequest,
 				GetAppointment.class)).willReturn(new ResponseEntity<GetAppointment>(responseGA, HttpStatus.OK));
-
+		
+		
+		BundlePromotionRequest requestForPromo = new BundlePromotionRequest();
+		List<String> bundleIdList = new ArrayList<>();
+		bundleIdList.add("110264");
+		requestForPromo.setBundleIdList(bundleIdList);
+		requestForPromo.setJourneyType("SecondLine");
+		String promotionResponse = new String(Utility.readFile("\\rest-mock\\GetPromotionForBundle.json"));
+		BundlePromotion[] bundlePromotion = new ObjectMapper().readValue(promotionResponse, BundlePromotion[].class);
+		given(restTemplate.postForEntity(
+				"http://PROMOTION-V1/promotion/queries/ForBundleList",requestForPromo,
+				BundlePromotion[].class))
+						.willReturn(new ResponseEntity<BundlePromotion[]>(bundlePromotion, HttpStatus.OK));
 		/////
 
+		
+		////////Get Current Journey
+		
+		String getCurrentJourneyResponse = new String(Utility.readFile("\\rest-mock\\GetCurrentJourneyResponse.json"));
+		CurrentJourney currentJourney = new ObjectMapper().readValue(getCurrentJourneyResponse, CurrentJourney.class);
+		
+		given(restTemplate.getForEntity(
+				"http://JOURNEY-V1/journey/2290f3b1-1ed5-4513-9f86-110531c5fbfb/queries/currentJourney",
+				CurrentJourney.class))
+						.willReturn(new ResponseEntity<CurrentJourney>(currentJourney, HttpStatus.OK));
+		
+		
+		//////////
+		
+		
+		
 		String jsonString7 = new String(Utility.readFile("\\rest-mock\\GetAddressByPostCode_Response.json"));
 		AddressInfo responseGAL = new ObjectMapper().readValue(jsonString7, AddressInfo.class);
 
@@ -633,6 +667,21 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<RouterProductDetails[]>(productDetails, HttpStatus.OK));
 			ResponseEntity<List<RouterDetails>> resonse = broadBandController
 					.getCompatibleDevicesForBundle("12345678907888", "110264", "cat-1");
+			assertNotNull(resonse);
+		} catch (Exception e) {
+			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	
+	
+	
+	@Test
+	public void testOptimizeBasket() {
+		try {
+			OptimizePackageRequest optimizePackageRequest = new OptimizePackageRequest();
+			optimizePackageRequest.setJourneyId("2290f3b1-1ed5-4513-9f86-110531c5fbfb");
+			ResponseEntity<OptimizePackageResponse> resonse = broadBandController.optimizePackageForFLBB("12345678907888", optimizePackageRequest);	
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);

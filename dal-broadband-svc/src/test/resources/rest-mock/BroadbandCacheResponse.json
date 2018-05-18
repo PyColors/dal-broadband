@@ -145,9 +145,10 @@
     "accountCategory":"Consumer",
   	"packageId": null,
   	"planProductLineId" : null,
-  	"hardwareProductLineId" : null
-  },
-  "journeyId" : null,
+  	"hardwareProductLineId" : null,
+  	"planId" : "110264"
+   },
+   "journeyId" : null,
   "engineeringVisitCharge":{
   "gross" :"100.00",
   "net" : "80.00",

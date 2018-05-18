@@ -118,18 +118,6 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setBundleClass("FTTC");
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
 		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
-		// ObjectMapper objectMapper = new ObjectMapper();
-		/*
-		 * try { FlbBundle[] flbbArry = objectMapper.readValue(
-		 * "[{\"bundleDescription\":\"string\",\"bundleName\":\"string\",\"classificationCode\":\"string\",\"commitmentPeriod\":\"string\",\"description\":\"string\",\"merchandisingMedia\":[{\"id\":\"string\",\"packageType\":[\"string\"],\"priority\":0,\"type\":\"string\",\"value\":\"string\"}],\"name\":\"string\",\"priceInfo\":{\"bundlePrice\":{\"bundleId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"monthlyDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"monthlyPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"deliveryPrice\":{\"hardwareId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"oneOffDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"oneOffPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"engineerVisitFees\":{\"hardwareId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"oneOffDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"oneOffPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"routerPrice\":{\"hardwareId\":\"string\",\"merchandisingPromotions\":{\"description\":\"string\",\"discountId\":\"string\",\"footNotes\":[\"string\"],\"label\":\"string\",\"mpType\":\"string\",\"packageType\":[\"string\"],\"priceEstablishedLabel\":\"string\",\"priority\":0,\"promotionMedia\":\"string\",\"tag\":\"string\"},\"oneOffDiscountPrice\":{\"gross\":0,\"net\":0,\"vat\":0},\"oneOffPrice\":{\"gross\":0,\"net\":0,\"vat\":0}},\"totalCost\":{\"gross\":0,\"net\":0,\"vat\":0}},\"productDescription\":\"string\",\"productName\":\"string\",\"skuId\":\"string\",\"speed\":{\"maxSpeed\":\"string\",\"minSpeed\":\"string\",\"speed\":\"string\"},\"usage\":\"string\"}]",
-		 * FlbBundle[].class); return new
-		 * ResponseEntity<List<FlbBundle>>(Arrays.asList(flbbArry),
-		 * HttpStatus.NOT_IMPLEMENTED); } catch (IOException e) {
-		 * LogHelper.error(BroadbandController.class,
-		 * "Couldn't serialize response for content type application/json  " +
-		 * e); return new
-		 * ResponseEntity<List<FlbBundle>>(HttpStatus.INTERNAL_SERVER_ERROR); }
-		 */
 
 	}
 
@@ -191,47 +179,6 @@ public class BroadbandController {
 	 * "BROADBAND_COHERENCE_EXCEPTION", "RECORD NOT FOUND :  " +
 	 * e.getMessage()); return
 	 * ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-	 * 
-	 * } }
-	 * 
-	 * @ApiOperation(value =
-	 * "Creates the appointment, updates the journey and basket", notes =
-	 * "This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date"
-	 * , response = CreateAppointmentResponse.class, tags = { "Appointment", })
-	 * 
-	 * @ApiResponses(value = { @ApiResponse(code = 200, message = "Success",
-	 * response = CreateAppointmentResponse.class),
-	 * 
-	 * @ApiResponse(code = 400, message = "Bad Request", response = Void.class),
-	 * 
-	 * @ApiResponse(code = 404, message = "Not found", response = Void.class),
-	 * 
-	 * @ApiResponse(code = 500, message = "Internal Server Error", response =
-	 * com.vf.uk.dal.broadband.entity.Error.class) })
-	 * 
-	 * @RequestMapping(value = "/{journeyId}/appointment", produces = {
-	 * "application/json" }, method = RequestMethod.POST)
-	 * 
-	 * public ResponseEntity<CreateAppointmentResponse>
-	 * createAppointmentForFLBB(
-	 * 
-	 * @ApiParam(value = "Journey id of the broadband - Unique", required =
-	 * true) @Valid @PathVariable(value = "journeyId") String journeyId,
-	 * 
-	 * @ApiParam(value = "Sends the availability check request", required =
-	 * true) @Valid @RequestBody CreateAppointmentRequest
-	 * createAppointmentRequest) {
-	 * 
-	 * BroadbandValidator.isCreateAppointmentRequestValid(
-	 * createAppointmentRequest); CreateAppointmentResponse
-	 * createAppointmentResponse = broadbandService
-	 * .createAppointmentForFLBB(createAppointmentRequest,journeyId); if
-	 * (StringUtils.isNotBlank(createAppointmentResponse.getApplicationId())) {
-	 * return new ResponseEntity<>(createAppointmentResponse, HttpStatus.OK); }
-	 * else { LogHelper.error(this, "Create Appointment failed!!!"); throw new
-	 * ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED); }
-	 * 
-	 * }
 	 */
 
 	@ApiOperation(value = "Gets the list of addresses for a given postal code", notes = "Gets the list of addresses for a given postal code", response = AddressInfo.class, tags = {
@@ -312,11 +259,8 @@ public class BroadbandController {
 	public ResponseEntity<OptimizePackageResponse> optimizePackageForFLBB(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Request for optimizing the broadband package", required = true) @Valid @RequestBody OptimizePackageRequest optimizePackageRequest) {
-
-		// OptimizePackageResponse optimizePackageResponse =
-		// broadbandService.optimizePackageForFLBB(optimizePackageRequest);
-
-		return null;
+		return new ResponseEntity<>(broadbandService
+				.optimizePackageForFLBB(optimizePackageRequest, broadbandId), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Gets the list of appointment based  ", notes = "This service gets the service start date from the cache and calls getAppointmentList", response = GetAppointmentResponse.class, tags = {
@@ -335,11 +279,12 @@ public class BroadbandController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RouterDetails[].class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
-	@RequestMapping(value = "/{broadbandId}/plan/{planId}/router", produces = { "application/json" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/{broadbandId}/plan/{planId}/router", produces = {
+			"application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<RouterDetails>> getCompatibleDevicesForBundle(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "plan id based on which we need to query the compatible devices", required = true) @PathVariable("planId") String planId,
 			@RequestHeader(value = "Accept-Version", required = false) String acceptVersion) {
-		return new ResponseEntity<>(broadbandService.getCompatibleDevicesForBundle(broadbandId,planId), HttpStatus.OK);
+		return new ResponseEntity<>(broadbandService.getCompatibleDevicesForBundle(broadbandId, planId), HttpStatus.OK);
 	}
 }
