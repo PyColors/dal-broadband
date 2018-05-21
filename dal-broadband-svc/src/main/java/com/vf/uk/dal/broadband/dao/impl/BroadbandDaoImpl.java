@@ -207,9 +207,13 @@ public class BroadbandDaoImpl implements BroadbandDao {
 					"http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
 			if (client != null)
 				addressInfo = client.getBody();
-		} catch (Exception e) {
+		} catch (RestClientResponseException e) {
+			Gson gson = new Gson();
+			String jsonInString = e.getResponseBodyAsString();
+			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
+					com.vf.uk.dal.common.exception.ErrorResponse.class);
 			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(ExceptionMessages.NO_VALID_DATA_TIL);
+			throw new ApplicationException(error.getErrorMessage());
 		}
 		return addressInfo;
 	}
@@ -399,8 +403,6 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		try {
 			ResponseEntity<GetAppointment> client = restTemplate.postForEntity(
 					"http://APPOINTMENT-V1/appointment/action/getAppointment", request, GetAppointment.class);
-			Gson gson = new Gson();
-			gson.toJson(request);
 			if (client != null)
 				getAppointment = client.getBody();
 		} catch (RestClientResponseException e) {
@@ -420,7 +422,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		try {
 			ResponseEntity<RouterProductDetails[]> client = restTemplate.getForEntity(
-					"http://BUNDLES-V1/bundles/catalogue/bundle/"+planId+"/compatibleDevices",
+					"http://BUNDLES-V1/bundles/catalogue/bundle/" + planId + "/compatibleDevices",
 					RouterProductDetails[].class);
 			if (client != null)
 				productDetails = Arrays.asList(client.getBody());
@@ -433,7 +435,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	@Override
 	public List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest) {
-		
+
 		List<BundlePromotion> bundlePromotions = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();

@@ -14,7 +14,6 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -452,8 +451,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,
 						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class),
 						journey);
-				Gson gson = new Gson();
-				gson.toJson(createBasketRequest);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
