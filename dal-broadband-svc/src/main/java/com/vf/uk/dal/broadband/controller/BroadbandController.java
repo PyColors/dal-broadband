@@ -249,6 +249,19 @@ public class BroadbandController {
 		return new ResponseEntity<>(createAppointmentresponse, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "Updates the basket with service start date and service point info in basket if user selects to remove from directory", notes = "This service calls update basket, based on the earliest available date and also service point with the remove me from phone directory information based on if user has selected", response = HttpStatus.class, tags = {
+			"Broadband, Service Start Date" })
+	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
+	@RequestMapping(value = "/{broadbandId}/startDate", produces = {
+			"application/json" }, method = RequestMethod.PUT)
+	public ResponseEntity<HttpStatus> serviceStartDate(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@ApiParam(value = "Request to update the broadband with the service start date information ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDateRequest) {
+		return null;
+	}
+
 	@ApiOperation(value = "Optimize the basket by replacing the package", notes = "This service calls promotion API to get the plan which needs to be replaced and then calls update package", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class, tags = {
 			"Broadband, Optimize Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = OptimizePackageResponse.class),
@@ -259,8 +272,8 @@ public class BroadbandController {
 	public ResponseEntity<OptimizePackageResponse> optimizePackageForFLBB(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Request for optimizing the broadband package", required = true) @Valid @RequestBody OptimizePackageRequest optimizePackageRequest) {
-		return new ResponseEntity<>(broadbandService
-				.optimizePackageForFLBB(optimizePackageRequest, broadbandId), HttpStatus.OK);
+		return new ResponseEntity<>(broadbandService.optimizePackageForFLBB(optimizePackageRequest, broadbandId),
+				HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Gets the list of appointment based  ", notes = "This service gets the service start date from the cache and calls getAppointmentList", response = GetAppointmentResponse.class, tags = {
