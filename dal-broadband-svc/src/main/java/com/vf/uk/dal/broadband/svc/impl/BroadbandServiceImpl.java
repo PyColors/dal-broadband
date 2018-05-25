@@ -224,9 +224,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
+		String broadbandId = getBundleListSearchCriteria.getBroadbandId();
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		Set<String> routerProductIds = new HashSet<>();
 		DozerBeanMapper beanMapper = new DozerBeanMapper();
 		if (bundleDetails != null && CollectionUtils.isNotEmpty(bundleDetails.getPlanList())) {
@@ -247,6 +249,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 						BroadBandConstant.LINE_WITH_38)) {
 					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_38, "25"));
 				}
+				flbBundle.setIsSelected(false);
+				if(broadband!=null && broadband.getLineDetails()!=null && StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), broadband.getLineDetails().getClassificationCode())){
+					flbBundle.setIsSelected(true);
+				}
+				
+				
+				
 				flbBundle.setSpeed(speedForBB);
 				flbBundle.setIsSpeedLess(false);
 				if (broadBand != null && broadBand.getServicePoint() != null
