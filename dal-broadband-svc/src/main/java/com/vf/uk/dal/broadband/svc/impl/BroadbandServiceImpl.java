@@ -440,8 +440,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 
 	@Override
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
-		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode);
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference) {
+		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreference);
 	}
 
 	@Override
