@@ -199,12 +199,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode) {
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference) {
 		AddressInfo addressInfo = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
 			ResponseEntity<AddressInfo> client = restTemplate.getForEntity(
-					"http://PREMISE-V1/premise/address/" + postCode + "?qualified=true", AddressInfo.class);
+					"http://PREMISE-V1/premise/address/" + postCode + "?qualified=true&categoryType=" + categoryPreference, AddressInfo.class);
 			if (client != null)
 				addressInfo = client.getBody();
 		} catch (RestClientResponseException e) {
