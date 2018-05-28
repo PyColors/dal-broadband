@@ -52,7 +52,7 @@
                "lineTreatmentType": "NEW",
                "earliestAvailabilityDate": "2018-01-22",
                "appointmentNeeded": false,
-               "connectionCharge": "No Charge"
+               "connectionCharge": "Line"
             }
          ],
          "serviceLine":          [
@@ -136,7 +136,7 @@
             "lineTreatmentType": "EXISTING",
             "earliestAvailabilityDate": "2018-01-26",
             "appointmentNeeded": false,
-            "connectionCharge": "No Charge"
+            "connectionCharge": "Line"
          }],
          "serviceLine":          [
                         {

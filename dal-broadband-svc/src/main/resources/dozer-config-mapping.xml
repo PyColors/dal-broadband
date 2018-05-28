@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+
+
+	
+	<mapping map-null="false">
+		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint</class-a>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServicePoint</class-b>
+		
+		<field>
+			<a>lineReference</a>
+			<b>lineRefernece</b>
+		</field>
+		
+	</mapping>
+	
+	<mapping map-null="false">
+		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.LineReference</class-a>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketLineReference</class-b>
+		<field>
+			<a>lineDirectoryList</a>
+			<b>lineDirectory</b>
+		</field>
+	</mapping>
+	
+	
+	<mapping map-null="false">
+		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceReference</class-a>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceReference</class-b>
+		<field>
+			<a>serviceLinesList</a>
+			<b>serviceLines</b>
+		</field>
+	</mapping>
+
+	<mapping map-null="false">
+		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines</class-a>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceLines</class-b>
+		<field>
+			<a>lineTreatmentList</a>
+			<b>lineTreatments</b>
+		</field>
+		
+		<field>
+			<a>serviceLineList</a>
+			<b>serviceLines</b>
+		</field>
+	</mapping>
+
+	<mapping map-null="false">
+		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServieLine</class-a>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceLine</class-b>
+		<field>
+			<a>serviceLineTreatmentList</a>
+			<b>serviceLineTreatments</b>
+		</field>
+		
+		
+	</mapping>
+	
+	<mapping map-null="false">
+		<class-a>com.vf.uk.dal.broadband.cache.repository.entity.ServiceLineTreatment</class-a>
+		<class-b>com.vf.uk.dal.broadband.basket.entity.BasketServiceLineTreatment</class-b>
+		<field>
+			<a>SIM2Value</a>
+			<b>simValue</b>
+		</field>
+		
+		
+	</mapping>
+	
+	
+</mappings>

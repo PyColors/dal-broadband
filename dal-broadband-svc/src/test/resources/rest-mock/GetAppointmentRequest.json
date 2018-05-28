@@ -1,0 +1,31 @@
+{
+	"existing": false,
+	"appointmentDetails": {
+		"appointmentWindow": {
+			"startTimePeriod": "2018-04-23 00:00:00",
+			"operationalPreferenceCode": "STANDARD"
+		},
+		"serviceRequest": {
+			"typeCode": "INSTALL",
+			"classificationCode": "LINE",
+			"subClassificationCode": "WLR_SINGLE_LINE",
+			"categoryCode": "BASIC"
+		},
+		"addressDetails": {
+			"address": {
+				"lineOne": "Craven Crescent",
+				"lineTwo": "Brooke",
+				"lineThree": "1",
+				"lineFour": "",
+				"building": "",
+				"countyName": "Norfolk",
+				"citySubDivisionName": "LS",
+				"postalCode": "LS29 0JJ",
+				"identificationId": "A90000221048"
+			},
+			"organisation": {
+				"name": "Vodafone"
+			}
+		}
+	}
+}

@@ -6,17 +6,7 @@ import java.util.Objects;
 
 public class AddressInfo {
 
-	private StatusInfo statusInfo = null;
-
 	private List<Address> addresses = new ArrayList<>();
-
-	public StatusInfo getStatusInfo() {
-		return statusInfo;
-	}
-
-	public void setStatusInfo(StatusInfo statusInfo) {
-		this.statusInfo = statusInfo;
-	}
 
 	public AddressInfo addresses(List<Address> addresses) {
 		this.addresses = addresses;
@@ -40,14 +30,12 @@ public class AddressInfo {
 			return false;
 		}
 		AddressInfo addressInfo = (AddressInfo) o;
-		return Objects.equals(this.statusInfo, addressInfo.statusInfo)
-				&& Objects.equals(this.addresses, addressInfo.addresses);
+		return Objects.equals(this.addresses, addressInfo.addresses);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(statusInfo, addresses);
+		return Objects.hash(addresses);
 	}
 
-	
 }

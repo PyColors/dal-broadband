@@ -13,165 +13,185 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
-public class HardwarePrice   {
-  @JsonProperty("hardwareId")
-  private String hardwareId = null;
+public class HardwarePrice {
 
-  @JsonProperty("oneOffPrice")
-  private Price oneOffPrice = null;
+	@JsonProperty("hardwareId")
+	private String hardwareId = null;
 
-  @JsonProperty("oneOffDiscountPrice")
-  private Price oneOffDiscountPrice = null;
+	/** The hardware name. */
+	@JsonProperty("hardwareName")
+	private String hardwareName = null;
 
-  @JsonProperty("merchandisingPromotions")
-  private MerchandisingPromotion merchandisingPromotions = null;
+	@JsonProperty("oneOffPrice")
+	private Price oneOffPrice = null;
 
-  /**
-   * 
-   * @param hardwareId
-   * @return
-   */
-  public HardwarePrice hardwareId(String hardwareId) {
-    this.hardwareId = hardwareId;
-    return this;
-  }
+	@JsonProperty("oneOffDiscountPrice")
+	private Price oneOffDiscountPrice = null;
 
-   /**
-   * Hardware id of the price to be calculated
-   * @return hardwareId
-  **/
-  @ApiModelProperty(value = "Hardware id of the price to be calculated")
+	@JsonProperty("merchandisingPromotions")
+	private MerchandisingPromotion merchandisingPromotions = null;
 
+	public HardwarePrice hardwareName(String hardwareName) {
+		this.hardwareName = hardwareName;
+		return this;
+	}
 
-  public String getHardwareId() {
-    return hardwareId;
-  }
+	@ApiModelProperty(value = "Name of hardware, whose price to be calculated")
+	public String getHardwareName() {
+		return hardwareName;
+	}
 
-  public void setHardwareId(String hardwareId) {
-    this.hardwareId = hardwareId;
-  }
+	public void setHardwareName(String hardwareName) {
+		this.hardwareName = hardwareName;
+	}
 
-  /**
-   * 
-   * @param oneOffPrice
-   * @return
-   */
-  public HardwarePrice oneOffPrice(Price oneOffPrice) {
-    this.oneOffPrice = oneOffPrice;
-    return this;
-  }
+	/**
+	 * 
+	 * @param hardwareId
+	 * @return
+	 */
+	public HardwarePrice hardwareId(String hardwareId) {
+		this.hardwareId = hardwareId;
+		return this;
+	}
 
-   /**
-   * Get oneOffPrice
-   * @return oneOffPrice
-  **/
-  @ApiModelProperty(value = "")
+	/**
+	 * Hardware id of the price to be calculated
+	 * 
+	 * @return hardwareId
+	 **/
+	@ApiModelProperty(value = "Hardware id of the price to be calculated")
 
-  @Valid
+	public String getHardwareId() {
+		return hardwareId;
+	}
 
-  public Price getOneOffPrice() {
-    return oneOffPrice;
-  }
+	public void setHardwareId(String hardwareId) {
+		this.hardwareId = hardwareId;
+	}
 
-  public void setOneOffPrice(Price oneOffPrice) {
-    this.oneOffPrice = oneOffPrice;
-  }
+	/**
+	 * 
+	 * @param oneOffPrice
+	 * @return
+	 */
+	public HardwarePrice oneOffPrice(Price oneOffPrice) {
+		this.oneOffPrice = oneOffPrice;
+		return this;
+	}
 
-  /**
-   * 
-   * @param oneOffDiscountPrice
-   * @return
-   */
-  public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
-    this.oneOffDiscountPrice = oneOffDiscountPrice;
-    return this;
-  }
+	/**
+	 * Get oneOffPrice
+	 * 
+	 * @return oneOffPrice
+	 **/
+	@ApiModelProperty(value = "")
 
-   /**
-   * Get oneOffDiscountPrice
-   * @return oneOffDiscountPrice
-  **/
-  @ApiModelProperty(value = "")
+	@Valid
 
-  @Valid
+	public Price getOneOffPrice() {
+		return oneOffPrice;
+	}
 
-  public Price getOneOffDiscountPrice() {
-    return oneOffDiscountPrice;
-  }
+	public void setOneOffPrice(Price oneOffPrice) {
+		this.oneOffPrice = oneOffPrice;
+	}
 
-  public void setOneOffDiscountPrice(Price oneOffDiscountPrice) {
-    this.oneOffDiscountPrice = oneOffDiscountPrice;
-  }
+	/**
+	 * 
+	 * @param oneOffDiscountPrice
+	 * @return
+	 */
+	public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
+		this.oneOffDiscountPrice = oneOffDiscountPrice;
+		return this;
+	}
 
-  /**
-   * 
-   * @param merchandisingPromotions
-   * @return
-   */
-  public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
-    this.merchandisingPromotions = merchandisingPromotions;
-    return this;
-  }
+	/**
+	 * Get oneOffDiscountPrice
+	 * 
+	 * @return oneOffDiscountPrice
+	 **/
+	@ApiModelProperty(value = "")
 
-   /**
-   * Merchandising promotions applicable for the bundle
-   * @return merchandisingPromotions
-  **/
-  @ApiModelProperty(value = "Merchandising promotions applicable for the bundle")
+	@Valid
 
-  @Valid
+	public Price getOneOffDiscountPrice() {
+		return oneOffDiscountPrice;
+	}
 
-  public MerchandisingPromotion getMerchandisingPromotions() {
-    return merchandisingPromotions;
-  }
+	public void setOneOffDiscountPrice(Price oneOffDiscountPrice) {
+		this.oneOffDiscountPrice = oneOffDiscountPrice;
+	}
 
-  public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
-    this.merchandisingPromotions = merchandisingPromotions;
-  }
+	/**
+	 * 
+	 * @param merchandisingPromotions
+	 * @return
+	 */
+	public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+		this.merchandisingPromotions = merchandisingPromotions;
+		return this;
+	}
 
+	/**
+	 * Merchandising promotions applicable for the bundle
+	 * 
+	 * @return merchandisingPromotions
+	 **/
+	@ApiModelProperty(value = "Merchandising promotions applicable for the bundle")
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    HardwarePrice hardwarePrice = (HardwarePrice) o;
-    return Objects.equals(this.hardwareId, hardwarePrice.hardwareId) &&
-        Objects.equals(this.oneOffPrice, hardwarePrice.oneOffPrice) &&
-        Objects.equals(this.oneOffDiscountPrice, hardwarePrice.oneOffDiscountPrice) &&
-        Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions);
-  }
+	@Valid
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(hardwareId, oneOffPrice, oneOffDiscountPrice, merchandisingPromotions);
-  }
+	public MerchandisingPromotion getMerchandisingPromotions() {
+		return merchandisingPromotions;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class HardwarePrice {\n");
-    
-    sb.append("    hardwareId: ").append(toIndentedString(hardwareId)).append("\n");
-    sb.append("    oneOffPrice: ").append(toIndentedString(oneOffPrice)).append("\n");
-    sb.append("    oneOffDiscountPrice: ").append(toIndentedString(oneOffDiscountPrice)).append("\n");
-    sb.append("    merchandisingPromotions: ").append(toIndentedString(merchandisingPromotions)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
+		this.merchandisingPromotions = merchandisingPromotions;
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		HardwarePrice hardwarePrice = (HardwarePrice) o;
+		return Objects.equals(this.hardwareId, hardwarePrice.hardwareId)
+				&& Objects.equals(this.oneOffPrice, hardwarePrice.oneOffPrice)
+				&& Objects.equals(this.oneOffDiscountPrice, hardwarePrice.oneOffDiscountPrice)
+				&& Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(hardwareId, oneOffPrice, oneOffDiscountPrice, merchandisingPromotions);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class HardwarePrice {\n");
+
+		sb.append("    hardwareId: ").append(toIndentedString(hardwareId)).append("\n");
+		sb.append("    oneOffPrice: ").append(toIndentedString(oneOffPrice)).append("\n");
+		sb.append("    oneOffDiscountPrice: ").append(toIndentedString(oneOffDiscountPrice)).append("\n");
+		sb.append("    merchandisingPromotions: ").append(toIndentedString(merchandisingPromotions)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

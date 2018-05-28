@@ -15,254 +15,220 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-26T12:06:28.563Z")
 
-public class AvailabilityCheckResponse   {
-  @JsonProperty("journeyId")
-  private String journeyId = null;
+public class AvailabilityCheckResponse {
+	@JsonProperty("journeyId")
+	private String journeyId = null;
 
-  @JsonProperty("installationAddress")
-  private InstallationAddress installationAddress = null;
+	@JsonProperty("installationAddress")
+	private InstallationAddress installationAddress = null;
 
-  @JsonProperty("appointmentAndAvailabilityDetail")
-  private List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail = null;
+	@JsonProperty("appointmentAndAvailabilityDetail")
+	private List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail = null;
 
-  @JsonProperty("engineeringVisitCharge")
-  private Price engineeringVisitCharge = null;
+	@JsonProperty("lineSpeeds")
+	private List<LineSpeeds> lineSpeeds = null;
 
-  @JsonProperty("lineSpeeds")
-  private LineSpeeds lineSpeeds = null;
+	@JsonProperty("classificationCode")
+	private List<String> classificationCode = null;
 
-  @JsonProperty("classificationCode")
-  private List<String> classificationCode = null;
+	@JsonProperty("engineeringVisitCharge")
+	private Price engineeringVisitCharge = null;
 
-  public AvailabilityCheckResponse journeyId(String journeyId) {
-    this.journeyId = journeyId;
-    return this;
-  }
+	public AvailabilityCheckResponse journeyId(String journeyId) {
+		this.journeyId = journeyId;
+		return this;
+	}
 
-   /**
-   * Journey id of the broadband - Unique
-   * @return journeyId
-  **/
-  @ApiModelProperty(value = "Journey id of the broadband - Unique")
+	/**
+	 * Journey id of the broadband - Unique
+	 * 
+	 * @return journeyId
+	 **/
+	@ApiModelProperty(value = "Journey id of the broadband - Unique")
 
+	public String getJourneyId() {
+		return journeyId;
+	}
 
-  public String getJourneyId() {
-    return journeyId;
-  }
+	public void setJourneyId(String journeyId) {
+		this.journeyId = journeyId;
+	}
 
-  public void setJourneyId(String journeyId) {
-    this.journeyId = journeyId;
-  }
+	/**
+	 * 
+	 * @param installationAddress
+	 * @return
+	 */
 
-  /**
-   * 
-   * @param installationAddress
-   * @return
-   */
-  
-  public AvailabilityCheckResponse installationAddress(InstallationAddress installationAddress) {
-    this.installationAddress = installationAddress;
-    return this;
-  }
+	public AvailabilityCheckResponse installationAddress(InstallationAddress installationAddress) {
+		this.installationAddress = installationAddress;
+		return this;
+	}
 
-   /**
-   * Get installationAddress
-   * @return installationAddress
-  **/
-  @ApiModelProperty(value = "")
+	/**
+	 * Get installationAddress
+	 * 
+	 * @return installationAddress
+	 **/
+	@ApiModelProperty(value = "")
 
-  @Valid
+	@Valid
 
-  public InstallationAddress getInstallationAddress() {
-    return installationAddress;
-  }
+	public InstallationAddress getInstallationAddress() {
+		return installationAddress;
+	}
 
-  public void setInstallationAddress(InstallationAddress installationAddress) {
-    this.installationAddress = installationAddress;
-  }
+	public void setInstallationAddress(InstallationAddress installationAddress) {
+		this.installationAddress = installationAddress;
+	}
 
-  /**
-   * 
-   * @param appointmentAndAvailabilityDetail
-   * @return
-   */
-  
-  public AvailabilityCheckResponse appointmentAndAvailabilityDetail(List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail) {
-    this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
-    return this;
-  }
+	/**
+	 * 
+	 * @param appointmentAndAvailabilityDetail
+	 * @return
+	 */
 
-  /**
-   * 
-   * @param appointmentAndAvailabilityDetailItem
-   * @return
-   */
-  
-  public AvailabilityCheckResponse addAppointmentAndAvailabilityDetailItem(AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetailItem) {
-    if (this.appointmentAndAvailabilityDetail == null) {
-      this.appointmentAndAvailabilityDetail = new ArrayList<AppointmentAndAvailabilityDetail>();
-    }
-    this.appointmentAndAvailabilityDetail.add(appointmentAndAvailabilityDetailItem);
-    return this;
-  }
+	public AvailabilityCheckResponse appointmentAndAvailabilityDetail(
+			List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail) {
+		this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
+		return this;
+	}
 
-   /**
-   * Get appointmentAndAvailabilityDetail
-   * @return appointmentAndAvailabilityDetail
-  **/
-  @ApiModelProperty(value = "")
+	/**
+	 * 
+	 * @param appointmentAndAvailabilityDetailItem
+	 * @return
+	 */
 
-  @Valid
+	public AvailabilityCheckResponse addAppointmentAndAvailabilityDetailItem(
+			AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetailItem) {
+		if (this.appointmentAndAvailabilityDetail == null) {
+			this.appointmentAndAvailabilityDetail = new ArrayList<AppointmentAndAvailabilityDetail>();
+		}
+		this.appointmentAndAvailabilityDetail.add(appointmentAndAvailabilityDetailItem);
+		return this;
+	}
 
-  public List<AppointmentAndAvailabilityDetail> getAppointmentAndAvailabilityDetail() {
-    return appointmentAndAvailabilityDetail;
-  }
+	/**
+	 * Get appointmentAndAvailabilityDetail
+	 * 
+	 * @return appointmentAndAvailabilityDetail
+	 **/
+	@ApiModelProperty(value = "")
 
-  public void setAppointmentAndAvailabilityDetail(List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail) {
-    this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
-  }
+	@Valid
 
-  /**
-   * 
-   * @param engineeringVisitCharge
-   * @return
-   */
-  
-  public AvailabilityCheckResponse engineeringVisitCharge(Price engineeringVisitCharge) {
-    this.engineeringVisitCharge = engineeringVisitCharge;
-    return this;
-  }
+	public List<AppointmentAndAvailabilityDetail> getAppointmentAndAvailabilityDetail() {
+		return appointmentAndAvailabilityDetail;
+	}
 
-   /**
-   * Get engineeringVisitCharge
-   * @return engineeringVisitCharge
-  **/
-  @ApiModelProperty(value = "")
+	public void setAppointmentAndAvailabilityDetail(
+			List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail) {
+		this.appointmentAndAvailabilityDetail = appointmentAndAvailabilityDetail;
+	}
 
-  @Valid
+	/**
+	 * 
+	 * @param classificationCode
+	 * @return
+	 */
 
-  public Price getEngineeringVisitCharge() {
-    return engineeringVisitCharge;
-  }
+	public AvailabilityCheckResponse classificationCode(List<String> classificationCode) {
+		this.classificationCode = classificationCode;
+		return this;
+	}
 
-  public void setEngineeringVisitCharge(Price engineeringVisitCharge) {
-    this.engineeringVisitCharge = engineeringVisitCharge;
-  }
+	/**
+	 * 
+	 * @param classificationCodeItem
+	 * @return
+	 */
 
-  /**
-   * 
-   * @param lineSpeeds
-   * @return
-   */
-  
-  public AvailabilityCheckResponse lineSpeeds(LineSpeeds lineSpeeds) {
-    this.lineSpeeds = lineSpeeds;
-    return this;
-  }
+	public AvailabilityCheckResponse addClassificationCodeItem(String classificationCodeItem) {
+		if (this.classificationCode == null) {
+			this.classificationCode = new ArrayList<String>();
+		}
+		this.classificationCode.add(classificationCodeItem);
+		return this;
+	}
 
-   /**
-   * Get lineSpeeds
-   * @return lineSpeeds
-  **/
-  @ApiModelProperty(value = "")
+	/**
+	 * Get classificationCode
+	 * 
+	 * @return classificationCode
+	 **/
+	@ApiModelProperty(value = "")
 
-  @Valid
+	public List<String> getClassificationCode() {
+		return classificationCode;
+	}
 
-  public LineSpeeds getLineSpeeds() {
-    return lineSpeeds;
-  }
+	public void setClassificationCode(List<String> classificationCode) {
+		this.classificationCode = classificationCode;
+	}
 
-  public void setLineSpeeds(LineSpeeds lineSpeeds) {
-    this.lineSpeeds = lineSpeeds;
-  }
+	public List<LineSpeeds> getLineSpeeds() {
+		return lineSpeeds;
+	}
 
-  /**
-   * 
-   * @param classificationCode
-   * @return
-   */
-  
-  public AvailabilityCheckResponse classificationCode(List<String> classificationCode) {
-    this.classificationCode = classificationCode;
-    return this;
-  }
+	public void setLineSpeeds(List<LineSpeeds> lineSpeeds) {
+		this.lineSpeeds = lineSpeeds;
+	}
 
-  /**
-   * 
-   * @param classificationCodeItem
-   * @return
-   */
-  
-  public AvailabilityCheckResponse addClassificationCodeItem(String classificationCodeItem) {
-    if (this.classificationCode == null) {
-      this.classificationCode = new ArrayList<String>();
-    }
-    this.classificationCode.add(classificationCodeItem);
-    return this;
-  }
+	public Price getEngineeringVisitCharge() {
+		return engineeringVisitCharge;
+	}
 
-   /**
-   * Get classificationCode
-   * @return classificationCode
-  **/
-  @ApiModelProperty(value = "")
+	public void setEngineeringVisitCharge(Price engineeringVisitCharge) {
+		this.engineeringVisitCharge = engineeringVisitCharge;
+	}
 
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		AvailabilityCheckResponse availabilityCheckResponse = (AvailabilityCheckResponse) o;
+		return Objects.equals(this.journeyId, availabilityCheckResponse.journeyId)
+				&& Objects.equals(this.installationAddress, availabilityCheckResponse.installationAddress)
+				&& Objects.equals(this.appointmentAndAvailabilityDetail,
+						availabilityCheckResponse.appointmentAndAvailabilityDetail)
+				&& Objects.equals(this.lineSpeeds, availabilityCheckResponse.lineSpeeds)
+				&& Objects.equals(this.classificationCode, availabilityCheckResponse.classificationCode);
+	}
 
-  public List<String> getClassificationCode() {
-    return classificationCode;
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(journeyId, installationAddress, appointmentAndAvailabilityDetail, lineSpeeds,
+				classificationCode);
+	}
 
-  public void setClassificationCode(List<String> classificationCode) {
-    this.classificationCode = classificationCode;
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class AvailabilityCheckResponse {\n");
 
+		sb.append("    journeyId: ").append(toIndentedString(journeyId)).append("\n");
+		sb.append("    installationAddress: ").append(toIndentedString(installationAddress)).append("\n");
+		sb.append("    appointmentAndAvailabilityDetail: ").append(toIndentedString(appointmentAndAvailabilityDetail))
+				.append("\n");
+		sb.append("    lineSpeeds: ").append(toIndentedString(lineSpeeds)).append("\n");
+		sb.append("    classificationCode: ").append(toIndentedString(classificationCode)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AvailabilityCheckResponse availabilityCheckResponse = (AvailabilityCheckResponse) o;
-    return Objects.equals(this.journeyId, availabilityCheckResponse.journeyId) &&
-        Objects.equals(this.installationAddress, availabilityCheckResponse.installationAddress) &&
-        Objects.equals(this.appointmentAndAvailabilityDetail, availabilityCheckResponse.appointmentAndAvailabilityDetail) &&
-        Objects.equals(this.engineeringVisitCharge, availabilityCheckResponse.engineeringVisitCharge) &&
-        Objects.equals(this.lineSpeeds, availabilityCheckResponse.lineSpeeds) &&
-        Objects.equals(this.classificationCode, availabilityCheckResponse.classificationCode);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(journeyId, installationAddress, appointmentAndAvailabilityDetail, engineeringVisitCharge, lineSpeeds, classificationCode);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class AvailabilityCheckResponse {\n");
-    
-    sb.append("    journeyId: ").append(toIndentedString(journeyId)).append("\n");
-    sb.append("    installationAddress: ").append(toIndentedString(installationAddress)).append("\n");
-    sb.append("    appointmentAndAvailabilityDetail: ").append(toIndentedString(appointmentAndAvailabilityDetail)).append("\n");
-    sb.append("    engineeringVisitCharge: ").append(toIndentedString(engineeringVisitCharge)).append("\n");
-    sb.append("    lineSpeeds: ").append(toIndentedString(lineSpeeds)).append("\n");
-    sb.append("    classificationCode: ").append(toIndentedString(classificationCode)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

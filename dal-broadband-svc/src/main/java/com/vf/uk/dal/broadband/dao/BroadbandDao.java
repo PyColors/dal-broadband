@@ -1,18 +1,27 @@
 package com.vf.uk.dal.broadband.dao;
 
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 
+import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
+import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
+import com.vf.uk.dal.broadband.basket.entity.Basket;
+import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
-import com.vf.uk.dal.broadband.entity.journey.FLBBJourneyRequest;
-import com.vf.uk.dal.broadband.entity.journey.Journey;
-import com.vf.uk.dal.broadband.entity.journey.SalesOrderAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
+import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
+import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
-import com.vodafone.solrmodels.ProductModel;
 
 /**
  * @author Infosys limited
@@ -35,7 +44,6 @@ public interface BroadbandDao {
 	 * @param flbbRequestForJourney
 	 */
 	
-	void updateJourneyWithFLBBDetails(String journeyId, FLBBJourneyRequest flbbRequestForJourney);
 
 	/**
 	 *  create FLBB Journey
@@ -43,7 +51,6 @@ public interface BroadbandDao {
 	 * @return createJourneyWithFLBBDetails
 	 */
 	
-	String createJourneyWithFLBBDetails(FLBBJourneyRequest flbbRequestForJourney);
 
 	/**
 	 * Get the bundle details from Bundle List
@@ -58,13 +65,12 @@ public interface BroadbandDao {
 	 * @return List<ProductModel>
 	 */
 	
-	List<ProductModel> getListOfProductModelsBasedOnProductIdList(List<String> productIdList);
+	//List<ProductModel> getListOfProductModelsBasedOnProductIdList(List<String> productIdList);
 
 	/**
 	 * Solr Connection
 	 */
 	
-	void getSolrConnection();
 
 	/**
 	 * get the holiday list
@@ -74,7 +80,6 @@ public interface BroadbandDao {
 	 * @throws ParseException
 	 */
 	
-	List<LocalDate> getHolidayList(LocalDate startDate, LocalDate endDate) throws ParseException;
 
 	/**
 	 * Get the journey
@@ -82,7 +87,6 @@ public interface BroadbandDao {
 	 * @return Journey
 	 */
 	
-	Journey getJourney(String journeyId);
 
 	/**
 	 * Creates the appointment
@@ -99,14 +103,43 @@ public interface BroadbandDao {
 	 * @param appointmentRequest
 	 */
 	
-	void updateJourneyStateForAppointment(String journeyId, SalesOrderAppointmentRequest appointmentRequest);
 
 	/**
 	 * 
 	 * @return List<ProductModel>
 	 */
 	
-	List<ProductModel> getEngineeringVisitProduct();
 
 	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+
+	void setBroadBandInCache(Broadband broadBand);
+
+	Broadband getBroadbandFromCache(String broadBandSessionId);
+
+	CurrentJourney getJourney(String journeyId);
+
+	Basket createBasket(CreateBasketRequest createBasketRequest);
+
+	void updatePackage(UpdatePackage updatePackageRequest, String packageId, String basketId);
+
+	Basket getBasket(String basketId);
+
+	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
+
+	List<ProductDetails> getEngineeringVisitFee(String acceptVersion);
+
+	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
+	
+	List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache);
+
+	void updateBasketWithServiceId(AddProductRequest addProductRequest, String basketId, String packageId);
+
+	void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest, String packageId,
+			String basketId);
+
+	GetAppointment getAppointmentList(GetAppointmentRequest request);
+
+	List<RouterProductDetails> getCompatibleDevicesForBundle(String planId);
+
+	List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest);
 }
