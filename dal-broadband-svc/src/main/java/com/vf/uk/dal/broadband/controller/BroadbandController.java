@@ -188,7 +188,7 @@ public class BroadbandController {
 	@RequestMapping(value = "/premise/{postCode}", produces = { "application/json" }, method = RequestMethod.GET)
 	public AddressInfo getAddressByPostcode(
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,
-			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false, defaultValue="FTTC") String categoryPreference) {
+			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false, defaultValue="FTTH") String categoryPreference) {
 		return broadbandService.getAddressInfoByPostcodeFromPremise(postCode, categoryPreference);
 	}
 
