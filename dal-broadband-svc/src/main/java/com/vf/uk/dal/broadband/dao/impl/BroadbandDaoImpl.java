@@ -3,6 +3,7 @@ package com.vf.uk.dal.broadband.dao.impl;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -203,8 +204,11 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		AddressInfo addressInfo = null;
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
-			ResponseEntity<AddressInfo> client = restTemplate.getForEntity(
-					"http://PREMISE-V1/premise/address/" + postCode + "?qualified=true&categoryType=" + categoryPreference, AddressInfo.class);
+			String url = "http://PREMISE-V1/premise/address/" + postCode + "?qualified=true";
+			if(StringUtils.equals(categoryPreference, "FTTH")){
+				url += "&categoryType=" + categoryPreference;
+			}
+			ResponseEntity<AddressInfo> client = restTemplate.getForEntity(url, AddressInfo.class);
 			if (client != null)
 				addressInfo = client.getBody();
 		} catch (RestClientResponseException e) {
