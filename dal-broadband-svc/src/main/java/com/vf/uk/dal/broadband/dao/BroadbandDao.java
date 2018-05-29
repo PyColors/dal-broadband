@@ -110,7 +110,7 @@ public interface BroadbandDao {
 	 */
 	
 
-	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference);
 
 	void setBroadBandInCache(Broadband broadBand);
 

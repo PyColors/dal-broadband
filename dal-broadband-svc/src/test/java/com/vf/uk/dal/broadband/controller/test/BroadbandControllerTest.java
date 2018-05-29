@@ -176,7 +176,7 @@ public class BroadbandControllerTest {
 				request, GetServiceAvailibilityResponse.class))
 						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(response, HttpStatus.OK));
 
-		given(restTemplate.getForEntity("http://PREMISE-V1/premise/address/LS290JJ?qualified=true", AddressInfo.class))
+		given(restTemplate.getForEntity("http://PREMISE-V1/premise/address/LS290JJ?qualified=true&categoryType=FTTH", AddressInfo.class))
 				.willReturn(new ResponseEntity<AddressInfo>(responseGAL, HttpStatus.OK));
 
 		given(restTemplate.getForEntity("http://BASKET-V1/basket/basket/2b23e0a1-eefd-409c-a919-e0ca774b9017",
@@ -483,7 +483,7 @@ public class BroadbandControllerTest {
 
 	@Test
 	public void testGetAddressByPostCodeFromPremise() {
-		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ");
+		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ", "FTTH");
 		assertNotNull(addressInfo);
 	}
 

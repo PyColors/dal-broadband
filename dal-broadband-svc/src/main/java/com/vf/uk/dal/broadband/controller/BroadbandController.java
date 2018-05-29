@@ -187,8 +187,9 @@ public class BroadbandController {
 			@ApiResponse(code = 404, message = "Not found", response = Void.class) })
 	@RequestMapping(value = "/premise/{postCode}", produces = { "application/json" }, method = RequestMethod.GET)
 	public AddressInfo getAddressByPostcode(
-			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode) {
-		return broadbandService.getAddressInfoByPostcodeFromPremise(postCode);
+			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,
+			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false, defaultValue="FTTH") String categoryPreference) {
+		return broadbandService.getAddressInfoByPostcodeFromPremise(postCode, categoryPreference);
 	}
 
 	@ApiOperation(value = "Create or updates the basket when the user selects the package", notes = "Create or update the basket when the user selects the the package", response = Basket.class, tags = {
