@@ -322,7 +322,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public List<ProductDetails> getEngineeringVisitFee(String acceptVersion) {
+	public List<ProductDetails> getEngineeringVisitFee() {
 
 		List<ProductDetails> productDetails = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();

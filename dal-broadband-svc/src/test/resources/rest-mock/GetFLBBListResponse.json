@@ -25,7 +25,7 @@
 				"speed": "38"
 			},
 			"usage": null,
-			"classificationCode": "Line Fibre with Speed 38",
+			"classificationCode": "Line and Fibre with Speed 38",
 			"miscAttributes": {
 				"planCallOut": "Great",
 				"speed": "38",
@@ -217,7 +217,7 @@
 				"speed": "76"
 			},
 			"usage": null,
-			"classificationCode": "Line Fibre with Speed 76",
+			"classificationCode": "Line and ADSL",
 			"miscAttributes": {
 				"planCallOut": "Great",
 				"speed": "76",

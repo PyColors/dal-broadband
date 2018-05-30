@@ -2,6 +2,8 @@ package com.vf.uk.dal.broadband.entity;
 
 import java.util.Objects;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -11,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-23T15:53:15.171Z")
 
-public class CreateAppointmentResponse   {
+public class CreateAppointmentResponse extends ResourceSupport   {
   @JsonProperty("applicationId")
   private String applicationId = null;
 

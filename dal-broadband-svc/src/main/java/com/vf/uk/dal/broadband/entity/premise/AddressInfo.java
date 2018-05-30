@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AddressInfo {
+import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class AddressInfo extends ResourceSupport{
+
+	@JsonProperty("category")
 	private String category;
-
+	@JsonProperty("addresses")
 	private List<Address> addresses = new ArrayList<>();
 
 	public AddressInfo addresses(List<Address> addresses) {
