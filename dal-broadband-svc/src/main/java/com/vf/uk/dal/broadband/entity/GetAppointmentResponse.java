@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-14T14:47:09.485Z")
 
-public class GetAppointmentResponse   {
+public class GetAppointmentResponse extends ResourceSupport  {
   @JsonProperty("appointmentWindowList")
   @Valid
   private List<AppointmentList> appointmentWindowList = null;

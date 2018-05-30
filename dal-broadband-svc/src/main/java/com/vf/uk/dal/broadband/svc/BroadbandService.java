@@ -32,7 +32,7 @@ public interface BroadbandService {
 	 * @return AvailabilityCheckResponse
 	 */
 	
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, String acceptVersion);
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, Broadband broadband);
 
 	
 	/**
@@ -67,7 +67,7 @@ public interface BroadbandService {
 	 * @param postCode
 	 * @return AddressInfo
 	 */
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference, String broadbandId);
 
 
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId);

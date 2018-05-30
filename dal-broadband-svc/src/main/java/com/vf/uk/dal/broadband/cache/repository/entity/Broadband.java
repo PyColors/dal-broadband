@@ -62,7 +62,6 @@ public class Broadband implements Serializable {
 	
 	
 	
-	
 
 	public Broadband servicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;

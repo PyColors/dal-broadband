@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AddressInfo {
+import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class AddressInfo extends ResourceSupport{
+
+	@JsonProperty("category")
+	private String category;
+	@JsonProperty("addresses")
 	private List<Address> addresses = new ArrayList<>();
 
 	public AddressInfo addresses(List<Address> addresses) {
@@ -21,6 +28,14 @@ public class AddressInfo {
 		this.addresses = addresses;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -30,12 +45,13 @@ public class AddressInfo {
 			return false;
 		}
 		AddressInfo addressInfo = (AddressInfo) o;
-		return Objects.equals(this.addresses, addressInfo.addresses);
+		return Objects.equals(this.addresses, addressInfo.addresses)
+				&& Objects.equals(this.category, addressInfo.category);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(addresses);
+		return Objects.hash(addresses, category);
 	}
 
 }

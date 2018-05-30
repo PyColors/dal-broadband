@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-26T12:06:28.563Z")
 
-public class AvailabilityCheckResponse {
+public class AvailabilityCheckResponse extends ResourceSupport{
 	@JsonProperty("journeyId")
 	private String journeyId = null;
 

@@ -110,7 +110,7 @@ public interface BroadbandDao {
 	 */
 	
 
-	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference);
 
 	void setBroadBandInCache(Broadband broadBand);
 
@@ -126,7 +126,7 @@ public interface BroadbandDao {
 
 	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
 
-	List<ProductDetails> getEngineeringVisitFee(String acceptVersion);
+	List<ProductDetails> getEngineeringVisitFee();
 
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
 	
