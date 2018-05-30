@@ -12,6 +12,10 @@ import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
@@ -31,6 +35,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.LineSpeeds;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineTreatment;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServieLine;
+import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
@@ -93,11 +98,23 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 	@Override
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest,
-			String broadbandId, String acceptVersion) {
+			String broadbandId,Broadband broadband) {
+		String journeyType  = "Acquisition";
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
-		Broadband broadBand = broadbandDao.getBroadbandFromCache(broadbandId);
+		Broadband broadBand = broadband;
 		if (broadBand != null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
+			if(org.apache.commons.lang.StringUtils.isNotEmpty(broadBand.getJourneyId())){
+				journeyType = "SecondLine";
+			}
+			if(StringUtils.isNotEmpty(broadBand.getBasketId())){
+				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
+		                .methodOn(BroadbandController.class).updateLineTypeInBasket(null, new UpdateLineRequest());
+				Link lineTypeLink = ControllerLinkBuilder
+		                .linkTo(methodLinkBuilderLineType)
+		                .withRel("line-type").withType("PUT");
+				response.add(lineTypeLink);
+			}
 		} else {
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
 					.getServiceAvailability(availabilityCheckRequest);
@@ -116,7 +133,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
 					|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
 
-				List<ProductDetails> productDetailsList = broadbandDao.getEngineeringVisitFee(acceptVersion);
+				List<ProductDetails> productDetailsList = broadbandDao.getEngineeringVisitFee();
 
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
 						getServiceAvailabilityResponse, broadbandId, broadBand, productDetailsList);
@@ -135,7 +152,23 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest,
 					broadBand.getBasketInfo().getPackageId(), broadBand.getBasketId());
 		}
-
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).getFlbbList(null, null, null, journeyType, null, null);
+		Link planLink = ControllerLinkBuilder
+                .linkTo(methodLinkBuilderPlan)
+                .withRel("flbb-plan").withType("GET");
+		AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).getAddressByPostcode(null ,availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode(),"FTTH");
+		Link getAddressLink = ControllerLinkBuilder
+                .linkTo(methodLinkBuilderGetAddressList)
+                .withRel("flbb-gal").withType("GET");
+		Link selfLink = ControllerLinkBuilder
+	            .linkTo(ControllerLinkBuilder
+	            .methodOn(BroadbandController.class).checkAvailabilityForBroadband(availabilityCheckRequest, broadbandId))
+	            .withSelfRel();
+		response.add(selfLink);
+		response.add(planLink);
+		response.add(getAddressLink);
 		return response;
 	}
 
@@ -253,9 +286,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 				if(broadband!=null && broadband.getLineDetails()!=null && StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), broadband.getLineDetails().getClassificationCode())){
 					flbBundle.setIsSelected(true);
 				}
-				
-				
-				
 				flbBundle.setSpeed(speedForBB);
 				flbBundle.setIsSpeedLess(false);
 				if (broadBand != null && broadBand.getServicePoint() != null
@@ -440,14 +470,28 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 
 	@Override
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference) {
-		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreference);
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences, String broadbandId) {
+		AddressInfo addressInfo =  broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreferences);
+		
+		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).checkAvailabilityForBroadband(new AvailabilityCheckRequest(), null);
+		Link lineOptionLink = ControllerLinkBuilder
+                .linkTo(methodLinkBuilderLineOptions)
+                .withRel("flbb-availablility-checker").withType("POST");
+		Link selfLink = ControllerLinkBuilder
+	            .linkTo(ControllerLinkBuilder
+	            .methodOn(BroadbandController.class).getAddressByPostcode(null,postCode,"FTTH"))
+	            .withSelfRel().withType("GET");
+		addressInfo.add(selfLink);
+		addressInfo.add(lineOptionLink);
+		return addressInfo;
 	}
 
 	@Override
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId) {
 		Basket basket = null;
 		Broadband broadbandCache = broadband;
+		String journeyType = "Acquisition";
 		if (broadbandCache != null) {
 			String basketId = broadbandCache.getBasketId();
 			String journeyId = broadbandCache.getJourneyId();
@@ -455,27 +499,38 @@ public class BroadbandServiceImpl implements BroadbandService {
 			CurrentJourney journey = null;
 			if (StringUtils.isNotEmpty(journeyId)) {
 				journey = broadbandDao.getJourney(journeyId);
+				journeyType = journey.getJourneyData().getName();
 			}
 			if (StringUtils.isBlank(basketId)) {
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,
 						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class),
 						journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
+				AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder
+		                .methodOn(BroadbandController.class).getAddressByPostcode(null ,null,"FTTH");
+				Link getAddressLink = ControllerLinkBuilder
+		                .linkTo(methodLinkBuilderGetAddressList)
+		                .withRel("flbb-gal").withType("GET");
+				basket.add(getAddressLink);
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
 				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest, journey,
 						broadbandCache, null);
+				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
+		                .methodOn(BroadbandController.class).updateLineTypeInBasket(null, new UpdateLineRequest());
+				Link lineTypeLink = ControllerLinkBuilder
+		                .linkTo(methodLinkBuilderLineType)
+		                .withRel("line-type").withType("PUT");
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
 				basket = broadbandDao.getBasket(basketId);
+				basket.add(lineTypeLink);
 			}
 			broadbandCache = ConverterUtils.createUpdateCacheRequest(broadbandCache, basketRequest, broadbandId,
 					basket);
-
 			broadbandDao.setBroadBandInCache(broadbandCache);
 		} else {
 			CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest, broadbandCache,
 					null, null);
-
 			basket = broadbandDao.createBasket(createBasketRequest);
 			Broadband broadbandToSave = new Broadband();
 			broadbandToSave.setBroadBandId(broadbandId);
@@ -504,7 +559,33 @@ public class BroadbandServiceImpl implements BroadbandService {
 				}
 			}
 			broadbandDao.setBroadBandInCache(broadbandToSave);
+			
+			AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder
+	                .methodOn(BroadbandController.class).getAddressByPostcode(null ,null,"FTTH");
+			Link getAddressLink = ControllerLinkBuilder
+	                .linkTo(methodLinkBuilderGetAddressList)
+	                .withRel("flbb-gal").withType("GET");
+			basket.add(getAddressLink);
 		}
+		Link selfLink = ControllerLinkBuilder
+	            .linkTo(ControllerLinkBuilder
+	            .methodOn(BroadbandController.class).createOrUpdatePackage(broadbandId, new BasketRequest()))
+	            .withSelfRel();
+		basket.add(selfLink);
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).getFlbbList(null, null, null, journeyType, null, null);
+		Link planLink = ControllerLinkBuilder
+                .linkTo(methodLinkBuilderPlan)
+                .withRel("flbb-plan").withType("GET");
+		if(basketRequest.getAddBundle()!=null){
+			ResponseEntity<List<RouterDetails>> methodLinkCompatibleRouters = ControllerLinkBuilder
+	                .methodOn(BroadbandController.class).getCompatibleDevicesForBundle(null, basketRequest.getAddBundle().getBundleId());
+			Link routerLink = ControllerLinkBuilder
+	                .linkTo(methodLinkCompatibleRouters)
+	                .withRel("flbb-router").withType("GET");
+			basket.add(routerLink);
+		}
+		basket.add(planLink);
 		return basket;
 	}
 
@@ -637,6 +718,19 @@ public class BroadbandServiceImpl implements BroadbandService {
 			LogHelper.error(this, "Create Appointment failed!!!");
 			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
 		}
+		
+		Link selfLink = ControllerLinkBuilder
+	            .linkTo(ControllerLinkBuilder
+	            .methodOn(BroadbandController.class).createAppointmentForFLBB(broadbandId, new CreateAppointmentRequest()))
+	            .withSelfRel();
+		
+		ResponseEntity<GetAppointmentResponse> methodLinkGetAppointment = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).getAppointmentForFLBB(null);
+		Link getAppointmentLink = ControllerLinkBuilder
+                .linkTo(methodLinkGetAppointment)
+                .withRel("flbb-get-appointment").withType("GET");
+		response.add(selfLink);
+		response.add(getAppointmentLink);
 		return response;
 	}
 
@@ -645,7 +739,19 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband);
 		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
-		return ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
+		GetAppointmentResponse getAppointmentRes =  ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
+		Link selfLink = ControllerLinkBuilder
+	            .linkTo(ControllerLinkBuilder
+	            .methodOn(BroadbandController.class).getAppointmentForFLBB(broadbandId))
+	            .withSelfRel();
+		ResponseEntity<CreateAppointmentResponse> methodLinkCreateAppointment = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).createAppointmentForFLBB(null, new CreateAppointmentRequest());
+		Link createAppointmentLink = ControllerLinkBuilder
+                .linkTo(methodLinkCreateAppointment)
+                .withRel("flbb-create-appointment").withType("POST");
+		getAppointmentRes.add(selfLink);
+		getAppointmentRes.add(createAppointmentLink);
+		return getAppointmentRes;
 	}
 
 	@Override
