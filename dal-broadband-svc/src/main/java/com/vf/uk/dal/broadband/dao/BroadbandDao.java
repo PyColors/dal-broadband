@@ -142,4 +142,8 @@ public interface BroadbandDao {
 	List<RouterProductDetails> getCompatibleDevicesForBundle(String planId);
 
 	List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest);
+
+	void updateBasketWithServiceDate(
+			com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest, String basketId,
+			String packageId);
 }

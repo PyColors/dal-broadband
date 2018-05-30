@@ -51,6 +51,7 @@ import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
@@ -66,6 +67,7 @@ import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
+import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -804,5 +806,30 @@ public class BroadbandServiceImpl implements BroadbandService {
 			routerDetailList.add(routerDetails);
 		}
 		return routerDetailList;
+	}
+
+	@Override
+	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest) {
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		if (broadband != null) {
+			if (BroadbandValidator.validateStartDate(serviceStartDateRequest)) {
+				com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest = ConverterUtils
+						.createServiceStartDateRequest(serviceStartDateRequest);
+				broadbandDao.updateBasketWithServiceDate(serviceStartDateBaketRequest, broadband.getBasketId(),
+						broadband.getBasketInfo().getPackageId());
+			}
+			if (BooleanUtils.toBoolean(serviceStartDateRequest.getRemoveFromPhoneDirectory())) {
+				ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
+				broadband.setServicePoint(servicePoint);
+				PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
+						mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
+				broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+						broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+				broadbandDao.setBroadBandInCache(broadband);
+			}
+		} else {
+			LogHelper.error(this, "Invalid Broadband Id !!!");
+			throw new ApplicationException(ExceptionMessages.INVALID_BROADBAND_ID);
+		}
 	}
 }
