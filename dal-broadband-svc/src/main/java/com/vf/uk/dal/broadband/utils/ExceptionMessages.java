@@ -42,6 +42,8 @@ public class ExceptionMessages {
 	public static final String GEN_EXCP_UPDATE_APPT = "General Exception occured while updating the basket with the appointment information";
 	public static final String CREATE_APPOINTMENT_FAILED = "Create Appointment Failed.";
 	public static final String GEN_EXC_PROMOTION_API = "General Exception while calling promotion API";
+	public static final String INVALID_BROADBAND_ID = "Invalid BroadBand Id sent in the Request";
+	public static final String INVALID_INPUT_INCORRECT_DATE_FORMAT = "Invalid input, Incorrect date format.";
 
 	private ExceptionMessages() {
 

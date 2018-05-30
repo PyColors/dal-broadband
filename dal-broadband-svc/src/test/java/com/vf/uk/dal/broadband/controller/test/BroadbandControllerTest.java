@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +42,7 @@ import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.SiteNote;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
@@ -161,6 +167,10 @@ public class BroadbandControllerTest {
 
 		CreateBasketRequest createBasketRequest = new ObjectMapper().readValue(jsonString13, CreateBasketRequest.class);
 		
+		String jsonString20 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse1.json"));
+		Broadband broadband20 = new ObjectMapper().readValue(jsonString20, Broadband.class);
+		
+		given(broadBandRepoProvider.getBroadbandFromCache("12345678907")).willReturn(broadband20);
 
 		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest, Basket.class))
 				.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
@@ -185,6 +195,15 @@ public class BroadbandControllerTest {
 
 		given(restTemplate.getForEntity("http://BASKET-V1/basket/basket/2b23e0a1-eefd-409c-a919-e0ca774b9017",
 				Basket.class)).willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+		serviceStartDateRequest.setStartDateTime("2018-10-01T18:45:00.000+00:00");
+		serviceStartDateRequest.setRemoveFromPhoneDirectory(true);
+		final HttpEntity<ServiceStartDateRequest> entity1 = new HttpEntity<>(serviceStartDateRequest, headers);
+		given(restTemplate.exchange("http://BASKET-V1/basket/basket/2b23e0a1-eefd-409c-a919-e0ca774b9017/broadbandPackage/3b23e0a1-eefd-409c-a919-e0ca774b9018/serviceStartDate",
+					HttpMethod.PUT,entity1,Void.class)).willReturn(new ResponseEntity<Void>(HttpStatus.NO_CONTENT));
 	}
 
 	@Test
@@ -711,6 +730,58 @@ public class BroadbandControllerTest {
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
+		}
+	}
+	
+	@Test
+	public void updateServiceDateinBasketWithInvalidBroadBandId() {
+		try {
+			ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+			serviceStartDateRequest.setStartDateTime("");
+			serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
+			broadBandController.serviceStartDate("1234",serviceStartDateRequest);	
+		} catch (Exception e) {
+			LogHelper.error(this, "BroadBandId is null!!" + e);
+			Assert.assertEquals("Invalid BroadBand Id sent in the Request", "Invalid BroadBand Id sent in the Request");
+		}
+	}
+	
+	@Test
+	public void updateServiceDateinBasketWithEmptySatrtDate() {
+		try {
+			ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+			serviceStartDateRequest.setStartDateTime("");
+			serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
+			broadBandController.serviceStartDate("12345678907888",serviceStartDateRequest);	
+		} catch (Exception e) {
+			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
+			Assert.assertEquals("Start Date time or time slot is null. This cannot be null", "Start Date time or time slot is null. This cannot be null");
+		}
+	}
+	
+	@Test
+	public void updateServiceDateinBasketWithOutRemoveFromPhoneDirectory() {
+		try {
+			ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+			serviceStartDateRequest.setStartDateTime("2018-10-01T18:45:00.000+00:00");
+			serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
+			ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("12345678907",serviceStartDateRequest);	
+			Assert.assertEquals(204, response.getStatusCodeValue());
+		} catch (Exception e) {
+			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
+		}
+	}
+	
+	@Test
+	public void updateServiceDateinBasketWithRemoveFromPhoneDirectory() {
+		try {
+			ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+			serviceStartDateRequest.setStartDateTime("2018-10-01T18:45:00.000+00:00");
+			serviceStartDateRequest.setRemoveFromPhoneDirectory(true);
+			ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("12345678907",serviceStartDateRequest);	
+			Assert.assertEquals(204, response.getStatusCodeValue());
+		} catch (Exception e) {
+			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
 		}
 	}
 

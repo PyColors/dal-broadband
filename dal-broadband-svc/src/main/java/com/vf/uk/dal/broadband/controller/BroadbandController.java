@@ -259,7 +259,8 @@ public class BroadbandController {
 	public ResponseEntity<HttpStatus> serviceStartDate(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Request to update the broadband with the service start date information ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDateRequest) {
-		return null;
+		broadbandService.updateBasketWithServiceDate(broadbandId,serviceStartDateRequest);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@ApiOperation(value = "Optimize the basket by replacing the package", notes = "This service calls promotion API to get the plan which needs to be replaced and then calls update package", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class, tags = {
