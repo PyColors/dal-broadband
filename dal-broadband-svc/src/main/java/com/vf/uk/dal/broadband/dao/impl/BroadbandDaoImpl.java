@@ -26,6 +26,7 @@ import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreatePackageResponse;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
@@ -455,5 +456,22 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			throw new ApplicationException(ExceptionMessages.GEN_EXC_PROMOTION_API);
 		}
 		return bundlePromotions;
+	}
+
+	@Override
+	public void updateBasketWithServiceDate(ServiceStartDateRequest serviceStartDateRequest, String basketId, String packageId) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+
+			final HttpEntity<ServiceStartDateRequest> entity = new HttpEntity<>(serviceStartDateRequest, headers);
+			String url = BroadBandConstant.BASKET_URL + basketId + "/broadbandPackage/" + packageId + "/serviceStartDate";
+			restTemplate.exchange(url, HttpMethod.PUT, entity, Void.class);
+
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception occured while calling updateBasketWithServiceDate " + e);
+			throw new ApplicationException(ExceptionMessages.GEN_EXCP_ADD_PRODUCT);
+		}
 	}
 }

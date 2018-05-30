@@ -15,6 +15,7 @@ import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.Product;
+import com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.basket.entity.UpdateBundle;
 import com.vf.uk.dal.broadband.basket.entity.UpdateDevice;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
@@ -1214,5 +1215,11 @@ public class ConverterUtils {
 		bundlePromotionRequest.setBundleIdList(bundleIdList);
 		bundlePromotionRequest.setJourneyType(journeyName);
 		return bundlePromotionRequest;
+	}
+	
+	public static ServiceStartDateRequest createServiceStartDateRequest(com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDate) {
+		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+		serviceStartDateRequest.setServiceStartDate(serviceStartDate.getStartDateTime());
+		return serviceStartDateRequest;
 	}
 }

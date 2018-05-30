@@ -15,6 +15,7 @@ import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
@@ -90,4 +91,7 @@ public interface BroadbandService {
 
 
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId);
+
+
+	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest);
 }
