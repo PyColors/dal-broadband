@@ -1226,7 +1226,9 @@ public class ConverterUtils {
 	
 	public static Link formatLink(Link link){
 		Link newLink = link;
-		newLink=newLink.withHref(newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
+		if(newLink!=null && newLink.getHref().indexOf("/broadband")!=-1){
+			newLink=newLink.withHref(newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
+		}
 		return newLink;
 	}
 
