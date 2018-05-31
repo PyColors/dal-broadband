@@ -160,7 +160,7 @@ public class BroadbandServiceImpl implements BroadbandService {
                 .linkTo(methodLinkBuilderPlan)
                 .withRel("flbb-plan").withType("GET");
 		AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder
-                .methodOn(BroadbandController.class).getAddressByPostcode(null ,availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode(),"FTTH");
+                .methodOn(BroadbandController.class).getAddressByPostcode(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getPostCode(),"FTTH");
 		Link getAddressLink = ControllerLinkBuilder
                 .linkTo(methodLinkBuilderGetAddressList)
                 .withRel("flbb-gal").withType("GET");
@@ -472,7 +472,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 
 	@Override
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences, String broadbandId) {
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences) {
 		AddressInfo addressInfo =  broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreferences);
 		
 		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder
@@ -482,7 +482,7 @@ public class BroadbandServiceImpl implements BroadbandService {
                 .withRel("flbb-availablility-checker").withType("POST");
 		Link selfLink = ControllerLinkBuilder
 	            .linkTo(ControllerLinkBuilder
-	            .methodOn(BroadbandController.class).getAddressByPostcode(null,postCode,"FTTH"))
+	            .methodOn(BroadbandController.class).getAddressByPostcode(postCode,"FTTH"))
 	            .withSelfRel().withType("GET");
 		
 		addressInfo.add(ConverterUtils.formatLink(selfLink));
@@ -510,7 +510,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder
-		                .methodOn(BroadbandController.class).getAddressByPostcode(null ,null,"FTTH");
+		                .methodOn(BroadbandController.class).getAddressByPostcode(null,"FTTH");
 				Link getAddressLink = ControllerLinkBuilder
 		                .linkTo(methodLinkBuilderGetAddressList)
 		                .withRel("flbb-gal").withType("GET");
@@ -564,7 +564,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadbandDao.setBroadBandInCache(broadbandToSave);
 			
 			AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder
-	                .methodOn(BroadbandController.class).getAddressByPostcode(null ,null,"FTTH");
+	                .methodOn(BroadbandController.class).getAddressByPostcode(null,"FTTH");
 			Link getAddressLink = ControllerLinkBuilder
 	                .linkTo(methodLinkBuilderGetAddressList)
 	                .withRel("flbb-gal").withType("GET");
