@@ -115,7 +115,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				Link lineTypeLink = ControllerLinkBuilder
 		                .linkTo(methodLinkBuilderLineType)
 		                .withRel("line-type").withType("PUT");
-				response.add(lineTypeLink);
+				response.add(ConverterUtils.formatLink(lineTypeLink));
 			}
 		} else {
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
@@ -168,9 +168,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 	            .linkTo(ControllerLinkBuilder
 	            .methodOn(BroadbandController.class).checkAvailabilityForBroadband(availabilityCheckRequest, broadbandId))
 	            .withSelfRel();
-		response.add(selfLink);
-		response.add(planLink);
-		response.add(getAddressLink);
+		response.add(ConverterUtils.formatLink(selfLink));
+		response.add(ConverterUtils.formatLink(planLink));
+		response.add(ConverterUtils.formatLink(getAddressLink));
 		return response;
 	}
 
@@ -484,8 +484,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 	            .linkTo(ControllerLinkBuilder
 	            .methodOn(BroadbandController.class).getAddressByPostcode(null,postCode,"FTTH"))
 	            .withSelfRel().withType("GET");
-		addressInfo.add(selfLink);
-		addressInfo.add(lineOptionLink);
+		
+		addressInfo.add(ConverterUtils.formatLink(selfLink));
+		addressInfo.add(ConverterUtils.formatLink(lineOptionLink));
 		return addressInfo;
 	}
 
@@ -513,7 +514,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				Link getAddressLink = ControllerLinkBuilder
 		                .linkTo(methodLinkBuilderGetAddressList)
 		                .withRel("flbb-gal").withType("GET");
-				basket.add(getAddressLink);
+				basket.add(ConverterUtils.formatLink(getAddressLink));
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
 				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest, journey,
@@ -525,7 +526,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		                .withRel("line-type").withType("PUT");
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
 				basket = broadbandDao.getBasket(basketId);
-				basket.add(lineTypeLink);
+				basket.add(ConverterUtils.formatLink(lineTypeLink));
 			}
 			broadbandCache = ConverterUtils.createUpdateCacheRequest(broadbandCache, basketRequest, broadbandId,
 					basket);
@@ -567,7 +568,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			Link getAddressLink = ControllerLinkBuilder
 	                .linkTo(methodLinkBuilderGetAddressList)
 	                .withRel("flbb-gal").withType("GET");
-			basket.add(getAddressLink);
+			basket.add(ConverterUtils.formatLink(getAddressLink));
 		}
 		Link selfLink = ControllerLinkBuilder
 	            .linkTo(ControllerLinkBuilder
@@ -585,9 +586,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 			Link routerLink = ControllerLinkBuilder
 	                .linkTo(methodLinkCompatibleRouters)
 	                .withRel("flbb-router").withType("GET");
-			basket.add(routerLink);
+			basket.add(ConverterUtils.formatLink(routerLink));
 		}
-		basket.add(planLink);
+		basket.add(ConverterUtils.formatLink(planLink));
 		return basket;
 	}
 
@@ -731,8 +732,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Link getAppointmentLink = ControllerLinkBuilder
                 .linkTo(methodLinkGetAppointment)
                 .withRel("flbb-get-appointment").withType("GET");
-		response.add(selfLink);
-		response.add(getAppointmentLink);
+		response.add(ConverterUtils.formatLink(selfLink));
+		response.add(ConverterUtils.formatLink(getAppointmentLink));
 		return response;
 	}
 
@@ -751,8 +752,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Link createAppointmentLink = ControllerLinkBuilder
                 .linkTo(methodLinkCreateAppointment)
                 .withRel("flbb-create-appointment").withType("POST");
-		getAppointmentRes.add(selfLink);
-		getAppointmentRes.add(createAppointmentLink);
+		getAppointmentRes.add(ConverterUtils.formatLink(selfLink));
+		getAppointmentRes.add(ConverterUtils.formatLink(createAppointmentLink));
 		return getAppointmentRes;
 	}
 

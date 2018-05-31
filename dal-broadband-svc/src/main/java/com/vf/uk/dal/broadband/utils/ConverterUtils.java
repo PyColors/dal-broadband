@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.hateoas.Link;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
@@ -1222,4 +1223,11 @@ public class ConverterUtils {
 		serviceStartDateRequest.setServiceStartDate(serviceStartDate.getStartDateTime());
 		return serviceStartDateRequest;
 	}
+	
+	public static Link formatLink(Link link){
+		Link newLink = link;
+		newLink=newLink.withHref(newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
+		return newLink;
+	}
+
 }
