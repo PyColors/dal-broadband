@@ -257,7 +257,7 @@ public class BroadbandController {
 			"application/json" }, method = RequestMethod.PUT)
 	public ResponseEntity<HttpStatus> serviceStartDate(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
-			@ApiParam(value = "Request to update the broadband with the service start date information ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDateRequest) {
+			@ApiParam(value = "Request to update the broadband with the service start date information, Date format Should be yyyy-MM-dd ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDateRequest) {
 		broadbandService.updateBasketWithServiceDate(broadbandId,serviceStartDateRequest);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
