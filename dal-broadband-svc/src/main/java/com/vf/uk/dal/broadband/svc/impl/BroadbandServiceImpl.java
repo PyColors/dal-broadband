@@ -815,20 +815,23 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		if (broadband != null) {
 			if (BroadbandValidator.validateStartDate(serviceStartDateRequest)) {
+				serviceStartDateRequest.setStartDateTime(BroadbandValidator.convertDateToTimeStamp(serviceStartDateRequest.getStartDateTime()));
 				com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest = ConverterUtils
 						.createServiceStartDateRequest(serviceStartDateRequest);
 				broadbandDao.updateBasketWithServiceDate(serviceStartDateBaketRequest, broadband.getBasketId(),
 						broadband.getBasketInfo().getPackageId());
+				
+				if (BooleanUtils.toBoolean(serviceStartDateRequest.getRemoveFromPhoneDirectory())) {
+					ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
+					broadband.setServicePoint(servicePoint);
+					PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
+							mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
+					broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+							broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+					broadbandDao.setBroadBandInCache(broadband);
+				}
 			}
-			if (BooleanUtils.toBoolean(serviceStartDateRequest.getRemoveFromPhoneDirectory())) {
-				ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
-				broadband.setServicePoint(servicePoint);
-				PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
-						mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
-				broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
-						broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
-				broadbandDao.setBroadBandInCache(broadband);
-			}
+			
 		} else {
 			LogHelper.error(this, "Invalid Broadband Id !!!");
 			throw new ApplicationException(ExceptionMessages.INVALID_BROADBAND_ID);
