@@ -101,14 +101,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest,
 			String broadbandId,Broadband broadband) {
-		String journeyType  = "Acquisition";
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		Broadband broadBand = broadband;
 		if (broadBand != null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
-			if(org.apache.commons.lang.StringUtils.isNotEmpty(broadBand.getJourneyId())){
-				journeyType = "SecondLine";
-			}
 			if(StringUtils.isNotEmpty(broadBand.getBasketId())){
 				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
 		                .methodOn(BroadbandController.class).updateLineTypeInBasket(null, new UpdateLineRequest());
@@ -155,7 +151,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					broadBand.getBasketInfo().getPackageId(), broadBand.getBasketId());
 		}
 		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
-                .methodOn(BroadbandController.class).getFlbbList(null, null, null, journeyType, null, null);
+                .methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null);
 		Link planLink = ControllerLinkBuilder
                 .linkTo(methodLinkBuilderPlan)
                 .withRel("flbb-plan").withType("GET");
@@ -166,7 +162,7 @@ public class BroadbandServiceImpl implements BroadbandService {
                 .withRel("flbb-gal").withType("GET");
 		Link selfLink = ControllerLinkBuilder
 	            .linkTo(ControllerLinkBuilder
-	            .methodOn(BroadbandController.class).checkAvailabilityForBroadband(availabilityCheckRequest, broadbandId))
+	            .methodOn(BroadbandController.class).checkAvailabilityForBroadband(availabilityCheckRequest, null))
 	            .withSelfRel();
 		response.add(ConverterUtils.formatLink(selfLink));
 		response.add(ConverterUtils.formatLink(planLink));
@@ -484,7 +480,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 	            .linkTo(ControllerLinkBuilder
 	            .methodOn(BroadbandController.class).getAddressByPostcode(null,"FTTH"))
 	            .withSelfRel().withType("GET");
-		
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
+                .methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null);
+		Link planLink = ControllerLinkBuilder
+                .linkTo(methodLinkBuilderPlan)
+                .withRel("flbb-plan").withType("GET");
+		addressInfo.add(ConverterUtils.formatLink(planLink));
 		addressInfo.add(ConverterUtils.formatLink(selfLink));
 		addressInfo.add(ConverterUtils.formatLink(lineOptionLink));
 		return addressInfo;
