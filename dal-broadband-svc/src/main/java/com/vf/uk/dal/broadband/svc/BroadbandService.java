@@ -68,7 +68,7 @@ public interface BroadbandService {
 	 * @param postCode
 	 * @return AddressInfo
 	 */
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference, String broadbandId);
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference);
 
 
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId);

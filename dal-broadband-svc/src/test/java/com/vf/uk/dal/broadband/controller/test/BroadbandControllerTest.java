@@ -529,7 +529,7 @@ public class BroadbandControllerTest {
 
 	@Test
 	public void testGetAddressByPostCodeFromPremise() {
-		AddressInfo addressInfo = broadBandController.getAddressByPostcode("12345678907888","LS290JJ","FTTH");
+		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ","FTTH");
 		assertNotNull(addressInfo);
 	}
 
