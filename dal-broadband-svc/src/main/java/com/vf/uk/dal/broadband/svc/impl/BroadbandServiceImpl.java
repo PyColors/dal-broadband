@@ -780,7 +780,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 			UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, journey, broadband, planId);
 			broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(),
 					broadband.getBasketId());
-			response.setHasPackageOptimized(true);
 			BasketInfo basketInfo = broadband.getBasketInfo();
 			if (basketInfo == null) {
 				basketInfo = new BasketInfo();
