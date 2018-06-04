@@ -745,6 +745,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 		OptimizePackageResponse response = new OptimizePackageResponse();
 		response.setHasPackageOptimized(false);
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		if(broadband==null){
+			broadband = new Broadband();
+		}
+		broadband.setBroadBandId(broadbandId);
 		if (StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())) {
 			broadband.setJourneyId(optimizePackageRequest.getJourneyId());
 		}
