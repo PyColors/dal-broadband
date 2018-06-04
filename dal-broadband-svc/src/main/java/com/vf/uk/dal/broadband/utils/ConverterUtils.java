@@ -810,6 +810,7 @@ public class ConverterUtils {
 		}
 		if (CollectionUtils.isNotEmpty(basket.getPackages())) {
 			for (ModelPackage modelPackage : basket.getPackages()) {
+				basketInfo.setPlanType(modelPackage.getPlanType());
 				if (StringUtils.contains(modelPackage.getPlanType(), "BroadBand")) {
 					basketInfo.setPackageId(modelPackage.getPackageId());
 					if (modelPackage.getBundle() != null) {
