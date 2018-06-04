@@ -768,6 +768,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					if (StringUtils.equalsIgnoreCase(bundlePromotion.getBundleId(), planId)
 							&& CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())) {
 						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
+						response.setHasPackageOptimized(true);
 						break;
 
 					}
