@@ -249,11 +249,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
-		String broadbandId = getBundleListSearchCriteria.getBroadbandId();
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
-		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		// Broadband broadband =
+		// broadbandDao.getBroadbandFromCache(broadbandId);
 		Set<String> routerProductIds = new HashSet<>();
 		DozerBeanMapper beanMapper = new DozerBeanMapper();
 		if (bundleDetails != null && CollectionUtils.isNotEmpty(bundleDetails.getPlanList())) {
@@ -275,8 +275,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_38, "25"));
 				}
 				flbBundle.setIsSelected(false);
-				if (broadband != null && broadband.getLineDetails() != null && StringUtils.equalsIgnoreCase(
-						flbBundle.getClassificationCode(), broadband.getLineDetails().getClassificationCode())) {
+				if (broadBand != null && broadBand.getLineDetails() != null && StringUtils.equalsIgnoreCase(
+						flbBundle.getClassificationCode(), broadBand.getLineDetails().getClassificationCode())) {
 					flbBundle.setIsSelected(true);
 				}
 				flbBundle.setSpeed(speedForBB);
@@ -748,28 +748,33 @@ public class BroadbandServiceImpl implements BroadbandService {
 		if (StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())) {
 			broadband.setJourneyId(optimizePackageRequest.getJourneyId());
 		}
-		if (broadband!=null && StringUtils.isNotEmpty(broadband.getBasketId())) {
+		if (broadband != null && StringUtils.isNotEmpty(broadband.getBasketId())) {
 			CurrentJourney journey = null;
 			if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
 				journey = broadbandDao.getJourney(broadband.getJourneyId());
 			}
 			String journeyName = null;
-			String planId = broadband.getBasketInfo().getPlanId();
 			if (journey != null && journey.getJourneyData() != null
 					&& StringUtils.isNotEmpty(journey.getJourneyData().getName())) {
 				journeyName = journey.getJourneyData().getName();
 			}
-
+			String planId = broadband.getBasketInfo().getPlanId();
 			if (!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), "FTTH")) {
 				BundlePromotionRequest bundlePromotionRequest = ConverterUtils
 						.createPromotionRequestToOptimize(broadband, journeyName);
 				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
+
 				for (BundlePromotion bundlePromotion : bundlePromotions) {
 					if (StringUtils.equalsIgnoreCase(bundlePromotion.getBundleId(), planId)
 							&& CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())) {
 						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
 						break;
+
 					}
+				}
+			} else if (StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), "FTTH")) {
+				if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
+					response.setHasPackageOptimized(true);
 				}
 			}
 			UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, journey, broadband, planId);
@@ -782,6 +787,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 			basketInfo.setPlanId(planId);
 			broadband.setBasketInfo(basketInfo);
+
 		}
 		broadbandDao.setBroadBandInCache(broadband);
 		return response;
@@ -790,7 +796,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId) {
 		List<RouterDetails> routerDetailList = new ArrayList<>();
-		for(RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)){
+		for (RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)) {
 			RouterDetails routerDetails = new RouterDetails();
 			routerDetails = mapper.map(routerProductDetails, RouterDetails.class);
 			routerDetails.setIsDefaultDevice(routerProductDetails.isIsDefaultDevice());
@@ -804,12 +810,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		if (broadband != null) {
 			if (BroadbandValidator.validateStartDate(serviceStartDateRequest)) {
-				serviceStartDateRequest.setStartDateTime(BroadbandValidator.convertDateToTimeStamp(serviceStartDateRequest.getStartDateTime()));
+				serviceStartDateRequest.setStartDateTime(
+						BroadbandValidator.convertDateToTimeStamp(serviceStartDateRequest.getStartDateTime()));
 				com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest = ConverterUtils
 						.createServiceStartDateRequest(serviceStartDateRequest);
 				broadbandDao.updateBasketWithServiceDate(serviceStartDateBaketRequest, broadband.getBasketId(),
 						broadband.getBasketInfo().getPackageId());
-				
+
 				if (BooleanUtils.toBoolean(serviceStartDateRequest.getRemoveFromPhoneDirectory())) {
 					ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
 					broadband.setServicePoint(servicePoint);
@@ -820,7 +827,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					broadbandDao.setBroadBandInCache(broadband);
 				}
 			}
-			
+
 		} else {
 			LogHelper.error(this, "Invalid Broadband Id !!!");
 			throw new ApplicationException(ExceptionMessages.INVALID_BROADBAND_ID);
