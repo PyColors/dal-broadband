@@ -1,5 +1,7 @@
 package com.vf.uk.dal.broadband.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -30,6 +32,7 @@ import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
+import com.vf.uk.dal.common.exception.ApplicationException;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -188,7 +191,11 @@ public class BroadbandController {
 	public AddressInfo getAddressByPostcode(
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,
 			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false) String categoryPreference) {
-		return broadbandService.getAddressInfoByPostcodeFromPremise(postCode, categoryPreference);
+		try {
+			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"), categoryPreference);
+		} catch (UnsupportedEncodingException e) {
+			throw new ApplicationException("Invalid_Format_PostCode" + e);
+		}
 	}
 
 	@ApiOperation(value = "Create or updates the basket when the user selects the package", notes = "Create or update the basket when the user selects the the package", response = Basket.class, tags = {
