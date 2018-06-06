@@ -18,7 +18,7 @@ public class ServiceRequest {
 	@JsonProperty("classificationCode")
 	private String classificationCode = null;
 
-	@JsonProperty("SubClassificationCode")
+	@JsonProperty("subClassificationCode")
 	private String subClassificationCode = null;
 
 	@JsonProperty("priorityCode")

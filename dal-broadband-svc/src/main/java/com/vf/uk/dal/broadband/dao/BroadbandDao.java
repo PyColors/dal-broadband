@@ -3,6 +3,7 @@ package com.vf.uk.dal.broadband.dao;
 import java.util.List;
 
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
+import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
@@ -10,8 +11,14 @@ import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.RouterProductDetails;
+import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
@@ -87,8 +94,8 @@ public interface BroadbandDao {
 	 * @return CreateAppointment
 	 */
 	
-	/*CreateAppointment createAppointment(
-			com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq);*/
+	CreateAppointment createAppointment(
+			com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentReq);
 
 	/**
 	 * Update the journey
@@ -103,7 +110,7 @@ public interface BroadbandDao {
 	 */
 	
 
-	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+	AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference);
 
 	void setBroadBandInCache(Broadband broadBand);
 
@@ -119,11 +126,24 @@ public interface BroadbandDao {
 
 	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
 
-	List<ProductDetails> getEngineeringVisitFee(String acceptVersion);
+	List<ProductDetails> getEngineeringVisitFee();
 
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
 	
 	List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache);
 
 	void updateBasketWithServiceId(AddProductRequest addProductRequest, String basketId, String packageId);
+
+	void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest, String packageId,
+			String basketId);
+
+	GetAppointment getAppointmentList(GetAppointmentRequest request);
+
+	List<RouterProductDetails> getCompatibleDevicesForBundle(String planId);
+
+	List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest);
+
+	void updateBasketWithServiceDate(
+			com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest, String basketId,
+			String packageId);
 }

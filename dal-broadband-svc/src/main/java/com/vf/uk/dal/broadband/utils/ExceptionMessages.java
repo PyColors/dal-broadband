@@ -38,6 +38,12 @@ public class ExceptionMessages {
 	public static final String GEN_EXCP_CREATE_BASKET = "General Exception occured while creating the basket";
 	public static final String NO_VALID_DATA_DELIVERY_METHODS = "No Valid data recieved while calling Inventory MS";
 	public static final String GEN_EXCP_ADD_PRODUCT = "Generic exception while adding product in basket";
+	public static final String START_DATE_EMPTY = "Start Date time or time slot is null. This cannot be null";
+	public static final String GEN_EXCP_UPDATE_APPT = "General Exception occured while updating the basket with the appointment information";
+	public static final String CREATE_APPOINTMENT_FAILED = "Create Appointment Failed.";
+	public static final String GEN_EXC_PROMOTION_API = "General Exception while calling promotion API";
+	public static final String INVALID_BROADBAND_ID = "Invalid BroadBand Id sent in the Request";
+	public static final String INVALID_INPUT_INCORRECT_DATE_FORMAT = "Invalid input, Incorrect date format. Date format should be yyyy-MM-dd";
 
 	private ExceptionMessages() {
 

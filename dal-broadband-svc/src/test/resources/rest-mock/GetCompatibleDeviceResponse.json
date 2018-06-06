@@ -1,0 +1,376 @@
+[
+  {
+    "productId": "085457",
+    "displayName": "Vodafone Broadband router white",
+    "productName": "Vodafone Broadband router white",
+    "productClass": "Fixed Broadband Equipment",
+    "description": null,
+    "order": "0",
+    "isServicesProduct": true,
+    "condition": "New",
+    "paymentType": "Postpaid",
+    "isDeviceProduct": true,
+    "productLines": [
+      "Acc Sol",
+      "Available FL Packages CBU",
+      "Available FL Packages EBU",
+      "Misc",
+      "Router"
+    ],
+    "delivery": {
+      "classification": "Standard",
+      "partner": "DPD",
+      "soaDeliveryMethod": "WK86",
+      "weekend": null
+    },
+    "listOfImageURLs": [
+      {
+        "imageName": "imageURLs.thumbs.front",
+        "imageURL": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_router.jpg"
+      }
+    ],
+    "priceInfo": {
+      "bundlePrice": {
+        "bundleId": "110264",
+        "monthlyPrice": {
+          "gross": "25",
+          "net": "20.83",
+          "vat": "4.17"
+        },
+        "monthlyDiscountPrice": {
+          "gross": null,
+          "net": null,
+          "vat": null
+        },
+        "merchandisingPromotions": null
+      },
+      "hardwarePrice": {
+        "hardwareId": "085457",
+        "hardwareName": null,
+        "oneOffPrice": {
+          "gross": "49",
+          "net": "40.83",
+          "vat": "8.17"
+        },
+        "oneOffDiscountPrice": {
+          "gross": "41.65",
+          "net": "34.71",
+          "vat": "6.94"
+        },
+        "merchandisingPromotions": {
+          "tag": "FLBB.UpfrontDiscount.Bundle",
+          "label": "15% of the plan",
+          "discountId": null,
+          "description": null,
+          "mpType": "Upfront_Discount",
+          "priceEstablishedLabel": null,
+          "priority": 241,
+          "packageType": [
+            "Acquisition",
+            "Upgrade"
+          ],
+          "footNotes": [],
+          "promotionMedia": null
+        }
+      },
+      "oneOffPrice": {
+        "gross": "49",
+        "net": "40.83",
+        "vat": "8.17"
+      },
+      "oneOffDiscountPrice": {
+        "gross": "41.65",
+        "net": "34.71",
+        "vat": "6.94"
+      },
+      "monthlyPrice": {
+        "gross": "25",
+        "net": "20.83",
+        "vat": "4.17"
+      },
+      "monthlyDiscountPrice": {
+        "gross": null,
+        "net": null,
+        "vat": null
+      }
+    },
+    "promotionPackages": {
+      "planId": "110264",
+      "hardwareId": "085457",
+      "bundlePromotions": {
+        "dataPromotion": {
+          "tag": "SIMO.Extra.2GB.Data",
+          "label": "Additional SIMO 2GB Data",
+          "discountId": null,
+          "description": null,
+          "mpType": "data_allowance",
+          "priceEstablishedLabel": null,
+          "priority": 12,
+          "packageType": [
+            "Acquisition",
+            "Upgrade",
+            "SecondLine"
+          ],
+          "footNotes": [
+            "test"
+          ],
+          "promotionMedia": null
+        },
+        "textPromotion": null,
+        "talkTimePromotion": null,
+        "entertainmentPackPromotion": null,
+        "secureNetPromotion": {
+          "tag": "Bundle.SecureNet",
+          "label": "3 month free trial of Secure Net",
+          "discountId": null,
+          "description": null,
+          "mpType": "securenet",
+          "priceEstablishedLabel": null,
+          "priority": 27,
+          "packageType": [
+            "Acquisition"
+          ],
+          "footNotes": null,
+          "promotionMedia": null
+        },
+        "sashBannerPromotion": {
+          "tag": "Banner.Bundle",
+          "label": "Most Popular Plan",
+          "discountId": null,
+          "description": null,
+          "mpType": "sash_banner",
+          "priceEstablishedLabel": null,
+          "priority": 18,
+          "packageType": [
+            "Acquisition",
+            "Upgrade",
+            "SecondLine"
+          ],
+          "footNotes": [
+            "test"
+          ],
+          "promotionMedia": null
+        },
+        "freeExtraPromotion": null,
+        "freeAccessoryPromotion": null,
+        "conditionalSashBannerPromotion": null,
+        "pricePromotion": null
+      },
+      "hardwarePromotions": {
+        "dataPromotion": null,
+        "textPromotion": null,
+        "talkTimePromotion": null,
+        "entertainmentPackPromotion": null,
+        "secureNetPromotion": null,
+        "sashBannerPromotion": null,
+        "freeExtraPromotion": null,
+        "freeAccessoryPromotion": null,
+        "conditionalSashBannerPromotion": null,
+        "pricePromotion": {
+          "tag": "FLBB.UpfrontDiscount.Bundle",
+          "label": "15% of the plan",
+          "discountId": null,
+          "description": null,
+          "mpType": "Upfront_Discount",
+          "priceEstablishedLabel": null,
+          "priority": 241,
+          "packageType": [
+            "Acquisition",
+            "Upgrade"
+          ],
+          "footNotes": [],
+          "promotionMedia": null
+        }
+      }
+    },
+    "isDefaultDevice": false
+  },
+  {
+    "productId": "085897",
+    "displayName": "Vodafone Broadband router",
+    "productName": "Vodafone Broadband router",
+    "productClass": "Fixed Broadband Equipment",
+    "description": null,
+    "order": "0",
+    "isServicesProduct": true,
+    "condition": "New",
+    "paymentType": "Postpaid",
+    "isDeviceProduct": true,
+    "productLines": [
+      "Acc Sol",
+      "Available FL Packages CBU",
+      "Available FL Packages EBU",
+      "Misc",
+      "Router"
+    ],
+    "delivery": {
+      "classification": "Standard",
+      "partner": "DPD",
+      "soaDeliveryMethod": "WK86",
+      "weekend": null
+    },
+    "listOfImageURLs": [
+      {
+        "imageName": "imageURLs.thumbs.front",
+        "imageURL": "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/img_170x170_vox_25_huawei_uk_f.png"
+      }
+    ],
+    "priceInfo": {
+      "bundlePrice": {
+        "bundleId": "110264",
+        "monthlyPrice": {
+          "gross": "25",
+          "net": "20.83",
+          "vat": "4.17"
+        },
+        "monthlyDiscountPrice": {
+          "gross": null,
+          "net": null,
+          "vat": null
+        },
+        "merchandisingPromotions": null
+      },
+      "hardwarePrice": {
+        "hardwareId": "085897",
+        "hardwareName": null,
+        "oneOffPrice": {
+          "gross": "49",
+          "net": "40.83",
+          "vat": "8.17"
+        },
+        "oneOffDiscountPrice": {
+          "gross": "36.75",
+          "net": "30.63",
+          "vat": "6.12"
+        },
+        "merchandisingPromotions": {
+          "tag": "handset.hardware.percentage",
+          "label": "25% off the device",
+          "discountId": null,
+          "description": null,
+          "mpType": "hardware_discount",
+          "priceEstablishedLabel": null,
+          "priority": 113,
+          "packageType": [
+            "Upgrade",
+            "SecondLine",
+            "Acquisition"
+          ],
+          "footNotes": [],
+          "promotionMedia": null
+        }
+      },
+      "oneOffPrice": {
+        "gross": "49",
+        "net": "40.83",
+        "vat": "8.17"
+      },
+      "oneOffDiscountPrice": {
+        "gross": "36.75",
+        "net": "30.63",
+        "vat": "6.12"
+      },
+      "monthlyPrice": {
+        "gross": "25",
+        "net": "20.83",
+        "vat": "4.17"
+      },
+      "monthlyDiscountPrice": {
+        "gross": null,
+        "net": null,
+        "vat": null
+      }
+    },
+    "promotionPackages": {
+      "planId": "110264",
+      "hardwareId": "085897",
+      "bundlePromotions": {
+        "dataPromotion": {
+          "tag": "SIMO.Extra.2GB.Data",
+          "label": "Additional SIMO 2GB Data",
+          "discountId": null,
+          "description": null,
+          "mpType": "data_allowance",
+          "priceEstablishedLabel": null,
+          "priority": 12,
+          "packageType": [
+            "Acquisition",
+            "Upgrade",
+            "SecondLine"
+          ],
+          "footNotes": [
+            "test"
+          ],
+          "promotionMedia": null
+        },
+        "textPromotion": null,
+        "talkTimePromotion": null,
+        "entertainmentPackPromotion": null,
+        "secureNetPromotion": {
+          "tag": "Bundle.SecureNet",
+          "label": "3 month free trial of Secure Net",
+          "discountId": null,
+          "description": null,
+          "mpType": "securenet",
+          "priceEstablishedLabel": null,
+          "priority": 27,
+          "packageType": [
+            "Acquisition"
+          ],
+          "footNotes": null,
+          "promotionMedia": null
+        },
+        "sashBannerPromotion": {
+          "tag": "Banner.Bundle",
+          "label": "Most Popular Plan",
+          "discountId": null,
+          "description": null,
+          "mpType": "sash_banner",
+          "priceEstablishedLabel": null,
+          "priority": 18,
+          "packageType": [
+            "Acquisition",
+            "Upgrade",
+            "SecondLine"
+          ],
+          "footNotes": [
+            "test"
+          ],
+          "promotionMedia": null
+        },
+        "freeExtraPromotion": null,
+        "freeAccessoryPromotion": null,
+        "conditionalSashBannerPromotion": null,
+        "pricePromotion": null
+      },
+      "hardwarePromotions": {
+        "dataPromotion": null,
+        "textPromotion": null,
+        "talkTimePromotion": null,
+        "entertainmentPackPromotion": null,
+        "secureNetPromotion": null,
+        "sashBannerPromotion": null,
+        "freeExtraPromotion": null,
+        "freeAccessoryPromotion": null,
+        "conditionalSashBannerPromotion": null,
+        "pricePromotion": {
+          "tag": "handset.hardware.percentage",
+          "label": "25% off the device",
+          "discountId": null,
+          "description": null,
+          "mpType": "hardware_discount",
+          "priceEstablishedLabel": null,
+          "priority": 113,
+          "packageType": [
+            "Upgrade",
+            "SecondLine",
+            "Acquisition"
+          ],
+          "footNotes": [],
+          "promotionMedia": null
+        }
+      }
+    },
+    "isDefaultDevice": true
+  }
+]

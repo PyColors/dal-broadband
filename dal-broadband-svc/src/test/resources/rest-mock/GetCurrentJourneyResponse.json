@@ -1,0 +1,28 @@
+{
+  "id": "2290f3b1-1ed5-4513-9f86-110531c5fbfb",
+  "username": "AUT7000350635",
+  "contextMSISDN": "07386015395",
+  "basketId": null,
+  "journeyData": {
+    "name": "SecondLine",
+    "creditDetails": null,
+    "state": "INPROGRESS",
+    "customerPartyID": "7000350635",
+    "ssoCreatedDate": "20180213165011",
+    "ownedCustomerPartyIDs": "7000350635",
+    "offers": [
+      {
+        "type": "HARDWARE",
+        "code": "W_HH_HANDSET_01"
+      }
+    ],
+    "upgradeEligibilityType": null,
+    "commitmentEndDate": null,
+    "earlyUpgradeFeeNet": null,
+    "earlyUpgradeFeeGross": null,
+    "contextMSISDN": "07386015395",
+    "accountRoles": [
+      "Owner"
+    ]
+  }
+}

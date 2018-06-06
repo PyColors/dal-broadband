@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.hateoas.Link;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
@@ -15,13 +16,16 @@ import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.Product;
+import com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.basket.entity.UpdateBundle;
 import com.vf.uk.dal.broadband.basket.entity.UpdateDevice;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.basket.entity.UpdateService;
 import com.vf.uk.dal.broadband.cache.repository.entity.AccessLine;
 import com.vf.uk.dal.broadband.cache.repository.entity.AvailableServices;
+import com.vf.uk.dal.broadband.cache.repository.entity.BasketInfo;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
+import com.vf.uk.dal.broadband.cache.repository.entity.BroadbandSalesOrderAppointment;
 import com.vf.uk.dal.broadband.cache.repository.entity.Identification;
 import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.cache.repository.entity.ItemReference;
@@ -41,18 +45,31 @@ import com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServiceReference;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServieLine;
+import com.vf.uk.dal.broadband.cache.repository.entity.SiteNote;
 import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
+import com.vf.uk.dal.broadband.entity.AppointmentList;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
+import com.vf.uk.dal.broadband.entity.appointment.Address;
+import com.vf.uk.dal.broadband.entity.appointment.AddressDetails;
+import com.vf.uk.dal.broadband.entity.appointment.AppointmentDetails;
+import com.vf.uk.dal.broadband.entity.appointment.AppointmentWindow;
+import com.vf.uk.dal.broadband.entity.appointment.AppointmentWindowList;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
+import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.appointment.Organisation;
+import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
 import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
-
 
 /**
  * @author Infosys limited
@@ -63,16 +80,15 @@ public class ConverterUtils {
 	private ConverterUtils() {
 	}
 
-	
 	/**
 	 * 
 	 * @param availabilityCheckRequest
 	 * @return GetServiceAvailibilityRequest
 	 */
-	
+
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
 			AvailabilityCheckRequest availabilityCheckRequest) {
-		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest(); 
+		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest();
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
@@ -100,8 +116,10 @@ public class ConverterUtils {
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getStreetName());
 		installationAddress.setCity(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getTown());
-		installationAddress.setAddressReferenceNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getIdentification().getId());
-		installationAddress.setAddressType(availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getIdentification().getContextId());
+		installationAddress.setAddressReferenceNumber(availabilityCheckRequest.getLineRef().getLineIdentification()
+				.getInstallationAddress().getIdentification().getId());
+		installationAddress.setAddressType(availabilityCheckRequest.getLineRef().getLineIdentification()
+				.getInstallationAddress().getIdentification().getContextId());
 		request.setInstallationAddress(installationAddress);
 		return request;
 	}
@@ -110,23 +128,26 @@ public class ConverterUtils {
 	 * 
 	 * @param availabilityCheckRequest
 	 * @param getServiceAvailabilityResponse
-	 * @param broadbandId 
-	 * @param broadBand 
+	 * @param broadbandId
+	 * @param broadBand
 	 * @return FLBBJourneyRequest
 	 */
-	
+
 	public static Broadband createBroadbandInCache(AvailabilityCheckRequest availabilityCheckRequest,
-			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId, Broadband broadBand,List<ProductDetails> productDetailsList) {
+			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId, Broadband broadBand,
+			List<ProductDetails> productDetailsList) {
 		Broadband broadband = broadBand;
-		if(broadband == null){
+		if (broadband == null) {
 			broadband = new Broadband();
 		}
 		broadband.setBroadBandId(broadbandId);
-		
-		if(availabilityCheckRequest.getLineRef()!=null && availabilityCheckRequest.getLineRef().getLineIdentification()!=null
-				&& StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())){
+
+		if (availabilityCheckRequest.getLineRef() != null
+				&& availabilityCheckRequest.getLineRef().getLineIdentification() != null && StringUtils.isNotEmpty(
+						availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())) {
 			LineDetails lineDetails = new LineDetails();
-			lineDetails.setFlbbNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
+			lineDetails
+					.setFlbbNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 			broadband.setLineDetails(lineDetails);
 		}
 
@@ -151,7 +172,7 @@ public class ConverterUtils {
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getHouseName());
 		installationAddress.setHouseNumber(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getHouseNumber());
-		installationAddress.setLocality( 
+		installationAddress.setLocality(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getInstallationAddress().getLocality());
 		installationAddress.setMoveTypeCode(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getMoveTypeCode());
@@ -265,35 +286,44 @@ public class ConverterUtils {
 					for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : serviceLinesFromRequest
 							.getLineTreatment()) {
 						LineTreatment lineTreatmentForJourney = new LineTreatment();
-						if(lineTreatment.getLineTreatmentType()!=null){
+						if (lineTreatment.getLineTreatmentType() != null) {
 							lineTreatmentForJourney.setIdentification(lineTreatment.getLineTreatmentType().toString());
 						}
 						lineTreatmentForJourney.setAppointmentNeeded(lineTreatment.getAppointmentNeeded());
 						if (lineTreatment.getConnectionCharge() != null) {
 							lineTreatmentForJourney.setConnectionCharge(lineTreatment.getConnectionCharge().toString());
 						}
-						if(lineTreatment.getLineTreatmentType()!=null){
-							lineTreatmentForJourney.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
+						if (lineTreatment.getLineTreatmentType() != null) {
+							lineTreatmentForJourney
+									.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
 						}
 						lineTreatmentForJourney.setEarliestAvailableDate(lineTreatment.getEarliestAvailabilityDate());
 						lineTreatmentList.add(lineTreatmentForJourney);
 					}
-					for(LineTreatment lineTreatments : lineTreatmentList){
-						if(StringUtils.equalsIgnoreCase(lineTreatments.getLineTreatmentType().toString(), BroadBandConstant.NEW)
-								&& !StringUtils.equalsIgnoreCase(lineTreatments.getConnectionCharge().toString(), BroadBandConstant.No_CHARGE)
-								&& CollectionUtils.isNotEmpty(productDetailsList)){
+					for (LineTreatment lineTreatments : lineTreatmentList) {
+						if (StringUtils.equalsIgnoreCase(lineTreatments.getLineTreatmentType().toString(),
+								BroadBandConstant.NEW)
+								&& !StringUtils.equalsIgnoreCase(lineTreatments.getConnectionCharge().toString(),
+										BroadBandConstant.No_CHARGE)
+								&& CollectionUtils.isNotEmpty(productDetailsList)) {
 							PriceForHardware engineeringVisitCharge = new PriceForHardware();
-							if(productDetailsList.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceGross())){
-								engineeringVisitCharge.setGross(String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceGross()));
+							if (productDetailsList.get(0).getPriceDetail() != null && StringUtils
+									.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceGross())) {
+								engineeringVisitCharge.setGross(
+										String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceGross()));
 							}
-							if(productDetailsList.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceNet())){
-								engineeringVisitCharge.setNet(String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceNet()));
+							if (productDetailsList.get(0).getPriceDetail() != null && StringUtils
+									.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceNet())) {
+								engineeringVisitCharge.setNet(
+										String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceNet()));
 							}
-							if(productDetailsList.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceVAT())){
-								engineeringVisitCharge.setVat(String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceVAT()));
+							if (productDetailsList.get(0).getPriceDetail() != null && StringUtils
+									.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceVAT())) {
+								engineeringVisitCharge.setVat(
+										String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceVAT()));
 							}
-							
-							if(StringUtils.isNotEmpty(productDetailsList.get(0).getId())){
+
+							if (StringUtils.isNotEmpty(productDetailsList.get(0).getId())) {
 								engineeringVisitCharge.setEngVisitProductId(productDetailsList.get(0).getId());
 							}
 							broadband.setEngineeringVisitCharge(engineeringVisitCharge);
@@ -363,8 +393,9 @@ public class ConverterUtils {
 									.getLineTreatment()) {
 								ServiceLineTreatment serviceLineTreatment = new ServiceLineTreatment();
 								serviceLineTreatment.setParentIdentification(
-								serviceLineTreatmentReq.getLineTreatmentType().toString());
-								serviceLineTreatment.setCanNumberBeRetained(serviceLineTreatmentReq.getCanNumberBeRetained());
+										serviceLineTreatmentReq.getLineTreatmentType().toString());
+								serviceLineTreatment
+										.setCanNumberBeRetained(serviceLineTreatmentReq.getCanNumberBeRetained());
 								serviceLineTreatment.setLineInfo(serviceLineTreatmentReq.getLineInfo());
 								serviceLineTreatment.setPortInFlag(serviceLineTreatmentReq.getPortInFlag());
 								serviceLineTreatment.setServiceAction(serviceLineTreatmentReq.getServiceAction());
@@ -383,8 +414,8 @@ public class ConverterUtils {
 										pendingOrderForJourney
 												.setCompletionDate(pendingOrderFromGSA.getCompletionDate());
 										if (pendingOrderFromGSA.getThirdPartyFlag() != null) {
-											pendingOrderForJourney.setThirdPartyFlag(
-													pendingOrderFromGSA.getThirdPartyFlag());
+											pendingOrderForJourney
+													.setThirdPartyFlag(pendingOrderFromGSA.getThirdPartyFlag());
 										}
 										pendingOrderForJourney.setTypeCode(pendingOrderFromGSA.getTypeCode());
 										pendingOrderList.add(pendingOrderForJourney);
@@ -404,7 +435,7 @@ public class ConverterUtils {
 			serviceReference.setServiceLinesList(serviceLinesList);
 			servicePoint.setServiceReference(serviceReference);
 		}
-		
+
 		broadband.setServicePoint(servicePoint);
 		return broadband;
 	}
@@ -417,52 +448,67 @@ public class ConverterUtils {
 	 * @param productModel
 	 * @return AvailabilityCheckResponse
 	 */
-	
+
 	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse,
-			AvailabilityCheckRequest availabilityCheckRequest,List<ProductDetails> productModel) {
+			AvailabilityCheckRequest availabilityCheckRequest, List<ProductDetails> productModel) {
 		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()
-				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()!=null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment().isEmpty()){
+				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
+						.getLineTreatment() != null
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
+						.getLineTreatment().isEmpty()) {
 			List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityList = new ArrayList<>();
-			for(com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()){
+			for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse
+					.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()) {
 				AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
 				appointmentDetails.setAppointmentNeeded(lineTreatment.getAppointmentNeeded());
 				appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailabilityDate());
-				if(lineTreatment.getLineTreatmentType()!=null){
+				if (lineTreatment.getLineTreatmentType() != null) {
 					appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
 				}
 				appointmentAndAvailabilityList.add(appointmentDetails);
-				
-				if(StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), BroadBandConstant.NEW)
-						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(), BroadBandConstant.No_CHARGE)
-						&& productModel!=null && !productModel.isEmpty()){
+
+				if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), BroadBandConstant.NEW)
+						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(),
+								BroadBandConstant.No_CHARGE)
+						&& productModel != null && !productModel.isEmpty()) {
 					com.vf.uk.dal.broadband.entity.Price engineeringVisitCharge = new com.vf.uk.dal.broadband.entity.Price();
-					if(productModel.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceGross())){
-						engineeringVisitCharge.setGross(String.valueOf(productModel.get(0).getPriceDetail().getPriceGross()));
+					if (productModel.get(0).getPriceDetail() != null
+							&& StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceGross())) {
+						engineeringVisitCharge
+								.setGross(String.valueOf(productModel.get(0).getPriceDetail().getPriceGross()));
 					}
-					if(productModel.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceNet())){
-						engineeringVisitCharge.setNet(String.valueOf(productModel.get(0).getPriceDetail().getPriceNet()));
+					if (productModel.get(0).getPriceDetail() != null
+							&& StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceNet())) {
+						engineeringVisitCharge
+								.setNet(String.valueOf(productModel.get(0).getPriceDetail().getPriceNet()));
 					}
-					if(productModel.get(0).getPriceDetail()!=null && StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceVAT())){
-						engineeringVisitCharge.setVat(String.valueOf(productModel.get(0).getPriceDetail().getPriceVAT()));
+					if (productModel.get(0).getPriceDetail() != null
+							&& StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceVAT())) {
+						engineeringVisitCharge
+								.setVat(String.valueOf(productModel.get(0).getPriceDetail().getPriceVAT()));
 					}
 					response.setEngineeringVisitCharge(engineeringVisitCharge);
 				}
-				
+
 			}
-			for(AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList){
-				for(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
-					List<com.vf.uk.dal.entity.serviceavailability.ServiceLine> serviceLineList= serviceLines.getServiceLine();
-					for(com.vf.uk.dal.entity.serviceavailability.ServiceLine sLine : serviceLineList){
-						if(!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")){
-							List<com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment> serviceLineTreatmentList = sLine.getLineTreatment();
-							for(com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList){
-								if(StringUtils.equalsIgnoreCase(appointmentDetails.getLineTreatmentType(), serviceLineTreatment.getLineTreatmentType().toString()))
-								appointmentDetails.setCanNumberBeRetained(String.valueOf(serviceLineTreatment.getCanNumberBeRetained()));
+			for (AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList) {
+				for (com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse
+						.getServiceAvailabilityLine().get(0).getServiceLines()) {
+					List<com.vf.uk.dal.entity.serviceavailability.ServiceLine> serviceLineList = serviceLines
+							.getServiceLine();
+					for (com.vf.uk.dal.entity.serviceavailability.ServiceLine sLine : serviceLineList) {
+						if (!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")) {
+							List<com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment> serviceLineTreatmentList = sLine
+									.getLineTreatment();
+							for (com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList) {
+								if (StringUtils.equalsIgnoreCase(appointmentDetails.getLineTreatmentType(),
+										serviceLineTreatment.getLineTreatmentType().toString()))
+									appointmentDetails.setCanNumberBeRetained(
+											String.valueOf(serviceLineTreatment.getCanNumberBeRetained()));
 							}
 						}
 					}
@@ -477,9 +523,11 @@ public class ConverterUtils {
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()) {
 
 			List<com.vf.uk.dal.broadband.entity.LineSpeeds> lineSpeedList = new ArrayList<>();
-			for(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
-				
-				com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = setLineSpeedForBroadband(serviceLines,serviceLines.getClassificationCode());
+			for (com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse
+					.getServiceAvailabilityLine().get(0).getServiceLines()) {
+
+				com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = setLineSpeedForBroadband(serviceLines,
+						serviceLines.getClassificationCode());
 				lineSpeedList.add(lineSpeedForResponse);
 				classificationCodesList.add(serviceLines.getClassificationCode());
 			}
@@ -517,14 +565,15 @@ public class ConverterUtils {
 		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
-				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()){
+				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().isEmpty()) {
 			List<String> classificationCodeList = new ArrayList<>();
-			for(com.vf.uk.dal.entity.serviceavailability.ServiceLines servLines : getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()){
+			for (com.vf.uk.dal.entity.serviceavailability.ServiceLines servLines : getServiceAvailabilityResponse
+					.getServiceAvailabilityLine().get(0).getServiceLines()) {
 				classificationCodeList.add(servLines.getClassificationCode());
 			}
 			response.setClassificationCode(classificationCodeList);
 		}
-				
+
 		response.setInstallationAddress(installationAddress);
 
 		return response;
@@ -536,22 +585,22 @@ public class ConverterUtils {
 	 * @param speed
 	 * @return LineSpeeds
 	 */
-	
-	private static com.vf.uk.dal.broadband.entity.LineSpeeds setLineSpeedForBroadband(com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines,String packageName) {
+
+	private static com.vf.uk.dal.broadband.entity.LineSpeeds setLineSpeedForBroadband(
+			com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines, String packageName) {
 		com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 		lineSpeedForResponse.setPackageName(packageName);
-		for(com.vf.uk.dal.entity.serviceavailability.ServiceLine serviceLine : serviceLines.getServiceLine()){
-			if(!StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "Line")){
+		for (com.vf.uk.dal.entity.serviceavailability.ServiceLine serviceLine : serviceLines.getServiceLine()) {
+			if (!StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "Line")) {
 				lineSpeedForResponse.setAvgDownSpeed(serviceLine.getLineSpeeds().getAvgDownSpeed());
 				lineSpeedForResponse.setBandwidthMeasure(serviceLine.getLineSpeeds().getBandwidthMeasure());
 				lineSpeedForResponse.setMaxDownSpeed(serviceLine.getLineSpeeds().getMaxDownSpeed());
 				lineSpeedForResponse.setMaxUpSpeed(serviceLine.getLineSpeeds().getMaxUpSpeed());
 				lineSpeedForResponse.setMinDownSpeed(serviceLine.getLineSpeeds().getMinDownSpeed());
-				lineSpeedForResponse.setMinGuaranteedDownSpeed(
-						serviceLine.getLineSpeeds().getMinGuaranteedDownSpeed());
+				lineSpeedForResponse.setMinGuaranteedDownSpeed(serviceLine.getLineSpeeds().getMinGuaranteedDownSpeed());
 				lineSpeedForResponse.setMinUpSpeed(serviceLine.getLineSpeeds().getMinUpSpeed());
 			}
-			}
+		}
 		return lineSpeedForResponse;
 	}
 
@@ -561,27 +610,34 @@ public class ConverterUtils {
 	 * @param journey
 	 * @return CreateAppointmentRequest
 	 */
-	
-	/*public static com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(CreateAppointmentRequest createAppointmentRequest, Broadband broadBand) {
+
+	public static com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(
+			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand) {
 		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest request = new com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest();
-		if(broadBand.getServicePoint()!=null && broadBand.getServicePoint().getLineReference()!=null
-				&& broadBand.getServicePoint().getLineReference().getInstallationAddress()!=null){
+		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getLineReference() != null
+				&& broadBand.getServicePoint().getLineReference().getInstallationAddress() != null) {
 			AppointmentDetails appointmentDetails = new AppointmentDetails();
 			AddressDetails addressDetails = new AddressDetails();
 			Address address = new Address();
 			address.setCityName(broadBand.getServicePoint().getLineReference().getInstallationAddress().getTown());
-			address.setCitySubDivisionName(broadBand.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
-			address.setCountryCode(broadBand.getServicePoint().getLineReference().getInstallationAddress().getCountry());
+			address.setCitySubDivisionName(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
+			address.setCountryCode(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getCountry());
 			address.setCountyName(broadBand.getServicePoint().getLineReference().getInstallationAddress().getCounty());
-			address.setLineFour(broadBand.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
+			address.setLineFour(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
 			address.setLineOne(broadBand.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
-			address.setLineThree(broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
+			address.setLineThree(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
 			address.setLineTwo(broadBand.getServicePoint().getLineReference().getInstallationAddress().getLocality());
 			address.setBuilding(broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
-			address.setPostalCode(broadBand.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
-			
-			if(broadBand.getServicePoint().getLineReference().getInstallationAddress().getIdentification()!=null){
-				address.setIdentificationId(broadBand.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getId());
+			address.setPostalCode(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
+
+			if (broadBand.getServicePoint().getLineReference().getInstallationAddress().getIdentification() != null) {
+				address.setIdentificationId(broadBand.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getId());
 			}
 			addressDetails.setAddress(address);
 			Organisation organisation = new Organisation();
@@ -603,13 +659,13 @@ public class ConverterUtils {
 			request.setExisting(false);
 		}
 		return request;
-	}*/
+	}
 
-	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,Broadband broadBand) {
-		if(broadBand!=null && broadBand.getServicePoint()!=null){
-			
-			
-			if(broadBand.getEngineeringVisitCharge()!=null){
+	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
+			Broadband broadBand) {
+		if (broadBand != null && broadBand.getServicePoint() != null) {
+
+			if (broadBand.getEngineeringVisitCharge() != null) {
 				com.vf.uk.dal.broadband.entity.Price price = new com.vf.uk.dal.broadband.entity.Price();
 				price.setGross(broadBand.getEngineeringVisitCharge().getGross());
 				price.setNet(broadBand.getEngineeringVisitCharge().getNet());
@@ -617,131 +673,154 @@ public class ConverterUtils {
 				response.setEngineeringVisitCharge(price);
 			}
 
-			if(broadBand.getServicePoint().getServiceReference()!=null){
+			if (broadBand.getServicePoint().getServiceReference() != null) {
 				ServiceReference serviceReference = broadBand.getServicePoint().getServiceReference();
 				List<ServiceLines> serviceLinesList = serviceReference.getServiceLinesList();
 				List<String> classificationCodeList = new ArrayList<>();
-				for(ServiceLines sLines : serviceLinesList){
+				for (ServiceLines sLines : serviceLinesList) {
 					classificationCodeList.add(sLines.getClassificationCode());
 				}
 				response.setClassificationCode(classificationCodeList);
-				
-				if(CollectionUtils.isNotEmpty(serviceLinesList)){
-					
+
+				if (CollectionUtils.isNotEmpty(serviceLinesList)) {
+
 					List<com.vf.uk.dal.broadband.entity.LineSpeeds> lineSpeedForResponse = new ArrayList<>();
 					List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityList = new ArrayList<>();
-						ServiceLines serLines = serviceLinesList.get(0);
-						List<LineTreatment> lineTreatmentList = serLines.getLineTreatmentList();
-						List<ServieLine> serviceLineList = serLines.getServiceLineList();
-						for(LineTreatment lineTreatment : lineTreatmentList){
-							AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
-							appointmentDetails.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
-							appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
-							if(lineTreatment.getLineTreatmentType()!=null){
-								appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType());
-							}
-							
-							appointmentAndAvailabilityList.add(appointmentDetails);
+					ServiceLines serLines = serviceLinesList.get(0);
+					List<LineTreatment> lineTreatmentList = serLines.getLineTreatmentList();
+					List<ServieLine> serviceLineList = serLines.getServiceLineList();
+					for (LineTreatment lineTreatment : lineTreatmentList) {
+						AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
+						appointmentDetails.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
+						appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
+						if (lineTreatment.getLineTreatmentType() != null) {
+							appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType());
 						}
-						
-						
-						for(AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList){
-							for(ServieLine servieLine : serviceLineList){
-								if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
-									List<ServiceLineTreatment> serviceLineTreatmentList = servieLine.getServiceLineTreatmentList();
-									for(ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList){
-										if(StringUtils.equalsIgnoreCase(serviceLineTreatment.getParentIdentification(), appointmentDetails.getLineTreatmentType()))
-										appointmentDetails.setCanNumberBeRetained(String.valueOf(serviceLineTreatment.isCanNumberBeRetained()));
-									}
-								}
-							}	
-						}
-						
-						
-						response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
-						for(ServiceLines serviceLineListForAll : serviceLinesList){
-							for(ServieLine servieLine : serviceLineListForAll.getServiceLineList()){
-								
-								if(!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")){
-									com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
-									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())){
-										lineSpeedsForRes.setAvgDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getAvgDownSpeed()));
-									}
-									lineSpeedsForRes.setBandwidthMeasure(servieLine.getLineSpeeds().getBandwidthMeasure());
-									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxDownSpeed())){
-										lineSpeedsForRes.setMaxDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMaxDownSpeed()));
-									}
-									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxUpSpeed())){
-										lineSpeedsForRes.setMaxUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMaxUpSpeed()));
-									}
-									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinDownSpeed())){
-										lineSpeedsForRes.setMinDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinDownSpeed()));
-									}
-									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed())){
-										lineSpeedsForRes.setMinGuaranteedDownSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed()));
-									}
-									if(StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinUpSpeed())){
-										lineSpeedsForRes.setMinUpSpeed(Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
-									}
-									lineSpeedsForRes.setPackageName(serviceLineListForAll.getClassificationCode());
-									lineSpeedForResponse.add(lineSpeedsForRes);
+
+						appointmentAndAvailabilityList.add(appointmentDetails);
+					}
+
+					for (AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList) {
+						for (ServieLine servieLine : serviceLineList) {
+							if (!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")) {
+								List<ServiceLineTreatment> serviceLineTreatmentList = servieLine
+										.getServiceLineTreatmentList();
+								for (ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList) {
+									if (StringUtils.equalsIgnoreCase(serviceLineTreatment.getParentIdentification(),
+											appointmentDetails.getLineTreatmentType()))
+										appointmentDetails.setCanNumberBeRetained(
+												String.valueOf(serviceLineTreatment.isCanNumberBeRetained()));
 								}
 							}
 						}
-						response.setLineSpeeds(lineSpeedForResponse);
-						
-					
+					}
+
+					response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
+					for (ServiceLines serviceLineListForAll : serviceLinesList) {
+						for (ServieLine servieLine : serviceLineListForAll.getServiceLineList()) {
+
+							if (!StringUtils.equalsIgnoreCase(servieLine.getClassificationCode(), "Line")) {
+								com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedsForRes = new com.vf.uk.dal.broadband.entity.LineSpeeds();
+								if (StringUtils.isNotEmpty(servieLine.getLineSpeeds().getAvgDownSpeed())) {
+									lineSpeedsForRes.setAvgDownSpeed(
+											Double.parseDouble(servieLine.getLineSpeeds().getAvgDownSpeed()));
+								}
+								lineSpeedsForRes.setBandwidthMeasure(servieLine.getLineSpeeds().getBandwidthMeasure());
+								if (StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxDownSpeed())) {
+									lineSpeedsForRes.setMaxDownSpeed(
+											Double.parseDouble(servieLine.getLineSpeeds().getMaxDownSpeed()));
+								}
+								if (StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMaxUpSpeed())) {
+									lineSpeedsForRes.setMaxUpSpeed(
+											Double.parseDouble(servieLine.getLineSpeeds().getMaxUpSpeed()));
+								}
+								if (StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinDownSpeed())) {
+									lineSpeedsForRes.setMinDownSpeed(
+											Double.parseDouble(servieLine.getLineSpeeds().getMinDownSpeed()));
+								}
+								if (StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed())) {
+									lineSpeedsForRes.setMinGuaranteedDownSpeed(
+											Double.parseDouble(servieLine.getLineSpeeds().getMinGuaranteedDownSpeed()));
+								}
+								if (StringUtils.isNotEmpty(servieLine.getLineSpeeds().getMinUpSpeed())) {
+									lineSpeedsForRes.setMinUpSpeed(
+											Double.parseDouble(servieLine.getLineSpeeds().getMinUpSpeed()));
+								}
+								lineSpeedsForRes.setPackageName(serviceLineListForAll.getClassificationCode());
+								lineSpeedForResponse.add(lineSpeedsForRes);
+							}
+						}
+					}
+					response.setLineSpeeds(lineSpeedForResponse);
+
 				}
 			}
-			if(broadBand.getServicePoint().getLineReference()!=null
-					&& broadBand.getServicePoint().getLineReference().getInstallationAddress()!=null){
+			if (broadBand.getServicePoint().getLineReference() != null
+					&& broadBand.getServicePoint().getLineReference().getInstallationAddress() != null) {
 				com.vf.uk.dal.broadband.entity.InstallationAddress installationAddress = new com.vf.uk.dal.broadband.entity.InstallationAddress();
-				
-				installationAddress.setCitySubDivisionName(broadBand.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
+
+				installationAddress.setCitySubDivisionName(broadBand.getServicePoint().getLineReference()
+						.getInstallationAddress().getCitySubDivisionName());
 				installationAddress.setCountry(
 						broadBand.getServicePoint().getLineReference().getInstallationAddress().getCountry());
-				installationAddress.setCounty(
-						broadBand.getServicePoint().getLineReference().getInstallationAddress().getCounty());
+				installationAddress
+						.setCounty(broadBand.getServicePoint().getLineReference().getInstallationAddress().getCounty());
 				installationAddress.setFlatNumber(
 						broadBand.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
 				installationAddress.setHouseName(
 						broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
-				installationAddress.setHouseNumber(broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
+				installationAddress.setHouseNumber(
+						broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
 				installationAddress.setLocality(
 						broadBand.getServicePoint().getLineReference().getInstallationAddress().getLocality());
-				installationAddress.setMoveTypeCode(broadBand.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
+				installationAddress.setMoveTypeCode(
+						broadBand.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
 				installationAddress.setPostCode(
 						broadBand.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
 				installationAddress.setStreetName(
 						broadBand.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
-				installationAddress.setTown(
-						broadBand.getServicePoint().getLineReference().getInstallationAddress().getTown());
+				installationAddress
+						.setTown(broadBand.getServicePoint().getLineReference().getInstallationAddress().getTown());
 				com.vf.uk.dal.broadband.entity.Identification identification = new com.vf.uk.dal.broadband.entity.Identification();
 				identification.setId(broadBand.getServicePoint().getLineReference().getInstallationAddress()
 						.getIdentification().getId());
-				identification.setContextId(broadBand.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getContextId());
+				identification.setContextId(broadBand.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getContextId());
 				installationAddress.setIdentification(identification);
 				response.setInstallationAddress(installationAddress);
-				
+
 			}
-			
+
 		}
 		return response;
 	}
 
+	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest,
+			String broadbandId, Basket basket) {
 
-	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest, String broadbandId, Basket basket) {
-		
 		LineDetails lineDetails = broadband.getLineDetails();
-		
-		if(lineDetails==null){
+
+		if (lineDetails == null) {
 			lineDetails = new LineDetails();
 		}
 		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
-		if(CollectionUtils.isNotEmpty(basket.getPackages())){
-			for(ModelPackage modelPackage : basket.getPackages()){
-				if(StringUtils.equalsIgnoreCase(modelPackage.getPlanType(), "Broadband")){
-					broadband.setPackageId(modelPackage.getPackageId());
+		BasketInfo basketInfo = new BasketInfo();
+		if(basketRequest.getAddBundle()!=null && StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())){
+			basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
+		}
+		if (CollectionUtils.isNotEmpty(basket.getPackages())) {
+			for (ModelPackage modelPackage : basket.getPackages()) {
+				basketInfo.setPlanType(modelPackage.getPlanType());
+				if (StringUtils.contains(modelPackage.getPlanType(), "BroadBand")) {
+					basketInfo.setPackageId(modelPackage.getPackageId());
+					if (modelPackage.getBundle() != null) {
+						basketInfo.setPlanProductLineId(modelPackage.getBundle().getPackageLineId());
+					}
+					if (modelPackage.getHardwares() != null
+							&& CollectionUtils.isNotEmpty(modelPackage.getHardwares())) {
+						basketInfo.setHardwareProductLineId(modelPackage.getHardwares().get(0).getPackageLineId());
+					}
+					broadband.setBasketInfo(basketInfo);
 				}
 			}
 		}
@@ -750,38 +829,40 @@ public class ConverterUtils {
 		return broadband;
 	}
 
-	public static CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband, com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, CurrentJourney journey) {
+	public static CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband,
+			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, CurrentJourney journey) {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
 		createBasket.setCustomerRequestedDate(basketRequest.getCustomerRequestedDate());
 		createBasket.setSource(basketRequest.getSource());
 		List<AddPackage> packages = new ArrayList<>();
 		AddPackage addPackage = new AddPackage();
 		// add bundle in basket
-		if(broadband!=null && broadband.getLineDetails()!=null
-				&& StringUtils.isNotEmpty(broadband.getLineDetails().getFlbbNumber())){
+		if (broadband != null && broadband.getLineDetails() != null
+				&& StringUtils.isNotEmpty(broadband.getLineDetails().getFlbbNumber())) {
 			addPackage.setPhoneNumber(broadband.getLineDetails().getFlbbNumber());
 		}
-		
-		if(broadband!=null && StringUtils.isNotEmpty(broadband.getAccountCategory())){
-			addPackage.setAccountCategory(broadband.getAccountCategory());
-		}else{
+
+		if (broadband != null && broadband.getBasketInfo() != null
+				&& StringUtils.isNotEmpty(broadband.getBasketInfo().getAccountCategory())) {
+			addPackage.setAccountCategory(broadband.getBasketInfo().getAccountCategory());
+		} else {
 			addPackage.setAccountCategory("Consumer");
 		}
-		if(journey!=null && journey.getJourneyData()!=null
-				&& StringUtils.isNotEmpty(journey.getJourneyData().getName())){
+		if (journey != null && journey.getJourneyData() != null
+				&& StringUtils.isNotEmpty(journey.getJourneyData().getName())) {
 			addPackage.setPackageType(journey.getJourneyData().getName());
-		}else{
+		} else {
 			addPackage.setPackageType("Acquisition");
 		}
-		
+
 		AddProduct bundle = new AddProduct();
 		bundle.setAction("ADD");
 		bundle.setSkuId(basketRequest.getAddBundle().getBundleId());
 		addPackage.setBundle(bundle);
-		
+
 		// add service point in basket
 		addPackage.setServicePoint(servicePoint);
-		
+
 		// add hardware to basket
 		List<AddProduct> hardwares = new ArrayList<>();
 		AddProduct hardware = new AddProduct();
@@ -789,67 +870,89 @@ public class ConverterUtils {
 		hardware.setSkuId(basketRequest.getAddHardware().getHardwareId());
 		hardwares.add(hardware);
 		addPackage.setHardwares(hardwares);
-		
-		
+
 		// add installation address to basket
-		if( broadband!=null && broadband.getServicePoint().getLineReference().getInstallationAddress()!=null){
+		if (broadband != null && broadband.getServicePoint().getLineReference().getInstallationAddress() != null) {
 			com.vf.uk.dal.broadband.basket.entity.InstallationAddress installationAddress = new com.vf.uk.dal.broadband.basket.entity.InstallationAddress();
-			installationAddress.setCitySubDivisionName(broadband.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
-			installationAddress.setCountry(broadband.getServicePoint().getLineReference().getInstallationAddress().getCountry());
-			installationAddress.setCounty(broadband.getServicePoint().getLineReference().getInstallationAddress().getCounty());
-			installationAddress.setFlatNumber(broadband.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
-			installationAddress.setHouseName(broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
-			installationAddress.setHouseNumber(broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
-			installationAddress.setLocality(broadband.getServicePoint().getLineReference().getInstallationAddress().getLocality());
-			installationAddress.setMoveTypeCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
-			installationAddress.setPostCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
-			installationAddress.setStreetName(broadband.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
-			installationAddress.setTown(broadband.getServicePoint().getLineReference().getInstallationAddress().getTown());
-			if(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification()!=null){
+			installationAddress.setCitySubDivisionName(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
+			installationAddress
+					.setCountry(broadband.getServicePoint().getLineReference().getInstallationAddress().getCountry());
+			installationAddress
+					.setCounty(broadband.getServicePoint().getLineReference().getInstallationAddress().getCounty());
+			installationAddress.setFlatNumber(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
+			installationAddress.setHouseName(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
+			installationAddress.setHouseNumber(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
+			installationAddress
+					.setLocality(broadband.getServicePoint().getLineReference().getInstallationAddress().getLocality());
+			installationAddress.setMoveTypeCode(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
+			installationAddress
+					.setPostCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
+			installationAddress.setStreetName(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
+			installationAddress
+					.setTown(broadband.getServicePoint().getLineReference().getInstallationAddress().getTown());
+			if (broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification() != null) {
 				com.vf.uk.dal.broadband.basket.entity.Identification identification = new com.vf.uk.dal.broadband.basket.entity.Identification();
-				identification.setContextId(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getContextId());
-				identification.setId(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getId());
+				identification.setContextId(broadband.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getContextId());
+				identification.setId(broadband.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getId());
 				installationAddress.setIdentification(identification);
 				addPackage.setInstallationAddress(installationAddress);
 			}
 		}
-		
+
 		List<AddProduct> services = new ArrayList<>();
-		for(String skuId : basketRequest.getServiceIds()){
+		for (String skuId : basketRequest.getServiceIds()) {
 			AddProduct addProductForServices = new AddProduct();
 			addProductForServices.setAction("ADD");
 			addProductForServices.setSkuId(skuId);
 			services.add(addProductForServices);
 		}
 		addPackage.setServices(services);
-		
+
 		packages.add(addPackage);
 		createBasket.setPackages(packages);
 		return createBasket;
 	}
-
 
 	public static Broadband createUpdateCacheRequest(Broadband broadband, String basketId) {
 		broadband.setBasketId(basketId);
 		return broadband;
 	}
 
-
-	public static UpdatePackage updateBasketRequest(BasketRequest basketRequest, CurrentJourney journey, Broadband broadband) {
+	public static UpdatePackage updateBasketRequest(BasketRequest basketRequest, CurrentJourney journey,
+			Broadband broadband, String planId) {
 		UpdatePackage updatePackage = new UpdatePackage();
-		if(StringUtils.isNotEmpty(broadband.getAccountCategory())){
-			updatePackage.setAccountCategory(broadband.getAccountCategory());
-		}else{
+		if (broadband.getBasketInfo() != null
+				&& StringUtils.isNotEmpty(broadband.getBasketInfo().getAccountCategory())) {
+			updatePackage.setAccountCategory(broadband.getBasketInfo().getAccountCategory());
+		} else {
 			updatePackage.setAccountCategory("Consumer");
 		}
-		if(journey!=null && journey.getJourneyData()!=null && StringUtils.isNotEmpty(journey.getJourneyData().getName())){
+		if (journey != null && journey.getJourneyData() != null
+				&& StringUtils.isNotEmpty(journey.getJourneyData().getName())) {
 			updatePackage.setPackageType(journey.getJourneyData().getName());
-		}else{
+		} else {
 			updatePackage.setPackageType("Acquisition");
 		}
-		if(basketRequest!=null && basketRequest.getAddBundle()!=null
+		
+		
+		if (StringUtils.isNotEmpty(planId)) {
+			UpdateBundle updateBundle = new UpdateBundle();
+			updateBundle.setAction("ADD");
+			updateBundle.setSkuId(planId);
+			updateBundle.setProductLineId(broadband.getBasketInfo().getPlanProductLineId());
+			updatePackage.setBundle(updateBundle);
+		}
+		if (basketRequest != null && basketRequest.getAddBundle() != null
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())
-				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getPackageLineId())){
+				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getPackageLineId())) {
 			UpdateBundle updateBundle = new UpdateBundle();
 			updateBundle.setAction("ADD");
 			updateBundle.setSkuId(basketRequest.getAddBundle().getBundleId());
@@ -857,9 +960,9 @@ public class ConverterUtils {
 			updatePackage.setBundle(updateBundle);
 		}
 		List<UpdateDevice> hardwares = new ArrayList<>();
-		if(basketRequest!=null && basketRequest.getAddHardware()!=null
+		if (basketRequest != null && basketRequest.getAddHardware() != null
 				&& StringUtils.isNotEmpty(basketRequest.getAddHardware().getHardwareId())
-				&& StringUtils.isNotEmpty(basketRequest.getAddHardware().getPackageLineId())){
+				&& StringUtils.isNotEmpty(basketRequest.getAddHardware().getPackageLineId())) {
 			UpdateDevice updateDevice = new UpdateDevice();
 			updateDevice.setAction("ADD");
 			updateDevice.setSkuId(basketRequest.getAddHardware().getHardwareId());
@@ -868,8 +971,9 @@ public class ConverterUtils {
 			updatePackage.addHardwaresItem(updateDevice);
 		}
 
-		if(broadband.getEngineeringVisitCharge()!=null
-				&& StringUtils.isNotEmpty(broadband.getEngineeringVisitCharge().getEngVisitProductId())){
+		if (broadband.getEngineeringVisitCharge() != null
+				&& StringUtils.isNotEmpty(broadband.getEngineeringVisitCharge().getEngVisitProductId())
+				&& StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
 			List<UpdateService> services = new ArrayList<>();
 			UpdateService updateService = new UpdateService();
 			updateService.setProductLineId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
@@ -880,43 +984,61 @@ public class ConverterUtils {
 		return updatePackage;
 	}
 
-
 	public static PremiseAndServicePoint setPremiseAndServicePointRequest(
-			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, Broadband broadband, AvailabilityCheckRequest availabilityCheckRequest,UpdateLineRequest updateLineRequest) {
+			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, Broadband broadband,
+			AvailabilityCheckRequest availabilityCheckRequest, UpdateLineRequest updateLineRequest) {
 		PremiseAndServicePoint premiseAndServicePoint = new PremiseAndServicePoint();
-		if(servicePoint!=null){
+		if (servicePoint != null) {
 			premiseAndServicePoint.setServicePoint(servicePoint);
 		}
-		
-		if(broadband.getLineDetails()!=null && StringUtils.isNotEmpty(broadband.getLineDetails().getClassificationCode())){
+
+		if (broadband.getLineDetails() != null
+				&& StringUtils.isNotEmpty(broadband.getLineDetails().getClassificationCode())) {
 			premiseAndServicePoint.setLinePackageType(broadband.getLineDetails().getClassificationCode());
 		}
-		if(availabilityCheckRequest!=null && availabilityCheckRequest.getLineRef()!=null && availabilityCheckRequest.getLineRef().getLineIdentification()!=null
-				&& StringUtils.isNotEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())){
-			premiseAndServicePoint.setPhoneNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
-		}
-		
-		if(updateLineRequest!=null && StringUtils.isNotEmpty(updateLineRequest.getLineTreatmentType())){
-			premiseAndServicePoint.setLineTreatmentType(updateLineRequest.getLineTreatmentType());
+		if (availabilityCheckRequest != null && availabilityCheckRequest.getLineRef() != null
+				&& availabilityCheckRequest.getLineRef().getLineIdentification() != null && StringUtils.isNotEmpty(
+						availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())) {
+			premiseAndServicePoint.setPhoneNumber(
+					availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		}
 
-		if( broadband.getServicePoint().getLineReference().getInstallationAddress()!=null){
+		if (updateLineRequest != null && StringUtils.isNotEmpty(updateLineRequest.getLineTreatmentType())) {
+			premiseAndServicePoint.setLineTreatmentType(updateLineRequest.getLineTreatmentType());
+		} else if (StringUtils.isNotEmpty(broadband.getLineDetails().getLineTreatmentType())) {
+			premiseAndServicePoint.setLineTreatmentType(broadband.getLineDetails().getLineTreatmentType());
+		}
+
+		if (broadband.getServicePoint().getLineReference().getInstallationAddress() != null) {
 			com.vf.uk.dal.broadband.basket.entity.InstallationAddress installationAddress = new com.vf.uk.dal.broadband.basket.entity.InstallationAddress();
-			installationAddress.setCitySubDivisionName(broadband.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
-			installationAddress.setCountry(broadband.getServicePoint().getLineReference().getInstallationAddress().getCountry());
-			installationAddress.setCounty(broadband.getServicePoint().getLineReference().getInstallationAddress().getCounty());
-			installationAddress.setFlatNumber(broadband.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
-			installationAddress.setHouseName(broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
-			installationAddress.setHouseNumber(broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
-			installationAddress.setLocality(broadband.getServicePoint().getLineReference().getInstallationAddress().getLocality());
-			installationAddress.setMoveTypeCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
-			installationAddress.setPostCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
-			installationAddress.setStreetName(broadband.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
-			installationAddress.setTown(broadband.getServicePoint().getLineReference().getInstallationAddress().getTown());
-			if(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification()!=null){
+			installationAddress.setCitySubDivisionName(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
+			installationAddress
+					.setCountry(broadband.getServicePoint().getLineReference().getInstallationAddress().getCountry());
+			installationAddress
+					.setCounty(broadband.getServicePoint().getLineReference().getInstallationAddress().getCounty());
+			installationAddress.setFlatNumber(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
+			installationAddress.setHouseName(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
+			installationAddress.setHouseNumber(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
+			installationAddress
+					.setLocality(broadband.getServicePoint().getLineReference().getInstallationAddress().getLocality());
+			installationAddress.setMoveTypeCode(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getMoveTypeCode());
+			installationAddress
+					.setPostCode(broadband.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
+			installationAddress.setStreetName(
+					broadband.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
+			installationAddress
+					.setTown(broadband.getServicePoint().getLineReference().getInstallationAddress().getTown());
+			if (broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification() != null) {
 				com.vf.uk.dal.broadband.basket.entity.Identification identification = new com.vf.uk.dal.broadband.basket.entity.Identification();
-				identification.setContextId(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getContextId());
-				identification.setId(broadband.getServicePoint().getLineReference().getInstallationAddress().getIdentification().getId());
+				identification.setContextId(broadband.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getContextId());
+				identification.setId(broadband.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getId());
 				installationAddress.setIdentification(identification);
 				premiseAndServicePoint.setInstallationAddress(installationAddress);
 			}
@@ -924,19 +1046,18 @@ public class ConverterUtils {
 		return premiseAndServicePoint;
 	}
 
-
-	public static Broadband updateBroadbandCache(Broadband broadband, UpdateLineRequest updateLineRequest, String broadbandId) {
+	public static Broadband updateBroadbandCache(Broadband broadband, UpdateLineRequest updateLineRequest,
+			String broadbandId) {
 		Broadband broadBand = broadband;
 		broadBand.setBroadBandId(broadbandId);
-		LineDetails lineDetails  = broadBand.getLineDetails();
-		if(lineDetails == null){
+		LineDetails lineDetails = broadBand.getLineDetails();
+		if (lineDetails == null) {
 			lineDetails = new LineDetails();
 		}
 		lineDetails.setLineTreatmentType(updateLineRequest.getLineTreatmentType());
 		broadBand.setLineDetails(lineDetails);
 		return broadBand;
 	}
-
 
 	public static AddProductRequest addProductRequest(Broadband broadband) {
 		AddProductRequest addProductRequest = new AddProductRequest();
@@ -950,47 +1071,166 @@ public class ConverterUtils {
 		return addProductRequest;
 	}
 
-
-	/*public static Broadband addAppointmentInfoToBroadbandCache(Broadband broadBand,
+	public static Broadband addAppointmentInfoToBroadbandCache(Broadband broadBand,
 			CreateAppointmentRequest createAppointmentRequest, String identificationId) {
-		SalesOrderAppointment salesOrderAppointment = null;
+		BroadbandSalesOrderAppointment salesOrderAppointment = null;
 		Broadband broadBandForSalesAppointment = broadBand;
-		if( broadBand.getSalesOrderAppointment()!=null){
+		if (broadBand.getSalesOrderAppointment() != null) {
 			salesOrderAppointment = broadBand.getSalesOrderAppointment();
-		}else{
-			 salesOrderAppointment = new SalesOrderAppointment();
-			 com.vf.uk.dal.broadband.cache.repository.entity.AppointmentWindow appointmentWindow = new  com.vf.uk.dal.broadband.cache.repository.entity.AppointmentWindow();
-			 appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
-			 appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
-				appointmentWindow.setIdentificationId(identificationId);
-				appointmentWindow.setOperationalPreferenceCode("STANDARD");
-				salesOrderAppointment.setAppointmentWindow(appointmentWindow);
-				if(createAppointmentRequest.getSiteNote()!=null){
-					SiteNote siteNote = new SiteNote();
-					siteNote.setNotes(createAppointmentRequest.getSiteNote().getNotes());
-					siteNote.setTypeCode("ENGINEER");
-					salesOrderAppointment.setSiteNote(siteNote);
-				}
+		} else {
+			salesOrderAppointment = new BroadbandSalesOrderAppointment();
+			com.vf.uk.dal.broadband.cache.repository.entity.AppointmentWindow appointmentWindow = new com.vf.uk.dal.broadband.cache.repository.entity.AppointmentWindow();
+			appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
+			appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
+			appointmentWindow.setIdentificationId(identificationId);
+			appointmentWindow.setOperationalPreferenceCode("STANDARD");
+			salesOrderAppointment.setAppointmentWindow(appointmentWindow);
+			if (createAppointmentRequest.getSiteNote() != null) {
+				SiteNote siteNote = new SiteNote();
+				siteNote.setNotes(createAppointmentRequest.getSiteNote().getNotes());
+				siteNote.setTypeCode("ENGINEER");
+				salesOrderAppointment.setSiteNote(siteNote);
+			}
 		}
 		broadBandForSalesAppointment.setSalesOrderAppointment(salesOrderAppointment);
 		return broadBandForSalesAppointment;
-	}*/
+	}
 
-
-	/*public static com.vf.uk.dal.broadband.basket.AppointmentWindow updateBasketWithAppointmentRequest(
-			CreateAppointmentRequest createAppointmentRequest) {
-		com.vf.uk.dal.broadband.basket.AppointmentWindow appointmentWindow = new com.vf.uk.dal.broadband.basket.AppointmentWindow();
+	public static com.vf.uk.dal.broadband.basket.entity.AppointmentWindow updateBasketWithAppointmentRequest(
+			CreateAppointmentRequest createAppointmentRequest, String applicationId) {
+		com.vf.uk.dal.broadband.basket.entity.AppointmentWindow appointmentWindow = new com.vf.uk.dal.broadband.basket.entity.AppointmentWindow();
 		appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
 		appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
-		if(createAppointmentRequest.getSiteNote().getNotes()!=null){
-			List<com.vf.uk.dal.broadband.basket.SiteNote> siteNoteList = new ArrayList<>();
-			com.vf.uk.dal.broadband.basket.SiteNote siteNote = new com.vf.uk.dal.broadband.basket.SiteNote();
+		appointmentWindow.setOperationalPreferenceCode(applicationId);
+		appointmentWindow.setIdentificationId(applicationId);
+		if (createAppointmentRequest.getSiteNote() != null
+				&& createAppointmentRequest.getSiteNote().getNotes() != null) {
+			List<com.vf.uk.dal.broadband.basket.entity.SiteNote> siteNoteList = new ArrayList<>();
+			com.vf.uk.dal.broadband.basket.entity.SiteNote siteNote = new com.vf.uk.dal.broadband.basket.entity.SiteNote();
 			siteNote.setNotes(createAppointmentRequest.getSiteNote().getNotes());
 			siteNote.setTypeCode("ENGINEER");
 			siteNoteList.add(siteNote);
 			appointmentWindow.setSiteNotes(siteNoteList);
 		}
 		return appointmentWindow;
-	}*/
+	}
+
+	public static ServicePoint updateBroadbandCacheWithLineDirectoryInfo(Broadband broadband) {
+		ServicePoint servicePoint = broadband.getServicePoint();
+		LineReference lineReference = servicePoint.getLineReference();
+		List<LineDirectory> lineDirectoryList = lineReference.getLineDirectoryList();
+		if (!CollectionUtils.isNotEmpty(lineDirectoryList)) {
+			lineDirectoryList = new ArrayList<>();
+		}
+		LineDirectory lineDirectory = new LineDirectory();
+		lineDirectory.setDirectoryCode("NO_DIRECTORY_ENTRY");
+		lineDirectory.setLocationCode("INDIVIDUAL");
+		lineDirectory.setFeatureCode("MAINLINE_DIRECTORY");
+		lineDirectoryList.add(lineDirectory);
+		lineReference.setLineDirectoryList(lineDirectoryList);
+		servicePoint.setLineReference(lineReference);
+		return servicePoint;
+	}
+
+	public static GetAppointmentRequest getAppointmentRequest(Broadband broadBand) {
+
+		GetAppointmentRequest request = new GetAppointmentRequest();
+		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getServiceReference() != null
+				&& CollectionUtils
+						.isNotEmpty(broadBand.getServicePoint().getServiceReference().getServiceLinesList())) {
+
+			AppointmentDetails appointmentDetails = new AppointmentDetails();
+			AddressDetails addressDetails = new AddressDetails();
+			Address address = new Address();
+			address.setCityName(broadBand.getServicePoint().getLineReference().getInstallationAddress().getTown());
+			address.setCitySubDivisionName(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getCitySubDivisionName());
+			address.setCountryCode(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getCountry());
+			address.setCountyName(broadBand.getServicePoint().getLineReference().getInstallationAddress().getCounty());
+			address.setLineFour(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getFlatNumber());
+			address.setLineOne(broadBand.getServicePoint().getLineReference().getInstallationAddress().getStreetName());
+			address.setLineThree(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseNumber());
+			address.setLineTwo(broadBand.getServicePoint().getLineReference().getInstallationAddress().getLocality());
+			address.setBuilding(broadBand.getServicePoint().getLineReference().getInstallationAddress().getHouseName());
+			address.setPostalCode(
+					broadBand.getServicePoint().getLineReference().getInstallationAddress().getPostCode());
+			if (broadBand.getServicePoint().getLineReference().getInstallationAddress().getIdentification() != null) {
+				address.setIdentificationId(broadBand.getServicePoint().getLineReference().getInstallationAddress()
+						.getIdentification().getId());
+			}
+			addressDetails.setAddress(address);
+			Organisation organisation = new Organisation();
+			organisation.setName("Vodafone");
+			addressDetails.setOrganisation(organisation);
+			appointmentDetails.setAddressDetails(addressDetails);
+			ServiceRequest serviceRequest = new ServiceRequest();
+			serviceRequest.setCategoryCode("BASIC");
+			serviceRequest.setClassificationCode("LINE");
+			serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+			serviceRequest.setTypeCode("INSTALL");
+			appointmentDetails.setServiceRequest(serviceRequest);
+			AppointmentWindow appointmentWindow = new AppointmentWindow();
+			appointmentWindow.setOperationalPreferenceCode("STANDARD");
+			appointmentDetails.setAppointmentWindow(appointmentWindow);
+			for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint()
+					.getServiceReference().getServiceLinesList()) {
+				if (StringUtils.equalsIgnoreCase(serLines.getClassificationCode(),
+						broadBand.getLineDetails().getClassificationCode())) {
+					if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
+						for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
+							if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
+									broadBand.getLineDetails().getLineTreatmentType())) {
+								appointmentWindow.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + " 00:00:00");
+							}
+						}
+					}
+				}
+			}
+			request.setAppointmentDetails(appointmentDetails);
+			request.setExisting(false);
+		}
+		return request;
+	}
+
+	public static GetAppointmentResponse createGetAppointmentResponse(GetAppointment getAppointmentResponse) {
+		GetAppointmentResponse getAppointmentRes = new GetAppointmentResponse();
+		List<AppointmentList> apptWindowList = new ArrayList<>();
+		for (AppointmentWindowList apptWindow : getAppointmentResponse.getAppointmentWindowList()) {
+			AppointmentList appWondow = new AppointmentList();
+			appWondow.setStartDate(apptWindow.getStartTimePeriod());
+			List<String> slot = new ArrayList<>();
+			slot.add(apptWindow.getTimeSlot());
+			appWondow.setTimeSlots(slot);
+			apptWindowList.add(appWondow);
+		}
+		getAppointmentRes.setAppointmentWindowList(apptWindowList);
+		return getAppointmentRes;
+	}
+
+	public static BundlePromotionRequest createPromotionRequestToOptimize(Broadband broadband, String journeyName) {
+		BundlePromotionRequest bundlePromotionRequest = new BundlePromotionRequest();
+		List<String> bundleIdList = new ArrayList<>();
+		bundleIdList.add(broadband.getBasketInfo().getPlanId());
+		bundlePromotionRequest.setBundleIdList(bundleIdList);
+		bundlePromotionRequest.setJourneyType(journeyName);
+		return bundlePromotionRequest;
+	}
 	
+	public static ServiceStartDateRequest createServiceStartDateRequest(com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDate) {
+		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+		serviceStartDateRequest.setServiceStartDate(serviceStartDate.getStartDateTime());
+		return serviceStartDateRequest;
+	}
+	
+	public static Link formatLink(Link link){
+		Link newLink = link;
+		if(newLink!=null && newLink.getHref().indexOf("/broadband")!=-1){
+			newLink=newLink.withHref(newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
+		}
+		return newLink;
+	}
+
 }

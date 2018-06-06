@@ -62,6 +62,9 @@ public class FlbBundle {
 	@JsonProperty("isSpeedLess")
 	private Boolean isSpeedLess = null;
 
+	@JsonProperty("isSelected")
+	private Boolean isSelected = null;
+
 	/**
 	 * 
 	 * @param skuId
@@ -420,6 +423,14 @@ public class FlbBundle {
 		this.isSpeedLess = isSpeedLess;
 	}
 
+	public Boolean getIsSelected() {
+		return isSelected;
+	}
+
+	public void setIsSelected(Boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -445,8 +456,8 @@ public class FlbBundle {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(skuId, name, description, bundleName, bundleFeatures, bundleDescription, speed, usage, classificationCode,
-				commitmentPeriod, productName, productDescription, merchandisingMedia, priceInfo);
+		return Objects.hash(skuId, name, description, bundleName, bundleFeatures, bundleDescription, speed, usage,
+				classificationCode, commitmentPeriod, productName, productDescription, merchandisingMedia, priceInfo);
 	}
 
 	@Override

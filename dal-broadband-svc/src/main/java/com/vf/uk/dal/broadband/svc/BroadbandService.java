@@ -7,8 +7,15 @@ import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
+import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
+import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
+import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
+import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
@@ -26,7 +33,7 @@ public interface BroadbandService {
 	 * @return AvailabilityCheckResponse
 	 */
 	
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, String acceptVersion);
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, Broadband broadband);
 
 	
 	/**
@@ -61,7 +68,7 @@ public interface BroadbandService {
 	 * @param postCode
 	 * @return AddressInfo
 	 */
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode);
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference);
 
 
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId);
@@ -71,4 +78,20 @@ public interface BroadbandService {
 
 
 	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest);
+
+
+	public CreateAppointmentResponse createAppointment(CreateAppointmentRequest createAppointmentRequest,
+			String broadbandId);
+
+
+	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId);
+
+
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest, String broadbandId);
+
+
+	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId);
+
+
+	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest);
 }
