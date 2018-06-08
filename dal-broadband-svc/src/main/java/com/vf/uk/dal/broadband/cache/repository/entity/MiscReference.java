@@ -11,42 +11,45 @@ public class MiscReference implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8859851765986955170L;
-	
+
 	/** The Constant SERVICEPROVIDERNAME. */
 	private static final String SERVICEPROVIDERNAME = "serviceProviderName";
-	
+
 	/** The Constant LINELENGTH. */
 	private static final String LINELENGTH = "lineLength";
-	
+
 	/** The Constant CUSTOMERAGREEDDATE. */
 	private static final String CUSTOMERAGREEDDATE = "customerAgreedDate";
-	
+
 	/** The Constant READYFORSERVICEDATE. */
 	private static final String READYFORSERVICEDATE = "readyForServiceDate";
-	
+
 	/** The Constant ANFP. */
 	private static final String ANFP = "anfp";
-	
+
 	/** The service provider name. */
 	@JsonProperty(SERVICEPROVIDERNAME)
 	private String serviceProviderName;
-	
+
 	/** The line length. */
 	@JsonProperty(LINELENGTH)
 	private String lineLength;
-	
+
 	/** The customer agreed date. */
 	@JsonProperty(CUSTOMERAGREEDDATE)
 	private String customerAgreedDate;
-	
+
 	/** The ready for service date. */
 	@JsonProperty(READYFORSERVICEDATE)
 	private String readyForServiceDate;
-	
+
 	/** The anfp. */
 	@JsonProperty(ANFP)
 	private String anfp;
-	
+
+	@JsonProperty("installationType")
+	private String installationType = null;
+
 	/**
 	 * Gets the service provider name.
 	 *
@@ -55,16 +58,17 @@ public class MiscReference implements Serializable {
 	public String getServiceProviderName() {
 		return serviceProviderName;
 	}
-	
+
 	/**
 	 * Sets the service provider name.
 	 *
-	 * @param serviceProviderName the new service provider name
+	 * @param serviceProviderName
+	 *            the new service provider name
 	 */
 	public void setServiceProviderName(String serviceProviderName) {
 		this.serviceProviderName = serviceProviderName;
 	}
-	
+
 	/**
 	 * Gets the line length.
 	 *
@@ -73,16 +77,17 @@ public class MiscReference implements Serializable {
 	public String getLineLength() {
 		return lineLength;
 	}
-	
+
 	/**
 	 * Sets the line length.
 	 *
-	 * @param lineLength the new line length
+	 * @param lineLength
+	 *            the new line length
 	 */
 	public void setLineLength(String lineLength) {
 		this.lineLength = lineLength;
 	}
-	
+
 	/**
 	 * Gets the customer agreed date.
 	 *
@@ -91,16 +96,17 @@ public class MiscReference implements Serializable {
 	public String getCustomerAgreedDate() {
 		return customerAgreedDate;
 	}
-	
+
 	/**
 	 * Sets the customer agreed date.
 	 *
-	 * @param customerAgreedDate the new customer agreed date
+	 * @param customerAgreedDate
+	 *            the new customer agreed date
 	 */
 	public void setCustomerAgreedDate(String customerAgreedDate) {
 		this.customerAgreedDate = customerAgreedDate;
 	}
-	
+
 	/**
 	 * Gets the ready for service date.
 	 *
@@ -109,16 +115,17 @@ public class MiscReference implements Serializable {
 	public String getReadyForServiceDate() {
 		return readyForServiceDate;
 	}
-	
+
 	/**
 	 * Sets the ready for service date.
 	 *
-	 * @param readyForServiceDate the new ready for service date
+	 * @param readyForServiceDate
+	 *            the new ready for service date
 	 */
 	public void setReadyForServiceDate(String readyForServiceDate) {
 		this.readyForServiceDate = readyForServiceDate;
 	}
-	
+
 	/**
 	 * Gets the anfp.
 	 *
@@ -127,17 +134,28 @@ public class MiscReference implements Serializable {
 	public String getAnfp() {
 		return anfp;
 	}
-	
+
 	/**
 	 * Sets the anfp.
 	 *
-	 * @param anfp the new anfp
+	 * @param anfp
+	 *            the new anfp
 	 */
 	public void setAnfp(String anfp) {
 		this.anfp = anfp;
 	}
-	
-	/* (non-Javadoc)
+
+	public String getInstallationType() {
+		return installationType;
+	}
+
+	public void setInstallationType(String installationType) {
+		this.installationType = installationType;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -151,8 +169,10 @@ public class MiscReference implements Serializable {
 		result = prime * result + ((serviceProviderName == null) ? 0 : serviceProviderName.hashCode());
 		return result;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -191,8 +211,10 @@ public class MiscReference implements Serializable {
 			return false;
 		return true;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -201,6 +223,5 @@ public class MiscReference implements Serializable {
 				+ ", customerAgreedDate=" + customerAgreedDate + ", readyForServiceDate=" + readyForServiceDate
 				+ ", anfp=" + anfp + "]";
 	}
-	
-	
+
 }

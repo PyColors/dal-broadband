@@ -22,6 +22,9 @@ public class AvailabilityCheckRequest {
 	@JsonProperty("classificationCode")
 	private List<String> classificationCode = null;
 
+	@JsonProperty("category")
+	private String category = null;
+
 	/**
 	 * 
 	 * @param lineRef
@@ -49,7 +52,6 @@ public class AvailabilityCheckRequest {
 	public void setLineRef(LineRef lineRef) {
 		this.lineRef = lineRef;
 	}
-
 
 	/**
 	 * 
@@ -97,6 +99,14 @@ public class AvailabilityCheckRequest {
 
 	public void setClassificationCode(List<String> classificationCode) {
 		this.classificationCode = classificationCode;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override
