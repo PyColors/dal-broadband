@@ -66,7 +66,6 @@ import com.vf.uk.dal.broadband.entity.product.ProductDetails;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.constant.BroadBandConstant;
-import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
@@ -92,7 +91,7 @@ public class ConverterUtils {
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
-		request.setCustomerType(CustomerTypeEnum.INDIVIDUAL);
+		request.setCustomerType(com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
 		com.vf.uk.dal.entity.serviceavailability.InstallationAddress installationAddress = new com.vf.uk.dal.entity.serviceavailability.InstallationAddress();
 		installationAddress.setCitySubDivisionName(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getCitySubDivisionName());
@@ -289,7 +288,7 @@ public class ConverterUtils {
 						if (lineTreatment.getLineTreatmentType() != null) {
 							lineTreatmentForJourney.setIdentification(lineTreatment.getLineTreatmentType().toString());
 						}
-						lineTreatmentForJourney.setAppointmentNeeded(lineTreatment.getAppointmentNeeded());
+						lineTreatmentForJourney.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
 						if (lineTreatment.getConnectionCharge() != null) {
 							lineTreatmentForJourney.setConnectionCharge(lineTreatment.getConnectionCharge().toString());
 						}
@@ -375,7 +374,7 @@ public class ConverterUtils {
 						}
 						if (serviceLineFromRequest.getMiscReference() != null) {
 							MiscReference miscReferenceForJourney = new MiscReference();
-							miscReferenceForJourney.setAnfp(serviceLineFromRequest.getMiscReference().getAnfp());
+							miscReferenceForJourney.setAnfp(serviceLineFromRequest.getMiscReference().getANFP());
 							miscReferenceForJourney.setCustomerAgreedDate(
 									serviceLineFromRequest.getMiscReference().getCustomerAgreedDate());
 							miscReferenceForJourney
@@ -464,7 +463,7 @@ public class ConverterUtils {
 			for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse
 					.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()) {
 				AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
-				appointmentDetails.setAppointmentNeeded(lineTreatment.getAppointmentNeeded());
+				appointmentDetails.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
 				appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailabilityDate());
 				if (lineTreatment.getLineTreatmentType() != null) {
 					appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
