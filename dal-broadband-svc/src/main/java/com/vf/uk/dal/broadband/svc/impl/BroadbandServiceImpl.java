@@ -82,6 +82,8 @@ import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 @Component("broadbandService")
 public class BroadbandServiceImpl implements BroadbandService {
 
+	private static final String CATEGORY_PREFERENCE_FTTH = "FTTH";
+
 	@Autowired
 	BroadbandDao broadbandDao;
 
@@ -103,8 +105,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 			String broadbandId, Broadband broadband) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		Broadband broadBand = broadband;
-		if(broadBand == null){
-			broadBand	 = new Broadband();
+		if (broadBand == null) {
+			broadBand = new Broadband();
 		}
 		broadBand.setCategoryPreference(availabilityCheckRequest.getCategory());
 		if (checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
@@ -157,7 +159,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null);
 		Link planLink = ControllerLinkBuilder.linkTo(methodLinkBuilderPlan).withRel("flbb-plan").withType("GET");
 		AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
-				.getAddressByPostcode(null, "FTTH");
+				.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
 		Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 				.withType("GET");
 		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
@@ -253,6 +255,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
+		Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
+		if (broadBand != null && StringUtils.isNotBlank(broadBand.getCategoryPreference())
+				&& broadBand.getCategoryPreference().equalsIgnoreCase(CATEGORY_PREFERENCE_FTTH)) {
+			bundleClass = CATEGORY_PREFERENCE_FTTH;
+		}
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
@@ -261,7 +268,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Set<String> routerProductIds = new HashSet<>();
 		DozerBeanMapper beanMapper = new DozerBeanMapper();
 		if (bundleDetails != null && CollectionUtils.isNotEmpty(bundleDetails.getPlanList())) {
-			Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
+
 			bundleDetails.getPlanList().forEach(bundleHeader -> {
 
 				FlbBundle flbBundle = new FlbBundle();
@@ -314,6 +321,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 										break;
 									}
 								}
+							}
+							
+							if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
+								LineTreatment lineTreatment = serLines.getLineTreatmentList().get(0);
+								flbBundle.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
+								flbBundle.setPreOrderable(lineTreatment.getPreOrder());
 							}
 						}
 					}
@@ -476,7 +489,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Link lineOptionLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineOptions)
 				.withRel("flbb-availablility-checker").withType("POST");
 		Link selfLink = ControllerLinkBuilder
-				.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class).getAddressByPostcode(null, "FTTH"))
+				.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class).getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH))
 				.withSelfRel().withType("GET");
 		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
 				.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null);
@@ -507,7 +520,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
-						.getAddressByPostcode(null, "FTTH");
+						.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
 				Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 						.withType("GET");
 				basket.add(ConverterUtils.formatLink(getAddressLink));
@@ -560,7 +573,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadbandDao.setBroadBandInCache(broadbandToSave);
 
 			AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
-					.getAddressByPostcode(null, "FTTH");
+					.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
 			Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 					.withType("GET");
 			basket.add(ConverterUtils.formatLink(getAddressLink));
@@ -749,7 +762,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		OptimizePackageResponse response = new OptimizePackageResponse();
 		response.setHasPackageOptimized(false);
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		if(broadband==null){
+		if (broadband == null) {
 			broadband = new Broadband();
 		}
 		broadband.setBroadBandId(broadbandId);
@@ -767,7 +780,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				journeyName = journey.getJourneyData().getName();
 			}
 			String planId = broadband.getBasketInfo().getPlanId();
-			if (!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), "FTTH")) {
+			if (!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)) {
 				BundlePromotionRequest bundlePromotionRequest = ConverterUtils
 						.createPromotionRequestToOptimize(broadband, journeyName);
 				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
@@ -781,7 +794,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 					}
 				}
-			} else if (StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), "FTTH")) {
+			} else if (StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)) {
 				if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
 					response.setHasPackageOptimized(true);
 				}
