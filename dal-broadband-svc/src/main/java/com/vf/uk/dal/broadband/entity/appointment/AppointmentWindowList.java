@@ -15,6 +15,12 @@ public class AppointmentWindowList {
 
 	@JsonProperty("timeSlot")
 	private String timeSlot = null;
+	
+	@JsonProperty("startTime")
+	private String startTime = null;
+	
+	@JsonProperty("endTime")
+	private String endTime = null;
 
 	/**
 	 * @param startTimePeriod
@@ -63,6 +69,52 @@ public class AppointmentWindowList {
 	public void setTimeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 	}
+	
+	/**
+	 * @param startTime
+	 * @return
+	 */
+	public AppointmentWindowList startTime(String startTime) {
+		this.startTime = startTime;
+		return this;
+	}
+
+	/**
+	 * Time on which the appointment should be reserved.
+	 * 
+	 * @return startTime
+	 **/
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	
+	/**
+	 * @param endTime
+	 * @return
+	 */
+	public AppointmentWindowList endTime(String endTime) {
+		this.endTime = endTime;
+		return this;
+	}
+
+	/**
+	 * Time on which the appointment should be reserved.
+	 * 
+	 * @return endTime
+	 **/
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
 	@Override
 	public boolean equals(java.lang.Object o) {
@@ -74,12 +126,14 @@ public class AppointmentWindowList {
 		}
 		AppointmentWindowList appointmentWindowList = (AppointmentWindowList) o;
 		return Objects.equals(this.startTimePeriod, appointmentWindowList.startTimePeriod)
-				&& Objects.equals(this.timeSlot, appointmentWindowList.timeSlot);
+				&& Objects.equals(this.timeSlot, appointmentWindowList.timeSlot)
+				&& Objects.equals(this.startTime, appointmentWindowList.startTime)
+				&& Objects.equals(this.endTime, appointmentWindowList.endTime);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(startTimePeriod, timeSlot);
+		return Objects.hash(startTimePeriod, timeSlot, startTime, endTime);
 	}
 
 	@Override
@@ -89,6 +143,8 @@ public class AppointmentWindowList {
 
 		sb.append("    startTimePeriod: ").append(toIndentedString(startTimePeriod)).append("\n");
 		sb.append("    timeSlot: ").append(toIndentedString(timeSlot)).append("\n");
+		sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
+		sb.append("    endTime: ").append(toIndentedString(endTime)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
