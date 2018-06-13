@@ -41,27 +41,24 @@ public class Broadband implements Serializable {
 	/** The line details. */
 	@JsonProperty("lineDetails")
 	private LineDetails lineDetails;
-	
-	
+
 	@JsonProperty("engineeringVisitCharge")
-	private PriceForHardware engineeringVisitCharge = null;;
-	
+	private PriceForHardware engineeringVisitCharge = null;
 
 	@JsonProperty("broadBandId")
 	@Id
 	private String broadBandId = null;
 	@JsonProperty("journeyId")
 	private String journeyId = null;
-	
+
 	@JsonProperty("basketId")
 	private String basketId = null;
-	
+
 	@JsonProperty("basketInfo")
 	private BasketInfo basketInfo;
-	
-	
-	
-	
+
+	@JsonProperty("categoryPreference")
+	private String categoryPreference = null;
 
 	public Broadband servicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
@@ -121,7 +118,6 @@ public class Broadband implements Serializable {
 		this.basketId = basketId;
 	}
 
-
 	public PriceForHardware getEngineeringVisitCharge() {
 		return engineeringVisitCharge;
 	}
@@ -136,6 +132,14 @@ public class Broadband implements Serializable {
 
 	public void setBasketInfo(BasketInfo basketInfo) {
 		this.basketInfo = basketInfo;
+	}
+
+	public String getCategoryPreference() {
+		return categoryPreference;
+	}
+
+	public void setCategoryPreference(String categoryPreference) {
+		this.categoryPreference = categoryPreference;
 	}
 
 	@Override

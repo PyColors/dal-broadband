@@ -103,7 +103,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 			String broadbandId, Broadband broadband) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		Broadband broadBand = broadband;
-		if (broadBand != null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
+		if(broadBand == null){
+			broadBand	 = new Broadband();
+		}
+		broadBand.setCategoryPreference(availabilityCheckRequest.getCategory());
+		if (checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
 			if (StringUtils.isNotEmpty(broadBand.getBasketId())) {
 				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
