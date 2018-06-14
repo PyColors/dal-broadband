@@ -9,39 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * ListOfHelpURL
+ * HelpURL
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
-public class ListOfHelpURL   {
-  @JsonProperty("url")
-  private String url = null;
-
+public class HelpURL   {
   @JsonProperty("text")
   private String text = null;
 
-  public ListOfHelpURL url(String url) {
-    this.url = url;
-    return this;
-  }
+  @JsonProperty("url")
+  private String url = null;
 
-  /**
-   * Get url
-   * @return url
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  public ListOfHelpURL text(String text) {
+  public HelpURL text(String text) {
     this.text = text;
     return this;
   }
@@ -61,6 +41,26 @@ public class ListOfHelpURL   {
     this.text = text;
   }
 
+  public HelpURL url(String url) {
+    this.url = url;
+    return this;
+  }
+
+  /**
+   * Get url
+   * @return url
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -70,23 +70,23 @@ public class ListOfHelpURL   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListOfHelpURL listOfHelpURL = (ListOfHelpURL) o;
-    return Objects.equals(this.url, listOfHelpURL.url) &&
-        Objects.equals(this.text, listOfHelpURL.text);
+    HelpURL helpURL = (HelpURL) o;
+    return Objects.equals(this.text, helpURL.text) &&
+        Objects.equals(this.url, helpURL.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(url, text);
+    return Objects.hash(text, url);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ListOfHelpURL {\n");
+    sb.append("class HelpURL {\n");
     
-    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
+    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
   }

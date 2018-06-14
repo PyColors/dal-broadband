@@ -38,7 +38,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -323,14 +323,14 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public List<ProductDetails> getEngineeringVisitFee() {
+	public List<CommercialProduct> getEngineeringVisitFee() {
 
-		List<ProductDetails> productDetails = null;
+		List<CommercialProduct> productDetails = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		try {
-			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity(
+			ResponseEntity<CommercialProduct[]> client = restTemplate.getForEntity(
 					"http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
-					ProductDetails[].class);
+					CommercialProduct[].class);
 			if (client != null)
 				productDetails = Arrays.asList(client.getBody());
 		} catch (Exception e) {

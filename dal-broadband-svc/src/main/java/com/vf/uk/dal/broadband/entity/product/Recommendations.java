@@ -12,34 +12,14 @@ import io.swagger.annotations.ApiModelProperty;
  * Recommendations
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class Recommendations   {
-  @JsonProperty("type")
-  private String type = null;
-
   @JsonProperty("name")
   private String name = null;
 
-  public Recommendations type(String type) {
-    this.type = type;
-    return this;
-  }
-
-  /**
-   * Get type
-   * @return type
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
+  @JsonProperty("type")
+  private String type = null;
 
   public Recommendations name(String name) {
     this.name = name;
@@ -61,6 +41,26 @@ public class Recommendations   {
     this.name = name;
   }
 
+  public Recommendations type(String type) {
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   * @return type
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,13 +71,13 @@ public class Recommendations   {
       return false;
     }
     Recommendations recommendations = (Recommendations) o;
-    return Objects.equals(this.type, recommendations.type) &&
-        Objects.equals(this.name, recommendations.name);
+    return Objects.equals(this.name, recommendations.name) &&
+        Objects.equals(this.type, recommendations.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, name);
+    return Objects.hash(name, type);
   }
 
   @Override
@@ -85,8 +85,8 @@ public class Recommendations   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Recommendations {\n");
     
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

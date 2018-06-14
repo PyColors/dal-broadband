@@ -12,34 +12,14 @@ import io.swagger.annotations.ApiModelProperty;
  * ProductRequest
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class ProductRequest   {
-  @JsonProperty("productId")
-  private String productId = null;
-
   @JsonProperty("fieldList")
   private String fieldList = null;
 
-  public ProductRequest productId(String productId) {
-    this.productId = productId;
-    return this;
-  }
-
-  /**
-   * comma separated product ids
-   * @return productId
-  **/
-  @ApiModelProperty(value = "comma separated product ids")
-
-
-  public String getProductId() {
-    return productId;
-  }
-
-  public void setProductId(String productId) {
-    this.productId = productId;
-  }
+  @JsonProperty("ids")
+  private String ids = null;
 
   public ProductRequest fieldList(String fieldList) {
     this.fieldList = fieldList;
@@ -61,6 +41,26 @@ public class ProductRequest   {
     this.fieldList = fieldList;
   }
 
+  public ProductRequest ids(String ids) {
+    this.ids = ids;
+    return this;
+  }
+
+  /**
+   * comma separated product ids
+   * @return ids
+  **/
+  @ApiModelProperty(value = "comma separated product ids")
+
+
+  public String getIds() {
+    return ids;
+  }
+
+  public void setIds(String ids) {
+    this.ids = ids;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,13 +71,13 @@ public class ProductRequest   {
       return false;
     }
     ProductRequest productRequest = (ProductRequest) o;
-    return Objects.equals(this.productId, productRequest.productId) &&
-        Objects.equals(this.fieldList, productRequest.fieldList);
+    return Objects.equals(this.fieldList, productRequest.fieldList) &&
+        Objects.equals(this.ids, productRequest.ids);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(productId, fieldList);
+    return Objects.hash(fieldList, ids);
   }
 
   @Override
@@ -85,8 +85,8 @@ public class ProductRequest   {
     StringBuilder sb = new StringBuilder();
     sb.append("class ProductRequest {\n");
     
-    sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
     sb.append("    fieldList: ").append(toIndentedString(fieldList)).append("\n");
+    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
     sb.append("}");
     return sb.toString();
   }
