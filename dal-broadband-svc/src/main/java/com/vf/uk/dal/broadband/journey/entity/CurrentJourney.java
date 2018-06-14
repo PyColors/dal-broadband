@@ -1,5 +1,6 @@
 package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CurrentJourney

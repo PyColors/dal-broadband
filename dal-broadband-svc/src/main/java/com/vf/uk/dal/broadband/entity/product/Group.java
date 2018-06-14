@@ -13,23 +13,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * SpecificationGroups
+ * Group
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
-public class SpecificationGroups   {
+public class Group   {
   @JsonProperty("groupName")
   private String groupName = null;
 
   @JsonProperty("priority")
-  private String priority = null;
+  private Long priority = null;
 
   @JsonProperty("specifications")
   @Valid
-  private List<Specifications> specifications = null;
+  private List<Specification> specifications = null;
 
-  public SpecificationGroups groupName(String groupName) {
+  public Group groupName(String groupName) {
     this.groupName = groupName;
     return this;
   }
@@ -49,7 +49,7 @@ public class SpecificationGroups   {
     this.groupName = groupName;
   }
 
-  public SpecificationGroups priority(String priority) {
+  public Group priority(Long priority) {
     this.priority = priority;
     return this;
   }
@@ -61,22 +61,22 @@ public class SpecificationGroups   {
   @ApiModelProperty(value = "")
 
 
-  public String getPriority() {
+  public Long getPriority() {
     return priority;
   }
 
-  public void setPriority(String priority) {
+  public void setPriority(Long priority) {
     this.priority = priority;
   }
 
-  public SpecificationGroups specifications(List<Specifications> specifications) {
+  public Group specifications(List<Specification> specifications) {
     this.specifications = specifications;
     return this;
   }
 
-  public SpecificationGroups addSpecificationsItem(Specifications specificationsItem) {
+  public Group addSpecificationsItem(Specification specificationsItem) {
     if (this.specifications == null) {
-      this.specifications = new ArrayList<Specifications>();
+      this.specifications = new ArrayList<Specification>();
     }
     this.specifications.add(specificationsItem);
     return this;
@@ -90,11 +90,11 @@ public class SpecificationGroups   {
 
   @Valid
 
-  public List<Specifications> getSpecifications() {
+  public List<Specification> getSpecifications() {
     return specifications;
   }
 
-  public void setSpecifications(List<Specifications> specifications) {
+  public void setSpecifications(List<Specification> specifications) {
     this.specifications = specifications;
   }
 
@@ -107,10 +107,10 @@ public class SpecificationGroups   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SpecificationGroups specificationGroups = (SpecificationGroups) o;
-    return Objects.equals(this.groupName, specificationGroups.groupName) &&
-        Objects.equals(this.priority, specificationGroups.priority) &&
-        Objects.equals(this.specifications, specificationGroups.specifications);
+    Group group = (Group) o;
+    return Objects.equals(this.groupName, group.groupName) &&
+        Objects.equals(this.priority, group.priority) &&
+        Objects.equals(this.specifications, group.specifications);
   }
 
   @Override
@@ -121,7 +121,7 @@ public class SpecificationGroups   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SpecificationGroups {\n");
+    sb.append("class Group {\n");
     
     sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
     sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
