@@ -88,6 +88,7 @@ public class ConverterUtils {
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
 			AvailabilityCheckRequest availabilityCheckRequest) {
 		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest();
+		request.setCategory(availabilityCheckRequest.getCategory());
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
