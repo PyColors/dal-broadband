@@ -1198,12 +1198,14 @@ public class ConverterUtils {
 		GetAppointmentResponse getAppointmentRes = new GetAppointmentResponse();
 		List<AppointmentList> apptWindowList = new ArrayList<>();
 		for (AppointmentWindowList apptWindow : getAppointmentResponse.getAppointmentWindowList()) {
-			AppointmentList appWondow = new AppointmentList();
-			appWondow.setStartDate(apptWindow.getStartTimePeriod());
+			AppointmentList appWindow = new AppointmentList();
+			appWindow.setStartDate(apptWindow.getStartTimePeriod());
 			List<String> slot = new ArrayList<>();
 			slot.add(apptWindow.getTimeSlot());
-			appWondow.setTimeSlots(slot);
-			apptWindowList.add(appWondow);
+			appWindow.setTimeSlots(slot);
+			appWindow.setStartTime(apptWindow.getStartTime());
+			appWindow.setEndTime(apptWindow.getEndTime());
+			apptWindowList.add(appWindow);
 		}
 		getAppointmentRes.setAppointmentWindowList(apptWindowList);
 		return getAppointmentRes;
