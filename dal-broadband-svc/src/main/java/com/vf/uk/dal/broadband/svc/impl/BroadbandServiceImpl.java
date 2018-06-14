@@ -286,6 +286,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						BroadBandConstant.LINE_WITH_38)) {
 					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_38, "25"));
 				}
+				flbBundle.setPreOrderable(false);
 				flbBundle.setIsSelected(false);
 				if (broadBand != null && broadBand.getLineDetails() != null && StringUtils.equalsIgnoreCase(
 						flbBundle.getClassificationCode(), broadBand.getLineDetails().getClassificationCode())) {
@@ -327,7 +328,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 							if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
 								LineTreatment lineTreatment = serLines.getLineTreatmentList().get(0);
 								flbBundle.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
-								flbBundle.setPreOrderable(lineTreatment.getPreOrder());
+								if (lineTreatment.getPreOrder() != null) {
+									flbBundle.setPreOrderable(lineTreatment.getPreOrder());
+								}
 							}
 						}
 					}
