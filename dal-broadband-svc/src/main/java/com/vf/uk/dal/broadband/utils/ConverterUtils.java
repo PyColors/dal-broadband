@@ -303,7 +303,7 @@ public class ConverterUtils {
 					for (LineTreatment lineTreatments : lineTreatmentList) {
 						if (StringUtils.equalsIgnoreCase(lineTreatments.getLineTreatmentType().toString(),
 								BroadBandConstant.NEW)
-								&& !StringUtils.equalsIgnoreCase(lineTreatments.getConnectionCharge().toString(),
+								&& StringUtils.isNotEmpty(lineTreatments.getConnectionCharge()) && !StringUtils.equalsIgnoreCase(lineTreatments.getConnectionCharge().toString(),
 										BroadBandConstant.No_CHARGE)
 								&& CollectionUtils.isNotEmpty(productDetailsList)) {
 							PriceForHardware engineeringVisitCharge = new PriceForHardware();
@@ -472,7 +472,7 @@ public class ConverterUtils {
 				appointmentAndAvailabilityList.add(appointmentDetails);
 
 				if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), BroadBandConstant.NEW)
-						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(),
+						&& lineTreatment.getConnectionCharge()!=null  && !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(),
 								BroadBandConstant.No_CHARGE)
 						&& productModel != null && !productModel.isEmpty()) {
 					com.vf.uk.dal.broadband.entity.Price engineeringVisitCharge = new com.vf.uk.dal.broadband.entity.Price();
