@@ -210,7 +210,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 					.isEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))
 					|| (broadBand.getLineDetails() != null && StringUtils.equalsIgnoreCase(
 							broadBand.getLineDetails().getFlbbNumber(),
-							availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())))) {
+							availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())))
+					&& StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), broadBand.getCategoryPreference())) {
 				return true;
 			}
 
