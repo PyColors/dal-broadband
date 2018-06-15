@@ -385,7 +385,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 										.equalsIgnoreCase(BroadBandConstant.LINE_TREATMENT_TYPE_NEW))
 										|| (lineTreatmentList.size() == 2 && (StringUtils.isNotBlank(lineTreatmentType)
 												&& lineTreatmentType.equalsIgnoreCase(
-														BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))) {
+														BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))
+										&& broadBand.getEngineeringVisitCharge()!=null) {
 									engineeringFee.setHardwareId(
 											broadBand.getEngineeringVisitCharge().getEngVisitProductId());
 									Price engFee = new Price();
