@@ -83,6 +83,8 @@ import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 public class BroadbandServiceImpl implements BroadbandService {
 
 	private static final String CATEGORY_PREFERENCE_FTTH = "FTTH";
+	
+	private static final String CATEGORY_PREFERENCE_FTTC = "FTTC";
 
 	@Autowired
 	BroadbandDao broadbandDao;
@@ -257,9 +259,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
 		Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
-		if (broadBand != null && StringUtils.isNotBlank(broadBand.getCategoryPreference())
-				&& broadBand.getCategoryPreference().equalsIgnoreCase(CATEGORY_PREFERENCE_FTTH)) {
-			bundleClass = CATEGORY_PREFERENCE_FTTH;
+		if (broadBand != null  && (StringUtils.isBlank(broadBand.getCategoryPreference())
+				 || CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
+			bundleClass = CATEGORY_PREFERENCE_FTTC;
 		}
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
