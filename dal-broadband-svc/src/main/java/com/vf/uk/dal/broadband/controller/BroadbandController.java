@@ -117,7 +117,7 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setOfferCode(offerCode);
 		getBundleListSearchCriteria.setClassificationCode(classificationCode);
 		getBundleListSearchCriteria.setDuration(duration);
-		getBundleListSearchCriteria.setBundleClass("FTTC");
+		getBundleListSearchCriteria.setBundleClass("FTTH");
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
 		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
 
