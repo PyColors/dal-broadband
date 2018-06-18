@@ -60,6 +60,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Check the service availability for the broad band service at the given location: post codes like RG14 2PA", notes = "This service accepts address, calls the GSA and creates / update the journey with the service point information.", response = AvailabilityCheckResponse.class, tags = {
 			"AvailabilityCheck", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AvailabilityCheckResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 
@@ -99,6 +100,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Get the list of bundle(FLBB)  based on the filter criteria.", notes = "The service gets the details of the bundles from solr based on the filter criteria in the response.", response = FlbBundle[].class, tags = {
 			"Bundle", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = FlbBundle[].class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/plan", produces = { "application/json" }, method = RequestMethod.GET)
@@ -201,6 +203,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Create or updates the basket when the user selects the package", notes = "Create or update the basket when the user selects the the package", response = Basket.class, tags = {
 			"Broadband Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Basket.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/package", produces = { "application/hal+json" }, method = RequestMethod.POST)
@@ -216,6 +219,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Gives the Broadband cache using broadband id", notes = "Gets the broadband cache using broadband id", response = Broadband.class, tags = {
 			"Broadband" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Broadband.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/broadband/{broadbandId}", produces = { "application/json" }, method = RequestMethod.GET)
@@ -227,6 +231,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Updates the basket and cache with the line option selected and the selected package code of the plan", notes = "Update the basket with the line options and package code, to be used by checkout for creating the Service point info in the CSO", response = HttpStatus.class, tags = {
 			"Broadband, Selected Line API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/lineType", produces = { "application/json" }, method = RequestMethod.PUT)
@@ -258,6 +263,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Updates the basket with service start date and service point info in basket if user selects to remove from directory", notes = "This service calls update basket, based on the earliest available date and also service point with the remove me from phone directory information based on if user has selected", response = HttpStatus.class, tags = {
 			"Broadband, Service Start Date" })
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/startDate", produces = {
@@ -272,6 +278,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Optimize the basket by replacing the package", notes = "This service calls promotion API to get the plan which needs to be replaced and then calls update package", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class, tags = {
 			"Broadband, Optimize Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = OptimizePackageResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/optimize/package", produces = {
@@ -286,6 +293,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Gets the list of appointment based  ", notes = "This service gets the service start date from the cache and calls getAppointmentList", response = GetAppointmentResponse.class, tags = {
 			"Broadband, Appointment" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = GetAppointmentResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/appointment", produces = { "application/hal+json" }, method = RequestMethod.GET)
@@ -297,6 +305,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Get the list of the compatible devices based on the plan id sent", notes = "This service is called, get compatible devices and send the response to the client ", response = RouterDetails[].class, tags = {
 			"Broadband, Compatible Routers" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RouterDetails[].class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/plan/{planId}/router", produces = {
