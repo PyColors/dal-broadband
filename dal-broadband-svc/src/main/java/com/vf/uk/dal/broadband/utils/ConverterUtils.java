@@ -299,6 +299,14 @@ public class ConverterUtils {
 									.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
 						}
 						lineTreatmentForJourney.setEarliestAvailableDate(lineTreatment.getEarliestAvailabilityDate());
+						lineTreatmentForJourney.setPreOrder(false);
+						if (lineTreatment.isPreOrder() != null) {
+							lineTreatmentForJourney.setPreOrder(lineTreatment.isPreOrder());
+						}
+						lineTreatmentForJourney.setRegisterOfInterest(false);
+						if (lineTreatment.isRegisterOfInterest() != null) {
+							lineTreatmentForJourney.setRegisterOfInterest(lineTreatment.isRegisterOfInterest());
+						}
 						lineTreatmentList.add(lineTreatmentForJourney);
 					}
 					for (LineTreatment lineTreatments : lineTreatmentList) {

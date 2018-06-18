@@ -330,8 +330,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 							if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
 								LineTreatment lineTreatment = serLines.getLineTreatmentList().get(0);
 								flbBundle.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
-								if (lineTreatment.getPreOrder() != null) {
-									flbBundle.setPreOrderable(lineTreatment.getPreOrder());
+								if (lineTreatment.isPreOrder() != null) {
+									flbBundle.setPreOrderable(lineTreatment.isPreOrder());
 								}
 							}
 						}
