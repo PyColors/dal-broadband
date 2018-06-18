@@ -136,7 +136,7 @@ public class LineTreatment implements Serializable {
 		this.lineTreatmentType = lineTreatmentType;
 	}
 
-	public Boolean getPreOrder() {
+	public Boolean isPreOrder() {
 		return preOrder;
 	}
 

@@ -114,7 +114,7 @@ public class FlbBundle {
 	 **/
 	@ApiModelProperty(value = "Preorderable flag returned from GSA")
 
-	public Boolean getPreOrderable() {
+	public Boolean isPreOrderable() {
 		return preOrderable;
 	}
 
