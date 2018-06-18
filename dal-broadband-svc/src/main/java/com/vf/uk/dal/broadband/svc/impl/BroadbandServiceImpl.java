@@ -58,7 +58,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -83,6 +83,8 @@ import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 public class BroadbandServiceImpl implements BroadbandService {
 
 	private static final String CATEGORY_PREFERENCE_FTTH = "FTTH";
+	
+	private static final String CATEGORY_PREFERENCE_FTTC = "FTTC";
 
 	@Autowired
 	BroadbandDao broadbandDao;
@@ -136,7 +138,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
 					|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
 
-				List<ProductDetails> productDetailsList = broadbandDao.getEngineeringVisitFee();
+				List<CommercialProduct> productDetailsList = broadbandDao.getEngineeringVisitFee();
 
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
 						getServiceAvailabilityResponse, broadbandId, broadBand, productDetailsList);
@@ -257,9 +259,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
 		Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
-		if (broadBand != null && StringUtils.isNotBlank(broadBand.getCategoryPreference())
-				&& broadBand.getCategoryPreference().equalsIgnoreCase(CATEGORY_PREFERENCE_FTTH)) {
-			bundleClass = CATEGORY_PREFERENCE_FTTH;
+		if (broadBand != null  && (StringUtils.isBlank(broadBand.getCategoryPreference())
+				 || CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
+			bundleClass = CATEGORY_PREFERENCE_FTTC;
 		}
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
@@ -385,7 +387,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 										.equalsIgnoreCase(BroadBandConstant.LINE_TREATMENT_TYPE_NEW))
 										|| (lineTreatmentList.size() == 2 && (StringUtils.isNotBlank(lineTreatmentType)
 												&& lineTreatmentType.equalsIgnoreCase(
-														BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))) {
+														BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))
+										&& broadBand.getEngineeringVisitCharge()!=null) {
 									engineeringFee.setHardwareId(
 											broadBand.getEngineeringVisitCharge().getEngVisitProductId());
 									Price engFee = new Price();

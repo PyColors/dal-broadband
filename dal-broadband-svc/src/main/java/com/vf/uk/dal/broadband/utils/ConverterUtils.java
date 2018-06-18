@@ -62,7 +62,7 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.Organisation;
 import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.constant.BroadBandConstant;
@@ -88,10 +88,12 @@ public class ConverterUtils {
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
 			AvailabilityCheckRequest availabilityCheckRequest) {
 		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest();
+		request.setCategory(availabilityCheckRequest.getCategory());
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
-		request.setCustomerType(com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
+		request.setCustomerType(
+				com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
 		com.vf.uk.dal.entity.serviceavailability.InstallationAddress installationAddress = new com.vf.uk.dal.entity.serviceavailability.InstallationAddress();
 		installationAddress.setCitySubDivisionName(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getCitySubDivisionName());
@@ -134,7 +136,7 @@ public class ConverterUtils {
 
 	public static Broadband createBroadbandInCache(AvailabilityCheckRequest availabilityCheckRequest,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId, Broadband broadBand,
-			List<ProductDetails> productDetailsList) {
+			List<CommercialProduct> productDetailsList) {
 		Broadband broadband = broadBand;
 		if (broadband == null) {
 			broadband = new Broadband();
@@ -300,32 +302,15 @@ public class ConverterUtils {
 						lineTreatmentList.add(lineTreatmentForJourney);
 					}
 					for (LineTreatment lineTreatments : lineTreatmentList) {
-						if (StringUtils.equalsIgnoreCase(lineTreatments.getLineTreatmentType().toString(),
-								BroadBandConstant.NEW)
+						if (!StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH")
 								&& !StringUtils.equalsIgnoreCase(lineTreatments.getConnectionCharge().toString(),
 										BroadBandConstant.No_CHARGE)
 								&& CollectionUtils.isNotEmpty(productDetailsList)) {
-							PriceForHardware engineeringVisitCharge = new PriceForHardware();
-							if (productDetailsList.get(0).getPriceDetail() != null && StringUtils
-									.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceGross())) {
-								engineeringVisitCharge.setGross(
-										String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceGross()));
-							}
-							if (productDetailsList.get(0).getPriceDetail() != null && StringUtils
-									.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceNet())) {
-								engineeringVisitCharge.setNet(
-										String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceNet()));
-							}
-							if (productDetailsList.get(0).getPriceDetail() != null && StringUtils
-									.isNotEmpty(productDetailsList.get(0).getPriceDetail().getPriceVAT())) {
-								engineeringVisitCharge.setVat(
-										String.valueOf(productDetailsList.get(0).getPriceDetail().getPriceVAT()));
-							}
+							setEngineerVisitPrice(productDetailsList, broadband);
+						} else if (StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH")
 
-							if (StringUtils.isNotEmpty(productDetailsList.get(0).getId())) {
-								engineeringVisitCharge.setEngVisitProductId(productDetailsList.get(0).getId());
-							}
-							broadband.setEngineeringVisitCharge(engineeringVisitCharge);
+								&& CollectionUtils.isNotEmpty(productDetailsList)) {
+							setEngineerVisitPrice(productDetailsList, broadband);
 						}
 					}
 					serviceLinesRequestForJourney.setLineTreatmentList(lineTreatmentList);
@@ -439,6 +424,31 @@ public class ConverterUtils {
 		return broadband;
 	}
 
+	private static void setEngineerVisitPrice(List<CommercialProduct> productDetailsList, Broadband broadband) {
+		PriceForHardware engineeringVisitCharge = new PriceForHardware();
+
+		if (productDetailsList.get(0).getPriceInfo() != null
+				&& productDetailsList.get(0).getPriceInfo().getOneOffPrice() != null) {
+			if (StringUtils.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getNet())) {
+				engineeringVisitCharge
+						.setNet(String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getNet()));
+			}
+			if (StringUtils.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getGross())) {
+				engineeringVisitCharge
+						.setGross(String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getGross()));
+			}
+			if (StringUtils.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getVat())) {
+				engineeringVisitCharge
+						.setVat(String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getVat()));
+			}
+		}
+
+		if (StringUtils.isNotEmpty(productDetailsList.get(0).getId())) {
+			engineeringVisitCharge.setEngVisitProductId(productDetailsList.get(0).getId());
+		}
+		broadband.setEngineeringVisitCharge(engineeringVisitCharge);
+	}
+
 	/**
 	 * 
 	 * @param response
@@ -450,7 +460,7 @@ public class ConverterUtils {
 
 	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse,
-			AvailabilityCheckRequest availabilityCheckRequest, List<ProductDetails> productModel) {
+			AvailabilityCheckRequest availabilityCheckRequest, List<CommercialProduct> productDetailsList) {
 		if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
 				&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
@@ -470,25 +480,54 @@ public class ConverterUtils {
 				}
 				appointmentAndAvailabilityList.add(appointmentDetails);
 
-				if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), BroadBandConstant.NEW)
+				if (!StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH")
+						&& StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(),
+								BroadBandConstant.NEW)
+						&& lineTreatment.getConnectionCharge() != null
 						&& !StringUtils.equalsIgnoreCase(lineTreatment.getConnectionCharge().toString(),
 								BroadBandConstant.No_CHARGE)
-						&& productModel != null && !productModel.isEmpty()) {
+						&& productDetailsList != null && !productDetailsList.isEmpty()) {
 					com.vf.uk.dal.broadband.entity.Price engineeringVisitCharge = new com.vf.uk.dal.broadband.entity.Price();
-					if (productModel.get(0).getPriceDetail() != null
-							&& StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceGross())) {
-						engineeringVisitCharge
-								.setGross(String.valueOf(productModel.get(0).getPriceDetail().getPriceGross()));
+					if (productDetailsList.get(0).getPriceInfo() != null
+							&& productDetailsList.get(0).getPriceInfo().getOneOffPrice() != null) {
+						if (StringUtils
+								.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getNet())) {
+							engineeringVisitCharge.setNet(
+									String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getNet()));
+						}
+						if (StringUtils
+								.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getGross())) {
+							engineeringVisitCharge.setGross(String
+									.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getGross()));
+						}
+						if (StringUtils
+								.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getVat())) {
+							engineeringVisitCharge.setVat(
+									String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getVat()));
+						}
 					}
-					if (productModel.get(0).getPriceDetail() != null
-							&& StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceNet())) {
-						engineeringVisitCharge
-								.setNet(String.valueOf(productModel.get(0).getPriceDetail().getPriceNet()));
-					}
-					if (productModel.get(0).getPriceDetail() != null
-							&& StringUtils.isNotEmpty(productModel.get(0).getPriceDetail().getPriceVAT())) {
-						engineeringVisitCharge
-								.setVat(String.valueOf(productModel.get(0).getPriceDetail().getPriceVAT()));
+					response.setEngineeringVisitCharge(engineeringVisitCharge);
+				} else if (StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH") && StringUtils
+						.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(), BroadBandConstant.NEW)
+						&& productDetailsList != null && !productDetailsList.isEmpty()) {
+					com.vf.uk.dal.broadband.entity.Price engineeringVisitCharge = new com.vf.uk.dal.broadband.entity.Price();
+					if (productDetailsList.get(0).getPriceInfo() != null
+							&& productDetailsList.get(0).getPriceInfo().getOneOffPrice() != null) {
+						if (StringUtils
+								.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getNet())) {
+							engineeringVisitCharge.setNet(
+									String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getNet()));
+						}
+						if (StringUtils
+								.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getGross())) {
+							engineeringVisitCharge.setGross(String
+									.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getGross()));
+						}
+						if (StringUtils
+								.isNotEmpty(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getVat())) {
+							engineeringVisitCharge.setVat(
+									String.valueOf(productDetailsList.get(0).getPriceInfo().getOneOffPrice().getVat()));
+						}
 					}
 					response.setEngineeringVisitCharge(engineeringVisitCharge);
 				}
@@ -804,7 +843,8 @@ public class ConverterUtils {
 		}
 		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
 		BasketInfo basketInfo = new BasketInfo();
-		if(basketRequest.getAddBundle()!=null && StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())){
+		if (basketRequest.getAddBundle() != null
+				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())) {
 			basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
 		}
 		if (CollectionUtils.isNotEmpty(basket.getPackages())) {
@@ -940,8 +980,7 @@ public class ConverterUtils {
 		} else {
 			updatePackage.setPackageType("Acquisition");
 		}
-		
-		
+
 		if (StringUtils.isNotEmpty(planId)) {
 			UpdateBundle updateBundle = new UpdateBundle();
 			updateBundle.setAction("ADD");
@@ -1182,7 +1221,8 @@ public class ConverterUtils {
 						for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
 							if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
 									broadBand.getLineDetails().getLineTreatmentType())) {
-								appointmentWindow.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + " 00:00:00");
+								appointmentWindow
+										.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + " 00:00:00");
 							}
 						}
 					}
@@ -1219,17 +1259,19 @@ public class ConverterUtils {
 		bundlePromotionRequest.setJourneyType(journeyName);
 		return bundlePromotionRequest;
 	}
-	
-	public static ServiceStartDateRequest createServiceStartDateRequest(com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDate) {
+
+	public static ServiceStartDateRequest createServiceStartDateRequest(
+			com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDate) {
 		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
 		serviceStartDateRequest.setServiceStartDate(serviceStartDate.getStartDateTime());
 		return serviceStartDateRequest;
 	}
-	
-	public static Link formatLink(Link link){
+
+	public static Link formatLink(Link link) {
 		Link newLink = link;
-		if(newLink!=null && newLink.getHref().indexOf("/broadband")!=-1){
-			newLink=newLink.withHref(newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
+		if (newLink != null && newLink.getHref().indexOf("/broadband") != -1) {
+			newLink = newLink.withHref(
+					newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
 		}
 		return newLink;
 	}
