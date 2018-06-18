@@ -58,6 +58,7 @@ import com.vf.uk.dal.broadband.entity.appointment.AddressDetails;
 import com.vf.uk.dal.broadband.entity.appointment.AppointmentDetails;
 import com.vf.uk.dal.broadband.entity.appointment.AppointmentWindow;
 import com.vf.uk.dal.broadband.entity.appointment.AppointmentWindowList;
+import com.vf.uk.dal.broadband.entity.appointment.CustomerPartyReference;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.Organisation;
@@ -376,7 +377,8 @@ public class ConverterUtils {
 									serviceLineFromRequest.getMiscReference().getReadyForServiceDate());
 							miscReferenceForJourney.setServiceProviderName(
 									serviceLineFromRequest.getMiscReference().getServiceProviderName());
-							miscReferenceForJourney.setInstallationType(serviceLineFromRequest.getMiscReference().getInstallationType());
+							miscReferenceForJourney.setInstallationType(
+									serviceLineFromRequest.getMiscReference().getInstallationType());
 							serviceLine.setMiscRefernce(miscReferenceForJourney);
 						}
 						List<ServiceLineTreatment> serviceLineTreatmentList = new ArrayList<>();
@@ -693,14 +695,30 @@ public class ConverterUtils {
 			appointmentDetails.setAddressDetails(addressDetails);
 			ServiceRequest serviceRequest = new ServiceRequest();
 			serviceRequest.setCategoryCode("BASIC");
-			serviceRequest.setClassificationCode("LINE");
-			serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+			serviceRequest.setClassificationCode("BROADBAND");
 			serviceRequest.setTypeCode("INSTALL");
+			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
+				serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+
+			}
+			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference = new com.vf.uk.dal.broadband.entity.appointment.ItemReference();
+			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
+				itemReference.setTypeCode(broadBand.getCategoryPreference());
+			}
+			if (StringUtils.isNotEmpty(broadBand.getLineDetails().getClassificationCode())) {
+				itemReference.setClassificationCode(broadBand.getLineDetails().getClassificationCode());
+			}
+			serviceRequest.setItemReference(itemReference);
+			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
+			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
+			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
 			appointmentWindow.setStartTimePeriod(createAppointmentRequest.getStartTimePeriod());
 			appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
 			appointmentWindow.setOperationalPreferenceCode("STANDARD");
+			appointmentWindow.setStartTime(createAppointmentRequest.getStartTime());
+			appointmentWindow.setEndTime(createAppointmentRequest.getEndTime());
 			appointmentDetails.setAppointmentWindow(appointmentWindow);
 			request.setAppointmentDetails(appointmentDetails);
 			request.setExisting(false);
@@ -1215,9 +1233,24 @@ public class ConverterUtils {
 			appointmentDetails.setAddressDetails(addressDetails);
 			ServiceRequest serviceRequest = new ServiceRequest();
 			serviceRequest.setCategoryCode("BASIC");
-			serviceRequest.setClassificationCode("LINE");
-			serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+			serviceRequest.setClassificationCode("BROADBAND");
 			serviceRequest.setTypeCode("INSTALL");
+			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
+				serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+
+			}
+
+			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference = new com.vf.uk.dal.broadband.entity.appointment.ItemReference();
+			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
+				itemReference.setTypeCode(broadBand.getCategoryPreference());
+			}
+			if (StringUtils.isNotEmpty(broadBand.getLineDetails().getClassificationCode())) {
+				itemReference.setClassificationCode(broadBand.getLineDetails().getClassificationCode());
+			}
+			serviceRequest.setItemReference(itemReference);
+			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
+			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
+			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
 			appointmentWindow.setOperationalPreferenceCode("STANDARD");
@@ -1231,7 +1264,7 @@ public class ConverterUtils {
 							if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
 									broadBand.getLineDetails().getLineTreatmentType())) {
 								appointmentWindow
-										.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + " 00:00:00");
+										.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + "T00:00:00");
 							}
 						}
 					}

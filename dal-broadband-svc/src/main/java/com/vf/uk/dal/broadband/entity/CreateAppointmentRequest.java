@@ -15,8 +15,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class CreateAppointmentRequest {
 
-	
-
 	@JsonProperty("startTimePeriod")
 	private String startTimePeriod = null;
 
@@ -25,10 +23,15 @@ public class CreateAppointmentRequest {
 
 	@JsonProperty("siteNote")
 	private SiteNote siteNote = null;
-	
+
 	@JsonProperty("removeFromPhoneDirectory")
 	private Boolean removeFromPhoneDirectory = null;
-	
+
+	@JsonProperty("endTime")
+	private String endTime = null;
+
+	@JsonProperty("startTime")
+	private String startTime = null;
 
 	/**
 	 * 
@@ -114,6 +117,22 @@ public class CreateAppointmentRequest {
 
 	public void setRemoveFromPhoneDirectory(Boolean removeFromPhoneDirectory) {
 		this.removeFromPhoneDirectory = removeFromPhoneDirectory;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 	@Override
