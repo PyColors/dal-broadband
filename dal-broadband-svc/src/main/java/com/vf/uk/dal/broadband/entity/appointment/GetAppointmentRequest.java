@@ -4,105 +4,105 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * GetAppointmentRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-18T17:50:50.794Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
-public class GetAppointmentRequest implements RequestMessage{
-	@JsonProperty("existing")
-	private Boolean existing = null;
+public class GetAppointmentRequest   {
+  @JsonProperty("appointmentDetails")
+  private AppointmentDetails appointmentDetails = null;
 
-	@JsonProperty("appointmentDetails")
-	private AppointmentDetails appointmentDetails = null;
+  @JsonProperty("existing")
+  private Boolean existing = null;
 
-	/**
-	 * @param existing
-	 * @return
-	 */
-	public GetAppointmentRequest existing(Boolean existing) {
-		this.existing = existing;
-		return this;
-	}
+  public GetAppointmentRequest appointmentDetails(AppointmentDetails appointmentDetails) {
+    this.appointmentDetails = appointmentDetails;
+    return this;
+  }
 
-	/**
-	 * Get existing
-	 * 
-	 * @return existing
-	 **/
+  /**
+   * Get appointmentDetails
+   * @return appointmentDetails
+  **/
+  @ApiModelProperty(value = "")
 
-	public Boolean getExisting() {
-		return existing;
-	}
+  @Valid
 
-	public void setExisting(Boolean existing) {
-		this.existing = existing;
-	}
+  public AppointmentDetails getAppointmentDetails() {
+    return appointmentDetails;
+  }
 
-	/**
-	 * @param appointmentDetails
-	 * @return
-	 */
-	public GetAppointmentRequest appointmentDetails(AppointmentDetails appointmentDetails) {
-		this.appointmentDetails = appointmentDetails;
-		return this;
-	}
+  public void setAppointmentDetails(AppointmentDetails appointmentDetails) {
+    this.appointmentDetails = appointmentDetails;
+  }
 
-	/**
-	 * Get appointmentDetails
-	 * 
-	 * @return appointmentDetails
-	 **/
+  public GetAppointmentRequest existing(Boolean existing) {
+    this.existing = existing;
+    return this;
+  }
 
-	@Valid
+  /**
+   * Get existing
+   * @return existing
+  **/
+  @ApiModelProperty(example = "false", value = "")
 
-	public AppointmentDetails getAppointmentDetails() {
-		return appointmentDetails;
-	}
 
-	public void setAppointmentDetails(AppointmentDetails appointmentDetails) {
-		this.appointmentDetails = appointmentDetails;
-	}
+  public Boolean isExisting() {
+    return existing;
+  }
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		GetAppointmentRequest getAppointmentRequest = (GetAppointmentRequest) o;
-		return Objects.equals(this.existing, getAppointmentRequest.existing)
-				&& Objects.equals(this.appointmentDetails, getAppointmentRequest.appointmentDetails);
-	}
+  public void setExisting(Boolean existing) {
+    this.existing = existing;
+  }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(existing, appointmentDetails);
-	}
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class GetAppointmentRequest {\n");
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    GetAppointmentRequest getAppointmentRequest = (GetAppointmentRequest) o;
+    return Objects.equals(this.appointmentDetails, getAppointmentRequest.appointmentDetails) &&
+        Objects.equals(this.existing, getAppointmentRequest.existing);
+  }
 
-		sb.append("    existing: ").append(toIndentedString(existing)).append("\n");
-		sb.append("    appointmentDetails: ").append(toIndentedString(appointmentDetails)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hash(appointmentDetails, existing);
+  }
 
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class GetAppointmentRequest {\n");
+    
+    sb.append("    appointmentDetails: ").append(toIndentedString(appointmentDetails)).append("\n");
+    sb.append("    existing: ").append(toIndentedString(existing)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+
