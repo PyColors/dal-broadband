@@ -376,6 +376,7 @@ public class ConverterUtils {
 									serviceLineFromRequest.getMiscReference().getReadyForServiceDate());
 							miscReferenceForJourney.setServiceProviderName(
 									serviceLineFromRequest.getMiscReference().getServiceProviderName());
+							miscReferenceForJourney.setInstallationType(serviceLineFromRequest.getMiscReference().getInstallationType());
 							serviceLine.setMiscRefernce(miscReferenceForJourney);
 						}
 						List<ServiceLineTreatment> serviceLineTreatmentList = new ArrayList<>();
