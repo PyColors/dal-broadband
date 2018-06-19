@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Check the service availability for the broad band service at the given location: post codes like RG14 2PA", notes = "This service accepts address, calls the GSA and creates / update the journey with the service point information.", response = AvailabilityCheckResponse.class, tags = {
 			"AvailabilityCheck", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AvailabilityCheckResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 
@@ -71,8 +73,9 @@ public class BroadbandController {
 
 		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
 		AvailabilityCheckResponse availabilityCheckResponse = broadbandService
-				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId,broadband);
-		//Link selfLink = ControllerLinkBuilder.linkTo(BroadbandController.class).metho
+				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId, broadband);
+		// Link selfLink =
+		// ControllerLinkBuilder.linkTo(BroadbandController.class).metho
 		return new ResponseEntity<>(availabilityCheckResponse, HttpStatus.OK);
 
 	}
@@ -99,6 +102,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Get the list of bundle(FLBB)  based on the filter criteria.", notes = "The service gets the details of the bundles from solr based on the filter criteria in the response.", response = FlbBundle[].class, tags = {
 			"Bundle", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = FlbBundle[].class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/plan", produces = { "application/json" }, method = RequestMethod.GET)
@@ -108,7 +112,8 @@ public class BroadbandController {
 			@ApiParam(value = "Offercode sets the pricing information based on the offercode sent, and gets the data from promotions API.") @RequestParam(value = "offerCode", required = false) String offerCode,
 			@ApiParam(value = "Indicates the journeyType of the customer. For eg. upgrade Accepts SecondLine, Upgrade. Upgrade is currently not supported. The provision is there but should not be sent until backend starts supporting. If nothing is passed then we default it to Acquisition or New Customer secondline, etc.") @RequestParam(value = "journeyType", required = false) String journeyType,
 			@ApiParam(value = "bundles will be filter based on duration like 18 months or 24 months. Format is 18 Months or 24 Months or 12 Months") @RequestParam(value = "duration", required = false) String duration,
-			@ApiParam(value = "Filter based on speed. Accepts single and comma seperated aswell Eg: Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed then we show all the packages for corresponding journeyType.") @RequestParam(value = "classificationCode", required = false) String classificationCode) {
+			@ApiParam(value = "Filter based on speed. Accepts single and comma seperated aswell Eg: Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed then we show all the packages for corresponding journeyType.") @RequestParam(value = "classificationCode", required = false) String classificationCode,
+			@ApiParam(value = "Filter based on category preferences. Accepts FTTH or FTTC") @RequestParam(value = "categoryPreference", required = false) String categoryPreference) {
 		List<FlbBundle> listOfFlbBundle;
 		GetBundleListSearchCriteria getBundleListSearchCriteria = new GetBundleListSearchCriteria();
 		getBundleListSearchCriteria.setBroadbandId(broadbandId);
@@ -117,7 +122,10 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setOfferCode(offerCode);
 		getBundleListSearchCriteria.setClassificationCode(classificationCode);
 		getBundleListSearchCriteria.setDuration(duration);
-		getBundleListSearchCriteria.setBundleClass("FTTC");
+		getBundleListSearchCriteria.setBundleClass("FTTH");
+		if (StringUtils.isNotBlank(categoryPreference)) {
+			getBundleListSearchCriteria.setBundleClass(categoryPreference);
+		}
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
 		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);
 
@@ -192,7 +200,8 @@ public class BroadbandController {
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,
 			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false) String categoryPreference) {
 		try {
-			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"), categoryPreference);
+			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"),
+					categoryPreference);
 		} catch (UnsupportedEncodingException e) {
 			throw new ApplicationException("Invalid_Format_PostCode" + e);
 		}
@@ -201,9 +210,11 @@ public class BroadbandController {
 	@ApiOperation(value = "Create or updates the basket when the user selects the package", notes = "Create or update the basket when the user selects the the package", response = Basket.class, tags = {
 			"Broadband Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Basket.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
-	@RequestMapping(value = "/{broadbandId}/package", produces = { "application/hal+json" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/{broadbandId}/package", produces = {
+			"application/hal+json" }, method = RequestMethod.POST)
 	public Basket createOrUpdatePackage(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody BasketRequest basketRequest) {
@@ -216,6 +227,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Gives the Broadband cache using broadband id", notes = "Gets the broadband cache using broadband id", response = Broadband.class, tags = {
 			"Broadband" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Broadband.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/broadband/{broadbandId}", produces = { "application/json" }, method = RequestMethod.GET)
@@ -227,6 +239,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Updates the basket and cache with the line option selected and the selected package code of the plan", notes = "Update the basket with the line options and package code, to be used by checkout for creating the Service point info in the CSO", response = HttpStatus.class, tags = {
 			"Broadband, Selected Line API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/lineType", produces = { "application/json" }, method = RequestMethod.PUT)
@@ -258,20 +271,21 @@ public class BroadbandController {
 	@ApiOperation(value = "Updates the basket with service start date and service point info in basket if user selects to remove from directory", notes = "This service calls update basket, based on the earliest available date and also service point with the remove me from phone directory information based on if user has selected", response = HttpStatus.class, tags = {
 			"Broadband, Service Start Date" })
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
-	@RequestMapping(value = "/{broadbandId}/startDate", produces = {
-			"application/json" }, method = RequestMethod.PUT)
+	@RequestMapping(value = "/{broadbandId}/startDate", produces = { "application/json" }, method = RequestMethod.PUT)
 	public ResponseEntity<HttpStatus> serviceStartDate(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Request to update the broadband with the service start date information, Date format Should be yyyy-MM-dd ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDateRequest) {
-		broadbandService.updateBasketWithServiceDate(broadbandId,serviceStartDateRequest);
+		broadbandService.updateBasketWithServiceDate(broadbandId, serviceStartDateRequest);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@ApiOperation(value = "Optimize the basket by replacing the package", notes = "This service calls promotion API to get the plan which needs to be replaced and then calls update package", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class, tags = {
 			"Broadband, Optimize Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = OptimizePackageResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/optimize/package", produces = {
@@ -286,9 +300,11 @@ public class BroadbandController {
 	@ApiOperation(value = "Gets the list of appointment based  ", notes = "This service gets the service start date from the cache and calls getAppointmentList", response = GetAppointmentResponse.class, tags = {
 			"Broadband, Appointment" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = GetAppointmentResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
-	@RequestMapping(value = "/{broadbandId}/appointment", produces = { "application/hal+json" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/{broadbandId}/appointment", produces = {
+			"application/hal+json" }, method = RequestMethod.GET)
 	public ResponseEntity<GetAppointmentResponse> getAppointmentForFLBB(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
 		return new ResponseEntity<>(broadbandService.getAppointmentForFLBB(broadbandId), HttpStatus.OK);
@@ -297,6 +313,7 @@ public class BroadbandController {
 	@ApiOperation(value = "Get the list of the compatible devices based on the plan id sent", notes = "This service is called, get compatible devices and send the response to the client ", response = RouterDetails[].class, tags = {
 			"Broadband, Compatible Routers" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RouterDetails[].class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/plan/{planId}/router", produces = {

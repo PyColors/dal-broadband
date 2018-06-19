@@ -12,14 +12,37 @@ import io.swagger.annotations.ApiModelProperty;
  * ProductGroup
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class ProductGroup   {
+  @JsonProperty("groupRole")
+  private String groupRole = null;
+
   @JsonProperty("productGroupName")
   private String productGroupName = null;
 
   @JsonProperty("productGroupRole")
   private String productGroupRole = null;
+
+  public ProductGroup groupRole(String groupRole) {
+    this.groupRole = groupRole;
+    return this;
+  }
+
+  /**
+   * Get groupRole
+   * @return groupRole
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getGroupRole() {
+    return groupRole;
+  }
+
+  public void setGroupRole(String groupRole) {
+    this.groupRole = groupRole;
+  }
 
   public ProductGroup productGroupName(String productGroupName) {
     this.productGroupName = productGroupName;
@@ -71,13 +94,14 @@ public class ProductGroup   {
       return false;
     }
     ProductGroup productGroup = (ProductGroup) o;
-    return Objects.equals(this.productGroupName, productGroup.productGroupName) &&
+    return Objects.equals(this.groupRole, productGroup.groupRole) &&
+        Objects.equals(this.productGroupName, productGroup.productGroupName) &&
         Objects.equals(this.productGroupRole, productGroup.productGroupRole);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(productGroupName, productGroupRole);
+    return Objects.hash(groupRole, productGroupName, productGroupRole);
   }
 
   @Override
@@ -85,6 +109,7 @@ public class ProductGroup   {
     StringBuilder sb = new StringBuilder();
     sb.append("class ProductGroup {\n");
     
+    sb.append("    groupRole: ").append(toIndentedString(groupRole)).append("\n");
     sb.append("    productGroupName: ").append(toIndentedString(productGroupName)).append("\n");
     sb.append("    productGroupRole: ").append(toIndentedString(productGroupRole)).append("\n");
     sb.append("}");

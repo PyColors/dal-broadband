@@ -65,6 +65,63 @@ public class FlbBundle {
 	@JsonProperty("isSelected")
 	private Boolean isSelected = null;
 
+	@JsonProperty("preOrderable")
+	private Boolean preOrderable = null;
+
+	@JsonProperty("earliestAvailableDate")
+	private String earliestAvailableDate = null;
+
+	/**
+	 * 
+	 * @param earliestAvailableDate
+	 * @return
+	 */
+
+	public FlbBundle earliestAvailableDate(String earliestAvailableDate) {
+		this.earliestAvailableDate = earliestAvailableDate;
+		return this;
+	}
+
+	/**
+	 * The earliest available date when the service will be available
+	 * 
+	 * @return earliestAvailableDate
+	 **/
+	@ApiModelProperty(value = "The earliest available date when the service will be available")
+
+	public String getEarliestAvailableDate() {
+		return earliestAvailableDate;
+	}
+
+	public void setEarliestAvailableDate(String earliestAvailableDate) {
+		this.earliestAvailableDate = earliestAvailableDate;
+	}
+
+	/**
+	 * 
+	 * @param skuId
+	 * @return
+	 */
+	public FlbBundle preOrderable(Boolean preOrderable) {
+		this.preOrderable = preOrderable;
+		return this;
+	}
+
+	/**
+	 * Unique bundle id as available from the product catalogue
+	 * 
+	 * @return skuId
+	 **/
+	@ApiModelProperty(value = "Preorderable flag returned from GSA")
+
+	public Boolean isPreOrderable() {
+		return preOrderable;
+	}
+
+	public void setPreOrderable(Boolean preOrderable) {
+		this.preOrderable = preOrderable;
+	}
+
 	/**
 	 * 
 	 * @param skuId
@@ -451,13 +508,18 @@ public class FlbBundle {
 				&& Objects.equals(this.productName, flbBundle.productName)
 				&& Objects.equals(this.productDescription, flbBundle.productDescription)
 				&& Objects.equals(this.merchandisingMedia, flbBundle.merchandisingMedia)
-				&& Objects.equals(this.priceInfo, flbBundle.priceInfo);
+				&& Objects.equals(this.priceInfo, flbBundle.priceInfo)
+				&& Objects.equals(this.isSelected, flbBundle.isSelected)
+				&& Objects.equals(this.isSpeedLess, flbBundle.isSpeedLess)
+				&& Objects.equals(this.preOrderable, flbBundle.preOrderable)
+				&& Objects.equals(this.earliestAvailableDate, flbBundle.earliestAvailableDate);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(skuId, name, description, bundleName, bundleFeatures, bundleDescription, speed, usage,
-				classificationCode, commitmentPeriod, productName, productDescription, merchandisingMedia, priceInfo);
+				classificationCode, commitmentPeriod, productName, productDescription, merchandisingMedia, priceInfo,
+				isSelected, isSpeedLess, preOrderable, earliestAvailableDate);
 	}
 
 	@Override
@@ -479,6 +541,10 @@ public class FlbBundle {
 		sb.append("    productDescription: ").append(toIndentedString(productDescription)).append("\n");
 		sb.append("    merchandisingMedia: ").append(toIndentedString(merchandisingMedia)).append("\n");
 		sb.append("    priceInfo: ").append(toIndentedString(priceInfo)).append("\n");
+		sb.append("    isSelected: ").append(toIndentedString(isSelected)).append("\n");
+		sb.append("    isSpeedLess: ").append(toIndentedString(isSpeedLess)).append("\n");
+		sb.append("    preOrderable: ").append(toIndentedString(preOrderable)).append("\n");
+		sb.append("    earliestAvailableDate: ").append(toIndentedString(earliestAvailableDate)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}

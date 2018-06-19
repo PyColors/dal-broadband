@@ -14,14 +14,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,7 +48,7 @@ import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -161,7 +161,7 @@ public class BroadbandControllerTest {
 
 		String jsonString12 = new String(Utility.readFile("\\rest-mock\\GetProducts.json"));
 
-		ProductDetails[] productDetails = new ObjectMapper().readValue(jsonString12, ProductDetails[].class);
+		CommercialProduct[] productDetails = new ObjectMapper().readValue(jsonString12, CommercialProduct[].class);
 
 		String jsonString13 = new String(Utility.readFile("\\rest-mock\\CreateBasketRequest.json"));
 
@@ -180,8 +180,8 @@ public class BroadbandControllerTest {
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907899")).willReturn(newBroadband);
 
 		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
-				ProductDetails[].class))
-						.willReturn(new ResponseEntity<ProductDetails[]>(productDetails, HttpStatus.OK));
+				CommercialProduct[].class))
+						.willReturn(new ResponseEntity<CommercialProduct[]>(productDetails, HttpStatus.OK));
 
 		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability",
 				requestGsa, GetServiceAvailibilityResponse.class)).willReturn(null);
@@ -579,7 +579,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -607,7 +607,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -635,7 +635,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -663,7 +663,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);

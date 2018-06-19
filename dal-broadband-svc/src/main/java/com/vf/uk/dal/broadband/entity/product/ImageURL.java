@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * ImageURL
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-17T16:12:08.903Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class ImageURL   {
   @JsonProperty("imageName")
