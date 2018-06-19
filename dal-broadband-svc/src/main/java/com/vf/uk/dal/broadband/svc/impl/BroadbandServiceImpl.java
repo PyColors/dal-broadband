@@ -736,7 +736,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
 				.createAppointmentForFLBB(broadbandId, new CreateAppointmentRequest())).withSelfRel();
 
-		ResponseEntity<GetAppointmentResponse> methodLinkGetAppointment = ControllerLinkBuilder
+		ResponseEntity<?> methodLinkGetAppointment = ControllerLinkBuilder
 				.methodOn(BroadbandController.class).getAppointmentForFLBB(null);
 		Link getAppointmentLink = ControllerLinkBuilder.linkTo(methodLinkGetAppointment).withRel("flbb-get-appointment")
 				.withType("GET");
@@ -754,7 +754,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Link selfLink = ControllerLinkBuilder
 				.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class).getAppointmentForFLBB(broadbandId))
 				.withSelfRel();
-		ResponseEntity<CreateAppointmentResponse> methodLinkCreateAppointment = ControllerLinkBuilder
+		ResponseEntity<?> methodLinkCreateAppointment = ControllerLinkBuilder
 				.methodOn(BroadbandController.class).createAppointmentForFLBB(null, new CreateAppointmentRequest());
 		Link createAppointmentLink = ControllerLinkBuilder.linkTo(methodLinkCreateAppointment)
 				.withRel("flbb-create-appointment").withType("POST");
