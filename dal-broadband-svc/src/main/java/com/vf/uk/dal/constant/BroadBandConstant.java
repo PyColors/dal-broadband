@@ -19,6 +19,8 @@ public class BroadBandConstant {
 	public static final String SPEED_38 = "SPEED_38";
 	public static final String SPEED_76 = "SPEED_76";
 	
+	public static final String LINE = "Line";
+	
 	private BroadBandConstant() {
 	}
 }
