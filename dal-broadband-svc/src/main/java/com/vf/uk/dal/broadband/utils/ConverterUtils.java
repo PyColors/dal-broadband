@@ -705,9 +705,8 @@ public class ConverterUtils {
 			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
 				itemReference.setTypeCode(broadBand.getCategoryPreference());
 			}
-			if (StringUtils.isNotEmpty(broadBand.getLineDetails().getClassificationCode())) {
-				itemReference.setClassificationCode(broadBand.getLineDetails().getClassificationCode());
-			}
+			// Added logic to set classificationCode
+			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
 			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
@@ -724,6 +723,28 @@ public class ConverterUtils {
 			request.setExisting(false);
 		}
 		return request;
+	}
+
+	/**
+	 * @param broadBand
+	 * @param itemReference
+	 */
+	private static void setClassificationCodeInAppointmentRequest(Broadband broadBand,
+			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference) {
+		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getServiceReference() != null
+				&& CollectionUtils
+						.isNotEmpty(broadBand.getServicePoint().getServiceReference().getServiceLinesList())) {
+			List<com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines> serviceLinesList = broadBand
+					.getServicePoint().getServiceReference().getServiceLinesList();
+			for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLines : serviceLinesList) {
+				for(com.vf.uk.dal.broadband.cache.repository.entity.ServieLine servLine : serviceLines.getServiceLineList()){
+					if(!StringUtils.equalsIgnoreCase(BroadBandConstant.LINE, servLine.getClassificationCode())){
+						itemReference.setClassificationCode(servLine.getClassificationCode());
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
@@ -1244,9 +1265,8 @@ public class ConverterUtils {
 			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
 				itemReference.setTypeCode(broadBand.getCategoryPreference());
 			}
-			if (StringUtils.isNotEmpty(broadBand.getLineDetails().getClassificationCode())) {
-				itemReference.setClassificationCode(broadBand.getLineDetails().getClassificationCode());
-			}
+			// Added logic to set classification code
+			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
 			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
