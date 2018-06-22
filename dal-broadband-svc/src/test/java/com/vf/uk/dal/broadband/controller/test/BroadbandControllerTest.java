@@ -579,7 +579,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -607,7 +607,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -635,7 +635,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -663,7 +663,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null);
+					null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -681,7 +681,7 @@ public class BroadbandControllerTest {
 			SiteNote siteNote = new SiteNote();
 			siteNote.setNotes("Hello");
 			request.setSiteNote(siteNote);
-			ResponseEntity<CreateAppointmentResponse> resonse = broadBandController
+			ResponseEntity<?> resonse = broadBandController
 					.createAppointmentForFLBB("12345678907888", request);
 			assertNotNull(resonse);
 		} catch (Exception e) {
@@ -693,7 +693,7 @@ public class BroadbandControllerTest {
 	@Test
 	public void testGetAppointmentResponse() {
 		try {
-			ResponseEntity<GetAppointmentResponse> resonse = broadBandController
+			ResponseEntity<?> resonse = broadBandController
 					.getAppointmentForFLBB("12345678907888");
 			assertNotNull(resonse);
 		} catch (Exception e) {

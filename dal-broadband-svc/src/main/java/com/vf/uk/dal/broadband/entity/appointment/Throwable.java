@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Error
+ * Throwable
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
-public class Error   {
+public class Throwable   {
   @JsonProperty("cause")
   private Throwable cause = null;
 
@@ -36,7 +36,7 @@ public class Error   {
   @Valid
   private List<Throwable> suppressed = null;
 
-  public Error cause(Throwable cause) {
+  public Throwable cause(Throwable cause) {
     this.cause = cause;
     return this;
   }
@@ -57,7 +57,7 @@ public class Error   {
     this.cause = cause;
   }
 
-  public Error localizedMessage(String localizedMessage) {
+  public Throwable localizedMessage(String localizedMessage) {
     this.localizedMessage = localizedMessage;
     return this;
   }
@@ -77,7 +77,7 @@ public class Error   {
     this.localizedMessage = localizedMessage;
   }
 
-  public Error message(String message) {
+  public Throwable message(String message) {
     this.message = message;
     return this;
   }
@@ -97,12 +97,12 @@ public class Error   {
     this.message = message;
   }
 
-  public Error stackTrace(List<StackTraceElement> stackTrace) {
+  public Throwable stackTrace(List<StackTraceElement> stackTrace) {
     this.stackTrace = stackTrace;
     return this;
   }
 
-  public Error addStackTraceItem(StackTraceElement stackTraceItem) {
+  public Throwable addStackTraceItem(StackTraceElement stackTraceItem) {
     if (this.stackTrace == null) {
       this.stackTrace = new ArrayList<StackTraceElement>();
     }
@@ -126,12 +126,12 @@ public class Error   {
     this.stackTrace = stackTrace;
   }
 
-  public Error suppressed(List<Throwable> suppressed) {
+  public Throwable suppressed(List<Throwable> suppressed) {
     this.suppressed = suppressed;
     return this;
   }
 
-  public Error addSuppressedItem(Throwable suppressedItem) {
+  public Throwable addSuppressedItem(Throwable suppressedItem) {
     if (this.suppressed == null) {
       this.suppressed = new ArrayList<Throwable>();
     }
@@ -164,12 +164,12 @@ public class Error   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error error = (Error) o;
-    return Objects.equals(this.cause, error.cause) &&
-        Objects.equals(this.localizedMessage, error.localizedMessage) &&
-        Objects.equals(this.message, error.message) &&
-        Objects.equals(this.stackTrace, error.stackTrace) &&
-        Objects.equals(this.suppressed, error.suppressed);
+    Throwable throwable = (Throwable) o;
+    return Objects.equals(this.cause, throwable.cause) &&
+        Objects.equals(this.localizedMessage, throwable.localizedMessage) &&
+        Objects.equals(this.message, throwable.message) &&
+        Objects.equals(this.stackTrace, throwable.stackTrace) &&
+        Objects.equals(this.suppressed, throwable.suppressed);
   }
 
   @Override
@@ -180,7 +180,7 @@ public class Error   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error {\n");
+    sb.append("class Throwable {\n");
     
     sb.append("    cause: ").append(toIndentedString(cause)).append("\n");
     sb.append("    localizedMessage: ").append(toIndentedString(localizedMessage)).append("\n");
