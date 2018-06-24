@@ -698,10 +698,11 @@ public class ConverterUtils {
 			serviceRequest.setClassificationCode("BROADBAND");
 			serviceRequest.setTypeCode("INSTALL");
 			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
-				serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+				serviceRequest.setSubClassificationCode("Generic Ethernet Access");
 
 			}
 			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference = new com.vf.uk.dal.broadband.entity.appointment.ItemReference();
+			itemReference.setTypeCode("NGAFTTC");
 			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
 				itemReference.setTypeCode(broadBand.getCategoryPreference());
 			}
@@ -737,11 +738,16 @@ public class ConverterUtils {
 			List<com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines> serviceLinesList = broadBand
 					.getServicePoint().getServiceReference().getServiceLinesList();
 			for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLines : serviceLinesList) {
-				for(com.vf.uk.dal.broadband.cache.repository.entity.ServieLine servLine : serviceLines.getServiceLineList()){
-					if(!StringUtils.equalsIgnoreCase(BroadBandConstant.LINE, servLine.getClassificationCode())){
-						itemReference.setClassificationCode(servLine.getClassificationCode());
-						break;
+				if (StringUtils.equalsIgnoreCase(broadBand.getLineDetails().getClassificationCode(),
+						serviceLines.getClassificationCode())) {
+					for (com.vf.uk.dal.broadband.cache.repository.entity.ServieLine servLine : serviceLines
+							.getServiceLineList()) {
+						if (!StringUtils.equalsIgnoreCase(BroadBandConstant.LINE, servLine.getClassificationCode())) {
+							itemReference.setClassificationCode(servLine.getClassificationCode());
+							break;
+						}
 					}
+					break;
 				}
 			}
 		}
@@ -1257,11 +1263,12 @@ public class ConverterUtils {
 			serviceRequest.setClassificationCode("BROADBAND");
 			serviceRequest.setTypeCode("INSTALL");
 			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
-				serviceRequest.setSubClassificationCode("WLR_SINGLE_LINE");
+				serviceRequest.setSubClassificationCode("Generic Ethernet Access");
 
 			}
 
 			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference = new com.vf.uk.dal.broadband.entity.appointment.ItemReference();
+			itemReference.setTypeCode("NGAFTTC");
 			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
 				itemReference.setTypeCode(broadBand.getCategoryPreference());
 			}
