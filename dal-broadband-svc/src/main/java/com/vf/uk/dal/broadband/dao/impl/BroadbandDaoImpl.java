@@ -41,6 +41,7 @@ import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
+import com.vf.uk.dal.broadband.exception.TILException;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
@@ -190,12 +191,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			if (client != null)
 				createAppointment = client.getBody();
 		} catch (RestClientResponseException e) {
+			LogHelper.error(this, "::::::ERROR WHILE CALLING CREATE APPOINTMENT" + e);
 			Gson gson = new Gson();
 			String jsonInString = e.getResponseBodyAsString();
 			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
 					com.vf.uk.dal.common.exception.ErrorResponse.class);
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(error.getErrorMessage());
+			throw new TILException(null, error.getErrorMessage());
 		}
 		return createAppointment;
 	}
@@ -411,12 +412,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			if (client != null)
 				getAppointment = client.getBody();
 		} catch (RestClientResponseException e) {
+			LogHelper.error(this, "::::::ERROR WHILE CALLING GET APPOINTMENT" + e);
 			Gson gson = new Gson();
 			String jsonInString = e.getResponseBodyAsString();
 			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
 					com.vf.uk.dal.common.exception.ErrorResponse.class);
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(error.getErrorMessage());
+			throw new TILException(null, error.getErrorMessage());
 		}
 		return getAppointment;
 	}

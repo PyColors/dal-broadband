@@ -31,9 +31,11 @@ import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.exception.TILException;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 import com.vf.uk.dal.common.exception.ApplicationException;
+import com.vf.uk.dal.common.logger.LogHelper;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -194,7 +196,8 @@ public class BroadbandController {
 	@ApiOperation(value = "Gets the list of addresses for a given postal code", notes = "Gets the list of addresses for a given postal code", response = AddressInfo.class, tags = {
 			"Premise" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AddressInfo.class),
-			@ApiResponse(code = 404, message = "Not found", response = Void.class) })
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/premise/{postCode}", produces = { "application/hal+json" }, method = RequestMethod.GET)
 	public AddressInfo getAddressByPostcode(
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,
@@ -258,13 +261,19 @@ public class BroadbandController {
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/appointment", produces = {
 			"application/hal+json" }, method = RequestMethod.POST)
-	public ResponseEntity<CreateAppointmentResponse> createAppointmentForFLBB(
+	public ResponseEntity<?> createAppointmentForFLBB(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@ApiParam(value = "Request to update the broadband with the appointment information ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest) {
 		BroadbandValidator.isCreateAppointmentRequestValid(createAppointmentRequest);
-		CreateAppointmentResponse createAppointmentresponse = broadbandService
-				.createAppointment(createAppointmentRequest, broadbandId);
-
+		CreateAppointmentResponse createAppointmentresponse;
+		try {
+			createAppointmentresponse = broadbandService.createAppointment(createAppointmentRequest, broadbandId);
+		} catch (TILException e) {
+			LogHelper.error(getClass(), "ERROR WHILE CALLING CREATE APPOINTMENT: " + e);
+			com.vf.uk.dal.common.exception.ErrorResponse error = new com.vf.uk.dal.common.exception.ErrorResponse(400,
+					"BROADBAND_CREATE_APPOINTMENT_EXCEPTION", e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		}
 		return new ResponseEntity<>(createAppointmentresponse, HttpStatus.OK);
 	}
 
@@ -305,9 +314,16 @@ public class BroadbandController {
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/appointment", produces = {
 			"application/hal+json" }, method = RequestMethod.GET)
-	public ResponseEntity<GetAppointmentResponse> getAppointmentForFLBB(
+	public ResponseEntity<?> getAppointmentForFLBB(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
-		return new ResponseEntity<>(broadbandService.getAppointmentForFLBB(broadbandId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(broadbandService.getAppointmentForFLBB(broadbandId), HttpStatus.OK);
+		} catch (TILException e) {
+			LogHelper.error(getClass(), "ERROR WHILE CALLING GET APPOINTMENT: " + e);
+			com.vf.uk.dal.common.exception.ErrorResponse error = new com.vf.uk.dal.common.exception.ErrorResponse(400,
+					"BROADBAND_GET_APPOINTMENT_EXCEPTION", e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		}
 	}
 
 	@ApiOperation(value = "Get the list of the compatible devices based on the plan id sent", notes = "This service is called, get compatible devices and send the response to the client ", response = RouterDetails[].class, tags = {
