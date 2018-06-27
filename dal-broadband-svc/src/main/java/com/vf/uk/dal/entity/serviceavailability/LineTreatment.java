@@ -113,8 +113,6 @@ public class LineTreatment   {
    * Get appointmentNeeded
    * @return appointmentNeeded
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isAppointmentNeeded() {
     return appointmentNeeded;
@@ -213,8 +211,6 @@ public class LineTreatment   {
    * Get preOrder
    * @return preOrder
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isPreOrder() {
     return preOrder;
@@ -233,8 +229,6 @@ public class LineTreatment   {
    * Get registerOfInterest
    * @return registerOfInterest
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isRegisterOfInterest() {
     return registerOfInterest;

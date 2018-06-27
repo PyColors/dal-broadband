@@ -151,8 +151,6 @@ public class BasketLineStatus   {
    * Get standbyPowerRequired
    * @return standbyPowerRequired
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isStandbyPowerRequired() {
     return standbyPowerRequired;
@@ -211,8 +209,6 @@ public class BasketLineStatus   {
    * Get tempStructure
    * @return tempStructure
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isTempStructure() {
     return tempStructure;
