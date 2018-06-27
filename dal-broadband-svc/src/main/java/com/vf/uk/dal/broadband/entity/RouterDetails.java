@@ -95,7 +95,6 @@ public class RouterDetails {
 	 * 
 	 * @return isDefaultDevice
 	 **/
-	@ApiModelProperty(example = "false", value = "set to true if device is default")
 
 	public Boolean isIsDefaultDevice() {
 		return isDefaultDevice;

@@ -19,6 +19,16 @@ public class BroadBandConstant {
 	public static final String SPEED_38 = "SPEED_38";
 	public static final String SPEED_76 = "SPEED_76";
 	
+	public static final String LINE = "Line";
+	
+	public static final String DATE_PATTERN1 = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	public static final String DATE_PATTERN2 = "yyyy-MM-dd HH:mm:ss";
+	public static final String DATE_PATTERN3 = "yyyy-MM-dd'T'HH:mm:ss";
+	
+	public static final String FTTC_SUB_CLASSIFICATIONCODE = "Generic Ethernet Access";
+	public static final String FTTC_ITEM_REFERENCE_CODE = "NGAFTTC";
+	
+	
 	private BroadBandConstant() {
 	}
 }

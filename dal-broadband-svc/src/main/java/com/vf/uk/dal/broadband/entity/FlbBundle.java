@@ -70,6 +70,9 @@ public class FlbBundle {
 
 	@JsonProperty("earliestAvailableDate")
 	private String earliestAvailableDate = null;
+	
+	@JsonProperty("lineRentalPrice")
+	private Price lineRentalPrice = null;
 
 	/**
 	 * 
@@ -112,7 +115,6 @@ public class FlbBundle {
 	 * 
 	 * @return skuId
 	 **/
-	@ApiModelProperty(value = "Preorderable flag returned from GSA")
 
 	public Boolean isPreOrderable() {
 		return preOrderable;
@@ -486,6 +488,14 @@ public class FlbBundle {
 
 	public void setIsSelected(Boolean isSelected) {
 		this.isSelected = isSelected;
+	}
+
+	public Price getLineRentalPrice() {
+		return lineRentalPrice;
+	}
+
+	public void setLineRentalPrice(Price lineRentalPrice) {
+		this.lineRentalPrice = lineRentalPrice;
 	}
 
 	@Override
