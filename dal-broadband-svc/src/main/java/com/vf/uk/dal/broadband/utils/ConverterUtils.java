@@ -1,5 +1,7 @@
 package com.vf.uk.dal.broadband.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +68,7 @@ import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
+import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
@@ -698,12 +701,12 @@ public class ConverterUtils {
 			serviceRequest.setClassificationCode("BROADBAND");
 			serviceRequest.setTypeCode("INSTALL");
 			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
-				serviceRequest.setSubClassificationCode("Generic Ethernet Access");
-
+				serviceRequest.setSubClassificationCode(BroadBandConstant.FTTC_SUB_CLASSIFICATIONCODE);
 			}
 			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference = new com.vf.uk.dal.broadband.entity.appointment.ItemReference();
-			itemReference.setTypeCode("NGAFTTC");
-			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
+			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
+				itemReference.setTypeCode(BroadBandConstant.FTTC_ITEM_REFERENCE_CODE);
+			} else {
 				itemReference.setTypeCode(broadBand.getCategoryPreference());
 			}
 			// Added logic to set classificationCode
@@ -714,7 +717,12 @@ public class ConverterUtils {
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
-			appointmentWindow.setStartTimePeriod(createAppointmentRequest.getStartTimePeriod());
+			String startTimePeriod = createAppointmentRequest.getStartTimePeriod();
+			if (StringUtils.isNotBlank(createAppointmentRequest.getStartTimePeriod())) {
+				startTimePeriod = getFormattedDate(createAppointmentRequest.getStartTimePeriod(),
+						BroadBandConstant.DATE_PATTERN2, BroadBandConstant.DATE_PATTERN1);
+			}
+			appointmentWindow.setStartTimePeriod(startTimePeriod);
 			appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
 			appointmentWindow.setOperationalPreferenceCode("STANDARD");
 			appointmentWindow.setStartTime(createAppointmentRequest.getStartTime());
@@ -742,7 +750,8 @@ public class ConverterUtils {
 						serviceLines.getClassificationCode())) {
 					for (com.vf.uk.dal.broadband.cache.repository.entity.ServieLine servLine : serviceLines
 							.getServiceLineList()) {
-						if (!StringUtils.equalsIgnoreCase(BroadBandConstant.LINE, servLine.getClassificationCode())) {
+						if (!(StringUtils.equalsIgnoreCase(BroadBandConstant.LINE, servLine.getClassificationCode())
+								|| StringUtils.equalsIgnoreCase("ADSL", servLine.getClassificationCode()))) {
 							itemReference.setClassificationCode(servLine.getClassificationCode());
 							break;
 						}
@@ -1263,13 +1272,12 @@ public class ConverterUtils {
 			serviceRequest.setClassificationCode("BROADBAND");
 			serviceRequest.setTypeCode("INSTALL");
 			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
-				serviceRequest.setSubClassificationCode("Generic Ethernet Access");
-
+				serviceRequest.setSubClassificationCode(BroadBandConstant.FTTC_SUB_CLASSIFICATIONCODE);
 			}
-
 			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference = new com.vf.uk.dal.broadband.entity.appointment.ItemReference();
-			itemReference.setTypeCode("NGAFTTC");
-			if (StringUtils.isNotEmpty(broadBand.getCategoryPreference())) {
+			if (!StringUtils.equalsIgnoreCase(broadBand.getCategoryPreference(), "FTTH")) {
+				itemReference.setTypeCode(BroadBandConstant.FTTC_ITEM_REFERENCE_CODE);
+			} else {
 				itemReference.setTypeCode(broadBand.getCategoryPreference());
 			}
 			// Added logic to set classification code
@@ -1281,26 +1289,34 @@ public class ConverterUtils {
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
 			appointmentWindow.setOperationalPreferenceCode("STANDARD");
+			appointmentWindow.setStartTimePeriod(getStartTimePeriodFromLineTreatment(broadBand));
 			appointmentDetails.setAppointmentWindow(appointmentWindow);
-			for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint()
-					.getServiceReference().getServiceLinesList()) {
-				if (StringUtils.equalsIgnoreCase(serLines.getClassificationCode(),
-						broadBand.getLineDetails().getClassificationCode())) {
-					if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
-						for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
-							if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
-									broadBand.getLineDetails().getLineTreatmentType())) {
-								appointmentWindow
-										.setStartTimePeriod(lineTreatment.getEarliestAvailableDate() + "T00:00:00");
-							}
-						}
-					}
-				}
-			}
 			request.setAppointmentDetails(appointmentDetails);
 			request.setExisting(false);
 		}
 		return request;
+	}
+
+	/**
+	 * @param broadBand
+	 * @param startTimePeriod
+	 * @return
+	 */
+	private static String getStartTimePeriodFromLineTreatment(Broadband broadBand) {
+		String startTimePeriod = null;
+		for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint()
+				.getServiceReference().getServiceLinesList()) {
+			if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
+				for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
+					if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
+							broadBand.getLineDetails().getLineTreatmentType())) {
+						startTimePeriod = getFormattedDate(lineTreatment.getEarliestAvailableDate(),
+								BroadBandConstant.DATE_PATTERN2, BroadBandConstant.DATE_PATTERN3);
+					}
+				}
+			}
+		}
+		return startTimePeriod;
 	}
 
 	public static GetAppointmentResponse createGetAppointmentResponse(GetAppointment getAppointmentResponse) {
@@ -1343,6 +1359,24 @@ public class ConverterUtils {
 					newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
 		}
 		return newLink;
+	}
+
+	private static String getFormattedDate(String dateInString, String pattern, String desiredPattern) {
+		String dateString = null;
+		if (dateInString != null) {
+			try {
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				java.util.Date date = simpleDateFormat.parse(dateInString);
+				if (desiredPattern != null) {
+					SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(desiredPattern);
+					dateString = simpleDateFormat1.format(date);
+				}
+			} catch (ParseException e) {
+				LogHelper.error(ConverterUtils.class,
+						dateInString + "is not in pattern " + pattern + " and desired pattern is " + desiredPattern);
+			}
+		}
+		return dateString;
 	}
 
 }

@@ -43,7 +43,6 @@ public class AppointmentAndAvailabilityDetail {
 	 * 
 	 * @return appointmentNeeded
 	 **/
-	@ApiModelProperty(value = "Whether the appointment is needed or not. If appointmenr needed flag is false, it means customer has existing line if it is true it means customer does not have existing line and should only take a new line option")
 
 	public Boolean getAppointmentNeeded() {
 		return appointmentNeeded;
