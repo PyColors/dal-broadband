@@ -27,8 +27,6 @@ public class ServiceStartDateRequest   {
    * Get serviceStartDate
    * @return serviceStartDate
   **/
-  @ApiModelProperty(value = "")
-
 
   public String getServiceStartDate() {
     return serviceStartDate;

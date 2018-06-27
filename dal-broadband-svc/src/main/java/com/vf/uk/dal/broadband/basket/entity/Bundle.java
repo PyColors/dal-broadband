@@ -346,8 +346,6 @@ public class Bundle   {
    * Get isChanged
    * @return isChanged
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsChanged() {
     return isChanged;
@@ -366,8 +364,6 @@ public class Bundle   {
    * Get isVodafoneGlobalRoaming
    * @return isVodafoneGlobalRoaming
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsVodafoneGlobalRoaming() {
     return isVodafoneGlobalRoaming;
@@ -536,8 +532,6 @@ public class Bundle   {
    * Get showInSummary
    * @return showInSummary
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isShowInSummary() {
     return showInSummary;
