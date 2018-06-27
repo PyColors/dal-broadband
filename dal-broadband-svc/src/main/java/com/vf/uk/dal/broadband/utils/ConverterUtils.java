@@ -1306,14 +1306,17 @@ public class ConverterUtils {
 		String startTimePeriod = null;
 		for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serLines : broadBand.getServicePoint()
 				.getServiceReference().getServiceLinesList()) {
+			if (StringUtils.equalsIgnoreCase(serLines.getClassificationCode(),
+					broadBand.getLineDetails().getClassificationCode())) {
 			if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
 				for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
 					if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
 							broadBand.getLineDetails().getLineTreatmentType())) {
 						startTimePeriod = getFormattedDate(lineTreatment.getEarliestAvailableDate(),
-								BroadBandConstant.DATE_PATTERN2, BroadBandConstant.DATE_PATTERN3);
+								BroadBandConstant.DATE_PATTERN4, BroadBandConstant.DATE_PATTERN3);
 					}
 				}
+			}
 			}
 		}
 		return startTimePeriod;
