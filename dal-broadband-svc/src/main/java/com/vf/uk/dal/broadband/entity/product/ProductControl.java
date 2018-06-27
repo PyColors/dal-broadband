@@ -326,8 +326,6 @@ public class ProductControl   {
    * Get preOrderable
    * @return preOrderable
   **/
-  @ApiModelProperty(example = "false", value = "")
-
 
   public Boolean isPreOrderable() {
     return preOrderable;

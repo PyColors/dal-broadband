@@ -42,8 +42,6 @@ public class BasketLineTreatment   {
    * Get appointmentNeeded
    * @return appointmentNeeded
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isAppointmentNeeded() {
     return appointmentNeeded;
@@ -122,8 +120,6 @@ public class BasketLineTreatment   {
    * Get preOrder
    * @return preOrder
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isPreOrder() {
     return preOrder;
@@ -142,8 +138,6 @@ public class BasketLineTreatment   {
    * Get registerOfInterest
    * @return registerOfInterest
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isRegisterOfInterest() {
     return registerOfInterest;

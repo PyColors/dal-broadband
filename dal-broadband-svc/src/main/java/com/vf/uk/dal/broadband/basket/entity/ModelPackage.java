@@ -497,7 +497,7 @@ public class ModelPackage {
 	 * 
 	 * @return serviceStartDate
 	 **/
-	@ApiModelProperty(example = "2017-10-01T09:45:00.000+02:00", value = "Service Start Date for FLBB")
+	@ApiModelProperty(value = "Service Start Date for FLBB - 2017-10-01T09:45:00.000+02:00")
 
 	public String getServiceStartDate() {
 		return serviceStartDate;

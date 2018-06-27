@@ -113,7 +113,7 @@ public class AppointmentWindow   {
    * Earliest required appointment date. ex: yyyy-MM-dd'T'HH:mm:ss.SSSXXX 
    * @return startDateTime
   **/
-  @ApiModelProperty(example = "2017-10-01T09:45:00.000+02:00", value = "Earliest required appointment date. ex: yyyy-MM-dd'T'HH:mm:ss.SSSXXX ")
+  @ApiModelProperty(value = "Earliest required appointment date. ex: yyyy-MM-dd'T'HH:mm:ss.SSSXXX ")
 
 
   public String getStartDateTime() {

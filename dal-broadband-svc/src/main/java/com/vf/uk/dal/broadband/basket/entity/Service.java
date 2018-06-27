@@ -244,8 +244,6 @@ public class Service   {
    * Get freeGift
    * @return freeGift
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isFreeGift() {
     return freeGift;
@@ -264,8 +262,6 @@ public class Service   {
    * Get isChanged
    * @return isChanged
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsChanged() {
     return isChanged;
