@@ -207,7 +207,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
 			String url = "http://PREMISE-V1/premise/address/" + postCode + "?qualified=true";
-			if(StringUtils.equals(categoryPreference, "FTTH")){
+			if (StringUtils.equals(categoryPreference, "FTTH")) {
 				url += "&categoryType=" + categoryPreference;
 			}
 			ResponseEntity<AddressInfo> client = restTemplate.getForEntity(url, AddressInfo.class);
@@ -324,13 +324,19 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public List<CommercialProduct> getEngineeringVisitFee() {
+	public List<CommercialProduct> getEngineeringVisitFee(String productClass, boolean isFTTHPlan,
+			String installationType, boolean isPreOrderable) {
 
 		List<CommercialProduct> productDetails = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append("http://PRODUCTS-V1/products/catalogue/products?class:name=" + productClass + "&isFTTH="
+				+ isFTTHPlan + "&preorderable=" + isPreOrderable);
+		if (StringUtils.isNotBlank(installationType)) {
+			urlBuilder.append("&installationType=" + installationType);
+		}
 		try {
-			ResponseEntity<CommercialProduct[]> client = restTemplate.getForEntity(
-					"http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
+			ResponseEntity<CommercialProduct[]> client = restTemplate.getForEntity(urlBuilder.toString(),
 					CommercialProduct[].class);
 			if (client != null)
 				productDetails = Arrays.asList(client.getBody());
@@ -460,14 +466,16 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public void updateBasketWithServiceDate(ServiceStartDateRequest serviceStartDateRequest, String basketId, String packageId) {
+	public void updateBasketWithServiceDate(ServiceStartDateRequest serviceStartDateRequest, String basketId,
+			String packageId) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 
 			final HttpEntity<ServiceStartDateRequest> entity = new HttpEntity<>(serviceStartDateRequest, headers);
-			String url = BroadBandConstant.BASKET_URL + basketId + "/broadbandPackage/" + packageId + "/serviceStartDate";
+			String url = BroadBandConstant.BASKET_URL + basketId + "/broadbandPackage/" + packageId
+					+ "/serviceStartDate";
 			restTemplate.exchange(url, HttpMethod.PUT, entity, Void.class);
 
 		} catch (Exception e) {
