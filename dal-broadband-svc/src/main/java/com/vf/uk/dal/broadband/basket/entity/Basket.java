@@ -93,8 +93,6 @@ public class Basket extends ResourceSupport {
    * Get affiliateFlag
    * @return affiliateFlag
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isAffiliateFlag() {
     return affiliateFlag;
@@ -255,8 +253,6 @@ public class Basket extends ResourceSupport {
    * Get isChanged
    * @return isChanged
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsChanged() {
     return isChanged;
@@ -427,8 +423,6 @@ public class Basket extends ResourceSupport {
    * Get validated
    * @return validated
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isValidated() {
     return validated;
