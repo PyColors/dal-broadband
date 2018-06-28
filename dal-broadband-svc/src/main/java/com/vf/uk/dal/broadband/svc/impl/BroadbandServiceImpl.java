@@ -142,8 +142,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 				boolean isFTTHPlan = false;
 				boolean isPreOrderable = false;
 				String installationType = null;
+				String productClass = BroadBandConstant.BROADBAND_ENG_FEE_PRODUCTCLASS;
+				// For FTTH the product class mentioned is "Fixed Fee:Standard Installation Fee"
 				if (StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH")) {
 					isFTTHPlan = true;
+					productClass = BroadBandConstant.BROADBAND_STD_INSTALLATION_FEE_PRODUCTCLASS;
 				}
 
 				if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
@@ -174,7 +177,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					}
 				}
 				List<CommercialProduct> productDetailsList = broadbandDao.getEngineeringVisitFee(
-						BroadBandConstant.BROADBAND_ENG_FEE_PRODUCTCLASS, isFTTHPlan, installationType, isPreOrderable);
+						productClass, isFTTHPlan, installationType, isPreOrderable);
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
 						getServiceAvailabilityResponse, broadbandId, broadBand, productDetailsList);
 				broadbandDao.setBroadBandInCache(broadBand);

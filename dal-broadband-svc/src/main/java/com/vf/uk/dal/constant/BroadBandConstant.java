@@ -30,6 +30,9 @@ public class BroadBandConstant {
 	public static final String FTTC_ITEM_REFERENCE_CODE = "NGAFTTC";
 	
 	public static final String BROADBAND_ENG_FEE_PRODUCTCLASS = "Fee:Engineer Visit";
+	
+	public static final String BROADBAND_STD_INSTALLATION_FEE_PRODUCTCLASS  = "Fixed Fee:Standard Installation Fee";
+	
 	private BroadBandConstant() {
 	}
 }
