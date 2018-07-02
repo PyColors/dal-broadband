@@ -12,37 +12,17 @@ import io.swagger.annotations.ApiModelProperty;
  * ProductAvailability
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class ProductAvailability   {
-  @JsonProperty("start")
-  private String start = null;
-
   @JsonProperty("end")
   private String end = null;
 
   @JsonProperty("salesExpired")
-  private Boolean salesExpired = null;
+  private String salesExpired = null;
 
-  public ProductAvailability start(String start) {
-    this.start = start;
-    return this;
-  }
-
-  /**
-   * Get start
-   * @return start
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getStart() {
-    return start;
-  }
-
-  public void setStart(String start) {
-    this.start = start;
-  }
+  @JsonProperty("start")
+  private String start = null;
 
   public ProductAvailability end(String end) {
     this.end = end;
@@ -64,7 +44,7 @@ public class ProductAvailability   {
     this.end = end;
   }
 
-  public ProductAvailability salesExpired(Boolean salesExpired) {
+  public ProductAvailability salesExpired(String salesExpired) {
     this.salesExpired = salesExpired;
     return this;
   }
@@ -76,12 +56,32 @@ public class ProductAvailability   {
   @ApiModelProperty(value = "")
 
 
-  public Boolean isSalesExpired() {
+  public String getSalesExpired() {
     return salesExpired;
   }
 
-  public void setSalesExpired(Boolean salesExpired) {
+  public void setSalesExpired(String salesExpired) {
     this.salesExpired = salesExpired;
+  }
+
+  public ProductAvailability start(String start) {
+    this.start = start;
+    return this;
+  }
+
+  /**
+   * Get start
+   * @return start
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getStart() {
+    return start;
+  }
+
+  public void setStart(String start) {
+    this.start = start;
   }
 
 
@@ -94,14 +94,14 @@ public class ProductAvailability   {
       return false;
     }
     ProductAvailability productAvailability = (ProductAvailability) o;
-    return Objects.equals(this.start, productAvailability.start) &&
-        Objects.equals(this.end, productAvailability.end) &&
-        Objects.equals(this.salesExpired, productAvailability.salesExpired);
+    return Objects.equals(this.end, productAvailability.end) &&
+        Objects.equals(this.salesExpired, productAvailability.salesExpired) &&
+        Objects.equals(this.start, productAvailability.start);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(start, end, salesExpired);
+    return Objects.hash(end, salesExpired, start);
   }
 
   @Override
@@ -109,9 +109,9 @@ public class ProductAvailability   {
     StringBuilder sb = new StringBuilder();
     sb.append("class ProductAvailability {\n");
     
-    sb.append("    start: ").append(toIndentedString(start)).append("\n");
     sb.append("    end: ").append(toIndentedString(end)).append("\n");
     sb.append("    salesExpired: ").append(toIndentedString(salesExpired)).append("\n");
+    sb.append("    start: ").append(toIndentedString(start)).append("\n");
     sb.append("}");
     return sb.toString();
   }

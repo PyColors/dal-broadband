@@ -16,7 +16,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -126,7 +126,7 @@ public interface BroadbandDao {
 
 	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
 
-	List<ProductDetails> getEngineeringVisitFee(String acceptVersion);
+	List<CommercialProduct> getEngineeringVisitFee(String productClass, boolean isFTTHPlan, String installationType, boolean isPreOrderable);
 
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
 	
@@ -142,4 +142,8 @@ public interface BroadbandDao {
 	List<RouterProductDetails> getCompatibleDevicesForBundle(String planId);
 
 	List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest);
+
+	void updateBasketWithServiceDate(
+			com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest, String basketId,
+			String packageId);
 }

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
-public class Basket   {
+public class Basket extends ResourceSupport {
   @JsonProperty("affiliateFlag")
   private Boolean affiliateFlag = null;
 
@@ -92,8 +93,6 @@ public class Basket   {
    * Get affiliateFlag
    * @return affiliateFlag
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isAffiliateFlag() {
     return affiliateFlag;
@@ -254,8 +253,6 @@ public class Basket   {
    * Get isChanged
    * @return isChanged
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsChanged() {
     return isChanged;
@@ -426,8 +423,6 @@ public class Basket   {
    * Get validated
    * @return validated
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isValidated() {
     return validated;

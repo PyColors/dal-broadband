@@ -1,10 +1,16 @@
 package com.vf.uk.dal.broadband.validator;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
@@ -73,7 +79,41 @@ public class BroadbandValidator {
 		}
 	}
 	
+	public static boolean validateStartDate(ServiceStartDateRequest serviceStartDateRequest) {
+		boolean isValidStartDate;
+		if(serviceStartDateRequest!=null && StringUtils.isNotEmpty(serviceStartDateRequest.getStartDateTime())){
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			formatter.setLenient(false);
+			try {
+				formatter.parse(serviceStartDateRequest.getStartDateTime());
+				isValidStartDate = true;
+			} catch (ParseException exception) {
+				LogHelper.error(BroadbandValidator.class, exception.getMessage());
+				throw new ApplicationException(ExceptionMessages.INVALID_INPUT_INCORRECT_DATE_FORMAT);
+			}
+		}else{
+			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
+			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
+		}
+		return isValidStartDate;
+	}
 	
+	public static String convertDateToTimeStamp(String serviceStartDate) {
+		Date date;
+		String formattedDate = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(serviceStartDate);
+			Timestamp ts = new Timestamp(date.getTime());  
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");    
+	        formattedDate =  formatter.format(ts);
+		} catch (ParseException e) {
+			LogHelper.error(BroadbandValidator.class, e.getMessage());
+			throw new ApplicationException(ExceptionMessages.INVALID_INPUT_INCORRECT_DATE_FORMAT);
+		}
+		return formattedDate;
+		
+	}
+
 	
 	
 

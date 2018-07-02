@@ -296,8 +296,6 @@ public class Hardware   {
    * Get freeGift
    * @return freeGift
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isFreeGift() {
     return freeGift;
@@ -336,8 +334,6 @@ public class Hardware   {
    * Get isChanged
    * @return isChanged
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsChanged() {
     return isChanged;
@@ -526,8 +522,6 @@ public class Hardware   {
    * Get showInSummary
    * @return showInSummary
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isShowInSummary() {
     return showInSummary;

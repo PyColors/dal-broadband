@@ -12,16 +12,16 @@ import io.swagger.annotations.ApiModelProperty;
  * Discount
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class Discount   {
   @JsonProperty("amount")
-  private String amount = null;
+  private Double amount = null;
 
   @JsonProperty("type")
   private String type = null;
 
-  public Discount amount(String amount) {
+  public Discount amount(Double amount) {
     this.amount = amount;
     return this;
   }
@@ -33,11 +33,11 @@ public class Discount   {
   @ApiModelProperty(value = "")
 
 
-  public String getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
-  public void setAmount(String amount) {
+  public void setAmount(Double amount) {
     this.amount = amount;
   }
 

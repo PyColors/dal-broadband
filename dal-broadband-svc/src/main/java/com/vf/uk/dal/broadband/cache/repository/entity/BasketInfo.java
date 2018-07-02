@@ -26,6 +26,9 @@ public class BasketInfo implements Serializable {
 	@JsonProperty("planId")
 	private String planId = null;
 
+	@JsonProperty("planType")
+	private String planType = null;
+
 	public String getAccountCategory() {
 		return accountCategory;
 	}
@@ -64,6 +67,14 @@ public class BasketInfo implements Serializable {
 
 	public void setPlanId(String planId) {
 		this.planId = planId;
+	}
+
+	public String getPlanType() {
+		return planType;
+	}
+
+	public void setPlanType(String planType) {
+		this.planType = planType;
 	}
 
 }

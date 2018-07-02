@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Equipment
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class Equipment   {
   @JsonProperty("make")

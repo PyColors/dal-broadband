@@ -80,8 +80,6 @@ public class BasketServiceLineTreatment   {
    * Get canNumberBeRetained
    * @return canNumberBeRetained
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isCanNumberBeRetained() {
     return canNumberBeRetained;

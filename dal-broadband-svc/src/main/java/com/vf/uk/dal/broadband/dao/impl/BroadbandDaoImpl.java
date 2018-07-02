@@ -26,6 +26,7 @@ import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreatePackageResponse;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
@@ -37,9 +38,10 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
+import com.vf.uk.dal.broadband.exception.TILException;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
@@ -189,12 +191,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			if (client != null)
 				createAppointment = client.getBody();
 		} catch (RestClientResponseException e) {
+			LogHelper.error(this, "::::::ERROR WHILE CALLING CREATE APPOINTMENT" + e);
 			Gson gson = new Gson();
 			String jsonInString = e.getResponseBodyAsString();
 			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
 					com.vf.uk.dal.common.exception.ErrorResponse.class);
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(error.getErrorMessage());
+			throw new TILException(null, error.getErrorMessage());
 		}
 		return createAppointment;
 	}
@@ -205,7 +207,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		try {
 			RestTemplate restTemplate = registryClient.getRestTemplate();
 			String url = "http://PREMISE-V1/premise/address/" + postCode + "?qualified=true";
-			if(StringUtils.equals(categoryPreference, "FTTH")){
+			if (StringUtils.equals(categoryPreference, "FTTH")) {
 				url += "&categoryType=" + categoryPreference;
 			}
 			ResponseEntity<AddressInfo> client = restTemplate.getForEntity(url, AddressInfo.class);
@@ -322,14 +324,20 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	}
 
 	@Override
-	public List<ProductDetails> getEngineeringVisitFee(String acceptVersion) {
+	public List<CommercialProduct> getEngineeringVisitFee(String productClass, boolean isFTTHPlan,
+			String installationType, boolean isPreOrderable) {
 
-		List<ProductDetails> productDetails = null;
+		List<CommercialProduct> productDetails = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
+		StringBuilder urlBuilder = new StringBuilder();
+		urlBuilder.append("http://PRODUCTS-V1/products/catalogue/products?class:name=" + productClass + "&isFTTH="
+				+ isFTTHPlan + "&preorderable=" + isPreOrderable);
+		if (StringUtils.isNotBlank(installationType)) {
+			urlBuilder.append("&installationType=" + installationType);
+		}
 		try {
-			ResponseEntity<ProductDetails[]> client = restTemplate.getForEntity(
-					"http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
-					ProductDetails[].class);
+			ResponseEntity<CommercialProduct[]> client = restTemplate.getForEntity(urlBuilder.toString(),
+					CommercialProduct[].class);
 			if (client != null)
 				productDetails = Arrays.asList(client.getBody());
 		} catch (Exception e) {
@@ -410,12 +418,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			if (client != null)
 				getAppointment = client.getBody();
 		} catch (RestClientResponseException e) {
+			LogHelper.error(this, "::::::ERROR WHILE CALLING GET APPOINTMENT" + e);
 			Gson gson = new Gson();
 			String jsonInString = e.getResponseBodyAsString();
 			com.vf.uk.dal.common.exception.ErrorResponse error = gson.fromJson(jsonInString,
 					com.vf.uk.dal.common.exception.ErrorResponse.class);
-			LogHelper.error(this, "::::::No Data recieved from TIL" + e);
-			throw new ApplicationException(error.getErrorMessage());
+			throw new TILException(null, error.getErrorMessage());
 		}
 		return getAppointment;
 	}
@@ -455,5 +463,24 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			throw new ApplicationException(ExceptionMessages.GEN_EXC_PROMOTION_API);
 		}
 		return bundlePromotions;
+	}
+
+	@Override
+	public void updateBasketWithServiceDate(ServiceStartDateRequest serviceStartDateRequest, String basketId,
+			String packageId) {
+		RestTemplate restTemplate = registryClient.getRestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		try {
+
+			final HttpEntity<ServiceStartDateRequest> entity = new HttpEntity<>(serviceStartDateRequest, headers);
+			String url = BroadBandConstant.BASKET_URL + basketId + "/broadbandPackage/" + packageId
+					+ "/serviceStartDate";
+			restTemplate.exchange(url, HttpMethod.PUT, entity, Void.class);
+
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception occured while calling updateBasketWithServiceDate " + e);
+			throw new ApplicationException(ExceptionMessages.GEN_EXCP_ADD_PRODUCT);
+		}
 	}
 }

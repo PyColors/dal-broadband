@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * LineTreatment
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-08T09:39:43.102Z")
 
 public class BasketLineTreatment   {
   @JsonProperty("appointmentNeeded")
@@ -27,6 +27,12 @@ public class BasketLineTreatment   {
   @JsonProperty("identification")
   private String identification = null;
 
+  @JsonProperty("preOrder")
+  private Boolean preOrder = null;
+
+  @JsonProperty("registerOfInterest")
+  private Boolean registerOfInterest = null;
+
   public BasketLineTreatment appointmentNeeded(Boolean appointmentNeeded) {
     this.appointmentNeeded = appointmentNeeded;
     return this;
@@ -36,8 +42,6 @@ public class BasketLineTreatment   {
    * Get appointmentNeeded
    * @return appointmentNeeded
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isAppointmentNeeded() {
     return appointmentNeeded;
@@ -107,6 +111,42 @@ public class BasketLineTreatment   {
     this.identification = identification;
   }
 
+  public BasketLineTreatment preOrder(Boolean preOrder) {
+    this.preOrder = preOrder;
+    return this;
+  }
+
+  /**
+   * Get preOrder
+   * @return preOrder
+  **/
+
+  public Boolean isPreOrder() {
+    return preOrder;
+  }
+
+  public void setPreOrder(Boolean preOrder) {
+    this.preOrder = preOrder;
+  }
+
+  public BasketLineTreatment registerOfInterest(Boolean registerOfInterest) {
+    this.registerOfInterest = registerOfInterest;
+    return this;
+  }
+
+  /**
+   * Get registerOfInterest
+   * @return registerOfInterest
+  **/
+
+  public Boolean isRegisterOfInterest() {
+    return registerOfInterest;
+  }
+
+  public void setRegisterOfInterest(Boolean registerOfInterest) {
+    this.registerOfInterest = registerOfInterest;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -120,12 +160,14 @@ public class BasketLineTreatment   {
     return Objects.equals(this.appointmentNeeded, lineTreatment.appointmentNeeded) &&
         Objects.equals(this.connectionCharge, lineTreatment.connectionCharge) &&
         Objects.equals(this.earliestAvailableDate, lineTreatment.earliestAvailableDate) &&
-        Objects.equals(this.identification, lineTreatment.identification);
+        Objects.equals(this.identification, lineTreatment.identification) &&
+        Objects.equals(this.preOrder, lineTreatment.preOrder) &&
+        Objects.equals(this.registerOfInterest, lineTreatment.registerOfInterest);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(appointmentNeeded, connectionCharge, earliestAvailableDate, identification);
+    return Objects.hash(appointmentNeeded, connectionCharge, earliestAvailableDate, identification, preOrder, registerOfInterest);
   }
 
   @Override
@@ -137,6 +179,8 @@ public class BasketLineTreatment   {
     sb.append("    connectionCharge: ").append(toIndentedString(connectionCharge)).append("\n");
     sb.append("    earliestAvailableDate: ").append(toIndentedString(earliestAvailableDate)).append("\n");
     sb.append("    identification: ").append(toIndentedString(identification)).append("\n");
+    sb.append("    preOrder: ").append(toIndentedString(preOrder)).append("\n");
+    sb.append("    registerOfInterest: ").append(toIndentedString(registerOfInterest)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * ListOfMediaURL
+ * MediaURL
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
-public class ListOfMediaURL   {
+public class MediaURL   {
   @JsonProperty("mediaName")
   private String mediaName = null;
 
   @JsonProperty("mediaURL")
   private String mediaURL = null;
 
-  public ListOfMediaURL mediaName(String mediaName) {
+  public MediaURL mediaName(String mediaName) {
     this.mediaName = mediaName;
     return this;
   }
@@ -41,7 +41,7 @@ public class ListOfMediaURL   {
     this.mediaName = mediaName;
   }
 
-  public ListOfMediaURL mediaURL(String mediaURL) {
+  public MediaURL mediaURL(String mediaURL) {
     this.mediaURL = mediaURL;
     return this;
   }
@@ -70,9 +70,9 @@ public class ListOfMediaURL   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListOfMediaURL listOfMediaURL = (ListOfMediaURL) o;
-    return Objects.equals(this.mediaName, listOfMediaURL.mediaName) &&
-        Objects.equals(this.mediaURL, listOfMediaURL.mediaURL);
+    MediaURL mediaURL = (MediaURL) o;
+    return Objects.equals(this.mediaName, mediaURL.mediaName) &&
+        Objects.equals(this.mediaURL, mediaURL.mediaURL);
   }
 
   @Override
@@ -83,7 +83,7 @@ public class ListOfMediaURL   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ListOfMediaURL {\n");
+    sb.append("class MediaURL {\n");
     
     sb.append("    mediaName: ").append(toIndentedString(mediaName)).append("\n");
     sb.append("    mediaURL: ").append(toIndentedString(mediaURL)).append("\n");

@@ -12,37 +12,17 @@ import io.swagger.annotations.ApiModelProperty;
  * BoxPrice
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class BoxPrice   {
-  @JsonProperty("priceNet")
-  private String priceNet = null;
-
   @JsonProperty("priceGross")
   private String priceGross = null;
 
+  @JsonProperty("priceNet")
+  private String priceNet = null;
+
   @JsonProperty("priceVAT")
   private String priceVAT = null;
-
-  public BoxPrice priceNet(String priceNet) {
-    this.priceNet = priceNet;
-    return this;
-  }
-
-  /**
-   * Get priceNet
-   * @return priceNet
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getPriceNet() {
-    return priceNet;
-  }
-
-  public void setPriceNet(String priceNet) {
-    this.priceNet = priceNet;
-  }
 
   public BoxPrice priceGross(String priceGross) {
     this.priceGross = priceGross;
@@ -62,6 +42,26 @@ public class BoxPrice   {
 
   public void setPriceGross(String priceGross) {
     this.priceGross = priceGross;
+  }
+
+  public BoxPrice priceNet(String priceNet) {
+    this.priceNet = priceNet;
+    return this;
+  }
+
+  /**
+   * Get priceNet
+   * @return priceNet
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getPriceNet() {
+    return priceNet;
+  }
+
+  public void setPriceNet(String priceNet) {
+    this.priceNet = priceNet;
   }
 
   public BoxPrice priceVAT(String priceVAT) {
@@ -94,14 +94,14 @@ public class BoxPrice   {
       return false;
     }
     BoxPrice boxPrice = (BoxPrice) o;
-    return Objects.equals(this.priceNet, boxPrice.priceNet) &&
-        Objects.equals(this.priceGross, boxPrice.priceGross) &&
+    return Objects.equals(this.priceGross, boxPrice.priceGross) &&
+        Objects.equals(this.priceNet, boxPrice.priceNet) &&
         Objects.equals(this.priceVAT, boxPrice.priceVAT);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(priceNet, priceGross, priceVAT);
+    return Objects.hash(priceGross, priceNet, priceVAT);
   }
 
   @Override
@@ -109,8 +109,8 @@ public class BoxPrice   {
     StringBuilder sb = new StringBuilder();
     sb.append("class BoxPrice {\n");
     
-    sb.append("    priceNet: ").append(toIndentedString(priceNet)).append("\n");
     sb.append("    priceGross: ").append(toIndentedString(priceGross)).append("\n");
+    sb.append("    priceNet: ").append(toIndentedString(priceNet)).append("\n");
     sb.append("    priceVAT: ").append(toIndentedString(priceVAT)).append("\n");
     sb.append("}");
     return sb.toString();

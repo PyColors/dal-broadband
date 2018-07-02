@@ -2,33 +2,36 @@ package com.vf.uk.dal.broadband.entity.premise;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Address
  */
 
 public class Address {
+	@JsonProperty("postCode")
 	private String postCode = null;
-
+	@JsonProperty("houseNumber")
 	private String houseNumber = null;
-
+	@JsonProperty("houseName")
 	private String houseName = null;
-
+	@JsonProperty("flatNumber")
 	private String flatNumber = null;
-
+	@JsonProperty("streetName")
 	private String streetName = null;
-
+	@JsonProperty("locality")
 	private String locality = null;
-
+	@JsonProperty("city")
 	private String city = null;
-
+	@JsonProperty("county")
 	private String county = null;
-
+	@JsonProperty("country")
 	private String country = null;
-
+	@JsonProperty("citySubDivisionCode")
 	private String citySubDivisionCode = null;
-
+	@JsonProperty("contextId")
 	private String contextId = null;
-
+	@JsonProperty("id")
 	private String id = null;
 
 	public Address postCode(String postCode) {

@@ -11,37 +11,46 @@ public class LineTreatment implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7678338484729609759L;
-	
+
 	/** The Constant IDENTIFICATION. */
 	private static final String IDENTIFICATION = "identification";
-	
+
 	/** The Constant EARLIESTAVAILABLEDATE. */
 	private static final String EARLIESTAVAILABLEDATE = "earliestAvailableDate";
-	
+
 	/** The Constant APPOINTMENTNEEDED. */
 	private static final String APPOINTMENTNEEDED = "appointmentNeeded";
-	
+
 	/** The Constant CONNECTIONCHARGE. */
 	private static final String CONNECTIONCHARGE = "connectionCharge";
 
 	/** The identification. */
 	@JsonProperty(IDENTIFICATION)
 	private String identification;
-	
+
 	/** The earliest available date. */
 	@JsonProperty(EARLIESTAVAILABLEDATE)
 	private String earliestAvailableDate;
-	
+
 	/** The appointment needed. */
 	@JsonProperty(APPOINTMENTNEEDED)
 	private boolean appointmentNeeded;
-	
+
 	/** The connection charge. */
 	@JsonProperty(CONNECTIONCHARGE)
 	private String connectionCharge;
-	
+
 	@JsonProperty("lineTreatmentType")
 	private String lineTreatmentType = null;
+
+	@JsonProperty("preOrder")
+	private Boolean preOrder = null;
+
+	@JsonProperty("registerOfInterest")
+	private Boolean registerOfInterest = null;
+
+	@JsonProperty("installProcess")
+	private String installProcess = null;
 
 	/**
 	 * Gets the identification.
@@ -55,7 +64,8 @@ public class LineTreatment implements Serializable {
 	/**
 	 * Sets the identification.
 	 *
-	 * @param identification the new identification
+	 * @param identification
+	 *            the new identification
 	 */
 	public void setIdentification(String identification) {
 		this.identification = identification;
@@ -73,7 +83,8 @@ public class LineTreatment implements Serializable {
 	/**
 	 * Sets the earliest available date.
 	 *
-	 * @param earliestAvailableDate the new earliest available date
+	 * @param earliestAvailableDate
+	 *            the new earliest available date
 	 */
 	public void setEarliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
@@ -91,7 +102,8 @@ public class LineTreatment implements Serializable {
 	/**
 	 * Sets the appointment needed.
 	 *
-	 * @param appointmentNeeded the new appointment needed
+	 * @param appointmentNeeded
+	 *            the new appointment needed
 	 */
 	public void setAppointmentNeeded(boolean appointmentNeeded) {
 		this.appointmentNeeded = appointmentNeeded;
@@ -109,7 +121,8 @@ public class LineTreatment implements Serializable {
 	/**
 	 * Sets the connection charge.
 	 *
-	 * @param connectionCharge the new connection charge
+	 * @param connectionCharge
+	 *            the new connection charge
 	 */
 	public void setConnectionCharge(String connectionCharge) {
 		this.connectionCharge = connectionCharge;
@@ -123,7 +136,33 @@ public class LineTreatment implements Serializable {
 		this.lineTreatmentType = lineTreatmentType;
 	}
 
-	/* (non-Javadoc)
+	public Boolean isPreOrder() {
+		return preOrder;
+	}
+
+	public void setPreOrder(Boolean preOrder) {
+		this.preOrder = preOrder;
+	}
+
+	public Boolean getRegisterOfInterest() {
+		return registerOfInterest;
+	}
+
+	public void setRegisterOfInterest(Boolean registerOfInterest) {
+		this.registerOfInterest = registerOfInterest;
+	}
+
+	public String getInstallProcess() {
+		return installProcess;
+	}
+
+	public void setInstallProcess(String installProcess) {
+		this.installProcess = installProcess;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -137,7 +176,9 @@ public class LineTreatment implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -169,7 +210,9 @@ public class LineTreatment implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

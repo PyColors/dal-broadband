@@ -12,17 +12,17 @@ import io.swagger.annotations.ApiModelProperty;
  * ItemAttribute
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-27T09:23:23.120Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class ItemAttribute   {
   @JsonProperty("key")
   private String key = null;
 
-  @JsonProperty("value")
-  private String value = null;
-
   @JsonProperty("type")
   private String type = null;
+
+  @JsonProperty("value")
+  private String value = null;
 
   @JsonProperty("valueUOM")
   private String valueUOM = null;
@@ -47,26 +47,6 @@ public class ItemAttribute   {
     this.key = key;
   }
 
-  public ItemAttribute value(String value) {
-    this.value = value;
-    return this;
-  }
-
-  /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-
   public ItemAttribute type(String type) {
     this.type = type;
     return this;
@@ -85,6 +65,26 @@ public class ItemAttribute   {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public ItemAttribute value(String value) {
+    this.value = value;
+    return this;
+  }
+
+  /**
+   * Get value
+   * @return value
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
   }
 
   public ItemAttribute valueUOM(String valueUOM) {
@@ -118,14 +118,14 @@ public class ItemAttribute   {
     }
     ItemAttribute itemAttribute = (ItemAttribute) o;
     return Objects.equals(this.key, itemAttribute.key) &&
-        Objects.equals(this.value, itemAttribute.value) &&
         Objects.equals(this.type, itemAttribute.type) &&
+        Objects.equals(this.value, itemAttribute.value) &&
         Objects.equals(this.valueUOM, itemAttribute.valueUOM);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, value, type, valueUOM);
+    return Objects.hash(key, type, value, valueUOM);
   }
 
   @Override
@@ -134,8 +134,8 @@ public class ItemAttribute   {
     sb.append("class ItemAttribute {\n");
     
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    valueUOM: ").append(toIndentedString(valueUOM)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -12,6 +12,10 @@ import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
@@ -31,6 +35,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.LineSpeeds;
 import com.vf.uk.dal.broadband.cache.repository.entity.LineTreatment;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServieLine;
+import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
@@ -46,13 +51,14 @@ import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
-import com.vf.uk.dal.broadband.entity.product.ProductDetails;
+import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
@@ -61,6 +67,7 @@ import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
+import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -74,6 +81,10 @@ import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
  */
 @Component("broadbandService")
 public class BroadbandServiceImpl implements BroadbandService {
+
+	private static final String CATEGORY_PREFERENCE_FTTH = "FTTH";
+
+	private static final String CATEGORY_PREFERENCE_FTTC = "FTTC";
 
 	@Autowired
 	BroadbandDao broadbandDao;
@@ -93,11 +104,22 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 	@Override
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest,
-			String broadbandId, String acceptVersion) {
+			String broadbandId, Broadband broadband) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
-		Broadband broadBand = broadbandDao.getBroadbandFromCache(broadbandId);
-		if (broadBand != null && checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
+		Broadband broadBand = broadband;
+		if (broadBand == null) {
+			broadBand = new Broadband();
+		}
+		broadBand.setCategoryPreference(availabilityCheckRequest.getCategory());
+		if (checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
+			if (StringUtils.isNotEmpty(broadBand.getBasketId())) {
+				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
+						.methodOn(BroadbandController.class).updateLineTypeInBasket(null, new UpdateLineRequest());
+				Link lineTypeLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineType).withRel("line-type")
+						.withType("PUT");
+				response.add(ConverterUtils.formatLink(lineTypeLink));
+			}
 		} else {
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
 					.getServiceAvailability(availabilityCheckRequest);
@@ -116,8 +138,46 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if (isClassificationCodePresent || availabilityCheckRequest.getClassificationCode() == null
 					|| availabilityCheckRequest.getClassificationCode().isEmpty()) {
 
-				List<ProductDetails> productDetailsList = broadbandDao.getEngineeringVisitFee(acceptVersion);
+				//
+				boolean isFTTHPlan = false;
+				boolean isPreOrderable = false;
+				String installationType = null;
+				String productClass = BroadBandConstant.BROADBAND_ENG_FEE_PRODUCTCLASS;
+				// For FTTH the product class mentioned is "Fixed Fee:Standard Installation Fee"
+				if (StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH")) {
+					isFTTHPlan = true;
+					productClass = BroadBandConstant.BROADBAND_STD_INSTALLATION_FEE_PRODUCTCLASS;
+				}
 
+				if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
+						&& CollectionUtils.isNotEmpty(getServiceAvailabilityResponse.getServiceAvailabilityLine())
+						&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() != null
+						&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines()
+								.isEmpty()) {
+					for (com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLinesFromRequest : getServiceAvailabilityResponse
+							.getServiceAvailabilityLine().get(0).getServiceLines()) {
+
+						if (CollectionUtils.isNotEmpty(serviceLinesFromRequest.getLineTreatment())) {
+							for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : serviceLinesFromRequest
+									.getLineTreatment()) {
+								if (lineTreatment.isPreOrder() != null && lineTreatment.isPreOrder()) {
+									isPreOrderable = true;
+								}
+							}
+						}
+						if (CollectionUtils.isNotEmpty(serviceLinesFromRequest.getServiceLine())) {
+							for (com.vf.uk.dal.entity.serviceavailability.ServiceLine serviceLineFromRequest : serviceLinesFromRequest
+									.getServiceLine()) {
+								if (serviceLineFromRequest.getMiscReference() != null && StringUtils
+										.isNotBlank(serviceLineFromRequest.getMiscReference().getInstallationType())) {
+									installationType = serviceLineFromRequest.getMiscReference().getInstallationType();
+								}
+							}
+						}
+					}
+				}
+				List<CommercialProduct> productDetailsList = broadbandDao.getEngineeringVisitFee(
+						productClass, isFTTHPlan, installationType, isPreOrderable);
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
 						getServiceAvailabilityResponse, broadbandId, broadBand, productDetailsList);
 				broadbandDao.setBroadBandInCache(broadBand);
@@ -135,7 +195,18 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePointRequest,
 					broadBand.getBasketInfo().getPackageId(), broadBand.getBasketId());
 		}
-
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
+				.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null, null);
+		Link planLink = ControllerLinkBuilder.linkTo(methodLinkBuilderPlan).withRel("flbb-plan").withType("GET");
+		AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
+		Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
+				.withType("GET");
+		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.checkAvailabilityForBroadband(availabilityCheckRequest, null)).withSelfRel();
+		response.add(ConverterUtils.formatLink(selfLink));
+		response.add(ConverterUtils.formatLink(planLink));
+		response.add(ConverterUtils.formatLink(getAddressLink));
 		return response;
 	}
 
@@ -175,11 +246,15 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 				isAddressSame = true;
 			}
-			if (isAddressSame && ((broadBand.getLineDetails() == null && StringUtils
-					.isEmpty(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))
-					|| (broadBand.getLineDetails() != null && StringUtils.equalsIgnoreCase(
-							broadBand.getLineDetails().getFlbbNumber(),
-							availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber())))) {
+			if (isAddressSame
+					&& ((broadBand.getLineDetails() == null && StringUtils.isEmpty(
+							availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber()))
+							|| (broadBand.getLineDetails() != null
+									&& StringUtils.equalsIgnoreCase(broadBand.getLineDetails().getFlbbNumber(),
+											availabilityCheckRequest.getLineRef().getLineIdentification()
+													.getFllandlineNumber())))
+					&& StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(),
+							broadBand.getCategoryPreference())) {
 				return true;
 			}
 
@@ -224,15 +299,20 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
-		String broadbandId = getBundleListSearchCriteria.getBroadbandId();
+		Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
+		if (broadBand != null && (StringUtils.isBlank(broadBand.getCategoryPreference())
+				|| CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
+			bundleClass = CATEGORY_PREFERENCE_FTTC;
+		}
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
-		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		// Broadband broadband =
+		// broadbandDao.getBroadbandFromCache(broadbandId);
 		Set<String> routerProductIds = new HashSet<>();
 		DozerBeanMapper beanMapper = new DozerBeanMapper();
 		if (bundleDetails != null && CollectionUtils.isNotEmpty(bundleDetails.getPlanList())) {
-			Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
+
 			bundleDetails.getPlanList().forEach(bundleHeader -> {
 
 				FlbBundle flbBundle = new FlbBundle();
@@ -249,13 +329,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 						BroadBandConstant.LINE_WITH_38)) {
 					speedForBB.setCommercialSpeed(ConfigHelper.getString(BroadBandConstant.SPEED_38, "25"));
 				}
+				flbBundle.setPreOrderable(false);
 				flbBundle.setIsSelected(false);
-				if(broadband!=null && broadband.getLineDetails()!=null && StringUtils.equalsIgnoreCase(flbBundle.getClassificationCode(), broadband.getLineDetails().getClassificationCode())){
+				if (broadBand != null && broadBand.getLineDetails() != null && StringUtils.equalsIgnoreCase(
+						flbBundle.getClassificationCode(), broadBand.getLineDetails().getClassificationCode())) {
 					flbBundle.setIsSelected(true);
 				}
-				
-				
-				
 				flbBundle.setSpeed(speedForBB);
 				flbBundle.setIsSpeedLess(false);
 				if (broadBand != null && broadBand.getServicePoint() != null
@@ -286,6 +365,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 										flbBundle.setIsSpeedLess(true);
 										break;
 									}
+								}
+							}
+
+							if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
+								LineTreatment lineTreatment = serLines.getLineTreatmentList().get(0);
+								flbBundle.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
+								if (lineTreatment.isPreOrder() != null) {
+									flbBundle.setPreOrderable(lineTreatment.isPreOrder());
 								}
 							}
 						}
@@ -339,9 +426,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 								com.vf.uk.dal.broadband.entity.HardwarePrice engineeringFee = new com.vf.uk.dal.broadband.entity.HardwarePrice();
 								if ((lineTreatmentList.size() == 1 && lineTreatmentList.get(0).getIdentification()
 										.equalsIgnoreCase(BroadBandConstant.LINE_TREATMENT_TYPE_NEW))
-										|| (lineTreatmentList.size() == 2 && (StringUtils.isNotBlank(lineTreatmentType)
-												&& lineTreatmentType.equalsIgnoreCase(
-														BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))) {
+										|| (lineTreatmentList.size() == 2
+												&& (StringUtils.isNotBlank(lineTreatmentType) && lineTreatmentType
+														.equalsIgnoreCase(BroadBandConstant.LINE_TREATMENT_TYPE_NEW)))
+												&& broadBand.getEngineeringVisitCharge() != null) {
 									engineeringFee.setHardwareId(
 											broadBand.getEngineeringVisitCharge().getEngVisitProductId());
 									Price engFee = new Price();
@@ -440,14 +528,30 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 
 	@Override
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference) {
-		return broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreference);
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences) {
+		AddressInfo addressInfo = broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreferences);
+
+		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder
+				.methodOn(BroadbandController.class)
+				.checkAvailabilityForBroadband(new AvailabilityCheckRequest(), null);
+		Link lineOptionLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineOptions)
+				.withRel("flbb-availablility-checker").withType("POST");
+		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH)).withSelfRel().withType("GET");
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
+				.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null, null);
+		Link planLink = ControllerLinkBuilder.linkTo(methodLinkBuilderPlan).withRel("flbb-plan").withType("GET");
+		addressInfo.add(ConverterUtils.formatLink(planLink));
+		addressInfo.add(ConverterUtils.formatLink(selfLink));
+		addressInfo.add(ConverterUtils.formatLink(lineOptionLink));
+		return addressInfo;
 	}
 
 	@Override
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId) {
 		Basket basket = null;
 		Broadband broadbandCache = broadband;
+		String journeyType = "Acquisition";
 		if (broadbandCache != null) {
 			String basketId = broadbandCache.getBasketId();
 			String journeyId = broadbandCache.getJourneyId();
@@ -455,27 +559,36 @@ public class BroadbandServiceImpl implements BroadbandService {
 			CurrentJourney journey = null;
 			if (StringUtils.isNotEmpty(journeyId)) {
 				journey = broadbandDao.getJourney(journeyId);
+				journeyType = journey.getJourneyData().getName();
 			}
 			if (StringUtils.isBlank(basketId)) {
 				CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest,
 						broadbandCache, mapper.map(broadbandCache.getServicePoint(), BasketServicePoint.class),
 						journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
+				AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
+						.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
+				Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
+						.withType("GET");
+				basket.add(ConverterUtils.formatLink(getAddressLink));
 				broadbandCache.setBasketId(basket.getBasketId());
 			} else {
 				UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(basketRequest, journey,
 						broadbandCache, null);
+				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
+						.methodOn(BroadbandController.class).updateLineTypeInBasket(null, new UpdateLineRequest());
+				Link lineTypeLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineType).withRel("line-type")
+						.withType("PUT");
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
 				basket = broadbandDao.getBasket(basketId);
+				basket.add(ConverterUtils.formatLink(lineTypeLink));
 			}
 			broadbandCache = ConverterUtils.createUpdateCacheRequest(broadbandCache, basketRequest, broadbandId,
 					basket);
-
 			broadbandDao.setBroadBandInCache(broadbandCache);
 		} else {
 			CreateBasketRequest createBasketRequest = ConverterUtils.createBasketRequest(basketRequest, broadbandCache,
 					null, null);
-
 			basket = broadbandDao.createBasket(createBasketRequest);
 			Broadband broadbandToSave = new Broadband();
 			broadbandToSave.setBroadBandId(broadbandId);
@@ -490,6 +603,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 			if (CollectionUtils.isNotEmpty(basket.getPackages())) {
 				for (ModelPackage modelPackage : basket.getPackages()) {
+					basketInfo.setPlanType(modelPackage.getPlanType());
 					if (StringUtils.contains(modelPackage.getPlanType(), "BroadBand")) {
 						basketInfo.setPackageId(modelPackage.getPackageId());
 						if (modelPackage.getBundle() != null) {
@@ -504,7 +618,28 @@ public class BroadbandServiceImpl implements BroadbandService {
 				}
 			}
 			broadbandDao.setBroadBandInCache(broadbandToSave);
+
+			AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
+					.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
+			Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
+					.withType("GET");
+			basket.add(ConverterUtils.formatLink(getAddressLink));
 		}
+		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.createOrUpdatePackage(null, new BasketRequest())).withSelfRel();
+		basket.add(ConverterUtils.formatLink(selfLink));
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
+				.methodOn(BroadbandController.class).getFlbbList(null, null, null, journeyType, null, null, null);
+		Link planLink = ControllerLinkBuilder.linkTo(methodLinkBuilderPlan).withRel("flbb-plan").withType("GET");
+		if (basketRequest.getAddBundle() != null) {
+			ResponseEntity<List<RouterDetails>> methodLinkCompatibleRouters = ControllerLinkBuilder
+					.methodOn(BroadbandController.class)
+					.getCompatibleDevicesForBundle(null, basketRequest.getAddBundle().getBundleId());
+			Link routerLink = ControllerLinkBuilder.linkTo(methodLinkCompatibleRouters).withRel("flbb-router")
+					.withType("GET");
+			basket.add(ConverterUtils.formatLink(routerLink));
+		}
+		basket.add(ConverterUtils.formatLink(planLink));
 		return basket;
 	}
 
@@ -637,6 +772,16 @@ public class BroadbandServiceImpl implements BroadbandService {
 			LogHelper.error(this, "Create Appointment failed!!!");
 			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
 		}
+
+		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.createAppointmentForFLBB(broadbandId, new CreateAppointmentRequest())).withSelfRel();
+
+		ResponseEntity<?> methodLinkGetAppointment = ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.getAppointmentForFLBB(null);
+		Link getAppointmentLink = ControllerLinkBuilder.linkTo(methodLinkGetAppointment).withRel("flbb-get-appointment")
+				.withType("GET");
+		response.add(ConverterUtils.formatLink(selfLink));
+		response.add(ConverterUtils.formatLink(getAppointmentLink));
 		return response;
 	}
 
@@ -645,44 +790,73 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband);
 		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
-		return ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
+		GetAppointmentResponse getAppointmentRes = ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
+		Link selfLink = ControllerLinkBuilder
+				.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class).getAppointmentForFLBB(broadbandId))
+				.withSelfRel();
+		ResponseEntity<?> methodLinkCreateAppointment = ControllerLinkBuilder.methodOn(BroadbandController.class)
+				.createAppointmentForFLBB(null, new CreateAppointmentRequest());
+		Link createAppointmentLink = ControllerLinkBuilder.linkTo(methodLinkCreateAppointment)
+				.withRel("flbb-create-appointment").withType("POST");
+		getAppointmentRes.add(ConverterUtils.formatLink(selfLink));
+		getAppointmentRes.add(ConverterUtils.formatLink(createAppointmentLink));
+		return getAppointmentRes;
 	}
 
 	@Override
-	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest, String broadbandId) {
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest,
+			String broadbandId) {
 		OptimizePackageResponse response = new OptimizePackageResponse();
 		response.setHasPackageOptimized(false);
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		if(StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())){
+		if (broadband == null) {
+			broadband = new Broadband();
+		}
+		broadband.setBroadBandId(broadbandId);
+		if (StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())) {
 			broadband.setJourneyId(optimizePackageRequest.getJourneyId());
 		}
-		if(StringUtils.isNotEmpty(broadband.getBasketId())){
+		if (broadband != null && StringUtils.isNotEmpty(broadband.getBasketId())) {
 			CurrentJourney journey = null;
 			if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
 				journey = broadbandDao.getJourney(broadband.getJourneyId());
 			}
 			String journeyName = null;
-			if(journey!=null && journey.getJourneyData()!=null && StringUtils.isNotEmpty(journey.getJourneyData().getName())){
+			if (journey != null && journey.getJourneyData() != null
+					&& StringUtils.isNotEmpty(journey.getJourneyData().getName())) {
 				journeyName = journey.getJourneyData().getName();
 			}
-			BundlePromotionRequest bundlePromotionRequest = ConverterUtils.createPromotionRequestToOptimize(broadband, journeyName);
-			List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
 			String planId = broadband.getBasketInfo().getPlanId();
-			for(BundlePromotion bundlePromotion : bundlePromotions){
-				if(StringUtils.equalsIgnoreCase(bundlePromotion.getBundleId(), planId)
-						&& CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())){
-					planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
-					UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, journey, broadband, planId);
-					broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
-					response.setHasPackageOptimized(true);
-					BasketInfo basketInfo = broadband.getBasketInfo();
-					if(basketInfo==null){
-						basketInfo = new BasketInfo();
+			if (!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)) {
+				BundlePromotionRequest bundlePromotionRequest = ConverterUtils
+						.createPromotionRequestToOptimize(broadband, journeyName);
+				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
+
+				for (BundlePromotion bundlePromotion : bundlePromotions) {
+					if (StringUtils.equalsIgnoreCase(bundlePromotion.getBundleId(), planId)
+							&& CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())) {
+						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
+						response.setHasPackageOptimized(true);
+						break;
+
 					}
-					basketInfo.setPlanId(planId);
-					broadband.setBasketInfo(basketInfo);
+				}
+			} else if (StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(),
+					CATEGORY_PREFERENCE_FTTH)) {
+				if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
+					response.setHasPackageOptimized(true);
 				}
 			}
+			UpdatePackage updatePackageRequest = ConverterUtils.updateBasketRequest(null, journey, broadband, planId);
+			broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(),
+					broadband.getBasketId());
+			BasketInfo basketInfo = broadband.getBasketInfo();
+			if (basketInfo == null) {
+				basketInfo = new BasketInfo();
+			}
+			basketInfo.setPlanId(planId);
+			broadband.setBasketInfo(basketInfo);
+
 		}
 		broadbandDao.setBroadBandInCache(broadband);
 		return response;
@@ -691,12 +865,41 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId) {
 		List<RouterDetails> routerDetailList = new ArrayList<>();
-		for(RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)){
+		for (RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)) {
 			RouterDetails routerDetails = new RouterDetails();
 			routerDetails = mapper.map(routerProductDetails, RouterDetails.class);
 			routerDetails.setIsDefaultDevice(routerProductDetails.isIsDefaultDevice());
 			routerDetailList.add(routerDetails);
 		}
 		return routerDetailList;
+	}
+
+	@Override
+	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest) {
+		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		if (broadband != null) {
+			if (BroadbandValidator.validateStartDate(serviceStartDateRequest)) {
+				serviceStartDateRequest.setStartDateTime(
+						BroadbandValidator.convertDateToTimeStamp(serviceStartDateRequest.getStartDateTime()));
+				com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest serviceStartDateBaketRequest = ConverterUtils
+						.createServiceStartDateRequest(serviceStartDateRequest);
+				broadbandDao.updateBasketWithServiceDate(serviceStartDateBaketRequest, broadband.getBasketId(),
+						broadband.getBasketInfo().getPackageId());
+
+				if (BooleanUtils.toBoolean(serviceStartDateRequest.getRemoveFromPhoneDirectory())) {
+					ServicePoint servicePoint = ConverterUtils.updateBroadbandCacheWithLineDirectoryInfo(broadband);
+					broadband.setServicePoint(servicePoint);
+					PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
+							mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
+					broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+							broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+					broadbandDao.setBroadBandInCache(broadband);
+				}
+			}
+
+		} else {
+			LogHelper.error(this, "Invalid Broadband Id !!!");
+			throw new ApplicationException(ExceptionMessages.INVALID_BROADBAND_ID);
+		}
 	}
 }

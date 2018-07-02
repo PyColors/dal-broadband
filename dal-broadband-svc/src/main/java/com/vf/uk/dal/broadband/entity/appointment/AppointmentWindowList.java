@@ -2,105 +2,154 @@ package com.vf.uk.dal.broadband.entity.appointment;
 
 import java.util.Objects;
 
+import org.springframework.validation.annotation.Validated;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * AppointmentWindowList
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-18T17:50:50.794Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
-public class AppointmentWindowList {
-	@JsonProperty("startTimePeriod")
-	private String startTimePeriod = null;
+public class AppointmentWindowList   {
+  @JsonProperty("endTime")
+  private String endTime = null;
 
-	@JsonProperty("timeSlot")
-	private String timeSlot = null;
+  @JsonProperty("startTime")
+  private String startTime = null;
 
-	/**
-	 * @param startTimePeriod
-	 * @return
-	 */
-	public AppointmentWindowList startTimePeriod(String startTimePeriod) {
-		this.startTimePeriod = startTimePeriod;
-		return this;
-	}
+  @JsonProperty("startTimePeriod")
+  private String startTimePeriod = null;
 
-	/**
-	 * Date on which the appointment should be reserved in case of or Earliest
-	 * required appointment date in case of get appointment request.
-	 * 
-	 * @return startTimePeriod
-	 **/
+  @JsonProperty("timeSlot")
+  private String timeSlot = null;
 
-	public String getStartTimePeriod() {
-		return startTimePeriod;
-	}
+  public AppointmentWindowList endTime(String endTime) {
+    this.endTime = endTime;
+    return this;
+  }
 
-	public void setStartTimePeriod(String startTimePeriod) {
-		this.startTimePeriod = startTimePeriod;
-	}
+  /**
+   * Time on which the appointment should be reserved
+   * @return endTime
+  **/
+  @ApiModelProperty(value = "Time on which the appointment should be reserved")
 
-	/**
-	 * @param timeSlot
-	 * @return
-	 */
-	public AppointmentWindowList timeSlot(String timeSlot) {
-		this.timeSlot = timeSlot;
-		return this;
-	}
 
-	/**
-	 * Time slot at which the appointment should be reserved. LOV - AM, PM, EV,
-	 * EM
-	 * 
-	 * @return timeSlot
-	 **/
+  public String getEndTime() {
+    return endTime;
+  }
 
-	public String getTimeSlot() {
-		return timeSlot;
-	}
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
 
-	public void setTimeSlot(String timeSlot) {
-		this.timeSlot = timeSlot;
-	}
+  public AppointmentWindowList startTime(String startTime) {
+    this.startTime = startTime;
+    return this;
+  }
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		AppointmentWindowList appointmentWindowList = (AppointmentWindowList) o;
-		return Objects.equals(this.startTimePeriod, appointmentWindowList.startTimePeriod)
-				&& Objects.equals(this.timeSlot, appointmentWindowList.timeSlot);
-	}
+  /**
+   * Time on which the appointment should be reserved
+   * @return startTime
+  **/
+  @ApiModelProperty(value = "Time on which the appointment should be reserved")
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(startTimePeriod, timeSlot);
-	}
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class AppointmentWindowList {\n");
+  public String getStartTime() {
+    return startTime;
+  }
 
-		sb.append("    startTimePeriod: ").append(toIndentedString(startTimePeriod)).append("\n");
-		sb.append("    timeSlot: ").append(toIndentedString(timeSlot)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
 
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
+  public AppointmentWindowList startTimePeriod(String startTimePeriod) {
+    this.startTimePeriod = startTimePeriod;
+    return this;
+  }
+
+  /**
+   * Date on which the appointment should be reserved in case of or Earliest required appointment date in case of get appointment request.
+   * @return startTimePeriod
+  **/
+  @ApiModelProperty(value = "Date on which the appointment should be reserved in case of or Earliest required appointment date in case of get appointment request.")
+
+
+  public String getStartTimePeriod() {
+    return startTimePeriod;
+  }
+
+  public void setStartTimePeriod(String startTimePeriod) {
+    this.startTimePeriod = startTimePeriod;
+  }
+
+  public AppointmentWindowList timeSlot(String timeSlot) {
+    this.timeSlot = timeSlot;
+    return this;
+  }
+
+  /**
+   * Time slot at which the appointment should be reserved. LOV - AM, PM, EV, EM
+   * @return timeSlot
+  **/
+  @ApiModelProperty(value = "Time slot at which the appointment should be reserved. LOV - AM, PM, EV, EM")
+
+
+  public String getTimeSlot() {
+    return timeSlot;
+  }
+
+  public void setTimeSlot(String timeSlot) {
+    this.timeSlot = timeSlot;
+  }
+
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    AppointmentWindowList appointmentWindowList = (AppointmentWindowList) o;
+    return Objects.equals(this.endTime, appointmentWindowList.endTime) &&
+        Objects.equals(this.startTime, appointmentWindowList.startTime) &&
+        Objects.equals(this.startTimePeriod, appointmentWindowList.startTimePeriod) &&
+        Objects.equals(this.timeSlot, appointmentWindowList.timeSlot);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(endTime, startTime, startTimePeriod, timeSlot);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class AppointmentWindowList {\n");
+    
+    sb.append("    endTime: ").append(toIndentedString(endTime)).append("\n");
+    sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
+    sb.append("    startTimePeriod: ").append(toIndentedString(startTimePeriod)).append("\n");
+    sb.append("    timeSlot: ").append(toIndentedString(timeSlot)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+
