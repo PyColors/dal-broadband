@@ -1,7 +1,7 @@
 {
-  "lineRef": {
+   "lineRef": {
     "lineIdentification": {
-      "fllandlineNumber": null,
+       "fllandlineNumber": "1635033333",
       "typeCode": null,
       "serviceClassificationCode": null,
       "moveFromPostCode": null,
@@ -10,19 +10,19 @@
           "id": "A90000121249",
           "contextId": "Gold"
         },
-        "postCode": "OL6 0FD",
-        "houseName": null,
-        "houseNumber": "8",
-        "flatNumber": null,
-        "streetName": "Merry Lane",
-        "town": "Lancashire",
-        "country": "United Kingdom",
-        "locality": null,
-        "citySubDivisionName": "MR",
+        "postCode": "LS29 0JJ",
+        "houseName": "",
+        "houseNumber": "1",
+        "flatNumber": "",
+        "streetName": "Craven Crescent",
+        "town": null,
+        "county": "Norfolk",
+        "country": null,
+        "locality": "Brooke",
+        "citySubDivisionName": "LS",
         "moveTypeCode": null
       }
     }
   },
-  "journeyId": null,
-  "classificationCode" : ["Line"]
+  "classificationCode" : ["Line"] 
 }

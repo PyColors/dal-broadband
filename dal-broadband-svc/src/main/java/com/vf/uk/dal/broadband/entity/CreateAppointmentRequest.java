@@ -13,193 +13,167 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-23T20:55:40.172Z")
 
-public class CreateAppointmentRequest   {
-  @JsonProperty("journeyId")
-  private String journeyId = null;
+public class CreateAppointmentRequest {
 
-  @JsonProperty("basketId")
-  private String basketId = null;
+	@JsonProperty("startTimePeriod")
+	private String startTimePeriod = null;
 
-  @JsonProperty("startTimePeriod")
-  private String startTimePeriod = null;
+	@JsonProperty("timeSlot")
+	private String timeSlot = null;
 
-  @JsonProperty("timeSlot")
-  private String timeSlot = null;
+	@JsonProperty("siteNote")
+	private SiteNote siteNote = null;
 
-  @JsonProperty("siteNote")
-  private SiteNote siteNote = null;
+	@JsonProperty("removeFromPhoneDirectory")
+	private Boolean removeFromPhoneDirectory = null;
 
-  /**
-   * 
-   * @param journeyId
-   * @return
-   */
-  public CreateAppointmentRequest journeyId(String journeyId) {
-    this.journeyId = journeyId;
-    return this;
-  }
+	@JsonProperty("endTime")
+	private String endTime = null;
 
-   /**
-   * Journey id of the broadband - Unique
-   * @return journeyId
-  **/
-  @ApiModelProperty(value = "Journey id of the broadband - Unique")
+	@JsonProperty("startTime")
+	private String startTime = null;
 
+	/**
+	 * 
+	 * @param startTimePeriod
+	 * @return
+	 */
+	public CreateAppointmentRequest startTimePeriod(String startTimePeriod) {
+		this.startTimePeriod = startTimePeriod;
+		return this;
+	}
 
-  public String getJourneyId() {
-    return journeyId;
-  }
+	/**
+	 * Earliest required appointment date. The format should be yyyy-mm-dd
+	 * hh:mm:ss or Date at which appointment needs ot be booked.
+	 * 
+	 * @return startTimePeriod
+	 **/
+	@ApiModelProperty(value = "Earliest required appointment date. The format should be yyyy-mm-dd hh:mm:ss or Date at which appointment needs ot be booked.")
 
-  public void setJourneyId(String journeyId) {
-    this.journeyId = journeyId;
-  }
+	public String getStartTimePeriod() {
+		return startTimePeriod;
+	}
 
-  /**
-   * 
-   * @param basketId
-   * @return
-   */
-  public CreateAppointmentRequest basketId(String basketId) {
-    this.basketId = basketId;
-    return this;
-  }
+	public void setStartTimePeriod(String startTimePeriod) {
+		this.startTimePeriod = startTimePeriod;
+	}
 
-   /**
-   * Basket id - Unique
-   * @return basketId
-  **/
-  @ApiModelProperty(value = "Basket id - Unique")
+	/**
+	 * 
+	 * @param timeSlot
+	 * @return
+	 */
+	public CreateAppointmentRequest timeSlot(String timeSlot) {
+		this.timeSlot = timeSlot;
+		return this;
+	}
 
+	/**
+	 * AM PM EV etc
+	 * 
+	 * @return timeSlot
+	 **/
+	@ApiModelProperty(value = "AM PM EV etc")
 
-  public String getBasketId() {
-    return basketId;
-  }
+	public String getTimeSlot() {
+		return timeSlot;
+	}
 
-  public void setBasketId(String basketId) {
-    this.basketId = basketId;
-  }
+	public void setTimeSlot(String timeSlot) {
+		this.timeSlot = timeSlot;
+	}
 
-  /**
-   * 
-   * @param startTimePeriod
-   * @return
-   */
-  public CreateAppointmentRequest startTimePeriod(String startTimePeriod) {
-    this.startTimePeriod = startTimePeriod;
-    return this;
-  }
+	/**
+	 * 
+	 * @param siteNote
+	 * @return
+	 */
+	public CreateAppointmentRequest siteNote(SiteNote siteNote) {
+		this.siteNote = siteNote;
+		return this;
+	}
 
-   /**
-   * Earliest required appointment date. The format should be yyyy-mm-dd hh:mm:ss or Date at which appointment needs ot be booked.
-   * @return startTimePeriod
-  **/
-  @ApiModelProperty(value = "Earliest required appointment date. The format should be yyyy-mm-dd hh:mm:ss or Date at which appointment needs ot be booked.")
+	/**
+	 * Get siteNote
+	 * 
+	 * @return siteNote
+	 **/
+	@ApiModelProperty(value = "")
 
+	@Valid
 
-  public String getStartTimePeriod() {
-    return startTimePeriod;
-  }
+	public SiteNote getSiteNote() {
+		return siteNote;
+	}
 
-  public void setStartTimePeriod(String startTimePeriod) {
-    this.startTimePeriod = startTimePeriod;
-  }
+	public void setSiteNote(SiteNote siteNote) {
+		this.siteNote = siteNote;
+	}
 
-  /**
-   * 
-   * @param timeSlot
-   * @return
-   */
-  public CreateAppointmentRequest timeSlot(String timeSlot) {
-    this.timeSlot = timeSlot;
-    return this;
-  }
+	public Boolean getRemoveFromPhoneDirectory() {
+		return removeFromPhoneDirectory;
+	}
 
-   /**
-   * AM PM EV etc
-   * @return timeSlot
-  **/
-  @ApiModelProperty(value = "AM PM EV etc")
+	public void setRemoveFromPhoneDirectory(Boolean removeFromPhoneDirectory) {
+		this.removeFromPhoneDirectory = removeFromPhoneDirectory;
+	}
 
+	public String getEndTime() {
+		return endTime;
+	}
 
-  public String getTimeSlot() {
-    return timeSlot;
-  }
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
-  public void setTimeSlot(String timeSlot) {
-    this.timeSlot = timeSlot;
-  }
+	public String getStartTime() {
+		return startTime;
+	}
 
-  /**
-   * 
-   * @param siteNote
-   * @return
-   */
-  public CreateAppointmentRequest siteNote(SiteNote siteNote) {
-    this.siteNote = siteNote;
-    return this;
-  }
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
-   /**
-   * Get siteNote
-   * @return siteNote
-  **/
-  @ApiModelProperty(value = "")
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		CreateAppointmentRequest createAppointmentRequest = (CreateAppointmentRequest) o;
+		return Objects.equals(this.startTimePeriod, createAppointmentRequest.startTimePeriod)
+				&& Objects.equals(this.timeSlot, createAppointmentRequest.timeSlot)
+				&& Objects.equals(this.siteNote, createAppointmentRequest.siteNote);
+	}
 
-  @Valid
+	@Override
+	public int hashCode() {
+		return Objects.hash(startTimePeriod, timeSlot, siteNote);
+	}
 
-  public SiteNote getSiteNote() {
-    return siteNote;
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class CreateAppointmentRequest {\n");
 
-  public void setSiteNote(SiteNote siteNote) {
-    this.siteNote = siteNote;
-  }
+		sb.append("    startTimePeriod: ").append(toIndentedString(startTimePeriod)).append("\n");
+		sb.append("    timeSlot: ").append(toIndentedString(timeSlot)).append("\n");
+		sb.append("    siteNote: ").append(toIndentedString(siteNote)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    CreateAppointmentRequest createAppointmentRequest = (CreateAppointmentRequest) o;
-    return Objects.equals(this.journeyId, createAppointmentRequest.journeyId) &&
-        Objects.equals(this.basketId, createAppointmentRequest.basketId) &&
-        Objects.equals(this.startTimePeriod, createAppointmentRequest.startTimePeriod) &&
-        Objects.equals(this.timeSlot, createAppointmentRequest.timeSlot) &&
-        Objects.equals(this.siteNote, createAppointmentRequest.siteNote);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(journeyId, basketId, startTimePeriod, timeSlot, siteNote);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class CreateAppointmentRequest {\n");
-    
-    sb.append("    journeyId: ").append(toIndentedString(journeyId)).append("\n");
-    sb.append("    basketId: ").append(toIndentedString(basketId)).append("\n");
-    sb.append("    startTimePeriod: ").append(toIndentedString(startTimePeriod)).append("\n");
-    sb.append("    timeSlot: ").append(toIndentedString(timeSlot)).append("\n");
-    sb.append("    siteNote: ").append(toIndentedString(siteNote)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }
-

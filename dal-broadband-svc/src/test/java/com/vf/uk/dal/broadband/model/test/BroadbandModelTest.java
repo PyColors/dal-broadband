@@ -61,8 +61,8 @@ public class BroadbandModelTest {
 		BeanTest.test(AccessLine.class);
 		BeanTest.test(AppointmentWindow.class);
 		BeanTest.test(AvailableServices.class);
-		BeanTest.test(FLBBJourneyDetails.class);
-		BeanTest.test(FLBBJourneyRequest.class);
+		BeanTest.test(FLBBDetails.class);
+		BeanTest.test(Broadband.class);
 		BeanTest.test(FLBBJourneyResponse.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.Identification.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.journey.InstallationAddress.class);
@@ -157,7 +157,9 @@ public class BroadbandModelTest {
 		BeanTest.test(com.vf.uk.dal.broadband.entity.SiteNote.class);
 		BeanTest.test(com.vf.uk.dal.broadband.entity.CreateAppointmentResponse.class);
 		
-		
+		BeanTest.test(com.vf.uk.dal.broadband.entity.premise.AddressInfo.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.premise.Address.class);
+		BeanTest.test(com.vf.uk.dal.broadband.entity.premise.StatusInfo.class);
  	
  	}
 }

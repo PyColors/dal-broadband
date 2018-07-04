@@ -2,296 +2,316 @@ package com.vf.uk.dal.broadband.entity;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * MerchandisingPromotionsWrapper
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-02T10:55:14.550Z")
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-17T16:12:08.903Z")
 
-public class MerchandisingPromotionsWrapper {
-	@JsonProperty("dataPromotion")
-	private MerchandisingPromotion dataPromotion = null;
+public class MerchandisingPromotionsWrapper   {
+  @JsonProperty("conditionalSashBannerPromotion")
+  private MerchandisingPromotion conditionalSashBannerPromotion = null;
 
-	@JsonProperty("textPromotion")
-	private MerchandisingPromotion textPromotion = null;
+  @JsonProperty("dataPromotion")
+  private MerchandisingPromotion dataPromotion = null;
 
-	@JsonProperty("talkTimePromotion")
-	private MerchandisingPromotion talkTimePromotion = null;
+  @JsonProperty("entertainmentPackPromotion")
+  private MerchandisingPromotion entertainmentPackPromotion = null;
 
-	@JsonProperty("entertainmentPackPromotion")
-	private MerchandisingPromotion entertainmentPackPromotion = null;
+  @JsonProperty("freeAccessoryPromotion")
+  private MerchandisingPromotion freeAccessoryPromotion = null;
 
-	@JsonProperty("secureNetPromotion")
-	private MerchandisingPromotion secureNetPromotion = null;
+  @JsonProperty("freeExtraPromotion")
+  private MerchandisingPromotion freeExtraPromotion = null;
 
-	@JsonProperty("sashBannerPromotion")
-	private MerchandisingPromotion sashBannerPromotion = null;
+  @JsonProperty("pricePromotion")
+  private MerchandisingPromotion pricePromotion = null;
 
-	@JsonProperty("freeExtraPromotion")
-	private MerchandisingPromotion freeExtraPromotion = null;
+  @JsonProperty("sashBannerPromotion")
+  private MerchandisingPromotion sashBannerPromotion = null;
 
-	@JsonProperty("freeAccessoryPromotion")
-	private MerchandisingPromotion freeAccessoryPromotion = null;
+  @JsonProperty("secureNetPromotion")
+  private MerchandisingPromotion secureNetPromotion = null;
 
-	@JsonProperty("pricePromotion")
-	private MerchandisingPromotion pricePromotion = null;
+  @JsonProperty("talkTimePromotion")
+  private MerchandisingPromotion talkTimePromotion = null;
 
-	/**
-	 * @param dataPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper dataPromotion(MerchandisingPromotion dataPromotion) {
-		this.dataPromotion = dataPromotion;
-		return this;
-	}
+  @JsonProperty("textPromotion")
+  private MerchandisingPromotion textPromotion = null;
 
-	/**
-	 * Get dataPromotion
-	 * 
-	 * @return dataPromotion
-	 **/
-	public MerchandisingPromotion getDataPromotion() {
-		return dataPromotion;
-	}
+  public MerchandisingPromotionsWrapper conditionalSashBannerPromotion(MerchandisingPromotion conditionalSashBannerPromotion) {
+    this.conditionalSashBannerPromotion = conditionalSashBannerPromotion;
+    return this;
+  }
 
-	public void setDataPromotion(MerchandisingPromotion dataPromotion) {
-		this.dataPromotion = dataPromotion;
-	}
+  /**
+   * Get conditionalSashBannerPromotion
+   * @return conditionalSashBannerPromotion
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * @param textPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper textPromotion(MerchandisingPromotion textPromotion) {
-		this.textPromotion = textPromotion;
-		return this;
-	}
+  @Valid
 
-	/**
-	 * Get textPromotion
-	 * 
-	 * @return textPromotion
-	 **/
+  public MerchandisingPromotion getConditionalSashBannerPromotion() {
+    return conditionalSashBannerPromotion;
+  }
 
-	public MerchandisingPromotion getTextPromotion() {
-		return textPromotion;
-	}
+  public void setConditionalSashBannerPromotion(MerchandisingPromotion conditionalSashBannerPromotion) {
+    this.conditionalSashBannerPromotion = conditionalSashBannerPromotion;
+  }
 
-	public void setTextPromotion(MerchandisingPromotion textPromotion) {
-		this.textPromotion = textPromotion;
-	}
+  public MerchandisingPromotionsWrapper dataPromotion(MerchandisingPromotion dataPromotion) {
+    this.dataPromotion = dataPromotion;
+    return this;
+  }
 
-	/**
-	 * @param talkTimePromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper talkTimePromotion(MerchandisingPromotion talkTimePromotion) {
-		this.talkTimePromotion = talkTimePromotion;
-		return this;
-	}
+  /**
+   * Get dataPromotion
+   * @return dataPromotion
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * Get talkTimePromotion
-	 * 
-	 * @return talkTimePromotion
-	 **/
-	public MerchandisingPromotion getTalkTimePromotion() {
-		return talkTimePromotion;
-	}
+  @Valid
 
-	public void setTalkTimePromotion(MerchandisingPromotion talkTimePromotion) {
-		this.talkTimePromotion = talkTimePromotion;
-	}
+  public MerchandisingPromotion getDataPromotion() {
+    return dataPromotion;
+  }
 
-	/**
-	 * @param entertainmentPackPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper entertainmentPackPromotion(
-			MerchandisingPromotion entertainmentPackPromotion) {
-		this.entertainmentPackPromotion = entertainmentPackPromotion;
-		return this;
-	}
+  public void setDataPromotion(MerchandisingPromotion dataPromotion) {
+    this.dataPromotion = dataPromotion;
+  }
 
-	/**
-	 * Get entertainmentPackPromotion
-	 * 
-	 * @return entertainmentPackPromotion
-	 **/
+  public MerchandisingPromotionsWrapper entertainmentPackPromotion(MerchandisingPromotion entertainmentPackPromotion) {
+    this.entertainmentPackPromotion = entertainmentPackPromotion;
+    return this;
+  }
 
-	public MerchandisingPromotion getEntertainmentPackPromotion() {
-		return entertainmentPackPromotion;
-	}
+  /**
+   * Get entertainmentPackPromotion
+   * @return entertainmentPackPromotion
+  **/
+  @ApiModelProperty(value = "")
 
-	public void setEntertainmentPackPromotion(MerchandisingPromotion entertainmentPackPromotion) {
-		this.entertainmentPackPromotion = entertainmentPackPromotion;
-	}
+  @Valid
 
-	/**
-	 * @param secureNetPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper secureNetPromotion(MerchandisingPromotion secureNetPromotion) {
-		this.secureNetPromotion = secureNetPromotion;
-		return this;
-	}
+  public MerchandisingPromotion getEntertainmentPackPromotion() {
+    return entertainmentPackPromotion;
+  }
 
-	/**
-	 * Get secureNetPromotion
-	 * 
-	 * @return secureNetPromotion
-	 **/
-	public MerchandisingPromotion getSecureNetPromotion() {
-		return secureNetPromotion;
-	}
+  public void setEntertainmentPackPromotion(MerchandisingPromotion entertainmentPackPromotion) {
+    this.entertainmentPackPromotion = entertainmentPackPromotion;
+  }
 
-	public void setSecureNetPromotion(MerchandisingPromotion secureNetPromotion) {
-		this.secureNetPromotion = secureNetPromotion;
-	}
+  public MerchandisingPromotionsWrapper freeAccessoryPromotion(MerchandisingPromotion freeAccessoryPromotion) {
+    this.freeAccessoryPromotion = freeAccessoryPromotion;
+    return this;
+  }
 
-	/**
-	 * @param sashBannerPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper sashBannerPromotion(MerchandisingPromotion sashBannerPromotion) {
-		this.sashBannerPromotion = sashBannerPromotion;
-		return this;
-	}
+  /**
+   * Get freeAccessoryPromotion
+   * @return freeAccessoryPromotion
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * Get sashBannerPromotion
-	 * 
-	 * @return sashBannerPromotion
-	 **/
-	public MerchandisingPromotion getSashBannerPromotion() {
-		return sashBannerPromotion;
-	}
+  @Valid
 
-	public void setSashBannerPromotion(MerchandisingPromotion sashBannerPromotion) {
-		this.sashBannerPromotion = sashBannerPromotion;
-	}
+  public MerchandisingPromotion getFreeAccessoryPromotion() {
+    return freeAccessoryPromotion;
+  }
 
-	/**
-	 * @param freeExtraPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper freeExtraPromotion(MerchandisingPromotion freeExtraPromotion) {
-		this.freeExtraPromotion = freeExtraPromotion;
-		return this;
-	}
+  public void setFreeAccessoryPromotion(MerchandisingPromotion freeAccessoryPromotion) {
+    this.freeAccessoryPromotion = freeAccessoryPromotion;
+  }
 
-	/**
-	 * Get freeExtraPromotion
-	 * 
-	 * @return freeExtraPromotion
-	 **/
-	public MerchandisingPromotion getFreeExtraPromotion() {
-		return freeExtraPromotion;
-	}
+  public MerchandisingPromotionsWrapper freeExtraPromotion(MerchandisingPromotion freeExtraPromotion) {
+    this.freeExtraPromotion = freeExtraPromotion;
+    return this;
+  }
 
-	public void setFreeExtraPromotion(MerchandisingPromotion freeExtraPromotion) {
-		this.freeExtraPromotion = freeExtraPromotion;
-	}
+  /**
+   * Get freeExtraPromotion
+   * @return freeExtraPromotion
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * @param freeAccessoryPromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper freeAccessoryPromotion(MerchandisingPromotion freeAccessoryPromotion) {
-		this.freeAccessoryPromotion = freeAccessoryPromotion;
-		return this;
-	}
+  @Valid
 
-	/**
-	 * Get freeAccessoryPromotion
-	 * 
-	 * @return freeAccessoryPromotion
-	 **/
+  public MerchandisingPromotion getFreeExtraPromotion() {
+    return freeExtraPromotion;
+  }
 
-	public MerchandisingPromotion getFreeAccessoryPromotion() {
-		return freeAccessoryPromotion;
-	}
+  public void setFreeExtraPromotion(MerchandisingPromotion freeExtraPromotion) {
+    this.freeExtraPromotion = freeExtraPromotion;
+  }
 
-	public void setFreeAccessoryPromotion(MerchandisingPromotion freeAccessoryPromotion) {
-		this.freeAccessoryPromotion = freeAccessoryPromotion;
-	}
+  public MerchandisingPromotionsWrapper pricePromotion(MerchandisingPromotion pricePromotion) {
+    this.pricePromotion = pricePromotion;
+    return this;
+  }
 
-	/**
-	 * @param pricePromotion
-	 * @return
-	 */
-	public MerchandisingPromotionsWrapper pricePromotion(MerchandisingPromotion pricePromotion) {
-		this.pricePromotion = pricePromotion;
-		return this;
-	}
+  /**
+   * Get pricePromotion
+   * @return pricePromotion
+  **/
+  @ApiModelProperty(value = "")
 
-	/**
-	 * Get pricePromotion
-	 * 
-	 * @return pricePromotion
-	 **/
-	public MerchandisingPromotion getPricePromotion() {
-		return pricePromotion;
-	}
+  @Valid
 
-	public void setPricePromotion(MerchandisingPromotion pricePromotion) {
-		this.pricePromotion = pricePromotion;
-	}
+  public MerchandisingPromotion getPricePromotion() {
+    return pricePromotion;
+  }
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		MerchandisingPromotionsWrapper merchandisingPromotionsWrapper = (MerchandisingPromotionsWrapper) o;
-		return Objects.equals(this.dataPromotion, merchandisingPromotionsWrapper.dataPromotion)
-				&& Objects.equals(this.textPromotion, merchandisingPromotionsWrapper.textPromotion)
-				&& Objects.equals(this.talkTimePromotion, merchandisingPromotionsWrapper.talkTimePromotion)
-				&& Objects.equals(this.entertainmentPackPromotion,
-						merchandisingPromotionsWrapper.entertainmentPackPromotion)
-				&& Objects.equals(this.secureNetPromotion, merchandisingPromotionsWrapper.secureNetPromotion)
-				&& Objects.equals(this.sashBannerPromotion, merchandisingPromotionsWrapper.sashBannerPromotion)
-				&& Objects.equals(this.freeExtraPromotion, merchandisingPromotionsWrapper.freeExtraPromotion)
-				&& Objects.equals(this.freeAccessoryPromotion, merchandisingPromotionsWrapper.freeAccessoryPromotion)
-				&& Objects.equals(this.pricePromotion, merchandisingPromotionsWrapper.pricePromotion);
-	}
+  public void setPricePromotion(MerchandisingPromotion pricePromotion) {
+    this.pricePromotion = pricePromotion;
+  }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(dataPromotion, textPromotion, talkTimePromotion, entertainmentPackPromotion,
-				secureNetPromotion, sashBannerPromotion, freeExtraPromotion, freeAccessoryPromotion, pricePromotion);
-	}
+  public MerchandisingPromotionsWrapper sashBannerPromotion(MerchandisingPromotion sashBannerPromotion) {
+    this.sashBannerPromotion = sashBannerPromotion;
+    return this;
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class MerchandisingPromotionsWrapper {\n");
+  /**
+   * Get sashBannerPromotion
+   * @return sashBannerPromotion
+  **/
+  @ApiModelProperty(value = "")
 
-		sb.append("    dataPromotion: ").append(toIndentedString(dataPromotion)).append("\n");
-		sb.append("    textPromotion: ").append(toIndentedString(textPromotion)).append("\n");
-		sb.append("    talkTimePromotion: ").append(toIndentedString(talkTimePromotion)).append("\n");
-		sb.append("    entertainmentPackPromotion: ").append(toIndentedString(entertainmentPackPromotion)).append("\n");
-		sb.append("    secureNetPromotion: ").append(toIndentedString(secureNetPromotion)).append("\n");
-		sb.append("    sashBannerPromotion: ").append(toIndentedString(sashBannerPromotion)).append("\n");
-		sb.append("    freeExtraPromotion: ").append(toIndentedString(freeExtraPromotion)).append("\n");
-		sb.append("    freeAccessoryPromotion: ").append(toIndentedString(freeAccessoryPromotion)).append("\n");
-		sb.append("    pricePromotion: ").append(toIndentedString(pricePromotion)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
+  @Valid
 
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
+  public MerchandisingPromotion getSashBannerPromotion() {
+    return sashBannerPromotion;
+  }
+
+  public void setSashBannerPromotion(MerchandisingPromotion sashBannerPromotion) {
+    this.sashBannerPromotion = sashBannerPromotion;
+  }
+
+  public MerchandisingPromotionsWrapper secureNetPromotion(MerchandisingPromotion secureNetPromotion) {
+    this.secureNetPromotion = secureNetPromotion;
+    return this;
+  }
+
+  /**
+   * Get secureNetPromotion
+   * @return secureNetPromotion
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public MerchandisingPromotion getSecureNetPromotion() {
+    return secureNetPromotion;
+  }
+
+  public void setSecureNetPromotion(MerchandisingPromotion secureNetPromotion) {
+    this.secureNetPromotion = secureNetPromotion;
+  }
+
+  public MerchandisingPromotionsWrapper talkTimePromotion(MerchandisingPromotion talkTimePromotion) {
+    this.talkTimePromotion = talkTimePromotion;
+    return this;
+  }
+
+  /**
+   * Get talkTimePromotion
+   * @return talkTimePromotion
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public MerchandisingPromotion getTalkTimePromotion() {
+    return talkTimePromotion;
+  }
+
+  public void setTalkTimePromotion(MerchandisingPromotion talkTimePromotion) {
+    this.talkTimePromotion = talkTimePromotion;
+  }
+
+  public MerchandisingPromotionsWrapper textPromotion(MerchandisingPromotion textPromotion) {
+    this.textPromotion = textPromotion;
+    return this;
+  }
+
+  /**
+   * Get textPromotion
+   * @return textPromotion
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public MerchandisingPromotion getTextPromotion() {
+    return textPromotion;
+  }
+
+  public void setTextPromotion(MerchandisingPromotion textPromotion) {
+    this.textPromotion = textPromotion;
+  }
+
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    MerchandisingPromotionsWrapper merchandisingPromotionsWrapper = (MerchandisingPromotionsWrapper) o;
+    return Objects.equals(this.conditionalSashBannerPromotion, merchandisingPromotionsWrapper.conditionalSashBannerPromotion) &&
+        Objects.equals(this.dataPromotion, merchandisingPromotionsWrapper.dataPromotion) &&
+        Objects.equals(this.entertainmentPackPromotion, merchandisingPromotionsWrapper.entertainmentPackPromotion) &&
+        Objects.equals(this.freeAccessoryPromotion, merchandisingPromotionsWrapper.freeAccessoryPromotion) &&
+        Objects.equals(this.freeExtraPromotion, merchandisingPromotionsWrapper.freeExtraPromotion) &&
+        Objects.equals(this.pricePromotion, merchandisingPromotionsWrapper.pricePromotion) &&
+        Objects.equals(this.sashBannerPromotion, merchandisingPromotionsWrapper.sashBannerPromotion) &&
+        Objects.equals(this.secureNetPromotion, merchandisingPromotionsWrapper.secureNetPromotion) &&
+        Objects.equals(this.talkTimePromotion, merchandisingPromotionsWrapper.talkTimePromotion) &&
+        Objects.equals(this.textPromotion, merchandisingPromotionsWrapper.textPromotion);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(conditionalSashBannerPromotion, dataPromotion, entertainmentPackPromotion, freeAccessoryPromotion, freeExtraPromotion, pricePromotion, sashBannerPromotion, secureNetPromotion, talkTimePromotion, textPromotion);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class MerchandisingPromotionsWrapper {\n");
+    
+    sb.append("    conditionalSashBannerPromotion: ").append(toIndentedString(conditionalSashBannerPromotion)).append("\n");
+    sb.append("    dataPromotion: ").append(toIndentedString(dataPromotion)).append("\n");
+    sb.append("    entertainmentPackPromotion: ").append(toIndentedString(entertainmentPackPromotion)).append("\n");
+    sb.append("    freeAccessoryPromotion: ").append(toIndentedString(freeAccessoryPromotion)).append("\n");
+    sb.append("    freeExtraPromotion: ").append(toIndentedString(freeExtraPromotion)).append("\n");
+    sb.append("    pricePromotion: ").append(toIndentedString(pricePromotion)).append("\n");
+    sb.append("    sashBannerPromotion: ").append(toIndentedString(sashBannerPromotion)).append("\n");
+    sb.append("    secureNetPromotion: ").append(toIndentedString(secureNetPromotion)).append("\n");
+    sb.append("    talkTimePromotion: ").append(toIndentedString(talkTimePromotion)).append("\n");
+    sb.append("    textPromotion: ").append(toIndentedString(textPromotion)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 }
+

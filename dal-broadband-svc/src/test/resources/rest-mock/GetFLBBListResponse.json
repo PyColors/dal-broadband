@@ -1,0 +1,293 @@
+{
+	"planList": [
+		{
+			"skuId": "110265",
+			"name": "Unlimited Fibre 38",
+			"description": null,
+			"bundleName": "Home Broadband - Unlimited Fibre 38 and Phone - FTR4 -18 m",
+			"bundleDescription": "This is a consumer line and Unlimited Fibre 38  Broadband package for customers with no Vodafone mobile service",
+			"bundleClass": "FLBALL",
+			"productClass": null,
+			"paymentType": "Postpaid",
+			"bundleType": null,
+			"planCoupleId": null,
+			"planCoupleFlag": null,
+			"planCoupleLabel": null,
+			"globalRoamingFlag": false,
+			"secureNetFlag": null,
+			"isUnlimitedUsage": true,
+			"commitmentPeriod": "18 Months",
+			"mobileLineRentalId": null,
+			"mobileServiceId": null,
+			"speed": {
+				"minSpeed": "1000",
+				"maxSpeed": "40000",
+				"speed": "38"
+			},
+			"usage": null,
+			"classificationCode": "Line and Fibre with Speed 38",
+			"miscAttributes": {
+				"planCallOut": "Great",
+				"speed": "38",
+				"MaxCapSpeed": "40000",
+				"MinCapSpeed": "1000"
+			},
+			"allowance": [],
+			"roamingAllowance": [],
+			"merchandisingMedia": [],
+			"priceInfo": {
+				"bundlePrice": {
+					"bundleId": "110265",
+					"monthlyPrice": {
+						"gross": "25",
+						"net": "20.83",
+						"vat": "4.17"
+					},
+					"monthlyDiscountPrice": {
+						"gross": "25",
+						"net": "20.83",
+						"vat": "4.17"
+					},
+					"merchandisingPromotions": null
+				},
+				"hardwarePrice": {
+					"hardwareId": "085897",
+					"hardwareName": null,
+					"oneOffPrice": {
+						"gross": "0",
+						"net": "0",
+						"vat": "0"
+					},
+					"oneOffDiscountPrice": {
+						"gross": "0",
+						"net": "0",
+						"vat": "0"
+					},
+					"merchandisingPromotions": null
+				},
+				"oneOffPrice": {
+					"gross": "0",
+					"net": "0",
+					"vat": "0"
+				},
+				"oneOffDiscountPrice": {
+					"gross": "0",
+					"net": "0",
+					"vat": "0"
+				},
+				"monthlyPrice": {
+					"gross": "25",
+					"net": "20.83",
+					"vat": "4.17"
+				},
+				"monthlyDiscountPrice": {
+					"gross": "25",
+					"net": "20.83",
+					"vat": "4.17"
+				},
+				"stepPrices": []
+			},
+			"lineRental": {
+				"gross": "0",
+				"net": "0",
+				"vat": "0"
+			},
+			"lineRentalDiscount": null,
+			"mcs": [],
+			"promotionsPackage": null
+		},
+		{
+			"skuId": "110264",
+			"name": "Unlimited Standard Broadband 17",
+			"description": null,
+			"bundleName": "Home Broadband - Unlimited Standard Broadband 17 and Phone - FTR4 -18 m",
+			"bundleDescription": "This is a consumer line and Unlimited Standard Broadband 17 Broadband package for customers with no Vodafone mobile service",
+			"bundleClass": "FLBALL",
+			"productClass": null,
+			"paymentType": "Postpaid",
+			"bundleType": null,
+			"planCoupleId": null,
+			"planCoupleFlag": null,
+			"planCoupleLabel": null,
+			"globalRoamingFlag": false,
+			"secureNetFlag": null,
+			"isUnlimitedUsage": true,
+			"commitmentPeriod": "18 Months",
+			"mobileLineRentalId": null,
+			"mobileServiceId": null,
+			"speed": {
+				"minSpeed": "100",
+				"maxSpeed": "17000",
+				"speed": "17"
+			},
+			"usage": null,
+			"classificationCode": null,
+			"miscAttributes": {
+				"planCallOut": "Great",
+				"speed": "17",
+				"MaxCapSpeed": "17000",
+				"MinCapSpeed": "100"
+			},
+			"allowance": [],
+			"roamingAllowance": [],
+			"merchandisingMedia": [],
+			"priceInfo": {
+				"bundlePrice": {
+					"bundleId": "110264",
+					"monthlyPrice": {
+						"gross": "25",
+						"net": "20.83",
+						"vat": "4.17"
+					},
+					"monthlyDiscountPrice": {
+						"gross": "25",
+						"net": "20.83",
+						"vat": "4.17"
+					},
+					"merchandisingPromotions": null
+				},
+				"hardwarePrice": {
+					"hardwareId": "085897",
+					"hardwareName": null,
+					"oneOffPrice": {
+						"gross": "49",
+						"net": "40.83",
+						"vat": "8.17"
+					},
+					"oneOffDiscountPrice": {
+						"gross": "49",
+						"net": "40.83",
+						"vat": "8.17"
+					},
+					"merchandisingPromotions": null
+				},
+				"oneOffPrice": {
+					"gross": "49",
+					"net": "40.83",
+					"vat": "8.17"
+				},
+				"oneOffDiscountPrice": {
+					"gross": "49",
+					"net": "40.83",
+					"vat": "8.17"
+				},
+				"monthlyPrice": {
+					"gross": "25",
+					"net": "20.83",
+					"vat": "4.17"
+				},
+				"monthlyDiscountPrice": {
+					"gross": "25",
+					"net": "20.83",
+					"vat": "4.17"
+				},
+				"stepPrices": []
+			},
+			"lineRental": {
+				"gross": "0",
+				"net": "0",
+				"vat": "0"
+			},
+			"lineRentalDiscount": null,
+			"mcs": [],
+			"promotionsPackage": null
+		},
+		{
+			"skuId": "110266",
+			"name": "Unlimited Fibre 76",
+			"description": null,
+			"bundleName": "Home Broadband - Unlimited Fibre 76 and Phone - FTR4 -18 m",
+			"bundleDescription": "This is a consumer line and Unlimited Fibre 76 Broadband package for customers with no Vodafone mobile service",
+			"bundleClass": "FLBALL",
+			"productClass": null,
+			"paymentType": "Postpaid",
+			"bundleType": null,
+			"planCoupleId": null,
+			"planCoupleFlag": null,
+			"planCoupleLabel": null,
+			"globalRoamingFlag": false,
+			"secureNetFlag": null,
+			"isUnlimitedUsage": true,
+			"commitmentPeriod": "18 Months",
+			"mobileLineRentalId": null,
+			"mobileServiceId": null,
+			"speed": {
+				"minSpeed": "40001",
+				"maxSpeed": "76000",
+				"speed": "76"
+			},
+			"usage": null,
+			"classificationCode": "Line and ADSL",
+			"miscAttributes": {
+				"planCallOut": "Great",
+				"speed": "76",
+				"MaxCapSpeed": "76000",
+				"MinCapSpeed": "40001"
+			},
+			"allowance": [],
+			"roamingAllowance": [],
+			"merchandisingMedia": [],
+			"priceInfo": {
+				"bundlePrice": {
+					"bundleId": "110266",
+					"monthlyPrice": {
+						"gross": "30",
+						"net": "25",
+						"vat": "5"
+					},
+					"monthlyDiscountPrice": {
+						"gross": "30",
+						"net": "25",
+						"vat": "5"
+					},
+					"merchandisingPromotions": null
+				},
+				"hardwarePrice": {
+					"hardwareId": "085897",
+					"hardwareName": null,
+					"oneOffPrice": {
+						"gross": "0",
+						"net": "0",
+						"vat": "0"
+					},
+					"oneOffDiscountPrice": {
+						"gross": "0",
+						"net": "0",
+						"vat": "0"
+					},
+					"merchandisingPromotions": null
+				},
+				"oneOffPrice": {
+					"gross": "0",
+					"net": "0",
+					"vat": "0"
+				},
+				"oneOffDiscountPrice": {
+					"gross": "0",
+					"net": "0",
+					"vat": "0"
+				},
+				"monthlyPrice": {
+					"gross": "30",
+					"net": "25",
+					"vat": "5"
+				},
+				"monthlyDiscountPrice": {
+					"gross": "30",
+					"net": "25",
+					"vat": "5"
+				},
+				"stepPrices": []
+			},
+			"lineRental": {
+				"gross": "0",
+				"net": "0",
+				"vat": "0"
+			},
+			"lineRentalDiscount": null,
+			"mcs": [],
+			"promotionsPackage": null
+		}
+	],
+	"message": null
+}

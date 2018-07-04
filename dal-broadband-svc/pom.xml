@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.vf.uk.dal</groupId>
-	<artifactId>dal-broadband-svc</artifactId>
-	<version>8.1.2</version>
+	<artifactId>dal-broadband-svc</artifactId> 
+	<version>9.6.6</version>
 	<packaging>jar</packaging>
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.4.RELEASE</version>
+		<version>1.5.10.RELEASE</version>
 	</parent>
 	<build>
 		<plugins>
@@ -37,256 +37,121 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-eureka</artifactId> 
-			<exclusions> <exclusion> <artifactId>log4j-over-slf4j</artifactId> <groupId>org.slf4j</groupId> 
-			</exclusion> <exclusion> <artifactId>logback-classic</artifactId> <groupId>ch.qos.logback</groupId> 
-			</exclusion> </exclusions> <version>1.2.0.RELEASE</version> </dependency> -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.4.0</version>
+			<!-- <exclusions> <exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
+				</exclusion> <exclusion> <groupId>org.slf4j</groupId> <artifactId>log4j-over-slf4j</artifactId> 
+				</exclusion> <exclusion> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
+				</exclusion> </exclusions> -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.hateoas/spring-hateoas -->
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>0.24.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.latencyutils</groupId>
+			<artifactId>LatencyUtils</artifactId>
+			<version>2.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.vf.uk.dal</groupId>
 			<artifactId>dal-core</artifactId>
-			<version>6.6.1</version>
+			<version>9.6.2</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>slf4j-api</artifactId>
 					<groupId>org.slf4j</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-				<exclusion>
 					<artifactId>log4j-over-slf4j</artifactId>
 					<groupId>org.slf4j</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- Dependencies for redis cache -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
 		<dependency>
-			<groupId>com.vf.uk.dal</groupId>
-			<artifactId>solr</artifactId>
-			<version>6.3.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.lettuce/lettuce-core -->
+		<!-- <dependency> <groupId>io.lettuce</groupId> <artifactId>lettuce-core</artifactId> 
+			<version>5.0.1.RELEASE</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/biz.paluch.redis/lettuce -->
+		<!-- https://mvnrepository.com/artifact/biz.paluch.redis/lettuce -->
+		<!-- https://mvnrepository.com/artifact/biz.paluch.redis/lettuce -->
 		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>commons</artifactId>
-			<version>2.5</version>
+			<groupId>biz.paluch.redis</groupId>
+			<artifactId>lettuce</artifactId>
+			<version>4.4.3.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>httpmime</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>noggit</artifactId>
-			<version>0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>stax2</artifactId>
-			<version>3.1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>woodstox</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.7</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-over-slf4j</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>logback-classic</artifactId>
-					<groupId>ch.qos.logback</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal</groupId>
-			<artifactId>solr</artifactId>
-			<version>6.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-			<version>5.4.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>log4j-over-slf4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>ch.qos.logback</groupId>
-					<artifactId>logback-classic</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>commons</artifactId>
-			<version>2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>httpmime</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>noggit</artifactId>
-			<version>0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>stax2</artifactId>
-			<version>3.1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>woodstox</artifactId>
-			<version>4.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.7</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-over-slf4j</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>logback-classic</artifactId>
-					<groupId>ch.qos.logback</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<version>1.7.7</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-over-slf4j</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>logback-classic</artifactId>
-					<groupId>ch.qos.logback</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>zookeeper</artifactId>
-			<version>3.4.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.7</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-over-slf4j</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>logback-classic</artifactId>
-					<groupId>ch.qos.logback</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j-over-slf4j</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>logback-classic</artifactId>
-					<groupId>ch.qos.logback</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.solr</groupId>
-			<artifactId>solr-query-manager</artifactId>
-			<version>7.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>Solr</groupId>
-			<artifactId>IndexManager</artifactId>
-			<version>6.6.4</version>
-		</dependency>
-		<!-- Coherence Jars -->
-		<dependency>
-			<groupId>com.vf.uk.dal</groupId>
-			<artifactId>coherence</artifactId>
-			<version>12.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.coh</groupId>
-			<artifactId>coherence-domain</artifactId>
-			<version>7.2.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.vf.uk.dal.coh</groupId>
-			<artifactId>coherence-logging-utility</artifactId>
-			<version>7.2.0</version>
-		</dependency>
+
+		<!-- Coherence Jars <dependency> <groupId>com.vf.uk.dal</groupId> <artifactId>coherence</artifactId> 
+			<version>12.2.1</version> </dependency> <dependency> <groupId>com.vf.uk.dal.coh</groupId> 
+			<artifactId>coherence-domain</artifactId> <version>7.2.0</version> <exclusions> 
+			<exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>com.vf.uk.dal.coh</groupId> 
+			<artifactId>coherence-logging-utility</artifactId> <version>7.2.0</version> 
+			</dependency> -->
 		<!-- LoggingUtility uses slf4j-ext and json-simple jar -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-ext</artifactId>
-			<version>1.7.20</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-ext</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -298,30 +163,29 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.netflix.archaius/archaius-core -->
 		<dependency>
 			<groupId>com.netflix.archaius</groupId>
 			<artifactId>archaius-core</artifactId>
 			<version>0.7.4</version>
 		</dependency>
-		<!-- Swagger 2.0 -->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.6.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.6.1</version>
-			<scope>compile</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -331,11 +195,9 @@
 		<springfox-version>2.6.1</springfox-version>
 		<sonar.coverage.exclusions>
 			**/entity/**,
-			**/pojo/**,
-			**/responsebeans/**,
-			**/requestbeans/**,
-			**/BroadbandApplication.java
-		</sonar.coverage.exclusions> 
+			**/config/**,
+			**/BroadbandApplication.java,
+		</sonar.coverage.exclusions>
 	</properties>
 
 

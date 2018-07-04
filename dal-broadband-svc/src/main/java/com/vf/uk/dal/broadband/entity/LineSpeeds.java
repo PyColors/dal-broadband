@@ -12,6 +12,10 @@ import io.swagger.annotations.ApiModelProperty;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class LineSpeeds {
+
+	@JsonProperty("packageName")
+	private String packageName = null;
+
 	@JsonProperty("maxDownSpeed")
 	private Double maxDownSpeed = null;
 
@@ -205,6 +209,14 @@ public class LineSpeeds {
 
 	public void setBandwidthMeasure(String bandwidthMeasure) {
 		this.bandwidthMeasure = bandwidthMeasure;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
 	}
 
 	@Override

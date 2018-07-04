@@ -1,33 +1,125 @@
 package com.vf.uk.dal.broadband.validator;
 
-import org.apache.commons.lang.StringUtils;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
+import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 
-/**
- * @author Infosys Limited
- *
- */
 public class BroadbandValidator {
 
 	private BroadbandValidator() {
 
 	}
 
-	/**
-	 * checks if the request is valid or not.
-	 * @param createAppointment
-	 */
+	
+	
+	public static void isBasketCreateOrUpdateRequestValid(BasketRequest basketRequest, Broadband broadband){
+		
+		
+		if(org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getSource())){
+			LogHelper.error(BroadbandValidator.class, "Source cannot be null while creating or updating package");
+			throw new ApplicationException(ExceptionMessages.EMPTY_SOURCE);
+		}
+		
+		
+		if(org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getCustomerRequestedDate())){
+			LogHelper.error(BroadbandValidator.class, "Customer Requested date cannot be null while creating or updating package");
+			throw new ApplicationException(ExceptionMessages.EMPTY_CUSTOMER_REQUESTED_DATE);
+		}
+		
+		if(broadband!=null && org.apache.commons.lang.StringUtils.isNotEmpty(broadband.getBasketId())){
+			if(org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getPackageId())){
+				LogHelper.error(BroadbandValidator.class, "Package Id cannot be empty while updating");
+				throw new ApplicationException(ExceptionMessages.PACKAGE_ID_EMPTY);
+			}
+			if(basketRequest.getAddBundle()!=null && (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddBundle().getPackageLineId())
+					|| org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddBundle().getBundleId()))){
+				LogHelper.error(BroadbandValidator.class, "Bundle Id and Package line id of bundle cannot be null while updating");
+				throw new ApplicationException(ExceptionMessages.BUNDLE_ID_EMPTY);
+			}
+			if(basketRequest.getAddHardware()!=null && (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddHardware().getPackageLineId())
+					|| org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddHardware().getHardwareId()))){
+				LogHelper.error(BroadbandValidator.class, "hardware Id and Package line id of bundle cannot be null while updating");
+				throw new ApplicationException(ExceptionMessages.HARDWARE_ID_EMPTY);
+			}
+		}
+		
+		
+		
+	}
 
-	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointment) {
 
-		if (StringUtils.isEmpty(createAppointment.getJourneyId())) {
-			LogHelper.error(BroadbandValidator.class, "Journey Id cannot be empty");
-			throw new ApplicationException(ExceptionMessages.JOURNEY_ID_EMPTY);
-		} else if (StringUtils.isEmpty(createAppointment.getStartTimePeriod())) {
+
+	public static void isUpdateLineTreatmentRequestValid(UpdateLineRequest updateLineRequest) {
+		if(StringUtils.isEmpty(updateLineRequest.getLineTreatmentType())){
+			LogHelper.error(BroadbandValidator.class, "Line Treatment Type cannot be null whule updating the basket for line treatment type");
+			throw new ApplicationException(ExceptionMessages.LINE_TREATEMENT_TYPE_EMPTY);
+		}
+		
+	}
+
+
+
+	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointmentRequest) {
+		if(StringUtils.isEmpty(createAppointmentRequest.getStartTimePeriod())
+				|| StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())){
+			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
+			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
+		}
+	}
+	
+	public static boolean validateStartDate(ServiceStartDateRequest serviceStartDateRequest) {
+		boolean isValidStartDate;
+		if(serviceStartDateRequest!=null && StringUtils.isNotEmpty(serviceStartDateRequest.getStartDateTime())){
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			formatter.setLenient(false);
+			try {
+				formatter.parse(serviceStartDateRequest.getStartDateTime());
+				isValidStartDate = true;
+			} catch (ParseException exception) {
+				LogHelper.error(BroadbandValidator.class, exception.getMessage());
+				throw new ApplicationException(ExceptionMessages.INVALID_INPUT_INCORRECT_DATE_FORMAT);
+			}
+		}else{
+			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
+			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
+		}
+		return isValidStartDate;
+	}
+	
+	public static String convertDateToTimeStamp(String serviceStartDate) {
+		Date date;
+		String formattedDate = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(serviceStartDate);
+			Timestamp ts = new Timestamp(date.getTime());  
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");    
+	        formattedDate =  formatter.format(ts);
+		} catch (ParseException e) {
+			LogHelper.error(BroadbandValidator.class, e.getMessage());
+			throw new ApplicationException(ExceptionMessages.INVALID_INPUT_INCORRECT_DATE_FORMAT);
+		}
+		return formattedDate;
+		
+	}
+
+	
+	
+
+	/*public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointment) {
+
+		if (StringUtils.isEmpty(createAppointment.getStartTimePeriod())) {
 			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
 			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
 		} else if (StringUtils.isEmpty(createAppointment.getTimeSlot())) {
@@ -38,6 +130,6 @@ public class BroadbandValidator {
 			throw new ApplicationException(ExceptionMessages.BASKET_ID_EMPTY);
 		}
 
-	}
+	}*/
 
 }
