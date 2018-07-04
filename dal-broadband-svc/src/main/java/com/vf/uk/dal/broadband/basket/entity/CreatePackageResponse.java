@@ -198,8 +198,6 @@ public class CreatePackageResponse   {
    * Get isChanged
    * @return isChanged
   **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsChanged() {
     return isChanged;

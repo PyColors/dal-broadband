@@ -133,71 +133,12 @@ public class BroadbandController {
 
 	}
 
-	/**
-	 * Gets the available service start dates.
-	 *
-	 * @param earliestAvailableStartDate
-	 *            the earliest available start date
-	 * @param range
-	 *            the range
-	 * @return the available service start dates
-	 */
-	/*
-	 * @ApiOperation(value =
-	 * "Utility Service which accepts earliest available service start date returned by GSA service and returns the next possible service start dates (working days - excluding weekends and bank holidays), within the requested date range."
-	 * , notes =
-	 * "This service accepts earliest available service start date returned by GSA service and returns the next possible service start dates (working days - excluding weekends and bank holidays), within the requested date range. The "
-	 * , response = ServiceStartDates.class, tags = { "AvailabilityCheck", })
-	 * 
-	 * @ApiResponses(value = { @ApiResponse(code = 200, message = "Success",
-	 * response = ServiceStartDates.class),
-	 * 
-	 * @ApiResponse(code = 400, message = "Bad Request", response =
-	 * ErrorResponse.class),
-	 * 
-	 * @ApiResponse(code = 404, message = "Not found", response =
-	 * ErrorResponse.class),
-	 * 
-	 * @ApiResponse(code = 500, message = "Internal Server Error", response =
-	 * ErrorResponse.class) })
-	 * 
-	 * @RequestMapping(value = "/availableServiceStartDates", produces = {
-	 * "application/json" }, method = RequestMethod.GET) public
-	 * ResponseEntity<?> getAvailableServiceStartDates(
-	 * 
-	 * @NotNull @ApiParam(value =
-	 * "Earliest available service start date returned by GSA service in dd-MMM-yyyy"
-	 * , required = true) @RequestParam(value = "earliestAvailableStartDate",
-	 * required = true) String earliestAvailableStartDate,
-	 * 
-	 * @NotNull @ApiParam(value =
-	 * "The range of days , based on which the service will send the available service startDates"
-	 * , required = true) @RequestParam(value = "range", required = true)
-	 * BigDecimal range) { try { return ResponseEntity.status(HttpStatus.OK)
-	 * .body(broadbandService.getAvailableServiceStartDates(
-	 * earliestAvailableStartDate, range)); } catch (DateTimeParseException |
-	 * ParseException e) { LogHelper.error(getClass(),
-	 * "ParseException occurred: " + e);
-	 * com.vf.uk.dal.common.exception.ErrorResponse error = new
-	 * com.vf.uk.dal.common.exception.ErrorResponse(400,
-	 * "BROADBAND_INVALID_INPUT", "Invalid parameter value :  " +
-	 * e.getMessage()); return
-	 * ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-	 * 
-	 * } catch (Exception e) { LogHelper.error(getClass(),
-	 * "Broadband Exception occurred: " + e);
-	 * com.vf.uk.dal.common.exception.ErrorResponse error = new
-	 * com.vf.uk.dal.common.exception.ErrorResponse(500,
-	 * "BROADBAND_COHERENCE_EXCEPTION", "RECORD NOT FOUND :  " +
-	 * e.getMessage()); return
-	 * ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-	 */
-
 	@ApiOperation(value = "Gets the list of addresses for a given postal code", notes = "Gets the list of addresses for a given postal code", response = AddressInfo.class, tags = {
 			"Premise" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AddressInfo.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
-			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class) })
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/premise/{postCode}", produces = { "application/hal+json" }, method = RequestMethod.GET)
 	public AddressInfo getAddressByPostcode(
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,

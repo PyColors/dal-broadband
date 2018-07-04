@@ -126,7 +126,7 @@ public interface BroadbandDao {
 
 	void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest, String packageId, String basketId);
 
-	List<CommercialProduct> getEngineeringVisitFee();
+	List<CommercialProduct> getEngineeringVisitFee(String productClass, boolean isFTTHPlan, String installationType, boolean isPreOrderable);
 
 	/*void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest);*/
 	

@@ -272,7 +272,6 @@ public class ModelPackage {
 	 * 
 	 * @return isChanged
 	 **/
-	@ApiModelProperty(example = "false", value = "value true/false. This will identify if there are any changes to the basket (at basket level and package level)")
 
 	public Boolean isIsChanged() {
 		return isChanged;
@@ -436,7 +435,6 @@ public class ModelPackage {
 	 * 
 	 * @return removable
 	 **/
-	@ApiModelProperty(example = "false", value = "Flag to indicate if this package can be removed without affecting the integrity of the basket")
 
 	public Boolean isRemovable() {
 		return removable;
@@ -499,7 +497,7 @@ public class ModelPackage {
 	 * 
 	 * @return serviceStartDate
 	 **/
-	@ApiModelProperty(example = "2017-10-01T09:45:00.000+02:00", value = "Service Start Date for FLBB")
+	@ApiModelProperty(value = "Service Start Date for FLBB - 2017-10-01T09:45:00.000+02:00")
 
 	public String getServiceStartDate() {
 		return serviceStartDate;
