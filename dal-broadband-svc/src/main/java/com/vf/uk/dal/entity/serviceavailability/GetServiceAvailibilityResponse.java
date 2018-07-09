@@ -14,6 +14,10 @@ public class GetServiceAvailibilityResponse {
 	@JsonProperty("serviceAvailabilityLine")
 	private List<ServiceAvailabilityLine> serviceAvailabilityLine = new ArrayList<ServiceAvailabilityLine>();
 
+	@JsonProperty("warningErrorList")
+	private List<ErrorInfo> warningErrorList = null;
+
+	
 	public GetServiceAvailibilityResponse serviceAvailabilityLine(
 			List<ServiceAvailabilityLine> serviceAvailabilityLine) {
 		this.serviceAvailabilityLine = serviceAvailabilityLine;
@@ -75,5 +79,13 @@ public class GetServiceAvailibilityResponse {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+	
+	public List<ErrorInfo> getWarningErrorList() {
+		return warningErrorList;
+	}
+
+	public void setWarningErrorList(List<ErrorInfo> warningErrorList) {
+		this.warningErrorList = warningErrorList;
 	}
 }
