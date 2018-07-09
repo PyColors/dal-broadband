@@ -33,6 +33,15 @@ public class BroadBandConstant {
 	
 	public static final String BROADBAND_STD_INSTALLATION_FEE_PRODUCTCLASS  = "Fixed Fee:Standard Installation Fee";
 	
+	public static final String BROADBAND_CONSUMER = "Consumer";
+	
+	public static final String BROADBAND_BUSINESS = "Business";
+	
+	public static final String BROADBAND_NO_OF_ADDRESS = "BROADBAND_NO_OF_ADDRESS";
+	
+	public static final int DEFAULT_BROADBAND_NO_OF_ADDRESS = 3;
+	
+	
 	private BroadBandConstant() {
 	}
 }

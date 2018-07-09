@@ -57,6 +57,7 @@ import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
+import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
@@ -529,7 +530,7 @@ public class BroadbandControllerTest {
 
 	@Test
 	public void testGetAddressByPostCodeFromPremise() {
-		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ","FTTH");
+		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ","FTTH",BroadBandConstant.BROADBAND_CONSUMER);
 		assertNotNull(addressInfo);
 	}
 
