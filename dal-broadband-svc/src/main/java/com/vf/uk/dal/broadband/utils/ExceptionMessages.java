@@ -44,6 +44,8 @@ public class ExceptionMessages {
 	public static final String GEN_EXC_PROMOTION_API = "General Exception while calling promotion API";
 	public static final String INVALID_BROADBAND_ID = "Invalid BroadBand Id sent in the Request";
 	public static final String INVALID_INPUT_INCORRECT_DATE_FORMAT = "Invalid input, Incorrect date format. Date format should be yyyy-MM-dd";
+	
+	public static final String BUSINESS_ADDRESS = "Please contact sales representative";
 
 	private ExceptionMessages() {
 
