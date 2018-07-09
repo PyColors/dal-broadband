@@ -39,7 +39,7 @@ public class BroadBandConstant {
 	
 	public static final String BROADBAND_NO_OF_ADDRESS = "BROADBAND_NO_OF_ADDRESS";
 	
-	public static final int DEFAULT_BROADBAND_NO_OF_ADDRESS = 2;
+	public static final int DEFAULT_BROADBAND_NO_OF_ADDRESS = 3;
 	
 	
 	private BroadBandConstant() {

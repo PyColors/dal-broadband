@@ -148,8 +148,6 @@ public class BroadbandController {
 			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"),categoryPreference,userType);
 		} catch (UnsupportedEncodingException e) {
 			throw new ApplicationException("Invalid_Format_PostCode" + e);
-		}catch (ApplicationException e) {
-			throw e;
 		}
 	}
 
