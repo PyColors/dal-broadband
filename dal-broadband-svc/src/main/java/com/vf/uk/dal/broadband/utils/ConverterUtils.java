@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.dozer.DozerBeanMapper;
 import org.springframework.hateoas.Link;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
@@ -53,6 +54,7 @@ import com.vf.uk.dal.broadband.entity.AppointmentList;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.ErrorInfo;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.Address;
@@ -625,9 +627,16 @@ public class ConverterUtils {
 			}
 			response.setClassificationCode(classificationCodeList);
 		}
-
+		
 		response.setInstallationAddress(installationAddress);
-
+		if (CollectionUtils.isNotEmpty(getServiceAvailabilityResponse.getWarningErrorList())) {
+			DozerBeanMapper beanMapper = new DozerBeanMapper();
+			List<ErrorInfo> warningMessagesList = new ArrayList<>();
+			beanMapper.map(getServiceAvailabilityResponse.getWarningErrorList(), warningMessagesList);
+			response.setWarningErrorList(warningMessagesList);
+		}
+		
+		
 		return response;
 	}
 
