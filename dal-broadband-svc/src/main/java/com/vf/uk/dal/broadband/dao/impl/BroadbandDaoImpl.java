@@ -76,12 +76,12 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 */
 
 	@Override
-	public GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest) {
+	public GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest, String userType) {
 
 		RestTemplate restTemplate = registryClient.getRestTemplate();
 		GetServiceAvailibilityResponse availabilityCheckResponse = null;
 		GetServiceAvailibilityRequest request = ConverterUtils
-				.createGetServiceAvailibilityRequest(availabilityCheckRequest);
+				.createGetServiceAvailibilityRequest(availabilityCheckRequest, userType);
 		try {
 			ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate.postForEntity(
 					BroadBandConstant.SERVICE_AVAILABILITY_URL_CONSTANT, request, GetServiceAvailibilityResponse.class);

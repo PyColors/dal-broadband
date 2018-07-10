@@ -33,7 +33,7 @@ public interface BroadbandService {
 	 * @return AvailabilityCheckResponse
 	 */
 	
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, Broadband broadband);
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, Broadband broadband, String userType);
 
 	
 	/**
