@@ -9,8 +9,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CustomerTypeEnum {
 	INDIVIDUAL("INDIVIDUAL"),
 
-	BUSINESS("BUSINESS");
-
+	BUSINESS("BUSINESS"),
+    
+	CONSUMER("CONSUMER");
+	
 	private String value;
 
 	CustomerTypeEnum(String value) {

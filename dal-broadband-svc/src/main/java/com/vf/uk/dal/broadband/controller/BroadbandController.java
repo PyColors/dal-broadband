@@ -71,11 +71,12 @@ public class BroadbandController {
 			"application/hal+json" }, method = RequestMethod.POST)
 	public ResponseEntity<AvailabilityCheckResponse> checkAvailabilityForBroadband(
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody AvailabilityCheckRequest availabilityCheckerRequest,
-			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@ApiParam(value = "user type", required = false) @RequestParam(value = "userType", required = false, defaultValue = "CONSUMER") String userType){
 
 		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
 		AvailabilityCheckResponse availabilityCheckResponse = broadbandService
-				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId, broadband);
+				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId, broadband, userType);
 		// Link selfLink =
 		// ControllerLinkBuilder.linkTo(BroadbandController.class).metho
 		return new ResponseEntity<>(availabilityCheckResponse, HttpStatus.OK);

@@ -35,9 +35,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
-import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
-import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
@@ -221,7 +219,7 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"123456789078");
+				"123456789078", "CONSUMER");
 		assertNotNull(resonse);
 	}
 
@@ -239,7 +237,7 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"123456789078");
+				"123456789078", "CONSUMER");
 		assertNotNull(resonse);
 	}
 
@@ -257,7 +255,7 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"12345678907888");
+				"12345678907888", "CONSUMER");
 		assertNotNull(resonse);
 	}
 
@@ -275,7 +273,7 @@ public class BroadbandControllerTest {
 			e.printStackTrace();
 		}
 		try {
-			broadBandController.checkAvailabilityForBroadband(request, "12345678907888");
+			broadBandController.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
@@ -297,7 +295,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request, "12345678907888");
+					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -320,7 +318,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request, "12345678907888");
+					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -343,7 +341,7 @@ public class BroadbandControllerTest {
 		}
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request, "12345678907888");
+					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);

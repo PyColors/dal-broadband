@@ -104,14 +104,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 	@Override
 	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest,
-			String broadbandId, Broadband broadband) {
+			String broadbandId, Broadband broadband, String userType) {
 		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
 		Broadband broadBand = broadband;
 		if (broadBand == null) {
 			broadBand = new Broadband();
 		}
 		broadBand.setCategoryPreference(availabilityCheckRequest.getCategory());
-		if (checkIfAddressAndPhoneNumberIsSame(availabilityCheckRequest, broadBand)) {
+		if (checkIfAddressAndPhoneNumberAndUserTypeIsSame(availabilityCheckRequest, broadBand, userType)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
 			if (StringUtils.isNotEmpty(broadBand.getBasketId())) {
 				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
@@ -122,7 +122,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 		} else {
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
-					.getServiceAvailability(availabilityCheckRequest);
+					.getServiceAvailability(availabilityCheckRequest, userType);
 			if (getServiceAvailabilityResponse == null) {
 				LogHelper.error(this, "Invalid classification code !!!");
 				throw new ApplicationException(ExceptionMessages.EMPTY_GSA_RESPONSE);
@@ -179,7 +179,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				List<CommercialProduct> productDetailsList = broadbandDao.getEngineeringVisitFee(
 						productClass, isFTTHPlan, installationType, isPreOrderable);
 				broadBand = ConverterUtils.createBroadbandInCache(availabilityCheckRequest,
-						getServiceAvailabilityResponse, broadbandId, broadBand, productDetailsList);
+						getServiceAvailabilityResponse, broadbandId, broadBand, productDetailsList, userType);
 				broadbandDao.setBroadBandInCache(broadBand);
 				response = ConverterUtils.createAvailabilityCheckResponse(response, getServiceAvailabilityResponse,
 						availabilityCheckRequest, productDetailsList);
@@ -203,7 +203,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 				.withType("GET");
 		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
-				.checkAvailabilityForBroadband(availabilityCheckRequest, null)).withSelfRel();
+				.checkAvailabilityForBroadband(availabilityCheckRequest, null, null)).withSelfRel();
 		response.add(ConverterUtils.formatLink(selfLink));
 		response.add(ConverterUtils.formatLink(planLink));
 		response.add(ConverterUtils.formatLink(getAddressLink));
@@ -216,8 +216,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 * 
 	 */
 
-	private boolean checkIfAddressAndPhoneNumberIsSame(AvailabilityCheckRequest availabilityCheckRequest,
-			Broadband broadBand) {
+	private boolean checkIfAddressAndPhoneNumberAndUserTypeIsSame(AvailabilityCheckRequest availabilityCheckRequest,
+			Broadband broadBand, String userType) {
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getLineReference() != null) {
 			InstallationAddress installationAddress = broadBand.getServicePoint().getLineReference()
 					.getInstallationAddress();
@@ -254,7 +254,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 											availabilityCheckRequest.getLineRef().getLineIdentification()
 													.getFllandlineNumber())))
 					&& StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(),
-							broadBand.getCategoryPreference())) {
+							broadBand.getCategoryPreference())
+					&& StringUtils.equalsIgnoreCase(userType, broadBand.getBasketInfo().getAccountCategory())) {
 				return true;
 			}
 
@@ -538,7 +539,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 		}
 
-		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder.methodOn(BroadbandController.class).checkAvailabilityForBroadband(new AvailabilityCheckRequest(), null);
+		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder.methodOn(BroadbandController.class).checkAvailabilityForBroadband(new AvailabilityCheckRequest(), null, null);
 		Link lineOptionLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineOptions).withRel("flbb-availablility-checker").withType("POST");
 		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class).getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH,userType)).withSelfRel().withType("GET");
 		
