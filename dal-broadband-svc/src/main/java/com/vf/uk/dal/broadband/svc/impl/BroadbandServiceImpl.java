@@ -199,7 +199,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null, null);
 		Link planLink = ControllerLinkBuilder.linkTo(methodLinkBuilderPlan).withRel("flbb-plan").withType("GET");
 		AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
-				.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
+				.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH,BroadBandConstant.BROADBAND_CONSUMER);
 		Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 				.withType("GET");
 		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
@@ -528,18 +528,21 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 
 	@Override
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences) {
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences,String userType) {
 		AddressInfo addressInfo = broadbandDao.getAddressInfoByPostcodeFromPremise(postCode, categoryPreferences);
+		
+		if(StringUtils.equalsIgnoreCase(BroadBandConstant.BROADBAND_BUSINESS, userType)){
+			int noOfAddress = ConfigHelper.getInt(BroadBandConstant.BROADBAND_NO_OF_ADDRESS, BroadBandConstant.DEFAULT_BROADBAND_NO_OF_ADDRESS);
+			if(addressInfo.getAddresses().size()>noOfAddress){
+				throw new ApplicationException(ExceptionMessages.BUSINESS_ADDRESS);
+			}
+		}
 
-		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder
-				.methodOn(BroadbandController.class)
-				.checkAvailabilityForBroadband(new AvailabilityCheckRequest(), null);
-		Link lineOptionLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineOptions)
-				.withRel("flbb-availablility-checker").withType("POST");
-		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
-				.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH)).withSelfRel().withType("GET");
-		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder
-				.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null, null);
+		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder.methodOn(BroadbandController.class).checkAvailabilityForBroadband(new AvailabilityCheckRequest(), null);
+		Link lineOptionLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineOptions).withRel("flbb-availablility-checker").withType("POST");
+		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class).getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH,userType)).withSelfRel().withType("GET");
+		
+		ResponseEntity<List<FlbBundle>> methodLinkBuilderPlan = ControllerLinkBuilder.methodOn(BroadbandController.class).getFlbbList(null, null, null, null, null, null, null);
 		Link planLink = ControllerLinkBuilder.linkTo(methodLinkBuilderPlan).withRel("flbb-plan").withType("GET");
 		addressInfo.add(ConverterUtils.formatLink(planLink));
 		addressInfo.add(ConverterUtils.formatLink(selfLink));
@@ -567,7 +570,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						journey);
 				basket = broadbandDao.createBasket(createBasketRequest);
 				AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
-						.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
+						.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH,BroadBandConstant.BROADBAND_CONSUMER);
 				Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 						.withType("GET");
 				basket.add(ConverterUtils.formatLink(getAddressLink));
@@ -620,7 +623,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadbandDao.setBroadBandInCache(broadbandToSave);
 
 			AddressInfo methodLinkBuilderGetAddressList = ControllerLinkBuilder.methodOn(BroadbandController.class)
-					.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH);
+					.getAddressByPostcode(null, CATEGORY_PREFERENCE_FTTH,BroadBandConstant.BROADBAND_CONSUMER);
 			Link getAddressLink = ControllerLinkBuilder.linkTo(methodLinkBuilderGetAddressList).withRel("flbb-gal")
 					.withType("GET");
 			basket.add(ConverterUtils.formatLink(getAddressLink));

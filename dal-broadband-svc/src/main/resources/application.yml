@@ -15,7 +15,7 @@ spring:
     ttl: 3600  
 info:
   build:
-    version: @project.version@
+    version: @swaggerVersion@
     projectName: @project.artifactId@
 server:
   contextPath: /broadband
