@@ -72,6 +72,7 @@ import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
+import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
@@ -92,14 +93,19 @@ public class ConverterUtils {
 	 */
 
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
-			AvailabilityCheckRequest availabilityCheckRequest) {
+			AvailabilityCheckRequest availabilityCheckRequest, String userType) {
 		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest();
 		request.setCategory(availabilityCheckRequest.getCategory());
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
-		request.setCustomerType(
-				com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
+		if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString())){
+				request.setCustomerType(
+						com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.BUSINESS);
+		}else{
+			request.setCustomerType(
+					com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
+		}
 		com.vf.uk.dal.entity.serviceavailability.InstallationAddress installationAddress = new com.vf.uk.dal.entity.serviceavailability.InstallationAddress();
 		installationAddress.setCitySubDivisionName(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getCitySubDivisionName());
@@ -142,7 +148,7 @@ public class ConverterUtils {
 
 	public static Broadband createBroadbandInCache(AvailabilityCheckRequest availabilityCheckRequest,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId, Broadband broadBand,
-			List<CommercialProduct> productDetailsList) {
+			List<CommercialProduct> productDetailsList, String userType) {
 		Broadband broadband = broadBand;
 		if (broadband == null) {
 			broadband = new Broadband();
@@ -437,6 +443,13 @@ public class ConverterUtils {
 		}
 
 		broadband.setServicePoint(servicePoint);
+		
+		BasketInfo basketInfo = new BasketInfo();
+		if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+			basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+		else
+			basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+		broadband.setBasketInfo(basketInfo);
 		return broadband;
 	}
 

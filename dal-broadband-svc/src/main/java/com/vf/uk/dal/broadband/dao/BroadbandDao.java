@@ -36,7 +36,7 @@ public interface BroadbandDao {
 	 * @return GetServiceAvailibilityResponse
 	 */
 	
-	GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest);
+	GetServiceAvailibilityResponse getServiceAvailability(AvailabilityCheckRequest availabilityCheckRequest, String userType);
 
 	/**
 	 *  Update FLBB Journey
