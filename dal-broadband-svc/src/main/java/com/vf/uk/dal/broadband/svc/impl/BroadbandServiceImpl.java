@@ -72,6 +72,7 @@ import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
+import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 
@@ -301,10 +302,28 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
 		Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
-		if (broadBand != null && (StringUtils.isBlank(broadBand.getCategoryPreference())
-				|| CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
+		
+		if(broadBand==null){
+			
+			Broadband broadband = new com.vf.uk.dal.broadband.cache.repository.entity.Broadband();
+			broadband.setBroadBandId(getBundleListSearchCriteria.getBroadbandId());
+			
+			BasketInfo basketInfo = new BasketInfo();
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+			else
+				basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+			
+			broadband.setBasketInfo(basketInfo);
+			broadbandDao.setBroadBandInCache(broadband);
+			
+		}
+			
+		if (broadBand != null && (StringUtils.isBlank(broadBand.getCategoryPreference()) || CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
 			bundleClass = CATEGORY_PREFERENCE_FTTC;
 		}
+		
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
