@@ -770,8 +770,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			String broadbandId) {
 		CreateAppointmentResponse response = new CreateAppointmentResponse();
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = ConverterUtils
-				.createAppointmentRequest(createAppointmentRequest, broadband);
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = ConverterUtils.createAppointmentRequest(createAppointmentRequest, broadband,broadband.getBasketInfo().getAccountCategory());
 		CreateAppointment createAppointment = broadbandDao.createAppointment(apptRequest);
 		if (createAppointment != null && createAppointment.getAppointmentWindow() != null
 				&& StringUtils.isNotEmpty(createAppointment.getAppointmentWindow().getApplicationId())) {
@@ -811,7 +810,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband);
+		
+		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband,broadband.getBasketInfo().getAccountCategory());
 		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
 		GetAppointmentResponse getAppointmentRes = ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
 		Link selfLink = ControllerLinkBuilder
