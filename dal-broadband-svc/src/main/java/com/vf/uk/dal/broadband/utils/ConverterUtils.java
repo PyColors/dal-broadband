@@ -741,6 +741,7 @@ public class ConverterUtils {
 			
 			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
 				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
+			
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
