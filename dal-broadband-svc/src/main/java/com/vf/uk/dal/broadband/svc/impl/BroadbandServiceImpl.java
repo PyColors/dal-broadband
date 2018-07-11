@@ -320,8 +320,22 @@ public class BroadbandServiceImpl implements BroadbandService {
 			
 		}
 			
-		if (broadBand != null && (StringUtils.isBlank(broadBand.getCategoryPreference()) || CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
-			bundleClass = CATEGORY_PREFERENCE_FTTC;
+		else{
+			if(StringUtils.isBlank(broadBand.getCategoryPreference()) || CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
+				bundleClass = CATEGORY_PREFERENCE_FTTC;
+			}
+			
+			BasketInfo basketInfo = broadBand.getBasketInfo();
+			if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
+				
+				if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+					basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+				else
+					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+				
+				broadBand.setBasketInfo(basketInfo);
+				broadbandDao.setBroadBandInCache(broadBand);
+			}
 		}
 		
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
