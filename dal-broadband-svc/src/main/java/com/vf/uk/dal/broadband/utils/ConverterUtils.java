@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.dozer.DozerBeanMapper;
 import org.springframework.hateoas.Link;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
@@ -53,6 +54,7 @@ import com.vf.uk.dal.broadband.entity.AppointmentList;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.ErrorInfo;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.Address;
@@ -70,6 +72,7 @@ import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
+import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
@@ -90,14 +93,19 @@ public class ConverterUtils {
 	 */
 
 	public static GetServiceAvailibilityRequest createGetServiceAvailibilityRequest(
-			AvailabilityCheckRequest availabilityCheckRequest) {
+			AvailabilityCheckRequest availabilityCheckRequest, String userType) {
 		GetServiceAvailibilityRequest request = new GetServiceAvailibilityRequest();
 		request.setCategory(availabilityCheckRequest.getCategory());
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
-		request.setCustomerType(
-				com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
+		if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString())){
+				request.setCustomerType(
+						com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.BUSINESS);
+		}else{
+			request.setCustomerType(
+					com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
+		}
 		com.vf.uk.dal.entity.serviceavailability.InstallationAddress installationAddress = new com.vf.uk.dal.entity.serviceavailability.InstallationAddress();
 		installationAddress.setCitySubDivisionName(availabilityCheckRequest.getLineRef().getLineIdentification()
 				.getInstallationAddress().getCitySubDivisionName());
@@ -140,7 +148,7 @@ public class ConverterUtils {
 
 	public static Broadband createBroadbandInCache(AvailabilityCheckRequest availabilityCheckRequest,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse, String broadbandId, Broadband broadBand,
-			List<CommercialProduct> productDetailsList) {
+			List<CommercialProduct> productDetailsList, String userType) {
 		Broadband broadband = broadBand;
 		if (broadband == null) {
 			broadband = new Broadband();
@@ -435,6 +443,13 @@ public class ConverterUtils {
 		}
 
 		broadband.setServicePoint(servicePoint);
+		
+		BasketInfo basketInfo = new BasketInfo();
+		if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+			basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+		else
+			basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+		broadband.setBasketInfo(basketInfo);
 		return broadband;
 	}
 
@@ -625,9 +640,16 @@ public class ConverterUtils {
 			}
 			response.setClassificationCode(classificationCodeList);
 		}
-
+		
 		response.setInstallationAddress(installationAddress);
-
+		if (CollectionUtils.isNotEmpty(getServiceAvailabilityResponse.getWarningErrorList())) {
+			DozerBeanMapper beanMapper = new DozerBeanMapper();
+			List<ErrorInfo> warningMessagesList = new ArrayList<>();
+			beanMapper.map(getServiceAvailabilityResponse.getWarningErrorList(), warningMessagesList);
+			response.setWarningErrorList(warningMessagesList);
+		}
+		
+		
 		return response;
 	}
 
@@ -664,7 +686,7 @@ public class ConverterUtils {
 	 */
 
 	public static com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(
-			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand) {
+			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand,String userType) {
 		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest request = new com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest();
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getLineReference() != null
 				&& broadBand.getServicePoint().getLineReference().getInstallationAddress() != null) {
@@ -713,7 +735,13 @@ public class ConverterUtils {
 			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
-			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.BUSINESS.toString());
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
+			
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
@@ -1233,7 +1261,7 @@ public class ConverterUtils {
 		return servicePoint;
 	}
 
-	public static GetAppointmentRequest getAppointmentRequest(Broadband broadBand) {
+	public static GetAppointmentRequest getAppointmentRequest(Broadband broadBand,String userType) {
 
 		GetAppointmentRequest request = new GetAppointmentRequest();
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getServiceReference() != null
@@ -1284,7 +1312,13 @@ public class ConverterUtils {
 			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
-			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.BUSINESS.toString());
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
+			
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();

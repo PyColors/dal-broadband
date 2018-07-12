@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -17,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-26T12:06:28.563Z")
 
-public class AvailabilityCheckResponse extends ResourceSupport{
+public class AvailabilityCheckResponse extends ResourceSupport {
 	@JsonProperty("journeyId")
 	private String journeyId = null;
 
@@ -35,6 +34,9 @@ public class AvailabilityCheckResponse extends ResourceSupport{
 
 	@JsonProperty("engineeringVisitCharge")
 	private Price engineeringVisitCharge = null;
+
+	@JsonProperty("warningErrorList")
+	private List<ErrorInfo> warningErrorList = null;
 
 	public AvailabilityCheckResponse journeyId(String journeyId) {
 		this.journeyId = journeyId;
@@ -185,27 +187,116 @@ public class AvailabilityCheckResponse extends ResourceSupport{
 		this.engineeringVisitCharge = engineeringVisitCharge;
 	}
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		AvailabilityCheckResponse availabilityCheckResponse = (AvailabilityCheckResponse) o;
-		return Objects.equals(this.journeyId, availabilityCheckResponse.journeyId)
-				&& Objects.equals(this.installationAddress, availabilityCheckResponse.installationAddress)
-				&& Objects.equals(this.appointmentAndAvailabilityDetail,
-						availabilityCheckResponse.appointmentAndAvailabilityDetail)
-				&& Objects.equals(this.lineSpeeds, availabilityCheckResponse.lineSpeeds)
-				&& Objects.equals(this.classificationCode, availabilityCheckResponse.classificationCode);
+	/**
+	 * 
+	 * @param classificationCode
+	 * @return
+	 */
+
+	public AvailabilityCheckResponse warningErrorList(List<ErrorInfo> warningErrorList) {
+		this.warningErrorList = warningErrorList;
+		return this;
 	}
 
+	/**
+	 * 
+	 * @param classificationCodeItem
+	 * @return
+	 */
+
+	public AvailabilityCheckResponse addWarningErrorListItem(ErrorInfo warningError) {
+		if (this.warningErrorList == null) {
+			this.warningErrorList = new ArrayList<>();
+		}
+		this.warningErrorList.add(warningError);
+		return this;
+	}
+
+	/**
+	 * @return the warningErrorList
+	 */
+	public List<ErrorInfo> getWarningErrorList() {
+		return warningErrorList;
+	}
+
+	/**
+	 * @param warningErrorList
+	 *            the warningErrorList to set
+	 */
+	public void setWarningErrorList(List<ErrorInfo> warningErrorList) {
+		this.warningErrorList = warningErrorList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AvailabilityCheckResponse other = (AvailabilityCheckResponse) obj;
+		if (appointmentAndAvailabilityDetail == null) {
+			if (other.appointmentAndAvailabilityDetail != null)
+				return false;
+		} else if (!appointmentAndAvailabilityDetail.equals(other.appointmentAndAvailabilityDetail))
+			return false;
+		if (classificationCode == null) {
+			if (other.classificationCode != null)
+				return false;
+		} else if (!classificationCode.equals(other.classificationCode))
+			return false;
+		if (engineeringVisitCharge == null) {
+			if (other.engineeringVisitCharge != null)
+				return false;
+		} else if (!engineeringVisitCharge.equals(other.engineeringVisitCharge))
+			return false;
+		if (installationAddress == null) {
+			if (other.installationAddress != null)
+				return false;
+		} else if (!installationAddress.equals(other.installationAddress))
+			return false;
+		if (journeyId == null) {
+			if (other.journeyId != null)
+				return false;
+		} else if (!journeyId.equals(other.journeyId))
+			return false;
+		if (lineSpeeds == null) {
+			if (other.lineSpeeds != null)
+				return false;
+		} else if (!lineSpeeds.equals(other.lineSpeeds))
+			return false;
+		if (warningErrorList == null) {
+			if (other.warningErrorList != null)
+				return false;
+		} else if (!warningErrorList.equals(other.warningErrorList))
+			return false;
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(journeyId, installationAddress, appointmentAndAvailabilityDetail, lineSpeeds,
-				classificationCode);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((appointmentAndAvailabilityDetail == null) ? 0 : appointmentAndAvailabilityDetail.hashCode());
+		result = prime * result + ((classificationCode == null) ? 0 : classificationCode.hashCode());
+		result = prime * result + ((engineeringVisitCharge == null) ? 0 : engineeringVisitCharge.hashCode());
+		result = prime * result + ((installationAddress == null) ? 0 : installationAddress.hashCode());
+		result = prime * result + ((journeyId == null) ? 0 : journeyId.hashCode());
+		result = prime * result + ((lineSpeeds == null) ? 0 : lineSpeeds.hashCode());
+		result = prime * result + ((warningErrorList == null) ? 0 : warningErrorList.hashCode());
+		return result;
 	}
 
 	@Override
@@ -219,6 +310,8 @@ public class AvailabilityCheckResponse extends ResourceSupport{
 				.append("\n");
 		sb.append("    lineSpeeds: ").append(toIndentedString(lineSpeeds)).append("\n");
 		sb.append("    classificationCode: ").append(toIndentedString(classificationCode)).append("\n");
+		sb.append("    engineeringVisitCharge: ").append(toIndentedString(engineeringVisitCharge)).append("\n");
+		sb.append("    warningErrorList: ").append(toIndentedString(warningErrorList)).append("\n");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -233,4 +326,5 @@ public class AvailabilityCheckResponse extends ResourceSupport{
 		}
 		return o.toString().replace("\n", "\n    ");
 	}
+
 }

@@ -71,11 +71,12 @@ public class BroadbandController {
 			"application/hal+json" }, method = RequestMethod.POST)
 	public ResponseEntity<AvailabilityCheckResponse> checkAvailabilityForBroadband(
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody AvailabilityCheckRequest availabilityCheckerRequest,
-			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@ApiParam(value = "user type", required = false) @RequestParam(value = "userType", required = false, defaultValue = "CONSUMER") String userType){
 
 		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
 		AvailabilityCheckResponse availabilityCheckResponse = broadbandService
-				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId, broadband);
+				.checkAvailabilityForBroadband(availabilityCheckerRequest, broadbandId, broadband, userType);
 		// Link selfLink =
 		// ControllerLinkBuilder.linkTo(BroadbandController.class).metho
 		return new ResponseEntity<>(availabilityCheckResponse, HttpStatus.OK);
@@ -110,7 +111,7 @@ public class BroadbandController {
 	@RequestMapping(value = "/{broadbandId}/plan", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<FlbBundle>> getFlbbList(
 			@ApiParam(value = "Broad band session id to support broadband cache", required = true) @PathVariable("broadbandId") String broadbandId,
-			@ApiParam(value = "To identify the User, the possible values are \"consumer\" or \"business\" for get bundle list and consumer , enterprise and soho for compatible plans Accepts Consumer, Enterprose and Soho. If none is passed then by default it takes consumer.") @RequestParam(value = "userType", required = false) String userType,
+			@ApiParam(value = "To identify the User, the possible values are \"consumer\" or \"business\" for get bundle list and consumer , enterprise and soho for compatible plans Accepts Consumer, Enterprose and Soho. If none is passed then by default it takes consumer.") @RequestParam(value = "userType", required = false,defaultValue="CONSUMER") String userType,
 			@ApiParam(value = "Offercode sets the pricing information based on the offercode sent, and gets the data from promotions API.") @RequestParam(value = "offerCode", required = false) String offerCode,
 			@ApiParam(value = "Indicates the journeyType of the customer. For eg. upgrade Accepts SecondLine, Upgrade. Upgrade is currently not supported. The provision is there but should not be sent until backend starts supporting. If nothing is passed then we default it to Acquisition or New Customer secondline, etc.") @RequestParam(value = "journeyType", required = false) String journeyType,
 			@ApiParam(value = "bundles will be filter based on duration like 18 months or 24 months. Format is 18 Months or 24 Months or 12 Months") @RequestParam(value = "duration", required = false) String duration,
@@ -142,10 +143,10 @@ public class BroadbandController {
 	@RequestMapping(value = "/premise/{postCode}", produces = { "application/hal+json" }, method = RequestMethod.GET)
 	public AddressInfo getAddressByPostcode(
 			@ApiParam(value = "Postcode.RG14 5BC or RG145BC. Partial postcode not supported", required = true) @PathVariable("postCode") String postCode,
-			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false) String categoryPreference) {
+			@ApiParam(value = "Provides a preference of which Fixed Line Address database the address is to be fetched from. Expected inputs are FTTH,FTTC etc..", required = false) @RequestParam(value = "categoryPreference", required = false) String categoryPreference,
+			@ApiParam(value = "Provides Business or Consumer context", required = false) @RequestParam(value = "userType", required = false,defaultValue = "Consumer") String userType) {
 		try {
-			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"),
-					categoryPreference);
+			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"),categoryPreference,userType);
 		} catch (UnsupportedEncodingException e) {
 			throw new ApplicationException("Invalid_Format_PostCode" + e);
 		}
