@@ -112,6 +112,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadBand = new Broadband();
 		}
 		broadBand.setCategoryPreference(availabilityCheckRequest.getCategory());
+		if(StringUtils.isBlank(availabilityCheckRequest.getCategory())){
+			broadBand.setCategoryPreference("FTTC");
+		}
 		if (checkIfAddressAndPhoneNumberAndUserTypeIsSame(availabilityCheckRequest, broadBand, userType)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
 			if (StringUtils.isNotEmpty(broadBand.getBasketId())) {
@@ -321,7 +324,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 			
 		else{
-			if(StringUtils.isBlank(broadBand.getCategoryPreference()) || CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
+			if(CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
 				bundleClass = CATEGORY_PREFERENCE_FTTC;
 			}
 			
