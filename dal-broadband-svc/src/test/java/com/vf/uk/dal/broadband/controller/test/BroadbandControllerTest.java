@@ -416,7 +416,7 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWIthInvRequest3() {
+	public void testCreateOrUpdateBasketWIthInvalidRequest() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -437,7 +437,7 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWIthInvRequest4() {
+	public void testCreateOrUpdateBasketInvalidRequest() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -458,7 +458,7 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWIthInvRequest5() {
+	public void testCreateOrUpdateBasketInvRequest() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -479,7 +479,7 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWIthInvRequest2() {
+	public void testCreateOrUpdateBasketWIthInvalidReq() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
