@@ -72,6 +72,7 @@ import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
+import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 
@@ -111,6 +112,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadBand = new Broadband();
 		}
 		broadBand.setCategoryPreference(availabilityCheckRequest.getCategory());
+		if(StringUtils.isBlank(availabilityCheckRequest.getCategory())){
+			broadBand.setCategoryPreference("FTTC");
+			availabilityCheckRequest.setCategory("FTTC");
+		}
 		if (checkIfAddressAndPhoneNumberAndUserTypeIsSame(availabilityCheckRequest, broadBand, userType)) {
 			response = ConverterUtils.createAvailabilityCheckResponse(response, broadBand);
 			if (StringUtils.isNotEmpty(broadBand.getBasketId())) {
@@ -256,9 +261,15 @@ public class BroadbandServiceImpl implements BroadbandService {
 					&& StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(),
 							broadBand.getCategoryPreference())
 					&& StringUtils.equalsIgnoreCase(userType, broadBand.getBasketInfo().getAccountCategory())) {
+				if(StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTC")){
+					availabilityCheckRequest.setCategory(null);
+				}
 				return true;
 			}
 
+		}
+		if(StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTC")){
+			availabilityCheckRequest.setCategory(null);
 		}
 		return false;
 	}
@@ -301,10 +312,42 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
 		String duration = getBundleListSearchCriteria.getDuration();
 		Broadband broadBand = broadbandDao.getBroadbandFromCache(getBundleListSearchCriteria.getBroadbandId());
-		if (broadBand != null && (StringUtils.isBlank(broadBand.getCategoryPreference())
-				|| CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference()))) {
-			bundleClass = CATEGORY_PREFERENCE_FTTC;
+		
+		if(broadBand==null){
+			
+			Broadband broadband = new com.vf.uk.dal.broadband.cache.repository.entity.Broadband();
+			broadband.setBroadBandId(getBundleListSearchCriteria.getBroadbandId());
+			
+			BasketInfo basketInfo = new BasketInfo();
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+			else
+				basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+			
+			broadband.setBasketInfo(basketInfo);
+			broadbandDao.setBroadBandInCache(broadband);
+			
 		}
+			
+		else{
+			if(CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
+				bundleClass = CATEGORY_PREFERENCE_FTTC;
+			}
+			
+			BasketInfo basketInfo = broadBand.getBasketInfo();
+			if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
+				
+				if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+					basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+				else
+					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+				
+				broadBand.setBasketInfo(basketInfo);
+				broadbandDao.setBroadBandInCache(broadBand);
+			}
+		}
+		
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
@@ -751,8 +794,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			String broadbandId) {
 		CreateAppointmentResponse response = new CreateAppointmentResponse();
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = ConverterUtils
-				.createAppointmentRequest(createAppointmentRequest, broadband);
+		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest apptRequest = ConverterUtils.createAppointmentRequest(createAppointmentRequest, broadband,broadband.getBasketInfo().getAccountCategory());
 		CreateAppointment createAppointment = broadbandDao.createAppointment(apptRequest);
 		if (createAppointment != null && createAppointment.getAppointmentWindow() != null
 				&& StringUtils.isNotEmpty(createAppointment.getAppointmentWindow().getApplicationId())) {
@@ -792,7 +834,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband);
+		
+		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband,broadband.getBasketInfo().getAccountCategory());
 		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
 		GetAppointmentResponse getAppointmentRes = ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
 		Link selfLink = ControllerLinkBuilder

@@ -686,7 +686,7 @@ public class ConverterUtils {
 	 */
 
 	public static com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(
-			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand) {
+			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand,String userType) {
 		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest request = new com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest();
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getLineReference() != null
 				&& broadBand.getServicePoint().getLineReference().getInstallationAddress() != null) {
@@ -735,7 +735,13 @@ public class ConverterUtils {
 			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
-			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.BUSINESS.toString());
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
+			
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
@@ -1255,7 +1261,7 @@ public class ConverterUtils {
 		return servicePoint;
 	}
 
-	public static GetAppointmentRequest getAppointmentRequest(Broadband broadBand) {
+	public static GetAppointmentRequest getAppointmentRequest(Broadband broadBand,String userType) {
 
 		GetAppointmentRequest request = new GetAppointmentRequest();
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getServiceReference() != null
@@ -1306,7 +1312,13 @@ public class ConverterUtils {
 			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
-			customerPartyRef.setCustomerPartyAccountTypeCode("INDIVIDUAL");
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.BUSINESS.toString());
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
+				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
+			
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();

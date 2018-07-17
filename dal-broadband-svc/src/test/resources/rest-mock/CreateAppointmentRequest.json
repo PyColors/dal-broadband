@@ -1,33 +1,37 @@
 {
-	"existing": false,
 	"appointmentDetails": {
-		"appointmentWindow": {
-			"operationalPreferenceCode": "STANDARD",
-			"startTimePeriod" : "2015-10-07+01:00",
-			"timeSlot" : "AM"
-		},
-		"serviceRequest": {
-			"typeCode": "INSTALL",
-			"classificationCode": "LINE",
-			"subClassificationCode": "WLR_SINGLE_LINE",
-			"categoryCode": "BASIC"
-		},
 		"addressDetails": {
 			"address": {
-				"lineOne": "Craven Crescent",
-				"lineTwo": "Brooke",
-				"lineThree": "1",
-				"lineFour": "",
 				"building": "",
-				"countyName": "Norfolk",
 				"citySubDivisionName": "LS",
-				"postalCode": "LS29 0JJ",
-				"identificationId": "A90000221048"
+				"countyName": "Norfolk",
+				"identificationId": "A90000221048",
+				"lineFour": "",
+				"lineOne": "Craven Crescent",
+				"lineThree": "1",
+				"lineTwo": "Brooke",
+				"postalCode": "LS29 0JJ"
 			},
 			"organisation": {
 				"name": "Vodafone"
 			}
+		},
+		"appointmentWindow": {
+			"operationalPreferenceCode": "STANDARD",
+			"timeSlot": "AM"
+		},
+		"serviceRequest": {
+			"categoryCode": "BASIC",
+			"classificationCode": "BROADBAND",
+			"customerPartyReference": {
+				"customerPartyAccountTypeCode": "INDIVIDUAL"
+			},
+			"itemReference": {
+				"typeCode": "NGAFTTC"
+			},
+			"subClassificationCode": "Generic Ethernet Access",
+			"typeCode": "INSTALL"
 		}
-	}
+	},
+	"existing": false
 }
-

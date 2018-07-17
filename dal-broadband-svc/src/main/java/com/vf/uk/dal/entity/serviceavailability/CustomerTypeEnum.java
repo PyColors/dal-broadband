@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type of customer INDIVIDUAL or BUSINESS
+ * Type of customer INDIVIDUAL or BUSINESS or CONSUMER
  */
 public enum CustomerTypeEnum {
 	INDIVIDUAL("INDIVIDUAL"),
