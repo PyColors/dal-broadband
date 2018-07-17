@@ -259,11 +259,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 											availabilityCheckRequest.getLineRef().getLineIdentification()
 													.getFllandlineNumber())))
 					&& StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(),
-							broadBand.getCategoryPreference())
-					&& StringUtils.equalsIgnoreCase(userType, broadBand.getBasketInfo().getAccountCategory())) {
+							broadBand.getCategoryPreference())) {
 				if(StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTC")){
-					availabilityCheckRequest.setCategory(null);
-				}
+					availabilityCheckRequest.setCategory(null);}
+				if(null != broadBand.getBasketInfo() && !StringUtils.equalsIgnoreCase(userType, broadBand.getBasketInfo().getAccountCategory()))
+					return false;
 				return true;
 			}
 
