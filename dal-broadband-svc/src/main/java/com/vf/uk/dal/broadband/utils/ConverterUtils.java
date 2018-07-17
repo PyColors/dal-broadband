@@ -443,13 +443,17 @@ public class ConverterUtils {
 		}
 
 		broadband.setServicePoint(servicePoint);
-		
-		BasketInfo basketInfo = new BasketInfo();
-		if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
-			basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
-		else
-			basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
-		broadband.setBasketInfo(basketInfo);
+	
+		if(null != broadband.getBasketInfo()){
+			BasketInfo basketInfo = broadband.getBasketInfo();
+			if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
+				if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+					basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+				else
+					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+				broadband.setBasketInfo(basketInfo);
+			}
+		}
 		return broadband;
 	}
 
