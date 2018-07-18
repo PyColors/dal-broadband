@@ -47,7 +47,7 @@ public class BroadbandTestBeans {
 		return dozerBean;
 	}
 	
-	@Bean
+	/*@Bean
 	public RedisTemplate<String, Object> redisTemplate() {
 		return new RedisTemplate<String, Object>();
 	}
@@ -55,7 +55,7 @@ public class BroadbandTestBeans {
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		return new LettuceConnectionFactory();
-	}
+	}*/
 	
 	@Bean
 	public  RestTemplateConfiguration config() {
