@@ -443,16 +443,19 @@ public class ConverterUtils {
 		}
 
 		broadband.setServicePoint(servicePoint);
-	
-		if(null != broadband.getBasketInfo()){
-			BasketInfo basketInfo = broadband.getBasketInfo();
-			if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
-				if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
-					basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
-				else
-					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
-				broadband.setBasketInfo(basketInfo);
-			}
+		BasketInfo basketInfo;
+		if(null != broadband.getBasketInfo())
+			basketInfo = broadband.getBasketInfo();
+		else
+			basketInfo = new BasketInfo();
+		
+		if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+			else
+				basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+			broadband.setBasketInfo(basketInfo);
 		}
 		return broadband;
 	}
@@ -937,7 +940,15 @@ public class ConverterUtils {
 			lineDetails = new LineDetails();
 		}
 		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
-		BasketInfo basketInfo = new BasketInfo();
+		
+		BasketInfo basketInfo;
+		if(broadband.getBasketInfo() != null)
+			basketInfo = broadband.getBasketInfo();
+		else{
+			basketInfo = new BasketInfo();
+			basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+		}
+		
 		if (basketRequest.getAddBundle() != null
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())) {
 			basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
