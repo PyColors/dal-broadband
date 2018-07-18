@@ -318,14 +318,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 			Broadband broadband = new com.vf.uk.dal.broadband.cache.repository.entity.Broadband();
 			broadband.setBroadBandId(getBundleListSearchCriteria.getBroadbandId());
 			
-			BasketInfo basketInfo = new BasketInfo();
+			/*BasketInfo basketInfo = new BasketInfo();
 			
 			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
 				basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
 			else
 				basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
 			
-			broadband.setBasketInfo(basketInfo);
+			broadband.setBasketInfo(basketInfo);*/
 			broadbandDao.setBroadBandInCache(broadband);
 			
 		}
@@ -334,18 +334,20 @@ public class BroadbandServiceImpl implements BroadbandService {
 			if(CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
 				bundleClass = CATEGORY_PREFERENCE_FTTC;
 			}
-			
-			BasketInfo basketInfo = broadBand.getBasketInfo();
-			if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
-				
-				if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
-					basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
-				else
-					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
-				
-				broadBand.setBasketInfo(basketInfo);
-				broadbandDao.setBroadBandInCache(broadBand);
+			if(broadBand.getBasketInfo()!=null){
+				BasketInfo basketInfo = broadBand.getBasketInfo();
+				if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
+					
+					if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+						basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+					else
+						basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+					
+					broadBand.setBasketInfo(basketInfo);
+					broadbandDao.setBroadBandInCache(broadBand);
+				}	
 			}
+			
 		}
 		
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
