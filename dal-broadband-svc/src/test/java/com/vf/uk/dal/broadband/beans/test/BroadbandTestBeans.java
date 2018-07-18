@@ -6,12 +6,17 @@ import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import com.vf.uk.dal.broadband.controller.BroadbandController;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.dao.impl.BroadbandDaoImpl;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.svc.impl.BroadbandServiceImpl;
+import com.vf.uk.dal.common.configuration.registry.AsyncRestTemplateConfiguration;
+import com.vf.uk.dal.common.configuration.registry.RestTemplateConfiguration;
 
 @Configuration
 public class BroadbandTestBeans {
@@ -42,4 +47,23 @@ public class BroadbandTestBeans {
 		return dozerBean;
 	}
 	
+	@Bean
+	public RedisTemplate<String, Object> redisTemplate() {
+		return new RedisTemplate<String, Object>();
+	}
+	
+	@Bean
+	public RedisConnectionFactory redisConnectionFactory() {
+		return new LettuceConnectionFactory();
+	}
+	
+	@Bean
+	public  RestTemplateConfiguration config() {
+		return new  RestTemplateConfiguration();
+	}
+	
+	@Bean
+	public  AsyncRestTemplateConfiguration asynConfig() {
+		return new  AsyncRestTemplateConfiguration();
+	}
 }
