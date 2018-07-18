@@ -2,6 +2,7 @@ package com.vf.uk.dal.broadband.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -233,50 +234,20 @@ public class AvailabilityCheckResponse extends ResourceSupport {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AvailabilityCheckResponse other = (AvailabilityCheckResponse) obj;
-		if (appointmentAndAvailabilityDetail == null) {
-			if (other.appointmentAndAvailabilityDetail != null)
-				return false;
-		} else if (!appointmentAndAvailabilityDetail.equals(other.appointmentAndAvailabilityDetail))
-			return false;
-		if (classificationCode == null) {
-			if (other.classificationCode != null)
-				return false;
-		} else if (!classificationCode.equals(other.classificationCode))
-			return false;
-		if (engineeringVisitCharge == null) {
-			if (other.engineeringVisitCharge != null)
-				return false;
-		} else if (!engineeringVisitCharge.equals(other.engineeringVisitCharge))
-			return false;
-		if (installationAddress == null) {
-			if (other.installationAddress != null)
-				return false;
-		} else if (!installationAddress.equals(other.installationAddress))
-			return false;
-		if (journeyId == null) {
-			if (other.journeyId != null)
-				return false;
-		} else if (!journeyId.equals(other.journeyId))
-			return false;
-		if (lineSpeeds == null) {
-			if (other.lineSpeeds != null)
-				return false;
-		} else if (!lineSpeeds.equals(other.lineSpeeds))
-			return false;
-		if (warningErrorList == null) {
-			if (other.warningErrorList != null)
-				return false;
-		} else if (!warningErrorList.equals(other.warningErrorList))
-			return false;
-		return true;
+		}
+		AvailabilityCheckResponse availabilityCheckResponse = (AvailabilityCheckResponse) o;
+		return Objects.equals(this.journeyId, availabilityCheckResponse.journeyId)
+				&& Objects.equals(this.installationAddress, availabilityCheckResponse.installationAddress)
+				&& Objects.equals(this.appointmentAndAvailabilityDetail,
+						availabilityCheckResponse.appointmentAndAvailabilityDetail)
+				&& Objects.equals(this.lineSpeeds, availabilityCheckResponse.lineSpeeds)
+				&& Objects.equals(this.classificationCode, availabilityCheckResponse.classificationCode);
 	}
 
 	/*
