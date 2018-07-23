@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.config.ConfigurationManager;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -211,122 +214,95 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadband() {
+	public void testCheckAvailabilityForBroadband() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
-			String checkAvailabilityRequest = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
-			request = new ObjectMapper().readValue(checkAvailabilityRequest, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String checkAvailabilityRequest = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
+		AvailabilityCheckRequest request = new ObjectMapper().readValue(checkAvailabilityRequest, AvailabilityCheckRequest.class);
+		
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
+				"123456789078", "CONSUMER");
+		assertEquals(HttpStatus.OK, resonse.getStatusCode());
+		List<String> classificationCodeList = new ArrayList<>();
+		classificationCodeList.add("Line and ADSL");
+		classificationCodeList.add("Line and Fibre with Speed 76");
+		classificationCodeList.add("Line and Fibre with Speed 38");
+		Assert.assertEquals(classificationCodeList, resonse.getBody().getClassificationCode());
+		Assert.assertEquals("LS29 0JJ", resonse.getBody().getInstallationAddress().getPostCode());
+		Assert.assertEquals(2, resonse.getBody().getAppointmentAndAvailabilityDetail().size());
+		
+	}
+
+	@Test
+	public void testCheckAvailabilityForBroadbandWithEngineeringVisitFee() throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
+		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
 				"123456789078", "CONSUMER");
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadbandWithEngineeringVisitFee() {
+	public void testCheckAvailabilityForBroadbandFromCache() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
-			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"123456789078", "CONSUMER");
-		assertEquals(HttpStatus.OK, resonse.getStatusCode());
-	}
-
-	@Test
-	public void testCheckAvailabilityForBroadbandFromCache() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
-			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
+		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
 				"12345678907888", "CONSUMER");
-		assertNotNull(resonse);
+		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadbandForInvalidClassificationCode() {
+	public void testCheckAvailabilityForBroadbandForInvalidClassificationCode() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
 			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST3.json"));
-			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		
 		try {
 			broadBandController.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			Assertions.assertThat(e.getMessage()).isEqualTo("INVALID_CLASSIFICATION_CODE");
 		}
-
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadbandForValidClassificationCode() {
+	public void testCheckAvailabilityForBroadbandForValidClassificationCode() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST4.json"));
-			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST4.json"));
+		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
 					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
-			assertNotNull(resonse);
-		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
-		}
+			assertEquals(HttpStatus.OK, resonse.getStatusCode());
+		
 
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadbandForEmptyGSAResponse() {
+	public void testCheckAvailabilityForBroadbandForEmptyGSAResponse() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
 			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
-			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		
 		try {
-			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
+			broadBandController
 					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
-			assertNotNull(resonse);
+			
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			Assertions.assertThat(e.getMessage()).isEqualTo("No Data recieved from TIL");
 		}
 
 	}
