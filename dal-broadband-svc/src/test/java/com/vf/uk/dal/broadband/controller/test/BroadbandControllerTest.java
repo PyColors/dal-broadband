@@ -308,22 +308,17 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCheckAvailabilityForBroadbandForUpdateBasket() {
+	public void testCheckAvailabilityForBroadbandForUpdateBasket() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		AvailabilityCheckRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
-			request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
+		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
+		
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
 					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
-			assertNotNull(resonse);
+			assertEquals(HttpStatus.OK, resonse.getStatusCode());
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
@@ -331,21 +326,16 @@ public class BroadbandControllerTest {
 	}
 
 	@Test
-	public void testCreateOrUpdateBasket() {
+	public void testCreateOrUpdateBasket() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		
 		try {
 			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
-			assertNotNull(resonse);
+			assertEquals("2b23e0a1-eefd-409c-a919-e0ca774b9017", resonse.getBasketId());
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
@@ -353,18 +343,13 @@ public class BroadbandControllerTest {
 
 	
 	@Test
-	public void testCreateOrUpdateBasketWithNoBasketId() {
+	public void testCreateOrUpdateBasketWithNoBasketId() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		
 		try {
 			Basket resonse = broadBandController.createOrUpdatePackage("123456789078881", request);
 			assertNotNull(resonse);
@@ -376,126 +361,91 @@ public class BroadbandControllerTest {
 	
 	
 	@Test
-	public void testCreateOrUpdateBasketWithInvalidRequest() {
+	public void testCreateOrUpdateBasketWithInvalidRequest() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("1234907888", request);
-			assertNotNull(resonse);
+			broadBandController.createOrUpdatePackage("1234907888", request);
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			Assertions.assertThat(e.getMessage()).isEqualTo("Source cannot be null while creating or updating the basket");
 		}
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWIthInvalidRequest() {
+	public void testCreateOrUpdateBasketWIthInvalidRequest() throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest3.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest3.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
-			assertNotNull(resonse);
+			broadBandController.createOrUpdatePackage("12345678907888", request);
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			Assertions.assertThat(e.getMessage()).isEqualTo("Hardware Id or Package Id is null. Not a valid request while updating");
 		}
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketInvalidRequest() {
+	public void testCreateOrUpdateBasketInvalidRequest() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest4.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest4.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
-			assertNotNull(resonse);
+			broadBandController.createOrUpdatePackage("12345678907888", request);
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			
+			Assertions.assertThat(e.getMessage()).isEqualTo("Bundle Id or Package Id is null. Not a valid request while updating");
 		}
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketInvRequest() {
+	public void testCreateOrUpdateBasketInvRequest() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest5.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest5.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request);
-			assertNotNull(resonse);
+			broadBandController.createOrUpdatePackage("12345678907888", request);
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			
+			Assertions.assertThat(e.getMessage()).isEqualTo("Package id is empty. Not a valid request whule updating the basket");
 		}
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWIthInvalidReq() {
+	public void testCreateOrUpdateBasketWIthInvalidReq() throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest2.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		
 		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest2.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("1234907888", request);
-			assertNotNull(resonse);
+			broadBandController.createOrUpdatePackage("1234907888", request);
 		} catch (Exception e) {
-			LogHelper.error(this, "Null object is send \n" + e);
+			Assertions.assertThat(e.getMessage()).isEqualTo("Customer Requested date cannot be null while creating or updating the basket");
 		}
 	}
 
 	@Test
-	public void testCreateOrUpdateBasketWithValidReq() {
+	public void testCreateOrUpdateBasketWithValidReq() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		BasketRequest request = null;
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket3.json"));
-			request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket3.json"));
+		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
+		
 		try {
 			Basket resonse = broadBandController.createOrUpdatePackage("178907888", request);
-			assertNotNull(resonse);
+			assertEquals("2b23e0a1-eefd-409c-a919-e0ca774b9017", resonse.getBasketId());
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
 		}
