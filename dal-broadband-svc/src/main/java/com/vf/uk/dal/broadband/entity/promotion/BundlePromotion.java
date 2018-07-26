@@ -226,7 +226,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addPromotionsItem(Cataloguepromotions promotionsItem) {
     if (this.promotions == null) {
-      this.promotions = new ArrayList<Cataloguepromotions>();
+      this.promotions = new ArrayList<>();
     }
     this.promotions.add(promotionsItem);
     return this;

@@ -63,7 +63,7 @@ public class BasketLineReference   {
 
   public BasketLineReference addLineDirectoryItem(BasketLineDirectory lineDirectoryItem) {
     if (this.lineDirectory == null) {
-      this.lineDirectory = new ArrayList<BasketLineDirectory>();
+      this.lineDirectory = new ArrayList<>();
     }
     this.lineDirectory.add(lineDirectoryItem);
     return this;

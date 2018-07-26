@@ -1,4 +1,4 @@
-package com.vf.uk.dal.broadband.utils;
+package com.vf.uk.dal.broadband.exception;
 
 /**
  * @author Infosys Limited
