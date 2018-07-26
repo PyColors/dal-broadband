@@ -8,7 +8,10 @@
          "workingLines": 1,
          "stoppedLines": 1
       },
-      "lineDirectory": [],
+      "lineDirectory": [{
+      "featureCode":"abcd",
+      "directoryCode":"abcd",
+      "locationCode":"abcd"}],
       "lineLocator":       {
          "exchangeCode": "ASH",
          "exchangeName": "Ashton",
@@ -60,7 +63,7 @@
                   "minGuaranteedDownSpeed": 35000,
                   "maxUpSpeed": 10000,
                   "minUpSpeed": 10000,
-                  "avgDownSpeed": null,
+                  "avgDownSpeed": 10000,
                   "bandwidthMeasure": "Predicted"
                },
                "lineTreatment": [],
