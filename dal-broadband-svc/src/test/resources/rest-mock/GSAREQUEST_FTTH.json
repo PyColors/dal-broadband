@@ -1,0 +1,21 @@
+{
+"customerType": "INDIVIDUAL",
+"landlineNumber": "1635033333",
+"moveFromPostCode": null,
+"installationAddress": {
+ "houseNumber": "1",
+ "flatNumber": "",
+ "houseName": "",
+ "streetName": "Craven Crescent",
+ "locality": "Brooke",
+ "city": null,
+ "postCode": "LS29 0JJ",
+ "county": "Norfolk",
+ "countryCode": null,
+ "citySubDivisionName": "LS",
+ "addressReferenceNumber": "A90000121249",
+ "addressType": "Gold",
+ "moveTypeCode": null
+},
+"category" : "FTTH"
+}

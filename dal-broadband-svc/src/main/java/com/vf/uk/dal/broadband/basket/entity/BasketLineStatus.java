@@ -9,43 +9,54 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * LineStatus
+ * LineStatus.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class BasketLineStatus   {
+  
+  /** The access line status. */
   @JsonProperty("accessLineStatus")
   private String accessLineStatus = null;
 
+  /** The gnp status. */
   @JsonProperty("gnpStatus")
   private String gnpStatus = null;
 
+  /** The line option. */
   @JsonProperty("lineOption")
   private String lineOption = null;
 
+  /** The line type. */
   @JsonProperty("lineType")
   private String lineType = null;
 
+  /** The narrow band services available. */
   @JsonProperty("narrowBandServicesAvailable")
   private String narrowBandServicesAvailable = null;
 
+  /** The standby power required. */
   @JsonProperty("standbyPowerRequired")
   private Boolean standbyPowerRequired = null;
 
+  /** The status code. */
   @JsonProperty("statusCode")
   private String statusCode = null;
 
+  /** The technology. */
   @JsonProperty("technology")
   private String technology = null;
 
+  /** The temp structure. */
   @JsonProperty("tempStructure")
   private Boolean tempStructure = null;
 
   /**
-   * 
-   * @param accessLineStatus
-   * @return
+   * Access line status.
+   *
+   * @param accessLineStatus the access line status
+   * @return the basket line status
    */
   public BasketLineStatus accessLineStatus(String accessLineStatus) {
     this.accessLineStatus = accessLineStatus;
@@ -53,9 +64,10 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get accessLineStatus
+   * Get accessLineStatus.
+   *
    * @return accessLineStatus
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -63,14 +75,20 @@ public class BasketLineStatus   {
     return accessLineStatus;
   }
 
+  /**
+   * Sets the access line status.
+   *
+   * @param accessLineStatus the new access line status
+   */
   public void setAccessLineStatus(String accessLineStatus) {
     this.accessLineStatus = accessLineStatus;
   }
 
   /**
-   * 
-   * @param gnpStatus
-   * @return
+   * Gnp status.
+   *
+   * @param gnpStatus the gnp status
+   * @return the basket line status
    */
   public BasketLineStatus gnpStatus(String gnpStatus) {
     this.gnpStatus = gnpStatus;
@@ -78,9 +96,10 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get gnpStatus
+   * Get gnpStatus.
+   *
    * @return gnpStatus
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -88,14 +107,20 @@ public class BasketLineStatus   {
     return gnpStatus;
   }
 
+  /**
+   * Sets the gnp status.
+   *
+   * @param gnpStatus the new gnp status
+   */
   public void setGnpStatus(String gnpStatus) {
     this.gnpStatus = gnpStatus;
   }
 
   /**
-   * 
-   * @param lineOption
-   * @return
+   * Line option.
+   *
+   * @param lineOption the line option
+   * @return the basket line status
    */
   public BasketLineStatus lineOption(String lineOption) {
     this.lineOption = lineOption;
@@ -103,9 +128,10 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get lineOption
+   * Get lineOption.
+   *
    * @return lineOption
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -113,14 +139,20 @@ public class BasketLineStatus   {
     return lineOption;
   }
 
+  /**
+   * Sets the line option.
+   *
+   * @param lineOption the new line option
+   */
   public void setLineOption(String lineOption) {
     this.lineOption = lineOption;
   }
 
   /**
-   * 
-   * @param lineType
-   * @return
+   * Line type.
+   *
+   * @param lineType the line type
+   * @return the basket line status
    */
   public BasketLineStatus lineType(String lineType) {
     this.lineType = lineType;
@@ -128,9 +160,10 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get lineType
+   * Get lineType.
+   *
    * @return lineType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -138,14 +171,20 @@ public class BasketLineStatus   {
     return lineType;
   }
 
+  /**
+   * Sets the line type.
+   *
+   * @param lineType the new line type
+   */
   public void setLineType(String lineType) {
     this.lineType = lineType;
   }
 
   /**
-   * 
-   * @param narrowBandServicesAvailable
-   * @return
+   * Narrow band services available.
+   *
+   * @param narrowBandServicesAvailable the narrow band services available
+   * @return the basket line status
    */
   public BasketLineStatus narrowBandServicesAvailable(String narrowBandServicesAvailable) {
     this.narrowBandServicesAvailable = narrowBandServicesAvailable;
@@ -153,9 +192,10 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get narrowBandServicesAvailable
+   * Get narrowBandServicesAvailable.
+   *
    * @return narrowBandServicesAvailable
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -163,14 +203,20 @@ public class BasketLineStatus   {
     return narrowBandServicesAvailable;
   }
 
+  /**
+   * Sets the narrow band services available.
+   *
+   * @param narrowBandServicesAvailable the new narrow band services available
+   */
   public void setNarrowBandServicesAvailable(String narrowBandServicesAvailable) {
     this.narrowBandServicesAvailable = narrowBandServicesAvailable;
   }
 
   /**
-   * 
-   * @param standbyPowerRequired
-   * @return
+   * Standby power required.
+   *
+   * @param standbyPowerRequired the standby power required
+   * @return the basket line status
    */
   public BasketLineStatus standbyPowerRequired(Boolean standbyPowerRequired) {
     this.standbyPowerRequired = standbyPowerRequired;
@@ -178,22 +224,29 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get standbyPowerRequired
+   * Get standbyPowerRequired.
+   *
    * @return standbyPowerRequired
-  **/
+   */
 
   public Boolean isStandbyPowerRequired() {
     return standbyPowerRequired;
   }
 
+  /**
+   * Sets the standby power required.
+   *
+   * @param standbyPowerRequired the new standby power required
+   */
   public void setStandbyPowerRequired(Boolean standbyPowerRequired) {
     this.standbyPowerRequired = standbyPowerRequired;
   }
 
   /**
-   * 
-   * @param statusCode
-   * @return
+   * Status code.
+   *
+   * @param statusCode the status code
+   * @return the basket line status
    */
   public BasketLineStatus statusCode(String statusCode) {
     this.statusCode = statusCode;
@@ -201,9 +254,10 @@ public class BasketLineStatus   {
   }
 
   /**
-   * Get statusCode
+   * Get statusCode.
+   *
    * @return statusCode
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -211,19 +265,31 @@ public class BasketLineStatus   {
     return statusCode;
   }
 
+  /**
+   * Sets the status code.
+   *
+   * @param statusCode the new status code
+   */
   public void setStatusCode(String statusCode) {
     this.statusCode = statusCode;
   }
 
+  /**
+   * Technology.
+   *
+   * @param technology the technology
+   * @return the basket line status
+   */
   public BasketLineStatus technology(String technology) {
     this.technology = technology;
     return this;
   }
 
   /**
-   * Get technology
+   * Get technology.
+   *
    * @return technology
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -231,29 +297,49 @@ public class BasketLineStatus   {
     return technology;
   }
 
+  /**
+   * Sets the technology.
+   *
+   * @param technology the new technology
+   */
   public void setTechnology(String technology) {
     this.technology = technology;
   }
 
+  /**
+   * Temp structure.
+   *
+   * @param tempStructure the temp structure
+   * @return the basket line status
+   */
   public BasketLineStatus tempStructure(Boolean tempStructure) {
     this.tempStructure = tempStructure;
     return this;
   }
 
   /**
-   * Get tempStructure
+   * Get tempStructure.
+   *
    * @return tempStructure
-  **/
+   */
 
   public Boolean isTempStructure() {
     return tempStructure;
   }
 
+  /**
+   * Sets the temp structure.
+   *
+   * @param tempStructure the new temp structure
+   */
   public void setTempStructure(Boolean tempStructure) {
     this.tempStructure = tempStructure;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -274,11 +360,17 @@ public class BasketLineStatus   {
         Objects.equals(this.tempStructure, lineStatus.tempStructure);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(accessLineStatus, gnpStatus, lineOption, lineType, narrowBandServicesAvailable, standbyPowerRequired, statusCode, technology, tempStructure);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -300,6 +392,9 @@ public class BasketLineStatus   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

@@ -95,7 +95,7 @@ public class BroadbandValidator {
 	 */
 	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointmentRequest) {
 		if(StringUtils.isEmpty(createAppointmentRequest.getStartTimePeriod())
-				|| StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())){
+				&& StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())){
 			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
 			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
 		}
