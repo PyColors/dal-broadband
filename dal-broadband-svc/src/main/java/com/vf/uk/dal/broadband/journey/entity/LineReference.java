@@ -18,114 +18,193 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * LineReference
+ * LineReference.
  */
 public class LineReference {
+  
+  /** The installation address. */
   private InstallationAddress installationAddress = null;
 
+  /** The line locator. */
   private LineLocator lineLocator = null;
 
+  /** The line settings. */
   private LineSettings lineSettings = null;
 
+  /** The line status. */
   private LineStatus lineStatus = null;
 
+  /** The available services. */
   private AvailableServices availableServices = null;
 
+  /** The line directory. */
   private List<LineDirectory> lineDirectory = null;
 
+  /**
+   * Installation address.
+   *
+   * @param installationAddress the installation address
+   * @return the line reference
+   */
   public LineReference installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
   }
 
    /**
-   * Get installationAddress
-   * @return installationAddress
-  **/
+    * Get installationAddress.
+    *
+    * @return installationAddress
+    */
   public InstallationAddress getInstallationAddress() {
     return installationAddress;
   }
 
+  /**
+   * Sets the installation address.
+   *
+   * @param installationAddress the new installation address
+   */
   public void setInstallationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
   }
 
+  /**
+   * Line locator.
+   *
+   * @param lineLocator the line locator
+   * @return the line reference
+   */
   public LineReference lineLocator(LineLocator lineLocator) {
     this.lineLocator = lineLocator;
     return this;
   }
 
    /**
-   * Get lineLocator
-   * @return lineLocator
-  **/
+    * Get lineLocator.
+    *
+    * @return lineLocator
+    */
   public LineLocator getLineLocator() {
     return lineLocator;
   }
 
+  /**
+   * Sets the line locator.
+   *
+   * @param lineLocator the new line locator
+   */
   public void setLineLocator(LineLocator lineLocator) {
     this.lineLocator = lineLocator;
   }
 
+  /**
+   * Line settings.
+   *
+   * @param lineSettings the line settings
+   * @return the line reference
+   */
   public LineReference lineSettings(LineSettings lineSettings) {
     this.lineSettings = lineSettings;
     return this;
   }
 
    /**
-   * Get lineSettings
-   * @return lineSettings
-  **/
+    * Get lineSettings.
+    *
+    * @return lineSettings
+    */
    
   public LineSettings getLineSettings() {
     return lineSettings;
   }
 
+  /**
+   * Sets the line settings.
+   *
+   * @param lineSettings the new line settings
+   */
   public void setLineSettings(LineSettings lineSettings) {
     this.lineSettings = lineSettings;
   }
 
+  /**
+   * Line status.
+   *
+   * @param lineStatus the line status
+   * @return the line reference
+   */
   public LineReference lineStatus(LineStatus lineStatus) {
     this.lineStatus = lineStatus;
     return this;
   }
 
    /**
-   * Get lineStatus
-   * @return lineStatus
-  **/
+    * Get lineStatus.
+    *
+    * @return lineStatus
+    */
    
   public LineStatus getLineStatus() {
     return lineStatus;
   }
 
+  /**
+   * Sets the line status.
+   *
+   * @param lineStatus the new line status
+   */
   public void setLineStatus(LineStatus lineStatus) {
     this.lineStatus = lineStatus;
   }
 
+  /**
+   * Available services.
+   *
+   * @param availableServices the available services
+   * @return the line reference
+   */
   public LineReference availableServices(AvailableServices availableServices) {
     this.availableServices = availableServices;
     return this;
   }
 
    /**
-   * Get availableServices
-   * @return availableServices
-  **/
+    * Get availableServices.
+    *
+    * @return availableServices
+    */
    
   public AvailableServices getAvailableServices() {
     return availableServices;
   }
 
+  /**
+   * Sets the available services.
+   *
+   * @param availableServices the new available services
+   */
   public void setAvailableServices(AvailableServices availableServices) {
     this.availableServices = availableServices;
   }
 
+  /**
+   * Line directory.
+   *
+   * @param lineDirectory the line directory
+   * @return the line reference
+   */
   public LineReference lineDirectory(List<LineDirectory> lineDirectory) {
     this.lineDirectory = lineDirectory;
     return this;
   }
 
+  /**
+   * Adds the line directory item.
+   *
+   * @param lineDirectoryItem the line directory item
+   * @return the line reference
+   */
   public LineReference addLineDirectoryItem(LineDirectory lineDirectoryItem) {
     if (this.lineDirectory == null) {
       this.lineDirectory = new ArrayList<>();
@@ -135,19 +214,28 @@ public class LineReference {
   }
 
    /**
-   * Get lineDirectory
-   * @return lineDirectory
-  **/
+    * Get lineDirectory.
+    *
+    * @return lineDirectory
+    */
    
   public List<LineDirectory> getLineDirectory() {
     return lineDirectory;
   }
 
+  /**
+   * Sets the line directory.
+   *
+   * @param lineDirectory the new line directory
+   */
   public void setLineDirectory(List<LineDirectory> lineDirectory) {
     this.lineDirectory = lineDirectory;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -165,12 +253,18 @@ public class LineReference {
         Objects.equals(this.lineDirectory, lineReference.lineDirectory);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(installationAddress, lineLocator, lineSettings, lineStatus, availableServices, lineDirectory);
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -189,6 +283,9 @@ public class LineReference {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

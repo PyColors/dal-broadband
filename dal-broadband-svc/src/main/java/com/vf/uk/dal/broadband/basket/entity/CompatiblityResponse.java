@@ -26,11 +26,21 @@ public class CompatiblityResponse   {
   @JsonProperty("valid")
   private Boolean valid = null;
 
+  /**
+   * 
+   * @param packages
+   * @return
+   */
   public CompatiblityResponse packages(List<CompatibilityPackage> packages) {
     this.packages = packages;
     return this;
   }
 
+  /**
+   * 
+   * @param packagesItem
+   * @return
+   */
   public CompatiblityResponse addPackagesItem(CompatibilityPackage packagesItem) {
     if (this.packages == null) {
       this.packages = new ArrayList<>();
@@ -55,6 +65,11 @@ public class CompatiblityResponse   {
     this.packages = packages;
   }
 
+  /**
+   * 
+   * @param valid
+   * @return
+   */
   public CompatiblityResponse valid(Boolean valid) {
     this.valid = valid;
     return this;

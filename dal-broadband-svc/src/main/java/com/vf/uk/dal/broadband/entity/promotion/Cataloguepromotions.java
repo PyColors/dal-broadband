@@ -13,69 +13,103 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Cataloguepromotions
+ * Cataloguepromotions.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-17T22:32:14.737Z")
 
 public class Cataloguepromotions {
+	
+	/** The description. */
 	@JsonProperty("description")
 	private String description = null;
 
+	/** The foot notes. */
 	@JsonProperty("footNotes")
 	@Valid
 	private List<String> footNotes = null;
 
+	/** The free data. */
 	@JsonProperty("freeData")
 	private CataloguepromotionqueriesForBundleAndHardwareFreeData freeData = null;
 
+	/** The label. */
 	@JsonProperty("label")
 	private String label = null;
 
+	/** The package type. */
 	@JsonProperty("packageType")
 	@Valid
 	private List<String> packageType = null;
 
+	/** The plancouple id. */
 	@JsonProperty("plancoupleId")
 	private String plancoupleId = null;
 
+	/** The priority. */
 	@JsonProperty("priority")
 	private String priority = null;
 
+	/** The promotion media. */
 	@JsonProperty("promotionMedia")
 	private String promotionMedia = null;
 
+	/** The tag. */
 	@JsonProperty("tag")
 	private String tag = null;
 
+	/** The type. */
 	@JsonProperty("type")
 	private String type = null;
 
+	/**
+	 * Description.
+	 *
+	 * @param description the description
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions description(String description) {
 		this.description = description;
 		return this;
 	}
 
 	/**
-	 * Get description
-	 * 
+	 * Get description.
+	 *
 	 * @return description
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Foot notes.
+	 *
+	 * @param footNotes the foot notes
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions footNotes(List<String> footNotes) {
 		this.footNotes = footNotes;
 		return this;
 	}
 
+	/**
+	 * Adds the foot notes item.
+	 *
+	 * @param footNotesItem the foot notes item
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions addFootNotesItem(String footNotesItem) {
 		if (this.footNotes == null) {
 			this.footNotes = new ArrayList<>();
@@ -85,30 +119,41 @@ public class Cataloguepromotions {
 	}
 
 	/**
-	 * Get footNotes
-	 * 
+	 * Get footNotes.
+	 *
 	 * @return footNotes
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public List<String> getFootNotes() {
 		return footNotes;
 	}
 
+	/**
+	 * Sets the foot notes.
+	 *
+	 * @param footNotes the new foot notes
+	 */
 	public void setFootNotes(List<String> footNotes) {
 		this.footNotes = footNotes;
 	}
 
+	/**
+	 * Free data.
+	 *
+	 * @param freeData the free data
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions freeData(CataloguepromotionqueriesForBundleAndHardwareFreeData freeData) {
 		this.freeData = freeData;
 		return this;
 	}
 
 	/**
-	 * Get freeData
-	 * 
+	 * Get freeData.
+	 *
 	 * @return freeData
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -117,35 +162,63 @@ public class Cataloguepromotions {
 		return freeData;
 	}
 
+	/**
+	 * Sets the free data.
+	 *
+	 * @param freeData the new free data
+	 */
 	public void setFreeData(CataloguepromotionqueriesForBundleAndHardwareFreeData freeData) {
 		this.freeData = freeData;
 	}
 
+	/**
+	 * Label.
+	 *
+	 * @param label the label
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions label(String label) {
 		this.label = label;
 		return this;
 	}
 
 	/**
-	 * Get label
-	 * 
+	 * Get label.
+	 *
 	 * @return label
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getLabel() {
 		return label;
 	}
 
+	/**
+	 * Sets the label.
+	 *
+	 * @param label the new label
+	 */
 	public void setLabel(String label) {
 		this.label = label;
 	}
 
+	/**
+	 * Package type.
+	 *
+	 * @param packageType the package type
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions packageType(List<String> packageType) {
 		this.packageType = packageType;
 		return this;
 	}
 
+	/**
+	 * Adds the package type item.
+	 *
+	 * @param packageTypeItem the package type item
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions addPackageTypeItem(String packageTypeItem) {
 		if (this.packageType == null) {
 			this.packageType = new ArrayList<>();
@@ -155,120 +228,183 @@ public class Cataloguepromotions {
 	}
 
 	/**
-	 * Get packageType
-	 * 
+	 * Get packageType.
+	 *
 	 * @return packageType
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public List<String> getPackageType() {
 		return packageType;
 	}
 
+	/**
+	 * Sets the package type.
+	 *
+	 * @param packageType the new package type
+	 */
 	public void setPackageType(List<String> packageType) {
 		this.packageType = packageType;
 	}
 
+	/**
+	 * Plancouple id.
+	 *
+	 * @param plancoupleId the plancouple id
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions plancoupleId(String plancoupleId) {
 		this.plancoupleId = plancoupleId;
 		return this;
 	}
 
 	/**
-	 * Get plancoupleId
-	 * 
+	 * Get plancoupleId.
+	 *
 	 * @return plancoupleId
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getPlancoupleId() {
 		return plancoupleId;
 	}
 
+	/**
+	 * Sets the plancouple id.
+	 *
+	 * @param plancoupleId the new plancouple id
+	 */
 	public void setPlancoupleId(String plancoupleId) {
 		this.plancoupleId = plancoupleId;
 	}
 
+	/**
+	 * Priority.
+	 *
+	 * @param priority the priority
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions priority(String priority) {
 		this.priority = priority;
 		return this;
 	}
 
 	/**
-	 * Get priority
-	 * 
+	 * Get priority.
+	 *
 	 * @return priority
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getPriority() {
 		return priority;
 	}
 
+	/**
+	 * Sets the priority.
+	 *
+	 * @param priority the new priority
+	 */
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
+	/**
+	 * Promotion media.
+	 *
+	 * @param promotionMedia the promotion media
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions promotionMedia(String promotionMedia) {
 		this.promotionMedia = promotionMedia;
 		return this;
 	}
 
 	/**
-	 * Get promotionMedia
-	 * 
+	 * Get promotionMedia.
+	 *
 	 * @return promotionMedia
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getPromotionMedia() {
 		return promotionMedia;
 	}
 
+	/**
+	 * Sets the promotion media.
+	 *
+	 * @param promotionMedia the new promotion media
+	 */
 	public void setPromotionMedia(String promotionMedia) {
 		this.promotionMedia = promotionMedia;
 	}
 
+	/**
+	 * Tag.
+	 *
+	 * @param tag the tag
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions tag(String tag) {
 		this.tag = tag;
 		return this;
 	}
 
 	/**
-	 * Get tag
-	 * 
+	 * Get tag.
+	 *
 	 * @return tag
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getTag() {
 		return tag;
 	}
 
+	/**
+	 * Sets the tag.
+	 *
+	 * @param tag the new tag
+	 */
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
 
+	/**
+	 * Type.
+	 *
+	 * @param type the type
+	 * @return the cataloguepromotions
+	 */
 	public Cataloguepromotions type(String type) {
 		this.type = type;
 		return this;
 	}
 
 	/**
-	 * Get type
-	 * 
+	 * Get type.
+	 *
 	 * @return type
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -290,12 +426,18 @@ public class Cataloguepromotions {
 				&& Objects.equals(this.type, cataloguepromotions.type);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, footNotes, freeData, label, packageType, plancoupleId, priority,
 				promotionMedia, tag, type);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -318,6 +460,9 @@ public class Cataloguepromotions {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

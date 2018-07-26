@@ -17,76 +17,126 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * ServiceLine
+ * ServiceLine.
  */
 public class ServiceLine {
+	
+	/** The item reference. */
 	private ItemReference itemReference = null;
 
+	/** The line speeds. */
 	private LineSpeeds lineSpeeds = null;
 
+	/** The misc refernce. */
 	private MiscReference miscRefernce = null;
 
+	/** The service line treatments. */
 	private List<ServiceLineTreatment> serviceLineTreatments = null;
 
+	/**
+	 * Item reference.
+	 *
+	 * @param itemReference the item reference
+	 * @return the service line
+	 */
 	public ServiceLine itemReference(ItemReference itemReference) {
 		this.itemReference = itemReference;
 		return this;
 	}
 
 	/**
-	 * Get itemReference
-	 * 
+	 * Get itemReference.
+	 *
 	 * @return itemReference
-	 **/
+	 */
 	public ItemReference getItemReference() {
 		return itemReference;
 	}
 
+	/**
+	 * Sets the item reference.
+	 *
+	 * @param itemReference the new item reference
+	 */
 	public void setItemReference(ItemReference itemReference) {
 		this.itemReference = itemReference;
 	}
 
+	/**
+	 * Line speeds.
+	 *
+	 * @param lineSpeeds the line speeds
+	 * @return the service line
+	 */
 	public ServiceLine lineSpeeds(LineSpeeds lineSpeeds) {
 		this.lineSpeeds = lineSpeeds;
 		return this;
 	}
 
 	/**
-	 * Get lineSpeeds
-	 * 
+	 * Get lineSpeeds.
+	 *
 	 * @return lineSpeeds
-	 **/
+	 */
 	public LineSpeeds getLineSpeeds() {
 		return lineSpeeds;
 	}
 
+	/**
+	 * Sets the line speeds.
+	 *
+	 * @param lineSpeeds the new line speeds
+	 */
 	public void setLineSpeeds(LineSpeeds lineSpeeds) {
 		this.lineSpeeds = lineSpeeds;
 	}
 
+	/**
+	 * Misc refernce.
+	 *
+	 * @param miscRefernce the misc refernce
+	 * @return the service line
+	 */
 	public ServiceLine miscRefernce(MiscReference miscRefernce) {
 		this.miscRefernce = miscRefernce;
 		return this;
 	}
 
 	/**
-	 * Get miscRefernce
-	 * 
+	 * Get miscRefernce.
+	 *
 	 * @return miscRefernce
-	 **/
+	 */
 	public MiscReference getMiscRefernce() {
 		return miscRefernce;
 	}
 
+	/**
+	 * Sets the misc refernce.
+	 *
+	 * @param miscRefernce the new misc refernce
+	 */
 	public void setMiscRefernce(MiscReference miscRefernce) {
 		this.miscRefernce = miscRefernce;
 	}
 
+	/**
+	 * Service line treatments.
+	 *
+	 * @param serviceLineTreatments the service line treatments
+	 * @return the service line
+	 */
 	public ServiceLine serviceLineTreatments(List<ServiceLineTreatment> serviceLineTreatments) {
 		this.serviceLineTreatments = serviceLineTreatments;
 		return this;
 	}
 
+	/**
+	 * Adds the service line treatments item.
+	 *
+	 * @param serviceLineTreatmentsItem the service line treatments item
+	 * @return the service line
+	 */
 	public ServiceLine addServiceLineTreatmentsItem(ServiceLineTreatment serviceLineTreatmentsItem) {
 		if (this.serviceLineTreatments == null) {
 			this.serviceLineTreatments = new ArrayList<>();
@@ -96,18 +146,26 @@ public class ServiceLine {
 	}
 
 	/**
-	 * Get serviceLineTreatments
-	 * 
+	 * Get serviceLineTreatments.
+	 *
 	 * @return serviceLineTreatments
-	 **/
+	 */
 	public List<ServiceLineTreatment> getServiceLineTreatments() {
 		return serviceLineTreatments;
 	}
 
+	/**
+	 * Sets the service line treatments.
+	 *
+	 * @param serviceLineTreatments the new service line treatments
+	 */
 	public void setServiceLineTreatments(List<ServiceLineTreatment> serviceLineTreatments) {
 		this.serviceLineTreatments = serviceLineTreatments;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -123,11 +181,17 @@ public class ServiceLine {
 				&& Objects.equals(this.serviceLineTreatments, serviceLine.serviceLineTreatments);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(itemReference, lineSpeeds, miscRefernce, serviceLineTreatments);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -144,6 +208,9 @@ public class ServiceLine {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

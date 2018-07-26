@@ -15,77 +15,124 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * LineSpeeds
+ * LineSpeeds.
  */
 public class LineSpeeds {
+	
+	/** The max down speed. */
 	private String maxDownSpeed = null;
 
+	/** The min down speed. */
 	private String minDownSpeed = null;
 
+	/** The avg down speed. */
 	private String avgDownSpeed = null;
 
+	/** The min guaranteed down speed. */
 	private String minGuaranteedDownSpeed = null;
 
+	/** The max up speed. */
 	private String maxUpSpeed = null;
 
+	/** The min up speed. */
 	private String minUpSpeed = null;
 
+	/** The bandwidth measure. */
 	private String bandwidthMeasure = null;
 
+	/**
+	 * Max down speed.
+	 *
+	 * @param maxDownSpeed the max down speed
+	 * @return the line speeds
+	 */
 	public LineSpeeds maxDownSpeed(String maxDownSpeed) {
 		this.maxDownSpeed = maxDownSpeed;
 		return this;
 	}
 
 	/**
-	 * The maximum download speed offered (in kilobits per second [kbps])
-	 * 
+	 * The maximum download speed offered (in kilobits per second [kbps]).
+	 *
 	 * @return maxDownSpeed
-	 **/
+	 */
 	public String getMaxDownSpeed() {
 		return maxDownSpeed;
 	}
 
+	/**
+	 * Sets the max down speed.
+	 *
+	 * @param maxDownSpeed the new max down speed
+	 */
 	public void setMaxDownSpeed(String maxDownSpeed) {
 		this.maxDownSpeed = maxDownSpeed;
 	}
 
+	/**
+	 * Min down speed.
+	 *
+	 * @param minDownSpeed the min down speed
+	 * @return the line speeds
+	 */
 	public LineSpeeds minDownSpeed(String minDownSpeed) {
 		this.minDownSpeed = minDownSpeed;
 		return this;
 	}
 
 	/**
-	 * The minimum download speed offered (in kilobits per second [kbps])
-	 * 
+	 * The minimum download speed offered (in kilobits per second [kbps]).
+	 *
 	 * @return minDownSpeed
-	 **/
+	 */
 	public String getMinDownSpeed() {
 		return minDownSpeed;
 	}
 
+	/**
+	 * Sets the min down speed.
+	 *
+	 * @param minDownSpeed the new min down speed
+	 */
 	public void setMinDownSpeed(String minDownSpeed) {
 		this.minDownSpeed = minDownSpeed;
 	}
 
+	/**
+	 * Avg down speed.
+	 *
+	 * @param avgDownSpeed the avg down speed
+	 * @return the line speeds
+	 */
 	public LineSpeeds avgDownSpeed(String avgDownSpeed) {
 		this.avgDownSpeed = avgDownSpeed;
 		return this;
 	}
 
 	/**
-	 * The average download speed offered (in kilobits per second [kbps])
-	 * 
+	 * The average download speed offered (in kilobits per second [kbps]).
+	 *
 	 * @return avgDownSpeed
-	 **/
+	 */
 	public String getAvgDownSpeed() {
 		return avgDownSpeed;
 	}
 
+	/**
+	 * Sets the avg down speed.
+	 *
+	 * @param avgDownSpeed the new avg down speed
+	 */
 	public void setAvgDownSpeed(String avgDownSpeed) {
 		this.avgDownSpeed = avgDownSpeed;
 	}
 
+	/**
+	 * Min guaranteed down speed.
+	 *
+	 * @param minGuaranteedDownSpeed the min guaranteed down speed
+	 * @return the line speeds
+	 */
 	public LineSpeeds minGuaranteedDownSpeed(String minGuaranteedDownSpeed) {
 		this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
 		return this;
@@ -93,72 +140,113 @@ public class LineSpeeds {
 
 	/**
 	 * The minimum guaranteed download speed offered (in kilobits per second
-	 * [kbps])
-	 * 
+	 * [kbps]).
+	 *
 	 * @return minGuaranteedDownSpeed
-	 **/
+	 */
 	public String getMinGuaranteedDownSpeed() {
 		return minGuaranteedDownSpeed;
 	}
 
+	/**
+	 * Sets the min guaranteed down speed.
+	 *
+	 * @param minGuaranteedDownSpeed the new min guaranteed down speed
+	 */
 	public void setMinGuaranteedDownSpeed(String minGuaranteedDownSpeed) {
 		this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
 	}
 
+	/**
+	 * Max up speed.
+	 *
+	 * @param maxUpSpeed the max up speed
+	 * @return the line speeds
+	 */
 	public LineSpeeds maxUpSpeed(String maxUpSpeed) {
 		this.maxUpSpeed = maxUpSpeed;
 		return this;
 	}
 
 	/**
-	 * The max upload speed offered (in kilobits per second [kbps])
-	 * 
+	 * The max upload speed offered (in kilobits per second [kbps]).
+	 *
 	 * @return maxUpSpeed
-	 **/
+	 */
 	public String getMaxUpSpeed() {
 		return maxUpSpeed;
 	}
 
+	/**
+	 * Sets the max up speed.
+	 *
+	 * @param maxUpSpeed the new max up speed
+	 */
 	public void setMaxUpSpeed(String maxUpSpeed) {
 		this.maxUpSpeed = maxUpSpeed;
 	}
 
+	/**
+	 * Min up speed.
+	 *
+	 * @param minUpSpeed the min up speed
+	 * @return the line speeds
+	 */
 	public LineSpeeds minUpSpeed(String minUpSpeed) {
 		this.minUpSpeed = minUpSpeed;
 		return this;
 	}
 
 	/**
-	 * The min upload speed offered (in kilobits per second [kbps])
-	 * 
+	 * The min upload speed offered (in kilobits per second [kbps]).
+	 *
 	 * @return minUpSpeed
-	 **/
+	 */
 	public String getMinUpSpeed() {
 		return minUpSpeed;
 	}
 
+	/**
+	 * Sets the min up speed.
+	 *
+	 * @param minUpSpeed the new min up speed
+	 */
 	public void setMinUpSpeed(String minUpSpeed) {
 		this.minUpSpeed = minUpSpeed;
 	}
 
+	/**
+	 * Bandwidth measure.
+	 *
+	 * @param bandwidthMeasure the bandwidth measure
+	 * @return the line speeds
+	 */
 	public LineSpeeds bandwidthMeasure(String bandwidthMeasure) {
 		this.bandwidthMeasure = bandwidthMeasure;
 		return this;
 	}
 
 	/**
-	 * Indicates whether the best speed is predicted or actual
-	 * 
+	 * Indicates whether the best speed is predicted or actual.
+	 *
 	 * @return bandwidthMeasure
-	 **/
+	 */
 	public String getBandwidthMeasure() {
 		return bandwidthMeasure;
 	}
 
+	/**
+	 * Sets the bandwidth measure.
+	 *
+	 * @param bandwidthMeasure the new bandwidth measure
+	 */
 	public void setBandwidthMeasure(String bandwidthMeasure) {
 		this.bandwidthMeasure = bandwidthMeasure;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -177,12 +265,18 @@ public class LineSpeeds {
 				&& Objects.equals(this.bandwidthMeasure, lineSpeeds.bandwidthMeasure);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(maxDownSpeed, minDownSpeed, avgDownSpeed, minGuaranteedDownSpeed, maxUpSpeed, minUpSpeed,
 				bandwidthMeasure);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -202,6 +296,9 @@ public class LineSpeeds {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

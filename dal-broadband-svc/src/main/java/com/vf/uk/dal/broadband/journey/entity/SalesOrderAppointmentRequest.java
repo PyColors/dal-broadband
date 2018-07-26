@@ -15,49 +15,77 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * SalesOrderAppointmentRequest
+ * SalesOrderAppointmentRequest.
  */
 public class SalesOrderAppointmentRequest {
+	
+	/** The appointment window. */
 	private AppointmentWindow appointmentWindow = null;
 
+	/** The site note. */
 	private SiteNote siteNote = null;
 
+	/**
+	 * Appointment window.
+	 *
+	 * @param appointmentWindow the appointment window
+	 * @return the sales order appointment request
+	 */
 	public SalesOrderAppointmentRequest appointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 		return this;
 	}
 
 	/**
-	 * Get appointmentWindow
-	 * 
+	 * Get appointmentWindow.
+	 *
 	 * @return appointmentWindow
-	 **/
+	 */
 	public AppointmentWindow getAppointmentWindow() {
 		return appointmentWindow;
 	}
 
+	/**
+	 * Sets the appointment window.
+	 *
+	 * @param appointmentWindow the new appointment window
+	 */
 	public void setAppointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 	}
 
+	/**
+	 * Site note.
+	 *
+	 * @param siteNote the site note
+	 * @return the sales order appointment request
+	 */
 	public SalesOrderAppointmentRequest siteNote(SiteNote siteNote) {
 		this.siteNote = siteNote;
 		return this;
 	}
 
 	/**
-	 * Get siteNote
-	 * 
+	 * Get siteNote.
+	 *
 	 * @return siteNote
-	 **/
+	 */
 	public SiteNote getSiteNote() {
 		return siteNote;
 	}
 
+	/**
+	 * Sets the site note.
+	 *
+	 * @param siteNote the new site note
+	 */
 	public void setSiteNote(SiteNote siteNote) {
 		this.siteNote = siteNote;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -71,11 +99,17 @@ public class SalesOrderAppointmentRequest {
 				&& Objects.equals(this.siteNote, salesOrderAppointmentRequest.siteNote);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(appointmentWindow, siteNote);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -90,6 +124,9 @@ public class SalesOrderAppointmentRequest {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

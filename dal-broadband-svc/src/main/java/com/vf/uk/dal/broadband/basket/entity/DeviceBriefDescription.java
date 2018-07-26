@@ -27,6 +27,11 @@ public class DeviceBriefDescription   {
   @JsonProperty("valueUOM")
   private String valueUOM = null;
 
+  /**
+   * 
+   * @param key
+   * @return
+   */
   public DeviceBriefDescription key(String key) {
     this.key = key;
     return this;
@@ -47,6 +52,11 @@ public class DeviceBriefDescription   {
     this.key = key;
   }
 
+  /**
+   * 
+   * @param type
+   * @return
+   */
   public DeviceBriefDescription type(String type) {
     this.type = type;
     return this;
@@ -67,6 +77,11 @@ public class DeviceBriefDescription   {
     this.type = type;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public DeviceBriefDescription value(String value) {
     this.value = value;
     return this;
@@ -87,6 +102,11 @@ public class DeviceBriefDescription   {
     this.value = value;
   }
 
+  /**
+   * 
+   * @param valueUOM
+   * @return
+   */
   public DeviceBriefDescription valueUOM(String valueUOM) {
     this.valueUOM = valueUOM;
     return this;

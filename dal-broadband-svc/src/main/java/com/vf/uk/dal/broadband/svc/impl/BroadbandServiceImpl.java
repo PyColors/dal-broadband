@@ -77,19 +77,24 @@ import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
 
 /**
- * @author Infosys Limited.
+ * The Class BroadbandServiceImpl.
  *
+ * @author Infosys Limited.
  */
 @Component("broadbandService")
 public class BroadbandServiceImpl implements BroadbandService {
 
+	/** The Constant CATEGORY_PREFERENCE_FTTH. */
 	private static final String CATEGORY_PREFERENCE_FTTH = "FTTH";
 
+	/** The Constant CATEGORY_PREFERENCE_FTTC. */
 	private static final String CATEGORY_PREFERENCE_FTTC = "FTTC";
 
+	/** The broadband dao. */
 	@Autowired
 	BroadbandDao broadbandDao;
 
+	/** The mapper. */
 	@Autowired
 	DozerBeanMapper mapper;
 
@@ -221,6 +226,14 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 * 
 	 */
 
+	/**
+	 * Check if address and phone number and user type is same.
+	 *
+	 * @param availabilityCheckRequest the availability check request
+	 * @param broadBand the broad band
+	 * @param userType the user type
+	 * @return true, if successful
+	 */
 	private boolean checkIfAddressAndPhoneNumberAndUserTypeIsSame(AvailabilityCheckRequest availabilityCheckRequest,
 			Broadband broadBand, String userType) {
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getLineReference() != null) {
@@ -274,6 +287,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return false;
 	}
 
+	/**
+	 * Check if classification code present.
+	 *
+	 * @param availabilityCheckRequest the availability check request
+	 * @param getServiceAvailabilityResponse the get service availability response
+	 * @return true, if successful
+	 */
 	private boolean checkIfClassificationCodePresent(AvailabilityCheckRequest availabilityCheckRequest,
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse) {
 		boolean isClassificationCodePresent = false;
@@ -599,6 +619,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return addressInfo;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#createOrUpdatePackage(com.vf.uk.dal.broadband.basket.entity.BasketRequest, com.vf.uk.dal.broadband.cache.repository.entity.Broadband, java.lang.String)
+	 */
 	@Override
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId) {
 		Basket basket = null;
@@ -695,12 +718,18 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return basket;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#getBroadbandFromCache(java.lang.String)
+	 */
 	@Override
 	public Broadband getBroadbandFromCache(String broadbandId) {
 		LogHelper.info(getClass(), "Retrieveing Data from BB Cache : " + broadbandId);
 		return broadbandDao.getBroadbandFromCache(broadbandId);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#updateBasketWithLineTreatmentType(java.lang.String, com.vf.uk.dal.broadband.entity.UpdateLineRequest)
+	 */
 	@Override
 	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
@@ -721,6 +750,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 	}
 
+	/**
+	 * Gets the total net price.
+	 *
+	 * @param priceForBBBundleAndHardware the price for BB bundle and hardware
+	 * @return the total net price
+	 */
 	private Double getTotalNetPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
 
 		Double routerNetPrice = 0.00;
@@ -745,6 +780,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return routerNetPrice + deliveryNetPrice + engineerVisitFeesNet;
 	}
 
+	/**
+	 * Gets the total gross price.
+	 *
+	 * @param priceForBBBundleAndHardware the price for BB bundle and hardware
+	 * @return the total gross price
+	 */
 	private Double getTotalGrossPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
 
 		Double routerGrossPrice = 0.00;
@@ -770,6 +811,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return routerGrossPrice + deliveryGrossPrice + engineerVisitFeesGross;
 	}
 
+	/**
+	 * Gets the total vat price.
+	 *
+	 * @param priceForBBBundleAndHardware the price for BB bundle and hardware
+	 * @return the total vat price
+	 */
 	private Double getTotalVatPrice(PriceForBBBundleAndHardware priceForBBBundleAndHardware) {
 
 		Double routerVatPrice = 0.00;
@@ -794,6 +841,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return routerVatPrice + deliveryVatPrice + engineerVisitFeesVat;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#createAppointment(com.vf.uk.dal.broadband.entity.CreateAppointmentRequest, java.lang.String)
+	 */
 	@Override
 	public CreateAppointmentResponse createAppointment(CreateAppointmentRequest createAppointmentRequest,
 			String broadbandId) {
@@ -836,6 +886,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#getAppointmentForFLBB(java.lang.String)
+	 */
 	@Override
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
@@ -880,6 +933,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return getAppointmentRes;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#optimizePackageForFLBB(com.vf.uk.dal.broadband.entity.OptimizePackageRequest, java.lang.String)
+	 */
 	@Override
 	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest,
 			String broadbandId) {
@@ -939,6 +995,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#getCompatibleDevicesForBundle(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId) {
 		List<RouterDetails> routerDetailList = new ArrayList<>();
@@ -950,6 +1009,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		return routerDetailList;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.svc.BroadbandService#updateBasketWithServiceDate(java.lang.String, com.vf.uk.dal.broadband.entity.ServiceStartDateRequest)
+	 */
 	@Override
 	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);

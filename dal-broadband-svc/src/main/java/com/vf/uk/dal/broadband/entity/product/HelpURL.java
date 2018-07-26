@@ -9,27 +9,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * HelpURL
+ * HelpURL.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class HelpURL   {
+  
+  /** The text. */
   @JsonProperty("text")
   private String text = null;
 
+  /** The url. */
   @JsonProperty("url")
   private String url = null;
 
+  /**
+   * Text.
+   *
+   * @param text the text
+   * @return the help URL
+   */
   public HelpURL text(String text) {
     this.text = text;
     return this;
   }
 
   /**
-   * Get text
+   * Get text.
+   *
    * @return text
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -37,19 +47,31 @@ public class HelpURL   {
     return text;
   }
 
+  /**
+   * Sets the text.
+   *
+   * @param text the new text
+   */
   public void setText(String text) {
     this.text = text;
   }
 
+  /**
+   * Url.
+   *
+   * @param url the url
+   * @return the help URL
+   */
   public HelpURL url(String url) {
     this.url = url;
     return this;
   }
 
   /**
-   * Get url
+   * Get url.
+   *
    * @return url
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -57,11 +79,19 @@ public class HelpURL   {
     return url;
   }
 
+  /**
+   * Sets the url.
+   *
+   * @param url the new url
+   */
   public void setUrl(String url) {
     this.url = url;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -75,11 +105,17 @@ public class HelpURL   {
         Objects.equals(this.url, helpURL.url);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(text, url);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -94,6 +130,9 @@ public class HelpURL   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

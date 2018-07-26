@@ -21,6 +21,11 @@ public class CommitmentPeriod   {
   @JsonProperty("value")
   private String value = null;
 
+  /**
+   * 
+   * @param uom
+   * @return
+   */
   public CommitmentPeriod uom(String uom) {
     this.uom = uom;
     return this;
@@ -41,6 +46,11 @@ public class CommitmentPeriod   {
     this.uom = uom;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public CommitmentPeriod value(String value) {
     this.value = value;
     return this;

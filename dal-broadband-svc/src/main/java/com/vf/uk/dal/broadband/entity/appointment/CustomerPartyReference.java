@@ -9,15 +9,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * CustomerPartyReference
+ * CustomerPartyReference.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
 public class CustomerPartyReference   {
+  
+  /** The customer party account type code. */
   @JsonProperty("customerPartyAccountTypeCode")
   private String customerPartyAccountTypeCode = null;
 
+  /**
+   * Customer party account type code.
+   *
+   * @param customerPartyAccountTypeCode the customer party account type code
+   * @return the customer party reference
+   */
   public CustomerPartyReference customerPartyAccountTypeCode(String customerPartyAccountTypeCode) {
     this.customerPartyAccountTypeCode = customerPartyAccountTypeCode;
     return this;
@@ -34,11 +42,19 @@ public class CustomerPartyReference   {
     return customerPartyAccountTypeCode;
   }
 
+  /**
+   * Sets the customer party account type code.
+   *
+   * @param customerPartyAccountTypeCode the new customer party account type code
+   */
   public void setCustomerPartyAccountTypeCode(String customerPartyAccountTypeCode) {
     this.customerPartyAccountTypeCode = customerPartyAccountTypeCode;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -51,11 +67,17 @@ public class CustomerPartyReference   {
     return Objects.equals(this.customerPartyAccountTypeCode, customerPartyReference.customerPartyAccountTypeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(customerPartyAccountTypeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -69,6 +91,9 @@ public class CustomerPartyReference   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

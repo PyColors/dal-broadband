@@ -17,35 +17,57 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * ServiceLines
+ * ServiceLines.
  */
 public class ServiceLines {
+	
+	/** The classification code. */
 	private String classificationCode = null;
 
+	/** The network type. */
 	private String networkType = null;
 
+	/** The line treatments. */
 	private List<LineTreatment> lineTreatments = null;
 
+	/** The service lines. */
 	private List<ServiceLine> serviceLines = null;
 
+	/**
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the service lines
+	 */
 	public ServiceLines classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
 	}
 
 	/**
-	 * The category the technical product falls into
-	 * 
+	 * The category the technical product falls into.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 	public String getClassificationCode() {
 		return classificationCode;
 	}
 
+	/**
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
+	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * Network type.
+	 *
+	 * @param networkType the network type
+	 * @return the service lines
+	 */
 	public ServiceLines networkType(String networkType) {
 		this.networkType = networkType;
 		return this;
@@ -53,23 +75,40 @@ public class ServiceLines {
 
 	/**
 	 * Denotes which network the offered service/ service bundle would be
-	 * available
-	 * 
+	 * available.
+	 *
 	 * @return networkType
-	 **/
+	 */
 	public String getNetworkType() {
 		return networkType;
 	}
 
+	/**
+	 * Sets the network type.
+	 *
+	 * @param networkType the new network type
+	 */
 	public void setNetworkType(String networkType) {
 		this.networkType = networkType;
 	}
 
+	/**
+	 * Line treatments.
+	 *
+	 * @param lineTreatments the line treatments
+	 * @return the service lines
+	 */
 	public ServiceLines lineTreatments(List<LineTreatment> lineTreatments) {
 		this.lineTreatments = lineTreatments;
 		return this;
 	}
 
+	/**
+	 * Adds the line treatments item.
+	 *
+	 * @param lineTreatmentsItem the line treatments item
+	 * @return the service lines
+	 */
 	public ServiceLines addLineTreatmentsItem(LineTreatment lineTreatmentsItem) {
 		if (this.lineTreatments == null) {
 			this.lineTreatments = new ArrayList<>();
@@ -79,23 +118,40 @@ public class ServiceLines {
 	}
 
 	/**
-	 * Get lineTreatments
-	 * 
+	 * Get lineTreatments.
+	 *
 	 * @return lineTreatments
-	 **/
+	 */
 	public List<LineTreatment> getLineTreatments() {
 		return lineTreatments;
 	}
 
+	/**
+	 * Sets the line treatments.
+	 *
+	 * @param lineTreatments the new line treatments
+	 */
 	public void setLineTreatments(List<LineTreatment> lineTreatments) {
 		this.lineTreatments = lineTreatments;
 	}
 
+	/**
+	 * Service lines.
+	 *
+	 * @param serviceLines the service lines
+	 * @return the service lines
+	 */
 	public ServiceLines serviceLines(List<ServiceLine> serviceLines) {
 		this.serviceLines = serviceLines;
 		return this;
 	}
 
+	/**
+	 * Adds the service lines item.
+	 *
+	 * @param serviceLinesItem the service lines item
+	 * @return the service lines
+	 */
 	public ServiceLines addServiceLinesItem(ServiceLine serviceLinesItem) {
 		if (this.serviceLines == null) {
 			this.serviceLines = new ArrayList<>();
@@ -105,18 +161,26 @@ public class ServiceLines {
 	}
 
 	/**
-	 * Get serviceLines
-	 * 
+	 * Get serviceLines.
+	 *
 	 * @return serviceLines
-	 **/
+	 */
 	public List<ServiceLine> getServiceLines() {
 		return serviceLines;
 	}
 
+	/**
+	 * Sets the service lines.
+	 *
+	 * @param serviceLines the new service lines
+	 */
 	public void setServiceLines(List<ServiceLine> serviceLines) {
 		this.serviceLines = serviceLines;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -132,11 +196,17 @@ public class ServiceLines {
 				&& Objects.equals(this.serviceLines, serviceLines.serviceLines);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(classificationCode, networkType, lineTreatments, serviceLines);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -153,6 +223,9 @@ public class ServiceLines {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

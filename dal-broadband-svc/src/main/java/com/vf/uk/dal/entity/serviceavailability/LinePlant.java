@@ -6,18 +6,28 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * LinePlant
+ * LinePlant.
  */
 public class LinePlant {
+	
+	/** The spare pairs. */
 	@JsonProperty("sparePairs")
 	private BigDecimal sparePairs = null;
 
+	/** The working lines. */
 	@JsonProperty("workingLines")
 	private BigDecimal workingLines = null;
 
+	/** The stopped lines. */
 	@JsonProperty("stoppedLines")
 	private BigDecimal stoppedLines = null;
 
+	/**
+	 * Spare pairs.
+	 *
+	 * @param sparePairs the spare pairs
+	 * @return the line plant
+	 */
 	public LinePlant sparePairs(BigDecimal sparePairs) {
 		this.sparePairs = sparePairs;
 		return this;
@@ -32,10 +42,21 @@ public class LinePlant {
 		return sparePairs;
 	}
 
+	/**
+	 * Sets the spare pairs.
+	 *
+	 * @param sparePairs the new spare pairs
+	 */
 	public void setSparePairs(BigDecimal sparePairs) {
 		this.sparePairs = sparePairs;
 	}
 
+	/**
+	 * Working lines.
+	 *
+	 * @param workingLines the working lines
+	 * @return the line plant
+	 */
 	public LinePlant workingLines(BigDecimal workingLines) {
 		this.workingLines = workingLines;
 		return this;
@@ -50,10 +71,21 @@ public class LinePlant {
 		return workingLines;
 	}
 
+	/**
+	 * Sets the working lines.
+	 *
+	 * @param workingLines the new working lines
+	 */
 	public void setWorkingLines(BigDecimal workingLines) {
 		this.workingLines = workingLines;
 	}
 
+	/**
+	 * Stopped lines.
+	 *
+	 * @param stoppedLines the stopped lines
+	 * @return the line plant
+	 */
 	public LinePlant stoppedLines(BigDecimal stoppedLines) {
 		this.stoppedLines = stoppedLines;
 		return this;
@@ -68,10 +100,18 @@ public class LinePlant {
 		return stoppedLines;
 	}
 
+	/**
+	 * Sets the stopped lines.
+	 *
+	 * @param stoppedLines the new stopped lines
+	 */
 	public void setStoppedLines(BigDecimal stoppedLines) {
 		this.stoppedLines = stoppedLines;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -86,11 +126,17 @@ public class LinePlant {
 				&& Objects.equals(this.stoppedLines, linePlant.stoppedLines);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(sparePairs, workingLines, stoppedLines);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -106,6 +152,9 @@ public class LinePlant {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

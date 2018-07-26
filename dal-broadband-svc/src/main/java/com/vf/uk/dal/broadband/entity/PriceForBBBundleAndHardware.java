@@ -175,7 +175,7 @@ public class PriceForBBBundleAndHardware {
 	/**
 	 * Total cost.
 	 *
-	 * @param totalCost the total cost
+	 * @param totalOneOffCost the total one off cost
 	 * @return the price for bundle and hardware
 	 */
 	public PriceForBBBundleAndHardware totalOneOffCost(Price totalOneOffCost) {
@@ -200,7 +200,7 @@ public class PriceForBBBundleAndHardware {
 	/**
 	 * Sets the total cost.
 	 *
-	 * @param totalCost the new total cost
+	 * @param totalOneOffCost the new total one off cost
 	 */
 	public void setTotalOneOffCost(Price totalOneOffCost) {
 		this.totalOneOffCost = totalOneOffCost;

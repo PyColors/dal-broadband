@@ -7,26 +7,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * A composite object which holds all the details about the various types of
  * promotions applicable on the selected plan or hardware or the combination of
- * both
+ * both.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-02T14:46:40.485Z")
 
 public class MerchandisingPromotionsPackage {
+	
+	/** The plan id. */
 	@JsonProperty("planId")
 	private String planId = null;
 
+	/** The hardware id. */
 	@JsonProperty("hardwareId")
 	private String hardwareId = null;
 
+	/** The bundle promotions. */
 	@JsonProperty("bundlePromotions")
 	private MerchandisingPromotionsWrapper bundlePromotions = null;
 
+	/** The hardware promotions. */
 	@JsonProperty("hardwarePromotions")
 	private MerchandisingPromotionsWrapper hardwarePromotions = null;
 
 	/**
-	 * @param planId
-	 * @return
+	 * Plan id.
+	 *
+	 * @param planId the plan id
+	 * @return the merchandising promotions package
 	 */
 	public MerchandisingPromotionsPackage planId(String planId) {
 		this.planId = planId;
@@ -43,13 +50,20 @@ public class MerchandisingPromotionsPackage {
 		return planId;
 	}
 
+	/**
+	 * Sets the plan id.
+	 *
+	 * @param planId the new plan id
+	 */
 	public void setPlanId(String planId) {
 		this.planId = planId;
 	}
 
 	/**
-	 * @param hardwareId
-	 * @return
+	 * Hardware id.
+	 *
+	 * @param hardwareId the hardware id
+	 * @return the merchandising promotions package
 	 */
 	public MerchandisingPromotionsPackage hardwareId(String hardwareId) {
 		this.hardwareId = hardwareId;
@@ -66,13 +80,20 @@ public class MerchandisingPromotionsPackage {
 		return hardwareId;
 	}
 
+	/**
+	 * Sets the hardware id.
+	 *
+	 * @param hardwareId the new hardware id
+	 */
 	public void setHardwareId(String hardwareId) {
 		this.hardwareId = hardwareId;
 	}
 
 	/**
-	 * @param bundlePromotions
-	 * @return
+	 * Bundle promotions.
+	 *
+	 * @param bundlePromotions the bundle promotions
+	 * @return the merchandising promotions package
 	 */
 	public MerchandisingPromotionsPackage bundlePromotions(MerchandisingPromotionsWrapper bundlePromotions) {
 		this.bundlePromotions = bundlePromotions;
@@ -80,21 +101,28 @@ public class MerchandisingPromotionsPackage {
 	}
 
 	/**
-	 * Get bundlePromotions
-	 * 
+	 * Get bundlePromotions.
+	 *
 	 * @return bundlePromotions
-	 **/
+	 */
 	public MerchandisingPromotionsWrapper getBundlePromotions() {
 		return bundlePromotions;
 	}
 
+	/**
+	 * Sets the bundle promotions.
+	 *
+	 * @param bundlePromotions the new bundle promotions
+	 */
 	public void setBundlePromotions(MerchandisingPromotionsWrapper bundlePromotions) {
 		this.bundlePromotions = bundlePromotions;
 	}
 
 	/**
-	 * @param hardwarePromotions
-	 * @return
+	 * Hardware promotions.
+	 *
+	 * @param hardwarePromotions the hardware promotions
+	 * @return the merchandising promotions package
 	 */
 	public MerchandisingPromotionsPackage hardwarePromotions(MerchandisingPromotionsWrapper hardwarePromotions) {
 		this.hardwarePromotions = hardwarePromotions;
@@ -102,18 +130,26 @@ public class MerchandisingPromotionsPackage {
 	}
 
 	/**
-	 * Get hardwarePromotions
-	 * 
+	 * Get hardwarePromotions.
+	 *
 	 * @return hardwarePromotions
-	 **/
+	 */
 	public MerchandisingPromotionsWrapper getHardwarePromotions() {
 		return hardwarePromotions;
 	}
 
+	/**
+	 * Sets the hardware promotions.
+	 *
+	 * @param hardwarePromotions the new hardware promotions
+	 */
 	public void setHardwarePromotions(MerchandisingPromotionsWrapper hardwarePromotions) {
 		this.hardwarePromotions = hardwarePromotions;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -129,11 +165,17 @@ public class MerchandisingPromotionsPackage {
 				&& Objects.equals(this.hardwarePromotions, merchandisingPromotionsPackage.hardwarePromotions);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(planId, hardwareId, bundlePromotions, hardwarePromotions);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -150,6 +192,9 @@ public class MerchandisingPromotionsPackage {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

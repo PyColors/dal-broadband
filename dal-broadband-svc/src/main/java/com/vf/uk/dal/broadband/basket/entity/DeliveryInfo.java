@@ -38,6 +38,11 @@ public class DeliveryInfo   {
   @JsonProperty("storeInfo")
   private StoreInfo storeInfo = null;
 
+  /**
+   * 
+   * @param availableFrom
+   * @return
+   */
   public DeliveryInfo availableFrom(String availableFrom) {
     this.availableFrom = availableFrom;
     return this;
@@ -58,6 +63,11 @@ public class DeliveryInfo   {
     this.availableFrom = availableFrom;
   }
 
+  /**
+   * 
+   * @param deliveryType
+   * @return
+   */
   public DeliveryInfo deliveryType(String deliveryType) {
     this.deliveryType = deliveryType;
     return this;
@@ -78,6 +88,11 @@ public class DeliveryInfo   {
     this.deliveryType = deliveryType;
   }
 
+  /**
+   * 
+   * @param displayName
+   * @return
+   */
   public DeliveryInfo displayName(String displayName) {
     this.displayName = displayName;
     return this;
@@ -98,6 +113,11 @@ public class DeliveryInfo   {
     this.displayName = displayName;
   }
 
+  /**
+   * 
+   * @param price
+   * @return
+   */
   public DeliveryInfo price(Price price) {
     this.price = price;
     return this;
@@ -119,6 +139,11 @@ public class DeliveryInfo   {
     this.price = price;
   }
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public DeliveryInfo skuId(String skuId) {
     this.skuId = skuId;
     return this;
@@ -139,6 +164,11 @@ public class DeliveryInfo   {
     this.skuId = skuId;
   }
 
+  /**
+   * 
+   * @param stockStatus
+   * @return
+   */
   public DeliveryInfo stockStatus(String stockStatus) {
     this.stockStatus = stockStatus;
     return this;
@@ -159,6 +189,11 @@ public class DeliveryInfo   {
     this.stockStatus = stockStatus;
   }
 
+  /**
+   * 
+   * @param storeInfo
+   * @return
+   */
   public DeliveryInfo storeInfo(StoreInfo storeInfo) {
     this.storeInfo = storeInfo;
     return this;

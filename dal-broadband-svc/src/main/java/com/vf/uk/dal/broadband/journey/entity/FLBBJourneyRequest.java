@@ -15,29 +15,45 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * FLBBJourneyRequest
+ * FLBBJourneyRequest.
  */
 public class FLBBJourneyRequest {
+	
+	/** The flbb journey details. */
 	private FLBBJourneyDetails flbbJourneyDetails = null;
 
+	/**
+	 * Flbb journey details.
+	 *
+	 * @param flbbJourneyDetails the flbb journey details
+	 * @return the FLBB journey request
+	 */
 	public FLBBJourneyRequest flbbJourneyDetails(FLBBJourneyDetails flbbJourneyDetails) {
 		this.flbbJourneyDetails = flbbJourneyDetails;
 		return this;
 	}
 
 	/**
-	 * Get flbbJourneyDetails
-	 * 
+	 * Get flbbJourneyDetails.
+	 *
 	 * @return flbbJourneyDetails
-	 **/
+	 */
 	public FLBBJourneyDetails getFlbbJourneyDetails() {
 		return flbbJourneyDetails;
 	}
 
+	/**
+	 * Sets the flbb journey details.
+	 *
+	 * @param flbbJourneyDetails the new flbb journey details
+	 */
 	public void setFlbbJourneyDetails(FLBBJourneyDetails flbbJourneyDetails) {
 		this.flbbJourneyDetails = flbbJourneyDetails;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -50,11 +66,17 @@ public class FLBBJourneyRequest {
 		return Objects.equals(this.flbbJourneyDetails, flBBJourneyRequest.flbbJourneyDetails);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(flbbJourneyDetails);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -68,6 +90,9 @@ public class FLBBJourneyRequest {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

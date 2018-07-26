@@ -11,27 +11,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * GetAppointmentRequest
+ * GetAppointmentRequest.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
 public class GetAppointmentRequest   {
+  
+  /** The appointment details. */
   @JsonProperty("appointmentDetails")
   private AppointmentDetails appointmentDetails = null;
 
+  /** The existing. */
   @JsonProperty("existing")
   private Boolean existing = null;
 
+  /**
+   * Appointment details.
+   *
+   * @param appointmentDetails the appointment details
+   * @return the gets the appointment request
+   */
   public GetAppointmentRequest appointmentDetails(AppointmentDetails appointmentDetails) {
     this.appointmentDetails = appointmentDetails;
     return this;
   }
 
   /**
-   * Get appointmentDetails
+   * Get appointmentDetails.
+   *
    * @return appointmentDetails
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -40,19 +50,31 @@ public class GetAppointmentRequest   {
     return appointmentDetails;
   }
 
+  /**
+   * Sets the appointment details.
+   *
+   * @param appointmentDetails the new appointment details
+   */
   public void setAppointmentDetails(AppointmentDetails appointmentDetails) {
     this.appointmentDetails = appointmentDetails;
   }
 
+  /**
+   * Existing.
+   *
+   * @param existing the existing
+   * @return the gets the appointment request
+   */
   public GetAppointmentRequest existing(Boolean existing) {
     this.existing = existing;
     return this;
   }
 
   /**
-   * Get existing
+   * Get existing.
+   *
    * @return existing
-  **/
+   */
   @ApiModelProperty(example = "false", value = "")
 
 
@@ -60,11 +82,19 @@ public class GetAppointmentRequest   {
     return existing;
   }
 
+  /**
+   * Sets the existing.
+   *
+   * @param existing the new existing
+   */
   public void setExisting(Boolean existing) {
     this.existing = existing;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -78,11 +108,17 @@ public class GetAppointmentRequest   {
         Objects.equals(this.existing, getAppointmentRequest.existing);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(appointmentDetails, existing);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -97,6 +133,9 @@ public class GetAppointmentRequest   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

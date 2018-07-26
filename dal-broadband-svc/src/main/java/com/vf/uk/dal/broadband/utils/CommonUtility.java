@@ -3,11 +3,15 @@ package com.vf.uk.dal.broadband.utils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author Infosys Limited
+ * The Class CommonUtility.
  *
+ * @author Infosys Limited
  */
 public class CommonUtility {
 
+	/**
+	 * Instantiates a new common utility.
+	 */
 	private CommonUtility() {
 
 	}
@@ -15,24 +19,12 @@ public class CommonUtility {
 	/**
 	 * Gets the bundle details from get bundle list API.
 	 *
-	 * @param bundleClass
-	 *            the bundle class
-	 * @param userType
-	 *            the user type
-	 * @param sortCriteria
-	 *            the sort criteria
-	 * @param journeyType
-	 *            the journey type
-	 * @param creditLimit
-	 *            the credit limit
-	 * @param offerCode
-	 *            the offer code
-	 * @param customerIdentificationNumber
-	 *            the customer identification number
-	 * @param skipChordiant
-	 *            the skip chordiant
-	 * @param registryClient
-	 *            the registry client
+	 * @param bundleClass            the bundle class
+	 * @param userType            the user type
+	 * @param journeyType            the journey type
+	 * @param offerCode            the offer code
+	 * @param classificationCode the classification code
+	 * @param duration the duration
 	 * @return the bundle details from get bundle list API
 	 */
 	public static String getRequestUrlForFlbb(String bundleClass, String userType, String journeyType, String offerCode,

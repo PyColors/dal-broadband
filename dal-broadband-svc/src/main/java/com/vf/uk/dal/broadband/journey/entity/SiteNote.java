@@ -15,49 +15,77 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * SiteNote
+ * SiteNote.
  */
 public class SiteNote {
+	
+	/** The notes. */
 	private String notes = null;
 
+	/** The type code. */
 	private String typeCode = null;
 
+	/**
+	 * Notes.
+	 *
+	 * @param notes the notes
+	 * @return the site note
+	 */
 	public SiteNote notes(String notes) {
 		this.notes = notes;
 		return this;
 	}
 
 	/**
-	 * Note for the engineer
-	 * 
+	 * Note for the engineer.
+	 *
 	 * @return notes
-	 **/
+	 */
 	public String getNotes() {
 		return notes;
 	}
 
+	/**
+	 * Sets the notes.
+	 *
+	 * @param notes the new notes
+	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
+	/**
+	 * Type code.
+	 *
+	 * @param typeCode the type code
+	 * @return the site note
+	 */
 	public SiteNote typeCode(String typeCode) {
 		this.typeCode = typeCode;
 		return this;
 	}
 
 	/**
-	 * Engineer
-	 * 
+	 * Engineer.
+	 *
 	 * @return typeCode
-	 **/
+	 */
 	public String getTypeCode() {
 		return typeCode;
 	}
 
+	/**
+	 * Sets the type code.
+	 *
+	 * @param typeCode the new type code
+	 */
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -70,11 +98,17 @@ public class SiteNote {
 		return Objects.equals(this.notes, siteNote.notes) && Objects.equals(this.typeCode, siteNote.typeCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(notes, typeCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -89,6 +123,9 @@ public class SiteNote {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

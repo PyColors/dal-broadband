@@ -7,21 +7,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Identification
+ * Identification.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class Identification   {
+  
+  /** The id. */
   @JsonProperty("id")
   private String id = null;
 
+  /** The context id. */
   @JsonProperty("contextId")
   private String contextId = null;
 
   /**
-   * 
-   * @param id
-   * @return
+   * Id.
+   *
+   * @param id the id
+   * @return the identification
    */
   public Identification id(String id) {
     this.id = id;
@@ -29,9 +33,10 @@ public class Identification   {
   }
 
    /**
-   * This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system
-   * @return id
-  **/
+    * This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system.
+    *
+    * @return id
+    */
   @ApiModelProperty(value = "This is the Wholesale address reference identifier that uniquely identifies the address in the Fixed Line or PostOffice system")
 
 
@@ -39,14 +44,20 @@ public class Identification   {
     return id;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(String id) {
     this.id = id;
   }
 
   /**
-   * 
-   * @param contextId
-   * @return
+   * Context id.
+   *
+   * @param contextId the context id
+   * @return the identification
    */
   public Identification contextId(String contextId) {
     this.contextId = contextId;
@@ -54,9 +65,10 @@ public class Identification   {
   }
 
    /**
-   * Get contextId
-   * @return contextId
-  **/
+    * Get contextId.
+    *
+    * @return contextId
+    */
   @ApiModelProperty(value = "")
 
 
@@ -64,11 +76,19 @@ public class Identification   {
     return contextId;
   }
 
+  /**
+   * Sets the context id.
+   *
+   * @param contextId the new context id
+   */
   public void setContextId(String contextId) {
     this.contextId = contextId;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -82,11 +102,17 @@ public class Identification   {
         Objects.equals(this.contextId, identification.contextId);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(id, contextId);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -101,6 +127,9 @@ public class Identification   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

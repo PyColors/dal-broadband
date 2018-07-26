@@ -50,6 +50,11 @@ public class CheckOutBundle   {
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /**
+   * 
+   * @param action
+   * @return
+   */
   public CheckOutBundle action(String action) {
     this.action = action;
     return this;
@@ -70,11 +75,21 @@ public class CheckOutBundle   {
     this.action = action;
   }
 
+  /**
+   * 
+   * @param attributes
+   * @return
+   */
   public CheckOutBundle attributes(List<Attribute> attributes) {
     this.attributes = attributes;
     return this;
   }
 
+  /**
+   * 
+   * @param attributesItem
+   * @return
+   */
   public CheckOutBundle addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
       this.attributes = new ArrayList<>();
@@ -99,6 +114,11 @@ public class CheckOutBundle   {
     this.attributes = attributes;
   }
 
+  /**
+   * 
+   * @param displayName
+   * @return
+   */
   public CheckOutBundle displayName(String displayName) {
     this.displayName = displayName;
     return this;
@@ -119,6 +139,11 @@ public class CheckOutBundle   {
     this.displayName = displayName;
   }
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public CheckOutBundle name(String name) {
     this.name = name;
     return this;
@@ -139,6 +164,11 @@ public class CheckOutBundle   {
     this.name = name;
   }
 
+  /**
+   * 
+   * @param packageLineId
+   * @return
+   */
   public CheckOutBundle packageLineId(String packageLineId) {
     this.packageLineId = packageLineId;
     return this;
@@ -159,6 +189,11 @@ public class CheckOutBundle   {
     this.packageLineId = packageLineId;
   }
 
+  /**
+   * 
+   * @param paymentType
+   * @return
+   */
   public CheckOutBundle paymentType(String paymentType) {
     this.paymentType = paymentType;
     return this;
@@ -179,6 +214,11 @@ public class CheckOutBundle   {
     this.paymentType = paymentType;
   }
 
+  /**
+   * 
+   * @param priceDetails
+   * @return
+   */
   public CheckOutBundle priceDetails(BundlePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
@@ -200,6 +240,11 @@ public class CheckOutBundle   {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * 
+   * @param productClass
+   * @return
+   */
   public CheckOutBundle productClass(String productClass) {
     this.productClass = productClass;
     return this;
@@ -220,6 +265,11 @@ public class CheckOutBundle   {
     this.productClass = productClass;
   }
 
+  /**
+   * 
+   * @param serviceId
+   * @return
+   */
   public CheckOutBundle serviceId(String serviceId) {
     this.serviceId = serviceId;
     return this;
@@ -240,6 +290,11 @@ public class CheckOutBundle   {
     this.serviceId = serviceId;
   }
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public CheckOutBundle skuId(String skuId) {
     this.skuId = skuId;
     return this;

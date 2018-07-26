@@ -15,21 +15,34 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * MiscReference
+ * MiscReference.
  */
 public class MiscReference {
+	
+	/** The service provider name. */
 	private String serviceProviderName = null;
 
+	/** The line length. */
 	private String lineLength = null;
 
+	/** The classification code. */
 	private String classificationCode = null;
 
+	/** The customer agreed date. */
 	private String customerAgreedDate = null;
 
+	/** The ready for service date. */
 	private String readyForServiceDate = null;
 
+	/** The anfp. */
 	private String anfp = null;
 
+	/**
+	 * Service provider name.
+	 *
+	 * @param serviceProviderName the service provider name
+	 * @return the misc reference
+	 */
 	public MiscReference serviceProviderName(String serviceProviderName) {
 		this.serviceProviderName = serviceProviderName;
 		return this;
@@ -45,46 +58,79 @@ public class MiscReference {
 		return serviceProviderName;
 	}
 
+	/**
+	 * Sets the service provider name.
+	 *
+	 * @param serviceProviderName the new service provider name
+	 */
 	public void setServiceProviderName(String serviceProviderName) {
 		this.serviceProviderName = serviceProviderName;
 	}
 
+	/**
+	 * Line length.
+	 *
+	 * @param lineLength the line length
+	 * @return the misc reference
+	 */
 	public MiscReference lineLength(String lineLength) {
 		this.lineLength = lineLength;
 		return this;
 	}
 
 	/**
-	 * Estimate of the line length
-	 * 
+	 * Estimate of the line length.
+	 *
 	 * @return lineLength
-	 **/
+	 */
 	public String getLineLength() {
 		return lineLength;
 	}
 
+	/**
+	 * Sets the line length.
+	 *
+	 * @param lineLength the new line length
+	 */
 	public void setLineLength(String lineLength) {
 		this.lineLength = lineLength;
 	}
 
+	/**
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the misc reference
+	 */
 	public MiscReference classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
 	}
 
 	/**
-	 * Get classificationCode
-	 * 
+	 * Get classificationCode.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 	public String getClassificationCode() {
 		return classificationCode;
 	}
 
+	/**
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
+	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * Customer agreed date.
+	 *
+	 * @param customerAgreedDate the customer agreed date
+	 * @return the misc reference
+	 */
 	public MiscReference customerAgreedDate(String customerAgreedDate) {
 		this.customerAgreedDate = customerAgreedDate;
 		return this;
@@ -99,10 +145,21 @@ public class MiscReference {
 		return customerAgreedDate;
 	}
 
+	/**
+	 * Sets the customer agreed date.
+	 *
+	 * @param customerAgreedDate the new customer agreed date
+	 */
 	public void setCustomerAgreedDate(String customerAgreedDate) {
 		this.customerAgreedDate = customerAgreedDate;
 	}
 
+	/**
+	 * Ready for service date.
+	 *
+	 * @param readyForServiceDate the ready for service date
+	 * @return the misc reference
+	 */
 	public MiscReference readyForServiceDate(String readyForServiceDate) {
 		this.readyForServiceDate = readyForServiceDate;
 		return this;
@@ -118,10 +175,21 @@ public class MiscReference {
 		return readyForServiceDate;
 	}
 
+	/**
+	 * Sets the ready for service date.
+	 *
+	 * @param readyForServiceDate the new ready for service date
+	 */
 	public void setReadyForServiceDate(String readyForServiceDate) {
 		this.readyForServiceDate = readyForServiceDate;
 	}
 
+	/**
+	 * Anfp.
+	 *
+	 * @param anfp the anfp
+	 * @return the misc reference
+	 */
 	public MiscReference anfp(String anfp) {
 		this.anfp = anfp;
 		return this;
@@ -138,10 +206,18 @@ public class MiscReference {
 		return anfp;
 	}
 
+	/**
+	 * Sets the anfp.
+	 *
+	 * @param anfp the new anfp
+	 */
 	public void setAnfp(String anfp) {
 		this.anfp = anfp;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -159,12 +235,18 @@ public class MiscReference {
 				&& Objects.equals(this.anfp, miscReference.anfp);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(serviceProviderName, lineLength, classificationCode, customerAgreedDate,
 				readyForServiceDate, anfp);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -183,6 +265,9 @@ public class MiscReference {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

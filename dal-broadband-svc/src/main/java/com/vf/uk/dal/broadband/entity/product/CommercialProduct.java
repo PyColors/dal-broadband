@@ -13,193 +13,256 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * CommercialProduct
+ * CommercialProduct.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class CommercialProduct   {
+  
+  /** The allowance display. */
   @JsonProperty("allowanceDisplay")
   private String allowanceDisplay = null;
 
+  /** The battery. */
   @JsonProperty("battery")
   private Boolean battery = null;
 
+  /** The box price. */
   @JsonProperty("boxPrice")
   private BoxPrice boxPrice = null;
 
+  /** The categories. */
   @JsonProperty("categories")
   @Valid
   private List<String> categories = null;
 
+  /** The condition. */
   @JsonProperty("condition")
   private String condition = null;
 
+  /** The content version. */
   @JsonProperty("contentVersion")
   private String contentVersion = null;
 
+  /** The delivery. */
   @JsonProperty("delivery")
   private Delivery delivery = null;
 
+  /** The discount. */
   @JsonProperty("discount")
   private Discount discount = null;
 
+  /** The display name. */
   @JsonProperty("displayName")
   private String displayName = null;
 
+  /** The duration. */
   @JsonProperty("duration")
   private Duration duration = null;
 
+  /** The eligibility subflow. */
   @JsonProperty("eligibilitySubflow")
   private String eligibilitySubflow = null;
 
+  /** The equipment. */
   @JsonProperty("equipment")
   private Equipment equipment = null;
 
+  /** The fast moving. */
   @JsonProperty("fastMoving")
   private Boolean fastMoving = null;
 
+  /** The id. */
   @JsonProperty("id")
   private String id = null;
 
+  /** The in the box. */
   @JsonProperty("inTheBox")
   private String inTheBox = null;
 
+  /** The inclusive eligibility. */
   @JsonProperty("inclusiveEligibility")
   private String inclusiveEligibility = null;
 
+  /** The is device product. */
   @JsonProperty("isDeviceProduct")
   private Boolean isDeviceProduct = null;
 
+  /** The is services product. */
   @JsonProperty("isServicesProduct")
   private Boolean isServicesProduct = null;
 
+  /** The lead plan id. */
   @JsonProperty("leadPlanId")
   private String leadPlanId = null;
 
+  /** The list of compatible bundles. */
   @JsonProperty("listOfCompatibleBundles")
   private String listOfCompatibleBundles = null;
 
+  /** The list of eligible channels. */
   @JsonProperty("listOfEligibleChannels")
   private String listOfEligibleChannels = null;
 
+  /** The list ofhelp UR ls. */
   @JsonProperty("listOfhelpURLs")
   @Valid
   private List<HelpURL> listOfhelpURLs = null;
 
+  /** The list ofimage UR ls. */
   @JsonProperty("listOfimageURLs")
   @Valid
   private List<ImageURL> listOfimageURLs = null;
 
+  /** The list ofmedia UR ls. */
   @JsonProperty("listOfmediaURLs")
   @Valid
   private List<MediaURL> listOfmediaURLs = null;
 
+  /** The merchandising version. */
   @JsonProperty("merchandisingVersion")
   private String merchandisingVersion = null;
 
+  /** The metadata version. */
   @JsonProperty("metadataVersion")
   private String metadataVersion = null;
 
+  /** The misc. */
   @JsonProperty("misc")
   private Misc misc = null;
 
+  /** The name. */
   @JsonProperty("name")
   private String name = null;
 
+  /** The omni channel discount eligible. */
   @JsonProperty("omniChannelDiscountEligible")
   private Boolean omniChannelDiscountEligible = null;
 
+  /** The order. */
   @JsonProperty("order")
   private String order = null;
 
+  /** The payment type. */
   @JsonProperty("paymentType")
   private String paymentType = null;
 
+  /** The post desc. */
   @JsonProperty("postDesc")
   private String postDesc = null;
 
+  /** The post desc mobile. */
   @JsonProperty("postDescMobile")
   private String postDescMobile = null;
 
+  /** The pre desc. */
   @JsonProperty("preDesc")
   private String preDesc = null;
 
+  /** The pre desc mobile. */
   @JsonProperty("preDescMobile")
   private String preDescMobile = null;
 
+  /** The price info. */
   @JsonProperty("priceInfo")
   private ProductPrice priceInfo = null;
 
+  /** The product allowance. */
   @JsonProperty("productAllowance")
   private ProductAllowance productAllowance = null;
 
+  /** The product availability. */
   @JsonProperty("productAvailability")
   private ProductAvailability productAvailability = null;
 
+  /** The product class. */
   @JsonProperty("productClass")
   private String productClass = null;
 
+  /** The product control. */
   @JsonProperty("productControl")
   private ProductControl productControl = null;
 
+  /** The product groups. */
   @JsonProperty("productGroups")
   private ProductGroups productGroups = null;
 
+  /** The product lines. */
   @JsonProperty("productLines")
   @Valid
   private List<String> productLines = null;
 
+  /** The product price override. */
   @JsonProperty("productPriceOverride")
   private String productPriceOverride = null;
 
+  /** The product relationship list. */
   @JsonProperty("productRelationshipList")
   private String productRelationshipList = null;
 
+  /** The product sub class. */
   @JsonProperty("productSubClass")
   private String productSubClass = null;
 
+  /** The promote as. */
   @JsonProperty("promoteAs")
   private PromoteAs promoteAs = null;
 
+  /** The recommendataions. */
   @JsonProperty("recommendataions")
   @Valid
   private List<Recommendations> recommendataions = null;
 
+  /** The seo canonical. */
   @JsonProperty("seoCanonical")
   private String seoCanonical = null;
 
+  /** The seo description. */
   @JsonProperty("seoDescription")
   private String seoDescription = null;
 
+  /** The seo index. */
   @JsonProperty("seoIndex")
   private String seoIndex = null;
 
+  /** The seo keywords. */
   @JsonProperty("seoKeywords")
   private String seoKeywords = null;
 
+  /** The specification groups. */
   @JsonProperty("specificationGroups")
   @Valid
   private List<Group> specificationGroups = null;
 
+  /** The stock threshold limit. */
   @JsonProperty("stockThresholdLimit")
   private String stockThresholdLimit = null;
 
+  /** The version. */
   @JsonProperty("version")
   private String version = null;
 
+  /** The warranty. */
   @JsonProperty("warranty")
   private String warranty = null;
 
+  /**
+   * Allowance display.
+   *
+   * @param allowanceDisplay the allowance display
+   * @return the commercial product
+   */
   public CommercialProduct allowanceDisplay(String allowanceDisplay) {
     this.allowanceDisplay = allowanceDisplay;
     return this;
   }
 
   /**
-   * Get allowanceDisplay
+   * Get allowanceDisplay.
+   *
    * @return allowanceDisplay
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -207,19 +270,31 @@ public class CommercialProduct   {
     return allowanceDisplay;
   }
 
+  /**
+   * Sets the allowance display.
+   *
+   * @param allowanceDisplay the new allowance display
+   */
   public void setAllowanceDisplay(String allowanceDisplay) {
     this.allowanceDisplay = allowanceDisplay;
   }
 
+  /**
+   * Battery.
+   *
+   * @param battery the battery
+   * @return the commercial product
+   */
   public CommercialProduct battery(Boolean battery) {
     this.battery = battery;
     return this;
   }
 
   /**
-   * Get battery
+   * Get battery.
+   *
    * @return battery
-  **/
+   */
   @ApiModelProperty(example = "false", value = "")
 
 
@@ -227,19 +302,31 @@ public class CommercialProduct   {
     return battery;
   }
 
+  /**
+   * Sets the battery.
+   *
+   * @param battery the new battery
+   */
   public void setBattery(Boolean battery) {
     this.battery = battery;
   }
 
+  /**
+   * Box price.
+   *
+   * @param boxPrice the box price
+   * @return the commercial product
+   */
   public CommercialProduct boxPrice(BoxPrice boxPrice) {
     this.boxPrice = boxPrice;
     return this;
   }
 
   /**
-   * box price
+   * box price.
+   *
    * @return boxPrice
-  **/
+   */
   @ApiModelProperty(value = "box price")
 
   @Valid
@@ -248,15 +335,32 @@ public class CommercialProduct   {
     return boxPrice;
   }
 
+  /**
+   * Sets the box price.
+   *
+   * @param boxPrice the new box price
+   */
   public void setBoxPrice(BoxPrice boxPrice) {
     this.boxPrice = boxPrice;
   }
 
+  /**
+   * Categories.
+   *
+   * @param categories the categories
+   * @return the commercial product
+   */
   public CommercialProduct categories(List<String> categories) {
     this.categories = categories;
     return this;
   }
 
+  /**
+   * Adds the categories item.
+   *
+   * @param categoriesItem the categories item
+   * @return the commercial product
+   */
   public CommercialProduct addCategoriesItem(String categoriesItem) {
     if (this.categories == null) {
       this.categories = new ArrayList<>();
@@ -266,9 +370,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * categories
+   * categories.
+   *
    * @return categories
-  **/
+   */
   @ApiModelProperty(value = "categories")
 
 
@@ -276,19 +381,31 @@ public class CommercialProduct   {
     return categories;
   }
 
+  /**
+   * Sets the categories.
+   *
+   * @param categories the new categories
+   */
   public void setCategories(List<String> categories) {
     this.categories = categories;
   }
 
+  /**
+   * Condition.
+   *
+   * @param condition the condition
+   * @return the commercial product
+   */
   public CommercialProduct condition(String condition) {
     this.condition = condition;
     return this;
   }
 
   /**
-   * Condition
+   * Condition.
+   *
    * @return condition
-  **/
+   */
   @ApiModelProperty(value = "Condition")
 
 
@@ -296,19 +413,31 @@ public class CommercialProduct   {
     return condition;
   }
 
+  /**
+   * Sets the condition.
+   *
+   * @param condition the new condition
+   */
   public void setCondition(String condition) {
     this.condition = condition;
   }
 
+  /**
+   * Content version.
+   *
+   * @param contentVersion the content version
+   * @return the commercial product
+   */
   public CommercialProduct contentVersion(String contentVersion) {
     this.contentVersion = contentVersion;
     return this;
   }
 
   /**
-   * Get contentVersion
+   * Get contentVersion.
+   *
    * @return contentVersion
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -316,19 +445,31 @@ public class CommercialProduct   {
     return contentVersion;
   }
 
+  /**
+   * Sets the content version.
+   *
+   * @param contentVersion the new content version
+   */
   public void setContentVersion(String contentVersion) {
     this.contentVersion = contentVersion;
   }
 
+  /**
+   * Delivery.
+   *
+   * @param delivery the delivery
+   * @return the commercial product
+   */
   public CommercialProduct delivery(Delivery delivery) {
     this.delivery = delivery;
     return this;
   }
 
   /**
-   * Get delivery
+   * Get delivery.
+   *
    * @return delivery
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -337,19 +478,31 @@ public class CommercialProduct   {
     return delivery;
   }
 
+  /**
+   * Sets the delivery.
+   *
+   * @param delivery the new delivery
+   */
   public void setDelivery(Delivery delivery) {
     this.delivery = delivery;
   }
 
+  /**
+   * Discount.
+   *
+   * @param discount the discount
+   * @return the commercial product
+   */
   public CommercialProduct discount(Discount discount) {
     this.discount = discount;
     return this;
   }
 
   /**
-   * Discount on product
+   * Discount on product.
+   *
    * @return discount
-  **/
+   */
   @ApiModelProperty(value = "Discount on product")
 
   @Valid
@@ -358,19 +511,31 @@ public class CommercialProduct   {
     return discount;
   }
 
+  /**
+   * Sets the discount.
+   *
+   * @param discount the new discount
+   */
   public void setDiscount(Discount discount) {
     this.discount = discount;
   }
 
+  /**
+   * Display name.
+   *
+   * @param displayName the display name
+   * @return the commercial product
+   */
   public CommercialProduct displayName(String displayName) {
     this.displayName = displayName;
     return this;
   }
 
   /**
-   * Get displayName
+   * Get displayName.
+   *
    * @return displayName
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -378,19 +543,31 @@ public class CommercialProduct   {
     return displayName;
   }
 
+  /**
+   * Sets the display name.
+   *
+   * @param displayName the new display name
+   */
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
 
+  /**
+   * Duration.
+   *
+   * @param duration the duration
+   * @return the commercial product
+   */
   public CommercialProduct duration(Duration duration) {
     this.duration = duration;
     return this;
   }
 
   /**
-   * Duration of the product
+   * Duration of the product.
+   *
    * @return duration
-  **/
+   */
   @ApiModelProperty(value = "Duration of the product")
 
   @Valid
@@ -399,19 +576,31 @@ public class CommercialProduct   {
     return duration;
   }
 
+  /**
+   * Sets the duration.
+   *
+   * @param duration the new duration
+   */
   public void setDuration(Duration duration) {
     this.duration = duration;
   }
 
+  /**
+   * Eligibility subflow.
+   *
+   * @param eligibilitySubflow the eligibility subflow
+   * @return the commercial product
+   */
   public CommercialProduct eligibilitySubflow(String eligibilitySubflow) {
     this.eligibilitySubflow = eligibilitySubflow;
     return this;
   }
 
   /**
-   * Get eligibilitySubflow
+   * Get eligibilitySubflow.
+   *
    * @return eligibilitySubflow
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -419,19 +608,31 @@ public class CommercialProduct   {
     return eligibilitySubflow;
   }
 
+  /**
+   * Sets the eligibility subflow.
+   *
+   * @param eligibilitySubflow the new eligibility subflow
+   */
   public void setEligibilitySubflow(String eligibilitySubflow) {
     this.eligibilitySubflow = eligibilitySubflow;
   }
 
+  /**
+   * Equipment.
+   *
+   * @param equipment the equipment
+   * @return the commercial product
+   */
   public CommercialProduct equipment(Equipment equipment) {
     this.equipment = equipment;
     return this;
   }
 
   /**
-   * equipment details
+   * equipment details.
+   *
    * @return equipment
-  **/
+   */
   @ApiModelProperty(value = "equipment details")
 
   @Valid
@@ -440,19 +641,31 @@ public class CommercialProduct   {
     return equipment;
   }
 
+  /**
+   * Sets the equipment.
+   *
+   * @param equipment the new equipment
+   */
   public void setEquipment(Equipment equipment) {
     this.equipment = equipment;
   }
 
+  /**
+   * Fast moving.
+   *
+   * @param fastMoving the fast moving
+   * @return the commercial product
+   */
   public CommercialProduct fastMoving(Boolean fastMoving) {
     this.fastMoving = fastMoving;
     return this;
   }
 
   /**
-   * Get fastMoving
+   * Get fastMoving.
+   *
    * @return fastMoving
-  **/
+   */
   @ApiModelProperty(example = "false", value = "")
 
 
@@ -460,19 +673,31 @@ public class CommercialProduct   {
     return fastMoving;
   }
 
+  /**
+   * Sets the fast moving.
+   *
+   * @param fastMoving the new fast moving
+   */
   public void setFastMoving(Boolean fastMoving) {
     this.fastMoving = fastMoving;
   }
 
+  /**
+   * Id.
+   *
+   * @param id the id
+   * @return the commercial product
+   */
   public CommercialProduct id(String id) {
     this.id = id;
     return this;
   }
 
   /**
-   * Product ID
+   * Product ID.
+   *
    * @return id
-  **/
+   */
   @ApiModelProperty(value = "Product ID")
 
 
@@ -480,19 +705,31 @@ public class CommercialProduct   {
     return id;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(String id) {
     this.id = id;
   }
 
+  /**
+   * In the box.
+   *
+   * @param inTheBox the in the box
+   * @return the commercial product
+   */
   public CommercialProduct inTheBox(String inTheBox) {
     this.inTheBox = inTheBox;
     return this;
   }
 
   /**
-   * Get inTheBox
+   * Get inTheBox.
+   *
    * @return inTheBox
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -500,19 +737,31 @@ public class CommercialProduct   {
     return inTheBox;
   }
 
+  /**
+   * Sets the in the box.
+   *
+   * @param inTheBox the new in the box
+   */
   public void setInTheBox(String inTheBox) {
     this.inTheBox = inTheBox;
   }
 
+  /**
+   * Inclusive eligibility.
+   *
+   * @param inclusiveEligibility the inclusive eligibility
+   * @return the commercial product
+   */
   public CommercialProduct inclusiveEligibility(String inclusiveEligibility) {
     this.inclusiveEligibility = inclusiveEligibility;
     return this;
   }
 
   /**
-   * Eligibility
+   * Eligibility.
+   *
    * @return inclusiveEligibility
-  **/
+   */
   @ApiModelProperty(value = "Eligibility")
 
 
@@ -520,19 +769,31 @@ public class CommercialProduct   {
     return inclusiveEligibility;
   }
 
+  /**
+   * Sets the inclusive eligibility.
+   *
+   * @param inclusiveEligibility the new inclusive eligibility
+   */
   public void setInclusiveEligibility(String inclusiveEligibility) {
     this.inclusiveEligibility = inclusiveEligibility;
   }
 
+  /**
+   * Checks if is device product.
+   *
+   * @param isDeviceProduct the is device product
+   * @return the commercial product
+   */
   public CommercialProduct isDeviceProduct(Boolean isDeviceProduct) {
     this.isDeviceProduct = isDeviceProduct;
     return this;
   }
 
   /**
-   * Boolean attribute to identify all device products
+   * Boolean attribute to identify all device products.
+   *
    * @return isDeviceProduct
-  **/
+   */
   @ApiModelProperty(example = "false", value = "Boolean attribute to identify all device products")
 
 
@@ -540,19 +801,31 @@ public class CommercialProduct   {
     return isDeviceProduct;
   }
 
+  /**
+   * Sets the checks if is device product.
+   *
+   * @param isDeviceProduct the new checks if is device product
+   */
   public void setIsDeviceProduct(Boolean isDeviceProduct) {
     this.isDeviceProduct = isDeviceProduct;
   }
 
+  /**
+   * Checks if is services product.
+   *
+   * @param isServicesProduct the is services product
+   * @return the commercial product
+   */
   public CommercialProduct isServicesProduct(Boolean isServicesProduct) {
     this.isServicesProduct = isServicesProduct;
     return this;
   }
 
   /**
-   * Boolean attribute service product
+   * Boolean attribute service product.
+   *
    * @return isServicesProduct
-  **/
+   */
   @ApiModelProperty(example = "false", value = "Boolean attribute service product")
 
 
@@ -560,19 +833,31 @@ public class CommercialProduct   {
     return isServicesProduct;
   }
 
+  /**
+   * Sets the checks if is services product.
+   *
+   * @param isServicesProduct the new checks if is services product
+   */
   public void setIsServicesProduct(Boolean isServicesProduct) {
     this.isServicesProduct = isServicesProduct;
   }
 
+  /**
+   * Lead plan id.
+   *
+   * @param leadPlanId the lead plan id
+   * @return the commercial product
+   */
   public CommercialProduct leadPlanId(String leadPlanId) {
     this.leadPlanId = leadPlanId;
     return this;
   }
 
   /**
-   * Get leadPlanId
+   * Get leadPlanId.
+   *
    * @return leadPlanId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -580,19 +865,31 @@ public class CommercialProduct   {
     return leadPlanId;
   }
 
+  /**
+   * Sets the lead plan id.
+   *
+   * @param leadPlanId the new lead plan id
+   */
   public void setLeadPlanId(String leadPlanId) {
     this.leadPlanId = leadPlanId;
   }
 
+  /**
+   * List of compatible bundles.
+   *
+   * @param listOfCompatibleBundles the list of compatible bundles
+   * @return the commercial product
+   */
   public CommercialProduct listOfCompatibleBundles(String listOfCompatibleBundles) {
     this.listOfCompatibleBundles = listOfCompatibleBundles;
     return this;
   }
 
   /**
-   * Get listOfCompatibleBundles
+   * Get listOfCompatibleBundles.
+   *
    * @return listOfCompatibleBundles
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -600,19 +897,31 @@ public class CommercialProduct   {
     return listOfCompatibleBundles;
   }
 
+  /**
+   * Sets the list of compatible bundles.
+   *
+   * @param listOfCompatibleBundles the new list of compatible bundles
+   */
   public void setListOfCompatibleBundles(String listOfCompatibleBundles) {
     this.listOfCompatibleBundles = listOfCompatibleBundles;
   }
 
+  /**
+   * List of eligible channels.
+   *
+   * @param listOfEligibleChannels the list of eligible channels
+   * @return the commercial product
+   */
   public CommercialProduct listOfEligibleChannels(String listOfEligibleChannels) {
     this.listOfEligibleChannels = listOfEligibleChannels;
     return this;
   }
 
   /**
-   * Get listOfEligibleChannels
+   * Get listOfEligibleChannels.
+   *
    * @return listOfEligibleChannels
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -620,15 +929,32 @@ public class CommercialProduct   {
     return listOfEligibleChannels;
   }
 
+  /**
+   * Sets the list of eligible channels.
+   *
+   * @param listOfEligibleChannels the new list of eligible channels
+   */
   public void setListOfEligibleChannels(String listOfEligibleChannels) {
     this.listOfEligibleChannels = listOfEligibleChannels;
   }
 
+  /**
+   * List ofhelp UR ls.
+   *
+   * @param listOfhelpURLs the list ofhelp UR ls
+   * @return the commercial product
+   */
   public CommercialProduct listOfhelpURLs(List<HelpURL> listOfhelpURLs) {
     this.listOfhelpURLs = listOfhelpURLs;
     return this;
   }
 
+  /**
+   * Adds the list ofhelp UR ls item.
+   *
+   * @param listOfhelpURLsItem the list ofhelp UR ls item
+   * @return the commercial product
+   */
   public CommercialProduct addListOfhelpURLsItem(HelpURL listOfhelpURLsItem) {
     if (this.listOfhelpURLs == null) {
       this.listOfhelpURLs = new ArrayList<>();
@@ -638,9 +964,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * Get listOfhelpURLs
+   * Get listOfhelpURLs.
+   *
    * @return listOfhelpURLs
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -649,15 +976,32 @@ public class CommercialProduct   {
     return listOfhelpURLs;
   }
 
+  /**
+   * Sets the list ofhelp UR ls.
+   *
+   * @param listOfhelpURLs the new list ofhelp UR ls
+   */
   public void setListOfhelpURLs(List<HelpURL> listOfhelpURLs) {
     this.listOfhelpURLs = listOfhelpURLs;
   }
 
+  /**
+   * List ofimage UR ls.
+   *
+   * @param listOfimageURLs the list ofimage UR ls
+   * @return the commercial product
+   */
   public CommercialProduct listOfimageURLs(List<ImageURL> listOfimageURLs) {
     this.listOfimageURLs = listOfimageURLs;
     return this;
   }
 
+  /**
+   * Adds the list ofimage UR ls item.
+   *
+   * @param listOfimageURLsItem the list ofimage UR ls item
+   * @return the commercial product
+   */
   public CommercialProduct addListOfimageURLsItem(ImageURL listOfimageURLsItem) {
     if (this.listOfimageURLs == null) {
       this.listOfimageURLs = new ArrayList<>();
@@ -667,9 +1011,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * Get listOfimageURLs
+   * Get listOfimageURLs.
+   *
    * @return listOfimageURLs
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -678,15 +1023,32 @@ public class CommercialProduct   {
     return listOfimageURLs;
   }
 
+  /**
+   * Sets the list ofimage UR ls.
+   *
+   * @param listOfimageURLs the new list ofimage UR ls
+   */
   public void setListOfimageURLs(List<ImageURL> listOfimageURLs) {
     this.listOfimageURLs = listOfimageURLs;
   }
 
+  /**
+   * List ofmedia UR ls.
+   *
+   * @param listOfmediaURLs the list ofmedia UR ls
+   * @return the commercial product
+   */
   public CommercialProduct listOfmediaURLs(List<MediaURL> listOfmediaURLs) {
     this.listOfmediaURLs = listOfmediaURLs;
     return this;
   }
 
+  /**
+   * Adds the list ofmedia UR ls item.
+   *
+   * @param listOfmediaURLsItem the list ofmedia UR ls item
+   * @return the commercial product
+   */
   public CommercialProduct addListOfmediaURLsItem(MediaURL listOfmediaURLsItem) {
     if (this.listOfmediaURLs == null) {
       this.listOfmediaURLs = new ArrayList<>();
@@ -696,9 +1058,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * Get listOfmediaURLs
+   * Get listOfmediaURLs.
+   *
    * @return listOfmediaURLs
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -707,19 +1070,31 @@ public class CommercialProduct   {
     return listOfmediaURLs;
   }
 
+  /**
+   * Sets the list ofmedia UR ls.
+   *
+   * @param listOfmediaURLs the new list ofmedia UR ls
+   */
   public void setListOfmediaURLs(List<MediaURL> listOfmediaURLs) {
     this.listOfmediaURLs = listOfmediaURLs;
   }
 
+  /**
+   * Merchandising version.
+   *
+   * @param merchandisingVersion the merchandising version
+   * @return the commercial product
+   */
   public CommercialProduct merchandisingVersion(String merchandisingVersion) {
     this.merchandisingVersion = merchandisingVersion;
     return this;
   }
 
   /**
-   * Get merchandisingVersion
+   * Get merchandisingVersion.
+   *
    * @return merchandisingVersion
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -727,19 +1102,31 @@ public class CommercialProduct   {
     return merchandisingVersion;
   }
 
+  /**
+   * Sets the merchandising version.
+   *
+   * @param merchandisingVersion the new merchandising version
+   */
   public void setMerchandisingVersion(String merchandisingVersion) {
     this.merchandisingVersion = merchandisingVersion;
   }
 
+  /**
+   * Metadata version.
+   *
+   * @param metadataVersion the metadata version
+   * @return the commercial product
+   */
   public CommercialProduct metadataVersion(String metadataVersion) {
     this.metadataVersion = metadataVersion;
     return this;
   }
 
   /**
-   * Get metadataVersion
+   * Get metadataVersion.
+   *
    * @return metadataVersion
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -747,19 +1134,31 @@ public class CommercialProduct   {
     return metadataVersion;
   }
 
+  /**
+   * Sets the metadata version.
+   *
+   * @param metadataVersion the new metadata version
+   */
   public void setMetadataVersion(String metadataVersion) {
     this.metadataVersion = metadataVersion;
   }
 
+  /**
+   * Misc.
+   *
+   * @param misc the misc
+   * @return the commercial product
+   */
   public CommercialProduct misc(Misc misc) {
     this.misc = misc;
     return this;
   }
 
   /**
-   * Get misc
+   * Get misc.
+   *
    * @return misc
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -768,19 +1167,31 @@ public class CommercialProduct   {
     return misc;
   }
 
+  /**
+   * Sets the misc.
+   *
+   * @param misc the new misc
+   */
   public void setMisc(Misc misc) {
     this.misc = misc;
   }
 
+  /**
+   * Name.
+   *
+   * @param name the name
+   * @return the commercial product
+   */
   public CommercialProduct name(String name) {
     this.name = name;
     return this;
   }
 
   /**
-   * Product name as defined catalogue
+   * Product name as defined catalogue.
+   *
    * @return name
-  **/
+   */
   @ApiModelProperty(value = "Product name as defined catalogue")
 
 
@@ -788,19 +1199,31 @@ public class CommercialProduct   {
     return name;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Omni channel discount eligible.
+   *
+   * @param omniChannelDiscountEligible the omni channel discount eligible
+   * @return the commercial product
+   */
   public CommercialProduct omniChannelDiscountEligible(Boolean omniChannelDiscountEligible) {
     this.omniChannelDiscountEligible = omniChannelDiscountEligible;
     return this;
   }
 
   /**
-   * boolean value for omni channel discount eligibility
+   * boolean value for omni channel discount eligibility.
+   *
    * @return omniChannelDiscountEligible
-  **/
+   */
   @ApiModelProperty(example = "false", value = "boolean value for omni channel discount eligibility")
 
 
@@ -808,19 +1231,31 @@ public class CommercialProduct   {
     return omniChannelDiscountEligible;
   }
 
+  /**
+   * Sets the omni channel discount eligible.
+   *
+   * @param omniChannelDiscountEligible the new omni channel discount eligible
+   */
   public void setOmniChannelDiscountEligible(Boolean omniChannelDiscountEligible) {
     this.omniChannelDiscountEligible = omniChannelDiscountEligible;
   }
 
+  /**
+   * Order.
+   *
+   * @param order the order
+   * @return the commercial product
+   */
   public CommercialProduct order(String order) {
     this.order = order;
     return this;
   }
 
   /**
-   * Order
+   * Order.
+   *
    * @return order
-  **/
+   */
   @ApiModelProperty(value = "Order")
 
 
@@ -828,19 +1263,31 @@ public class CommercialProduct   {
     return order;
   }
 
+  /**
+   * Sets the order.
+   *
+   * @param order the new order
+   */
   public void setOrder(String order) {
     this.order = order;
   }
 
+  /**
+   * Payment type.
+   *
+   * @param paymentType the payment type
+   * @return the commercial product
+   */
   public CommercialProduct paymentType(String paymentType) {
     this.paymentType = paymentType;
     return this;
   }
 
   /**
-   * Get paymentType
+   * Get paymentType.
+   *
    * @return paymentType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -848,19 +1295,31 @@ public class CommercialProduct   {
     return paymentType;
   }
 
+  /**
+   * Sets the payment type.
+   *
+   * @param paymentType the new payment type
+   */
   public void setPaymentType(String paymentType) {
     this.paymentType = paymentType;
   }
 
+  /**
+   * Post desc.
+   *
+   * @param postDesc the post desc
+   * @return the commercial product
+   */
   public CommercialProduct postDesc(String postDesc) {
     this.postDesc = postDesc;
     return this;
   }
 
   /**
-   * Get postDesc
+   * Get postDesc.
+   *
    * @return postDesc
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -868,19 +1327,31 @@ public class CommercialProduct   {
     return postDesc;
   }
 
+  /**
+   * Sets the post desc.
+   *
+   * @param postDesc the new post desc
+   */
   public void setPostDesc(String postDesc) {
     this.postDesc = postDesc;
   }
 
+  /**
+   * Post desc mobile.
+   *
+   * @param postDescMobile the post desc mobile
+   * @return the commercial product
+   */
   public CommercialProduct postDescMobile(String postDescMobile) {
     this.postDescMobile = postDescMobile;
     return this;
   }
 
   /**
-   * Get postDescMobile
+   * Get postDescMobile.
+   *
    * @return postDescMobile
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -888,19 +1359,31 @@ public class CommercialProduct   {
     return postDescMobile;
   }
 
+  /**
+   * Sets the post desc mobile.
+   *
+   * @param postDescMobile the new post desc mobile
+   */
   public void setPostDescMobile(String postDescMobile) {
     this.postDescMobile = postDescMobile;
   }
 
+  /**
+   * Pre desc.
+   *
+   * @param preDesc the pre desc
+   * @return the commercial product
+   */
   public CommercialProduct preDesc(String preDesc) {
     this.preDesc = preDesc;
     return this;
   }
 
   /**
-   * Get preDesc
+   * Get preDesc.
+   *
    * @return preDesc
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -908,19 +1391,31 @@ public class CommercialProduct   {
     return preDesc;
   }
 
+  /**
+   * Sets the pre desc.
+   *
+   * @param preDesc the new pre desc
+   */
   public void setPreDesc(String preDesc) {
     this.preDesc = preDesc;
   }
 
+  /**
+   * Pre desc mobile.
+   *
+   * @param preDescMobile the pre desc mobile
+   * @return the commercial product
+   */
   public CommercialProduct preDescMobile(String preDescMobile) {
     this.preDescMobile = preDescMobile;
     return this;
   }
 
   /**
-   * Get preDescMobile
+   * Get preDescMobile.
+   *
    * @return preDescMobile
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -928,19 +1423,31 @@ public class CommercialProduct   {
     return preDescMobile;
   }
 
+  /**
+   * Sets the pre desc mobile.
+   *
+   * @param preDescMobile the new pre desc mobile
+   */
   public void setPreDescMobile(String preDescMobile) {
     this.preDescMobile = preDescMobile;
   }
 
+  /**
+   * Price info.
+   *
+   * @param priceInfo the price info
+   * @return the commercial product
+   */
   public CommercialProduct priceInfo(ProductPrice priceInfo) {
     this.priceInfo = priceInfo;
     return this;
   }
 
   /**
-   * Get priceInfo
+   * Get priceInfo.
+   *
    * @return priceInfo
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -949,19 +1456,31 @@ public class CommercialProduct   {
     return priceInfo;
   }
 
+  /**
+   * Sets the price info.
+   *
+   * @param priceInfo the new price info
+   */
   public void setPriceInfo(ProductPrice priceInfo) {
     this.priceInfo = priceInfo;
   }
 
+  /**
+   * Product allowance.
+   *
+   * @param productAllowance the product allowance
+   * @return the commercial product
+   */
   public CommercialProduct productAllowance(ProductAllowance productAllowance) {
     this.productAllowance = productAllowance;
     return this;
   }
 
   /**
-   * product allowance
+   * product allowance.
+   *
    * @return productAllowance
-  **/
+   */
   @ApiModelProperty(value = "product allowance")
 
   @Valid
@@ -970,19 +1489,31 @@ public class CommercialProduct   {
     return productAllowance;
   }
 
+  /**
+   * Sets the product allowance.
+   *
+   * @param productAllowance the new product allowance
+   */
   public void setProductAllowance(ProductAllowance productAllowance) {
     this.productAllowance = productAllowance;
   }
 
+  /**
+   * Product availability.
+   *
+   * @param productAvailability the product availability
+   * @return the commercial product
+   */
   public CommercialProduct productAvailability(ProductAvailability productAvailability) {
     this.productAvailability = productAvailability;
     return this;
   }
 
   /**
-   * product availability
+   * product availability.
+   *
    * @return productAvailability
-  **/
+   */
   @ApiModelProperty(value = "product availability")
 
   @Valid
@@ -991,19 +1522,31 @@ public class CommercialProduct   {
     return productAvailability;
   }
 
+  /**
+   * Sets the product availability.
+   *
+   * @param productAvailability the new product availability
+   */
   public void setProductAvailability(ProductAvailability productAvailability) {
     this.productAvailability = productAvailability;
   }
 
+  /**
+   * Product class.
+   *
+   * @param productClass the product class
+   * @return the commercial product
+   */
   public CommercialProduct productClass(String productClass) {
     this.productClass = productClass;
     return this;
   }
 
   /**
-   * Product class
+   * Product class.
+   *
    * @return productClass
-  **/
+   */
   @ApiModelProperty(value = "Product class")
 
 
@@ -1011,19 +1554,31 @@ public class CommercialProduct   {
     return productClass;
   }
 
+  /**
+   * Sets the product class.
+   *
+   * @param productClass the new product class
+   */
   public void setProductClass(String productClass) {
     this.productClass = productClass;
   }
 
+  /**
+   * Product control.
+   *
+   * @param productControl the product control
+   * @return the commercial product
+   */
   public CommercialProduct productControl(ProductControl productControl) {
     this.productControl = productControl;
     return this;
   }
 
   /**
-   * Get productControl
+   * Get productControl.
+   *
    * @return productControl
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -1032,19 +1587,31 @@ public class CommercialProduct   {
     return productControl;
   }
 
+  /**
+   * Sets the product control.
+   *
+   * @param productControl the new product control
+   */
   public void setProductControl(ProductControl productControl) {
     this.productControl = productControl;
   }
 
+  /**
+   * Product groups.
+   *
+   * @param productGroups the product groups
+   * @return the commercial product
+   */
   public CommercialProduct productGroups(ProductGroups productGroups) {
     this.productGroups = productGroups;
     return this;
   }
 
   /**
-   * Get productGroups
+   * Get productGroups.
+   *
    * @return productGroups
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -1053,15 +1620,32 @@ public class CommercialProduct   {
     return productGroups;
   }
 
+  /**
+   * Sets the product groups.
+   *
+   * @param productGroups the new product groups
+   */
   public void setProductGroups(ProductGroups productGroups) {
     this.productGroups = productGroups;
   }
 
+  /**
+   * Product lines.
+   *
+   * @param productLines the product lines
+   * @return the commercial product
+   */
   public CommercialProduct productLines(List<String> productLines) {
     this.productLines = productLines;
     return this;
   }
 
+  /**
+   * Adds the product lines item.
+   *
+   * @param productLinesItem the product lines item
+   * @return the commercial product
+   */
   public CommercialProduct addProductLinesItem(String productLinesItem) {
     if (this.productLines == null) {
       this.productLines = new ArrayList<>();
@@ -1071,9 +1655,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * productlines
+   * productlines.
+   *
    * @return productLines
-  **/
+   */
   @ApiModelProperty(value = "productlines")
 
 
@@ -1081,19 +1666,31 @@ public class CommercialProduct   {
     return productLines;
   }
 
+  /**
+   * Sets the product lines.
+   *
+   * @param productLines the new product lines
+   */
   public void setProductLines(List<String> productLines) {
     this.productLines = productLines;
   }
 
+  /**
+   * Product price override.
+   *
+   * @param productPriceOverride the product price override
+   * @return the commercial product
+   */
   public CommercialProduct productPriceOverride(String productPriceOverride) {
     this.productPriceOverride = productPriceOverride;
     return this;
   }
 
   /**
-   * Get productPriceOverride
+   * Get productPriceOverride.
+   *
    * @return productPriceOverride
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -1101,19 +1698,31 @@ public class CommercialProduct   {
     return productPriceOverride;
   }
 
+  /**
+   * Sets the product price override.
+   *
+   * @param productPriceOverride the new product price override
+   */
   public void setProductPriceOverride(String productPriceOverride) {
     this.productPriceOverride = productPriceOverride;
   }
 
+  /**
+   * Product relationship list.
+   *
+   * @param productRelationshipList the product relationship list
+   * @return the commercial product
+   */
   public CommercialProduct productRelationshipList(String productRelationshipList) {
     this.productRelationshipList = productRelationshipList;
     return this;
   }
 
   /**
-   * product relationship list
+   * product relationship list.
+   *
    * @return productRelationshipList
-  **/
+   */
   @ApiModelProperty(value = "product relationship list")
 
 
@@ -1121,19 +1730,31 @@ public class CommercialProduct   {
     return productRelationshipList;
   }
 
+  /**
+   * Sets the product relationship list.
+   *
+   * @param productRelationshipList the new product relationship list
+   */
   public void setProductRelationshipList(String productRelationshipList) {
     this.productRelationshipList = productRelationshipList;
   }
 
+  /**
+   * Product sub class.
+   *
+   * @param productSubClass the product sub class
+   * @return the commercial product
+   */
   public CommercialProduct productSubClass(String productSubClass) {
     this.productSubClass = productSubClass;
     return this;
   }
 
   /**
-   * product subclass
+   * product subclass.
+   *
    * @return productSubClass
-  **/
+   */
   @ApiModelProperty(value = "product subclass")
 
 
@@ -1141,19 +1762,31 @@ public class CommercialProduct   {
     return productSubClass;
   }
 
+  /**
+   * Sets the product sub class.
+   *
+   * @param productSubClass the new product sub class
+   */
   public void setProductSubClass(String productSubClass) {
     this.productSubClass = productSubClass;
   }
 
+  /**
+   * Promote as.
+   *
+   * @param promoteAs the promote as
+   * @return the commercial product
+   */
   public CommercialProduct promoteAs(PromoteAs promoteAs) {
     this.promoteAs = promoteAs;
     return this;
   }
 
   /**
-   * Get promoteAs
+   * Get promoteAs.
+   *
    * @return promoteAs
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -1162,15 +1795,32 @@ public class CommercialProduct   {
     return promoteAs;
   }
 
+  /**
+   * Sets the promote as.
+   *
+   * @param promoteAs the new promote as
+   */
   public void setPromoteAs(PromoteAs promoteAs) {
     this.promoteAs = promoteAs;
   }
 
+  /**
+   * Recommendataions.
+   *
+   * @param recommendataions the recommendataions
+   * @return the commercial product
+   */
   public CommercialProduct recommendataions(List<Recommendations> recommendataions) {
     this.recommendataions = recommendataions;
     return this;
   }
 
+  /**
+   * Adds the recommendataions item.
+   *
+   * @param recommendataionsItem the recommendataions item
+   * @return the commercial product
+   */
   public CommercialProduct addRecommendataionsItem(Recommendations recommendataionsItem) {
     if (this.recommendataions == null) {
       this.recommendataions = new ArrayList<>();
@@ -1180,9 +1830,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * Get recommendataions
+   * Get recommendataions.
+   *
    * @return recommendataions
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -1191,19 +1842,31 @@ public class CommercialProduct   {
     return recommendataions;
   }
 
+  /**
+   * Sets the recommendataions.
+   *
+   * @param recommendataions the new recommendataions
+   */
   public void setRecommendataions(List<Recommendations> recommendataions) {
     this.recommendataions = recommendataions;
   }
 
+  /**
+   * Seo canonical.
+   *
+   * @param seoCanonical the seo canonical
+   * @return the commercial product
+   */
   public CommercialProduct seoCanonical(String seoCanonical) {
     this.seoCanonical = seoCanonical;
     return this;
   }
 
   /**
-   * seoCanonical
+   * seoCanonical.
+   *
    * @return seoCanonical
-  **/
+   */
   @ApiModelProperty(value = "seoCanonical")
 
 
@@ -1211,19 +1874,31 @@ public class CommercialProduct   {
     return seoCanonical;
   }
 
+  /**
+   * Sets the seo canonical.
+   *
+   * @param seoCanonical the new seo canonical
+   */
   public void setSeoCanonical(String seoCanonical) {
     this.seoCanonical = seoCanonical;
   }
 
+  /**
+   * Seo description.
+   *
+   * @param seoDescription the seo description
+   * @return the commercial product
+   */
   public CommercialProduct seoDescription(String seoDescription) {
     this.seoDescription = seoDescription;
     return this;
   }
 
   /**
-   * seo description
+   * seo description.
+   *
    * @return seoDescription
-  **/
+   */
   @ApiModelProperty(value = "seo description")
 
 
@@ -1231,19 +1906,31 @@ public class CommercialProduct   {
     return seoDescription;
   }
 
+  /**
+   * Sets the seo description.
+   *
+   * @param seoDescription the new seo description
+   */
   public void setSeoDescription(String seoDescription) {
     this.seoDescription = seoDescription;
   }
 
+  /**
+   * Seo index.
+   *
+   * @param seoIndex the seo index
+   * @return the commercial product
+   */
   public CommercialProduct seoIndex(String seoIndex) {
     this.seoIndex = seoIndex;
     return this;
   }
 
   /**
-   * seo index
+   * seo index.
+   *
    * @return seoIndex
-  **/
+   */
   @ApiModelProperty(value = "seo index")
 
 
@@ -1251,19 +1938,31 @@ public class CommercialProduct   {
     return seoIndex;
   }
 
+  /**
+   * Sets the seo index.
+   *
+   * @param seoIndex the new seo index
+   */
   public void setSeoIndex(String seoIndex) {
     this.seoIndex = seoIndex;
   }
 
+  /**
+   * Seo keywords.
+   *
+   * @param seoKeywords the seo keywords
+   * @return the commercial product
+   */
   public CommercialProduct seoKeywords(String seoKeywords) {
     this.seoKeywords = seoKeywords;
     return this;
   }
 
   /**
-   * seo keywords
+   * seo keywords.
+   *
    * @return seoKeywords
-  **/
+   */
   @ApiModelProperty(value = "seo keywords")
 
 
@@ -1271,15 +1970,32 @@ public class CommercialProduct   {
     return seoKeywords;
   }
 
+  /**
+   * Sets the seo keywords.
+   *
+   * @param seoKeywords the new seo keywords
+   */
   public void setSeoKeywords(String seoKeywords) {
     this.seoKeywords = seoKeywords;
   }
 
+  /**
+   * Specification groups.
+   *
+   * @param specificationGroups the specification groups
+   * @return the commercial product
+   */
   public CommercialProduct specificationGroups(List<Group> specificationGroups) {
     this.specificationGroups = specificationGroups;
     return this;
   }
 
+  /**
+   * Adds the specification groups item.
+   *
+   * @param specificationGroupsItem the specification groups item
+   * @return the commercial product
+   */
   public CommercialProduct addSpecificationGroupsItem(Group specificationGroupsItem) {
     if (this.specificationGroups == null) {
       this.specificationGroups = new ArrayList<>();
@@ -1289,9 +2005,10 @@ public class CommercialProduct   {
   }
 
   /**
-   * Get specificationGroups
+   * Get specificationGroups.
+   *
    * @return specificationGroups
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -1300,19 +2017,31 @@ public class CommercialProduct   {
     return specificationGroups;
   }
 
+  /**
+   * Sets the specification groups.
+   *
+   * @param specificationGroups the new specification groups
+   */
   public void setSpecificationGroups(List<Group> specificationGroups) {
     this.specificationGroups = specificationGroups;
   }
 
+  /**
+   * Stock threshold limit.
+   *
+   * @param stockThresholdLimit the stock threshold limit
+   * @return the commercial product
+   */
   public CommercialProduct stockThresholdLimit(String stockThresholdLimit) {
     this.stockThresholdLimit = stockThresholdLimit;
     return this;
   }
 
   /**
-   * Get stockThresholdLimit
+   * Get stockThresholdLimit.
+   *
    * @return stockThresholdLimit
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -1320,19 +2049,31 @@ public class CommercialProduct   {
     return stockThresholdLimit;
   }
 
+  /**
+   * Sets the stock threshold limit.
+   *
+   * @param stockThresholdLimit the new stock threshold limit
+   */
   public void setStockThresholdLimit(String stockThresholdLimit) {
     this.stockThresholdLimit = stockThresholdLimit;
   }
 
+  /**
+   * Version.
+   *
+   * @param version the version
+   * @return the commercial product
+   */
   public CommercialProduct version(String version) {
     this.version = version;
     return this;
   }
 
   /**
-   * version
+   * version.
+   *
    * @return version
-  **/
+   */
   @ApiModelProperty(value = "version")
 
 
@@ -1340,19 +2081,31 @@ public class CommercialProduct   {
     return version;
   }
 
+  /**
+   * Sets the version.
+   *
+   * @param version the new version
+   */
   public void setVersion(String version) {
     this.version = version;
   }
 
+  /**
+   * Warranty.
+   *
+   * @param warranty the warranty
+   * @return the commercial product
+   */
   public CommercialProduct warranty(String warranty) {
     this.warranty = warranty;
     return this;
   }
 
   /**
-   * Product Warranty
+   * Product Warranty.
+   *
    * @return warranty
-  **/
+   */
   @ApiModelProperty(value = "Product Warranty")
 
 
@@ -1360,11 +2113,19 @@ public class CommercialProduct   {
     return warranty;
   }
 
+  /**
+   * Sets the warranty.
+   *
+   * @param warranty the new warranty
+   */
   public void setWarranty(String warranty) {
     this.warranty = warranty;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -1431,11 +2192,17 @@ public class CommercialProduct   {
         Objects.equals(this.warranty, commercialProduct.warranty);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(allowanceDisplay, battery, boxPrice, categories, condition, contentVersion, delivery, discount, displayName, duration, eligibilitySubflow, equipment, fastMoving, id, inTheBox, inclusiveEligibility, isDeviceProduct, isServicesProduct, leadPlanId, listOfCompatibleBundles, listOfEligibleChannels, listOfhelpURLs, listOfimageURLs, listOfmediaURLs, merchandisingVersion, metadataVersion, misc, name, omniChannelDiscountEligible, order, paymentType, postDesc, postDescMobile, preDesc, preDescMobile, priceInfo, productAllowance, productAvailability, productClass, productControl, productGroups, productLines, productPriceOverride, productRelationshipList, productSubClass, promoteAs, recommendataions, seoCanonical, seoDescription, seoIndex, seoKeywords, specificationGroups, stockThresholdLimit, version, warranty);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -1503,6 +2270,9 @@ public class CommercialProduct   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

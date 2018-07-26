@@ -7,28 +7,41 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ServiceLine
+ * ServiceLine.
  */
 
 public class ServiceLine {
+	
+	/** The product code. */
 	@JsonProperty("productCode")
 	private String productCode = null;
 
+	/** The product name. */
 	@JsonProperty("productName")
 	private String productName = null;
 
+	/** The classification code. */
 	@JsonProperty("classificationCode")
 	private String classificationCode = null;
 
+	/** The line speeds. */
 	@JsonProperty("lineSpeeds")
 	private LineSpeeds lineSpeeds = null;
 
+	/** The line treatment. */
 	@JsonProperty("lineTreatment")
 	private List<ServiceLineTreatment> lineTreatment = new ArrayList<>();
 
+	/** The misc reference. */
 	@JsonProperty("miscReference")
 	private MiscReference miscReference = null;
 
+	/**
+	 * Product code.
+	 *
+	 * @param productCode the product code
+	 * @return the service line
+	 */
 	public ServiceLine productCode(String productCode) {
 		this.productCode = productCode;
 		return this;
@@ -43,10 +56,21 @@ public class ServiceLine {
 		return productCode;
 	}
 
+	/**
+	 * Sets the product code.
+	 *
+	 * @param productCode the new product code
+	 */
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
 
+	/**
+	 * Product name.
+	 *
+	 * @param productName the product name
+	 * @return the service line
+	 */
 	public ServiceLine productName(String productName) {
 		this.productName = productName;
 		return this;
@@ -61,87 +85,145 @@ public class ServiceLine {
 		return productName;
 	}
 
+	/**
+	 * Sets the product name.
+	 *
+	 * @param productName the new product name
+	 */
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
+	/**
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the service line
+	 */
 	public ServiceLine classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
 	}
 
 	/**
-	 * The category the technical product falls into
-	 * 
+	 * The category the technical product falls into.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 	public String getClassificationCode() {
 		return classificationCode;
 	}
 
+	/**
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
+	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * Line speeds.
+	 *
+	 * @param lineSpeeds the line speeds
+	 * @return the service line
+	 */
 	public ServiceLine lineSpeeds(LineSpeeds lineSpeeds) {
 		this.lineSpeeds = lineSpeeds;
 		return this;
 	}
 
 	/**
-	 * Get lineSpeeds
-	 * 
+	 * Get lineSpeeds.
+	 *
 	 * @return lineSpeeds
-	 **/
+	 */
 	public LineSpeeds getLineSpeeds() {
 		return lineSpeeds;
 	}
 
+	/**
+	 * Sets the line speeds.
+	 *
+	 * @param lineSpeeds the new line speeds
+	 */
 	public void setLineSpeeds(LineSpeeds lineSpeeds) {
 		this.lineSpeeds = lineSpeeds;
 	}
 
+	/**
+	 * Line treatment.
+	 *
+	 * @param lineTreatment the line treatment
+	 * @return the service line
+	 */
 	public ServiceLine lineTreatment(List<ServiceLineTreatment> lineTreatment) {
 		this.lineTreatment = lineTreatment;
 		return this;
 	}
 
+	/**
+	 * Adds the line treatment item.
+	 *
+	 * @param lineTreatmentItem the line treatment item
+	 * @return the service line
+	 */
 	public ServiceLine addLineTreatmentItem(ServiceLineTreatment lineTreatmentItem) {
 		this.lineTreatment.add(lineTreatmentItem);
 		return this;
 	}
 
 	/**
-	 * Get lineTreatment
-	 * 
+	 * Get lineTreatment.
+	 *
 	 * @return lineTreatment
-	 **/
+	 */
 	public List<ServiceLineTreatment> getLineTreatment() {
 		return lineTreatment;
 	}
 
+	/**
+	 * Sets the line treatment.
+	 *
+	 * @param lineTreatment the new line treatment
+	 */
 	public void setLineTreatment(List<ServiceLineTreatment> lineTreatment) {
 		this.lineTreatment = lineTreatment;
 	}
 
+	/**
+	 * Misc reference.
+	 *
+	 * @param miscReference the misc reference
+	 * @return the service line
+	 */
 	public ServiceLine miscReference(MiscReference miscReference) {
 		this.miscReference = miscReference;
 		return this;
 	}
 
 	/**
-	 * Get miscReference
-	 * 
+	 * Get miscReference.
+	 *
 	 * @return miscReference
-	 **/
+	 */
 	public MiscReference getMiscReference() {
 		return miscReference;
 	}
 
+	/**
+	 * Sets the misc reference.
+	 *
+	 * @param miscReference the new misc reference
+	 */
 	public void setMiscReference(MiscReference miscReference) {
 		this.miscReference = miscReference;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -159,11 +241,17 @@ public class ServiceLine {
 				&& Objects.equals(this.miscReference, serviceLine.miscReference);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(productCode, productName, classificationCode, lineSpeeds, lineTreatment, miscReference);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -182,6 +270,9 @@ public class ServiceLine {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

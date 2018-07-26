@@ -9,27 +9,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * BundlePrice
+ * BundlePrice.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class BundlePrice   {
+  
+  /** The bundle id. */
   @JsonProperty("bundleId")
   private String bundleId = null;
 
+  /** The monthly price. */
   @JsonProperty("monthlyPrice")
   private Price monthlyPrice = null;
 
+  /** The monthly discount price. */
   @JsonProperty("monthlyDiscountPrice")
   private Price monthlyDiscountPrice = null;
 
+  /** The merchandising promotions. */
   @JsonProperty("merchandisingPromotions")
   private MerchandisingPromotion merchandisingPromotions = null;
 
   /**
-   * 
-   * @param bundleId
-   * @return
+   * Bundle id.
+   *
+   * @param bundleId the bundle id
+   * @return the bundle price
    */
   
   public BundlePrice bundleId(String bundleId) {
@@ -38,9 +44,10 @@ public class BundlePrice   {
   }
 
    /**
-   * Bundle id of the price to be calculated
-   * @return bundleId
-  **/
+    * Bundle id of the price to be calculated.
+    *
+    * @return bundleId
+    */
   @ApiModelProperty(value = "Bundle id of the price to be calculated")
 
 
@@ -48,14 +55,20 @@ public class BundlePrice   {
     return bundleId;
   }
 
+  /**
+   * Sets the bundle id.
+   *
+   * @param bundleId the new bundle id
+   */
   public void setBundleId(String bundleId) {
     this.bundleId = bundleId;
   }
 
   /**
-   * 
-   * @param monthlyPrice
-   * @return
+   * Monthly price.
+   *
+   * @param monthlyPrice the monthly price
+   * @return the bundle price
    */
   
   public BundlePrice monthlyPrice(Price monthlyPrice) {
@@ -64,9 +77,10 @@ public class BundlePrice   {
   }
 
    /**
-   * Get monthlyPrice
-   * @return monthlyPrice
-  **/
+    * Get monthlyPrice.
+    *
+    * @return monthlyPrice
+    */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -75,14 +89,20 @@ public class BundlePrice   {
     return monthlyPrice;
   }
 
+  /**
+   * Sets the monthly price.
+   *
+   * @param monthlyPrice the new monthly price
+   */
   public void setMonthlyPrice(Price monthlyPrice) {
     this.monthlyPrice = monthlyPrice;
   }
 
   /**
-   * 
-   * @param monthlyDiscountPrice
-   * @return
+   * Monthly discount price.
+   *
+   * @param monthlyDiscountPrice the monthly discount price
+   * @return the bundle price
    */
   public BundlePrice monthlyDiscountPrice(Price monthlyDiscountPrice) {
     this.monthlyDiscountPrice = monthlyDiscountPrice;
@@ -90,9 +110,10 @@ public class BundlePrice   {
   }
 
    /**
-   * Get monthlyDiscountPrice
-   * @return monthlyDiscountPrice
-  **/
+    * Get monthlyDiscountPrice.
+    *
+    * @return monthlyDiscountPrice
+    */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -101,14 +122,20 @@ public class BundlePrice   {
     return monthlyDiscountPrice;
   }
 
+  /**
+   * Sets the monthly discount price.
+   *
+   * @param monthlyDiscountPrice the new monthly discount price
+   */
   public void setMonthlyDiscountPrice(Price monthlyDiscountPrice) {
     this.monthlyDiscountPrice = monthlyDiscountPrice;
   }
 
   /**
-   * 
-   * @param merchandisingPromotions
-   * @return
+   * Merchandising promotions.
+   *
+   * @param merchandisingPromotions the merchandising promotions
+   * @return the bundle price
    */
   
   public BundlePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
@@ -117,9 +144,10 @@ public class BundlePrice   {
   }
 
    /**
-   * Get merchandisingPromotions
-   * @return merchandisingPromotions
-  **/
+    * Get merchandisingPromotions.
+    *
+    * @return merchandisingPromotions
+    */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -128,11 +156,19 @@ public class BundlePrice   {
     return merchandisingPromotions;
   }
 
+  /**
+   * Sets the merchandising promotions.
+   *
+   * @param merchandisingPromotions the new merchandising promotions
+   */
   public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -148,11 +184,17 @@ public class BundlePrice   {
         Objects.equals(this.merchandisingPromotions, bundlePrice.merchandisingPromotions);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(bundleId, monthlyPrice, monthlyDiscountPrice, merchandisingPromotions);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -169,6 +211,9 @@ public class BundlePrice   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

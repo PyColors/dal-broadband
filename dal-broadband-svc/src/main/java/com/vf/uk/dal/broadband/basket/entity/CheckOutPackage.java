@@ -53,6 +53,11 @@ public class CheckOutPackage   {
   @Valid
   private List<Service> services = null;
 
+  /**
+   * 
+   * @param accountCategory
+   * @return
+   */
   public CheckOutPackage accountCategory(String accountCategory) {
     this.accountCategory = accountCategory;
     return this;
@@ -73,6 +78,11 @@ public class CheckOutPackage   {
     this.accountCategory = accountCategory;
   }
 
+  /**
+   * 
+   * @param bundle
+   * @return
+   */
   public CheckOutPackage bundle(CheckOutBundle bundle) {
     this.bundle = bundle;
     return this;
@@ -94,11 +104,21 @@ public class CheckOutPackage   {
     this.bundle = bundle;
   }
 
+  /**
+   * 
+   * @param dependentOn
+   * @return
+   */
   public CheckOutPackage dependentOn(List<String> dependentOn) {
     this.dependentOn = dependentOn;
     return this;
   }
 
+  /**
+   * 
+   * @param dependentOnItem
+   * @return
+   */
   public CheckOutPackage addDependentOnItem(String dependentOnItem) {
     if (this.dependentOn == null) {
       this.dependentOn = new ArrayList<>();
@@ -122,11 +142,21 @@ public class CheckOutPackage   {
     this.dependentOn = dependentOn;
   }
 
+  /**
+   * 
+   * @param discounts
+   * @return
+   */
   public CheckOutPackage discounts(List<Discount> discounts) {
     this.discounts = discounts;
     return this;
   }
 
+  /**
+   * 
+   * @param discountsItem
+   * @return
+   */
   public CheckOutPackage addDiscountsItem(Discount discountsItem) {
     if (this.discounts == null) {
       this.discounts = new ArrayList<>();
@@ -151,11 +181,21 @@ public class CheckOutPackage   {
     this.discounts = discounts;
   }
 
+  /**
+   * 
+   * @param hardwares
+   * @return
+   */
   public CheckOutPackage hardwares(List<CheckOutHardware> hardwares) {
     this.hardwares = hardwares;
     return this;
   }
 
+  /**
+   * 
+   * @param hardwaresItem
+   * @return
+   */
   public CheckOutPackage addHardwaresItem(CheckOutHardware hardwaresItem) {
     if (this.hardwares == null) {
       this.hardwares = new ArrayList<>();
@@ -180,6 +220,11 @@ public class CheckOutPackage   {
     this.hardwares = hardwares;
   }
 
+  /**
+   * 
+   * @param packageId
+   * @return
+   */
   public CheckOutPackage packageId(String packageId) {
     this.packageId = packageId;
     return this;
@@ -200,6 +245,11 @@ public class CheckOutPackage   {
     this.packageId = packageId;
   }
 
+  /**
+   * 
+   * @param packageType
+   * @return
+   */
   public CheckOutPackage packageType(String packageType) {
     this.packageType = packageType;
     return this;
@@ -220,6 +270,11 @@ public class CheckOutPackage   {
     this.packageType = packageType;
   }
 
+  /**
+   * 
+   * @param priceDetails
+   * @return
+   */
   public CheckOutPackage priceDetails(PriceDetails priceDetails) {
     this.priceDetails = priceDetails;
     return this;
@@ -241,6 +296,11 @@ public class CheckOutPackage   {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * 
+   * @param sequence
+   * @return
+   */
   public CheckOutPackage sequence(Integer sequence) {
     this.sequence = sequence;
     return this;
@@ -261,11 +321,21 @@ public class CheckOutPackage   {
     this.sequence = sequence;
   }
 
+  /**
+   * 
+   * @param services
+   * @return
+   */
   public CheckOutPackage services(List<Service> services) {
     this.services = services;
     return this;
   }
 
+  /**
+   * 
+   * @param servicesItem
+   * @return
+   */
   public CheckOutPackage addServicesItem(Service servicesItem) {
     if (this.services == null) {
       this.services = new ArrayList<>();

@@ -9,39 +9,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * MiscReference
+ * MiscReference.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-07T12:15:55.201Z")
 
 public class MiscReference   {
+  
+  /** The anfp. */
   @JsonProperty("ANFP")
   private String ANFP = null;
 
+  /** The customer agreed date. */
   @JsonProperty("customerAgreedDate")
   private String customerAgreedDate = null;
 
+  /** The installation type. */
   @JsonProperty("installationType")
   private String installationType = null;
 
+  /** The line length. */
   @JsonProperty("lineLength")
   private String lineLength = null;
 
+  /** The ready for service date. */
   @JsonProperty("readyForServiceDate")
   private String readyForServiceDate = null;
 
+  /** The service provider name. */
   @JsonProperty("serviceProviderName")
   private String serviceProviderName = null;
 
+  /**
+   * Anfp.
+   *
+   * @param ANFP the anfp
+   * @return the misc reference
+   */
   public MiscReference ANFP(String ANFP) {
     this.ANFP = ANFP;
     return this;
   }
 
   /**
-   * Get ANFP
+   * Get ANFP.
+   *
    * @return ANFP
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -49,19 +63,31 @@ public class MiscReference   {
     return ANFP;
   }
 
+  /**
+   * Sets the anfp.
+   *
+   * @param ANFP the new anfp
+   */
   public void setANFP(String ANFP) {
     this.ANFP = ANFP;
   }
 
+  /**
+   * Customer agreed date.
+   *
+   * @param customerAgreedDate the customer agreed date
+   * @return the misc reference
+   */
   public MiscReference customerAgreedDate(String customerAgreedDate) {
     this.customerAgreedDate = customerAgreedDate;
     return this;
   }
 
   /**
-   * Get customerAgreedDate
+   * Get customerAgreedDate.
+   *
    * @return customerAgreedDate
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -69,19 +95,31 @@ public class MiscReference   {
     return customerAgreedDate;
   }
 
+  /**
+   * Sets the customer agreed date.
+   *
+   * @param customerAgreedDate the new customer agreed date
+   */
   public void setCustomerAgreedDate(String customerAgreedDate) {
     this.customerAgreedDate = customerAgreedDate;
   }
 
+  /**
+   * Installation type.
+   *
+   * @param installationType the installation type
+   * @return the misc reference
+   */
   public MiscReference installationType(String installationType) {
     this.installationType = installationType;
     return this;
   }
 
   /**
-   * Get installationType
+   * Get installationType.
+   *
    * @return installationType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -89,19 +127,31 @@ public class MiscReference   {
     return installationType;
   }
 
+  /**
+   * Sets the installation type.
+   *
+   * @param installationType the new installation type
+   */
   public void setInstallationType(String installationType) {
     this.installationType = installationType;
   }
 
+  /**
+   * Line length.
+   *
+   * @param lineLength the line length
+   * @return the misc reference
+   */
   public MiscReference lineLength(String lineLength) {
     this.lineLength = lineLength;
     return this;
   }
 
   /**
-   * Get lineLength
+   * Get lineLength.
+   *
    * @return lineLength
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -109,19 +159,31 @@ public class MiscReference   {
     return lineLength;
   }
 
+  /**
+   * Sets the line length.
+   *
+   * @param lineLength the new line length
+   */
   public void setLineLength(String lineLength) {
     this.lineLength = lineLength;
   }
 
+  /**
+   * Ready for service date.
+   *
+   * @param readyForServiceDate the ready for service date
+   * @return the misc reference
+   */
   public MiscReference readyForServiceDate(String readyForServiceDate) {
     this.readyForServiceDate = readyForServiceDate;
     return this;
   }
 
   /**
-   * Get readyForServiceDate
+   * Get readyForServiceDate.
+   *
    * @return readyForServiceDate
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -129,19 +191,31 @@ public class MiscReference   {
     return readyForServiceDate;
   }
 
+  /**
+   * Sets the ready for service date.
+   *
+   * @param readyForServiceDate the new ready for service date
+   */
   public void setReadyForServiceDate(String readyForServiceDate) {
     this.readyForServiceDate = readyForServiceDate;
   }
 
+  /**
+   * Service provider name.
+   *
+   * @param serviceProviderName the service provider name
+   * @return the misc reference
+   */
   public MiscReference serviceProviderName(String serviceProviderName) {
     this.serviceProviderName = serviceProviderName;
     return this;
   }
 
   /**
-   * Get serviceProviderName
+   * Get serviceProviderName.
+   *
    * @return serviceProviderName
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -149,11 +223,19 @@ public class MiscReference   {
     return serviceProviderName;
   }
 
+  /**
+   * Sets the service provider name.
+   *
+   * @param serviceProviderName the new service provider name
+   */
   public void setServiceProviderName(String serviceProviderName) {
     this.serviceProviderName = serviceProviderName;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -171,11 +253,17 @@ public class MiscReference   {
         Objects.equals(this.serviceProviderName, miscReference.serviceProviderName);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(ANFP, customerAgreedDate, installationType, lineLength, readyForServiceDate, serviceProviderName);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -194,6 +282,9 @@ public class MiscReference   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

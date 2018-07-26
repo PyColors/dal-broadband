@@ -3,19 +3,25 @@ package com.vf.uk.dal.broadband.inventory.entity;
 import java.util.Objects;
 
 /**
- * Price
+ * Price.
  */
 
 public class DeliveryPrice {
+	
+	/** The gross. */
 	private Double gross = null;
 
+	/** The net. */
 	private Double net = null;
 
+	/** The vat. */
 	private Double vat = null;
 
 	/**
-	 * @param gross
-	 * @return
+	 * Gross.
+	 *
+	 * @param gross the gross
+	 * @return the delivery price
 	 */
 	public DeliveryPrice gross(Double gross) {
 		this.gross = gross;
@@ -23,24 +29,28 @@ public class DeliveryPrice {
 	}
 
 	/**
-	 * Gross value of the item
-	 * 
+	 * Gross value of the item.
+	 *
 	 * @return gross
-	 **/
+	 */
 	public Double getGross() {
 		return gross;
 	}
 
 	/**
-	 * @param gross
+	 * Sets the gross.
+	 *
+	 * @param gross the new gross
 	 */
 	public void setGross(Double gross) {
 		this.gross = gross;
 	}
 
 	/**
-	 * @param net
-	 * @return
+	 * Net.
+	 *
+	 * @param net the net
+	 * @return the delivery price
 	 */
 	public DeliveryPrice net(Double net) {
 		this.net = net;
@@ -48,24 +58,28 @@ public class DeliveryPrice {
 	}
 
 	/**
-	 * Net value of the item
-	 * 
+	 * Net value of the item.
+	 *
 	 * @return net
-	 **/
+	 */
 	public Double getNet() {
 		return net;
 	}
 
 	/**
-	 * @param net
+	 * Sets the net.
+	 *
+	 * @param net the new net
 	 */
 	public void setNet(Double net) {
 		this.net = net;
 	}
 
 	/**
-	 * @param vat
-	 * @return
+	 * Vat.
+	 *
+	 * @param vat the vat
+	 * @return the delivery price
 	 */
 	public DeliveryPrice vat(Double vat) {
 		this.vat = vat;
@@ -73,21 +87,26 @@ public class DeliveryPrice {
 	}
 
 	/**
-	 * VAT component of the item price
-	 * 
+	 * VAT component of the item price.
+	 *
 	 * @return vat
-	 **/
+	 */
 	public Double getVat() {
 		return vat;
 	}
 
 	/**
-	 * @param vat
+	 * Sets the vat.
+	 *
+	 * @param vat the new vat
 	 */
 	public void setVat(Double vat) {
 		this.vat = vat;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -101,6 +120,9 @@ public class DeliveryPrice {
 				&& Objects.equals(this.vat, price.vat);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(gross, net, vat);
