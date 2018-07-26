@@ -13,17 +13,17 @@ public class SiteNote implements Serializable {
 	private static final long serialVersionUID = -6338036628127368614L;
 	
 	/** The Constant NOTES. */
-	private static final String NOTES = "notes";
+	private static final String ENGG_NOTES = "notes";
 	
 	/** The Constant TYPECODE. */
-	private static final String TYPECODE = "typeCode";
+	private static final String TYPE_CODE = "typeCode";
 
 	/** The notes. */
-	@JsonProperty(NOTES)
+	@JsonProperty(ENGG_NOTES)
 	private String notes;
 	
 	/** The type code. */
-	@JsonProperty(TYPECODE)
+	@JsonProperty(TYPE_CODE)
 	private String typeCode;
 
 	/**

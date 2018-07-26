@@ -30,7 +30,7 @@ public class ExcludesIncompatibility   {
 
   public ExcludesIncompatibility addProductIdsItem(String productIdsItem) {
     if (this.productIds == null) {
-      this.productIds = new ArrayList<String>();
+      this.productIds = new ArrayList<>();
     }
     this.productIds.add(productIdsItem);
     return this;

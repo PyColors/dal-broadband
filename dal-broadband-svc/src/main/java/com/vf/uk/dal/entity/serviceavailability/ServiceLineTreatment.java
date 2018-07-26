@@ -43,7 +43,7 @@ public class ServiceLineTreatment {
 	private String viCCode = null;
 
 	@JsonProperty("pendingOrder")
-	private List<PendingOrder> pendingOrder = new ArrayList<PendingOrder>();
+	private List<PendingOrder> pendingOrder = new ArrayList<>();
 
 	@JsonProperty("note")
 	private String note = null;

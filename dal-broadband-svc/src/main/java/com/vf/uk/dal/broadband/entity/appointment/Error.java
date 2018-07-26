@@ -104,7 +104,7 @@ public class Error   {
 
   public Error addStackTraceItem(StackTraceElement stackTraceItem) {
     if (this.stackTrace == null) {
-      this.stackTrace = new ArrayList<StackTraceElement>();
+      this.stackTrace = new ArrayList<>();
     }
     this.stackTrace.add(stackTraceItem);
     return this;
@@ -133,7 +133,7 @@ public class Error   {
 
   public Error addSuppressedItem(Throwable suppressedItem) {
     if (this.suppressed == null) {
-      this.suppressed = new ArrayList<Throwable>();
+      this.suppressed = new ArrayList<>();
     }
     this.suppressed.add(suppressedItem);
     return this;

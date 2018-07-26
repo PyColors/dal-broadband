@@ -188,7 +188,7 @@ public class CheckOutBasket   {
 
   public CheckOutBasket addPackagesItem(CheckOutPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<CheckOutPackage>();
+      this.packages = new ArrayList<>();
     }
     this.packages.add(packagesItem);
     return this;

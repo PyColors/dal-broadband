@@ -13,16 +13,16 @@ public class ItemReference implements Serializable{
 	private static final long serialVersionUID = 815255394624573030L;
 	
 	/** The Constant IDENTIFICATIONID. */
-	private static final String IDENTIFICATIONID = "identificationId";
+	private static final String IDENTIFICATION_ID = "identificationId";
 	
 	/** The Constant NAME. */
 	private static final String NAME = "name";
 	
 	/** The Constant CLASSIFICATIONCODE. */
-	private static final String CLASSIFICATIONCODE = "classificationCode";
+	private static final String CLASSIFICATION_CODE = "classificationCode";
 	
 	/** The identification id. */
-	@JsonProperty(IDENTIFICATIONID)
+	@JsonProperty(IDENTIFICATION_ID)
 	private String identificationId;
 	
 	/** The name. */
@@ -30,7 +30,7 @@ public class ItemReference implements Serializable{
 	private String name;
 	
 	/** The classification code. */
-	@JsonProperty(CLASSIFICATIONCODE)
+	@JsonProperty(CLASSIFICATION_CODE)
 	private String classificationCode;
 	
 	/**

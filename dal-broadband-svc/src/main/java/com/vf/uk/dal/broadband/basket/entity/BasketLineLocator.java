@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -153,28 +151,6 @@ public class BasketLineLocator   {
     this.l2SID = l2SID;
   }
 
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    BasketLineLocator lineLocator = (BasketLineLocator) o;
-    return Objects.equals(this.cableLinkID, lineLocator.cableLinkID) &&
-        Objects.equals(this.distributionPoint, lineLocator.distributionPoint) &&
-        Objects.equals(this.districtCode, lineLocator.districtCode) &&
-        Objects.equals(this.exchangeCode, lineLocator.exchangeCode) &&
-        Objects.equals(this.exchangeName, lineLocator.exchangeName) &&
-        Objects.equals(this.l2SID, lineLocator.l2SID);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(cableLinkID, distributionPoint, districtCode, exchangeCode, exchangeName, l2SID);
-  }
 
   @Override
   public String toString() {

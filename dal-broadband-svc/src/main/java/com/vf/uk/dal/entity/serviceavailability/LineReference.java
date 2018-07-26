@@ -23,7 +23,7 @@ public class LineReference {
 	private LinePlant linePlant = null;
 
 	@JsonProperty("lineDirectory")
-	private List<LineDirectory> lineDirectory = new ArrayList<LineDirectory>();
+	private List<LineDirectory> lineDirectory = new ArrayList<>();
 
 	@JsonProperty("lineLocator")
 	private LineLocator lineLocator = null;

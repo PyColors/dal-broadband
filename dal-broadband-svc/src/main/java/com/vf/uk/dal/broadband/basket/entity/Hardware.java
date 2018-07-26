@@ -115,7 +115,7 @@ public class Hardware   {
 
   public Hardware addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
-      this.attributes = new ArrayList<Attribute>();
+      this.attributes = new ArrayList<>();
     }
     this.attributes.add(attributesItem);
     return this;
@@ -185,7 +185,7 @@ public class Hardware   {
 
   public Hardware addDeviceBriefDescriptionItem(DeviceBriefDescription deviceBriefDescriptionItem) {
     if (this.deviceBriefDescription == null) {
-      this.deviceBriefDescription = new ArrayList<DeviceBriefDescription>();
+      this.deviceBriefDescription = new ArrayList<>();
     }
     this.deviceBriefDescription.add(deviceBriefDescriptionItem);
     return this;
@@ -390,7 +390,7 @@ public class Hardware   {
 
   public Hardware addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLinks>();
+      this.merchandisingMedia = new ArrayList<>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;

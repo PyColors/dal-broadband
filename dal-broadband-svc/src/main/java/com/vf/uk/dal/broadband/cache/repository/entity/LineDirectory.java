@@ -14,24 +14,24 @@ public class LineDirectory implements Serializable{
 	private static final long serialVersionUID = 1780612777649837824L;
 	
 	/** The Constant FEATURECODE. */
-	private static final String FEATURECODE = "featureCode";
+	private static final String FEATURE_CODE = "featureCode";
 	
 	/** The Constant DIRECTORYCODE. */
-	private static final String DIRECTORYCODE = "directoryCode";
+	private static final String DIRECTORY_CODE = "directoryCode";
 	
 	/** The Constant LOCALTIONCODE. */
-	private static final String LOCATIONCODE = "locationCode";
+	private static final String LOCATION_CODE = "locationCode";
 
 	/** The feature code. */
-	@JsonProperty(FEATURECODE)
+	@JsonProperty(FEATURE_CODE)
 	private String featureCode;
 	
 	/** The directory code. */
-	@JsonProperty(DIRECTORYCODE)
+	@JsonProperty(DIRECTORY_CODE)
 	private String directoryCode;
 	
 	/** The localtion code. */
-	@JsonProperty(LOCATIONCODE)
+	@JsonProperty(LOCATION_CODE)
 	private String locationCode;
 	
 	/**

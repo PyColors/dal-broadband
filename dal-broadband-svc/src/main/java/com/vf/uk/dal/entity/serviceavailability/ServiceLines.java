@@ -18,10 +18,10 @@ public class ServiceLines {
 	private String networkType = null;
 
 	@JsonProperty("lineTreatment")
-	private List<LineTreatment> lineTreatment = new ArrayList<LineTreatment>();
+	private List<LineTreatment> lineTreatment = new ArrayList<>();
 
 	@JsonProperty("serviceLine")
-	private List<ServiceLine> serviceLine = new ArrayList<ServiceLine>();
+	private List<ServiceLine> serviceLine = new ArrayList<>();
 
 	public ServiceLines classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;

@@ -15,32 +15,32 @@ public class ServiceLines implements Serializable {
 	private static final long serialVersionUID = -3798948156147335358L;
 	
 	/** The Constant CLASSIFICATIONCODE. */
-	private static final String CLASSIFICATIONCODE = "classificationCode";
+	private static final String CLASSIFICATION_CODE = "classificationCode";
 	
 	/** The Constant NETWORKTYPE. */
-	private static final String NETWORKTYPE = "networkType";
+	private static final String NETWORK_TYPE = "networkType";
 	
 	/** The Constant LINETREATMENTLIST. */
-	private static final String LINETREATMENTLIST = "lineTreatmentList";
+	private static final String LINETREATMENT_LIST = "lineTreatmentList";
 	
 	/** The Constant SERVICELINELIST. */
-	private static final String SERVICELINELIST = "serviceLineList";
+	private static final String SERVICELINE_LIST = "serviceLineList";
 	
 	/** The classification code. */
-	@JsonProperty(CLASSIFICATIONCODE)
+	@JsonProperty(CLASSIFICATION_CODE)
 	private String classificationCode;
 	
 	/** The network type. */
-	@JsonProperty(NETWORKTYPE)
+	@JsonProperty(NETWORK_TYPE)
 	private String networkType;
 	
 	/** The line treatment list. */
-	@JsonProperty(LINETREATMENTLIST)
-	private List<LineTreatment> lineTreatmentList = new ArrayList<LineTreatment>();
+	@JsonProperty(LINETREATMENT_LIST)
+	private List<LineTreatment> lineTreatmentList = new ArrayList<>();
 	
 	/** The service line list. */
-	@JsonProperty(SERVICELINELIST)
-	private List<ServieLine> serviceLineList = new ArrayList<ServieLine>();
+	@JsonProperty(SERVICELINE_LIST)
+	private List<ServieLine> serviceLineList = new ArrayList<>();
 	
 	/**
 	 * Gets the classification code.

@@ -136,7 +136,7 @@ public class BasketServiceLineTreatment   {
 
   public BasketServiceLineTreatment addPendingOrdersItem(BasketPendingOrder pendingOrdersItem) {
     if (this.pendingOrders == null) {
-      this.pendingOrders = new ArrayList<BasketPendingOrder>();
+      this.pendingOrders = new ArrayList<>();
     }
     this.pendingOrders.add(pendingOrdersItem);
     return this;

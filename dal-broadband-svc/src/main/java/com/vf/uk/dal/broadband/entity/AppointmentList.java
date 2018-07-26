@@ -59,7 +59,7 @@ public class AppointmentList {
 
 	public AppointmentList addTimeSlotsItem(String timeSlotsItem) {
 		if (this.timeSlots == null) {
-			this.timeSlots = new ArrayList<String>();
+			this.timeSlots = new ArrayList<>();
 		}
 		this.timeSlots.add(timeSlotsItem);
 		return this;

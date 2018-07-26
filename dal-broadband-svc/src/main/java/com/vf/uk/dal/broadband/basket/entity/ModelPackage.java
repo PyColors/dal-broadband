@@ -158,7 +158,7 @@ public class ModelPackage {
 
 	public ModelPackage addDependentOnItem(String dependentOnItem) {
 		if (this.dependentOn == null) {
-			this.dependentOn = new ArrayList<String>();
+			this.dependentOn = new ArrayList<>();
 		}
 		this.dependentOn.add(dependentOnItem);
 		return this;
@@ -186,7 +186,7 @@ public class ModelPackage {
 
 	public ModelPackage addDiscountsItem(Discount discountsItem) {
 		if (this.discounts == null) {
-			this.discounts = new ArrayList<Discount>();
+			this.discounts = new ArrayList<>();
 		}
 		this.discounts.add(discountsItem);
 		return this;
@@ -216,7 +216,7 @@ public class ModelPackage {
 
 	public ModelPackage addHardwaresItem(Hardware hardwaresItem) {
 		if (this.hardwares == null) {
-			this.hardwares = new ArrayList<Hardware>();
+			this.hardwares = new ArrayList<>();
 		}
 		this.hardwares.add(hardwaresItem);
 		return this;
@@ -514,7 +514,7 @@ public class ModelPackage {
 
 	public ModelPackage addServicesItem(Service servicesItem) {
 		if (this.services == null) {
-			this.services = new ArrayList<Service>();
+			this.services = new ArrayList<>();
 		}
 		this.services.add(servicesItem);
 		return this;

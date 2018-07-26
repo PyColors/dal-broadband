@@ -30,7 +30,7 @@ public class ProductGroups   {
 
   public ProductGroups addProductGroupItem(ProductGroup productGroupItem) {
     if (this.productGroup == null) {
-      this.productGroup = new ArrayList<ProductGroup>();
+      this.productGroup = new ArrayList<>();
     }
     this.productGroup.add(productGroupItem);
     return this;

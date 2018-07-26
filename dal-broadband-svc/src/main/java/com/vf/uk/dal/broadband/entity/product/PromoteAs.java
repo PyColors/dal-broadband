@@ -30,7 +30,7 @@ public class PromoteAs   {
 
   public PromoteAs addPromotionNameItem(String promotionNameItem) {
     if (this.promotionName == null) {
-      this.promotionName = new ArrayList<String>();
+      this.promotionName = new ArrayList<>();
     }
     this.promotionName.add(promotionNameItem);
     return this;

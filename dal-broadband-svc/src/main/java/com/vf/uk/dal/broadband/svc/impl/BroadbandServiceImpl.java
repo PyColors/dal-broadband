@@ -839,7 +839,24 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		
+		if(broadband!=null && broadband.getServicePoint()!=null && broadband.getServicePoint().getServiceReference()!=null && 
+				CollectionUtils.isNotEmpty(broadband.getServicePoint().getServiceReference().getServiceLinesList())){
+			for(com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLine : broadband.getServicePoint().getServiceReference().getServiceLinesList()){
+				List<LineTreatment> lineTreatmentList = serviceLine.getLineTreatmentList();
+				if(CollectionUtils.isNotEmpty(lineTreatmentList) && lineTreatmentList.size()==1 && "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())){
+					PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
+							mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
+					broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+							broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+					if (broadband.getEngineeringVisitCharge() != null
+							&& broadband.getEngineeringVisitCharge().getGross() != null) {
+						AddProductRequest addProductRequest = ConverterUtils.addProductRequest(broadband);
+						broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
+								broadband.getBasketInfo().getPackageId());
+					}
+				}
+			} 
+		}
 		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband,broadband.getBasketInfo().getAccountCategory());
 		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
 		GetAppointmentResponse getAppointmentRes = ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);
@@ -918,8 +935,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId) {
 		List<RouterDetails> routerDetailList = new ArrayList<>();
 		for (RouterProductDetails routerProductDetails : broadbandDao.getCompatibleDevicesForBundle(planId)) {
-			RouterDetails routerDetails = new RouterDetails();
-			routerDetails = mapper.map(routerProductDetails, RouterDetails.class);
+			RouterDetails routerDetails = mapper.map(routerProductDetails, RouterDetails.class);
 			routerDetails.setIsDefaultDevice(routerProductDetails.isIsDefaultDevice());
 			routerDetailList.add(routerDetails);
 		}

@@ -2084,7 +2084,7 @@ public class Product   {
 
   public Product addListOfCompatibleBundlesItem(String listOfCompatibleBundlesItem) {
     if (this.listOfCompatibleBundles == null) {
-      this.listOfCompatibleBundles = new ArrayList<String>();
+      this.listOfCompatibleBundles = new ArrayList<>();
     }
     this.listOfCompatibleBundles.add(listOfCompatibleBundlesItem);
     return this;

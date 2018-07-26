@@ -217,7 +217,7 @@ public class RouterProductDetails   {
 
   public RouterProductDetails addListOfImageURLsItem(ImageURL listOfImageURLsItem) {
     if (this.listOfImageURLs == null) {
-      this.listOfImageURLs = new ArrayList<ImageURL>();
+      this.listOfImageURLs = new ArrayList<>();
     }
     this.listOfImageURLs.add(listOfImageURLsItem);
     return this;
@@ -347,7 +347,7 @@ public class RouterProductDetails   {
 
   public RouterProductDetails addProductLinesItem(String productLinesItem) {
     if (this.productLines == null) {
-      this.productLines = new ArrayList<String>();
+      this.productLines = new ArrayList<>();
     }
     this.productLines.add(productLinesItem);
     return this;

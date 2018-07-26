@@ -89,7 +89,7 @@ public class ServiceLine {
 
 	public ServiceLine addServiceLineTreatmentsItem(ServiceLineTreatment serviceLineTreatmentsItem) {
 		if (this.serviceLineTreatments == null) {
-			this.serviceLineTreatments = new ArrayList<ServiceLineTreatment>();
+			this.serviceLineTreatments = new ArrayList<>();
 		}
 		this.serviceLineTreatments.add(serviceLineTreatmentsItem);
 		return this;

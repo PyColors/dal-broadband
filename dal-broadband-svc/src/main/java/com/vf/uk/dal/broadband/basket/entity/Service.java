@@ -104,7 +104,7 @@ public class Service   {
 
   public Service addAllowancesItem(Allowance allowancesItem) {
     if (this.allowances == null) {
-      this.allowances = new ArrayList<Allowance>();
+      this.allowances = new ArrayList<>();
     }
     this.allowances.add(allowancesItem);
     return this;
@@ -133,7 +133,7 @@ public class Service   {
 
   public Service addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
-      this.attributes = new ArrayList<Attribute>();
+      this.attributes = new ArrayList<>();
     }
     this.attributes.add(attributesItem);
     return this;
@@ -278,7 +278,7 @@ public class Service   {
 
   public Service addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLinks>();
+      this.merchandisingMedia = new ArrayList<>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;
@@ -449,7 +449,7 @@ public class Service   {
 
   public Service addSpecificationGroupItem(Specifications specificationGroupItem) {
     if (this.specificationGroup == null) {
-      this.specificationGroup = new ArrayList<Specifications>();
+      this.specificationGroup = new ArrayList<>();
     }
     this.specificationGroup.add(specificationGroupItem);
     return this;

@@ -53,7 +53,7 @@ public class Customer   {
 
   public Customer addOwnedAccountsItem(String ownedAccountsItem) {
     if (this.ownedAccounts == null) {
-      this.ownedAccounts = new ArrayList<String>();
+      this.ownedAccounts = new ArrayList<>();
     }
     this.ownedAccounts.add(ownedAccountsItem);
     return this;

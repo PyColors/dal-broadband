@@ -29,7 +29,7 @@ public class ServiceReference {
 
 	public ServiceReference addServiceLinesItem(ServiceLines serviceLinesItem) {
 		if (this.serviceLines == null) {
-			this.serviceLines = new ArrayList<ServiceLines>();
+			this.serviceLines = new ArrayList<>();
 		}
 		this.serviceLines.add(serviceLinesItem);
 		return this;

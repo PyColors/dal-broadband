@@ -65,7 +65,7 @@ public class BundledServiceProduct   {
 
   public BundledServiceProduct addMiscellaneousItem(Attribute miscellaneousItem) {
     if (this.miscellaneous == null) {
-      this.miscellaneous = new ArrayList<Attribute>();
+      this.miscellaneous = new ArrayList<>();
     }
     this.miscellaneous.add(miscellaneousItem);
     return this;

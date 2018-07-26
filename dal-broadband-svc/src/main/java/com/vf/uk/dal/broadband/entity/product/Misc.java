@@ -30,7 +30,7 @@ public class Misc   {
 
   public Misc addItemAttributeItem(ItemAttribute itemAttributeItem) {
     if (this.itemAttribute == null) {
-      this.itemAttribute = new ArrayList<ItemAttribute>();
+      this.itemAttribute = new ArrayList<>();
     }
     this.itemAttribute.add(itemAttributeItem);
     return this;

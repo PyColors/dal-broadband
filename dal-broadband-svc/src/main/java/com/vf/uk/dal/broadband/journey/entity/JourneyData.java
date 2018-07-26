@@ -155,7 +155,7 @@ public class JourneyData {
 
   public JourneyData addOffersItem(OfferDetails offersItem) {
     if (this.offers == null) {
-      this.offers = new ArrayList<OfferDetails>();
+      this.offers = new ArrayList<>();
     }
     this.offers.add(offersItem);
     return this;
@@ -265,7 +265,7 @@ public class JourneyData {
 
   public JourneyData addAccountRolesItem(String accountRolesItem) {
     if (this.accountRoles == null) {
-      this.accountRoles = new ArrayList<String>();
+      this.accountRoles = new ArrayList<>();
     }
     this.accountRoles.add(accountRolesItem);
     return this;

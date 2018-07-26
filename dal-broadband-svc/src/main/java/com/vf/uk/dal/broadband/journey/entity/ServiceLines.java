@@ -72,7 +72,7 @@ public class ServiceLines {
 
 	public ServiceLines addLineTreatmentsItem(LineTreatment lineTreatmentsItem) {
 		if (this.lineTreatments == null) {
-			this.lineTreatments = new ArrayList<LineTreatment>();
+			this.lineTreatments = new ArrayList<>();
 		}
 		this.lineTreatments.add(lineTreatmentsItem);
 		return this;
@@ -98,7 +98,7 @@ public class ServiceLines {
 
 	public ServiceLines addServiceLinesItem(ServiceLine serviceLinesItem) {
 		if (this.serviceLines == null) {
-			this.serviceLines = new ArrayList<ServiceLine>();
+			this.serviceLines = new ArrayList<>();
 		}
 		this.serviceLines.add(serviceLinesItem);
 		return this;

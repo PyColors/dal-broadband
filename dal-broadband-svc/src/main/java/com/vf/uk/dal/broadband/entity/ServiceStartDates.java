@@ -32,7 +32,7 @@ public class ServiceStartDates {
 	 */
 	public ServiceStartDates addDatesItem(String datesItem) {
 		if (this.dates == null) {
-			this.dates = new ArrayList<String>();
+			this.dates = new ArrayList<>();
 		}
 		this.dates.add(datesItem);
 		return this;

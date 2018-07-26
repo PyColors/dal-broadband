@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetServiceAvailibilityResponse {
 	@JsonProperty("serviceAvailabilityLine")
-	private List<ServiceAvailabilityLine> serviceAvailabilityLine = new ArrayList<ServiceAvailabilityLine>();
+	private List<ServiceAvailabilityLine> serviceAvailabilityLine = new ArrayList<>();
 
 	@JsonProperty("warningErrorList")
 	private List<ErrorInfo> warningErrorList = null;

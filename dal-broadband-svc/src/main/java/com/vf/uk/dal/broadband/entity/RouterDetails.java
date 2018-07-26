@@ -111,7 +111,7 @@ public class RouterDetails {
 
 	public RouterDetails addListOfImageURLsItem(ImageURL listOfImageURLsItem) {
 		if (this.listOfImageURLs == null) {
-			this.listOfImageURLs = new ArrayList<ImageURL>();
+			this.listOfImageURLs = new ArrayList<>();
 		}
 		this.listOfImageURLs.add(listOfImageURLsItem);
 		return this;

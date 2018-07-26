@@ -16,14 +16,14 @@ public class Identification implements Serializable {
 	private static final String ID = "id";
 	
 	/** The Constant CONTEXTID. */
-	private static final String CONTEXTID = "contextId";
+	private static final String CONTEXT_ID = "contextId";
 	
 	/** The id. */
 	@JsonProperty(ID)
 	private String id;
 	
 	/** The context id. */
-	@JsonProperty(CONTEXTID)
+	@JsonProperty(CONTEXT_ID)
 	private String contextId;
 	
 	/**

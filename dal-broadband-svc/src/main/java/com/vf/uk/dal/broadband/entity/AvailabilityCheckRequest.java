@@ -71,7 +71,7 @@ public class AvailabilityCheckRequest {
 	 */
 	public AvailabilityCheckRequest addClassificationCodeItem(String classificationCodeItem) {
 		if (this.classificationCode == null) {
-			this.classificationCode = new ArrayList<String>();
+			this.classificationCode = new ArrayList<>();
 		}
 		this.classificationCode.add(classificationCodeItem);
 		return this;

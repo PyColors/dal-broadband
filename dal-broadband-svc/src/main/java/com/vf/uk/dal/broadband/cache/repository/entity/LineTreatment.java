@@ -16,28 +16,28 @@ public class LineTreatment implements Serializable {
 	private static final String IDENTIFICATION = "identification";
 
 	/** The Constant EARLIESTAVAILABLEDATE. */
-	private static final String EARLIESTAVAILABLEDATE = "earliestAvailableDate";
+	private static final String EARLIESTAVAILABLE_DATE = "earliestAvailableDate";
 
 	/** The Constant APPOINTMENTNEEDED. */
-	private static final String APPOINTMENTNEEDED = "appointmentNeeded";
+	private static final String APPOINTMENT_NEEDED = "appointmentNeeded";
 
 	/** The Constant CONNECTIONCHARGE. */
-	private static final String CONNECTIONCHARGE = "connectionCharge";
+	private static final String CONNECTION_CHARGE = "connectionCharge";
 
 	/** The identification. */
 	@JsonProperty(IDENTIFICATION)
 	private String identification;
 
 	/** The earliest available date. */
-	@JsonProperty(EARLIESTAVAILABLEDATE)
+	@JsonProperty(EARLIESTAVAILABLE_DATE)
 	private String earliestAvailableDate;
 
 	/** The appointment needed. */
-	@JsonProperty(APPOINTMENTNEEDED)
+	@JsonProperty(APPOINTMENT_NEEDED)
 	private boolean appointmentNeeded;
 
 	/** The connection charge. */
-	@JsonProperty(CONNECTIONCHARGE)
+	@JsonProperty(CONNECTION_CHARGE)
 	private String connectionCharge;
 
 	@JsonProperty("lineTreatmentType")

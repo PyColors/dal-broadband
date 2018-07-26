@@ -132,7 +132,7 @@ public class CreateBasketRequest   {
 
   public CreateBasketRequest addPackagesItem(AddPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<AddPackage>();
+      this.packages = new ArrayList<>();
     }
     this.packages.add(packagesItem);
     return this;

@@ -190,7 +190,7 @@ public class ServiceLineTreatment {
 
 	public ServiceLineTreatment addPendingOrdersItem(PendingOrder pendingOrdersItem) {
 		if (this.pendingOrders == null) {
-			this.pendingOrders = new ArrayList<PendingOrder>();
+			this.pendingOrders = new ArrayList<>();
 		}
 		this.pendingOrders.add(pendingOrdersItem);
 		return this;

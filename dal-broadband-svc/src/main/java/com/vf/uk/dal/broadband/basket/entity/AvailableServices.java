@@ -30,7 +30,7 @@ public class AvailableServices   {
 
   public AvailableServices addServiceItem(String serviceItem) {
     if (this.service == null) {
-      this.service = new ArrayList<String>();
+      this.service = new ArrayList<>();
     }
     this.service.add(serviceItem);
     return this;

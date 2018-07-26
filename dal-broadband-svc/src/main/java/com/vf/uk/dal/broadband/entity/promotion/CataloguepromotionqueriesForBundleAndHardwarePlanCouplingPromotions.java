@@ -75,7 +75,7 @@ public class CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions
 
 	public CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions addFootNotesItem(String footNotesItem) {
 		if (this.footNotes == null) {
-			this.footNotes = new ArrayList<String>();
+			this.footNotes = new ArrayList<>();
 		}
 		this.footNotes.add(footNotesItem);
 		return this;
@@ -124,7 +124,7 @@ public class CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions
 	public CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions addPackageTypeItem(
 			String packageTypeItem) {
 		if (this.packageType == null) {
-			this.packageType = new ArrayList<String>();
+			this.packageType = new ArrayList<>();
 		}
 		this.packageType.add(packageTypeItem);
 		return this;

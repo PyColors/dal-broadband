@@ -13,31 +13,31 @@ public class LineDetails implements Serializable {
 	private static final long serialVersionUID = 2196503233118622640L;
 	
 	/** The Constant LINETREATMENTTYPE. */
-	private static final String LINETREATMENTTYPE = "lineTreatmentType";
+	private static final String LINETREATMENT_TYPE = "lineTreatmentType";
 	
 	/** The Constant FLBBNUMBER. */
-	private static final String FLBBNUMBER = "flbbNumber";
+	private static final String FLBB_NUMBER = "flbbNumber";
 	
 	/** The Constant CLASSIFICATIONCODE. */
-	private static final String CLASSIFICATIONCODE = "classificationCode";
+	private static final String CLASSIFICATION_CODE = "classificationCode";
 	
 	/** The Constant EARLIESTAVAILABLEDATE. */
-	private static final String EARLIESTAVAILABLEDATE = "earliestAvailableDate";
+	private static final String EARLIESTAVAILABLE_DATE = "earliestAvailableDate";
 
 	/** The line treatment type. */
-	@JsonProperty(LINETREATMENTTYPE)
+	@JsonProperty(LINETREATMENT_TYPE)
 	private String lineTreatmentType;
 	
 	/** The flbb number. */
-	@JsonProperty(FLBBNUMBER)
+	@JsonProperty(FLBB_NUMBER)
 	private String flbbNumber;
 	
 	/** The classification code. */
-	@JsonProperty(CLASSIFICATIONCODE)
+	@JsonProperty(CLASSIFICATION_CODE)
 	private String classificationCode;
 	
 	/** The earliest available date. */
-	@JsonProperty(EARLIESTAVAILABLEDATE)
+	@JsonProperty(EARLIESTAVAILABLE_DATE)
 	private String earliestAvailableDate;
 
 	/**

@@ -105,7 +105,7 @@ public class ProductResponse   {
 
   public ProductResponse addProductListItem(Product productListItem) {
     if (this.productList == null) {
-      this.productList = new ArrayList<Product>();
+      this.productList = new ArrayList<>();
     }
     this.productList.add(productListItem);
     return this;

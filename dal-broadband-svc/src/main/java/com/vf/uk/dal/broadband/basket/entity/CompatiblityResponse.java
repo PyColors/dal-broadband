@@ -33,7 +33,7 @@ public class CompatiblityResponse   {
 
   public CompatiblityResponse addPackagesItem(CompatibilityPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<CompatibilityPackage>();
+      this.packages = new ArrayList<>();
     }
     this.packages.add(packagesItem);
     return this;

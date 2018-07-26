@@ -15,7 +15,7 @@ public class ServiceAvailabilityLine {
 	private LineReference lineReference = null;
 
 	@JsonProperty("serviceLines")
-	private List<ServiceLines> serviceLines = new ArrayList<ServiceLines>();
+	private List<ServiceLines> serviceLines = new ArrayList<>();
 
 	public ServiceAvailabilityLine lineReference(LineReference lineReference) {
 		this.lineReference = lineReference;

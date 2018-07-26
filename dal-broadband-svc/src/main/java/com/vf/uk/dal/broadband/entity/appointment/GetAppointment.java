@@ -33,7 +33,7 @@ public class GetAppointment   {
 
   public GetAppointment addAppointmentWindowListItem(AppointmentWindowList appointmentWindowListItem) {
     if (this.appointmentWindowList == null) {
-      this.appointmentWindowList = new ArrayList<AppointmentWindowList>();
+      this.appointmentWindowList = new ArrayList<>();
     }
     this.appointmentWindowList.add(appointmentWindowListItem);
     return this;

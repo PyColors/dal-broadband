@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -120,7 +119,7 @@ public class AddPackage   {
 
   public AddPackage addHardwaresItem(AddProduct hardwaresItem) {
     if (this.hardwares == null) {
-      this.hardwares = new ArrayList<AddProduct>();
+      this.hardwares = new ArrayList<>();
     }
     this.hardwares.add(hardwaresItem);
     return this;
@@ -251,7 +250,7 @@ public class AddPackage   {
 
   public AddPackage addServicesItem(AddProduct servicesItem) {
     if (this.services == null) {
-      this.services = new ArrayList<AddProduct>();
+      this.services = new ArrayList<>();
     }
     this.services.add(servicesItem);
     return this;
@@ -274,31 +273,7 @@ public class AddPackage   {
   }
 
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AddPackage addPackage = (AddPackage) o;
-    return Objects.equals(this.accountCategory, addPackage.accountCategory) &&
-        Objects.equals(this.appointmentWindow, addPackage.appointmentWindow) &&
-        Objects.equals(this.bundle, addPackage.bundle) &&
-        Objects.equals(this.hardwares, addPackage.hardwares) &&
-        Objects.equals(this.installationAddress, addPackage.installationAddress) &&
-        Objects.equals(this.packageType, addPackage.packageType) &&
-        Objects.equals(this.phoneNumber, addPackage.phoneNumber) &&
-        Objects.equals(this.servicePoint, addPackage.servicePoint) &&
-        Objects.equals(this.serviceStartDate, addPackage.serviceStartDate) &&
-        Objects.equals(this.services, addPackage.services);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(accountCategory, appointmentWindow, bundle, hardwares, installationAddress, packageType, phoneNumber, servicePoint, serviceStartDate, services);
-  }
+  
 
   @Override
   public String toString() {
