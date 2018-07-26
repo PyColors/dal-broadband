@@ -13,80 +13,103 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Basket
+ * Basket.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class Basket extends ResourceSupport {
+  
+  /** The affiliate flag. */
   @JsonProperty("affiliateFlag")
   private Boolean affiliateFlag = null;
 
+  /** The affiliate id. */
   @JsonProperty("affiliateId")
   private String affiliateId = null;
 
+  /** The basket id. */
   @JsonProperty("basketId")
   private String basketId = null;
 
+  /** The change code. */
   @JsonProperty("changeCode")
   private String changeCode = null;
 
+  /** The customer. */
   @JsonProperty("customer")
   private Customer customer = null;
 
+  /** The customer requested date. */
   @JsonProperty("customerRequestedDate")
   private String customerRequestedDate = null;
 
+  /** The delivery info. */
   @JsonProperty("deliveryInfo")
   private DeliveryInfo deliveryInfo = null;
 
+  /** The hashvalue. */
   @JsonProperty("hashvalue")
   private String hashvalue = null;
 
+  /** The is changed. */
   @JsonProperty("isChanged")
   private Boolean isChanged = null;
 
+  /** The journey. */
   @JsonProperty("journey")
   private Journey journey = null;
 
+  /** The metadata. */
   @JsonProperty("metadata")
   private Metadata metadata = null;
 
+  /** The packages. */
   @JsonProperty("packages")
   @Valid
   private List<ModelPackage> packages = null;
 
+  /** The price details. */
   @JsonProperty("priceDetails")
   private PriceDetails priceDetails = null;
 
+  /** The source. */
   @JsonProperty("source")
   private String source = null;
 
+  /** The total monthly price saving. */
   @JsonProperty("totalMonthlyPriceSaving")
   private String totalMonthlyPriceSaving = null;
 
+  /** The total oneoff price saving. */
   @JsonProperty("totalOneoffPriceSaving")
   private String totalOneoffPriceSaving = null;
 
+  /** The validated. */
   @JsonProperty("validated")
   private Boolean validated = null;
 
+  /** The vet outcome. */
   @JsonProperty("vetOutcome")
   private VetOutcome vetOutcome = null;
 
+  /** The voucher code. */
   @JsonProperty("voucherCode")
   private String voucherCode = null;
 
+  /** The voucher description. */
   @JsonProperty("voucherDescription")
   private String voucherDescription = null;
 
+  /** The voucher error message. */
   @JsonProperty("voucherErrorMessage")
   private String voucherErrorMessage = null;
 
   /**
-   * 
-   * @param affiliateFlag
-   * @return
+   * Affiliate flag.
+   *
+   * @param affiliateFlag the affiliate flag
+   * @return the basket
    */
   public Basket affiliateFlag(Boolean affiliateFlag) {
     this.affiliateFlag = affiliateFlag;
@@ -94,22 +117,29 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get affiliateFlag
+   * Get affiliateFlag.
+   *
    * @return affiliateFlag
-  **/
+   */
 
   public Boolean isAffiliateFlag() {
     return affiliateFlag;
   }
 
+  /**
+   * Sets the affiliate flag.
+   *
+   * @param affiliateFlag the new affiliate flag
+   */
   public void setAffiliateFlag(Boolean affiliateFlag) {
     this.affiliateFlag = affiliateFlag;
   }
 
   /**
-   * 
-   * @param affiliateId
-   * @return
+   * Affiliate id.
+   *
+   * @param affiliateId the affiliate id
+   * @return the basket
    */
   public Basket affiliateId(String affiliateId) {
     this.affiliateId = affiliateId;
@@ -117,9 +147,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get affiliateId
+   * Get affiliateId.
+   *
    * @return affiliateId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -127,14 +158,20 @@ public class Basket extends ResourceSupport {
     return affiliateId;
   }
 
+  /**
+   * Sets the affiliate id.
+   *
+   * @param affiliateId the new affiliate id
+   */
   public void setAffiliateId(String affiliateId) {
     this.affiliateId = affiliateId;
   }
 
   /**
-   * 
-   * @param basketId
-   * @return
+   * Basket id.
+   *
+   * @param basketId the basket id
+   * @return the basket
    */
   public Basket basketId(String basketId) {
     this.basketId = basketId;
@@ -142,9 +179,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get basketId
+   * Get basketId.
+   *
    * @return basketId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -152,13 +190,20 @@ public class Basket extends ResourceSupport {
     return basketId;
   }
 
+  /**
+   * Sets the basket id.
+   *
+   * @param basketId the new basket id
+   */
   public void setBasketId(String basketId) {
     this.basketId = basketId;
   }
 
   /**
-   * @param changeCode
-   * @return
+   * Change code.
+   *
+   * @param changeCode the change code
+   * @return the basket
    */
   public Basket changeCode(String changeCode) {
     this.changeCode = changeCode;
@@ -166,9 +211,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get changeCode
+   * Get changeCode.
+   *
    * @return changeCode
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -176,14 +222,20 @@ public class Basket extends ResourceSupport {
     return changeCode;
   }
 
+  /**
+   * Sets the change code.
+   *
+   * @param changeCode the new change code
+   */
   public void setChangeCode(String changeCode) {
     this.changeCode = changeCode;
   }
 
   /**
-   * 
-   * @param customer
-   * @return
+   * Customer.
+   *
+   * @param customer the customer
+   * @return the basket
    */
   public Basket customer(Customer customer) {
     this.customer = customer;
@@ -191,9 +243,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get customer
+   * Get customer.
+   *
    * @return customer
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -202,14 +255,20 @@ public class Basket extends ResourceSupport {
     return customer;
   }
 
+  /**
+   * Sets the customer.
+   *
+   * @param customer the new customer
+   */
   public void setCustomer(Customer customer) {
     this.customer = customer;
   }
 
   /**
-   * 
-   * @param customerRequestedDate
-   * @return
+   * Customer requested date.
+   *
+   * @param customerRequestedDate the customer requested date
+   * @return the basket
    */
   public Basket customerRequestedDate(String customerRequestedDate) {
     this.customerRequestedDate = customerRequestedDate;
@@ -217,9 +276,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get customerRequestedDate
+   * Get customerRequestedDate.
+   *
    * @return customerRequestedDate
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -227,14 +287,20 @@ public class Basket extends ResourceSupport {
     return customerRequestedDate;
   }
 
+  /**
+   * Sets the customer requested date.
+   *
+   * @param customerRequestedDate the new customer requested date
+   */
   public void setCustomerRequestedDate(String customerRequestedDate) {
     this.customerRequestedDate = customerRequestedDate;
   }
 
   /**
-   * 
-   * @param deliveryInfo
-   * @return
+   * Delivery info.
+   *
+   * @param deliveryInfo the delivery info
+   * @return the basket
    */
   public Basket deliveryInfo(DeliveryInfo deliveryInfo) {
     this.deliveryInfo = deliveryInfo;
@@ -242,9 +308,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get deliveryInfo
+   * Get deliveryInfo.
+   *
    * @return deliveryInfo
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -253,14 +320,20 @@ public class Basket extends ResourceSupport {
     return deliveryInfo;
   }
 
+  /**
+   * Sets the delivery info.
+   *
+   * @param deliveryInfo the new delivery info
+   */
   public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
     this.deliveryInfo = deliveryInfo;
   }
 
   /**
-   * 
-   * @param hashvalue
-   * @return
+   * Hashvalue.
+   *
+   * @param hashvalue the hashvalue
+   * @return the basket
    */
   public Basket hashvalue(String hashvalue) {
     this.hashvalue = hashvalue;
@@ -268,9 +341,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get hashvalue
+   * Get hashvalue.
+   *
    * @return hashvalue
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -278,14 +352,20 @@ public class Basket extends ResourceSupport {
     return hashvalue;
   }
 
+  /**
+   * Sets the hashvalue.
+   *
+   * @param hashvalue the new hashvalue
+   */
   public void setHashvalue(String hashvalue) {
     this.hashvalue = hashvalue;
   }
 
   /**
-   * 
-   * @param isChanged
-   * @return
+   * Checks if is changed.
+   *
+   * @param isChanged the is changed
+   * @return the basket
    */
   public Basket isChanged(Boolean isChanged) {
     this.isChanged = isChanged;
@@ -293,22 +373,29 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get isChanged
+   * Get isChanged.
+   *
    * @return isChanged
-  **/
+   */
 
   public Boolean isIsChanged() {
     return isChanged;
   }
 
+  /**
+   * Sets the checks if is changed.
+   *
+   * @param isChanged the new checks if is changed
+   */
   public void setIsChanged(Boolean isChanged) {
     this.isChanged = isChanged;
   }
 
   /**
-   * 
-   * @param journey
-   * @return
+   * Journey.
+   *
+   * @param journey the journey
+   * @return the basket
    */
   public Basket journey(Journey journey) {
     this.journey = journey;
@@ -316,9 +403,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get journey
+   * Get journey.
+   *
    * @return journey
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -327,14 +415,20 @@ public class Basket extends ResourceSupport {
     return journey;
   }
 
+  /**
+   * Sets the journey.
+   *
+   * @param journey the new journey
+   */
   public void setJourney(Journey journey) {
     this.journey = journey;
   }
 
   /**
-   * 
-   * @param metadata
-   * @return
+   * Metadata.
+   *
+   * @param metadata the metadata
+   * @return the basket
    */
   public Basket metadata(Metadata metadata) {
     this.metadata = metadata;
@@ -342,9 +436,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get metadata
+   * Get metadata.
+   *
    * @return metadata
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -353,14 +448,20 @@ public class Basket extends ResourceSupport {
     return metadata;
   }
 
+  /**
+   * Sets the metadata.
+   *
+   * @param metadata the new metadata
+   */
   public void setMetadata(Metadata metadata) {
     this.metadata = metadata;
   }
 
   /**
-   * 
-   * @param packages
-   * @return
+   * Packages.
+   *
+   * @param packages the packages
+   * @return the basket
    */
   public Basket packages(List<ModelPackage> packages) {
     this.packages = packages;
@@ -368,9 +469,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * 
-   * @param packagesItem
-   * @return
+   * Adds the packages item.
+   *
+   * @param packagesItem the packages item
+   * @return the basket
    */
   public Basket addPackagesItem(ModelPackage packagesItem) {
     if (this.packages == null) {
@@ -381,9 +483,10 @@ public class Basket extends ResourceSupport {
   }
 
   /**
-   * Get packages
+   * Get packages.
+   *
    * @return packages
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -392,19 +495,31 @@ public class Basket extends ResourceSupport {
     return packages;
   }
 
+  /**
+   * Sets the packages.
+   *
+   * @param packages the new packages
+   */
   public void setPackages(List<ModelPackage> packages) {
     this.packages = packages;
   }
 
+  /**
+   * Price details.
+   *
+   * @param priceDetails the price details
+   * @return the basket
+   */
   public Basket priceDetails(PriceDetails priceDetails) {
     this.priceDetails = priceDetails;
     return this;
   }
 
   /**
-   * Get priceDetails
+   * Get priceDetails.
+   *
    * @return priceDetails
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -413,19 +528,31 @@ public class Basket extends ResourceSupport {
     return priceDetails;
   }
 
+  /**
+   * Sets the price details.
+   *
+   * @param priceDetails the new price details
+   */
   public void setPriceDetails(PriceDetails priceDetails) {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * Source.
+   *
+   * @param source the source
+   * @return the basket
+   */
   public Basket source(String source) {
     this.source = source;
     return this;
   }
 
   /**
-   * Get source
+   * Get source.
+   *
    * @return source
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -433,19 +560,31 @@ public class Basket extends ResourceSupport {
     return source;
   }
 
+  /**
+   * Sets the source.
+   *
+   * @param source the new source
+   */
   public void setSource(String source) {
     this.source = source;
   }
 
+  /**
+   * Total monthly price saving.
+   *
+   * @param totalMonthlyPriceSaving the total monthly price saving
+   * @return the basket
+   */
   public Basket totalMonthlyPriceSaving(String totalMonthlyPriceSaving) {
     this.totalMonthlyPriceSaving = totalMonthlyPriceSaving;
     return this;
   }
 
   /**
-   * Get totalMonthlyPriceSaving
+   * Get totalMonthlyPriceSaving.
+   *
    * @return totalMonthlyPriceSaving
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -453,19 +592,31 @@ public class Basket extends ResourceSupport {
     return totalMonthlyPriceSaving;
   }
 
+  /**
+   * Sets the total monthly price saving.
+   *
+   * @param totalMonthlyPriceSaving the new total monthly price saving
+   */
   public void setTotalMonthlyPriceSaving(String totalMonthlyPriceSaving) {
     this.totalMonthlyPriceSaving = totalMonthlyPriceSaving;
   }
 
+  /**
+   * Total oneoff price saving.
+   *
+   * @param totalOneoffPriceSaving the total oneoff price saving
+   * @return the basket
+   */
   public Basket totalOneoffPriceSaving(String totalOneoffPriceSaving) {
     this.totalOneoffPriceSaving = totalOneoffPriceSaving;
     return this;
   }
 
   /**
-   * Get totalOneoffPriceSaving
+   * Get totalOneoffPriceSaving.
+   *
    * @return totalOneoffPriceSaving
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -473,37 +624,61 @@ public class Basket extends ResourceSupport {
     return totalOneoffPriceSaving;
   }
 
+  /**
+   * Sets the total oneoff price saving.
+   *
+   * @param totalOneoffPriceSaving the new total oneoff price saving
+   */
   public void setTotalOneoffPriceSaving(String totalOneoffPriceSaving) {
     this.totalOneoffPriceSaving = totalOneoffPriceSaving;
   }
 
+  /**
+   * Validated.
+   *
+   * @param validated the validated
+   * @return the basket
+   */
   public Basket validated(Boolean validated) {
     this.validated = validated;
     return this;
   }
 
   /**
-   * Get validated
+   * Get validated.
+   *
    * @return validated
-  **/
+   */
 
   public Boolean isValidated() {
     return validated;
   }
 
+  /**
+   * Sets the validated.
+   *
+   * @param validated the new validated
+   */
   public void setValidated(Boolean validated) {
     this.validated = validated;
   }
 
+  /**
+   * Vet outcome.
+   *
+   * @param vetOutcome the vet outcome
+   * @return the basket
+   */
   public Basket vetOutcome(VetOutcome vetOutcome) {
     this.vetOutcome = vetOutcome;
     return this;
   }
 
   /**
-   * Get vetOutcome
+   * Get vetOutcome.
+   *
    * @return vetOutcome
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -512,19 +687,31 @@ public class Basket extends ResourceSupport {
     return vetOutcome;
   }
 
+  /**
+   * Sets the vet outcome.
+   *
+   * @param vetOutcome the new vet outcome
+   */
   public void setVetOutcome(VetOutcome vetOutcome) {
     this.vetOutcome = vetOutcome;
   }
 
+  /**
+   * Voucher code.
+   *
+   * @param voucherCode the voucher code
+   * @return the basket
+   */
   public Basket voucherCode(String voucherCode) {
     this.voucherCode = voucherCode;
     return this;
   }
 
   /**
-   * Get voucherCode
+   * Get voucherCode.
+   *
    * @return voucherCode
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -532,19 +719,31 @@ public class Basket extends ResourceSupport {
     return voucherCode;
   }
 
+  /**
+   * Sets the voucher code.
+   *
+   * @param voucherCode the new voucher code
+   */
   public void setVoucherCode(String voucherCode) {
     this.voucherCode = voucherCode;
   }
 
+  /**
+   * Voucher description.
+   *
+   * @param voucherDescription the voucher description
+   * @return the basket
+   */
   public Basket voucherDescription(String voucherDescription) {
     this.voucherDescription = voucherDescription;
     return this;
   }
 
   /**
-   * Get voucherDescription
+   * Get voucherDescription.
+   *
    * @return voucherDescription
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -552,19 +751,31 @@ public class Basket extends ResourceSupport {
     return voucherDescription;
   }
 
+  /**
+   * Sets the voucher description.
+   *
+   * @param voucherDescription the new voucher description
+   */
   public void setVoucherDescription(String voucherDescription) {
     this.voucherDescription = voucherDescription;
   }
 
+  /**
+   * Voucher error message.
+   *
+   * @param voucherErrorMessage the voucher error message
+   * @return the basket
+   */
   public Basket voucherErrorMessage(String voucherErrorMessage) {
     this.voucherErrorMessage = voucherErrorMessage;
     return this;
   }
 
   /**
-   * Get voucherErrorMessage
+   * Get voucherErrorMessage.
+   *
    * @return voucherErrorMessage
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -572,6 +783,11 @@ public class Basket extends ResourceSupport {
     return voucherErrorMessage;
   }
 
+  /**
+   * Sets the voucher error message.
+   *
+   * @param voucherErrorMessage the new voucher error message
+   */
   public void setVoucherErrorMessage(String voucherErrorMessage) {
     this.voucherErrorMessage = voucherErrorMessage;
   }
@@ -580,6 +796,9 @@ public class Basket extends ResourceSupport {
 
   
 
+  /* (non-Javadoc)
+   * @see org.springframework.hateoas.ResourceSupport#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -613,6 +832,9 @@ public class Basket extends ResourceSupport {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

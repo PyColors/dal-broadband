@@ -98,6 +98,10 @@ public class BroadbandControllerTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\GSAREQUEST.json"));
 		GetServiceAvailibilityRequest request = new ObjectMapper().readValue(jsonString,
 				GetServiceAvailibilityRequest.class);
+		
+		String jsonStringForFTTH = new String(Utility.readFile("\\rest-mock\\GSAREQUEST_FTTH.json"));
+		GetServiceAvailibilityRequest requestForFTTH = new ObjectMapper().readValue(jsonStringForFTTH,
+				GetServiceAvailibilityRequest.class);
 
 		String gsaResponse = new String(Utility.readFile("\\rest-mock\\GSAResponse.json"));
 		GetServiceAvailibilityResponse responseGsa = new ObjectMapper().readValue(gsaResponse,
@@ -198,13 +202,27 @@ public class BroadbandControllerTest {
 
 		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest, Basket.class))
 				.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
+		
+		
+		String createBasketJsonRequestWithServieId = new String(Utility.readFile("\\rest-mock\\CreateBasketRequestWithServiceId.json"));
+
+		CreateBasketRequest createBasketRequestWithServieId = new ObjectMapper().readValue(createBasketJsonRequestWithServieId,
+				CreateBasketRequest.class);
+		
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequestWithServieId, Basket.class))
+		.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
+		
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888")).willReturn(broadbandCacheResponse);
 		given(broadBandRepoProvider.getBroadbandFromCache("123456789078881"))
 				.willReturn(broadbandCacheResWithoutBasketId);
 
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907899")).willReturn(broadbandCacheRes);
 
-		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
+		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit&isFTTH=false&preorderable=false",
+				CommercialProduct[].class))
+						.willReturn(new ResponseEntity<CommercialProduct[]>(productDetails, HttpStatus.OK));
+		
+		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fixed Fee:Standard Installation Fee&isFTTH=true&preorderable=false",
 				CommercialProduct[].class))
 						.willReturn(new ResponseEntity<CommercialProduct[]>(productDetails, HttpStatus.OK));
 
@@ -213,6 +231,10 @@ public class BroadbandControllerTest {
 
 		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability",
 				request, GetServiceAvailibilityResponse.class))
+						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(responseGsa, HttpStatus.OK));
+		
+		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability",
+				requestForFTTH, GetServiceAvailibilityResponse.class))
 						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(responseGsa, HttpStatus.OK));
 
 		given(restTemplate.getForEntity("http://PREMISE-V1/premise/address/LS290JJ?qualified=true&categoryType=FTTH",
@@ -250,7 +272,30 @@ public class BroadbandControllerTest {
 		classificationCodeList.add("Line and Fibre with Speed 38");
 		Assert.assertEquals(classificationCodeList, resonse.getBody().getClassificationCode());
 		Assert.assertEquals("LS29 0JJ", resonse.getBody().getInstallationAddress().getPostCode());
-		Assert.assertEquals(2, resonse.getBody().getAppointmentAndAvailabilityDetail().size());
+		Assert.assertEquals(1, resonse.getBody().getAppointmentAndAvailabilityDetail().size());
+
+	}
+	
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandForFTTH() throws JsonParseException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String checkAvailabilityRequest = new String(Utility.readFile("\\rest-mock\\REQUESTFORFTTH.json"));
+		AvailabilityCheckRequest request = new ObjectMapper().readValue(checkAvailabilityRequest,
+				AvailabilityCheckRequest.class);
+
+		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
+				"123456789078", "CONSUMER");
+		assertEquals(HttpStatus.OK, resonse.getStatusCode());
+		List<String> classificationCodeList = new ArrayList<>();
+		classificationCodeList.add("Line and ADSL");
+		classificationCodeList.add("Line and Fibre with Speed 76");
+		classificationCodeList.add("Line and Fibre with Speed 38");
+		Assert.assertEquals(classificationCodeList, resonse.getBody().getClassificationCode());
+		Assert.assertEquals("LS29 0JJ", resonse.getBody().getInstallationAddress().getPostCode());
+		Assert.assertEquals(1, resonse.getBody().getAppointmentAndAvailabilityDetail().size());
 
 	}
 
@@ -443,7 +488,7 @@ public class BroadbandControllerTest {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket3.json"));
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketWithoutPackage.json"));
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 
 		try {
@@ -616,6 +661,22 @@ public class BroadbandControllerTest {
 		assertEquals(resonse.getStatusCode(), HttpStatus.OK);
 
 	}
+	
+	
+	@Test
+	public void testCreateAppointmentResponseNegativeScenario() {
+		CreateAppointmentRequest request = new CreateAppointmentRequest();
+		request.setRemoveFromPhoneDirectory(true);
+		SiteNote siteNote = new SiteNote();
+		siteNote.setNotes("Hello");
+		request.setSiteNote(siteNote);
+		thrown.expect(ApplicationException.class);
+		thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
+		broadBandController.createAppointmentForFLBB("12345678907888", request);
+		
+
+	}
+	
 
 	@Test
 	public void testGetAppointmentResponse() {
