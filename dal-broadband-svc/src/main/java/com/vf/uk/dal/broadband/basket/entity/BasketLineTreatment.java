@@ -33,6 +33,11 @@ public class BasketLineTreatment   {
   @JsonProperty("registerOfInterest")
   private Boolean registerOfInterest = null;
 
+  /**
+   * 
+   * @param appointmentNeeded
+   * @return
+   */
   public BasketLineTreatment appointmentNeeded(Boolean appointmentNeeded) {
     this.appointmentNeeded = appointmentNeeded;
     return this;
@@ -51,6 +56,11 @@ public class BasketLineTreatment   {
     this.appointmentNeeded = appointmentNeeded;
   }
 
+  /**
+   * 
+   * @param connectionCharge
+   * @return
+   */
   public BasketLineTreatment connectionCharge(String connectionCharge) {
     this.connectionCharge = connectionCharge;
     return this;
@@ -71,6 +81,11 @@ public class BasketLineTreatment   {
     this.connectionCharge = connectionCharge;
   }
 
+  /**
+   * 
+   * @param earliestAvailableDate
+   * @return
+   */
   public BasketLineTreatment earliestAvailableDate(String earliestAvailableDate) {
     this.earliestAvailableDate = earliestAvailableDate;
     return this;
@@ -91,6 +106,11 @@ public class BasketLineTreatment   {
     this.earliestAvailableDate = earliestAvailableDate;
   }
 
+  /**
+   * 
+   * @param identification
+   * @return
+   */
   public BasketLineTreatment identification(String identification) {
     this.identification = identification;
     return this;
@@ -111,6 +131,11 @@ public class BasketLineTreatment   {
     this.identification = identification;
   }
 
+  /**
+   * 
+   * @param preOrder
+   * @return
+   */
   public BasketLineTreatment preOrder(Boolean preOrder) {
     this.preOrder = preOrder;
     return this;
@@ -129,6 +154,11 @@ public class BasketLineTreatment   {
     this.preOrder = preOrder;
   }
 
+  /**
+   * 
+   * @param registerOfInterest
+   * @return
+   */
   public BasketLineTreatment registerOfInterest(Boolean registerOfInterest) {
     this.registerOfInterest = registerOfInterest;
     return this;

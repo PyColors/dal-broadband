@@ -31,6 +31,12 @@ public class BasketLineLocator   {
   @JsonProperty("l2SID")
   private String l2SID = null;
 
+  /**
+   * 
+   * @param cableLinkID
+   * @return
+   */
+  
   public BasketLineLocator cableLinkID(String cableLinkID) {
     this.cableLinkID = cableLinkID;
     return this;
@@ -51,6 +57,11 @@ public class BasketLineLocator   {
     this.cableLinkID = cableLinkID;
   }
 
+  /**
+   * 
+   * @param distributionPoint
+   * @return
+   */
   public BasketLineLocator distributionPoint(String distributionPoint) {
     this.distributionPoint = distributionPoint;
     return this;
@@ -71,6 +82,11 @@ public class BasketLineLocator   {
     this.distributionPoint = distributionPoint;
   }
 
+  /**
+   * 
+   * @param districtCode
+   * @return
+   */
   public BasketLineLocator districtCode(String districtCode) {
     this.districtCode = districtCode;
     return this;
@@ -91,6 +107,11 @@ public class BasketLineLocator   {
     this.districtCode = districtCode;
   }
 
+  /**
+   * 
+   * @param exchangeCode
+   * @return
+   */
   public BasketLineLocator exchangeCode(String exchangeCode) {
     this.exchangeCode = exchangeCode;
     return this;
@@ -111,6 +132,11 @@ public class BasketLineLocator   {
     this.exchangeCode = exchangeCode;
   }
 
+  /**
+   * 
+   * @param exchangeName
+   * @return
+   */
   public BasketLineLocator exchangeName(String exchangeName) {
     this.exchangeName = exchangeName;
     return this;
@@ -131,6 +157,11 @@ public class BasketLineLocator   {
     this.exchangeName = exchangeName;
   }
 
+  /**
+   * 
+   * @param l2SID
+   * @return
+   */
   public BasketLineLocator l2SID(String l2SID) {
     this.l2SID = l2SID;
     return this;

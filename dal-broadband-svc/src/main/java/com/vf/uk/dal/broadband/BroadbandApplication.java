@@ -16,11 +16,21 @@ import com.vf.uk.dal.common.annotation.Service;
 @Service
 public class BroadbandApplication
 {
+	
+	/**
+	 *  Static main method
+	 * @param args
+	 */
 	public static void main(String[] args)
     {
         SpringApplication.run(BroadbandApplication.class, args);
     }
 	
+	
+	/**
+	 * Dozer bean mapper
+	 * @return
+	 */
 	@Bean
 	public DozerBeanMapper dozerBean() {
 		List<String> mappingFiles = Arrays.asList("dozer-config-mapping.xml");

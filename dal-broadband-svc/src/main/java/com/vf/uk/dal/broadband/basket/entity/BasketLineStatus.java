@@ -42,6 +42,11 @@ public class BasketLineStatus   {
   @JsonProperty("tempStructure")
   private Boolean tempStructure = null;
 
+  /**
+   * 
+   * @param accessLineStatus
+   * @return
+   */
   public BasketLineStatus accessLineStatus(String accessLineStatus) {
     this.accessLineStatus = accessLineStatus;
     return this;
@@ -62,6 +67,11 @@ public class BasketLineStatus   {
     this.accessLineStatus = accessLineStatus;
   }
 
+  /**
+   * 
+   * @param gnpStatus
+   * @return
+   */
   public BasketLineStatus gnpStatus(String gnpStatus) {
     this.gnpStatus = gnpStatus;
     return this;
@@ -82,6 +92,11 @@ public class BasketLineStatus   {
     this.gnpStatus = gnpStatus;
   }
 
+  /**
+   * 
+   * @param lineOption
+   * @return
+   */
   public BasketLineStatus lineOption(String lineOption) {
     this.lineOption = lineOption;
     return this;
@@ -102,6 +117,11 @@ public class BasketLineStatus   {
     this.lineOption = lineOption;
   }
 
+  /**
+   * 
+   * @param lineType
+   * @return
+   */
   public BasketLineStatus lineType(String lineType) {
     this.lineType = lineType;
     return this;
@@ -122,6 +142,11 @@ public class BasketLineStatus   {
     this.lineType = lineType;
   }
 
+  /**
+   * 
+   * @param narrowBandServicesAvailable
+   * @return
+   */
   public BasketLineStatus narrowBandServicesAvailable(String narrowBandServicesAvailable) {
     this.narrowBandServicesAvailable = narrowBandServicesAvailable;
     return this;
@@ -142,6 +167,11 @@ public class BasketLineStatus   {
     this.narrowBandServicesAvailable = narrowBandServicesAvailable;
   }
 
+  /**
+   * 
+   * @param standbyPowerRequired
+   * @return
+   */
   public BasketLineStatus standbyPowerRequired(Boolean standbyPowerRequired) {
     this.standbyPowerRequired = standbyPowerRequired;
     return this;
@@ -160,6 +190,11 @@ public class BasketLineStatus   {
     this.standbyPowerRequired = standbyPowerRequired;
   }
 
+  /**
+   * 
+   * @param statusCode
+   * @return
+   */
   public BasketLineStatus statusCode(String statusCode) {
     this.statusCode = statusCode;
     return this;

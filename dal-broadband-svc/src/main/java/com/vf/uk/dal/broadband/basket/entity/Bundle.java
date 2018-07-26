@@ -89,6 +89,11 @@ public class Bundle   {
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /**
+   * 
+   * @param action
+   * @return
+   */
   public Bundle action(String action) {
     this.action = action;
     return this;
@@ -109,11 +114,21 @@ public class Bundle   {
     this.action = action;
   }
 
+  /**
+   * 
+   * @param allowances
+   * @return
+   */
   public Bundle allowances(List<Allowance> allowances) {
     this.allowances = allowances;
     return this;
   }
 
+  /**
+   * 
+   * @param allowancesItem
+   * @return
+   */
   public Bundle addAllowancesItem(Allowance allowancesItem) {
     if (this.allowances == null) {
       this.allowances = new ArrayList<>();
@@ -138,11 +153,21 @@ public class Bundle   {
     this.allowances = allowances;
   }
 
+  /**
+   * 
+   * @param attributes
+   * @return
+   */
   public Bundle attributes(List<Attribute> attributes) {
     this.attributes = attributes;
     return this;
   }
 
+  /**
+   * 
+   * @param attributesItem
+   * @return
+   */
   public Bundle addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
       this.attributes = new ArrayList<>();
@@ -167,6 +192,11 @@ public class Bundle   {
     this.attributes = attributes;
   }
 
+  /**
+   * 
+   * @param bundleClass
+   * @return
+   */
   public Bundle bundleClass(String bundleClass) {
     this.bundleClass = bundleClass;
     return this;
@@ -187,6 +217,11 @@ public class Bundle   {
     this.bundleClass = bundleClass;
   }
 
+  /**
+   * 
+   * @param bundleType
+   * @return
+   */
   public Bundle bundleType(String bundleType) {
     this.bundleType = bundleType;
     return this;
@@ -207,11 +242,21 @@ public class Bundle   {
     this.bundleType = bundleType;
   }
 
+  /**
+   * 
+   * @param bundledServiceProducts
+   * @return
+   */
   public Bundle bundledServiceProducts(List<BundledServiceProduct> bundledServiceProducts) {
     this.bundledServiceProducts = bundledServiceProducts;
     return this;
   }
 
+  /**
+   * 
+   * @param bundledServiceProductsItem
+   * @return
+   */
   public Bundle addBundledServiceProductsItem(BundledServiceProduct bundledServiceProductsItem) {
     if (this.bundledServiceProducts == null) {
       this.bundledServiceProducts = new ArrayList<>();
@@ -236,6 +281,11 @@ public class Bundle   {
     this.bundledServiceProducts = bundledServiceProducts;
   }
 
+  /**
+   * 
+   * @param commitmentPeriod
+   * @return
+   */
   public Bundle commitmentPeriod(CommitmentPeriod commitmentPeriod) {
     this.commitmentPeriod = commitmentPeriod;
     return this;
@@ -257,6 +307,11 @@ public class Bundle   {
     this.commitmentPeriod = commitmentPeriod;
   }
 
+  /**
+   * 
+   * @param description
+   * @return
+   */
   public Bundle description(String description) {
     this.description = description;
     return this;
@@ -277,6 +332,11 @@ public class Bundle   {
     this.description = description;
   }
 
+  /**
+   * 
+   * @param displayDescription
+   * @return
+   */
   public Bundle displayDescription(String displayDescription) {
     this.displayDescription = displayDescription;
     return this;
@@ -297,6 +357,11 @@ public class Bundle   {
     this.displayDescription = displayDescription;
   }
 
+  /**
+   * 
+   * @param displayName
+   * @return
+   */
   public Bundle displayName(String displayName) {
     this.displayName = displayName;
     return this;
@@ -317,6 +382,11 @@ public class Bundle   {
     this.displayName = displayName;
   }
 
+  /**
+   * 
+   * @param displayOrder
+   * @return
+   */
   public Bundle displayOrder(Integer displayOrder) {
     this.displayOrder = displayOrder;
     return this;
@@ -337,6 +407,11 @@ public class Bundle   {
     this.displayOrder = displayOrder;
   }
 
+  /**
+   * 
+   * @param isChanged
+   * @return
+   */
   public Bundle isChanged(Boolean isChanged) {
     this.isChanged = isChanged;
     return this;
@@ -355,6 +430,11 @@ public class Bundle   {
     this.isChanged = isChanged;
   }
 
+  /**
+   * 
+   * @param isVodafoneGlobalRoaming
+   * @return
+   */
   public Bundle isVodafoneGlobalRoaming(Boolean isVodafoneGlobalRoaming) {
     this.isVodafoneGlobalRoaming = isVodafoneGlobalRoaming;
     return this;
@@ -373,11 +453,21 @@ public class Bundle   {
     this.isVodafoneGlobalRoaming = isVodafoneGlobalRoaming;
   }
 
+  /**
+   * 
+   * @param merchandisingMedia
+   * @return
+   */
   public Bundle merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
+  /**
+   * 
+   * @param merchandisingMediaItem
+   * @return
+   */
   public Bundle addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
       this.merchandisingMedia = new ArrayList<>();
@@ -402,6 +492,11 @@ public class Bundle   {
     this.merchandisingMedia = merchandisingMedia;
   }
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public Bundle name(String name) {
     this.name = name;
     return this;
@@ -422,6 +517,11 @@ public class Bundle   {
     this.name = name;
   }
 
+  /**
+   * 
+   * @param packageLineId
+   * @return
+   */
   public Bundle packageLineId(String packageLineId) {
     this.packageLineId = packageLineId;
     return this;
@@ -442,6 +542,11 @@ public class Bundle   {
     this.packageLineId = packageLineId;
   }
 
+  /**
+   * 
+   * @param paymentType
+   * @return
+   */
   public Bundle paymentType(String paymentType) {
     this.paymentType = paymentType;
     return this;
@@ -462,6 +567,11 @@ public class Bundle   {
     this.paymentType = paymentType;
   }
 
+  /**
+   * 
+   * @param priceDetails
+   * @return
+   */
   public Bundle priceDetails(BundlePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
@@ -475,6 +585,10 @@ public class Bundle   {
 
   @Valid
 
+  /**
+   * 
+   * @return
+   */
   public BundlePrices getPriceDetails() {
     return priceDetails;
   }

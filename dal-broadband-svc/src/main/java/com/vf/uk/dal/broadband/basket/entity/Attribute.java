@@ -21,6 +21,11 @@ public class Attribute   {
   @JsonProperty("value")
   private String value = null;
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public Attribute name(String name) {
     this.name = name;
     return this;
@@ -41,6 +46,11 @@ public class Attribute   {
     this.name = name;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public Attribute value(String value) {
     this.value = value;
     return this;

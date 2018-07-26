@@ -33,6 +33,11 @@ public class BasketServiceLines   {
   @Valid
   private List<BasketServiceLine> serviceLines = null;
 
+  /**
+   * 
+   * @param classificationCode
+   * @return
+   */
   public BasketServiceLines classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
@@ -53,11 +58,21 @@ public class BasketServiceLines   {
     this.classificationCode = classificationCode;
   }
 
+  /**
+   * 
+   * @param lineTreatments
+   * @return
+   */
   public BasketServiceLines lineTreatments(List<BasketLineTreatment> lineTreatments) {
     this.lineTreatments = lineTreatments;
     return this;
   }
 
+  /**
+   * 
+   * @param lineTreatmentsItem
+   * @return
+   */
   public BasketServiceLines addLineTreatmentsItem(BasketLineTreatment lineTreatmentsItem) {
     if (this.lineTreatments == null) {
       this.lineTreatments = new ArrayList<>();
@@ -82,6 +97,11 @@ public class BasketServiceLines   {
     this.lineTreatments = lineTreatments;
   }
 
+  /**
+   * 
+   * @param networkType
+   * @return
+   */
   public BasketServiceLines networkType(String networkType) {
     this.networkType = networkType;
     return this;
@@ -102,11 +122,21 @@ public class BasketServiceLines   {
     this.networkType = networkType;
   }
 
+  /**
+   * 
+   * @param serviceLines
+   * @return
+   */
   public BasketServiceLines serviceLines(List<BasketServiceLine> serviceLines) {
     this.serviceLines = serviceLines;
     return this;
   }
 
+  /**
+   * 
+   * @param serviceLinesItem
+   * @return
+   */
   public BasketServiceLines addServiceLinesItem(BasketServiceLine serviceLinesItem) {
     if (this.serviceLines == null) {
       this.serviceLines = new ArrayList<>();

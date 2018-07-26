@@ -29,6 +29,11 @@ public class AddProduct   {
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /**
+   * 
+   * @param action
+   * @return
+   */
   public AddProduct action(String action) {
     this.action = action;
     return this;
@@ -49,11 +54,21 @@ public class AddProduct   {
     this.action = action;
   }
 
+  /**
+   * 
+   * @param attributes
+   * @return
+   */
   public AddProduct attributes(List<Attribute> attributes) {
     this.attributes = attributes;
     return this;
   }
 
+  /**
+   * 
+   * @param attributesItem
+   * @return
+   */
   public AddProduct addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
       this.attributes = new ArrayList<>();
@@ -78,6 +93,11 @@ public class AddProduct   {
     this.attributes = attributes;
   }
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public AddProduct skuId(String skuId) {
     this.skuId = skuId;
     return this;
