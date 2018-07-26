@@ -844,6 +844,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			for(com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLine : broadband.getServicePoint().getServiceReference().getServiceLinesList()){
 				List<LineTreatment> lineTreatmentList = serviceLine.getLineTreatmentList();
 				if(CollectionUtils.isNotEmpty(lineTreatmentList) && lineTreatmentList.size()==1 && "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())){
+					
 					PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
 							mapper.map(broadband.getServicePoint(), BasketServicePoint.class), broadband, null, null);
 					broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
@@ -854,9 +855,16 @@ public class BroadbandServiceImpl implements BroadbandService {
 						broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
 								broadband.getBasketInfo().getPackageId());
 					}
+					LineDetails lineDetails = broadband.getLineDetails();
+					if(lineDetails == null ){
+						lineDetails = new LineDetails();
+					}
+					lineDetails.setLineTreatmentType("NEW");
+					broadband.setLineDetails(lineDetails);
 				}
 			} 
 		}
+		broadbandDao.setBroadBandInCache(broadband);
 		GetAppointmentRequest request = ConverterUtils.getAppointmentRequest(broadband,broadband.getBasketInfo().getAccountCategory());
 		GetAppointment getAppointmentResponse = broadbandDao.getAppointmentList(request);
 		GetAppointmentResponse getAppointmentRes = ConverterUtils.createGetAppointmentResponse(getAppointmentResponse);

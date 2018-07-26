@@ -83,6 +83,11 @@ public class Basket extends ResourceSupport {
   @JsonProperty("voucherErrorMessage")
   private String voucherErrorMessage = null;
 
+  /**
+   * 
+   * @param affiliateFlag
+   * @return
+   */
   public Basket affiliateFlag(Boolean affiliateFlag) {
     this.affiliateFlag = affiliateFlag;
     return this;
@@ -101,6 +106,11 @@ public class Basket extends ResourceSupport {
     this.affiliateFlag = affiliateFlag;
   }
 
+  /**
+   * 
+   * @param affiliateId
+   * @return
+   */
   public Basket affiliateId(String affiliateId) {
     this.affiliateId = affiliateId;
     return this;
@@ -121,6 +131,11 @@ public class Basket extends ResourceSupport {
     this.affiliateId = affiliateId;
   }
 
+  /**
+   * 
+   * @param basketId
+   * @return
+   */
   public Basket basketId(String basketId) {
     this.basketId = basketId;
     return this;
@@ -141,6 +156,10 @@ public class Basket extends ResourceSupport {
     this.basketId = basketId;
   }
 
+  /**
+   * @param changeCode
+   * @return
+   */
   public Basket changeCode(String changeCode) {
     this.changeCode = changeCode;
     return this;
@@ -161,6 +180,11 @@ public class Basket extends ResourceSupport {
     this.changeCode = changeCode;
   }
 
+  /**
+   * 
+   * @param customer
+   * @return
+   */
   public Basket customer(Customer customer) {
     this.customer = customer;
     return this;
@@ -182,6 +206,11 @@ public class Basket extends ResourceSupport {
     this.customer = customer;
   }
 
+  /**
+   * 
+   * @param customerRequestedDate
+   * @return
+   */
   public Basket customerRequestedDate(String customerRequestedDate) {
     this.customerRequestedDate = customerRequestedDate;
     return this;
@@ -202,6 +231,11 @@ public class Basket extends ResourceSupport {
     this.customerRequestedDate = customerRequestedDate;
   }
 
+  /**
+   * 
+   * @param deliveryInfo
+   * @return
+   */
   public Basket deliveryInfo(DeliveryInfo deliveryInfo) {
     this.deliveryInfo = deliveryInfo;
     return this;
@@ -223,6 +257,11 @@ public class Basket extends ResourceSupport {
     this.deliveryInfo = deliveryInfo;
   }
 
+  /**
+   * 
+   * @param hashvalue
+   * @return
+   */
   public Basket hashvalue(String hashvalue) {
     this.hashvalue = hashvalue;
     return this;
@@ -243,6 +282,11 @@ public class Basket extends ResourceSupport {
     this.hashvalue = hashvalue;
   }
 
+  /**
+   * 
+   * @param isChanged
+   * @return
+   */
   public Basket isChanged(Boolean isChanged) {
     this.isChanged = isChanged;
     return this;
@@ -261,6 +305,11 @@ public class Basket extends ResourceSupport {
     this.isChanged = isChanged;
   }
 
+  /**
+   * 
+   * @param journey
+   * @return
+   */
   public Basket journey(Journey journey) {
     this.journey = journey;
     return this;
@@ -282,6 +331,11 @@ public class Basket extends ResourceSupport {
     this.journey = journey;
   }
 
+  /**
+   * 
+   * @param metadata
+   * @return
+   */
   public Basket metadata(Metadata metadata) {
     this.metadata = metadata;
     return this;
@@ -303,11 +357,21 @@ public class Basket extends ResourceSupport {
     this.metadata = metadata;
   }
 
+  /**
+   * 
+   * @param packages
+   * @return
+   */
   public Basket packages(List<ModelPackage> packages) {
     this.packages = packages;
     return this;
   }
 
+  /**
+   * 
+   * @param packagesItem
+   * @return
+   */
   public Basket addPackagesItem(ModelPackage packagesItem) {
     if (this.packages == null) {
       this.packages = new ArrayList<>();

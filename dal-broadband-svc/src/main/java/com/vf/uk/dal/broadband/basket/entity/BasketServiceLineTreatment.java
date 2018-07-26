@@ -50,6 +50,11 @@ public class BasketServiceLineTreatment   {
   @JsonProperty("vicCode")
   private String vicCode = null;
 
+  /**
+   * 
+   * @param accessLine
+   * @return
+   */
   public BasketServiceLineTreatment accessLine(BasketAccessLine accessLine) {
     this.accessLine = accessLine;
     return this;
@@ -71,6 +76,11 @@ public class BasketServiceLineTreatment   {
     this.accessLine = accessLine;
   }
 
+  /**
+   * 
+   * @param canNumberBeRetained
+   * @return
+   */
   public BasketServiceLineTreatment canNumberBeRetained(Boolean canNumberBeRetained) {
     this.canNumberBeRetained = canNumberBeRetained;
     return this;
@@ -89,6 +99,11 @@ public class BasketServiceLineTreatment   {
     this.canNumberBeRetained = canNumberBeRetained;
   }
 
+  /**
+   * 
+   * @param lineInfo
+   * @return
+   */
   public BasketServiceLineTreatment lineInfo(String lineInfo) {
     this.lineInfo = lineInfo;
     return this;
@@ -109,6 +124,11 @@ public class BasketServiceLineTreatment   {
     this.lineInfo = lineInfo;
   }
 
+  /**
+   * 
+   * @param parentIdentification
+   * @return
+   */
   public BasketServiceLineTreatment parentIdentification(String parentIdentification) {
     this.parentIdentification = parentIdentification;
     return this;
@@ -129,11 +149,21 @@ public class BasketServiceLineTreatment   {
     this.parentIdentification = parentIdentification;
   }
 
+  /**
+   * 
+   * @param pendingOrders
+   * @return
+   */
   public BasketServiceLineTreatment pendingOrders(List<BasketPendingOrder> pendingOrders) {
     this.pendingOrders = pendingOrders;
     return this;
   }
 
+  /**
+   * 
+   * @param pendingOrdersItem
+   * @return
+   */
   public BasketServiceLineTreatment addPendingOrdersItem(BasketPendingOrder pendingOrdersItem) {
     if (this.pendingOrders == null) {
       this.pendingOrders = new ArrayList<>();
@@ -158,6 +188,11 @@ public class BasketServiceLineTreatment   {
     this.pendingOrders = pendingOrders;
   }
 
+  /**
+   * 
+   * @param portInFlag
+   * @return
+   */
   public BasketServiceLineTreatment portInFlag(String portInFlag) {
     this.portInFlag = portInFlag;
     return this;
@@ -178,6 +213,11 @@ public class BasketServiceLineTreatment   {
     this.portInFlag = portInFlag;
   }
 
+  /**
+   * 
+   * @param serviceAction
+   * @return
+   */
   public BasketServiceLineTreatment serviceAction(String serviceAction) {
     this.serviceAction = serviceAction;
     return this;
@@ -198,6 +238,11 @@ public class BasketServiceLineTreatment   {
     this.serviceAction = serviceAction;
   }
 
+  /**
+   * 
+   * @param serviceType
+   * @return
+   */
   public BasketServiceLineTreatment serviceType(String serviceType) {
     this.serviceType = serviceType;
     return this;
@@ -218,6 +263,11 @@ public class BasketServiceLineTreatment   {
     this.serviceType = serviceType;
   }
 
+  /**
+   * 
+   * @param simValue
+   * @return
+   */
   public BasketServiceLineTreatment simValue(String simValue) {
     this.simValue = simValue;
     return this;
@@ -238,6 +288,11 @@ public class BasketServiceLineTreatment   {
     this.simValue = simValue;
   }
 
+  /**
+   * 
+   * @param vicCode
+   * @return
+   */
   public BasketServiceLineTreatment vicCode(String vicCode) {
     this.vicCode = vicCode;
     return this;

@@ -10,6 +10,10 @@ public class AddBundle {
 	@JsonProperty("packageLineId")
 	private String packageLineId = null;
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getBundleId() {
 		return bundleId;
 	}
@@ -18,6 +22,10 @@ public class AddBundle {
 		this.bundleId = bundleId;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPackageLineId() {
 		return packageLineId;
 	}

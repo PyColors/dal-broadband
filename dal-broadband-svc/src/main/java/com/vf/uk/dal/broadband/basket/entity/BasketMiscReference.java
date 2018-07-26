@@ -36,6 +36,11 @@ public class BasketMiscReference {
 	@JsonProperty("serviceProviderName")
 	private String serviceProviderName = null;
 
+	/**
+	 * 
+	 * @param anfp
+	 * @return
+	 */
 	public BasketMiscReference anfp(String anfp) {
 		this.anfp = anfp;
 		return this;
@@ -56,6 +61,11 @@ public class BasketMiscReference {
 		this.anfp = anfp;
 	}
 
+	/**
+	 * 
+	 * @param classificationCode
+	 * @return
+	 */
 	public BasketMiscReference classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -76,6 +86,11 @@ public class BasketMiscReference {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * 
+	 * @param customerAgreedDate
+	 * @return
+	 */
 	public BasketMiscReference customerAgreedDate(String customerAgreedDate) {
 		this.customerAgreedDate = customerAgreedDate;
 		return this;
@@ -96,6 +111,11 @@ public class BasketMiscReference {
 		this.customerAgreedDate = customerAgreedDate;
 	}
 
+	/**
+	 * 
+	 * @param installationType
+	 * @return
+	 */
 	public BasketMiscReference installationType(String installationType) {
 		this.installationType = installationType;
 		return this;
@@ -116,6 +136,11 @@ public class BasketMiscReference {
 		this.installationType = installationType;
 	}
 
+	/**
+	 * 
+	 * @param lineLength
+	 * @return
+	 */
 	public BasketMiscReference lineLength(String lineLength) {
 		this.lineLength = lineLength;
 		return this;
@@ -136,6 +161,11 @@ public class BasketMiscReference {
 		this.lineLength = lineLength;
 	}
 
+	/**
+	 * 
+	 * @param readyForServiceDate
+	 * @return
+	 */
 	public BasketMiscReference readyForServiceDate(String readyForServiceDate) {
 		this.readyForServiceDate = readyForServiceDate;
 		return this;
@@ -156,6 +186,11 @@ public class BasketMiscReference {
 		this.readyForServiceDate = readyForServiceDate;
 	}
 
+	/**
+	 * 
+	 * @param serviceProviderName
+	 * @return
+	 */
 	public BasketMiscReference serviceProviderName(String serviceProviderName) {
 		this.serviceProviderName = serviceProviderName;
 		return this;

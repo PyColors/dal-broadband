@@ -24,6 +24,11 @@ public class BasketLineDirectory   {
   @JsonProperty("locationCode")
   private String locationCode = null;
 
+  /**
+   * 
+   * @param directoryCode
+   * @return
+   */
   public BasketLineDirectory directoryCode(String directoryCode) {
     this.directoryCode = directoryCode;
     return this;
@@ -44,6 +49,11 @@ public class BasketLineDirectory   {
     this.directoryCode = directoryCode;
   }
 
+  /**
+   * 
+   * @param featureCode
+   * @return
+   */
   public BasketLineDirectory featureCode(String featureCode) {
     this.featureCode = featureCode;
     return this;
@@ -64,6 +74,11 @@ public class BasketLineDirectory   {
     this.featureCode = featureCode;
   }
 
+  /**
+   * 
+   * @param locationCode
+   * @return
+   */
   public BasketLineDirectory locationCode(String locationCode) {
     this.locationCode = locationCode;
     return this;

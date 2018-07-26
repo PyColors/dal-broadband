@@ -28,6 +28,11 @@ public class Allowance   {
   @JsonProperty("value")
   private String value = null;
 
+  /**
+   * 
+   * @param displayUom
+   * @return
+   */
   public Allowance displayUom(String displayUom) {
     this.displayUom = displayUom;
     return this;
@@ -48,6 +53,11 @@ public class Allowance   {
     this.displayUom = displayUom;
   }
 
+  /**
+   * 
+   * @param tilUom
+   * @return
+   */
   public Allowance tilUom(String tilUom) {
     this.tilUom = tilUom;
     return this;
@@ -68,6 +78,11 @@ public class Allowance   {
     this.tilUom = tilUom;
   }
 
+  /**
+   * 
+   * @param type
+   * @return
+   */
   public Allowance type(String type) {
     this.type = type;
     return this;
@@ -88,6 +103,12 @@ public class Allowance   {
     this.type = type;
   }
 
+  
+  /**
+   * 
+   * @param uom
+   * @return
+   */
   public Allowance uom(String uom) {
     this.uom = uom;
     return this;
@@ -108,6 +129,11 @@ public class Allowance   {
     this.uom = uom;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public Allowance value(String value) {
     this.value = value;
     return this;

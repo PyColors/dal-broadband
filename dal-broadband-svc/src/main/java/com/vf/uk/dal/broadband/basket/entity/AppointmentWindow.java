@@ -34,6 +34,11 @@ public class AppointmentWindow   {
   @JsonProperty("timeSlot")
   private String timeSlot = null;
 
+  /**
+   * 
+   * @param identificationId
+   * @return
+   */
   public AppointmentWindow identificationId(String identificationId) {
     this.identificationId = identificationId;
     return this;
@@ -54,6 +59,11 @@ public class AppointmentWindow   {
     this.identificationId = identificationId;
   }
 
+  /**
+   * 
+   * @param operationalPreferenceCode
+   * @return
+   */
   public AppointmentWindow operationalPreferenceCode(String operationalPreferenceCode) {
     this.operationalPreferenceCode = operationalPreferenceCode;
     return this;
@@ -74,11 +84,21 @@ public class AppointmentWindow   {
     this.operationalPreferenceCode = operationalPreferenceCode;
   }
 
+  /**
+   * 
+   * @param siteNotes
+   * @return
+   */
   public AppointmentWindow siteNotes(List<SiteNote> siteNotes) {
     this.siteNotes = siteNotes;
     return this;
   }
 
+  /**
+   * 
+   * @param siteNotesItem
+   * @return
+   */
   public AppointmentWindow addSiteNotesItem(SiteNote siteNotesItem) {
     if (this.siteNotes == null) {
       this.siteNotes = new ArrayList<>();
@@ -103,6 +123,11 @@ public class AppointmentWindow   {
     this.siteNotes = siteNotes;
   }
 
+  /**
+   * 
+   * @param startDateTime
+   * @return
+   */
   public AppointmentWindow startDateTime(String startDateTime) {
     this.startDateTime = startDateTime;
     return this;
@@ -123,6 +148,11 @@ public class AppointmentWindow   {
     this.startDateTime = startDateTime;
   }
 
+  /**
+   * 
+   * @param timeSlot
+   * @return
+   */
   public AppointmentWindow timeSlot(String timeSlot) {
     this.timeSlot = timeSlot;
     return this;

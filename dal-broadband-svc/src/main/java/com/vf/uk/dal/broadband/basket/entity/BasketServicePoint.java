@@ -23,6 +23,11 @@ public class BasketServicePoint   {
   @JsonProperty("serviceReference")
   private BasketServiceReference serviceReference = null;
 
+  /**
+   * 
+   * @param lineRefernece
+   * @return
+   */
   public BasketServicePoint lineRefernece(BasketLineReference lineRefernece) {
     this.lineRefernece = lineRefernece;
     return this;
@@ -44,6 +49,11 @@ public class BasketServicePoint   {
     this.lineRefernece = lineRefernece;
   }
 
+  /**
+   * 
+   * @param serviceReference
+   * @return
+   */
   public BasketServicePoint serviceReference(BasketServiceReference serviceReference) {
     this.serviceReference = serviceReference;
     return this;

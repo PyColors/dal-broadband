@@ -50,6 +50,12 @@ public class AddPackage   {
   @Valid
   private List<AddProduct> services = null;
 
+  /**
+   * 
+   * @param accountCategory
+   * @return
+   */
+  
   public AddPackage accountCategory(String accountCategory) {
     this.accountCategory = accountCategory;
     return this;
@@ -70,6 +76,11 @@ public class AddPackage   {
     this.accountCategory = accountCategory;
   }
 
+  /**
+   * 
+   * @param appointmentWindow
+   * @return
+   */
   public AddPackage appointmentWindow(AppointmentWindow appointmentWindow) {
     this.appointmentWindow = appointmentWindow;
     return this;
@@ -91,6 +102,12 @@ public class AddPackage   {
     this.appointmentWindow = appointmentWindow;
   }
 
+  /**
+   * 
+   * @param bundle
+   * @return
+   */
+  
   public AddPackage bundle(AddProduct bundle) {
     this.bundle = bundle;
     return this;
@@ -112,11 +129,23 @@ public class AddPackage   {
     this.bundle = bundle;
   }
 
+  
+  /**
+   * 
+   * @param hardwares
+   * @return
+   */
+  
   public AddPackage hardwares(List<AddProduct> hardwares) {
     this.hardwares = hardwares;
     return this;
   }
 
+  /**
+   * 
+   * @param hardwaresItem
+   * @return
+   */
   public AddPackage addHardwaresItem(AddProduct hardwaresItem) {
     if (this.hardwares == null) {
       this.hardwares = new ArrayList<>();
@@ -141,6 +170,11 @@ public class AddPackage   {
     this.hardwares = hardwares;
   }
 
+  /**
+   * 
+   * @param installationAddress
+   * @return
+   */
   public AddPackage installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
@@ -162,6 +196,11 @@ public class AddPackage   {
     this.installationAddress = installationAddress;
   }
 
+  /**
+   * 
+   * @param packageType
+   * @return
+   */
   public AddPackage packageType(String packageType) {
     this.packageType = packageType;
     return this;
@@ -182,6 +221,11 @@ public class AddPackage   {
     this.packageType = packageType;
   }
 
+  /**
+   * 
+   * @param phoneNumber
+   * @return
+   */
   public AddPackage phoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
     return this;
@@ -202,6 +246,11 @@ public class AddPackage   {
     this.phoneNumber = phoneNumber;
   }
 
+  /**
+   * 
+   * @param servicePoint
+   * @return
+   */
   public AddPackage servicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
     return this;
@@ -223,6 +272,12 @@ public class AddPackage   {
     this.servicePoint = servicePoint;
   }
 
+  
+  /**
+   * 
+   * @param serviceStartDate
+   * @return
+   */
   public AddPackage serviceStartDate(String serviceStartDate) {
     this.serviceStartDate = serviceStartDate;
     return this;
@@ -243,11 +298,22 @@ public class AddPackage   {
     this.serviceStartDate = serviceStartDate;
   }
 
+  
+  /**
+   * 
+   * @param services
+   * @return
+   */
   public AddPackage services(List<AddProduct> services) {
     this.services = services;
     return this;
   }
 
+  /**
+   * 
+   * @param servicesItem
+   * @return
+   */
   public AddPackage addServicesItem(AddProduct servicesItem) {
     if (this.services == null) {
       this.services = new ArrayList<>();
