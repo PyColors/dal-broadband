@@ -5,7 +5,7 @@
 
 	<groupId>com.vf.uk.dal</groupId>
 	<artifactId>dal-broadband-svc</artifactId>
-	<version>10.2.0</version>
+	<version>10.2.1</version>
 	<packaging>jar</packaging>
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
@@ -176,6 +176,9 @@
 			**/entity/**,
 			**/config/**,
 			**/BroadbandApplication.java,
+			**/constant/**,
+			**/exception/**,
+			**/BroadbandRepoProvider.java
 		</sonar.coverage.exclusions>
 	</properties>
 

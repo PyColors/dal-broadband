@@ -61,12 +61,12 @@ import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
+import com.vf.uk.dal.broadband.exception.ExceptionMessages;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.utils.ConverterUtils;
-import com.vf.uk.dal.broadband.utils.ExceptionMessages;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
@@ -839,7 +839,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		if(broadband!=null && broadband.getServicePoint()!=null && broadband.getServicePoint().getServiceReference()!=null && 
+		if(broadband.getServicePoint()!=null && broadband.getServicePoint().getServiceReference()!=null && 
 				CollectionUtils.isNotEmpty(broadband.getServicePoint().getServiceReference().getServiceLinesList())){
 			for(com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLine : broadband.getServicePoint().getServiceReference().getServiceLinesList()){
 				List<LineTreatment> lineTreatmentList = serviceLine.getLineTreatmentList();

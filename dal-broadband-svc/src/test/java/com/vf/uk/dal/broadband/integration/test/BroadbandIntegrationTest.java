@@ -148,6 +148,13 @@ public class BroadbandIntegrationTest {
 		String getBroadbandCacheResponse = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse.json"));
 		Broadband broadbandCacheResponse = new ObjectMapper().readValue(getBroadbandCacheResponse, Broadband.class);
 
+		
+		
+		String getBroadbandCacheBusResponse = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseForBusiness.json"));
+		Broadband broadbandCacheBusResponse = new ObjectMapper().readValue(getBroadbandCacheBusResponse, Broadband.class);
+		
+		given(broadBandRepoProvider.getBroadbandFromCache("businessBBCache")).willReturn(broadbandCacheBusResponse);
+		
 		String getBroadbandCacheResponseWithoutBasketId = new String(
 				Utility.readFile("\\rest-mock\\BroadbandCacheResponseWithNoBasketId.json"));
 		Broadband broadbandCacheResWithoutBasketId = new ObjectMapper()
@@ -420,6 +427,50 @@ public class BroadbandIntegrationTest {
 				.param("userType", "Consumer")).andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
+	
+	@Test
+	public void testGetFlbbListWithEmptyBBCache() throws Exception {
+		String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+		given(restTemplate.getForObject(
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTC&userType=Consumer", BundleDetails.class))
+						.willReturn(bundleDetails);
+
+		String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+		DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+		given(restTemplate.getForEntity(
+				"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+				DeliveryMethods[].class))
+						.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/12090/plan").contentType(MediaType.APPLICATION_JSON)
+				.param("userType", "Consumer")).andExpect(MockMvcResultMatchers.status().isOk());
+
+	}
+	
+	
+	@Test
+	public void testGetFlbbListForBusinessUser() throws Exception {
+		String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+		given(restTemplate.getForObject(
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Business", BundleDetails.class))
+						.willReturn(bundleDetails);
+
+		String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+		DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+		given(restTemplate.getForEntity(
+				"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=true",
+				DeliveryMethods[].class))
+						.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/businessBBCache/plan").contentType(MediaType.APPLICATION_JSON)
+				.param("userType", "Business")).andExpect(MockMvcResultMatchers.status().isOk());
+
+	}
+	
+	
+	
 
 	@Test
 	public void testGetFlbbListForNew() throws Exception {
