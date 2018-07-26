@@ -1,15 +1,12 @@
-package com.vf.uk.dal.broadband.controller.test;
+package com.vf.uk.dal.broadband.integration.test;
 
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,23 +31,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.netflix.config.ConfigurationManager;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
-import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.beans.test.BroadbandTestBeans;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.controller.BroadbandController;
-import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
-import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
-import com.vf.uk.dal.broadband.entity.FlbBundle;
-import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
-import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
-import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.SiteNote;
-import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
@@ -60,11 +49,8 @@ import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
-import com.vf.uk.dal.common.exception.ApplicationException;
-import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
-import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
@@ -336,19 +322,6 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-						.content(jsonString.getBytes(Charset.defaultCharset())))
-				.andExpect(MockMvcResultMatchers.status().isOk());
-
-	}
-
-	@Test
-	public void testCreateOrUpdateBasketWithValidReq() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket3.json"));
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/178907888/package").contentType(MediaType.APPLICATION_JSON)
 						.content(jsonString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 

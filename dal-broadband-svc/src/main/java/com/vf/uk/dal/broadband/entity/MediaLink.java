@@ -141,7 +141,7 @@ public class MediaLink {
 	 */
 	public MediaLink addPackageTypeItem(String packageTypeItem) {
 		if (this.packageType == null) {
-			this.packageType = new ArrayList<String>();
+			this.packageType = new ArrayList<>();
 		}
 		this.packageType.add(packageTypeItem);
 		return this;

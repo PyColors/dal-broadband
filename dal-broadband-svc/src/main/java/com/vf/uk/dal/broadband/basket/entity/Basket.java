@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -311,7 +310,7 @@ public class Basket extends ResourceSupport {
 
   public Basket addPackagesItem(ModelPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<ModelPackage>();
+      this.packages = new ArrayList<>();
     }
     this.packages.add(packagesItem);
     return this;
@@ -514,42 +513,8 @@ public class Basket extends ResourceSupport {
   }
 
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Basket basket = (Basket) o;
-    return Objects.equals(this.affiliateFlag, basket.affiliateFlag) &&
-        Objects.equals(this.affiliateId, basket.affiliateId) &&
-        Objects.equals(this.basketId, basket.basketId) &&
-        Objects.equals(this.changeCode, basket.changeCode) &&
-        Objects.equals(this.customer, basket.customer) &&
-        Objects.equals(this.customerRequestedDate, basket.customerRequestedDate) &&
-        Objects.equals(this.deliveryInfo, basket.deliveryInfo) &&
-        Objects.equals(this.hashvalue, basket.hashvalue) &&
-        Objects.equals(this.isChanged, basket.isChanged) &&
-        Objects.equals(this.journey, basket.journey) &&
-        Objects.equals(this.metadata, basket.metadata) &&
-        Objects.equals(this.packages, basket.packages) &&
-        Objects.equals(this.priceDetails, basket.priceDetails) &&
-        Objects.equals(this.source, basket.source) &&
-        Objects.equals(this.totalMonthlyPriceSaving, basket.totalMonthlyPriceSaving) &&
-        Objects.equals(this.totalOneoffPriceSaving, basket.totalOneoffPriceSaving) &&
-        Objects.equals(this.validated, basket.validated) &&
-        Objects.equals(this.vetOutcome, basket.vetOutcome) &&
-        Objects.equals(this.voucherCode, basket.voucherCode) &&
-        Objects.equals(this.voucherDescription, basket.voucherDescription) &&
-        Objects.equals(this.voucherErrorMessage, basket.voucherErrorMessage);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(affiliateFlag, affiliateId, basketId, changeCode, customer, customerRequestedDate, deliveryInfo, hashvalue, isChanged, journey, metadata, packages, priceDetails, source, totalMonthlyPriceSaving, totalOneoffPriceSaving, validated, vetOutcome, voucherCode, voucherDescription, voucherErrorMessage);
-  }
+  
 
   @Override
   public String toString() {

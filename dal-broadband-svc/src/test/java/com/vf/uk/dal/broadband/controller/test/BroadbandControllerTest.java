@@ -166,6 +166,15 @@ public class BroadbandControllerTest {
 		Broadband broadbandCacheResWithoutBasketId = new ObjectMapper()
 				.readValue(getBroadbandCacheResponseWithoutBasketId, Broadband.class);
 
+		
+		String getBroadbandCacheResponseWithOnlyOneLineTreatment = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse3.json"));
+		Broadband broadbandCacheResponseWithOnlyOneLineTreatment = new ObjectMapper().readValue(getBroadbandCacheResponseWithOnlyOneLineTreatment, Broadband.class);
+		
+		
+		
+		given(broadBandRepoProvider.getBroadbandFromCache("1234567890788889")).willReturn(broadbandCacheResponseWithOnlyOneLineTreatment);
+		
+		
 		String broadbandCacheResp = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse2.json"));
 		Broadband broadbandCacheRes = new ObjectMapper().readValue(broadbandCacheResp, Broadband.class);
 
@@ -188,7 +197,7 @@ public class BroadbandControllerTest {
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907")).willReturn(bbResponse);
 
 		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest, Basket.class))
-				.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+				.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888")).willReturn(broadbandCacheResponse);
 		given(broadBandRepoProvider.getBroadbandFromCache("123456789078881"))
 				.willReturn(broadbandCacheResWithoutBasketId);
@@ -610,7 +619,7 @@ public class BroadbandControllerTest {
 
 	@Test
 	public void testGetAppointmentResponse() {
-		ResponseEntity<?> resonse = broadBandController.getAppointmentForFLBB("12345678907888");
+		ResponseEntity<?> resonse = broadBandController.getAppointmentForFLBB("1234567890788889");
 		assertEquals(resonse.getStatusCode(), HttpStatus.OK);
 
 	}
@@ -674,7 +683,7 @@ public class BroadbandControllerTest {
 			serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
 			ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("12345678907",
 					serviceStartDateRequest);
-			Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCodeValue());
+			Assert.assertEquals(204, response.getStatusCodeValue());
 		} catch (Exception e) {
 			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
 		}
@@ -688,7 +697,7 @@ public class BroadbandControllerTest {
 			serviceStartDateRequest.setRemoveFromPhoneDirectory(true);
 			ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("12345678907",
 					serviceStartDateRequest);
-			Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCodeValue());
+			Assert.assertEquals(204, response.getStatusCodeValue());
 		} catch (Exception e) {
 			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
 		}

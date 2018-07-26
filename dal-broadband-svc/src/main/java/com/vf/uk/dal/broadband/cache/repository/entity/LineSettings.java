@@ -13,24 +13,24 @@ public class LineSettings implements Serializable {
 	private static final long serialVersionUID = 1518759682831766008L;
 	
 	/** The Constant SERVICECODE. */
-	private static final String SERVICECODE = "";
+	private static final String SERVICE_CODE = "serviceCode";
 	
 	/** The Constant INSTALLATIONCODE. */
-	private static final String INSTALLATIONCODE = "";
+	private static final String INSTALLATION_CODE = "installationCode";
 	
 	/** The Constant TERMINATIONCODE. */
-	private static final String TERMINATIONCODE = "";
+	private static final String TERMINATION_CODE = "terminationCode";
 
 	/** The service code. */
-	@JsonProperty(SERVICECODE)
+	@JsonProperty(SERVICE_CODE)
 	private String serviceCode;
 	
 	/** The installation code. */
-	@JsonProperty(INSTALLATIONCODE)
+	@JsonProperty(INSTALLATION_CODE)
 	private String installationCode;
 	
 	/** The termination code. */
-	@JsonProperty(TERMINATIONCODE)
+	@JsonProperty(TERMINATION_CODE)
 	private String terminationCode;
 	
 	/**

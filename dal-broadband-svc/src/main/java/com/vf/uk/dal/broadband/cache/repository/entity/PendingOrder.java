@@ -13,28 +13,28 @@ public class PendingOrder implements Serializable {
 	private static final long serialVersionUID = -7152366378366972739L;
 	
 	/** The Constant COMPLETIONDATE. */
-	private static final String COMPLETIONDATE= "completionDate";
+	private static final String COMPLETION_DATE= "completionDate";
 	
 	/** The Constant TYPECODE. */
-	private static final String TYPECODE= "typeCode";
+	private static final String TYPE_CODE= "typeCode";
 	
 	/** The Constant THIRDPARTYFLAG. */
-	private static final String THIRDPARTYFLAG= "thirdPartyFlag";
+	private static final String THIRDPARTY_FLAG= "thirdPartyFlag";
 	
 	/**
 	 * Field completionDate - Date.
 	 */
-	@JsonProperty(COMPLETIONDATE)
+	@JsonProperty(COMPLETION_DATE)
 	protected String completionDate;
 	/**
 	 * Field typeCode - String.
 	 */
-	@JsonProperty(TYPECODE)
+	@JsonProperty(TYPE_CODE)
 	protected String typeCode;
 	/**
 	 * Field thirtyPartyFlag - Boolean.
 	 */
-	@JsonProperty(THIRDPARTYFLAG)
+	@JsonProperty(THIRDPARTY_FLAG)
 	protected boolean thirdPartyFlag;
 
 	/**

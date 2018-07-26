@@ -102,7 +102,7 @@ public class BasketServiceLine   {
 
   public BasketServiceLine addServiceLineTreatmentsItem(BasketServiceLineTreatment serviceLineTreatmentsItem) {
     if (this.serviceLineTreatments == null) {
-      this.serviceLineTreatments = new ArrayList<BasketServiceLineTreatment>();
+      this.serviceLineTreatments = new ArrayList<>();
     }
     this.serviceLineTreatments.add(serviceLineTreatmentsItem);
     return this;

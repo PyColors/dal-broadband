@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -82,7 +81,7 @@ public class AppointmentWindow   {
 
   public AppointmentWindow addSiteNotesItem(SiteNote siteNotesItem) {
     if (this.siteNotes == null) {
-      this.siteNotes = new ArrayList<SiteNote>();
+      this.siteNotes = new ArrayList<>();
     }
     this.siteNotes.add(siteNotesItem);
     return this;
@@ -144,27 +143,6 @@ public class AppointmentWindow   {
     this.timeSlot = timeSlot;
   }
 
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AppointmentWindow appointmentWindow = (AppointmentWindow) o;
-    return Objects.equals(this.identificationId, appointmentWindow.identificationId) &&
-        Objects.equals(this.operationalPreferenceCode, appointmentWindow.operationalPreferenceCode) &&
-        Objects.equals(this.siteNotes, appointmentWindow.siteNotes) &&
-        Objects.equals(this.startDateTime, appointmentWindow.startDateTime) &&
-        Objects.equals(this.timeSlot, appointmentWindow.timeSlot);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(identificationId, operationalPreferenceCode, siteNotes, startDateTime, timeSlot);
-  }
 
   @Override
   public String toString() {

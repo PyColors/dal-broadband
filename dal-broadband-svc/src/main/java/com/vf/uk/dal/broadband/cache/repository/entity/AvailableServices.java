@@ -15,11 +15,11 @@ public class AvailableServices implements Serializable {
 	private static final long serialVersionUID = -8786941003761030305L;
 
 	/** The Constant SERVICE. */
-	private static final String SERVICE = "service";
+	private static final String AVAILABLE_SERVICE = "service";
 
 	/** The service. */
-	@JsonProperty(SERVICE)
-	private List<String> service = new ArrayList<String>();
+	@JsonProperty(AVAILABLE_SERVICE)
+	private List<String> service = new ArrayList<>();
 
 	/**
 	 * Gets the service.

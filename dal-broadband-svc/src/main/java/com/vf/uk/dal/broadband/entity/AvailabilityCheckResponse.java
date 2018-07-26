@@ -108,7 +108,7 @@ public class AvailabilityCheckResponse extends ResourceSupport {
 	public AvailabilityCheckResponse addAppointmentAndAvailabilityDetailItem(
 			AppointmentAndAvailabilityDetail appointmentAndAvailabilityDetailItem) {
 		if (this.appointmentAndAvailabilityDetail == null) {
-			this.appointmentAndAvailabilityDetail = new ArrayList<AppointmentAndAvailabilityDetail>();
+			this.appointmentAndAvailabilityDetail = new ArrayList<>();
 		}
 		this.appointmentAndAvailabilityDetail.add(appointmentAndAvailabilityDetailItem);
 		return this;
@@ -151,7 +151,7 @@ public class AvailabilityCheckResponse extends ResourceSupport {
 
 	public AvailabilityCheckResponse addClassificationCodeItem(String classificationCodeItem) {
 		if (this.classificationCode == null) {
-			this.classificationCode = new ArrayList<String>();
+			this.classificationCode = new ArrayList<>();
 		}
 		this.classificationCode.add(classificationCodeItem);
 		return this;

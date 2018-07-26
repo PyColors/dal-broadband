@@ -81,7 +81,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addDataAllowancesItem(CataloguepromotionqueriesForBundleAndHardwareDataAllowances dataAllowancesItem) {
     if (this.dataAllowances == null) {
-      this.dataAllowances = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareDataAllowances>();
+      this.dataAllowances = new ArrayList<>();
     }
     this.dataAllowances.add(dataAllowancesItem);
     return this;
@@ -110,7 +110,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addEntertainmentPacksItem(CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks entertainmentPacksItem) {
     if (this.entertainmentPacks == null) {
-      this.entertainmentPacks = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks>();
+      this.entertainmentPacks = new ArrayList<>();
     }
     this.entertainmentPacks.add(entertainmentPacksItem);
     return this;
@@ -139,7 +139,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addFreeAccessoryItem(CataloguepromotionqueriesForBundleAndHardwareAccessory freeAccessoryItem) {
     if (this.freeAccessory == null) {
-      this.freeAccessory = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareAccessory>();
+      this.freeAccessory = new ArrayList<>();
     }
     this.freeAccessory.add(freeAccessoryItem);
     return this;
@@ -168,7 +168,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addFreeExtrasItem(CataloguepromotionqueriesForBundleAndHardwareExtras freeExtrasItem) {
     if (this.freeExtras == null) {
-      this.freeExtras = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareExtras>();
+      this.freeExtras = new ArrayList<>();
     }
     this.freeExtras.add(freeExtrasItem);
     return this;
@@ -197,7 +197,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addPlanCouplingPromotionsItem(CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions planCouplingPromotionsItem) {
     if (this.planCouplingPromotions == null) {
-      this.planCouplingPromotions = new ArrayList<CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions>();
+      this.planCouplingPromotions = new ArrayList<>();
     }
     this.planCouplingPromotions.add(planCouplingPromotionsItem);
     return this;
@@ -255,7 +255,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addSashItem(CataloguepromotionqueriesForBundleAndHardwareSash sashItem) {
     if (this.sash == null) {
-      this.sash = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareSash>();
+      this.sash = new ArrayList<>();
     }
     this.sash.add(sashItem);
     return this;
@@ -284,7 +284,7 @@ public class BundlePromotion   {
 
   public BundlePromotion addSecureNetItem(CataloguepromotionqueriesForBundleAndHardwareSecureNet secureNetItem) {
     if (this.secureNet == null) {
-      this.secureNet = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareSecureNet>();
+      this.secureNet = new ArrayList<>();
     }
     this.secureNet.add(secureNetItem);
     return this;

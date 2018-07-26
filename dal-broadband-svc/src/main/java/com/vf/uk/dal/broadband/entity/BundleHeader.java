@@ -861,7 +861,7 @@ public class BundleHeader   {
    */
   public BundleHeader addAllowanceItem(BundleAllowance allowanceItem) {
     if (this.allowance == null) {
-      this.allowance = new ArrayList<BundleAllowance>();
+      this.allowance = new ArrayList<>();
     }
     this.allowance.add(allowanceItem);
     return this;
@@ -908,7 +908,7 @@ public class BundleHeader   {
    */
   public BundleHeader addRoamingAllowanceItem(BundleAllowance roamingAllowanceItem) {
     if (this.roamingAllowance == null) {
-      this.roamingAllowance = new ArrayList<BundleAllowance>();
+      this.roamingAllowance = new ArrayList<>();
     }
     this.roamingAllowance.add(roamingAllowanceItem);
     return this;
@@ -955,7 +955,7 @@ public class BundleHeader   {
    */
   public BundleHeader addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLink>();
+      this.merchandisingMedia = new ArrayList<>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;
@@ -1101,7 +1101,7 @@ public class BundleHeader   {
    */
   public BundleHeader addMcsItem(MonthlyCostSaver mcsItem) {
     if (this.mcs == null) {
-      this.mcs = new ArrayList<MonthlyCostSaver>();
+      this.mcs = new ArrayList<>();
     }
     this.mcs.add(mcsItem);
     return this;

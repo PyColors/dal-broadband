@@ -101,7 +101,7 @@ public class CheckOutPackage   {
 
   public CheckOutPackage addDependentOnItem(String dependentOnItem) {
     if (this.dependentOn == null) {
-      this.dependentOn = new ArrayList<String>();
+      this.dependentOn = new ArrayList<>();
     }
     this.dependentOn.add(dependentOnItem);
     return this;
@@ -129,7 +129,7 @@ public class CheckOutPackage   {
 
   public CheckOutPackage addDiscountsItem(Discount discountsItem) {
     if (this.discounts == null) {
-      this.discounts = new ArrayList<Discount>();
+      this.discounts = new ArrayList<>();
     }
     this.discounts.add(discountsItem);
     return this;
@@ -158,7 +158,7 @@ public class CheckOutPackage   {
 
   public CheckOutPackage addHardwaresItem(CheckOutHardware hardwaresItem) {
     if (this.hardwares == null) {
-      this.hardwares = new ArrayList<CheckOutHardware>();
+      this.hardwares = new ArrayList<>();
     }
     this.hardwares.add(hardwaresItem);
     return this;
@@ -268,7 +268,7 @@ public class CheckOutPackage   {
 
   public CheckOutPackage addServicesItem(Service servicesItem) {
     if (this.services == null) {
-      this.services = new ArrayList<Service>();
+      this.services = new ArrayList<>();
     }
     this.services.add(servicesItem);
     return this;

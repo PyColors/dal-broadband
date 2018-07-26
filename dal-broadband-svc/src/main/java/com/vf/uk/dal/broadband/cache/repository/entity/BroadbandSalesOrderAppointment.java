@@ -13,17 +13,17 @@ public class BroadbandSalesOrderAppointment implements Serializable {
 	private static final long serialVersionUID = 6512528605127882904L;
 	
 	/** The Constant APPOINTMENTWINDOW. */
-	private static final String APPOINTMENTWINDOW = "appointmentWindow";
+	private static final String APPOINTMENT_WINDOW = "appointmentWindow";
 	
 	/** The Constant SITENOTE. */
-	private static final String SITENOTE = "siteNote";
+	private static final String SITE_NOTE = "siteNote";
 	
 	/** The appointment window. */
-	@JsonProperty(APPOINTMENTWINDOW)
+	@JsonProperty(APPOINTMENT_WINDOW)
 	private AppointmentWindow appointmentWindow;
 	
 	/** The site note. */
-	@JsonProperty(SITENOTE)
+	@JsonProperty(SITE_NOTE)
 	private SiteNote siteNote;
 	
 	/**

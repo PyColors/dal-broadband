@@ -131,7 +131,7 @@ public class MerchandisingPromotions   {
 
   public MerchandisingPromotions addPackageTypeItem(String packageTypeItem) {
     if (this.packageType == null) {
-      this.packageType = new ArrayList<String>();
+      this.packageType = new ArrayList<>();
     }
     this.packageType.add(packageTypeItem);
     return this;

@@ -30,7 +30,7 @@ public class AddProductRequest   {
 
   public AddProductRequest addProductsItem(Product productsItem) {
     if (this.products == null) {
-      this.products = new ArrayList<Product>();
+      this.products = new ArrayList<>();
     }
     this.products.add(productsItem);
     return this;

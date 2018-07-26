@@ -53,7 +53,7 @@ public class BundleDetails   {
 
   public BundleDetails addPlanListItem(BundleHeader planListItem) {
     if (this.planList == null) {
-      this.planList = new ArrayList<BundleHeader>();
+      this.planList = new ArrayList<>();
     }
     this.planList.add(planListItem);
     return this;

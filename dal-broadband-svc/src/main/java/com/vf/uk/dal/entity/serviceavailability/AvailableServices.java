@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AvailableServices {
 	@JsonProperty("service")
-	private List<String> service = new ArrayList<String>();
+	private List<String> service = new ArrayList<>();
 
 	public AvailableServices service(List<String> service) {
 		this.service = service;

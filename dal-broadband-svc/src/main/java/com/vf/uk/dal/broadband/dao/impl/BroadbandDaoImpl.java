@@ -256,8 +256,6 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	public Basket createBasket(CreateBasketRequest createBasketRequest) {
 		Basket basket = null;
 		RestTemplate restTemplate = registryClient.getRestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
 		try {
 			ResponseEntity<Basket> client = restTemplate.postForEntity(BroadBandConstant.BASKET_URL,
 					createBasketRequest, Basket.class);

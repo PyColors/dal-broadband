@@ -109,7 +109,7 @@ public class AuthFLBBJourneyResponse {
 
 	public AuthFLBBJourneyResponse addJourneyDataItem(JourneyData journeyDataItem) {
 		if (this.journeyData == null) {
-			this.journeyData = new ArrayList<JourneyData>();
+			this.journeyData = new ArrayList<>();
 		}
 		this.journeyData.add(journeyDataItem);
 		return this;

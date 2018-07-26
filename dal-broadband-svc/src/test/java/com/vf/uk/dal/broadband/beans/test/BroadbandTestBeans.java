@@ -12,7 +12,6 @@ import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.dao.impl.BroadbandDaoImpl;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.svc.impl.BroadbandServiceImpl;
-import com.vf.uk.dal.common.registry.client.RegistryClient;
 
 @Configuration
 public class BroadbandTestBeans {

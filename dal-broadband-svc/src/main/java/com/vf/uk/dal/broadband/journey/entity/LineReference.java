@@ -128,7 +128,7 @@ public class LineReference {
 
   public LineReference addLineDirectoryItem(LineDirectory lineDirectoryItem) {
     if (this.lineDirectory == null) {
-      this.lineDirectory = new ArrayList<LineDirectory>();
+      this.lineDirectory = new ArrayList<>();
     }
     this.lineDirectory.add(lineDirectoryItem);
     return this;

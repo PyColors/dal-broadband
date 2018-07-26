@@ -84,7 +84,7 @@ public class UpdatePackage   {
 
   public UpdatePackage addHardwaresItem(UpdateDevice hardwaresItem) {
     if (this.hardwares == null) {
-      this.hardwares = new ArrayList<UpdateDevice>();
+      this.hardwares = new ArrayList<>();
     }
     this.hardwares.add(hardwaresItem);
     return this;
@@ -133,7 +133,7 @@ public class UpdatePackage   {
 
   public UpdatePackage addServicesItem(UpdateService servicesItem) {
     if (this.services == null) {
-      this.services = new ArrayList<UpdateService>();
+      this.services = new ArrayList<>();
     }
     this.services.add(servicesItem);
     return this;

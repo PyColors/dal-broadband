@@ -38,7 +38,7 @@ public class RequiresIncompatibility   {
 
   public RequiresIncompatibility addProductClassesItem(String productClassesItem) {
     if (this.productClasses == null) {
-      this.productClasses = new ArrayList<String>();
+      this.productClasses = new ArrayList<>();
     }
     this.productClasses.add(productClassesItem);
     return this;
@@ -66,7 +66,7 @@ public class RequiresIncompatibility   {
 
   public RequiresIncompatibility addProductIdsItem(String productIdsItem) {
     if (this.productIds == null) {
-      this.productIds = new ArrayList<String>();
+      this.productIds = new ArrayList<>();
     }
     this.productIds.add(productIdsItem);
     return this;
@@ -94,7 +94,7 @@ public class RequiresIncompatibility   {
 
   public RequiresIncompatibility addProductLinesItem(String productLinesItem) {
     if (this.productLines == null) {
-      this.productLines = new ArrayList<String>();
+      this.productLines = new ArrayList<>();
     }
     this.productLines.add(productLinesItem);
     return this;

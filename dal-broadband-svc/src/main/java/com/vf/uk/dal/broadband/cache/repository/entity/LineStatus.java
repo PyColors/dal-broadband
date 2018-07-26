@@ -13,46 +13,46 @@ public class LineStatus implements Serializable {
 	private static final long serialVersionUID = 2905281855467764206L;
 	
 	/** The Constant STATUSCODE. */
-	private static final String STATUSCODE = "statusCode";
+	private static final String STATUS_CODE = "statusCode";
 	
 	/** The Constant ACCESSLINESTATUS. */
-	private static final String ACCESSLINESTATUS = "accessLineStatus";
+	private static final String ACCESSLINE_STATUS = "accessLineStatus";
 	
 	/** The Constant GNPSTATUS. */
-	private static final String GNPSTATUS = "gnpStatus";
+	private static final String GNP_STATUS = "gnpStatus";
 	
 	/** The Constant LINEOPTION. */
-	private static final String LINEOPTION = "lineOption";
+	private static final String LINE_OPTION = "lineOption";
 	
 	/** The Constant TECHNOLOGY. */
 	private static final String TECHNOLOGY = "technology";
 	
 	/** The Constant LINETYPE. */
-	private static final String LINETYPE = "lineType";
+	private static final String LINE_TYPE = "lineType";
 	
 	/** The Constant TEMPSTRUCTURE. */
-	private static final String TEMPSTRUCTURE = "tempStructure";
+	private static final String TEMP_STRUCTURE = "tempStructure";
 	
 	/** The Constant STANDBYPOWERREQUIRED. */
-	private static final String STANDBYPOWERREQUIRED = "standbyPowerRequired";
+	private static final String STANDBYPOWER_REQUIRED = "standbyPowerRequired";
 	
 	/** The Constant NARROWBANDSERVICESAVAILABLE. */
-	private static final String NARROWBANDSERVICESAVAILABLE = "narrowBandServicesAvailable";
+	private static final String NARROWBANDSERVICES_AVAILABLE = "narrowBandServicesAvailable";
 
 	/** The status code. */
-	@JsonProperty(STATUSCODE)
+	@JsonProperty(STATUS_CODE)
 	private String statusCode;
 	
 	/** The access line status. */
-	@JsonProperty(ACCESSLINESTATUS)
+	@JsonProperty(ACCESSLINE_STATUS)
 	private String accessLineStatus;
 	
 	/** The g NP status. */
-	@JsonProperty(GNPSTATUS)
+	@JsonProperty(GNP_STATUS)
 	private String gnpStatus;
 	
 	/** The line option. */
-	@JsonProperty(LINEOPTION)
+	@JsonProperty(LINE_OPTION)
 	private String lineOption;
 	
 	/** The technology. */
@@ -60,19 +60,19 @@ public class LineStatus implements Serializable {
 	private String technology;
 	
 	/** The line type. */
-	@JsonProperty(LINETYPE)
+	@JsonProperty(LINE_TYPE)
 	private String lineType;
 	
 	/** The temp structure. */
-	@JsonProperty(TEMPSTRUCTURE)
+	@JsonProperty(TEMP_STRUCTURE)
 	private String tempStructure;
 	
 	/** The standby power required. */
-	@JsonProperty(STANDBYPOWERREQUIRED)
+	@JsonProperty(STANDBYPOWER_REQUIRED)
 	private String standbyPowerRequired;
 	
 	/** The narrow band services available. */
-	@JsonProperty(NARROWBANDSERVICESAVAILABLE)
+	@JsonProperty(NARROWBANDSERVICES_AVAILABLE)
 	private String narrowBandServicesAvailable;
 
 	/**

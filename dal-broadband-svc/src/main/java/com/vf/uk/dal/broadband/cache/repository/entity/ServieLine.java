@@ -15,34 +15,34 @@ public class ServieLine implements Serializable {
 	private static final long serialVersionUID = 6648662229394980645L;
 	
 	/** The Constant ITEMREFERENCE. */
-	private static final String ITEMREFERENCE = "itemReference";
+	private static final String ITEM_REFERENCE = "itemReference";
 	
 	/** The Constant LINESPEEDS. */
-	private static final String LINESPEEDS = "lineSpeeds";
+	private static final String LINE_SPEEDS = "lineSpeeds";
 	
 	/** The Constant SERVICELINETREATMENTLIST. */
-	private static final String SERVICELINETREATMENTLIST = "serviceLineTreatmentList";
+	private static final String SERVICELINETREATMENT_LIST = "serviceLineTreatmentList";
 	
 	/** The Constant MISCREFERNCE. */
-	private static final String MISCREFERNCE = "miscRefernce";
+	private static final String MISC_REFERNCE = "miscRefernce";
 
 	/** The item reference. */
-	@JsonProperty(ITEMREFERENCE)
+	@JsonProperty(ITEM_REFERENCE)
 	private ItemReference itemReference;
 	
 	@JsonProperty("classificationCode")
 	private String classificationCode;
 	
 	/** The line speeds. */
-	@JsonProperty(LINESPEEDS)
+	@JsonProperty(LINE_SPEEDS)
 	private LineSpeeds lineSpeeds;
 	
 	/** The service line treatment list. */
-	@JsonProperty(SERVICELINETREATMENTLIST)
-	private List<ServiceLineTreatment> serviceLineTreatmentList = new ArrayList<ServiceLineTreatment>();
+	@JsonProperty(SERVICELINETREATMENT_LIST)
+	private List<ServiceLineTreatment> serviceLineTreatmentList = new ArrayList<>();
 	
 	/** The misc refernce. */
-	@JsonProperty(MISCREFERNCE)
+	@JsonProperty(MISC_REFERNCE)
 	private MiscReference miscRefernce;
 
 	/**

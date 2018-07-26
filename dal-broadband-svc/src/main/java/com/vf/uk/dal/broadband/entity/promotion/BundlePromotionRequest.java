@@ -33,7 +33,7 @@ public class BundlePromotionRequest {
 
 	public BundlePromotionRequest addBundleIdListItem(String bundleIdListItem) {
 		if (this.bundleIdList == null) {
-			this.bundleIdList = new ArrayList<String>();
+			this.bundleIdList = new ArrayList<>();
 		}
 		this.bundleIdList.add(bundleIdListItem);
 		return this;

@@ -31,7 +31,7 @@ public class GetAppointmentResponse extends ResourceSupport  {
 
   public GetAppointmentResponse addAppointmentWindowListItem(AppointmentList appointmentWindowListItem) {
     if (this.appointmentWindowList == null) {
-      this.appointmentWindowList = new ArrayList<AppointmentList>();
+      this.appointmentWindowList = new ArrayList<>();
     }
     this.appointmentWindowList.add(appointmentWindowListItem);
     return this;

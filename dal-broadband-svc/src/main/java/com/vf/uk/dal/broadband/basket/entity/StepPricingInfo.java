@@ -42,7 +42,7 @@ public class StepPricingInfo   {
 
   public StepPricingInfo addDiscountSkuIdsItem(String discountSkuIdsItem) {
     if (this.discountSkuIds == null) {
-      this.discountSkuIds = new ArrayList<String>();
+      this.discountSkuIds = new ArrayList<>();
     }
     this.discountSkuIds.add(discountSkuIdsItem);
     return this;

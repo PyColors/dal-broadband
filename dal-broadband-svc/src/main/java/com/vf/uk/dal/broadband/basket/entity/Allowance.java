@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -130,27 +128,6 @@ public class Allowance   {
     this.value = value;
   }
 
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Allowance allowance = (Allowance) o;
-    return Objects.equals(this.displayUom, allowance.displayUom) &&
-        Objects.equals(this.tilUom, allowance.tilUom) &&
-        Objects.equals(this.type, allowance.type) &&
-        Objects.equals(this.uom, allowance.uom) &&
-        Objects.equals(this.value, allowance.value);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(displayUom, tilUom, type, uom, value);
-  }
 
   @Override
   public String toString() {

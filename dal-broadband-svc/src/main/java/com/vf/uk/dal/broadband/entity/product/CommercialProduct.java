@@ -259,7 +259,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addCategoriesItem(String categoriesItem) {
     if (this.categories == null) {
-      this.categories = new ArrayList<String>();
+      this.categories = new ArrayList<>();
     }
     this.categories.add(categoriesItem);
     return this;
@@ -631,7 +631,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addListOfhelpURLsItem(HelpURL listOfhelpURLsItem) {
     if (this.listOfhelpURLs == null) {
-      this.listOfhelpURLs = new ArrayList<HelpURL>();
+      this.listOfhelpURLs = new ArrayList<>();
     }
     this.listOfhelpURLs.add(listOfhelpURLsItem);
     return this;
@@ -660,7 +660,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addListOfimageURLsItem(ImageURL listOfimageURLsItem) {
     if (this.listOfimageURLs == null) {
-      this.listOfimageURLs = new ArrayList<ImageURL>();
+      this.listOfimageURLs = new ArrayList<>();
     }
     this.listOfimageURLs.add(listOfimageURLsItem);
     return this;
@@ -689,7 +689,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addListOfmediaURLsItem(MediaURL listOfmediaURLsItem) {
     if (this.listOfmediaURLs == null) {
-      this.listOfmediaURLs = new ArrayList<MediaURL>();
+      this.listOfmediaURLs = new ArrayList<>();
     }
     this.listOfmediaURLs.add(listOfmediaURLsItem);
     return this;
@@ -1064,7 +1064,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addProductLinesItem(String productLinesItem) {
     if (this.productLines == null) {
-      this.productLines = new ArrayList<String>();
+      this.productLines = new ArrayList<>();
     }
     this.productLines.add(productLinesItem);
     return this;
@@ -1173,7 +1173,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addRecommendataionsItem(Recommendations recommendataionsItem) {
     if (this.recommendataions == null) {
-      this.recommendataions = new ArrayList<Recommendations>();
+      this.recommendataions = new ArrayList<>();
     }
     this.recommendataions.add(recommendataionsItem);
     return this;
@@ -1282,7 +1282,7 @@ public class CommercialProduct   {
 
   public CommercialProduct addSpecificationGroupsItem(Group specificationGroupsItem) {
     if (this.specificationGroups == null) {
-      this.specificationGroups = new ArrayList<Group>();
+      this.specificationGroups = new ArrayList<>();
     }
     this.specificationGroups.add(specificationGroupsItem);
     return this;

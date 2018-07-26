@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -177,28 +175,6 @@ public class BasketLineSpeeds   {
   }
 
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    BasketLineSpeeds lineSpeeds = (BasketLineSpeeds) o;
-    return Objects.equals(this.avgDownSpeed, lineSpeeds.avgDownSpeed) &&
-        Objects.equals(this.bandwidthMeasure, lineSpeeds.bandwidthMeasure) &&
-        Objects.equals(this.maxDownSpeed, lineSpeeds.maxDownSpeed) &&
-        Objects.equals(this.maxUpSpeed, lineSpeeds.maxUpSpeed) &&
-        Objects.equals(this.minDownSpeed, lineSpeeds.minDownSpeed) &&
-        Objects.equals(this.minGuaranteedDownSpeed, lineSpeeds.minGuaranteedDownSpeed) &&
-        Objects.equals(this.minUpSpeed, lineSpeeds.minUpSpeed);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(avgDownSpeed, bandwidthMeasure, maxDownSpeed, maxUpSpeed, minDownSpeed, minGuaranteedDownSpeed, minUpSpeed);
-  }
 
   @Override
   public String toString() {

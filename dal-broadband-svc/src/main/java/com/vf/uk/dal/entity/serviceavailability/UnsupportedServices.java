@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UnsupportedServices {
 	@JsonProperty("service")
-	private List<String> service = new ArrayList<String>();
+	private List<String> service = new ArrayList<>();
 
 	public UnsupportedServices service(List<String> service) {
 		this.service = service;

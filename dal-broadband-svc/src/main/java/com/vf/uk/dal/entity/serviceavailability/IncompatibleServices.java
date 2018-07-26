@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class IncompatibleServices {
 	@JsonProperty("service")
-	private List<String> service = new ArrayList<String>();
+	private List<String> service = new ArrayList<>();
 
 	public IncompatibleServices service(List<String> service) {
 		this.service = service;

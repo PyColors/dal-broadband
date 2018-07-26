@@ -30,7 +30,7 @@ public class BasketServiceReference   {
 
   public BasketServiceReference addServiceLinesItem(BasketServiceLines serviceLinesItem) {
     if (this.serviceLines == null) {
-      this.serviceLines = new ArrayList<BasketServiceLines>();
+      this.serviceLines = new ArrayList<>();
     }
     this.serviceLines.add(serviceLinesItem);
     return this;

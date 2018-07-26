@@ -19,7 +19,7 @@ public class ServiceReference implements Serializable {
 
 	/** The service lines list. */
 	@JsonProperty(SERVICELINELIST)
-	private List<ServiceLines> serviceLinesList = new ArrayList<ServiceLines>();
+	private List<ServiceLines> serviceLinesList = new ArrayList<>();
 
 	/**
 	 * Gets the service lines list.

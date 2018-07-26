@@ -13,13 +13,13 @@ public class ServicePoint implements Serializable {
 	private static final long serialVersionUID = -1543418061981155540L;
 
 	/** The Constant LINEREFERNCE. */
-	private static final String LINEREFERENCE = "lineReference";
+	private static final String LINE_REFERENCE = "lineReference";
 
 	/** The Constant SERVICEREFERENCE. */
-	private static final String SERVICEREFERENCE = "serviceReference";
+	private static final String SERVICE_REFERENCE = "serviceReference";
 
 	/** The line refernce. */
-	@JsonProperty(LINEREFERENCE)
+	@JsonProperty(LINE_REFERENCE)
 	private LineReference lineReference;
 
 	public LineReference getLineReference() {
@@ -31,7 +31,7 @@ public class ServicePoint implements Serializable {
 	}
 
 	/** The service reference. */
-	@JsonProperty(SERVICEREFERENCE)
+	@JsonProperty(SERVICE_REFERENCE)
 	private ServiceReference serviceReference;
 
 	

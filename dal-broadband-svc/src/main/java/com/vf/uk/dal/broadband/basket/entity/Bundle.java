@@ -116,7 +116,7 @@ public class Bundle   {
 
   public Bundle addAllowancesItem(Allowance allowancesItem) {
     if (this.allowances == null) {
-      this.allowances = new ArrayList<Allowance>();
+      this.allowances = new ArrayList<>();
     }
     this.allowances.add(allowancesItem);
     return this;
@@ -145,7 +145,7 @@ public class Bundle   {
 
   public Bundle addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
-      this.attributes = new ArrayList<Attribute>();
+      this.attributes = new ArrayList<>();
     }
     this.attributes.add(attributesItem);
     return this;
@@ -214,7 +214,7 @@ public class Bundle   {
 
   public Bundle addBundledServiceProductsItem(BundledServiceProduct bundledServiceProductsItem) {
     if (this.bundledServiceProducts == null) {
-      this.bundledServiceProducts = new ArrayList<BundledServiceProduct>();
+      this.bundledServiceProducts = new ArrayList<>();
     }
     this.bundledServiceProducts.add(bundledServiceProductsItem);
     return this;
@@ -380,7 +380,7 @@ public class Bundle   {
 
   public Bundle addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
-      this.merchandisingMedia = new ArrayList<MediaLinks>();
+      this.merchandisingMedia = new ArrayList<>();
     }
     this.merchandisingMedia.add(merchandisingMediaItem);
     return this;

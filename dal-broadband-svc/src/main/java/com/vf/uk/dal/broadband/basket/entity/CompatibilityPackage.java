@@ -30,7 +30,7 @@ public class CompatibilityPackage   {
 
   public CompatibilityPackage addIncompatibleProductsItem(IncompatibleChildProduct incompatibleProductsItem) {
     if (this.incompatibleProducts == null) {
-      this.incompatibleProducts = new ArrayList<IncompatibleChildProduct>();
+      this.incompatibleProducts = new ArrayList<>();
     }
     this.incompatibleProducts.add(incompatibleProductsItem);
     return this;

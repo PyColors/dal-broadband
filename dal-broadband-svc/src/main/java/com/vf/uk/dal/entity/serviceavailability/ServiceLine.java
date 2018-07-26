@@ -24,7 +24,7 @@ public class ServiceLine {
 	private LineSpeeds lineSpeeds = null;
 
 	@JsonProperty("lineTreatment")
-	private List<ServiceLineTreatment> lineTreatment = new ArrayList<ServiceLineTreatment>();
+	private List<ServiceLineTreatment> lineTreatment = new ArrayList<>();
 
 	@JsonProperty("miscReference")
 	private MiscReference miscReference = null;

@@ -126,7 +126,7 @@ public class PriceDetails   {
 
   public PriceDetails addStepPricesItem(StepPricingInfo stepPricesItem) {
     if (this.stepPrices == null) {
-      this.stepPrices = new ArrayList<StepPricingInfo>();
+      this.stepPrices = new ArrayList<>();
     }
     this.stepPrices.add(stepPricesItem);
     return this;

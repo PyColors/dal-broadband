@@ -77,7 +77,7 @@ public class CheckOutBundle   {
 
   public CheckOutBundle addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
-      this.attributes = new ArrayList<Attribute>();
+      this.attributes = new ArrayList<>();
     }
     this.attributes.add(attributesItem);
     return this;

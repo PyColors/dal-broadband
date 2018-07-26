@@ -76,7 +76,7 @@ public class Group   {
 
   public Group addSpecificationsItem(Specification specificationsItem) {
     if (this.specifications == null) {
-      this.specifications = new ArrayList<Specification>();
+      this.specifications = new ArrayList<>();
     }
     this.specifications.add(specificationsItem);
     return this;
