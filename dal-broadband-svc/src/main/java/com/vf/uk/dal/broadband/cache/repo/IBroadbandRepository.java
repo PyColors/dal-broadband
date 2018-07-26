@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 
 
+/**
+ * The Interface IBroadbandRepository.
+ */
 @Repository("broadbandRepository")
 public interface IBroadbandRepository extends CrudRepository<Broadband, String> {
 

@@ -9,48 +9,65 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Specifications
+ * Specifications.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class Specifications   {
+  
+  /** The comparable. */
   @JsonProperty("comparable")
   private String comparable = null;
 
+  /** The description. */
   @JsonProperty("description")
   private String description = null;
 
+  /** The footnote. */
   @JsonProperty("footnote")
   private String footnote = null;
 
+  /** The iskey. */
   @JsonProperty("iskey")
   private String iskey = null;
 
+  /** The name. */
   @JsonProperty("name")
   private String name = null;
 
+  /** The spec priority. */
   @JsonProperty("specPriority")
   private String specPriority = null;
 
+  /** The value. */
   @JsonProperty("value")
   private String value = null;
 
+  /** The value type. */
   @JsonProperty("valueType")
   private String valueType = null;
 
+  /** The value UOM. */
   @JsonProperty("valueUOM")
   private String valueUOM = null;
 
+  /**
+   * Comparable.
+   *
+   * @param comparable the comparable
+   * @return the specifications
+   */
   public Specifications comparable(String comparable) {
     this.comparable = comparable;
     return this;
   }
 
   /**
-   * Get comparable
+   * Get comparable.
+   *
    * @return comparable
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -58,19 +75,31 @@ public class Specifications   {
     return comparable;
   }
 
+  /**
+   * Sets the comparable.
+   *
+   * @param comparable the new comparable
+   */
   public void setComparable(String comparable) {
     this.comparable = comparable;
   }
 
+  /**
+   * Description.
+   *
+   * @param description the description
+   * @return the specifications
+   */
   public Specifications description(String description) {
     this.description = description;
     return this;
   }
 
   /**
-   * Get description
+   * Get description.
+   *
    * @return description
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -78,19 +107,31 @@ public class Specifications   {
     return description;
   }
 
+  /**
+   * Sets the description.
+   *
+   * @param description the new description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * Footnote.
+   *
+   * @param footnote the footnote
+   * @return the specifications
+   */
   public Specifications footnote(String footnote) {
     this.footnote = footnote;
     return this;
   }
 
   /**
-   * Get footnote
+   * Get footnote.
+   *
    * @return footnote
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -98,19 +139,31 @@ public class Specifications   {
     return footnote;
   }
 
+  /**
+   * Sets the footnote.
+   *
+   * @param footnote the new footnote
+   */
   public void setFootnote(String footnote) {
     this.footnote = footnote;
   }
 
+  /**
+   * Iskey.
+   *
+   * @param iskey the iskey
+   * @return the specifications
+   */
   public Specifications iskey(String iskey) {
     this.iskey = iskey;
     return this;
   }
 
   /**
-   * Get iskey
+   * Get iskey.
+   *
    * @return iskey
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -118,19 +171,31 @@ public class Specifications   {
     return iskey;
   }
 
+  /**
+   * Sets the iskey.
+   *
+   * @param iskey the new iskey
+   */
   public void setIskey(String iskey) {
     this.iskey = iskey;
   }
 
+  /**
+   * Name.
+   *
+   * @param name the name
+   * @return the specifications
+   */
   public Specifications name(String name) {
     this.name = name;
     return this;
   }
 
   /**
-   * Get name
+   * Get name.
+   *
    * @return name
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -138,19 +203,31 @@ public class Specifications   {
     return name;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Spec priority.
+   *
+   * @param specPriority the spec priority
+   * @return the specifications
+   */
   public Specifications specPriority(String specPriority) {
     this.specPriority = specPriority;
     return this;
   }
 
   /**
-   * Get specPriority
+   * Get specPriority.
+   *
    * @return specPriority
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -158,19 +235,31 @@ public class Specifications   {
     return specPriority;
   }
 
+  /**
+   * Sets the spec priority.
+   *
+   * @param specPriority the new spec priority
+   */
   public void setSpecPriority(String specPriority) {
     this.specPriority = specPriority;
   }
 
+  /**
+   * Value.
+   *
+   * @param value the value
+   * @return the specifications
+   */
   public Specifications value(String value) {
     this.value = value;
     return this;
   }
 
   /**
-   * Get value
+   * Get value.
+   *
    * @return value
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -178,19 +267,31 @@ public class Specifications   {
     return value;
   }
 
+  /**
+   * Sets the value.
+   *
+   * @param value the new value
+   */
   public void setValue(String value) {
     this.value = value;
   }
 
+  /**
+   * Value type.
+   *
+   * @param valueType the value type
+   * @return the specifications
+   */
   public Specifications valueType(String valueType) {
     this.valueType = valueType;
     return this;
   }
 
   /**
-   * Get valueType
+   * Get valueType.
+   *
    * @return valueType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -198,19 +299,31 @@ public class Specifications   {
     return valueType;
   }
 
+  /**
+   * Sets the value type.
+   *
+   * @param valueType the new value type
+   */
   public void setValueType(String valueType) {
     this.valueType = valueType;
   }
 
+  /**
+   * Value UOM.
+   *
+   * @param valueUOM the value UOM
+   * @return the specifications
+   */
   public Specifications valueUOM(String valueUOM) {
     this.valueUOM = valueUOM;
     return this;
   }
 
   /**
-   * Get valueUOM
+   * Get valueUOM.
+   *
    * @return valueUOM
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -218,11 +331,19 @@ public class Specifications   {
     return valueUOM;
   }
 
+  /**
+   * Sets the value UOM.
+   *
+   * @param valueUOM the new value UOM
+   */
   public void setValueUOM(String valueUOM) {
     this.valueUOM = valueUOM;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -243,11 +364,17 @@ public class Specifications   {
         Objects.equals(this.valueUOM, specifications.valueUOM);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(comparable, description, footnote, iskey, name, specPriority, value, valueType, valueUOM);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -269,6 +396,9 @@ public class Specifications   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

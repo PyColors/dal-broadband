@@ -53,6 +53,11 @@ public class InstallationAddress   {
   @JsonProperty("town")
   private String town = null;
 
+  /**
+   * 
+   * @param citySubDivisionName
+   * @return
+   */
   public InstallationAddress citySubDivisionName(String citySubDivisionName) {
     this.citySubDivisionName = citySubDivisionName;
     return this;
@@ -73,6 +78,11 @@ public class InstallationAddress   {
     this.citySubDivisionName = citySubDivisionName;
   }
 
+  /**
+   * 
+   * @param country
+   * @return
+   */
   public InstallationAddress country(String country) {
     this.country = country;
     return this;
@@ -93,6 +103,11 @@ public class InstallationAddress   {
     this.country = country;
   }
 
+  /**
+   * 
+   * @param county
+   * @return
+   */
   public InstallationAddress county(String county) {
     this.county = county;
     return this;
@@ -113,6 +128,11 @@ public class InstallationAddress   {
     this.county = county;
   }
 
+  /**
+   * 
+   * @param flatNumber
+   * @return
+   */
   public InstallationAddress flatNumber(String flatNumber) {
     this.flatNumber = flatNumber;
     return this;
@@ -133,6 +153,11 @@ public class InstallationAddress   {
     this.flatNumber = flatNumber;
   }
 
+  /**
+   * 
+   * @param houseName
+   * @return
+   */
   public InstallationAddress houseName(String houseName) {
     this.houseName = houseName;
     return this;
@@ -153,6 +178,11 @@ public class InstallationAddress   {
     this.houseName = houseName;
   }
 
+  /**
+   * 
+   * @param houseNumber
+   * @return
+   */
   public InstallationAddress houseNumber(String houseNumber) {
     this.houseNumber = houseNumber;
     return this;
@@ -173,6 +203,11 @@ public class InstallationAddress   {
     this.houseNumber = houseNumber;
   }
 
+  /**
+   * 
+   * @param identification
+   * @return
+   */
   public InstallationAddress identification(Identification identification) {
     this.identification = identification;
     return this;
@@ -194,6 +229,11 @@ public class InstallationAddress   {
     this.identification = identification;
   }
 
+  /**
+   * 
+   * @param locality
+   * @return
+   */
   public InstallationAddress locality(String locality) {
     this.locality = locality;
     return this;
@@ -214,6 +254,11 @@ public class InstallationAddress   {
     this.locality = locality;
   }
 
+  /**
+   * 
+   * @param moveTypeCode
+   * @return
+   */
   public InstallationAddress moveTypeCode(String moveTypeCode) {
     this.moveTypeCode = moveTypeCode;
     return this;
@@ -234,6 +279,11 @@ public class InstallationAddress   {
     this.moveTypeCode = moveTypeCode;
   }
 
+  /**
+   * 
+   * @param postCode
+   * @return
+   */
   public InstallationAddress postCode(String postCode) {
     this.postCode = postCode;
     return this;
@@ -254,6 +304,11 @@ public class InstallationAddress   {
     this.postCode = postCode;
   }
 
+  /**
+   * 
+   * @param streetName
+   * @return
+   */
   public InstallationAddress streetName(String streetName) {
     this.streetName = streetName;
     return this;

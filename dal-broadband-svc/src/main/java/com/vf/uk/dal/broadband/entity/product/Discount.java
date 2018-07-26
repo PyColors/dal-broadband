@@ -9,27 +9,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Discount
+ * Discount.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class Discount   {
+  
+  /** The amount. */
   @JsonProperty("amount")
   private Double amount = null;
 
+  /** The type. */
   @JsonProperty("type")
   private String type = null;
 
+  /**
+   * Amount.
+   *
+   * @param amount the amount
+   * @return the discount
+   */
   public Discount amount(Double amount) {
     this.amount = amount;
     return this;
   }
 
   /**
-   * Get amount
+   * Get amount.
+   *
    * @return amount
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -37,19 +47,31 @@ public class Discount   {
     return amount;
   }
 
+  /**
+   * Sets the amount.
+   *
+   * @param amount the new amount
+   */
   public void setAmount(Double amount) {
     this.amount = amount;
   }
 
+  /**
+   * Type.
+   *
+   * @param type the type
+   * @return the discount
+   */
   public Discount type(String type) {
     this.type = type;
     return this;
   }
 
   /**
-   * Get type
+   * Get type.
+   *
    * @return type
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -57,11 +79,19 @@ public class Discount   {
     return type;
   }
 
+  /**
+   * Sets the type.
+   *
+   * @param type the new type
+   */
   public void setType(String type) {
     this.type = type;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -75,11 +105,17 @@ public class Discount   {
         Objects.equals(this.type, discount.type);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(amount, type);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -94,6 +130,9 @@ public class Discount   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

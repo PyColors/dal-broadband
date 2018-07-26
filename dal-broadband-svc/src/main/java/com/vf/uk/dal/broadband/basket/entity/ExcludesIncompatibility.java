@@ -23,11 +23,21 @@ public class ExcludesIncompatibility   {
   @Valid
   private List<String> productIds = null;
 
+  /**
+   * 
+   * @param productIds
+   * @return
+   */
   public ExcludesIncompatibility productIds(List<String> productIds) {
     this.productIds = productIds;
     return this;
   }
 
+  /**
+   * 
+   * @param productIdsItem
+   * @return
+   */
   public ExcludesIncompatibility addProductIdsItem(String productIdsItem) {
     if (this.productIds == null) {
       this.productIds = new ArrayList<>();

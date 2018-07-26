@@ -9,30 +9,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * UpdateBundle
+ * UpdateBundle.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class UpdateBundle   {
+  
+  /** The action. */
   @JsonProperty("action")
   private String action = null;
 
+  /** The product line id. */
   @JsonProperty("productLineId")
   private String productLineId = null;
 
+  /** The sku id. */
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /**
+   * Action.
+   *
+   * @param action the action
+   * @return the update bundle
+   */
   public UpdateBundle action(String action) {
     this.action = action;
     return this;
   }
 
   /**
-   * Get action
+   * Get action.
+   *
    * @return action
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -40,19 +51,31 @@ public class UpdateBundle   {
     return action;
   }
 
+  /**
+   * Sets the action.
+   *
+   * @param action the new action
+   */
   public void setAction(String action) {
     this.action = action;
   }
 
+  /**
+   * Product line id.
+   *
+   * @param productLineId the product line id
+   * @return the update bundle
+   */
   public UpdateBundle productLineId(String productLineId) {
     this.productLineId = productLineId;
     return this;
   }
 
   /**
-   * Get productLineId
+   * Get productLineId.
+   *
    * @return productLineId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -60,19 +83,31 @@ public class UpdateBundle   {
     return productLineId;
   }
 
+  /**
+   * Sets the product line id.
+   *
+   * @param productLineId the new product line id
+   */
   public void setProductLineId(String productLineId) {
     this.productLineId = productLineId;
   }
 
+  /**
+   * Sku id.
+   *
+   * @param skuId the sku id
+   * @return the update bundle
+   */
   public UpdateBundle skuId(String skuId) {
     this.skuId = skuId;
     return this;
   }
 
   /**
-   * Get skuId
+   * Get skuId.
+   *
    * @return skuId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -80,11 +115,19 @@ public class UpdateBundle   {
     return skuId;
   }
 
+  /**
+   * Sets the sku id.
+   *
+   * @param skuId the new sku id
+   */
   public void setSkuId(String skuId) {
     this.skuId = skuId;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -99,11 +142,17 @@ public class UpdateBundle   {
         Objects.equals(this.skuId, updateBundle.skuId);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(action, productLineId, skuId);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -119,6 +168,9 @@ public class UpdateBundle   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

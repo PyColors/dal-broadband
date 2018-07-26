@@ -13,79 +13,105 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Service
+ * Service.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
 
 public class Service   {
+  
+  /** The action. */
   @JsonProperty("action")
   private String action = null;
 
+  /** The allowances. */
   @JsonProperty("allowances")
   @Valid
   private List<Allowance> allowances = null;
 
+  /** The attributes. */
   @JsonProperty("attributes")
   @Valid
   private List<Attribute> attributes = null;
 
+  /** The data rollover. */
   @JsonProperty("dataRollover")
   private String dataRollover = null;
 
+  /** The description. */
   @JsonProperty("description")
   private String description = null;
 
+  /** The display description. */
   @JsonProperty("displayDescription")
   private String displayDescription = null;
 
+  /** The display name. */
   @JsonProperty("displayName")
   private String displayName = null;
 
+  /** The free gift. */
   @JsonProperty("freeGift")
   private Boolean freeGift = null;
 
+  /** The is changed. */
   @JsonProperty("isChanged")
   private Boolean isChanged = null;
 
+  /** The merchandising media. */
   @JsonProperty("merchandisingMedia")
   @Valid
   private List<MediaLinks> merchandisingMedia = null;
 
+  /** The name. */
   @JsonProperty("name")
   private String name = null;
 
+  /** The package line id. */
   @JsonProperty("packageLineId")
   private String packageLineId = null;
 
+  /** The plan duration. */
   @JsonProperty("planDuration")
   private CommitmentPeriod planDuration = null;
 
+  /** The price details. */
   @JsonProperty("priceDetails")
   private ServicePrice priceDetails = null;
 
+  /** The product class. */
   @JsonProperty("productClass")
   private String productClass = null;
 
+  /** The reward points. */
   @JsonProperty("rewardPoints")
   private String rewardPoints = null;
 
+  /** The sku id. */
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /** The specification group. */
   @JsonProperty("specificationGroup")
   @Valid
   private List<Specifications> specificationGroup = null;
 
+  /**
+   * Action.
+   *
+   * @param action the action
+   * @return the service
+   */
   public Service action(String action) {
     this.action = action;
     return this;
   }
 
   /**
-   * Get action
+   * Get action.
+   *
    * @return action
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -93,15 +119,32 @@ public class Service   {
     return action;
   }
 
+  /**
+   * Sets the action.
+   *
+   * @param action the new action
+   */
   public void setAction(String action) {
     this.action = action;
   }
 
+  /**
+   * Allowances.
+   *
+   * @param allowances the allowances
+   * @return the service
+   */
   public Service allowances(List<Allowance> allowances) {
     this.allowances = allowances;
     return this;
   }
 
+  /**
+   * Adds the allowances item.
+   *
+   * @param allowancesItem the allowances item
+   * @return the service
+   */
   public Service addAllowancesItem(Allowance allowancesItem) {
     if (this.allowances == null) {
       this.allowances = new ArrayList<>();
@@ -111,9 +154,10 @@ public class Service   {
   }
 
   /**
-   * Get allowances
+   * Get allowances.
+   *
    * @return allowances
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -122,15 +166,32 @@ public class Service   {
     return allowances;
   }
 
+  /**
+   * Sets the allowances.
+   *
+   * @param allowances the new allowances
+   */
   public void setAllowances(List<Allowance> allowances) {
     this.allowances = allowances;
   }
 
+  /**
+   * Attributes.
+   *
+   * @param attributes the attributes
+   * @return the service
+   */
   public Service attributes(List<Attribute> attributes) {
     this.attributes = attributes;
     return this;
   }
 
+  /**
+   * Adds the attributes item.
+   *
+   * @param attributesItem the attributes item
+   * @return the service
+   */
   public Service addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
       this.attributes = new ArrayList<>();
@@ -140,9 +201,10 @@ public class Service   {
   }
 
   /**
-   * Get attributes
+   * Get attributes.
+   *
    * @return attributes
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -151,19 +213,31 @@ public class Service   {
     return attributes;
   }
 
+  /**
+   * Sets the attributes.
+   *
+   * @param attributes the new attributes
+   */
   public void setAttributes(List<Attribute> attributes) {
     this.attributes = attributes;
   }
 
+  /**
+   * Data rollover.
+   *
+   * @param dataRollover the data rollover
+   * @return the service
+   */
   public Service dataRollover(String dataRollover) {
     this.dataRollover = dataRollover;
     return this;
   }
 
   /**
-   * Get dataRollover
+   * Get dataRollover.
+   *
    * @return dataRollover
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -171,19 +245,31 @@ public class Service   {
     return dataRollover;
   }
 
+  /**
+   * Sets the data rollover.
+   *
+   * @param dataRollover the new data rollover
+   */
   public void setDataRollover(String dataRollover) {
     this.dataRollover = dataRollover;
   }
 
+  /**
+   * Description.
+   *
+   * @param description the description
+   * @return the service
+   */
   public Service description(String description) {
     this.description = description;
     return this;
   }
 
   /**
-   * Get description
+   * Get description.
+   *
    * @return description
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -191,19 +277,31 @@ public class Service   {
     return description;
   }
 
+  /**
+   * Sets the description.
+   *
+   * @param description the new description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * Display description.
+   *
+   * @param displayDescription the display description
+   * @return the service
+   */
   public Service displayDescription(String displayDescription) {
     this.displayDescription = displayDescription;
     return this;
   }
 
   /**
-   * Get displayDescription
+   * Get displayDescription.
+   *
    * @return displayDescription
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -211,19 +309,31 @@ public class Service   {
     return displayDescription;
   }
 
+  /**
+   * Sets the display description.
+   *
+   * @param displayDescription the new display description
+   */
   public void setDisplayDescription(String displayDescription) {
     this.displayDescription = displayDescription;
   }
 
+  /**
+   * Display name.
+   *
+   * @param displayName the display name
+   * @return the service
+   */
   public Service displayName(String displayName) {
     this.displayName = displayName;
     return this;
   }
 
   /**
-   * Get displayName
+   * Get displayName.
+   *
    * @return displayName
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -231,51 +341,92 @@ public class Service   {
     return displayName;
   }
 
+  /**
+   * Sets the display name.
+   *
+   * @param displayName the new display name
+   */
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
 
+  /**
+   * Free gift.
+   *
+   * @param freeGift the free gift
+   * @return the service
+   */
   public Service freeGift(Boolean freeGift) {
     this.freeGift = freeGift;
     return this;
   }
 
   /**
-   * Get freeGift
+   * Get freeGift.
+   *
    * @return freeGift
-  **/
+   */
 
   public Boolean isFreeGift() {
     return freeGift;
   }
 
+  /**
+   * Sets the free gift.
+   *
+   * @param freeGift the new free gift
+   */
   public void setFreeGift(Boolean freeGift) {
     this.freeGift = freeGift;
   }
 
+  /**
+   * Checks if is changed.
+   *
+   * @param isChanged the is changed
+   * @return the service
+   */
   public Service isChanged(Boolean isChanged) {
     this.isChanged = isChanged;
     return this;
   }
 
   /**
-   * Get isChanged
+   * Get isChanged.
+   *
    * @return isChanged
-  **/
+   */
 
   public Boolean isIsChanged() {
     return isChanged;
   }
 
+  /**
+   * Sets the checks if is changed.
+   *
+   * @param isChanged the new checks if is changed
+   */
   public void setIsChanged(Boolean isChanged) {
     this.isChanged = isChanged;
   }
 
+  /**
+   * Merchandising media.
+   *
+   * @param merchandisingMedia the merchandising media
+   * @return the service
+   */
   public Service merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
+  /**
+   * Adds the merchandising media item.
+   *
+   * @param merchandisingMediaItem the merchandising media item
+   * @return the service
+   */
   public Service addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
       this.merchandisingMedia = new ArrayList<>();
@@ -285,9 +436,10 @@ public class Service   {
   }
 
   /**
-   * Get merchandisingMedia
+   * Get merchandisingMedia.
+   *
    * @return merchandisingMedia
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -296,19 +448,31 @@ public class Service   {
     return merchandisingMedia;
   }
 
+  /**
+   * Sets the merchandising media.
+   *
+   * @param merchandisingMedia the new merchandising media
+   */
   public void setMerchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
   }
 
+  /**
+   * Name.
+   *
+   * @param name the name
+   * @return the service
+   */
   public Service name(String name) {
     this.name = name;
     return this;
   }
 
   /**
-   * Get name
+   * Get name.
+   *
    * @return name
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -316,19 +480,31 @@ public class Service   {
     return name;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Package line id.
+   *
+   * @param packageLineId the package line id
+   * @return the service
+   */
   public Service packageLineId(String packageLineId) {
     this.packageLineId = packageLineId;
     return this;
   }
 
   /**
-   * Get packageLineId
+   * Get packageLineId.
+   *
    * @return packageLineId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -336,19 +512,31 @@ public class Service   {
     return packageLineId;
   }
 
+  /**
+   * Sets the package line id.
+   *
+   * @param packageLineId the new package line id
+   */
   public void setPackageLineId(String packageLineId) {
     this.packageLineId = packageLineId;
   }
 
+  /**
+   * Plan duration.
+   *
+   * @param planDuration the plan duration
+   * @return the service
+   */
   public Service planDuration(CommitmentPeriod planDuration) {
     this.planDuration = planDuration;
     return this;
   }
 
   /**
-   * Get planDuration
+   * Get planDuration.
+   *
    * @return planDuration
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -357,19 +545,31 @@ public class Service   {
     return planDuration;
   }
 
+  /**
+   * Sets the plan duration.
+   *
+   * @param planDuration the new plan duration
+   */
   public void setPlanDuration(CommitmentPeriod planDuration) {
     this.planDuration = planDuration;
   }
 
+  /**
+   * Price details.
+   *
+   * @param priceDetails the price details
+   * @return the service
+   */
   public Service priceDetails(ServicePrice priceDetails) {
     this.priceDetails = priceDetails;
     return this;
   }
 
   /**
-   * Get priceDetails
+   * Get priceDetails.
+   *
    * @return priceDetails
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -378,19 +578,31 @@ public class Service   {
     return priceDetails;
   }
 
+  /**
+   * Sets the price details.
+   *
+   * @param priceDetails the new price details
+   */
   public void setPriceDetails(ServicePrice priceDetails) {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * Product class.
+   *
+   * @param productClass the product class
+   * @return the service
+   */
   public Service productClass(String productClass) {
     this.productClass = productClass;
     return this;
   }
 
   /**
-   * Get productClass
+   * Get productClass.
+   *
    * @return productClass
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -398,19 +610,31 @@ public class Service   {
     return productClass;
   }
 
+  /**
+   * Sets the product class.
+   *
+   * @param productClass the new product class
+   */
   public void setProductClass(String productClass) {
     this.productClass = productClass;
   }
 
+  /**
+   * Reward points.
+   *
+   * @param rewardPoints the reward points
+   * @return the service
+   */
   public Service rewardPoints(String rewardPoints) {
     this.rewardPoints = rewardPoints;
     return this;
   }
 
   /**
-   * Get rewardPoints
+   * Get rewardPoints.
+   *
    * @return rewardPoints
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -418,19 +642,31 @@ public class Service   {
     return rewardPoints;
   }
 
+  /**
+   * Sets the reward points.
+   *
+   * @param rewardPoints the new reward points
+   */
   public void setRewardPoints(String rewardPoints) {
     this.rewardPoints = rewardPoints;
   }
 
+  /**
+   * Sku id.
+   *
+   * @param skuId the sku id
+   * @return the service
+   */
   public Service skuId(String skuId) {
     this.skuId = skuId;
     return this;
   }
 
   /**
-   * Get skuId
+   * Get skuId.
+   *
    * @return skuId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -438,15 +674,32 @@ public class Service   {
     return skuId;
   }
 
+  /**
+   * Sets the sku id.
+   *
+   * @param skuId the new sku id
+   */
   public void setSkuId(String skuId) {
     this.skuId = skuId;
   }
 
+  /**
+   * Specification group.
+   *
+   * @param specificationGroup the specification group
+   * @return the service
+   */
   public Service specificationGroup(List<Specifications> specificationGroup) {
     this.specificationGroup = specificationGroup;
     return this;
   }
 
+  /**
+   * Adds the specification group item.
+   *
+   * @param specificationGroupItem the specification group item
+   * @return the service
+   */
   public Service addSpecificationGroupItem(Specifications specificationGroupItem) {
     if (this.specificationGroup == null) {
       this.specificationGroup = new ArrayList<>();
@@ -456,9 +709,10 @@ public class Service   {
   }
 
   /**
-   * Get specificationGroup
+   * Get specificationGroup.
+   *
    * @return specificationGroup
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -467,11 +721,19 @@ public class Service   {
     return specificationGroup;
   }
 
+  /**
+   * Sets the specification group.
+   *
+   * @param specificationGroup the new specification group
+   */
   public void setSpecificationGroup(List<Specifications> specificationGroup) {
     this.specificationGroup = specificationGroup;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -501,11 +763,17 @@ public class Service   {
         Objects.equals(this.specificationGroup, service.specificationGroup);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(action, allowances, attributes, dataRollover, description, displayDescription, displayName, freeGift, isChanged, merchandisingMedia, name, packageLineId, planDuration, priceDetails, productClass, rewardPoints, skuId, specificationGroup);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -536,6 +804,9 @@ public class Service   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

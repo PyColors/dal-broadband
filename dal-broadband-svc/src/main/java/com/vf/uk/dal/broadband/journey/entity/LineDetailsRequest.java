@@ -3,18 +3,29 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * LineDetailsRequest
+ * LineDetailsRequest.
  */
 
 public class LineDetailsRequest {
+	
+	/** The line treatment type. */
 	private String lineTreatmentType = null;
 
+	/** The flbb number. */
 	private String flbbNumber = null;
 
+	/** The classification code. */
 	private String classificationCode = null;
 
+	/** The earliest available date. */
 	private String earliestAvailableDate = null;
 
+	/**
+	 * Line treatment type.
+	 *
+	 * @param lineTreatmentType the line treatment type
+	 * @return the line details request
+	 */
 	public LineDetailsRequest lineTreatmentType(String lineTreatmentType) {
 		this.lineTreatmentType = lineTreatmentType;
 		return this;
@@ -31,10 +42,21 @@ public class LineDetailsRequest {
 		return lineTreatmentType;
 	}
 
+	/**
+	 * Sets the line treatment type.
+	 *
+	 * @param lineTreatmentType the new line treatment type
+	 */
 	public void setLineTreatmentType(String lineTreatmentType) {
 		this.lineTreatmentType = lineTreatmentType;
 	}
 
+	/**
+	 * Flbb number.
+	 *
+	 * @param flbbNumber the flbb number
+	 * @return the line details request
+	 */
 	public LineDetailsRequest flbbNumber(String flbbNumber) {
 		this.flbbNumber = flbbNumber;
 		return this;
@@ -42,19 +64,30 @@ public class LineDetailsRequest {
 
 	/**
 	 * Update the journey with the FLBB phone number sent by the FE added by the
-	 * user
-	 * 
+	 * user.
+	 *
 	 * @return flbbNumber
-	 **/
+	 */
 
 	public String getFlbbNumber() {
 		return flbbNumber;
 	}
 
+	/**
+	 * Sets the flbb number.
+	 *
+	 * @param flbbNumber the new flbb number
+	 */
 	public void setFlbbNumber(String flbbNumber) {
 		this.flbbNumber = flbbNumber;
 	}
 
+	/**
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the line details request
+	 */
 	public LineDetailsRequest classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
@@ -62,19 +95,30 @@ public class LineDetailsRequest {
 
 	/**
 	 * Update the journey with the selected package classification code which is
-	 * sent as part of the FLBB package response
-	 * 
+	 * sent as part of the FLBB package response.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 
 	public String getClassificationCode() {
 		return classificationCode;
 	}
 
+	/**
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
+	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * Earliest available date.
+	 *
+	 * @param earliestAvailableDate the earliest available date
+	 * @return the line details request
+	 */
 	public LineDetailsRequest earliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 		return this;
@@ -82,19 +126,27 @@ public class LineDetailsRequest {
 
 	/**
 	 * The earliest available date for the selected line type recieved by the
-	 * GSA can be updated in journey
-	 * 
+	 * GSA can be updated in journey.
+	 *
 	 * @return earliestAvailableDate
-	 **/
+	 */
 
 	public String getEarliestAvailableDate() {
 		return earliestAvailableDate;
 	}
 
+	/**
+	 * Sets the earliest available date.
+	 *
+	 * @param earliestAvailableDate the new earliest available date
+	 */
 	public void setEarliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -110,11 +162,17 @@ public class LineDetailsRequest {
 				&& Objects.equals(this.earliestAvailableDate, lineDetailsRequest.earliestAvailableDate);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(lineTreatmentType, flbbNumber, classificationCode, earliestAvailableDate);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -131,6 +189,9 @@ public class LineDetailsRequest {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

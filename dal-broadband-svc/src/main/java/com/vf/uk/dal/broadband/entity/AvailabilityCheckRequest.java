@@ -11,24 +11,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * AvailabilityCheckRequest
+ * AvailabilityCheckRequest.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class AvailabilityCheckRequest {
+	
+	/** The line ref. */
 	@JsonProperty("lineRef")
 	private LineRef lineRef = null;
 
+	/** The classification code. */
 	@JsonProperty("classificationCode")
 	private List<String> classificationCode = null;
 
+	/** The category. */
 	@JsonProperty("category")
 	private String category = null;
 
 	/**
-	 * 
-	 * @param lineRef
-	 * @return
+	 * Line ref.
+	 *
+	 * @param lineRef the line ref
+	 * @return the availability check request
 	 */
 
 	public AvailabilityCheckRequest lineRef(LineRef lineRef) {
@@ -37,10 +42,10 @@ public class AvailabilityCheckRequest {
 	}
 
 	/**
-	 * Get lineRef
-	 * 
+	 * Get lineRef.
+	 *
 	 * @return lineRef
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -49,14 +54,20 @@ public class AvailabilityCheckRequest {
 		return lineRef;
 	}
 
+	/**
+	 * Sets the line ref.
+	 *
+	 * @param lineRef the new line ref
+	 */
 	public void setLineRef(LineRef lineRef) {
 		this.lineRef = lineRef;
 	}
 
 	/**
-	 * 
-	 * @param classificationCode
-	 * @return
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the availability check request
 	 */
 
 	public AvailabilityCheckRequest classificationCode(List<String> classificationCode) {
@@ -65,9 +76,10 @@ public class AvailabilityCheckRequest {
 	}
 
 	/**
-	 * 
-	 * @param classificationCodeItem
-	 * @return
+	 * Adds the classification code item.
+	 *
+	 * @param classificationCodeItem the classification code item
+	 * @return the availability check request
 	 */
 	public AvailabilityCheckRequest addClassificationCodeItem(String classificationCodeItem) {
 		if (this.classificationCode == null) {
@@ -78,10 +90,10 @@ public class AvailabilityCheckRequest {
 	}
 
 	/**
-	 * Get classificationCode
-	 * 
+	 * Get classificationCode.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	/**
@@ -93,22 +105,36 @@ public class AvailabilityCheckRequest {
 	}
 
 	/**
-	 * 
-	 * @param classificationCode
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
 	 */
 
 	public void setClassificationCode(List<String> classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
+	/**
+	 * Gets the category.
+	 *
+	 * @return the category
+	 */
 	public String getCategory() {
 		return category;
 	}
 
+	/**
+	 * Sets the category.
+	 *
+	 * @param category the new category
+	 */
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -122,11 +148,17 @@ public class AvailabilityCheckRequest {
 				&& Objects.equals(this.classificationCode, availabilityCheckRequest.classificationCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(lineRef, classificationCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -141,6 +173,9 @@ public class AvailabilityCheckRequest {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

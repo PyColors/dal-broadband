@@ -26,6 +26,11 @@ public class Customer   {
   @Valid
   private List<String> ownedAccounts = null;
 
+  /**
+   * 
+   * @param contactId
+   * @return
+   */
   public Customer contactId(String contactId) {
     this.contactId = contactId;
     return this;
@@ -46,11 +51,21 @@ public class Customer   {
     this.contactId = contactId;
   }
 
+  /**
+   * 
+   * @param ownedAccounts
+   * @return
+   */
   public Customer ownedAccounts(List<String> ownedAccounts) {
     this.ownedAccounts = ownedAccounts;
     return this;
   }
 
+  /**
+   * 
+   * @param ownedAccountsItem
+   * @return
+   */
   public Customer addOwnedAccountsItem(String ownedAccountsItem) {
     if (this.ownedAccounts == null) {
       this.ownedAccounts = new ArrayList<>();

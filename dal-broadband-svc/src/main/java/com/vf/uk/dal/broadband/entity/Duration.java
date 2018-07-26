@@ -7,21 +7,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Duration
+ * Duration.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class Duration   {
+  
+  /** The uom. */
   @JsonProperty("uom")
   private String uom = null;
 
+  /** The value. */
   @JsonProperty("value")
   private String value = null;
 
   /**
-   * 
-   * @param uom
-   * @return
+   * Uom.
+   *
+   * @param uom the uom
+   * @return the duration
    */
   public Duration uom(String uom) {
     this.uom = uom;
@@ -29,9 +33,10 @@ public class Duration   {
   }
 
    /**
-   * Unit of measurement for duration value
-   * @return uom
-  **/
+    * Unit of measurement for duration value.
+    *
+    * @return uom
+    */
   @ApiModelProperty(value = "Unit of measurement for duration value")
 
 
@@ -39,14 +44,20 @@ public class Duration   {
     return uom;
   }
 
+  /**
+   * Sets the uom.
+   *
+   * @param uom the new uom
+   */
   public void setUom(String uom) {
     this.uom = uom;
   }
 
   /**
-   * 
-   * @param value
-   * @return
+   * Value.
+   *
+   * @param value the value
+   * @return the duration
    */
   public Duration value(String value) {
     this.value = value;
@@ -54,9 +65,10 @@ public class Duration   {
   }
 
    /**
-   * Duration value
-   * @return value
-  **/
+    * Duration value.
+    *
+    * @return value
+    */
   @ApiModelProperty(value = "Duration value")
 
 
@@ -64,11 +76,19 @@ public class Duration   {
     return value;
   }
 
+  /**
+   * Sets the value.
+   *
+   * @param value the new value
+   */
   public void setValue(String value) {
     this.value = value;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -82,11 +102,17 @@ public class Duration   {
         Objects.equals(this.value, duration.value);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(uom, value);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -101,6 +127,9 @@ public class Duration   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

@@ -7,18 +7,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * A composite object which holds all the details about the various types of
  * promotions applicable on the selected plan or hardware or the combination of
- * both
+ * both.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-02T14:46:40.485Z")
 
 public class RouterMerchandisingPromotions {
 	
+	/** The hardware promotions. */
 	@JsonProperty("hardwarePromotions")
 	private RouterMerchandisingPromotionsWrapper hardwarePromotions = null;
 
 	/**
-	 * @param planId
-	 * @return
+	 * Hardware promotions.
+	 *
+	 * @param hardwarePromotions the hardware promotions
+	 * @return the router merchandising promotions
 	 */
 	
 
@@ -32,18 +35,26 @@ public class RouterMerchandisingPromotions {
 	}
 
 	/**
-	 * Get hardwarePromotions
-	 * 
+	 * Get hardwarePromotions.
+	 *
 	 * @return hardwarePromotions
-	 **/
+	 */
 	public RouterMerchandisingPromotionsWrapper getHardwarePromotions() {
 		return hardwarePromotions;
 	}
 
+	/**
+	 * Sets the hardware promotions.
+	 *
+	 * @param hardwarePromotions the new hardware promotions
+	 */
 	public void setHardwarePromotions(RouterMerchandisingPromotionsWrapper hardwarePromotions) {
 		this.hardwarePromotions = hardwarePromotions;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -57,11 +68,17 @@ public class RouterMerchandisingPromotions {
 				Objects.equals(this.hardwarePromotions, merchandisingPromotionsPackage.hardwarePromotions);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(hardwarePromotions);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -74,6 +91,9 @@ public class RouterMerchandisingPromotions {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

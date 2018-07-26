@@ -11,36 +11,49 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * PremiseAndServicePoint
+ * PremiseAndServicePoint.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-24T11:14:47.535Z")
 
 public class PremiseAndServicePoint   {
+  
+  /** The installation address. */
   @JsonProperty("installationAddress")
   private InstallationAddress installationAddress = null;
 
+  /** The line package type. */
   @JsonProperty("linePackageType")
   private String linePackageType = null;
 
+  /** The line treatment type. */
   @JsonProperty("lineTreatmentType")
   private String lineTreatmentType = null;
 
+  /** The phone number. */
   @JsonProperty("phoneNumber")
   private String phoneNumber = null;
 
+  /** The service point. */
   @JsonProperty("servicePoint")
   private BasketServicePoint servicePoint = null;
 
+  /**
+   * Installation address.
+   *
+   * @param installationAddress the installation address
+   * @return the premise and service point
+   */
   public PremiseAndServicePoint installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
   }
 
   /**
-   * Get installationAddress
+   * Get installationAddress.
+   *
    * @return installationAddress
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -49,19 +62,31 @@ public class PremiseAndServicePoint   {
     return installationAddress;
   }
 
+  /**
+   * Sets the installation address.
+   *
+   * @param installationAddress the new installation address
+   */
   public void setInstallationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
   }
 
+  /**
+   * Line package type.
+   *
+   * @param linePackageType the line package type
+   * @return the premise and service point
+   */
   public PremiseAndServicePoint linePackageType(String linePackageType) {
     this.linePackageType = linePackageType;
     return this;
   }
 
   /**
-   * Get linePackageType
+   * Get linePackageType.
+   *
    * @return linePackageType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -69,19 +94,31 @@ public class PremiseAndServicePoint   {
     return linePackageType;
   }
 
+  /**
+   * Sets the line package type.
+   *
+   * @param linePackageType the new line package type
+   */
   public void setLinePackageType(String linePackageType) {
     this.linePackageType = linePackageType;
   }
 
+  /**
+   * Line treatment type.
+   *
+   * @param lineTreatmentType the line treatment type
+   * @return the premise and service point
+   */
   public PremiseAndServicePoint lineTreatmentType(String lineTreatmentType) {
     this.lineTreatmentType = lineTreatmentType;
     return this;
   }
 
   /**
-   * Get lineTreatmentType
+   * Get lineTreatmentType.
+   *
    * @return lineTreatmentType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -89,19 +126,31 @@ public class PremiseAndServicePoint   {
     return lineTreatmentType;
   }
 
+  /**
+   * Sets the line treatment type.
+   *
+   * @param lineTreatmentType the new line treatment type
+   */
   public void setLineTreatmentType(String lineTreatmentType) {
     this.lineTreatmentType = lineTreatmentType;
   }
 
+  /**
+   * Phone number.
+   *
+   * @param phoneNumber the phone number
+   * @return the premise and service point
+   */
   public PremiseAndServicePoint phoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
     return this;
   }
 
   /**
-   * Get phoneNumber
+   * Get phoneNumber.
+   *
    * @return phoneNumber
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -109,19 +158,31 @@ public class PremiseAndServicePoint   {
     return phoneNumber;
   }
 
+  /**
+   * Sets the phone number.
+   *
+   * @param phoneNumber the new phone number
+   */
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
 
+  /**
+   * Service point.
+   *
+   * @param servicePoint the service point
+   * @return the premise and service point
+   */
   public PremiseAndServicePoint servicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
     return this;
   }
 
   /**
-   * Get servicePoint
+   * Get servicePoint.
+   *
    * @return servicePoint
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -130,11 +191,19 @@ public class PremiseAndServicePoint   {
     return servicePoint;
   }
 
+  /**
+   * Sets the service point.
+   *
+   * @param servicePoint the new service point
+   */
   public void setServicePoint(BasketServicePoint servicePoint) {
     this.servicePoint = servicePoint;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -151,11 +220,17 @@ public class PremiseAndServicePoint   {
         Objects.equals(this.servicePoint, premiseAndServicePoint.servicePoint);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(installationAddress, linePackageType, lineTreatmentType, phoneNumber, servicePoint);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -173,6 +248,9 @@ public class PremiseAndServicePoint   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

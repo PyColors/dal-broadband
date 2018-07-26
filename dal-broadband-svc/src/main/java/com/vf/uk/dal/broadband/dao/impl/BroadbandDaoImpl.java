@@ -55,15 +55,18 @@ import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 
 /**
- * @author Infosys Limited
+ * The Class BroadbandDaoImpl.
  *
+ * @author Infosys Limited
  */
 @Component("broadbandDao")
 public class BroadbandDaoImpl implements BroadbandDao {
 
+	/** The registry client. */
 	@Autowired
 	private RegistryClient registryClient;
 
+	/** The broadband repo provider. */
 	@Autowired
 	private BroadbandRepoProvider broadbandRepoProvider;
 
@@ -151,8 +154,8 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	/**
 	 * This method gets the list of Product Modles from Solr based on the list
 	 * of Product Ids received as input in parameter.
-	 * 
-	 * @param productIdList
+	 *
+	 * @param createAppointmentReq the create appointment req
 	 * @return List<ProductModel>
 	 */
 	/*
@@ -201,6 +204,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return createAppointment;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getAddressInfoByPostcodeFromPremise(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreference) {
 		AddressInfo addressInfo = null;
@@ -224,18 +230,27 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return addressInfo;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#setBroadBandInCache(com.vf.uk.dal.broadband.cache.repository.entity.Broadband)
+	 */
 	@Override
 	public void setBroadBandInCache(Broadband broadBand) {
 		broadbandRepoProvider.saveBroadbandInCache(broadBand);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getBroadbandFromCache(java.lang.String)
+	 */
 	@Override
 	public Broadband getBroadbandFromCache(String broadBandSessionId) {
 		return broadbandRepoProvider.getBroadbandFromCache(broadBandSessionId);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getJourney(java.lang.String)
+	 */
 	@Override
 	public CurrentJourney getJourney(String journeyId) {
 		CurrentJourney currentJourney = null;
@@ -252,6 +267,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return currentJourney;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#createBasket(com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest)
+	 */
 	@Override
 	public Basket createBasket(CreateBasketRequest createBasketRequest) {
 		Basket basket = null;
@@ -269,6 +287,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return basket;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updatePackage(com.vf.uk.dal.broadband.basket.entity.UpdatePackage, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updatePackage(UpdatePackage updatePackageRequest, String packageId, String basketId) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
@@ -285,6 +306,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getBasket(java.lang.String)
+	 */
 	@Override
 	public Basket getBasket(String basketId) {
 		Basket basket = null;
@@ -301,6 +325,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return basket;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updateBasketWithPremiseAndServicePoint(com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updateBasketWithPremiseAndServicePoint(PremiseAndServicePoint premiseAndServicePointRequest,
 			String packageId, String basketId) {
@@ -321,6 +348,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getEngineeringVisitFee(java.lang.String, boolean, java.lang.String, boolean)
+	 */
 	@Override
 	public List<CommercialProduct> getEngineeringVisitFee(String productClass, boolean isFTTHPlan,
 			String installationType, boolean isPreOrderable) {
@@ -346,6 +376,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getDeliveryMethods(java.lang.String, boolean)
+	 */
 	@Override
 	public List<DeliveryMethods> getDeliveryMethods(String productId, boolean useCache) {
 		// BundleDetails client = null;
@@ -367,6 +400,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return deliveryMethods;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updateBasketWithServiceId(com.vf.uk.dal.broadband.basket.entity.AddProductRequest, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updateBasketWithServiceId(AddProductRequest addProductRequest, String basketId, String packageId) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
@@ -385,6 +421,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updateBasketWithAppointmentInformation(com.vf.uk.dal.broadband.basket.entity.AppointmentWindow, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updateBasketWithAppointmentInformation(AppointmentWindow appointmentWindowRequest, String packageId,
 			String basketId) {
@@ -404,6 +443,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getAppointmentList(com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest)
+	 */
 	@Override
 	public GetAppointment getAppointmentList(GetAppointmentRequest request) {
 		RestTemplate restTemplate = registryClient.getRestTemplate();
@@ -426,6 +468,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return getAppointment;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getCompatibleDevicesForBundle(java.lang.String)
+	 */
 	@Override
 	public List<RouterProductDetails> getCompatibleDevicesForBundle(String planId) {
 		List<RouterProductDetails> productDetails = null;
@@ -443,6 +488,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return productDetails;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#getPromotionForBundleList(com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest)
+	 */
 	@Override
 	public List<BundlePromotion> getPromotionForBundleList(BundlePromotionRequest bundlePromotionRequest) {
 
@@ -463,6 +511,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return bundlePromotions;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vf.uk.dal.broadband.dao.BroadbandDao#updateBasketWithServiceDate(com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void updateBasketWithServiceDate(ServiceStartDateRequest serviceStartDateRequest, String basketId,
 			String packageId) {

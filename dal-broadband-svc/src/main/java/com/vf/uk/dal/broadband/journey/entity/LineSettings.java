@@ -15,15 +15,25 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * LineSettings
+ * LineSettings.
  */
 public class LineSettings {
+	
+	/** The service code. */
 	private String serviceCode = null;
 
+	/** The installation code. */
 	private String installationCode = null;
 
+	/** The termination code. */
 	private String terminationCode = null;
 
+	/**
+	 * Service code.
+	 *
+	 * @param serviceCode the service code
+	 * @return the line settings
+	 */
 	public LineSettings serviceCode(String serviceCode) {
 		this.serviceCode = serviceCode;
 		return this;
@@ -38,10 +48,21 @@ public class LineSettings {
 		return serviceCode;
 	}
 
+	/**
+	 * Sets the service code.
+	 *
+	 * @param serviceCode the new service code
+	 */
 	public void setServiceCode(String serviceCode) {
 		this.serviceCode = serviceCode;
 	}
 
+	/**
+	 * Installation code.
+	 *
+	 * @param installationCode the installation code
+	 * @return the line settings
+	 */
 	public LineSettings installationCode(String installationCode) {
 		this.installationCode = installationCode;
 		return this;
@@ -57,10 +78,21 @@ public class LineSettings {
 		return installationCode;
 	}
 
+	/**
+	 * Sets the installation code.
+	 *
+	 * @param installationCode the new installation code
+	 */
 	public void setInstallationCode(String installationCode) {
 		this.installationCode = installationCode;
 	}
 
+	/**
+	 * Termination code.
+	 *
+	 * @param terminationCode the termination code
+	 * @return the line settings
+	 */
 	public LineSettings terminationCode(String terminationCode) {
 		this.terminationCode = terminationCode;
 		return this;
@@ -68,18 +100,26 @@ public class LineSettings {
 
 	/**
 	 * The type of termination technology the line terminates in LOV - NTTP,
-	 * LINE_BOX, NTE, SECURE_NTE, TYPE_NINE
-	 * 
+	 * LINE_BOX, NTE, SECURE_NTE, TYPE_NINE.
+	 *
 	 * @return terminationCode
-	 **/
+	 */
 	public String getTerminationCode() {
 		return terminationCode;
 	}
 
+	/**
+	 * Sets the termination code.
+	 *
+	 * @param terminationCode the new termination code
+	 */
 	public void setTerminationCode(String terminationCode) {
 		this.terminationCode = terminationCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -94,11 +134,17 @@ public class LineSettings {
 				&& Objects.equals(this.terminationCode, lineSettings.terminationCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(serviceCode, installationCode, terminationCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -114,6 +160,9 @@ public class LineSettings {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

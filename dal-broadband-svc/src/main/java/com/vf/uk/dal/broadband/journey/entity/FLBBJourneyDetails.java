@@ -15,29 +15,45 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * FLBBJourneyDetails
+ * FLBBJourneyDetails.
  */
 public class FLBBJourneyDetails {
+	
+	/** The service point. */
 	private ServicePoint servicePoint = null;
 
+	/**
+	 * Service point.
+	 *
+	 * @param servicePoint the service point
+	 * @return the FLBB journey details
+	 */
 	public FLBBJourneyDetails servicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 		return this;
 	}
 
 	/**
-	 * Get servicePoint
-	 * 
+	 * Get servicePoint.
+	 *
 	 * @return servicePoint
-	 **/
+	 */
 	public ServicePoint getServicePoint() {
 		return servicePoint;
 	}
 
+	/**
+	 * Sets the service point.
+	 *
+	 * @param servicePoint the new service point
+	 */
 	public void setServicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -50,11 +66,17 @@ public class FLBBJourneyDetails {
 		return Objects.equals(this.servicePoint, flBBJourneyDetails.servicePoint);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(servicePoint);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -68,6 +90,9 @@ public class FLBBJourneyDetails {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

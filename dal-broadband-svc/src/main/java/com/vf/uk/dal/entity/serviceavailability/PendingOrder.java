@@ -5,19 +5,29 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * PendingOrder
+ * PendingOrder.
  */
 
 public class PendingOrder {
+	
+	/** The completion date. */
 	@JsonProperty("completionDate")
 	private String completionDate = null;
 
+	/** The type code. */
 	@JsonProperty("typeCode")
 	private String typeCode = null;
 
+	/** The third party flag. */
 	@JsonProperty("thirdPartyFlag")
 	private Boolean thirdPartyFlag = null;
 
+	/**
+	 * Completion date.
+	 *
+	 * @param completionDate the completion date
+	 * @return the pending order
+	 */
 	public PendingOrder completionDate(String completionDate) {
 		this.completionDate = completionDate;
 		return this;
@@ -32,28 +42,50 @@ public class PendingOrder {
 		return completionDate;
 	}
 
+	/**
+	 * Sets the completion date.
+	 *
+	 * @param completionDate the new completion date
+	 */
 	public void setCompletionDate(String completionDate) {
 		this.completionDate = completionDate;
 	}
 
+	/**
+	 * Type code.
+	 *
+	 * @param typeCode the type code
+	 * @return the pending order
+	 */
 	public PendingOrder typeCode(String typeCode) {
 		this.typeCode = typeCode;
 		return this;
 	}
 
 	/**
-	 * The type of pending order
-	 * 
+	 * The type of pending order.
+	 *
 	 * @return typeCode
-	 **/
+	 */
 	public String getTypeCode() {
 		return typeCode;
 	}
 
+	/**
+	 * Sets the type code.
+	 *
+	 * @param typeCode the new type code
+	 */
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
 	}
 
+	/**
+	 * Third party flag.
+	 *
+	 * @param thirdPartyFlag the third party flag
+	 * @return the pending order
+	 */
 	public PendingOrder thirdPartyFlag(Boolean thirdPartyFlag) {
 		this.thirdPartyFlag = thirdPartyFlag;
 		return this;
@@ -61,18 +93,26 @@ public class PendingOrder {
 
 	/**
 	 * Specifies if the pending order on the line is by a third party (a party
-	 * other than the line owner Communications Provider)
-	 * 
+	 * other than the line owner Communications Provider).
+	 *
 	 * @return thirdPartyFlag
-	 **/
+	 */
 	public Boolean getThirdPartyFlag() {
 		return thirdPartyFlag;
 	}
 
+	/**
+	 * Sets the third party flag.
+	 *
+	 * @param thirdPartyFlag the new third party flag
+	 */
 	public void setThirdPartyFlag(Boolean thirdPartyFlag) {
 		this.thirdPartyFlag = thirdPartyFlag;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -87,11 +127,17 @@ public class PendingOrder {
 				&& Objects.equals(this.thirdPartyFlag, pendingOrder.thirdPartyFlag);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(completionDate, typeCode, thirdPartyFlag);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -107,6 +153,9 @@ public class PendingOrder {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

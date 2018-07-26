@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MiscellaneousAttributes   {
   
-  /** plan callout */
+  /**  plan callout. */
   @JsonProperty("planCallOut")
   private String planCallOut = null;
   
@@ -50,14 +50,30 @@ public class MiscellaneousAttributes   {
     return speed;
   }
 
-  	public String getPlanCallOut() {
+  	/**
+	   * Gets the plan call out.
+	   *
+	   * @return the plan call out
+	   */
+	  public String getPlanCallOut() {
 		return planCallOut;
 	}
 	
+	/**
+	 * Sets the plan call out.
+	 *
+	 * @param planCallOut the new plan call out
+	 */
 	public void setPlanCallOut(String planCallOut) {
 		this.planCallOut = planCallOut;
 	}
 	
+	/**
+	 * Plan call out.
+	 *
+	 * @param planCallOut the plan call out
+	 * @return the miscellaneous attributes
+	 */
 	public MiscellaneousAttributes planCallOut(String planCallOut) {
 	    this.planCallOut = planCallOut;
 	    return this;

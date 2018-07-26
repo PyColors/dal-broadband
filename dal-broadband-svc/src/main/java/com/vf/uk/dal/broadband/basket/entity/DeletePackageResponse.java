@@ -18,6 +18,11 @@ public class DeletePackageResponse   {
   @JsonProperty("packageId")
   private String packageId = null;
 
+  /**
+   * 
+   * @param packageId
+   * @return
+   */
   public DeletePackageResponse packageId(String packageId) {
     this.packageId = packageId;
     return this;

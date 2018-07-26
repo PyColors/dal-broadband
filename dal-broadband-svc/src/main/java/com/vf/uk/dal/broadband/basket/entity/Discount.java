@@ -50,6 +50,11 @@ public class Discount   {
   @JsonProperty("tenure")
   private String tenure = null;
 
+  /**
+   * 
+   * @param action
+   * @return
+   */
   public Discount action(String action) {
     this.action = action;
     return this;
@@ -70,6 +75,11 @@ public class Discount   {
     this.action = action;
   }
 
+  /**
+   * 
+   * @param confirmedRequired
+   * @return
+   */
   public Discount confirmedRequired(String confirmedRequired) {
     this.confirmedRequired = confirmedRequired;
     return this;
@@ -90,6 +100,11 @@ public class Discount   {
     this.confirmedRequired = confirmedRequired;
   }
 
+  /**
+   * 
+   * @param discountValue
+   * @return
+   */
   public Discount discountValue(DiscountValue discountValue) {
     this.discountValue = discountValue;
     return this;
@@ -103,6 +118,10 @@ public class Discount   {
 
   @Valid
 
+  /**
+   * 
+   * @return
+   */
   public DiscountValue getDiscountValue() {
     return discountValue;
   }
@@ -111,6 +130,11 @@ public class Discount   {
     this.discountValue = discountValue;
   }
 
+  /**
+   * 
+   * @param duration
+   * @return
+   */
   public Discount duration(String duration) {
     this.duration = duration;
     return this;
@@ -131,6 +155,11 @@ public class Discount   {
     this.duration = duration;
   }
 
+  /**
+   * 
+   * @param label
+   * @return
+   */
   public Discount label(String label) {
     this.label = label;
     return this;
@@ -151,11 +180,21 @@ public class Discount   {
     this.label = label;
   }
 
+  /**
+   * 
+   * @param merchandisingMedia
+   * @return
+   */
   public Discount merchandisingMedia(List<MediaLinks> merchandisingMedia) {
     this.merchandisingMedia = merchandisingMedia;
     return this;
   }
 
+  /**
+   * 
+   * @param merchandisingMediaItem
+   * @return
+   */
   public Discount addMerchandisingMediaItem(MediaLinks merchandisingMediaItem) {
     if (this.merchandisingMedia == null) {
       this.merchandisingMedia = new ArrayList<>();
@@ -180,6 +219,11 @@ public class Discount   {
     this.merchandisingMedia = merchandisingMedia;
   }
 
+  /**
+   * 
+   * @param productLineId
+   * @return
+   */
   public Discount productLineId(String productLineId) {
     this.productLineId = productLineId;
     return this;
@@ -200,6 +244,11 @@ public class Discount   {
     this.productLineId = productLineId;
   }
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public Discount skuId(String skuId) {
     this.skuId = skuId;
     return this;
@@ -220,6 +269,11 @@ public class Discount   {
     this.skuId = skuId;
   }
 
+  /**
+   * 
+   * @param tag
+   * @return
+   */
   public Discount tag(String tag) {
     this.tag = tag;
     return this;
@@ -240,6 +294,11 @@ public class Discount   {
     this.tag = tag;
   }
 
+  /**
+   * 
+   * @param tenure
+   * @return
+   */
   public Discount tenure(String tenure) {
     this.tenure = tenure;
     return this;

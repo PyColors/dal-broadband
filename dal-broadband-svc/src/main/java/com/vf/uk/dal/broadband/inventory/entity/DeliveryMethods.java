@@ -18,35 +18,51 @@ import java.util.List;
  * Each delivery object represents a delivery method.
  */ 
 public class DeliveryMethods {
+	
+	/** The product id. */
 	private String productId = null;
 
+	/** The display name. */
 	private String displayName = null;
 
+	/** The delivery type. */
 	private String deliveryType = null;
 
+	/** The stock status. */
 	private String stockStatus = null;
 
+	/** The price. */
 	private DeliveryPrice price = null;
 
+	/** The delivery method. */
 	private String deliveryMethod = null;
 
+	/** The description. */
 	private String description = null;
 
+	/** The partner. */
 	private String partner = null;
 
+	/** The available time. */
 	private String availableTime = null;
 
+	/** The cut off time. */
 	private String cutOffTime = null;
 
+	/** The packaging date. */
 	private String packagingDate = null;
 
+	/** The back order product names. */
 	private List<String> backOrderProductNames = null;
 
+	/** The out of stock product names. */
 	private List<String> outOfStockProductNames = null;
 
 	/**
-	 * @param skuId
-	 * @return
+	 * Product id.
+	 *
+	 * @param productId the product id
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods productId(String productId) {
 		this.productId = productId;
@@ -62,15 +78,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param skuId
+	 * Sets the product id.
+	 *
+	 * @param productId the new product id
 	 */
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
 	/**
-	 * @param displayName
-	 * @return
+	 * Display name.
+	 *
+	 * @param displayName the display name
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods displayName(String displayName) {
 		this.displayName = displayName;
@@ -78,23 +98,28 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * Display name of the delivery
+	 * Display name of the delivery.
+	 *
 	 * @return displayName
-	 **/
+	 */
 	public String getDisplayName() {
 		return displayName;
 	}
 
 	/**
-	 * @param displayName
+	 * Sets the display name.
+	 *
+	 * @param displayName the new display name
 	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
 
 	/**
-	 * @param deliveryType
-	 * @return
+	 * Delivery type.
+	 *
+	 * @param deliveryType the delivery type
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods deliveryType(String deliveryType) {
 		this.deliveryType = deliveryType;
@@ -110,15 +135,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param deliveryType
+	 * Sets the delivery type.
+	 *
+	 * @param deliveryType the new delivery type
 	 */
 	public void setDeliveryType(String deliveryType) {
 		this.deliveryType = deliveryType;
 	}
 
 	/**
-	 * @param stockStatus
-	 * @return
+	 * Stock status.
+	 *
+	 * @param stockStatus the stock status
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods stockStatus(String stockStatus) {
 		this.stockStatus = stockStatus;
@@ -126,23 +155,28 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * Four possible values InStock,outOfStock,preOrder,backorder
+	 * Four possible values InStock,outOfStock,preOrder,backorder.
+	 *
 	 * @return stockStatus
-	 **/
+	 */
 	public String getStockStatus() {
 		return stockStatus;
 	}
 
 	/**
-	 * @param stockStatus
+	 * Sets the stock status.
+	 *
+	 * @param stockStatus the new stock status
 	 */
 	public void setStockStatus(String stockStatus) {
 		this.stockStatus = stockStatus;
 	}
 
 	/**
-	 * @param price
-	 * @return
+	 * Price.
+	 *
+	 * @param price the price
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods price(DeliveryPrice price) {
 		this.price = price;
@@ -158,15 +192,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param price
+	 * Sets the price.
+	 *
+	 * @param price the new price
 	 */
 	public void setPrice(DeliveryPrice price) {
 		this.price = price;
 	}
 
 	/**
-	 * @param deliveryMethod
-	 * @return
+	 * Delivery method.
+	 *
+	 * @param deliveryMethod the delivery method
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods deliveryMethod(String deliveryMethod) {
 		this.deliveryMethod = deliveryMethod;
@@ -182,15 +220,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param deliveryMethod
+	 * Sets the delivery method.
+	 *
+	 * @param deliveryMethod the new delivery method
 	 */
 	public void setDeliveryMethod(String deliveryMethod) {
 		this.deliveryMethod = deliveryMethod;
 	}
 
 	/**
-	 * @param description
-	 * @return
+	 * Description.
+	 *
+	 * @param description the description
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods description(String description) {
 		this.description = description;
@@ -206,15 +248,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param description
+	 * Sets the description.
+	 *
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * @param partner
-	 * @return
+	 * Partner.
+	 *
+	 * @param partner the partner
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods partner(String partner) {
 		this.partner = partner;
@@ -230,15 +276,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param partner
+	 * Sets the partner.
+	 *
+	 * @param partner the new partner
 	 */
 	public void setPartner(String partner) {
 		this.partner = partner;
 	}
 
 	/**
-	 * @param availableTime
-	 * @return
+	 * Available time.
+	 *
+	 * @param availableTime the available time
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods availableTime(String availableTime) {
 		this.availableTime = availableTime;
@@ -254,15 +304,19 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * @param availableTime
+	 * Sets the available time.
+	 *
+	 * @param availableTime the new available time
 	 */
 	public void setAvailableTime(String availableTime) {
 		this.availableTime = availableTime;
 	}
 
 	/**
-	 * @param cutOffTime
-	 * @return
+	 * Cut off time.
+	 *
+	 * @param cutOffTime the cut off time
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods cutOffTime(String cutOffTime) {
 		this.cutOffTime = cutOffTime;
@@ -270,37 +324,46 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * to be sent to the client for displaying the messages based on teh cut off time in the frontend
+	 * to be sent to the client for displaying the messages based on teh cut off time in the frontend.
+	 *
 	 * @return cutOffTime
-	 **/
+	 */
 	public String getCutOffTime() {
 		return cutOffTime;
 	}
 
 	/**
-	 * @return
+	 * Gets the out of stock product names.
+	 *
+	 * @return the out of stock product names
 	 */
 	public List<String> getOutOfStockProductNames() {
 		return outOfStockProductNames;
 	}
 
 	/**
-	 * @param outOfStockProductNames
+	 * Sets the out of stock product names.
+	 *
+	 * @param outOfStockProductNames the new out of stock product names
 	 */
 	public void setOutOfStockProductNames(List<String> outOfStockProductNames) {
 		this.outOfStockProductNames = outOfStockProductNames;
 	}
 
 	/**
-	 * @param cutOffTime
+	 * Sets the cut off time.
+	 *
+	 * @param cutOffTime the new cut off time
 	 */
 	public void setCutOffTime(String cutOffTime) {
 		this.cutOffTime = cutOffTime;
 	}
 
 	/**
-	 * @param packagingDate
-	 * @return
+	 * Packaging date.
+	 *
+	 * @param packagingDate the packaging date
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods packagingDate(String packagingDate) {
 		this.packagingDate = packagingDate;
@@ -308,23 +371,28 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * value will be true if the order is placed before cut off and false after cut off
+	 * value will be true if the order is placed before cut off and false after cut off.
+	 *
 	 * @return beforeCutOffTime
-	 **/
+	 */
 	public String getPackagingDate() {
 		return packagingDate;
 	}
 
 	/**
-	 * @param packagingDate
+	 * Sets the packaging date.
+	 *
+	 * @param packagingDate the new packaging date
 	 */
 	public void setPackagingDate(String packagingDate) {
 		this.packagingDate = packagingDate;
 	}
 
 	/**
-	 * @param backOrderProductNames
-	 * @return
+	 * Back order product names.
+	 *
+	 * @param backOrderProductNames the back order product names
+	 * @return the delivery methods
 	 */
 	public DeliveryMethods backOrderProductNames(List<String> backOrderProductNames) {
 		this.backOrderProductNames = backOrderProductNames;
@@ -332,15 +400,18 @@ public class DeliveryMethods {
 	}
 
 	/**
-	 * Holds List of services executed for the journey
+	 * Holds List of services executed for the journey.
+	 *
 	 * @return slowMovingProductsName
-	 **/
+	 */
 	public List<String> getBackOrderProductNames() {
 		return backOrderProductNames;
 	}
 
 	/**
-	 * @param backOrderProductNames
+	 * Sets the back order product names.
+	 *
+	 * @param backOrderProductNames the new back order product names
 	 */
 	public void setBackOrderProductNames(List<String> backOrderProductNames) {
 		this.backOrderProductNames = backOrderProductNames;

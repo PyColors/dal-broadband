@@ -9,18 +9,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * LineRef
+ * LineRef.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class LineRef   {
+  
+  /** The line identification. */
   @JsonProperty("lineIdentification")
   private LineIdentification lineIdentification = null;
 
   /**
-   * 
-   * @param lineIdentification
-   * @return
+   * Line identification.
+   *
+   * @param lineIdentification the line identification
+   * @return the line ref
    */
   public LineRef lineIdentification(LineIdentification lineIdentification) {
     this.lineIdentification = lineIdentification;
@@ -28,9 +31,10 @@ public class LineRef   {
   }
 
    /**
-   * Get lineIdentification
-   * @return lineIdentification
-  **/
+    * Get lineIdentification.
+    *
+    * @return lineIdentification
+    */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -39,11 +43,19 @@ public class LineRef   {
     return lineIdentification;
   }
 
+  /**
+   * Sets the line identification.
+   *
+   * @param lineIdentification the new line identification
+   */
   public void setLineIdentification(LineIdentification lineIdentification) {
     this.lineIdentification = lineIdentification;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -56,11 +68,17 @@ public class LineRef   {
     return Objects.equals(this.lineIdentification, lineRef.lineIdentification);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(lineIdentification);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -74,6 +92,9 @@ public class LineRef   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

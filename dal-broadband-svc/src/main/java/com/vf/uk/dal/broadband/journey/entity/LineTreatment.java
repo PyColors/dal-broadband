@@ -15,17 +15,28 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * LineTreatment
+ * LineTreatment.
  */
 public class LineTreatment {
+	
+	/** The identification. */
 	private String identification = null;
 
+	/** The earliest available date. */
 	private String earliestAvailableDate = null;
 
+	/** The appointment needed. */
 	private Boolean appointmentNeeded = null;
 
+	/** The connection charge. */
 	private String connectionCharge = null;
 
+	/**
+	 * Identification.
+	 *
+	 * @param identification the identification
+	 * @return the line treatment
+	 */
 	public LineTreatment identification(String identification) {
 		this.identification = identification;
 		return this;
@@ -33,18 +44,29 @@ public class LineTreatment {
 
 	/**
 	 * The Identification number for the treatment 1 -&gt; Existing Line
-	 * Treatment 2 -&gt; New (additional) Line Treatment
-	 * 
+	 * Treatment 2 -&gt; New (additional) Line Treatment.
+	 *
 	 * @return identification
-	 **/
+	 */
 	public String getIdentification() {
 		return identification;
 	}
 
+	/**
+	 * Sets the identification.
+	 *
+	 * @param identification the new identification
+	 */
 	public void setIdentification(String identification) {
 		this.identification = identification;
 	}
 
+	/**
+	 * Earliest available date.
+	 *
+	 * @param earliestAvailableDate the earliest available date
+	 * @return the line treatment
+	 */
 	public LineTreatment earliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 		return this;
@@ -52,54 +74,84 @@ public class LineTreatment {
 
 	/**
 	 * The earliest date by which the services offered can be made available to
-	 * the prospective customer
-	 * 
+	 * the prospective customer.
+	 *
 	 * @return earliestAvailableDate
-	 **/
+	 */
 	public String getEarliestAvailableDate() {
 		return earliestAvailableDate;
 	}
 
+	/**
+	 * Sets the earliest available date.
+	 *
+	 * @param earliestAvailableDate the new earliest available date
+	 */
 	public void setEarliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 	}
 
+	/**
+	 * Appointment needed.
+	 *
+	 * @param appointmentNeeded the appointment needed
+	 * @return the line treatment
+	 */
 	public LineTreatment appointmentNeeded(Boolean appointmentNeeded) {
 		this.appointmentNeeded = appointmentNeeded;
 		return this;
 	}
 
 	/**
-	 * Flag specifying if an appointment is needed or not
-	 * 
+	 * Flag specifying if an appointment is needed or not.
+	 *
 	 * @return appointmentNeeded
-	 **/
+	 */
 	public Boolean getAppointmentNeeded() {
 		return appointmentNeeded;
 	}
 
+	/**
+	 * Sets the appointment needed.
+	 *
+	 * @param appointmentNeeded the new appointment needed
+	 */
 	public void setAppointmentNeeded(Boolean appointmentNeeded) {
 		this.appointmentNeeded = appointmentNeeded;
 	}
 
+	/**
+	 * Connection charge.
+	 *
+	 * @param connectionCharge the connection charge
+	 * @return the line treatment
+	 */
 	public LineTreatment connectionCharge(String connectionCharge) {
 		this.connectionCharge = connectionCharge;
 		return this;
 	}
 
 	/**
-	 * The connection charge flag
-	 * 
+	 * The connection charge flag.
+	 *
 	 * @return connectionCharge
-	 **/
+	 */
 	public String getConnectionCharge() {
 		return connectionCharge;
 	}
 
+	/**
+	 * Sets the connection charge.
+	 *
+	 * @param connectionCharge the new connection charge
+	 */
 	public void setConnectionCharge(String connectionCharge) {
 		this.connectionCharge = connectionCharge;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -115,11 +167,17 @@ public class LineTreatment {
 				&& Objects.equals(this.connectionCharge, lineTreatment.connectionCharge);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(identification, earliestAvailableDate, appointmentNeeded, connectionCharge);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -136,6 +194,9 @@ public class LineTreatment {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

@@ -15,49 +15,77 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * ServicePoint
+ * ServicePoint.
  */
 public class ServicePoint {
+	
+	/** The line refernece. */
 	private LineReference lineRefernece = null;
 
+	/** The service reference. */
 	private ServiceReference serviceReference = null;
 
+	/**
+	 * Line refernece.
+	 *
+	 * @param lineRefernece the line refernece
+	 * @return the service point
+	 */
 	public ServicePoint lineRefernece(LineReference lineRefernece) {
 		this.lineRefernece = lineRefernece;
 		return this;
 	}
 
 	/**
-	 * Get lineRefernece
-	 * 
+	 * Get lineRefernece.
+	 *
 	 * @return lineRefernece
-	 **/
+	 */
 	public LineReference getLineRefernece() {
 		return lineRefernece;
 	}
 
+	/**
+	 * Sets the line refernece.
+	 *
+	 * @param lineRefernece the new line refernece
+	 */
 	public void setLineRefernece(LineReference lineRefernece) {
 		this.lineRefernece = lineRefernece;
 	}
 
+	/**
+	 * Service reference.
+	 *
+	 * @param serviceReference the service reference
+	 * @return the service point
+	 */
 	public ServicePoint serviceReference(ServiceReference serviceReference) {
 		this.serviceReference = serviceReference;
 		return this;
 	}
 
 	/**
-	 * Get serviceReference
-	 * 
+	 * Get serviceReference.
+	 *
 	 * @return serviceReference
-	 **/
+	 */
 	public ServiceReference getServiceReference() {
 		return serviceReference;
 	}
 
+	/**
+	 * Sets the service reference.
+	 *
+	 * @param serviceReference the new service reference
+	 */
 	public void setServiceReference(ServiceReference serviceReference) {
 		this.serviceReference = serviceReference;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -71,11 +99,17 @@ public class ServicePoint {
 				&& Objects.equals(this.serviceReference, servicePoint.serviceReference);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(lineRefernece, serviceReference);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -90,6 +124,9 @@ public class ServicePoint {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

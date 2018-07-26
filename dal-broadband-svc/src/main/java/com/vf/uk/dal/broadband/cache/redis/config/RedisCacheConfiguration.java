@@ -25,16 +25,26 @@ import com.lambdaworks.redis.resource.DnsResolvers;
 import com.vf.uk.dal.broadband.cache.redis.config.RedisCacheConfiguration.BroadbandKeyspaceConfiguration;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 
+/**
+ * The Class RedisCacheConfiguration.
+ */
 @Configuration
 @EnableRedisRepositories(basePackages = "com.vf.uk.dal.journey", keyspaceConfiguration = BroadbandKeyspaceConfiguration.class)
 public class RedisCacheConfiguration {
 
+	/** The cluster properties. */
 	@Autowired
 	ClusterConfigurationProperties clusterProperties;
 
+	/** The redis cache properties. */
 	@Autowired
 	RedisCacheProperties redisCacheProperties;
 
+	/**
+	 * Client resources.
+	 *
+	 * @return the client resources
+	 */
 	@Bean(destroyMethod = "shutdown")
 	public ClientResources clientResources() {
 		// ClientResources res = DefaultClientResources.create();
@@ -43,6 +53,11 @@ public class RedisCacheConfiguration {
 		return res;
 	}
 
+	/**
+	 * Redis connection factory.
+	 *
+	 * @return the redis connection factory
+	 */
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		
@@ -71,12 +86,22 @@ public class RedisCacheConfiguration {
 		return connectionFactory;
 	}
 
+	/**
+	 * Object mapper.
+	 *
+	 * @return the object mapper
+	 */
 	@Bean
 	public ObjectMapper objectMapper() {
 		return Jackson2ObjectMapperBuilder.json().featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // ISODate
 				.build();
 	}
 
+	/**
+	 * Redis template.
+	 *
+	 * @return the redis template
+	 */
 	@Bean
 	public RedisTemplate<String, Object> redisTemplate() {
 		final RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
@@ -91,8 +116,14 @@ public class RedisCacheConfiguration {
 		return redisTemplate;
 	}
 
+	/**
+	 * The Class BroadbandKeyspaceConfiguration.
+	 */
 	public class BroadbandKeyspaceConfiguration extends KeyspaceConfiguration {
 
+		/* (non-Javadoc)
+		 * @see org.springframework.data.redis.core.convert.KeyspaceConfiguration#initialConfiguration()
+		 */
 		@Override
 		protected Iterable<KeyspaceSettings> initialConfiguration() {
 			KeyspaceSettings journeyCacheKeySpaceSettings = new KeyspaceSettings(Broadband.class,
