@@ -572,5 +572,14 @@ public class BroadbandIntegrationTest {
 						.content(request.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
 	}
+	
+	
+	
+	@Test
+	public void testAvailabilityCheckReturnScenario() throws Exception {
+		
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/12345678907888/lineOptions/selected")
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
+	}
 
 }

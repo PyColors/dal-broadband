@@ -151,4 +151,7 @@ public interface BroadbandService {
 	 * @param serviceStartDateRequest the service start date request
 	 */
 	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest);
+
+
+	public AvailabilityCheckResponse getSelectedLineOptions(String broadbandId);
 }
