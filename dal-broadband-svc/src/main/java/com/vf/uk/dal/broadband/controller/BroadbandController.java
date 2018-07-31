@@ -337,4 +337,28 @@ public class BroadbandController {
 			@ApiParam(value = "plan id based on which we need to query the compatible devices", required = true) @PathVariable("planId") String planId) {
 		return new ResponseEntity<>(broadbandService.getCompatibleDevicesForBundle(broadbandId, planId), HttpStatus.OK);
 	}
+	
+	
+	/**
+	 * Gets the compatible devices for bundle.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param planId the plan id
+	 * @return the compatible devices for bundle
+	 */
+	@ApiOperation(value = "Fetches the line options from the Cache based on the broadband id", notes = "Fetches the line options from the Cache based on the broadband id", response = AvailabilityCheckResponse.class, tags = {
+			"Broadband, Compatible Routers" })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AvailabilityCheckResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
+	@RequestMapping(value = "/{broadbandId}/lineOptions/selected", produces = {
+			"application/json" }, method = RequestMethod.GET)
+	public ResponseEntity<AvailabilityCheckResponse> getSelectedLineOptions(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+		return new ResponseEntity<>(broadbandService.getSelectedLineOptions(broadbandId), HttpStatus.OK);
+	}
+	
+	
+	
 }
