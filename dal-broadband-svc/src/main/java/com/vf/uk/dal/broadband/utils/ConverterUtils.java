@@ -282,7 +282,13 @@ public class ConverterUtils {
 				for (com.vf.uk.dal.entity.serviceavailability.LineDirectory lDirectory : getServiceAvailabilityResponse
 						.getServiceAvailabilityLine().get(0).getLineReference().getLineDirectory()) {
 					LineDirectory lineDirectory = new LineDirectory();
-					lineDirectory.setDirectoryCode(lDirectory.getDirectoryCode());
+					if(StringUtils.isNotEmpty(lDirectory.getDirectoryCode())){
+						lineDirectory.setDirectoryCode(lDirectory.getDirectoryCode());
+					}else if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
+						lineDirectory.setDirectoryCode("Ex Directory No Calls Offered");
+					}else{
+						lineDirectory.setDirectoryCode("ORDINARY");
+					}
 					lineDirectory.setFeatureCode(lDirectory.getFeatureCode());
 					lineDirectory.setLocationCode(lDirectory.getFeatureCode());
 					lineDirectoryList.add(lineDirectory);

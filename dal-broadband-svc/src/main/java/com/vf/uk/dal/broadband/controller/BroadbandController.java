@@ -29,6 +29,7 @@ import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.SelectedAvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.exception.TILException;
@@ -347,14 +348,14 @@ public class BroadbandController {
 	 * @return the compatible devices for bundle
 	 */
 	@ApiOperation(value = "Fetches the line options from the Cache based on the broadband id", notes = "Fetches the line options from the Cache based on the broadband id", response = AvailabilityCheckResponse.class, tags = {
-			"Broadband, Compatible Routers" })
+			"AvailabilityCheck" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AvailabilityCheckResponse.class),
 			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
 	@RequestMapping(value = "/{broadbandId}/lineOptions/selected", produces = {
 			"application/json" }, method = RequestMethod.GET)
-	public ResponseEntity<AvailabilityCheckResponse> getSelectedLineOptions(
+	public ResponseEntity<SelectedAvailabilityCheckResponse> getSelectedLineOptions(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
 		return new ResponseEntity<>(broadbandService.getSelectedLineOptions(broadbandId), HttpStatus.OK);
 	}
