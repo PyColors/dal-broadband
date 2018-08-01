@@ -347,9 +347,9 @@ public class BroadbandController {
 	 * @param planId the plan id
 	 * @return the compatible devices for bundle
 	 */
-	@ApiOperation(value = "Fetches the line options from the Cache based on the broadband id", notes = "Fetches the line options from the Cache based on the broadband id", response = AvailabilityCheckResponse.class, tags = {
+	@ApiOperation(value = "Fetches the line options from the Cache based on the broadband id", notes = "Fetches the line options from the Cache based on the broadband id", response = SelectedAvailabilityCheckResponse.class, tags = {
 			"AvailabilityCheck" })
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AvailabilityCheckResponse.class),
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = SelectedAvailabilityCheckResponse.class),
 			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
 			@ApiResponse(code = 404, message = "Not found", response = Void.class),
 			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
