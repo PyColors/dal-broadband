@@ -52,6 +52,7 @@ import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.PriceForBBBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
+import com.vf.uk.dal.broadband.entity.SelectedAvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.Speed;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
@@ -1100,9 +1101,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 	}
 
 	@Override
-	public AvailabilityCheckResponse getSelectedLineOptions(String broadbandId) {
+	public SelectedAvailabilityCheckResponse getSelectedLineOptions(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		AvailabilityCheckResponse response = new AvailabilityCheckResponse();
+		SelectedAvailabilityCheckResponse response = new SelectedAvailabilityCheckResponse();
 		if (broadband != null && broadband.getServicePoint() != null) {
 			if (broadband.getServicePoint().getLineReference() != null
 					&& broadband.getServicePoint().getLineReference().getInstallationAddress() != null) {
@@ -1115,8 +1116,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 					.isNotEmpty(broadband.getServicePoint().getServiceReference().getServiceLinesList())) {
 				List<com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines> serviceLinesList = broadband
 						.getServicePoint().getServiceReference().getServiceLinesList();
-				List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityDetail = new ArrayList<>();
-				List<com.vf.uk.dal.broadband.entity.LineSpeeds> lineSpeedsResponse = new ArrayList<>();
 				for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLine : serviceLinesList) {
 					if (StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(),
 							broadband.getLineDetails().getClassificationCode())) {
@@ -1128,8 +1127,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 								apptDetal.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
 								apptDetal.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
 								apptDetal.setLineTreatmentType(lineTreatment.getLineTreatmentType());
-								appointmentAndAvailabilityDetail.add(apptDetal);
-								response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityDetail);
+								response.setAppointmentAndAvailabilityDetail(apptDetal);
 							}
 						}
 
@@ -1169,8 +1167,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 										lineSpeed.setMinGuaranteedDownSpeed(Double.parseDouble(
 												serviceLineFromCache.getLineSpeeds().getMinGuaranteedDownSpeed()));
 									}
-									lineSpeedsResponse.add(lineSpeed);
-									response.setLineSpeeds(lineSpeedsResponse);
+									response.setLineSpeeds(lineSpeed);
+									
 								}
 							}
 						}

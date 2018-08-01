@@ -15,6 +15,7 @@ import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.SelectedAvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
@@ -153,5 +154,5 @@ public interface BroadbandService {
 	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest);
 
 
-	public AvailabilityCheckResponse getSelectedLineOptions(String broadbandId);
+	public SelectedAvailabilityCheckResponse getSelectedLineOptions(String broadbandId);
 }
