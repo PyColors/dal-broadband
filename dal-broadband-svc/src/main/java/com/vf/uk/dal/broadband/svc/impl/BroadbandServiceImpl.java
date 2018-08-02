@@ -1104,6 +1104,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public SelectedAvailabilityCheckResponse getSelectedLineOptions(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 		SelectedAvailabilityCheckResponse response = new SelectedAvailabilityCheckResponse();
+		if(StringUtils.equalsIgnoreCase(broadband.getCategoryPreference(), "FTTH")){
+			broadband.getLineDetails().setLineTreatmentType("NEW");
+		}
 		if (broadband != null && broadband.getServicePoint() != null) {
 			if (broadband.getServicePoint().getLineReference() != null
 					&& broadband.getServicePoint().getLineReference().getInstallationAddress() != null) {
