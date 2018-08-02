@@ -942,7 +942,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			for (com.vf.uk.dal.broadband.cache.repository.entity.ServiceLines serviceLine : broadband.getServicePoint()
 					.getServiceReference().getServiceLinesList()) {
 				List<LineTreatment> lineTreatmentList = serviceLine.getLineTreatmentList();
-				if (CollectionUtils.isNotEmpty(lineTreatmentList) && lineTreatmentList.size() == 1
+				if (StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), broadband.getLineDetails().getClassificationCode()) &&  CollectionUtils.isNotEmpty(lineTreatmentList) && lineTreatmentList.size() == 1
 						&& "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())) {
 
 					PremiseAndServicePoint premiseAndServicePoint = ConverterUtils.setPremiseAndServicePointRequest(
