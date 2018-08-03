@@ -1185,7 +1185,7 @@ public class ConverterUtils {
 
 		if (broadband.getEngineeringVisitCharge() != null
 				&& StringUtils.isNotEmpty(broadband.getEngineeringVisitCharge().getEngVisitProductId())
-				&& StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
+				&& broadband.getLineDetails()!=null && StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
 			List<UpdateService> services = new ArrayList<>();
 			UpdateService updateService = new UpdateService();
 			updateService.setProductLineId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
