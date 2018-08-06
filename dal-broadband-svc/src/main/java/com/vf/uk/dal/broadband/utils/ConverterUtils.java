@@ -275,13 +275,13 @@ public class ConverterUtils {
 				lineRefernce.setAvailableServices(availableService);
 			}
 			List<LineDirectory> lineDirectoryList = new ArrayList<>();
+			LineDirectory lineDirectory = new LineDirectory();
 			if (getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getLineReference()
 					.getLineDirectory() != null
 					&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getLineReference()
 							.getLineDirectory().isEmpty()) {
 				for (com.vf.uk.dal.entity.serviceavailability.LineDirectory lDirectory : getServiceAvailabilityResponse
 						.getServiceAvailabilityLine().get(0).getLineReference().getLineDirectory()) {
-					LineDirectory lineDirectory = new LineDirectory();
 					if(StringUtils.isNotEmpty(lDirectory.getDirectoryCode())){
 						lineDirectory.setDirectoryCode(lDirectory.getDirectoryCode());
 					}else if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
@@ -293,8 +293,15 @@ public class ConverterUtils {
 					lineDirectory.setLocationCode(lDirectory.getFeatureCode());
 					lineDirectoryList.add(lineDirectory);
 				}
-				lineRefernce.setLineDirectoryList(lineDirectoryList);
+			}else{
+				if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
+					lineDirectory.setDirectoryCode("Ex Directory No Calls Offered");
+				}else{
+					lineDirectory.setDirectoryCode("ORDINARY");
+				}
+				lineDirectoryList.add(lineDirectory);
 			}
+			lineRefernce.setLineDirectoryList(lineDirectoryList);
 			servicePoint.setLineReference(lineRefernce);
 		}
 		ServiceReference serviceReference = new ServiceReference();
