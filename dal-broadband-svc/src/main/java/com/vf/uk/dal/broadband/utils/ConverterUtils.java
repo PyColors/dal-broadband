@@ -1381,10 +1381,7 @@ public class ConverterUtils {
 	public static ServicePoint updateBroadbandCacheWithLineDirectoryInfo(Broadband broadband) {
 		ServicePoint servicePoint = broadband.getServicePoint();
 		LineReference lineReference = servicePoint.getLineReference();
-		List<LineDirectory> lineDirectoryList = lineReference.getLineDirectoryList();
-		if (!CollectionUtils.isNotEmpty(lineDirectoryList)) {
-			lineDirectoryList = new ArrayList<>();
-		}
+		List<LineDirectory> lineDirectoryList = new ArrayList<>();
 		LineDirectory lineDirectory = new LineDirectory();
 		lineDirectory.setDirectoryCode("NO_DIRECTORY_ENTRY");
 		lineDirectory.setLocationCode("INDIVIDUAL");
