@@ -15,69 +15,109 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * ItemReference
+ * ItemReference.
  */
 public class ItemReference {
+	
+	/** The identification id. */
 	private String identificationId = null;
 
+	/** The name. */
 	private String name = null;
 
+	/** The classification code. */
 	private String classificationCode = null;
 
+	/**
+	 * Identification id.
+	 *
+	 * @param identificationId the identification id
+	 * @return the item reference
+	 */
 	public ItemReference identificationId(String identificationId) {
 		this.identificationId = identificationId;
 		return this;
 	}
 
 	/**
-	 * Get identificationId
-	 * 
+	 * Get identificationId.
+	 *
 	 * @return identificationId
-	 **/
+	 */
 	public String getIdentificationId() {
 		return identificationId;
 	}
 
+	/**
+	 * Sets the identification id.
+	 *
+	 * @param identificationId the new identification id
+	 */
 	public void setIdentificationId(String identificationId) {
 		this.identificationId = identificationId;
 	}
 
+	/**
+	 * Name.
+	 *
+	 * @param name the name
+	 * @return the item reference
+	 */
 	public ItemReference name(String name) {
 		this.name = name;
 		return this;
 	}
 
 	/**
-	 * Get name
-	 * 
+	 * Get name.
+	 *
 	 * @return name
-	 **/
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the item reference
+	 */
 	public ItemReference classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 		return this;
 	}
 
 	/**
-	 * Get classificationCode
-	 * 
+	 * Get classificationCode.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 	public String getClassificationCode() {
 		return classificationCode;
 	}
 
+	/**
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
+	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -92,11 +132,17 @@ public class ItemReference {
 				&& Objects.equals(this.classificationCode, itemReference.classificationCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(identificationId, name, classificationCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -112,6 +158,9 @@ public class ItemReference {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

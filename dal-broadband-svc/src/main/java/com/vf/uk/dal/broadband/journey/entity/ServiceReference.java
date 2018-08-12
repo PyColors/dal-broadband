@@ -17,37 +17,59 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * ServiceReference
+ * ServiceReference.
  */
 public class ServiceReference {
+	
+	/** The service lines. */
 	private List<ServiceLines> serviceLines = null;
 
+	/**
+	 * Service lines.
+	 *
+	 * @param serviceLines the service lines
+	 * @return the service reference
+	 */
 	public ServiceReference serviceLines(List<ServiceLines> serviceLines) {
 		this.serviceLines = serviceLines;
 		return this;
 	}
 
+	/**
+	 * Adds the service lines item.
+	 *
+	 * @param serviceLinesItem the service lines item
+	 * @return the service reference
+	 */
 	public ServiceReference addServiceLinesItem(ServiceLines serviceLinesItem) {
 		if (this.serviceLines == null) {
-			this.serviceLines = new ArrayList<ServiceLines>();
+			this.serviceLines = new ArrayList<>();
 		}
 		this.serviceLines.add(serviceLinesItem);
 		return this;
 	}
 
 	/**
-	 * Get serviceLines
-	 * 
+	 * Get serviceLines.
+	 *
 	 * @return serviceLines
-	 **/
+	 */
 	public List<ServiceLines> getServiceLines() {
 		return serviceLines;
 	}
 
+	/**
+	 * Sets the service lines.
+	 *
+	 * @param serviceLines the new service lines
+	 */
 	public void setServiceLines(List<ServiceLines> serviceLines) {
 		this.serviceLines = serviceLines;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -60,11 +82,17 @@ public class ServiceReference {
 		return Objects.equals(this.serviceLines, serviceReference.serviceLines);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(serviceLines);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -78,6 +106,9 @@ public class ServiceReference {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

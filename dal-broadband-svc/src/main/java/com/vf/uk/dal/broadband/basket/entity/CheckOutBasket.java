@@ -59,6 +59,11 @@ public class CheckOutBasket   {
   @JsonProperty("voucherDescription")
   private String voucherDescription = null;
 
+  /**
+   * 
+   * @param affiliateId
+   * @return
+   */
   public CheckOutBasket affiliateId(String affiliateId) {
     this.affiliateId = affiliateId;
     return this;
@@ -79,6 +84,11 @@ public class CheckOutBasket   {
     this.affiliateId = affiliateId;
   }
 
+  /**
+   * 
+   * @param basketId
+   * @return
+   */
   public CheckOutBasket basketId(String basketId) {
     this.basketId = basketId;
     return this;
@@ -99,6 +109,11 @@ public class CheckOutBasket   {
     this.basketId = basketId;
   }
 
+  /**
+   * 
+   * @param customerRequestedDate
+   * @return
+   */
   public CheckOutBasket customerRequestedDate(String customerRequestedDate) {
     this.customerRequestedDate = customerRequestedDate;
     return this;
@@ -119,6 +134,11 @@ public class CheckOutBasket   {
     this.customerRequestedDate = customerRequestedDate;
   }
 
+  /**
+   * 
+   * @param deliveryInfo
+   * @return
+   */
   public CheckOutBasket deliveryInfo(DeliveryInfo deliveryInfo) {
     this.deliveryInfo = deliveryInfo;
     return this;
@@ -140,6 +160,11 @@ public class CheckOutBasket   {
     this.deliveryInfo = deliveryInfo;
   }
 
+  /**
+   * 
+   * @param hashvalue
+   * @return
+   */
   public CheckOutBasket hashvalue(String hashvalue) {
     this.hashvalue = hashvalue;
     return this;
@@ -160,6 +185,11 @@ public class CheckOutBasket   {
     this.hashvalue = hashvalue;
   }
 
+  /**
+   * 
+   * @param journey
+   * @return
+   */
   public CheckOutBasket journey(Journey journey) {
     this.journey = journey;
     return this;
@@ -181,14 +211,24 @@ public class CheckOutBasket   {
     this.journey = journey;
   }
 
+  /**
+   * 
+   * @param packages
+   * @return
+   */
   public CheckOutBasket packages(List<CheckOutPackage> packages) {
     this.packages = packages;
     return this;
   }
 
+  /**
+   * 
+   * @param packagesItem
+   * @return
+   */
   public CheckOutBasket addPackagesItem(CheckOutPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<CheckOutPackage>();
+      this.packages = new ArrayList<>();
     }
     this.packages.add(packagesItem);
     return this;
@@ -210,6 +250,11 @@ public class CheckOutBasket   {
     this.packages = packages;
   }
 
+  /**
+   * 
+   * @param priceDetails
+   * @return
+   */
   public CheckOutBasket priceDetails(PriceDetails priceDetails) {
     this.priceDetails = priceDetails;
     return this;
@@ -231,6 +276,11 @@ public class CheckOutBasket   {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * 
+   * @param source
+   * @return
+   */
   public CheckOutBasket source(String source) {
     this.source = source;
     return this;
@@ -251,6 +301,11 @@ public class CheckOutBasket   {
     this.source = source;
   }
 
+  /**
+   * 
+   * @param validated
+   * @return
+   */
   public CheckOutBasket validated(Boolean validated) {
     this.validated = validated;
     return this;
@@ -271,6 +326,11 @@ public class CheckOutBasket   {
     this.validated = validated;
   }
 
+  /**
+   * 
+   * @param vetOutcome
+   * @return
+   */
   public CheckOutBasket vetOutcome(VetOutcome vetOutcome) {
     this.vetOutcome = vetOutcome;
     return this;
@@ -292,6 +352,11 @@ public class CheckOutBasket   {
     this.vetOutcome = vetOutcome;
   }
 
+  /**
+   * 
+   * @param voucherCode
+   * @return
+   */
   public CheckOutBasket voucherCode(String voucherCode) {
     this.voucherCode = voucherCode;
     return this;
@@ -312,6 +377,11 @@ public class CheckOutBasket   {
     this.voucherCode = voucherCode;
   }
 
+  /**
+   * 
+   * @param voucherDescription
+   * @return
+   */
   public CheckOutBasket voucherDescription(String voucherDescription) {
     this.voucherDescription = voucherDescription;
     return this;

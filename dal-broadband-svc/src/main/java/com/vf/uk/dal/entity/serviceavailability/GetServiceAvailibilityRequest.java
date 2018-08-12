@@ -13,35 +13,55 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * GetServiceAvailibilityRequest
+ * GetServiceAvailibilityRequest.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-07T12:15:55.201Z")
 
 public class GetServiceAvailibilityRequest   {
+  
+  /** The category. */
   @JsonProperty("category")
   private String category = null;
 
   /**
-   * Gets or Sets customerType
+   * Gets or Sets customerType.
    */
   public enum CustomerTypeEnum {
+    
+    /** The individual. */
     INDIVIDUAL("INDIVIDUAL"),
     
+    /** The business. */
     BUSINESS("BUSINESS");
 
+    /** The value. */
     private String value;
 
+    /**
+     * Instantiates a new customer type enum.
+     *
+     * @param value the value
+     */
     CustomerTypeEnum(String value) {
       this.value = value;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Enum#toString()
+     */
     @Override
     @JsonValue
     public String toString() {
       return String.valueOf(value);
     }
 
+    /**
+     * From value.
+     *
+     * @param text the text
+     * @return the customer type enum
+     */
     @JsonCreator
     public static CustomerTypeEnum fromValue(String text) {
       for (CustomerTypeEnum b : CustomerTypeEnum.values()) {
@@ -53,27 +73,38 @@ public class GetServiceAvailibilityRequest   {
     }
   }
 
+  /** The customer type. */
   @JsonProperty("customerType")
   private CustomerTypeEnum customerType = null;
 
+  /** The installation address. */
   @JsonProperty("installationAddress")
   private InstallationAddress installationAddress = null;
 
+  /** The landline number. */
   @JsonProperty("landlineNumber")
   private String landlineNumber = null;
 
+  /** The move from post code. */
   @JsonProperty("moveFromPostCode")
   private String moveFromPostCode = null;
 
+  /**
+   * Category.
+   *
+   * @param category the category
+   * @return the gets the service availibility request
+   */
   public GetServiceAvailibilityRequest category(String category) {
     this.category = category;
     return this;
   }
 
   /**
-   * Get category
+   * Get category.
+   *
    * @return category
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -81,19 +112,31 @@ public class GetServiceAvailibilityRequest   {
     return category;
   }
 
+  /**
+   * Sets the category.
+   *
+   * @param category the new category
+   */
   public void setCategory(String category) {
     this.category = category;
   }
 
+  /**
+   * Customer type.
+   *
+   * @param customerType the customer type
+   * @return the gets the service availibility request
+   */
   public GetServiceAvailibilityRequest customerType(CustomerTypeEnum customerType) {
     this.customerType = customerType;
     return this;
   }
 
   /**
-   * Get customerType
+   * Get customerType.
+   *
    * @return customerType
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -101,19 +144,31 @@ public class GetServiceAvailibilityRequest   {
     return customerType;
   }
 
+  /**
+   * Sets the customer type.
+   *
+   * @param customerType the new customer type
+   */
   public void setCustomerType(CustomerTypeEnum customerType) {
     this.customerType = customerType;
   }
 
+  /**
+   * Installation address.
+   *
+   * @param installationAddress the installation address
+   * @return the gets the service availibility request
+   */
   public GetServiceAvailibilityRequest installationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
     return this;
   }
 
   /**
-   * Get installationAddress
+   * Get installationAddress.
+   *
    * @return installationAddress
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -122,19 +177,31 @@ public class GetServiceAvailibilityRequest   {
     return installationAddress;
   }
 
+  /**
+   * Sets the installation address.
+   *
+   * @param installationAddress the new installation address
+   */
   public void setInstallationAddress(InstallationAddress installationAddress) {
     this.installationAddress = installationAddress;
   }
 
+  /**
+   * Landline number.
+   *
+   * @param landlineNumber the landline number
+   * @return the gets the service availibility request
+   */
   public GetServiceAvailibilityRequest landlineNumber(String landlineNumber) {
     this.landlineNumber = landlineNumber;
     return this;
   }
 
   /**
-   * Get landlineNumber
+   * Get landlineNumber.
+   *
    * @return landlineNumber
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -142,19 +209,31 @@ public class GetServiceAvailibilityRequest   {
     return landlineNumber;
   }
 
+  /**
+   * Sets the landline number.
+   *
+   * @param landlineNumber the new landline number
+   */
   public void setLandlineNumber(String landlineNumber) {
     this.landlineNumber = landlineNumber;
   }
 
+  /**
+   * Move from post code.
+   *
+   * @param moveFromPostCode the move from post code
+   * @return the gets the service availibility request
+   */
   public GetServiceAvailibilityRequest moveFromPostCode(String moveFromPostCode) {
     this.moveFromPostCode = moveFromPostCode;
     return this;
   }
 
   /**
-   * Get moveFromPostCode
+   * Get moveFromPostCode.
+   *
    * @return moveFromPostCode
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -162,11 +241,19 @@ public class GetServiceAvailibilityRequest   {
     return moveFromPostCode;
   }
 
+  /**
+   * Sets the move from post code.
+   *
+   * @param moveFromPostCode the new move from post code
+   */
   public void setMoveFromPostCode(String moveFromPostCode) {
     this.moveFromPostCode = moveFromPostCode;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -183,11 +270,17 @@ public class GetServiceAvailibilityRequest   {
         Objects.equals(this.moveFromPostCode, getServiceAvailibilityRequest.moveFromPostCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(category, customerType, installationAddress, landlineNumber, moveFromPostCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -205,6 +298,9 @@ public class GetServiceAvailibilityRequest   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

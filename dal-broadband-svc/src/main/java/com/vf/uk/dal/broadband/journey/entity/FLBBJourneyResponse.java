@@ -15,29 +15,45 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * FLBBJourneyResponse
+ * FLBBJourneyResponse.
  */
 public class FLBBJourneyResponse {
+	
+	/** The journey id. */
 	private String journeyId = null;
 
+	/**
+	 * Journey id.
+	 *
+	 * @param journeyId the journey id
+	 * @return the FLBB journey response
+	 */
 	public FLBBJourneyResponse journeyId(String journeyId) {
 		this.journeyId = journeyId;
 		return this;
 	}
 
 	/**
-	 * Get journeyId
-	 * 
+	 * Get journeyId.
+	 *
 	 * @return journeyId
-	 **/
+	 */
 	public String getJourneyId() {
 		return journeyId;
 	}
 
+	/**
+	 * Sets the journey id.
+	 *
+	 * @param journeyId the new journey id
+	 */
 	public void setJourneyId(String journeyId) {
 		this.journeyId = journeyId;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -50,11 +66,17 @@ public class FLBBJourneyResponse {
 		return Objects.equals(this.journeyId, flBBJourneyResponse.journeyId);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(journeyId);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -68,6 +90,9 @@ public class FLBBJourneyResponse {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

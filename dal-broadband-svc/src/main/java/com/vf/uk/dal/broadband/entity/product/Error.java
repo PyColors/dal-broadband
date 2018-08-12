@@ -9,30 +9,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Error
+ * Error.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class Error   {
+  
+  /** The code. */
   @JsonProperty("code")
   private String code = null;
 
+  /** The message. */
   @JsonProperty("message")
   private String message = null;
 
+  /** The reference id. */
   @JsonProperty("referenceId")
   private String referenceId = null;
 
+  /**
+   * Code.
+   *
+   * @param code the code
+   * @return the error
+   */
   public Error code(String code) {
     this.code = code;
     return this;
   }
 
   /**
-   * Get code
+   * Get code.
+   *
    * @return code
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -40,19 +51,31 @@ public class Error   {
     return code;
   }
 
+  /**
+   * Sets the code.
+   *
+   * @param code the new code
+   */
   public void setCode(String code) {
     this.code = code;
   }
 
+  /**
+   * Message.
+   *
+   * @param message the message
+   * @return the error
+   */
   public Error message(String message) {
     this.message = message;
     return this;
   }
 
   /**
-   * Get message
+   * Get message.
+   *
    * @return message
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -60,19 +83,31 @@ public class Error   {
     return message;
   }
 
+  /**
+   * Sets the message.
+   *
+   * @param message the new message
+   */
   public void setMessage(String message) {
     this.message = message;
   }
 
+  /**
+   * Reference id.
+   *
+   * @param referenceId the reference id
+   * @return the error
+   */
   public Error referenceId(String referenceId) {
     this.referenceId = referenceId;
     return this;
   }
 
   /**
-   * Get referenceId
+   * Get referenceId.
+   *
    * @return referenceId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -80,11 +115,19 @@ public class Error   {
     return referenceId;
   }
 
+  /**
+   * Sets the reference id.
+   *
+   * @param referenceId the new reference id
+   */
   public void setReferenceId(String referenceId) {
     this.referenceId = referenceId;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -99,11 +142,17 @@ public class Error   {
         Objects.equals(this.referenceId, error.referenceId);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(code, message, referenceId);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -119,6 +168,9 @@ public class Error   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

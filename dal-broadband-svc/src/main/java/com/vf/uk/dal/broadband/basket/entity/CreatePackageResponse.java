@@ -62,6 +62,11 @@ public class CreatePackageResponse   {
   @JsonProperty("voucherCode")
   private String voucherCode = null;
 
+  /**
+   * 
+   * @param accountCategory
+   * @return
+   */
   public CreatePackageResponse accountCategory(String accountCategory) {
     this.accountCategory = accountCategory;
     return this;
@@ -82,6 +87,11 @@ public class CreatePackageResponse   {
     this.accountCategory = accountCategory;
   }
 
+  /**
+   * 
+   * @param bundle
+   * @return
+   */
   public CreatePackageResponse bundle(Bundle bundle) {
     this.bundle = bundle;
     return this;
@@ -103,14 +113,23 @@ public class CreatePackageResponse   {
     this.bundle = bundle;
   }
 
+  /**
+   * 
+   * @param dependentOn
+   * @return
+   */
   public CreatePackageResponse dependentOn(List<String> dependentOn) {
     this.dependentOn = dependentOn;
     return this;
   }
-
+/**
+ * 
+ * @param dependentOnItem
+ * @return
+ */
   public CreatePackageResponse addDependentOnItem(String dependentOnItem) {
     if (this.dependentOn == null) {
-      this.dependentOn = new ArrayList<String>();
+      this.dependentOn = new ArrayList<>();
     }
     this.dependentOn.add(dependentOnItem);
     return this;
@@ -131,14 +150,24 @@ public class CreatePackageResponse   {
     this.dependentOn = dependentOn;
   }
 
+  /**
+   * 
+   * @param discounts
+   * @return
+   */
   public CreatePackageResponse discounts(List<Discount> discounts) {
     this.discounts = discounts;
     return this;
   }
 
+  /**
+   * 
+   * @param discountsItem
+   * @return
+   */
   public CreatePackageResponse addDiscountsItem(Discount discountsItem) {
     if (this.discounts == null) {
-      this.discounts = new ArrayList<Discount>();
+      this.discounts = new ArrayList<>();
     }
     this.discounts.add(discountsItem);
     return this;
@@ -160,14 +189,24 @@ public class CreatePackageResponse   {
     this.discounts = discounts;
   }
 
+  /**
+   * 
+   * @param hardwares
+   * @return
+   */
   public CreatePackageResponse hardwares(List<Hardware> hardwares) {
     this.hardwares = hardwares;
     return this;
   }
 
+  /**
+   * 
+   * @param hardwaresItem
+   * @return
+   */
   public CreatePackageResponse addHardwaresItem(Hardware hardwaresItem) {
     if (this.hardwares == null) {
-      this.hardwares = new ArrayList<Hardware>();
+      this.hardwares = new ArrayList<>();
     }
     this.hardwares.add(hardwaresItem);
     return this;
@@ -189,6 +228,11 @@ public class CreatePackageResponse   {
     this.hardwares = hardwares;
   }
 
+  /**
+   * 
+   * @param isChanged
+   * @return
+   */
   public CreatePackageResponse isChanged(Boolean isChanged) {
     this.isChanged = isChanged;
     return this;
@@ -207,6 +251,11 @@ public class CreatePackageResponse   {
     this.isChanged = isChanged;
   }
 
+  /**
+   * 
+   * @param packageId
+   * @return
+   */
   public CreatePackageResponse packageId(String packageId) {
     this.packageId = packageId;
     return this;
@@ -227,6 +276,11 @@ public class CreatePackageResponse   {
     this.packageId = packageId;
   }
 
+  /**
+   * 
+   * @param packageType
+   * @return
+   */
   public CreatePackageResponse packageType(String packageType) {
     this.packageType = packageType;
     return this;
@@ -247,6 +301,11 @@ public class CreatePackageResponse   {
     this.packageType = packageType;
   }
 
+  /**
+   * 
+   * @param priceDetails
+   * @return
+   */
   public CreatePackageResponse priceDetails(PriceDetails priceDetails) {
     this.priceDetails = priceDetails;
     return this;
@@ -268,6 +327,11 @@ public class CreatePackageResponse   {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * 
+   * @param removable
+   * @return
+   */
   public CreatePackageResponse removable(Boolean removable) {
     this.removable = removable;
     return this;
@@ -288,6 +352,11 @@ public class CreatePackageResponse   {
     this.removable = removable;
   }
 
+  /**
+   * 
+   * @param sequence
+   * @return
+   */
   public CreatePackageResponse sequence(Integer sequence) {
     this.sequence = sequence;
     return this;
@@ -308,14 +377,24 @@ public class CreatePackageResponse   {
     this.sequence = sequence;
   }
 
+  /**
+   * 
+   * @param services
+   * @return
+   */
   public CreatePackageResponse services(List<Service> services) {
     this.services = services;
     return this;
   }
 
+  /**
+   * 
+   * @param servicesItem
+   * @return
+   */
   public CreatePackageResponse addServicesItem(Service servicesItem) {
     if (this.services == null) {
-      this.services = new ArrayList<Service>();
+      this.services = new ArrayList<>();
     }
     this.services.add(servicesItem);
     return this;
@@ -337,6 +416,11 @@ public class CreatePackageResponse   {
     this.services = services;
   }
 
+  /**
+   * 
+   * @param voucherCode
+   * @return
+   */
   public CreatePackageResponse voucherCode(String voucherCode) {
     this.voucherCode = voucherCode;
     return this;

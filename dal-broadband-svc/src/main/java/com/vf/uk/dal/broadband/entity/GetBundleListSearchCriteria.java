@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.entity;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GetBundleListSearchCriteria.
  */

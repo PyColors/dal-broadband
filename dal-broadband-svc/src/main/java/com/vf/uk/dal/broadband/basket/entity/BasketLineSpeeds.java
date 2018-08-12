@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,6 +34,11 @@ public class BasketLineSpeeds   {
   @JsonProperty("minUpSpeed")
   private String minUpSpeed = null;
 
+  /**
+   * 
+   * @param avgDownSpeed
+   * @return
+   */
   public BasketLineSpeeds avgDownSpeed(String avgDownSpeed) {
     this.avgDownSpeed = avgDownSpeed;
     return this;
@@ -56,6 +59,11 @@ public class BasketLineSpeeds   {
     this.avgDownSpeed = avgDownSpeed;
   }
 
+  /**
+   * 
+   * @param bandwidthMeasure
+   * @return
+   */
   public BasketLineSpeeds bandwidthMeasure(String bandwidthMeasure) {
     this.bandwidthMeasure = bandwidthMeasure;
     return this;
@@ -76,6 +84,11 @@ public class BasketLineSpeeds   {
     this.bandwidthMeasure = bandwidthMeasure;
   }
 
+  /**
+   * 
+   * @param maxDownSpeed
+   * @return
+   */
   public BasketLineSpeeds maxDownSpeed(String maxDownSpeed) {
     this.maxDownSpeed = maxDownSpeed;
     return this;
@@ -96,6 +109,11 @@ public class BasketLineSpeeds   {
     this.maxDownSpeed = maxDownSpeed;
   }
 
+  /**
+   * 
+   * @param maxUpSpeed
+   * @return
+   */
   public BasketLineSpeeds maxUpSpeed(String maxUpSpeed) {
     this.maxUpSpeed = maxUpSpeed;
     return this;
@@ -116,6 +134,11 @@ public class BasketLineSpeeds   {
     this.maxUpSpeed = maxUpSpeed;
   }
 
+  /**
+   * 
+   * @param minDownSpeed
+   * @return
+   */
   public BasketLineSpeeds minDownSpeed(String minDownSpeed) {
     this.minDownSpeed = minDownSpeed;
     return this;
@@ -136,6 +159,11 @@ public class BasketLineSpeeds   {
     this.minDownSpeed = minDownSpeed;
   }
 
+  /**
+   * 
+   * @param minGuaranteedDownSpeed
+   * @return
+   */
   public BasketLineSpeeds minGuaranteedDownSpeed(String minGuaranteedDownSpeed) {
     this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
     return this;
@@ -156,6 +184,11 @@ public class BasketLineSpeeds   {
     this.minGuaranteedDownSpeed = minGuaranteedDownSpeed;
   }
 
+  /**
+   * 
+   * @param minUpSpeed
+   * @return
+   */
   public BasketLineSpeeds minUpSpeed(String minUpSpeed) {
     this.minUpSpeed = minUpSpeed;
     return this;
@@ -177,28 +210,6 @@ public class BasketLineSpeeds   {
   }
 
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    BasketLineSpeeds lineSpeeds = (BasketLineSpeeds) o;
-    return Objects.equals(this.avgDownSpeed, lineSpeeds.avgDownSpeed) &&
-        Objects.equals(this.bandwidthMeasure, lineSpeeds.bandwidthMeasure) &&
-        Objects.equals(this.maxDownSpeed, lineSpeeds.maxDownSpeed) &&
-        Objects.equals(this.maxUpSpeed, lineSpeeds.maxUpSpeed) &&
-        Objects.equals(this.minDownSpeed, lineSpeeds.minDownSpeed) &&
-        Objects.equals(this.minGuaranteedDownSpeed, lineSpeeds.minGuaranteedDownSpeed) &&
-        Objects.equals(this.minUpSpeed, lineSpeeds.minUpSpeed);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(avgDownSpeed, bandwidthMeasure, maxDownSpeed, maxUpSpeed, minDownSpeed, minGuaranteedDownSpeed, minUpSpeed);
-  }
 
   @Override
   public String toString() {

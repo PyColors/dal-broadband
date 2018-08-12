@@ -8,7 +8,10 @@
          "workingLines": 1,
          "stoppedLines": 1
       },
-      "lineDirectory": [],
+      "lineDirectory": [{
+      "featureCode":"abcd",
+      "directoryCode":"abcd",
+      "locationCode":"abcd"}],
       "lineLocator":       {
          "exchangeCode": "ASH",
          "exchangeName": "Ashton",
@@ -43,12 +46,6 @@
          "networkType": "Onnet",
          "lineTreatment":          [
                         {
-               "lineTreatmentType": "EXISTING",
-               "earliestAvailabilityDate": "2018-01-26",
-               "appointmentNeeded": false,
-               "connectionCharge": "No Charge"
-            },
-                        {
                "lineTreatmentType": "NEW",
                "earliestAvailabilityDate": "2018-01-22",
                "appointmentNeeded": false,
@@ -66,7 +63,7 @@
                   "minGuaranteedDownSpeed": 35000,
                   "maxUpSpeed": 10000,
                   "minUpSpeed": 10000,
-                  "avgDownSpeed": null,
+                  "avgDownSpeed": 10000,
                   "bandwidthMeasure": "Predicted"
                },
                "lineTreatment": [],
@@ -264,4 +261,8 @@
          ]
       }
    ]
+}],
+"warningErrorList":[
+{"errorCode":"001",
+"errorMessage":"warning message"
 }]}

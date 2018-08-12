@@ -15,35 +15,57 @@ package com.vf.uk.dal.broadband.journey.entity;
 import java.util.Objects;
 
 /**
- * AppointmentWindow
+ * AppointmentWindow.
  */
 public class AppointmentWindow {
+	
+	/** The identification id. */
 	private String identificationId = null;
 
+	/** The start date time. */
 	private String startDateTime = null;
 
+	/** The operational preference code. */
 	private String operationalPreferenceCode = null;
 
+	/** The time slot. */
 	private String timeSlot = null;
 
+	/**
+	 * Identification id.
+	 *
+	 * @param identificationId the identification id
+	 * @return the appointment window
+	 */
 	public AppointmentWindow identificationId(String identificationId) {
 		this.identificationId = identificationId;
 		return this;
 	}
 
 	/**
-	 * Get identificationId
-	 * 
+	 * Get identificationId.
+	 *
 	 * @return identificationId
-	 **/
+	 */
 	public String getIdentificationId() {
 		return identificationId;
 	}
 
+	/**
+	 * Sets the identification id.
+	 *
+	 * @param identificationId the new identification id
+	 */
 	public void setIdentificationId(String identificationId) {
 		this.identificationId = identificationId;
 	}
 
+	/**
+	 * Start date time.
+	 *
+	 * @param startDateTime the start date time
+	 * @return the appointment window
+	 */
 	public AppointmentWindow startDateTime(String startDateTime) {
 		this.startDateTime = startDateTime;
 		return this;
@@ -58,10 +80,21 @@ public class AppointmentWindow {
 		return startDateTime;
 	}
 
+	/**
+	 * Sets the start date time.
+	 *
+	 * @param startDateTime the new start date time
+	 */
 	public void setStartDateTime(String startDateTime) {
 		this.startDateTime = startDateTime;
 	}
 
+	/**
+	 * Operational preference code.
+	 *
+	 * @param operationalPreferenceCode the operational preference code
+	 * @return the appointment window
+	 */
 	public AppointmentWindow operationalPreferenceCode(String operationalPreferenceCode) {
 		this.operationalPreferenceCode = operationalPreferenceCode;
 		return this;
@@ -77,10 +110,21 @@ public class AppointmentWindow {
 		return operationalPreferenceCode;
 	}
 
+	/**
+	 * Sets the operational preference code.
+	 *
+	 * @param operationalPreferenceCode the new operational preference code
+	 */
 	public void setOperationalPreferenceCode(String operationalPreferenceCode) {
 		this.operationalPreferenceCode = operationalPreferenceCode;
 	}
 
+	/**
+	 * Time slot.
+	 *
+	 * @param timeSlot the time slot
+	 * @return the appointment window
+	 */
 	public AppointmentWindow timeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 		return this;
@@ -95,10 +139,18 @@ public class AppointmentWindow {
 		return timeSlot;
 	}
 
+	/**
+	 * Sets the time slot.
+	 *
+	 * @param timeSlot the new time slot
+	 */
 	public void setTimeSlot(String timeSlot) {
 		this.timeSlot = timeSlot;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -114,11 +166,17 @@ public class AppointmentWindow {
 				&& Objects.equals(this.timeSlot, appointmentWindow.timeSlot);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(identificationId, startDateTime, operationalPreferenceCode, timeSlot);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -135,6 +193,9 @@ public class AppointmentWindow {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

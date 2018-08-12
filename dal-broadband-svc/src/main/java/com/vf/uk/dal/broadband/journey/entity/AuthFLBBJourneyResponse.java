@@ -17,37 +17,60 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * AuthFLBBJourneyResponse
+ * AuthFLBBJourneyResponse.
  */
 public class AuthFLBBJourneyResponse {
+	
+	/** The id. */
 	private String id = null;
 
+	/** The username. */
 	private String username = null;
 
+	/** The context MSISDN. */
 	private String contextMSISDN = null;
 
+	/** The basket id. */
 	private String basketId = null;
 
+	/** The journey data. */
 	private List<JourneyData> journeyData = null;
 
+	/**
+	 * Id.
+	 *
+	 * @param id the id
+	 * @return the auth FLBB journey response
+	 */
 	public AuthFLBBJourneyResponse id(String id) {
 		this.id = id;
 		return this;
 	}
 
 	/**
-	 * Unique journeyId created to track
-	 * 
+	 * Unique journeyId created to track.
+	 *
 	 * @return id
-	 **/
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Username.
+	 *
+	 * @param username the username
+	 * @return the auth FLBB journey response
+	 */
 	public AuthFLBBJourneyResponse username(String username) {
 		this.username = username;
 		return this;
@@ -62,72 +85,119 @@ public class AuthFLBBJourneyResponse {
 		return username;
 	}
 
+	/**
+	 * Sets the username.
+	 *
+	 * @param username the new username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * Context MSISDN.
+	 *
+	 * @param contextMSISDN the context MSISDN
+	 * @return the auth FLBB journey response
+	 */
 	public AuthFLBBJourneyResponse contextMSISDN(String contextMSISDN) {
 		this.contextMSISDN = contextMSISDN;
 		return this;
 	}
 
 	/**
-	 * The in-context Service Identifier according to eCare
-	 * 
+	 * The in-context Service Identifier according to eCare.
+	 *
 	 * @return contextMSISDN
-	 **/
+	 */
 	public String getContextMSISDN() {
 		return contextMSISDN;
 	}
 
+	/**
+	 * Sets the context MSISDN.
+	 *
+	 * @param contextMSISDN the new context MSISDN
+	 */
 	public void setContextMSISDN(String contextMSISDN) {
 		this.contextMSISDN = contextMSISDN;
 	}
 
+	/**
+	 * Basket id.
+	 *
+	 * @param basketId the basket id
+	 * @return the auth FLBB journey response
+	 */
 	public AuthFLBBJourneyResponse basketId(String basketId) {
 		this.basketId = basketId;
 		return this;
 	}
 
 	/**
-	 * Any associated basket Id created for this user
-	 * 
+	 * Any associated basket Id created for this user.
+	 *
 	 * @return basketId
-	 **/
+	 */
 	public String getBasketId() {
 		return basketId;
 	}
 
+	/**
+	 * Sets the basket id.
+	 *
+	 * @param basketId the new basket id
+	 */
 	public void setBasketId(String basketId) {
 		this.basketId = basketId;
 	}
 
+	/**
+	 * Journey data.
+	 *
+	 * @param journeyData the journey data
+	 * @return the auth FLBB journey response
+	 */
 	public AuthFLBBJourneyResponse journeyData(List<JourneyData> journeyData) {
 		this.journeyData = journeyData;
 		return this;
 	}
 
+	/**
+	 * Adds the journey data item.
+	 *
+	 * @param journeyDataItem the journey data item
+	 * @return the auth FLBB journey response
+	 */
 	public AuthFLBBJourneyResponse addJourneyDataItem(JourneyData journeyDataItem) {
 		if (this.journeyData == null) {
-			this.journeyData = new ArrayList<JourneyData>();
+			this.journeyData = new ArrayList<>();
 		}
 		this.journeyData.add(journeyDataItem);
 		return this;
 	}
 
 	/**
-	 * Get journeyData
-	 * 
+	 * Get journeyData.
+	 *
 	 * @return journeyData
-	 **/
+	 */
 	public List<JourneyData> getJourneyData() {
 		return journeyData;
 	}
 
+	/**
+	 * Sets the journey data.
+	 *
+	 * @param journeyData the new journey data
+	 */
 	public void setJourneyData(List<JourneyData> journeyData) {
 		this.journeyData = journeyData;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -144,11 +214,17 @@ public class AuthFLBBJourneyResponse {
 				&& Objects.equals(this.journeyData, authFLBBJourneyResponse.journeyData);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, username, contextMSISDN, basketId, journeyData);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -166,6 +242,9 @@ public class AuthFLBBJourneyResponse {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

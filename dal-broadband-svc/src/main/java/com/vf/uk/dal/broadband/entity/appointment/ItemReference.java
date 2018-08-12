@@ -9,18 +9,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * ItemReference
+ * ItemReference.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
 public class ItemReference   {
+  
+  /** The classification code. */
   @JsonProperty("classificationCode")
   private String classificationCode = null;
 
+  /** The type code. */
   @JsonProperty("typeCode")
   private String typeCode = null;
 
+  /**
+   * Classification code.
+   *
+   * @param classificationCode the classification code
+   * @return the item reference
+   */
   public ItemReference classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
@@ -37,10 +46,21 @@ public class ItemReference   {
     return classificationCode;
   }
 
+  /**
+   * Sets the classification code.
+   *
+   * @param classificationCode the new classification code
+   */
   public void setClassificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
   }
 
+  /**
+   * Type code.
+   *
+   * @param typeCode the type code
+   * @return the item reference
+   */
   public ItemReference typeCode(String typeCode) {
     this.typeCode = typeCode;
     return this;
@@ -57,11 +77,19 @@ public class ItemReference   {
     return typeCode;
   }
 
+  /**
+   * Sets the type code.
+   *
+   * @param typeCode the new type code
+   */
   public void setTypeCode(String typeCode) {
     this.typeCode = typeCode;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -75,11 +103,17 @@ public class ItemReference   {
         Objects.equals(this.typeCode, itemReference.typeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(classificationCode, typeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -94,6 +128,9 @@ public class ItemReference   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

@@ -26,6 +26,11 @@ public class HardwarePrices   {
   @JsonProperty("oneOffPrice")
   private Price oneOffPrice = null;
 
+  /**
+   * 
+   * @param merchandisingPromotions
+   * @return
+   */
   public HardwarePrices merchandisingPromotions(MerchandisingPromotions merchandisingPromotions) {
     this.merchandisingPromotions = merchandisingPromotions;
     return this;
@@ -47,6 +52,11 @@ public class HardwarePrices   {
     this.merchandisingPromotions = merchandisingPromotions;
   }
 
+  /**
+   * 
+   * @param oneOffDiscountPrice
+   * @return
+   */
   public HardwarePrices oneOffDiscountPrice(Price oneOffDiscountPrice) {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
     return this;
@@ -68,6 +78,11 @@ public class HardwarePrices   {
     this.oneOffDiscountPrice = oneOffDiscountPrice;
   }
 
+  /**
+   * 
+   * @param oneOffPrice
+   * @return
+   */
   public HardwarePrices oneOffPrice(Price oneOffPrice) {
     this.oneOffPrice = oneOffPrice;
     return this;

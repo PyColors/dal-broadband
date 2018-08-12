@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.basket.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -35,6 +34,11 @@ public class AppointmentWindow   {
   @JsonProperty("timeSlot")
   private String timeSlot = null;
 
+  /**
+   * 
+   * @param identificationId
+   * @return
+   */
   public AppointmentWindow identificationId(String identificationId) {
     this.identificationId = identificationId;
     return this;
@@ -55,6 +59,11 @@ public class AppointmentWindow   {
     this.identificationId = identificationId;
   }
 
+  /**
+   * 
+   * @param operationalPreferenceCode
+   * @return
+   */
   public AppointmentWindow operationalPreferenceCode(String operationalPreferenceCode) {
     this.operationalPreferenceCode = operationalPreferenceCode;
     return this;
@@ -75,14 +84,24 @@ public class AppointmentWindow   {
     this.operationalPreferenceCode = operationalPreferenceCode;
   }
 
+  /**
+   * 
+   * @param siteNotes
+   * @return
+   */
   public AppointmentWindow siteNotes(List<SiteNote> siteNotes) {
     this.siteNotes = siteNotes;
     return this;
   }
 
+  /**
+   * 
+   * @param siteNotesItem
+   * @return
+   */
   public AppointmentWindow addSiteNotesItem(SiteNote siteNotesItem) {
     if (this.siteNotes == null) {
-      this.siteNotes = new ArrayList<SiteNote>();
+      this.siteNotes = new ArrayList<>();
     }
     this.siteNotes.add(siteNotesItem);
     return this;
@@ -104,6 +123,11 @@ public class AppointmentWindow   {
     this.siteNotes = siteNotes;
   }
 
+  /**
+   * 
+   * @param startDateTime
+   * @return
+   */
   public AppointmentWindow startDateTime(String startDateTime) {
     this.startDateTime = startDateTime;
     return this;
@@ -124,6 +148,11 @@ public class AppointmentWindow   {
     this.startDateTime = startDateTime;
   }
 
+  /**
+   * 
+   * @param timeSlot
+   * @return
+   */
   public AppointmentWindow timeSlot(String timeSlot) {
     this.timeSlot = timeSlot;
     return this;
@@ -144,27 +173,6 @@ public class AppointmentWindow   {
     this.timeSlot = timeSlot;
   }
 
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AppointmentWindow appointmentWindow = (AppointmentWindow) o;
-    return Objects.equals(this.identificationId, appointmentWindow.identificationId) &&
-        Objects.equals(this.operationalPreferenceCode, appointmentWindow.operationalPreferenceCode) &&
-        Objects.equals(this.siteNotes, appointmentWindow.siteNotes) &&
-        Objects.equals(this.startDateTime, appointmentWindow.startDateTime) &&
-        Objects.equals(this.timeSlot, appointmentWindow.timeSlot);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(identificationId, operationalPreferenceCode, siteNotes, startDateTime, timeSlot);
-  }
 
   @Override
   public String toString() {

@@ -7,18 +7,32 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * AvailableServices
+ * AvailableServices.
  */
 
 public class AvailableServices {
+	
+	/** The service. */
 	@JsonProperty("service")
-	private List<String> service = new ArrayList<String>();
+	private List<String> service = new ArrayList<>();
 
+	/**
+	 * Service.
+	 *
+	 * @param service the service
+	 * @return the available services
+	 */
 	public AvailableServices service(List<String> service) {
 		this.service = service;
 		return this;
 	}
 
+	/**
+	 * Adds the service item.
+	 *
+	 * @param serviceItem the service item
+	 * @return the available services
+	 */
 	public AvailableServices addServiceItem(String serviceItem) {
 		this.service.add(serviceItem);
 		return this;
@@ -26,18 +40,26 @@ public class AvailableServices {
 
 	/**
 	 * An identifier defining the Broadband system’s services available at this
-	 * exchange
-	 * 
+	 * exchange.
+	 *
 	 * @return service
-	 **/
+	 */
 	public List<String> getService() {
 		return service;
 	}
 
+	/**
+	 * Sets the service.
+	 *
+	 * @param service the new service
+	 */
 	public void setService(List<String> service) {
 		this.service = service;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -50,11 +72,17 @@ public class AvailableServices {
 		return Objects.equals(this.service, availableServices.service);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(service);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -68,6 +96,9 @@ public class AvailableServices {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

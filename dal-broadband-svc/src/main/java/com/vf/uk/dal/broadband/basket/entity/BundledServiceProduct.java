@@ -38,6 +38,11 @@ public class BundledServiceProduct   {
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /**
+   * 
+   * @param description
+   * @return
+   */
   public BundledServiceProduct description(String description) {
     this.description = description;
     return this;
@@ -58,14 +63,24 @@ public class BundledServiceProduct   {
     this.description = description;
   }
 
+  /**
+   * 
+   * @param miscellaneous
+   * @return
+   */
   public BundledServiceProduct miscellaneous(List<Attribute> miscellaneous) {
     this.miscellaneous = miscellaneous;
     return this;
   }
 
+  /**
+   * 
+   * @param miscellaneousItem
+   * @return
+   */
   public BundledServiceProduct addMiscellaneousItem(Attribute miscellaneousItem) {
     if (this.miscellaneous == null) {
-      this.miscellaneous = new ArrayList<Attribute>();
+      this.miscellaneous = new ArrayList<>();
     }
     this.miscellaneous.add(miscellaneousItem);
     return this;
@@ -87,6 +102,11 @@ public class BundledServiceProduct   {
     this.miscellaneous = miscellaneous;
   }
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public BundledServiceProduct name(String name) {
     this.name = name;
     return this;
@@ -107,6 +127,11 @@ public class BundledServiceProduct   {
     this.name = name;
   }
 
+  /**
+   * 
+   * @param priceDetail
+   * @return
+   */
   public BundledServiceProduct priceDetail(ServicePrice priceDetail) {
     this.priceDetail = priceDetail;
     return this;
@@ -128,6 +153,11 @@ public class BundledServiceProduct   {
     this.priceDetail = priceDetail;
   }
 
+  /**
+   * 
+   * @param productClass
+   * @return
+   */
   public BundledServiceProduct productClass(String productClass) {
     this.productClass = productClass;
     return this;
@@ -148,6 +178,11 @@ public class BundledServiceProduct   {
     this.productClass = productClass;
   }
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public BundledServiceProduct skuId(String skuId) {
     this.skuId = skuId;
     return this;

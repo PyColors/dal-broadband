@@ -29,6 +29,7 @@ import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.SelectedAvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.exception.TILException;
@@ -56,8 +57,9 @@ public class BroadbandController {
 	/**
 	 * Check availability for broadband.
 	 *
-	 * @param availabilityCheckerRequest
-	 *            the availability checker request
+	 * @param availabilityCheckerRequest            the availability checker request
+	 * @param broadbandId the broadband id
+	 * @param userType the user type
 	 * @return the response entity
 	 */
 	@ApiOperation(value = "Check the service availability for the broad band service at the given location: post codes like RG14 2PA", notes = "This service accepts address, calls the GSA and creates / update the journey with the service point information.", response = AvailabilityCheckResponse.class, tags = {
@@ -86,20 +88,13 @@ public class BroadbandController {
 	/**
 	 * Gets the flbb list.
 	 *
-	 * @param broadbandId
-	 *            the broadband id
-	 * @param userType
-	 *            the user type
-	 * @param offerCode
-	 *            the offer code
-	 * @param journeyType
-	 *            the journey type
-	 * @param duration
-	 *            the duration
-	 * @param classificationCode
-	 *            the classification code
-	 * @param acceptVersion
-	 *            the accept version
+	 * @param broadbandId            the broadband id
+	 * @param userType            the user type
+	 * @param offerCode            the offer code
+	 * @param journeyType            the journey type
+	 * @param duration            the duration
+	 * @param classificationCode            the classification code
+	 * @param categoryPreference the category preference
 	 * @return the flbb list
 	 */
 	@ApiOperation(value = "Get the list of bundle(FLBB)  based on the filter criteria.", notes = "The service gets the details of the bundles from solr based on the filter criteria in the response.", response = FlbBundle[].class, tags = {
@@ -134,6 +129,14 @@ public class BroadbandController {
 
 	}
 
+	/**
+	 * Gets the address by postcode.
+	 *
+	 * @param postCode the post code
+	 * @param categoryPreference the category preference
+	 * @param userType the user type
+	 * @return the address by postcode
+	 */
 	@ApiOperation(value = "Gets the list of addresses for a given postal code", notes = "Gets the list of addresses for a given postal code", response = AddressInfo.class, tags = {
 			"Premise" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = AddressInfo.class),
@@ -152,6 +155,13 @@ public class BroadbandController {
 		}
 	}
 
+	/**
+	 * Creates the or update package.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param basketRequest the basket request
+	 * @return the basket
+	 */
 	@ApiOperation(value = "Create or updates the basket when the user selects the package", notes = "Create or update the basket when the user selects the the package", response = Basket.class, tags = {
 			"Broadband Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Basket.class),
@@ -169,6 +179,12 @@ public class BroadbandController {
 		return broadbandService.createOrUpdatePackage(basketRequest, broadband, broadbandId);
 	}
 
+	/**
+	 * Gets the broadband info.
+	 *
+	 * @param broadbandId the broadband id
+	 * @return the broadband info
+	 */
 	@ApiOperation(value = "Gives the Broadband cache using broadband id", notes = "Gets the broadband cache using broadband id", response = Broadband.class, tags = {
 			"Broadband" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Broadband.class),
@@ -181,6 +197,13 @@ public class BroadbandController {
 		return broadbandService.getBroadbandFromCache(broadbandId);
 	}
 
+	/**
+	 * Update line type in basket.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param updateLineRequest the update line request
+	 * @return the response entity
+	 */
 	@ApiOperation(value = "Updates the basket and cache with the line option selected and the selected package code of the plan", notes = "Update the basket with the line options and package code, to be used by checkout for creating the Service point info in the CSO", response = HttpStatus.class, tags = {
 			"Broadband, Selected Line API" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = HttpStatus.class),
@@ -196,6 +219,13 @@ public class BroadbandController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Creates the appointment for FLBB.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param createAppointmentRequest the create appointment request
+	 * @return the response entity
+	 */
 	@ApiOperation(value = "Creates the appointment and updates the broadband cache and basket with the appointmenr information", notes = "This service calls create appointment TIL service and updates the basket with the appointment information", response = CreateAppointmentResponse.class, tags = {
 			"Broadband, Appointment" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = CreateAppointmentResponse.class),
@@ -219,6 +249,13 @@ public class BroadbandController {
 		return new ResponseEntity<>(createAppointmentresponse, HttpStatus.OK);
 	}
 
+	/**
+	 * Service start date.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param serviceStartDateRequest the service start date request
+	 * @return the response entity
+	 */
 	@ApiOperation(value = "Updates the basket with service start date and service point info in basket if user selects to remove from directory", notes = "This service calls update basket, based on the earliest available date and also service point with the remove me from phone directory information based on if user has selected", response = HttpStatus.class, tags = {
 			"Broadband, Service Start Date" })
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success", response = HttpStatus.class),
@@ -233,6 +270,13 @@ public class BroadbandController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Optimize package for FLBB.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param optimizePackageRequest the optimize package request
+	 * @return the response entity
+	 */
 	@ApiOperation(value = "Optimize the basket by replacing the package", notes = "This service calls promotion API to get the plan which needs to be replaced and then calls update package", response = com.vf.uk.dal.broadband.entity.OptimizePackageResponse.class, tags = {
 			"Broadband, Optimize Basket" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = OptimizePackageResponse.class),
@@ -248,6 +292,12 @@ public class BroadbandController {
 				HttpStatus.OK);
 	}
 
+	/**
+	 * Gets the appointment for FLBB.
+	 *
+	 * @param broadbandId the broadband id
+	 * @return the appointment for FLBB
+	 */
 	@ApiOperation(value = "Gets the list of appointment based  ", notes = "This service gets the service start date from the cache and calls getAppointmentList", response = GetAppointmentResponse.class, tags = {
 			"Broadband, Appointment" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = GetAppointmentResponse.class),
@@ -268,6 +318,13 @@ public class BroadbandController {
 		}
 	}
 
+	/**
+	 * Gets the compatible devices for bundle.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param planId the plan id
+	 * @return the compatible devices for bundle
+	 */
 	@ApiOperation(value = "Get the list of the compatible devices based on the plan id sent", notes = "This service is called, get compatible devices and send the response to the client ", response = RouterDetails[].class, tags = {
 			"Broadband, Compatible Routers" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = RouterDetails[].class),
@@ -281,4 +338,28 @@ public class BroadbandController {
 			@ApiParam(value = "plan id based on which we need to query the compatible devices", required = true) @PathVariable("planId") String planId) {
 		return new ResponseEntity<>(broadbandService.getCompatibleDevicesForBundle(broadbandId, planId), HttpStatus.OK);
 	}
+	
+	
+	/**
+	 * Gets the compatible devices for bundle.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param planId the plan id
+	 * @return the compatible devices for bundle
+	 */
+	@ApiOperation(value = "Fetches the line options from the Cache based on the broadband id", notes = "Fetches the line options from the Cache based on the broadband id", response = SelectedAvailabilityCheckResponse.class, tags = {
+			"AvailabilityCheck" })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = SelectedAvailabilityCheckResponse.class),
+			@ApiResponse(code = 400, message = "Bad Request", response = com.vf.uk.dal.broadband.entity.Error.class),
+			@ApiResponse(code = 404, message = "Not found", response = Void.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
+	@RequestMapping(value = "/{broadbandId}/lineOptions/selected", produces = {
+			"application/json" }, method = RequestMethod.GET)
+	public ResponseEntity<SelectedAvailabilityCheckResponse> getSelectedLineOptions(
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
+		return new ResponseEntity<>(broadbandService.getSelectedLineOptions(broadbandId), HttpStatus.OK);
+	}
+	
+	
+	
 }

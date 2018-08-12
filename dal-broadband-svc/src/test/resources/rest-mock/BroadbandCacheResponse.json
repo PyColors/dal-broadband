@@ -84,11 +84,11 @@
               "lineSpeeds": {
                 "maxDownSpeed": "1210.0",
                 "minDownSpeed": "510.0",
-                "avgDownSpeed": null,
+                "avgDownSpeed": "1234",
                 "minGuaranteedDownSpeed": "395.0",
                 "maxUpSpeed": "1000.0",
                 "minUpSpeed": "500.0",
-                "bandwidthMeasure": null
+                "bandwidthMeasure": "BN"
               },
               "serviceLineTreatmentList": [
                 {
@@ -152,6 +152,7 @@
   "engineeringVisitCharge":{
   "gross" :"100.00",
   "net" : "80.00",
-  "vat" : "20"
+  "vat" : "20",
+  "engVisitProductId" : "107573"
   }
 }

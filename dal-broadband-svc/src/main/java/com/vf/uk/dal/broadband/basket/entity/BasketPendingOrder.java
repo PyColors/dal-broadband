@@ -24,6 +24,11 @@ public class BasketPendingOrder   {
   @JsonProperty("typeCode")
   private String typeCode = null;
 
+  /**
+   * 
+   * @param completionDate
+   * @return
+   */
   public BasketPendingOrder completionDate(String completionDate) {
     this.completionDate = completionDate;
     return this;
@@ -44,6 +49,11 @@ public class BasketPendingOrder   {
     this.completionDate = completionDate;
   }
 
+  /**
+   * 
+   * @param thirdPartyFlag
+   * @return
+   */
   public BasketPendingOrder thirdPartyFlag(String thirdPartyFlag) {
     this.thirdPartyFlag = thirdPartyFlag;
     return this;
@@ -64,6 +74,11 @@ public class BasketPendingOrder   {
     this.thirdPartyFlag = thirdPartyFlag;
   }
 
+  /**
+   * 
+   * @param typeCode
+   * @return
+   */
   public BasketPendingOrder typeCode(String typeCode) {
     this.typeCode = typeCode;
     return this;

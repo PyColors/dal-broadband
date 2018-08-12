@@ -44,6 +44,11 @@ public class CreateBasketRequest   {
   @JsonProperty("ttl")
   private String ttl = null;
 
+  /**
+   * 
+   * @param affiliateFlag
+   * @return
+   */
   public CreateBasketRequest affiliateFlag(Boolean affiliateFlag) {
     this.affiliateFlag = affiliateFlag;
     return this;
@@ -64,6 +69,11 @@ public class CreateBasketRequest   {
     this.affiliateFlag = affiliateFlag;
   }
 
+  /**
+   * 
+   * @param affiliateId
+   * @return
+   */
   public CreateBasketRequest affiliateId(String affiliateId) {
     this.affiliateId = affiliateId;
     return this;
@@ -84,6 +94,11 @@ public class CreateBasketRequest   {
     this.affiliateId = affiliateId;
   }
 
+  /**
+   * 
+   * @param customerRequestedDate
+   * @return
+   */
   public CreateBasketRequest customerRequestedDate(String customerRequestedDate) {
     this.customerRequestedDate = customerRequestedDate;
     return this;
@@ -104,6 +119,11 @@ public class CreateBasketRequest   {
     this.customerRequestedDate = customerRequestedDate;
   }
 
+  /**
+   * 
+   * @param journey
+   * @return
+   */
   public CreateBasketRequest journey(Journey journey) {
     this.journey = journey;
     return this;
@@ -125,14 +145,24 @@ public class CreateBasketRequest   {
     this.journey = journey;
   }
 
+  /**
+   * 
+   * @param packages
+   * @return
+   */
   public CreateBasketRequest packages(List<AddPackage> packages) {
     this.packages = packages;
     return this;
   }
 
+  /**
+   * 
+   * @param packagesItem
+   * @return
+   */
   public CreateBasketRequest addPackagesItem(AddPackage packagesItem) {
     if (this.packages == null) {
-      this.packages = new ArrayList<AddPackage>();
+      this.packages = new ArrayList<>();
     }
     this.packages.add(packagesItem);
     return this;
@@ -154,6 +184,11 @@ public class CreateBasketRequest   {
     this.packages = packages;
   }
 
+  /**
+   * 
+   * @param returnURL
+   * @return
+   */
   public CreateBasketRequest returnURL(String returnURL) {
     this.returnURL = returnURL;
     return this;
@@ -174,6 +209,11 @@ public class CreateBasketRequest   {
     this.returnURL = returnURL;
   }
 
+  /**
+   * 
+   * @param source
+   * @return
+   */
   public CreateBasketRequest source(String source) {
     this.source = source;
     return this;
@@ -194,6 +234,11 @@ public class CreateBasketRequest   {
     this.source = source;
   }
 
+  /**
+   * 
+   * @param ttl
+   * @return
+   */
   public CreateBasketRequest ttl(String ttl) {
     this.ttl = ttl;
     return this;

@@ -23,14 +23,24 @@ public class AddProductRequest   {
   @Valid
   private List<Product> products = null;
 
+  /**
+   * 
+   * @param products
+   * @return
+   */
   public AddProductRequest products(List<Product> products) {
     this.products = products;
     return this;
   }
 
+  /**
+   * 
+   * @param productsItem
+   * @return
+   */
   public AddProductRequest addProductsItem(Product productsItem) {
     if (this.products == null) {
-      this.products = new ArrayList<Product>();
+      this.products = new ArrayList<>();
     }
     this.products.add(productsItem);
     return this;

@@ -1,7 +1,5 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,6 +28,11 @@ public class Allowance   {
   @JsonProperty("value")
   private String value = null;
 
+  /**
+   * 
+   * @param displayUom
+   * @return
+   */
   public Allowance displayUom(String displayUom) {
     this.displayUom = displayUom;
     return this;
@@ -50,6 +53,11 @@ public class Allowance   {
     this.displayUom = displayUom;
   }
 
+  /**
+   * 
+   * @param tilUom
+   * @return
+   */
   public Allowance tilUom(String tilUom) {
     this.tilUom = tilUom;
     return this;
@@ -70,6 +78,11 @@ public class Allowance   {
     this.tilUom = tilUom;
   }
 
+  /**
+   * 
+   * @param type
+   * @return
+   */
   public Allowance type(String type) {
     this.type = type;
     return this;
@@ -90,6 +103,12 @@ public class Allowance   {
     this.type = type;
   }
 
+  
+  /**
+   * 
+   * @param uom
+   * @return
+   */
   public Allowance uom(String uom) {
     this.uom = uom;
     return this;
@@ -110,6 +129,11 @@ public class Allowance   {
     this.uom = uom;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public Allowance value(String value) {
     this.value = value;
     return this;
@@ -130,27 +154,6 @@ public class Allowance   {
     this.value = value;
   }
 
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Allowance allowance = (Allowance) o;
-    return Objects.equals(this.displayUom, allowance.displayUom) &&
-        Objects.equals(this.tilUom, allowance.tilUom) &&
-        Objects.equals(this.type, allowance.type) &&
-        Objects.equals(this.uom, allowance.uom) &&
-        Objects.equals(this.value, allowance.value);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(displayUom, tilUom, type, uom, value);
-  }
 
   @Override
   public String toString() {

@@ -35,6 +35,11 @@ public class BasketLineReference   {
   @JsonProperty("lineStatus")
   private BasketLineStatus lineStatus = null;
 
+  /**
+   * 
+   * @param availableServices
+   * @return
+   */
   public BasketLineReference availableServices(AvailableServices availableServices) {
     this.availableServices = availableServices;
     return this;
@@ -56,14 +61,24 @@ public class BasketLineReference   {
     this.availableServices = availableServices;
   }
 
+  /**
+   * 
+   * @param lineDirectory
+   * @return
+   */
   public BasketLineReference lineDirectory(List<BasketLineDirectory> lineDirectory) {
     this.lineDirectory = lineDirectory;
     return this;
   }
 
+  /***
+   * 
+   * @param lineDirectoryItem
+   * @return
+   */
   public BasketLineReference addLineDirectoryItem(BasketLineDirectory lineDirectoryItem) {
     if (this.lineDirectory == null) {
-      this.lineDirectory = new ArrayList<BasketLineDirectory>();
+      this.lineDirectory = new ArrayList<>();
     }
     this.lineDirectory.add(lineDirectoryItem);
     return this;
@@ -85,6 +100,11 @@ public class BasketLineReference   {
     this.lineDirectory = lineDirectory;
   }
 
+  /**
+   * 
+   * @param lineLocator
+   * @return
+   */
   public BasketLineReference lineLocator(BasketLineLocator lineLocator) {
     this.lineLocator = lineLocator;
     return this;
@@ -106,6 +126,11 @@ public class BasketLineReference   {
     this.lineLocator = lineLocator;
   }
 
+  /**
+   * 
+   * @param lineSettings
+   * @return
+   */
   public BasketLineReference lineSettings(BasketLineSettings lineSettings) {
     this.lineSettings = lineSettings;
     return this;
@@ -127,6 +152,11 @@ public class BasketLineReference   {
     this.lineSettings = lineSettings;
   }
 
+  /**
+   * 
+   * @param lineStatus
+   * @return
+   */
   public BasketLineReference lineStatus(BasketLineStatus lineStatus) {
     this.lineStatus = lineStatus;
     return this;

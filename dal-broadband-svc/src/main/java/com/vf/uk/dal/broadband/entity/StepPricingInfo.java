@@ -12,29 +12,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * StepPricingInfo
+ * StepPricingInfo.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class StepPricingInfo {
+	
+	/** The sequence. */
 	@JsonProperty("sequence")
 	private String sequence = null;
 
+	/** The one off price. */
 	@JsonProperty("oneOffPrice")
 	private Price oneOffPrice = null;
 
+	/** The monthly price. */
 	@JsonProperty("monthlyPrice")
 	private Price monthlyPrice = null;
 
+	/** The duration. */
 	@JsonProperty("duration")
 	private Duration duration = null;
 
+	/** The discount sku ids. */
 	@JsonProperty("discountSkuIds")
 	private List<UUID> discountSkuIds = null;
 
 	/**
-	 * @param sequence
-	 * @return
+	 * Sequence.
+	 *
+	 * @param sequence the sequence
+	 * @return the step pricing info
 	 */
 	public StepPricingInfo sequence(String sequence) {
 		this.sequence = sequence;
@@ -42,23 +50,30 @@ public class StepPricingInfo {
 	}
 
 	/**
-	 * Sequence no of the line item
-	 * 
+	 * Sequence no of the line item.
+	 *
 	 * @return sequence
-	 **/
+	 */
 	@ApiModelProperty(value = "Sequence no of the line item")
 
 	public String getSequence() {
 		return sequence;
 	}
 
+	/**
+	 * Sets the sequence.
+	 *
+	 * @param sequence the new sequence
+	 */
 	public void setSequence(String sequence) {
 		this.sequence = sequence;
 	}
 
 	/**
-	 * @param oneOffPrice
-	 * @return
+	 * One off price.
+	 *
+	 * @param oneOffPrice the one off price
+	 * @return the step pricing info
 	 */
 	public StepPricingInfo oneOffPrice(Price oneOffPrice) {
 		this.oneOffPrice = oneOffPrice;
@@ -66,10 +81,10 @@ public class StepPricingInfo {
 	}
 
 	/**
-	 * Get oneOffPrice
-	 * 
+	 * Get oneOffPrice.
+	 *
 	 * @return oneOffPrice
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -78,13 +93,20 @@ public class StepPricingInfo {
 		return oneOffPrice;
 	}
 
+	/**
+	 * Sets the one off price.
+	 *
+	 * @param oneOffPrice the new one off price
+	 */
 	public void setOneOffPrice(Price oneOffPrice) {
 		this.oneOffPrice = oneOffPrice;
 	}
 
 	/**
-	 * @param monthlyPrice
-	 * @return
+	 * Monthly price.
+	 *
+	 * @param monthlyPrice the monthly price
+	 * @return the step pricing info
 	 */
 	public StepPricingInfo monthlyPrice(Price monthlyPrice) {
 		this.monthlyPrice = monthlyPrice;
@@ -92,10 +114,10 @@ public class StepPricingInfo {
 	}
 
 	/**
-	 * Get monthlyPrice
-	 * 
+	 * Get monthlyPrice.
+	 *
 	 * @return monthlyPrice
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -104,13 +126,20 @@ public class StepPricingInfo {
 		return monthlyPrice;
 	}
 
+	/**
+	 * Sets the monthly price.
+	 *
+	 * @param monthlyPrice the new monthly price
+	 */
 	public void setMonthlyPrice(Price monthlyPrice) {
 		this.monthlyPrice = monthlyPrice;
 	}
 
 	/**
-	 * @param duration
-	 * @return
+	 * Duration.
+	 *
+	 * @param duration the duration
+	 * @return the step pricing info
 	 */
 	public StepPricingInfo duration(Duration duration) {
 		this.duration = duration;
@@ -118,10 +147,10 @@ public class StepPricingInfo {
 	}
 
 	/**
-	 * Get duration
-	 * 
+	 * Get duration.
+	 *
 	 * @return duration
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -130,13 +159,20 @@ public class StepPricingInfo {
 		return duration;
 	}
 
+	/**
+	 * Sets the duration.
+	 *
+	 * @param duration the new duration
+	 */
 	public void setDuration(Duration duration) {
 		this.duration = duration;
 	}
 
 	/**
-	 * @param discountSkuIds
-	 * @return
+	 * Discount sku ids.
+	 *
+	 * @param discountSkuIds the discount sku ids
+	 * @return the step pricing info
 	 */
 	public StepPricingInfo discountSkuIds(List<UUID> discountSkuIds) {
 		this.discountSkuIds = discountSkuIds;
@@ -144,22 +180,24 @@ public class StepPricingInfo {
 	}
 
 	/**
-	 * @param discountSkuIdsItem
-	 * @return
+	 * Adds the discount sku ids item.
+	 *
+	 * @param discountSkuIdsItem the discount sku ids item
+	 * @return the step pricing info
 	 */
 	public StepPricingInfo addDiscountSkuIdsItem(UUID discountSkuIdsItem) {
 		if (this.discountSkuIds == null) {
-			this.discountSkuIds = new ArrayList<UUID>();
+			this.discountSkuIds = new ArrayList<>();
 		}
 		this.discountSkuIds.add(discountSkuIdsItem);
 		return this;
 	}
 
 	/**
-	 * List of applicable discount sku Ids for this duration
-	 * 
+	 * List of applicable discount sku Ids for this duration.
+	 *
 	 * @return discountSkuIds
-	 **/
+	 */
 	@ApiModelProperty(value = "List of applicable discount sku Ids for this duration")
 
 	@Valid
@@ -168,10 +206,18 @@ public class StepPricingInfo {
 		return discountSkuIds;
 	}
 
+	/**
+	 * Sets the discount sku ids.
+	 *
+	 * @param discountSkuIds the new discount sku ids
+	 */
 	public void setDiscountSkuIds(List<UUID> discountSkuIds) {
 		this.discountSkuIds = discountSkuIds;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -188,11 +234,17 @@ public class StepPricingInfo {
 				&& Objects.equals(this.discountSkuIds, stepPricingInfo.discountSkuIds);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(sequence, oneOffPrice, monthlyPrice, duration, discountSkuIds);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -210,6 +262,9 @@ public class StepPricingInfo {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

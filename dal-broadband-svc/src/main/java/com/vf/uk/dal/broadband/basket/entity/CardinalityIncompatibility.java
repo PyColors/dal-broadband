@@ -29,6 +29,11 @@ public class CardinalityIncompatibility   {
   @JsonProperty("relationCardinality")
   private String relationCardinality = null;
 
+  /**
+   * 
+   * @param groupCardinality
+   * @return
+   */
   public CardinalityIncompatibility groupCardinality(String groupCardinality) {
     this.groupCardinality = groupCardinality;
     return this;
@@ -49,14 +54,24 @@ public class CardinalityIncompatibility   {
     this.groupCardinality = groupCardinality;
   }
 
+  /**
+   * 
+   * @param productIds
+   * @return
+   */
   public CardinalityIncompatibility productIds(List<String> productIds) {
     this.productIds = productIds;
     return this;
   }
 
+  /**
+   * 
+   * @param productIdsItem
+   * @return
+   */
   public CardinalityIncompatibility addProductIdsItem(String productIdsItem) {
     if (this.productIds == null) {
-      this.productIds = new ArrayList<String>();
+      this.productIds = new ArrayList<>();
     }
     this.productIds.add(productIdsItem);
     return this;
@@ -77,6 +92,11 @@ public class CardinalityIncompatibility   {
     this.productIds = productIds;
   }
 
+  /**
+   * 
+   * @param relationCardinality
+   * @return
+   */
   public CardinalityIncompatibility relationCardinality(String relationCardinality) {
     this.relationCardinality = relationCardinality;
     return this;

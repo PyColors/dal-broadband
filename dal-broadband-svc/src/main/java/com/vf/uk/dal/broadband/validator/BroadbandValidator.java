@@ -12,18 +12,30 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
-import com.vf.uk.dal.broadband.utils.ExceptionMessages;
+import com.vf.uk.dal.broadband.exception.ExceptionMessages;
 import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
 
+/**
+ * The Class BroadbandValidator.
+ */
 public class BroadbandValidator {
 
+	/**
+	 * Instantiates a new broadband validator.
+	 */
 	private BroadbandValidator() {
 
 	}
 
 	
 	
+	/**
+	 * Checks if is basket create or update request valid.
+	 *
+	 * @param basketRequest the basket request
+	 * @param broadband the broadband
+	 */
 	public static void isBasketCreateOrUpdateRequestValid(BasketRequest basketRequest, Broadband broadband){
 		
 		
@@ -61,6 +73,11 @@ public class BroadbandValidator {
 
 
 
+	/**
+	 * Checks if is update line treatment request valid.
+	 *
+	 * @param updateLineRequest the update line request
+	 */
 	public static void isUpdateLineTreatmentRequestValid(UpdateLineRequest updateLineRequest) {
 		if(StringUtils.isEmpty(updateLineRequest.getLineTreatmentType())){
 			LogHelper.error(BroadbandValidator.class, "Line Treatment Type cannot be null whule updating the basket for line treatment type");
@@ -71,14 +88,25 @@ public class BroadbandValidator {
 
 
 
+	/**
+	 * Checks if is create appointment request valid.
+	 *
+	 * @param createAppointmentRequest the create appointment request
+	 */
 	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointmentRequest) {
 		if(StringUtils.isEmpty(createAppointmentRequest.getStartTimePeriod())
-				|| StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())){
+				&& StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())){
 			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
 			throw new ApplicationException(ExceptionMessages.START_DATE_EMPTY);
 		}
 	}
 	
+	/**
+	 * Validate start date.
+	 *
+	 * @param serviceStartDateRequest the service start date request
+	 * @return true, if successful
+	 */
 	public static boolean validateStartDate(ServiceStartDateRequest serviceStartDateRequest) {
 		boolean isValidStartDate;
 		if(serviceStartDateRequest!=null && StringUtils.isNotEmpty(serviceStartDateRequest.getStartDateTime())){
@@ -98,6 +126,12 @@ public class BroadbandValidator {
 		return isValidStartDate;
 	}
 	
+	/**
+	 * Convert date to time stamp.
+	 *
+	 * @param serviceStartDate the service start date
+	 * @return the string
+	 */
 	public static String convertDateToTimeStamp(String serviceStartDate) {
 		Date date;
 		String formattedDate = null;

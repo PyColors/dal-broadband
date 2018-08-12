@@ -9,51 +9,65 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * InstallationAddress
+ * InstallationAddress.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class InstallationAddress   {
+  
+  /** The identification. */
   @JsonProperty("identification")
   private Identification identification = null;
 
+  /** The post code. */
   @JsonProperty("postCode")
   private String postCode = null;
 
+  /** The house name. */
   @JsonProperty("houseName")
   private String houseName = null;
 
+  /** The house number. */
   @JsonProperty("houseNumber")
   private String houseNumber = null;
 
+  /** The flat number. */
   @JsonProperty("flatNumber")
   private String flatNumber = null;
 
+  /** The street name. */
   @JsonProperty("streetName")
   private String streetName = null;
 
+  /** The town. */
   @JsonProperty("town")
   private String town = null;
 
+  /** The county. */
   @JsonProperty("county")
   private String county = null;
 
+  /** The country. */
   @JsonProperty("country")
   private String country = null;
 
+  /** The locality. */
   @JsonProperty("locality")
   private String locality = null;
 
+  /** The city sub division name. */
   @JsonProperty("citySubDivisionName")
   private String citySubDivisionName = null;
 
+  /** The move type code. */
   @JsonProperty("moveTypeCode")
   private String moveTypeCode = null;
 
   /**
-   * 
-   * @param identification
-   * @return
+   * Identification.
+   *
+   * @param identification the identification
+   * @return the installation address
    */
   public InstallationAddress identification(Identification identification) {
     this.identification = identification;
@@ -61,9 +75,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * Get identification
-   * @return identification
-  **/
+    * Get identification.
+    *
+    * @return identification
+    */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -72,14 +87,20 @@ public class InstallationAddress   {
     return identification;
   }
 
+  /**
+   * Sets the identification.
+   *
+   * @param identification the new identification
+   */
   public void setIdentification(Identification identification) {
     this.identification = identification;
   }
 
   /**
-   * 
-   * @param postCode
-   * @return
+   * Post code.
+   *
+   * @param postCode the post code
+   * @return the installation address
    */
   public InstallationAddress postCode(String postCode) {
     this.postCode = postCode;
@@ -87,9 +108,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * The postcode of the prospective customer as per the Fixed Line system
-   * @return postCode
-  **/
+    * The postcode of the prospective customer as per the Fixed Line system.
+    *
+    * @return postCode
+    */
   @ApiModelProperty(value = "The postcode of the prospective customer as per the Fixed Line system")
 
 
@@ -97,14 +119,20 @@ public class InstallationAddress   {
     return postCode;
   }
 
+  /**
+   * Sets the post code.
+   *
+   * @param postCode the new post code
+   */
   public void setPostCode(String postCode) {
     this.postCode = postCode;
   }
 
   /**
-   * 
-   * @param houseName
-   * @return
+   * House name.
+   *
+   * @param houseName the house name
+   * @return the installation address
    */
   public InstallationAddress houseName(String houseName) {
     this.houseName = houseName;
@@ -112,9 +140,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * House Name
-   * @return houseName
-  **/
+    * House Name.
+    *
+    * @return houseName
+    */
   @ApiModelProperty(value = "House Name")
 
 
@@ -122,14 +151,20 @@ public class InstallationAddress   {
     return houseName;
   }
 
+  /**
+   * Sets the house name.
+   *
+   * @param houseName the new house name
+   */
   public void setHouseName(String houseName) {
     this.houseName = houseName;
   }
 
   /**
-   * 
-   * @param houseNumber
-   * @return
+   * House number.
+   *
+   * @param houseNumber the house number
+   * @return the installation address
    */
   public InstallationAddress houseNumber(String houseNumber) {
     this.houseNumber = houseNumber;
@@ -137,9 +172,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * House number
-   * @return houseNumber
-  **/
+    * House number.
+    *
+    * @return houseNumber
+    */
   @ApiModelProperty(value = "House number")
 
 
@@ -147,14 +183,20 @@ public class InstallationAddress   {
     return houseNumber;
   }
 
+  /**
+   * Sets the house number.
+   *
+   * @param houseNumber the new house number
+   */
   public void setHouseNumber(String houseNumber) {
     this.houseNumber = houseNumber;
   }
 
   /**
-   * 
-   * @param flatNumber
-   * @return
+   * Flat number.
+   *
+   * @param flatNumber the flat number
+   * @return the installation address
    */
   public InstallationAddress flatNumber(String flatNumber) {
     this.flatNumber = flatNumber;
@@ -162,9 +204,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * flat number
-   * @return flatNumber
-  **/
+    * flat number.
+    *
+    * @return flatNumber
+    */
   @ApiModelProperty(value = "flat number")
 
 
@@ -172,14 +215,20 @@ public class InstallationAddress   {
     return flatNumber;
   }
 
+  /**
+   * Sets the flat number.
+   *
+   * @param flatNumber the new flat number
+   */
   public void setFlatNumber(String flatNumber) {
     this.flatNumber = flatNumber;
   }
 
   /**
-   * 
-   * @param streetName
-   * @return
+   * Street name.
+   *
+   * @param streetName the street name
+   * @return the installation address
    */
   public InstallationAddress streetName(String streetName) {
     this.streetName = streetName;
@@ -187,9 +236,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * street name
-   * @return streetName
-  **/
+    * street name.
+    *
+    * @return streetName
+    */
   @ApiModelProperty(value = "street name")
 
 
@@ -197,14 +247,20 @@ public class InstallationAddress   {
     return streetName;
   }
 
+  /**
+   * Sets the street name.
+   *
+   * @param streetName the new street name
+   */
   public void setStreetName(String streetName) {
     this.streetName = streetName;
   }
 
   /**
-   * 
-   * @param town
-   * @return
+   * Town.
+   *
+   * @param town the town
+   * @return the installation address
    */
   public InstallationAddress town(String town) {
     this.town = town;
@@ -212,9 +268,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * town
-   * @return town
-  **/
+    * town.
+    *
+    * @return town
+    */
   @ApiModelProperty(value = "town")
 
 
@@ -222,14 +279,20 @@ public class InstallationAddress   {
     return town;
   }
 
+  /**
+   * Sets the town.
+   *
+   * @param town the new town
+   */
   public void setTown(String town) {
     this.town = town;
   }
 
   /**
-   * 
-   * @param county
-   * @return
+   * County.
+   *
+   * @param county the county
+   * @return the installation address
    */
   public InstallationAddress county(String county) {
     this.county = county;
@@ -237,9 +300,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * county
-   * @return county
-  **/
+    * county.
+    *
+    * @return county
+    */
   @ApiModelProperty(value = "county")
 
 
@@ -247,14 +311,20 @@ public class InstallationAddress   {
     return county;
   }
 
+  /**
+   * Sets the county.
+   *
+   * @param county the new county
+   */
   public void setCounty(String county) {
     this.county = county;
   }
 
   /**
-   * 
-   * @param country
-   * @return
+   * Country.
+   *
+   * @param country the country
+   * @return the installation address
    */
   public InstallationAddress country(String country) {
     this.country = country;
@@ -262,9 +332,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * country
-   * @return country
-  **/
+    * country.
+    *
+    * @return country
+    */
   @ApiModelProperty(value = "country")
 
 
@@ -272,14 +343,20 @@ public class InstallationAddress   {
     return country;
   }
 
+  /**
+   * Sets the country.
+   *
+   * @param country the new country
+   */
   public void setCountry(String country) {
     this.country = country;
   }
 
   /**
-   * 
-   * @param locality
-   * @return
+   * Locality.
+   *
+   * @param locality the locality
+   * @return the installation address
    */
   public InstallationAddress locality(String locality) {
     this.locality = locality;
@@ -287,9 +364,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * locality
-   * @return locality
-  **/
+    * locality.
+    *
+    * @return locality
+    */
   @ApiModelProperty(value = "locality")
 
 
@@ -297,14 +375,20 @@ public class InstallationAddress   {
     return locality;
   }
 
+  /**
+   * Sets the locality.
+   *
+   * @param locality the new locality
+   */
   public void setLocality(String locality) {
     this.locality = locality;
   }
 
   /**
-   * 
-   * @param citySubDivisionName
-   * @return
+   * City sub division name.
+   *
+   * @param citySubDivisionName the city sub division name
+   * @return the installation address
    */
   public InstallationAddress citySubDivisionName(String citySubDivisionName) {
     this.citySubDivisionName = citySubDivisionName;
@@ -312,9 +396,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * city sub division code
-   * @return citySubDivisionName
-  **/
+    * city sub division code.
+    *
+    * @return citySubDivisionName
+    */
   @ApiModelProperty(value = "city sub division code")
 
 
@@ -322,14 +407,20 @@ public class InstallationAddress   {
     return citySubDivisionName;
   }
 
+  /**
+   * Sets the city sub division name.
+   *
+   * @param citySubDivisionName the new city sub division name
+   */
   public void setCitySubDivisionName(String citySubDivisionName) {
     this.citySubDivisionName = citySubDivisionName;
   }
 
   /**
-   * 
-   * @param moveTypeCode
-   * @return
+   * Move type code.
+   *
+   * @param moveTypeCode the move type code
+   * @return the installation address
    */
   public InstallationAddress moveTypeCode(String moveTypeCode) {
     this.moveTypeCode = moveTypeCode;
@@ -337,9 +428,10 @@ public class InstallationAddress   {
   }
 
    /**
-   * Code identifying whether it is change of address scenario
-   * @return moveTypeCode
-  **/
+    * Code identifying whether it is change of address scenario.
+    *
+    * @return moveTypeCode
+    */
   @ApiModelProperty(value = "Code identifying whether it is change of address scenario")
 
 
@@ -347,11 +439,19 @@ public class InstallationAddress   {
     return moveTypeCode;
   }
 
+  /**
+   * Sets the move type code.
+   *
+   * @param moveTypeCode the new move type code
+   */
   public void setMoveTypeCode(String moveTypeCode) {
     this.moveTypeCode = moveTypeCode;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -375,11 +475,17 @@ public class InstallationAddress   {
         Objects.equals(this.moveTypeCode, installationAddress.moveTypeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(identification, postCode, houseName, houseNumber, flatNumber, streetName, town, county, country, locality, citySubDivisionName, moveTypeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -404,6 +510,9 @@ public class InstallationAddress   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

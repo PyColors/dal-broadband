@@ -23,14 +23,24 @@ public class CompatibilityPackage   {
   @Valid
   private List<IncompatibleChildProduct> incompatibleProducts = null;
 
+  /**
+   * 
+   * @param incompatibleProducts
+   * @return
+   */
   public CompatibilityPackage incompatibleProducts(List<IncompatibleChildProduct> incompatibleProducts) {
     this.incompatibleProducts = incompatibleProducts;
     return this;
   }
 
+  /**
+   * 
+   * @param incompatibleProductsItem
+   * @return
+   */
   public CompatibilityPackage addIncompatibleProductsItem(IncompatibleChildProduct incompatibleProductsItem) {
     if (this.incompatibleProducts == null) {
-      this.incompatibleProducts = new ArrayList<IncompatibleChildProduct>();
+      this.incompatibleProducts = new ArrayList<>();
     }
     this.incompatibleProducts.add(incompatibleProductsItem);
     return this;

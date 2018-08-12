@@ -23,14 +23,24 @@ public class BasketServiceReference   {
   @Valid
   private List<BasketServiceLines> serviceLines = null;
 
+  /**
+   * 
+   * @param serviceLines
+   * @return
+   */
   public BasketServiceReference serviceLines(List<BasketServiceLines> serviceLines) {
     this.serviceLines = serviceLines;
     return this;
   }
 
+  /**
+   * 
+   * @param serviceLinesItem
+   * @return
+   */
   public BasketServiceReference addServiceLinesItem(BasketServiceLines serviceLinesItem) {
     if (this.serviceLines == null) {
-      this.serviceLines = new ArrayList<BasketServiceLines>();
+      this.serviceLines = new ArrayList<>();
     }
     this.serviceLines.add(serviceLinesItem);
     return this;

@@ -21,6 +21,11 @@ public class DiscountValue   {
   @JsonProperty("value")
   private String value = null;
 
+  /**
+   * 
+   * @param type
+   * @return
+   */
   public DiscountValue type(String type) {
     this.type = type;
     return this;
@@ -41,6 +46,11 @@ public class DiscountValue   {
     this.type = type;
   }
 
+  /**
+   * 
+   * @param value
+   * @return
+   */
   public DiscountValue value(String value) {
     this.value = value;
     return this;

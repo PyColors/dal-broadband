@@ -32,6 +32,11 @@ public class BasketServiceLine   {
   @Valid
   private List<BasketServiceLineTreatment> serviceLineTreatments = null;
 
+  /**
+   * 
+   * @param itemReference
+   * @return
+   */
   public BasketServiceLine itemReference(BasketItemReference itemReference) {
     this.itemReference = itemReference;
     return this;
@@ -53,6 +58,11 @@ public class BasketServiceLine   {
     this.itemReference = itemReference;
   }
 
+  /**
+   * 
+   * @param lineSpeeds
+   * @return
+   */
   public BasketServiceLine lineSpeeds(BasketLineSpeeds lineSpeeds) {
     this.lineSpeeds = lineSpeeds;
     return this;
@@ -74,6 +84,11 @@ public class BasketServiceLine   {
     this.lineSpeeds = lineSpeeds;
   }
 
+  /**
+   * 
+   * @param miscRefernce
+   * @return
+   */
   public BasketServiceLine miscRefernce(BasketMiscReference miscRefernce) {
     this.miscRefernce = miscRefernce;
     return this;
@@ -95,14 +110,24 @@ public class BasketServiceLine   {
     this.miscRefernce = miscRefernce;
   }
 
+  /**
+   * 
+   * @param serviceLineTreatments
+   * @return
+   */
   public BasketServiceLine serviceLineTreatments(List<BasketServiceLineTreatment> serviceLineTreatments) {
     this.serviceLineTreatments = serviceLineTreatments;
     return this;
   }
 
+  /**
+   * 
+   * @param serviceLineTreatmentsItem
+   * @return
+   */
   public BasketServiceLine addServiceLineTreatmentsItem(BasketServiceLineTreatment serviceLineTreatmentsItem) {
     if (this.serviceLineTreatments == null) {
-      this.serviceLineTreatments = new ArrayList<BasketServiceLineTreatment>();
+      this.serviceLineTreatments = new ArrayList<>();
     }
     this.serviceLineTreatments.add(serviceLineTreatmentsItem);
     return this;

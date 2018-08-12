@@ -11,27 +11,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * CreateAppointment
+ * CreateAppointment.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
 public class CreateAppointment   {
+  
+  /** The appointment window. */
   @JsonProperty("appointmentWindow")
   private AppointmentWindow appointmentWindow = null;
 
+  /** The result status. */
   @JsonProperty("resultStatus")
   private String resultStatus = null;
 
+  /**
+   * Appointment window.
+   *
+   * @param appointmentWindow the appointment window
+   * @return the creates the appointment
+   */
   public CreateAppointment appointmentWindow(AppointmentWindow appointmentWindow) {
     this.appointmentWindow = appointmentWindow;
     return this;
   }
 
   /**
-   * Get appointmentWindow
+   * Get appointmentWindow.
+   *
    * @return appointmentWindow
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -40,19 +50,31 @@ public class CreateAppointment   {
     return appointmentWindow;
   }
 
+  /**
+   * Sets the appointment window.
+   *
+   * @param appointmentWindow the new appointment window
+   */
   public void setAppointmentWindow(AppointmentWindow appointmentWindow) {
     this.appointmentWindow = appointmentWindow;
   }
 
+  /**
+   * Result status.
+   *
+   * @param resultStatus the result status
+   * @return the creates the appointment
+   */
   public CreateAppointment resultStatus(String resultStatus) {
     this.resultStatus = resultStatus;
     return this;
   }
 
   /**
-   * Get resultStatus
+   * Get resultStatus.
+   *
    * @return resultStatus
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -60,11 +82,19 @@ public class CreateAppointment   {
     return resultStatus;
   }
 
+  /**
+   * Sets the result status.
+   *
+   * @param resultStatus the new result status
+   */
   public void setResultStatus(String resultStatus) {
     this.resultStatus = resultStatus;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -78,11 +108,17 @@ public class CreateAppointment   {
         Objects.equals(this.resultStatus, createAppointment.resultStatus);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(appointmentWindow, resultStatus);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -97,6 +133,9 @@ public class CreateAppointment   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

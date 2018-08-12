@@ -16,14 +16,14 @@ public class AccessLine implements Serializable {
 	private static final String ID = "id";
 	
 	/** The Constant CHANNELID. */
-	private static final String CHANNELID = "channelId";
+	private static final String CHANNEL_ID = "channelId";
 
 	/** The id. */
 	@JsonProperty(ID)
 	private String id;
 	
 	/** The channel id. */
-	@JsonProperty(CHANNELID)
+	@JsonProperty(CHANNEL_ID)
 	private String channelId;
 	
 	/**

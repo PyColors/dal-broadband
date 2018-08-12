@@ -15,45 +15,45 @@ public class LineReference implements Serializable {
 	private static final long serialVersionUID = -6204503232964226221L;
 	
 	/** The Constant INSTALLATIONADDRESS. */
-	private static final String INSTALLATIONADDRESS = "installationAddress";
+	private static final String INSTALLATION_ADDRESS = "installationAddress";
 	
 	/** The Constant LINELOCATOR. */
-	private static final String LINELOCATOR = "lineLocator";
+	private static final String LINE_LOCATOR = "lineLocator";
 	
 	/** The Constant LINEDIRECTYLIST. */
 	private static final String LINEDIRECTYLIST = "lineDirectoryList";
 	
 	/** The Constant LINESETTINGS. */
-	private static final String LINESETTINGS = "lineSettings";
+	private static final String LINE_SETTINGS = "lineSettings";
 	
 	/** The Constant LINESTATUS. */
-	private static final String LINESTATUS = "lineStatus";
+	private static final String LINE_STATUS = "lineStatus";
 	
 	/** The Constant AVAILABLESERVICES. */
-	private static final String AVAILABLESERVICES = "availableServices";
+	private static final String AVAILABLE_SERVICES = "availableServices";
 
 	/** The installation address. */
-	@JsonProperty(INSTALLATIONADDRESS)
+	@JsonProperty(INSTALLATION_ADDRESS)
 	private InstallationAddress installationAddress;
 	
 	/** The line locator. */
-	@JsonProperty(LINELOCATOR)
+	@JsonProperty(LINE_LOCATOR)
 	private LineLocator lineLocator;
 	
 	/** The line directory list. */
 	@JsonProperty(LINEDIRECTYLIST)
-	private List<LineDirectory> lineDirectoryList = new ArrayList<LineDirectory>();
+	private List<LineDirectory> lineDirectoryList = new ArrayList<>();
 	
 	/** The line settings. */
-	@JsonProperty(LINESETTINGS)
+	@JsonProperty(LINE_SETTINGS)
 	private LineSettings lineSettings;
 	
 	/** The line status. */
-	@JsonProperty(LINESTATUS)
+	@JsonProperty(LINE_STATUS)
 	private LineStatus lineStatus;
 	
 	/** The available services. */
-	@JsonProperty(AVAILABLESERVICES)
+	@JsonProperty(AVAILABLE_SERVICES)
 	private AvailableServices availableServices;
 
 	/**

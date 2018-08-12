@@ -11,26 +11,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * FlbBundle
+ * FlbBundle.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class FlbBundle {
+	
+	/** The sku id. */
 	@JsonProperty("skuId")
 	private String skuId = null;
 
+	/** The name. */
 	@JsonProperty("name")
 	private String name = null;
 
+	/** The description. */
 	@JsonProperty("description")
 	private String description = null;
 
+	/** The bundle name. */
 	@JsonProperty("bundleName")
 	private String bundleName = null;
 
+	/** The bundle description. */
 	@JsonProperty("bundleDescription")
 	private String bundleDescription = null;
 
+	/** The bundle features. */
 	@JsonProperty("bundleFeatures")
 	private String bundleFeatures = null;
 
@@ -38,46 +45,59 @@ public class FlbBundle {
 	@JsonProperty("speed")
 	private Speed speed = null;
 
+	/** The usage. */
 	@JsonProperty("usage")
 	private String usage = null;
 
+	/** The classification code. */
 	@JsonProperty("classificationCode")
 	private String classificationCode = null;
 
+	/** The commitment period. */
 	@JsonProperty("commitmentPeriod")
 	private String commitmentPeriod = null;
 
+	/** The product name. */
 	@JsonProperty("productName")
 	private String productName = null;
 
+	/** The product description. */
 	@JsonProperty("productDescription")
 	private String productDescription = null;
 
+	/** The merchandising media. */
 	@JsonProperty("merchandisingMedia")
 	private List<MediaLink> merchandisingMedia = null;
 
+	/** The price info. */
 	@JsonProperty("priceInfo")
 	private PriceForBBBundleAndHardware priceInfo = null;
 
+	/** The is speed less. */
 	@JsonProperty("isSpeedLess")
 	private Boolean isSpeedLess = null;
 
+	/** The is selected. */
 	@JsonProperty("isSelected")
 	private Boolean isSelected = null;
 
+	/** The pre orderable. */
 	@JsonProperty("preOrderable")
 	private Boolean preOrderable = null;
 
+	/** The earliest available date. */
 	@JsonProperty("earliestAvailableDate")
 	private String earliestAvailableDate = null;
 	
+	/** The line rental price. */
 	@JsonProperty("lineRentalPrice")
 	private Price lineRentalPrice = null;
 
 	/**
-	 * 
-	 * @param earliestAvailableDate
-	 * @return
+	 * Earliest available date.
+	 *
+	 * @param earliestAvailableDate the earliest available date
+	 * @return the flb bundle
 	 */
 
 	public FlbBundle earliestAvailableDate(String earliestAvailableDate) {
@@ -86,24 +106,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * The earliest available date when the service will be available
-	 * 
+	 * The earliest available date when the service will be available.
+	 *
 	 * @return earliestAvailableDate
-	 **/
+	 */
 	@ApiModelProperty(value = "The earliest available date when the service will be available")
 
 	public String getEarliestAvailableDate() {
 		return earliestAvailableDate;
 	}
 
+	/**
+	 * Sets the earliest available date.
+	 *
+	 * @param earliestAvailableDate the new earliest available date
+	 */
 	public void setEarliestAvailableDate(String earliestAvailableDate) {
 		this.earliestAvailableDate = earliestAvailableDate;
 	}
 
 	/**
-	 * 
-	 * @param skuId
-	 * @return
+	 * Pre orderable.
+	 *
+	 * @param preOrderable the pre orderable
+	 * @return the flb bundle
 	 */
 	public FlbBundle preOrderable(Boolean preOrderable) {
 		this.preOrderable = preOrderable;
@@ -111,23 +137,29 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Unique bundle id as available from the product catalogue
-	 * 
+	 * Unique bundle id as available from the product catalogue.
+	 *
 	 * @return skuId
-	 **/
+	 */
 
 	public Boolean isPreOrderable() {
 		return preOrderable;
 	}
 
+	/**
+	 * Sets the pre orderable.
+	 *
+	 * @param preOrderable the new pre orderable
+	 */
 	public void setPreOrderable(Boolean preOrderable) {
 		this.preOrderable = preOrderable;
 	}
 
 	/**
-	 * 
-	 * @param skuId
-	 * @return
+	 * Sku id.
+	 *
+	 * @param skuId the sku id
+	 * @return the flb bundle
 	 */
 	public FlbBundle skuId(String skuId) {
 		this.skuId = skuId;
@@ -135,24 +167,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Unique bundle id as available from the product catalogue
-	 * 
+	 * Unique bundle id as available from the product catalogue.
+	 *
 	 * @return skuId
-	 **/
+	 */
 	@ApiModelProperty(value = "Unique bundle id as available from the product catalogue")
 
 	public String getSkuId() {
 		return skuId;
 	}
 
+	/**
+	 * Sets the sku id.
+	 *
+	 * @param skuId the new sku id
+	 */
 	public void setSkuId(String skuId) {
 		this.skuId = skuId;
 	}
 
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 * Name.
+	 *
+	 * @param name the name
+	 * @return the flb bundle
 	 */
 	public FlbBundle name(String name) {
 		this.name = name;
@@ -160,24 +198,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Name of the bundle as provided in the product catalogue
-	 * 
+	 * Name of the bundle as provided in the product catalogue.
+	 *
 	 * @return name
-	 **/
+	 */
 	@ApiModelProperty(value = "Name of the bundle as provided in the product catalogue")
 
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * 
-	 * @param description
-	 * @return
+	 * Description.
+	 *
+	 * @param description the description
+	 * @return the flb bundle
 	 */
 	public FlbBundle description(String description) {
 		this.description = description;
@@ -185,37 +229,59 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Description of the bundle as provided in the product catalogue
-	 * 
+	 * Description of the bundle as provided in the product catalogue.
+	 *
 	 * @return description
-	 **/
+	 */
 	@ApiModelProperty(value = "Description of the bundle as provided in the product catalogue")
 
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Bundle features.
+	 *
+	 * @param bundleFeatures the bundle features
+	 * @return the flb bundle
+	 */
 	public FlbBundle bundleFeatures(String bundleFeatures) {
 		this.bundleFeatures = bundleFeatures;
 		return this;
 	}
 
+	/**
+	 * Gets the bundle features.
+	 *
+	 * @return the bundle features
+	 */
 	public String getBundleFeatures() {
 		return bundleFeatures;
 	}
 
+	/**
+	 * Sets the bundle features.
+	 *
+	 * @param bundleFeatures the new bundle features
+	 */
 	public void setBundleFeatures(String bundleFeatures) {
 		this.bundleFeatures = bundleFeatures;
 	}
 
 	/**
-	 * 
-	 * @param bundleName
-	 * @return
+	 * Bundle name.
+	 *
+	 * @param bundleName the bundle name
+	 * @return the flb bundle
 	 */
 	public FlbBundle bundleName(String bundleName) {
 		this.bundleName = bundleName;
@@ -223,24 +289,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Name of the bundle as provided in the merchandising file
-	 * 
+	 * Name of the bundle as provided in the merchandising file.
+	 *
 	 * @return bundleName
-	 **/
+	 */
 	@ApiModelProperty(value = "Name of the bundle as provided in the merchandising file")
 
 	public String getBundleName() {
 		return bundleName;
 	}
 
+	/**
+	 * Sets the bundle name.
+	 *
+	 * @param bundleName the new bundle name
+	 */
 	public void setBundleName(String bundleName) {
 		this.bundleName = bundleName;
 	}
 
 	/**
-	 * 
-	 * @param bundleDescription
-	 * @return
+	 * Bundle description.
+	 *
+	 * @param bundleDescription the bundle description
+	 * @return the flb bundle
 	 */
 	public FlbBundle bundleDescription(String bundleDescription) {
 		this.bundleDescription = bundleDescription;
@@ -248,24 +320,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Description of the bundle as provided in the merchandising file
-	 * 
+	 * Description of the bundle as provided in the merchandising file.
+	 *
 	 * @return bundleDescription
-	 **/
+	 */
 	@ApiModelProperty(value = "Description of the bundle as provided in the merchandising file")
 
 	public String getBundleDescription() {
 		return bundleDescription;
 	}
 
+	/**
+	 * Sets the bundle description.
+	 *
+	 * @param bundleDescription the new bundle description
+	 */
 	public void setBundleDescription(String bundleDescription) {
 		this.bundleDescription = bundleDescription;
 	}
 
 	/**
-	 * 
-	 * @param speed
-	 * @return
+	 * Speed.
+	 *
+	 * @param speed the speed
+	 * @return the flb bundle
 	 */
 	public FlbBundle speed(Speed speed) {
 		this.speed = speed;
@@ -273,24 +351,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Speed of the bundle as provided in the merchandising file
-	 * 
+	 * Speed of the bundle as provided in the merchandising file.
+	 *
 	 * @return speed
-	 **/
+	 */
 	@ApiModelProperty(value = "Speed of the bundle as provided in the merchandising file")
 
 	public Speed getSpeed() {
 		return speed;
 	}
 
+	/**
+	 * Sets the speed.
+	 *
+	 * @param speed the new speed
+	 */
 	public void setSpeed(Speed speed) {
 		this.speed = speed;
 	}
 
 	/**
-	 * 
-	 * @param usage
-	 * @return
+	 * Usage.
+	 *
+	 * @param usage the usage
+	 * @return the flb bundle
 	 */
 	public FlbBundle usage(String usage) {
 		this.usage = usage;
@@ -298,24 +382,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Usage of the bundle as provided in the merchandising file
-	 * 
+	 * Usage of the bundle as provided in the merchandising file.
+	 *
 	 * @return usage
-	 **/
+	 */
 	@ApiModelProperty(value = "Usage of the bundle as provided in the merchandising file")
 
 	public String getUsage() {
 		return usage;
 	}
 
+	/**
+	 * Sets the usage.
+	 *
+	 * @param usage the new usage
+	 */
 	public void setUsage(String usage) {
 		this.usage = usage;
 	}
 
 	/**
-	 * 
-	 * @param classificationCode
-	 * @return
+	 * Classification code.
+	 *
+	 * @param classificationCode the classification code
+	 * @return the flb bundle
 	 */
 	public FlbBundle classificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
@@ -323,24 +413,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * ClassificationCode of the Flb bundle as provided in the Product catalogue
-	 * 
+	 * ClassificationCode of the Flb bundle as provided in the Product catalogue.
+	 *
 	 * @return classificationCode
-	 **/
+	 */
 	@ApiModelProperty(value = "ClassificationCode of the Flb bundle as provided in the Product catalogue")
 
 	public String getClassificationCode() {
 		return classificationCode;
 	}
 
+	/**
+	 * Sets the classification code.
+	 *
+	 * @param classificationCode the new classification code
+	 */
 	public void setClassificationCode(String classificationCode) {
 		this.classificationCode = classificationCode;
 	}
 
 	/**
-	 * 
-	 * @param commitmentPeriod
-	 * @return
+	 * Commitment period.
+	 *
+	 * @param commitmentPeriod the commitment period
+	 * @return the flb bundle
 	 */
 	public FlbBundle commitmentPeriod(String commitmentPeriod) {
 		this.commitmentPeriod = commitmentPeriod;
@@ -348,24 +444,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Commitment period of the bundle
-	 * 
+	 * Commitment period of the bundle.
+	 *
 	 * @return commitmentPeriod
-	 **/
+	 */
 	@ApiModelProperty(value = "Commitment period of the bundle")
 
 	public String getCommitmentPeriod() {
 		return commitmentPeriod;
 	}
 
+	/**
+	 * Sets the commitment period.
+	 *
+	 * @param commitmentPeriod the new commitment period
+	 */
 	public void setCommitmentPeriod(String commitmentPeriod) {
 		this.commitmentPeriod = commitmentPeriod;
 	}
 
 	/**
-	 * 
-	 * @param productName
-	 * @return
+	 * Product name.
+	 *
+	 * @param productName the product name
+	 * @return the flb bundle
 	 */
 	public FlbBundle productName(String productName) {
 		this.productName = productName;
@@ -373,24 +475,30 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Name of the Product(Router) as provided in the product catalogue
-	 * 
+	 * Name of the Product(Router) as provided in the product catalogue.
+	 *
 	 * @return productName
-	 **/
+	 */
 	@ApiModelProperty(value = "Name of the Product(Router) as provided in the product catalogue")
 
 	public String getProductName() {
 		return productName;
 	}
 
+	/**
+	 * Sets the product name.
+	 *
+	 * @param productName the new product name
+	 */
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
 	/**
-	 * 
-	 * @param productDescription
-	 * @return
+	 * Product description.
+	 *
+	 * @param productDescription the product description
+	 * @return the flb bundle
 	 */
 	public FlbBundle productDescription(String productDescription) {
 		this.productDescription = productDescription;
@@ -398,43 +506,55 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Description of the Product(Router) as provided in the product catalogue
-	 * 
+	 * Description of the Product(Router) as provided in the product catalogue.
+	 *
 	 * @return productDescription
-	 **/
+	 */
 	@ApiModelProperty(value = "Description of the Product(Router) as provided in the product catalogue")
 
 	public String getProductDescription() {
 		return productDescription;
 	}
 
+	/**
+	 * Sets the product description.
+	 *
+	 * @param productDescription the new product description
+	 */
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
 
 	/**
-	 * 
-	 * @param merchandisingMedia
-	 * @return
+	 * Merchandising media.
+	 *
+	 * @param merchandisingMedia the merchandising media
+	 * @return the flb bundle
 	 */
 	public FlbBundle merchandisingMedia(List<MediaLink> merchandisingMedia) {
 		this.merchandisingMedia = merchandisingMedia;
 		return this;
 	}
 
+	/**
+	 * Adds the merchandising media item.
+	 *
+	 * @param merchandisingMediaItem the merchandising media item
+	 * @return the flb bundle
+	 */
 	public FlbBundle addMerchandisingMediaItem(MediaLink merchandisingMediaItem) {
 		if (this.merchandisingMedia == null) {
-			this.merchandisingMedia = new ArrayList<MediaLink>();
+			this.merchandisingMedia = new ArrayList<>();
 		}
 		this.merchandisingMedia.add(merchandisingMediaItem);
 		return this;
 	}
 
 	/**
-	 * Get merchandisingMedia
-	 * 
+	 * Get merchandisingMedia.
+	 *
 	 * @return merchandisingMedia
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -443,14 +563,20 @@ public class FlbBundle {
 		return merchandisingMedia;
 	}
 
+	/**
+	 * Sets the merchandising media.
+	 *
+	 * @param merchandisingMedia the new merchandising media
+	 */
 	public void setMerchandisingMedia(List<MediaLink> merchandisingMedia) {
 		this.merchandisingMedia = merchandisingMedia;
 	}
 
 	/**
-	 * 
-	 * @param priceInfo
-	 * @return
+	 * Price info.
+	 *
+	 * @param priceInfo the price info
+	 * @return the flb bundle
 	 */
 	public FlbBundle priceInfo(PriceForBBBundleAndHardware priceInfo) {
 		this.priceInfo = priceInfo;
@@ -458,10 +584,10 @@ public class FlbBundle {
 	}
 
 	/**
-	 * Get priceInfo
-	 * 
+	 * Get priceInfo.
+	 *
 	 * @return priceInfo
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -470,34 +596,72 @@ public class FlbBundle {
 		return priceInfo;
 	}
 
+	/**
+	 * Sets the price info.
+	 *
+	 * @param priceInfo the new price info
+	 */
 	public void setPriceInfo(PriceForBBBundleAndHardware priceInfo) {
 		this.priceInfo = priceInfo;
 	}
 
+	/**
+	 * Gets the checks if is speed less.
+	 *
+	 * @return the checks if is speed less
+	 */
 	public Boolean getIsSpeedLess() {
 		return isSpeedLess;
 	}
 
+	/**
+	 * Sets the checks if is speed less.
+	 *
+	 * @param isSpeedLess the new checks if is speed less
+	 */
 	public void setIsSpeedLess(Boolean isSpeedLess) {
 		this.isSpeedLess = isSpeedLess;
 	}
 
+	/**
+	 * Gets the checks if is selected.
+	 *
+	 * @return the checks if is selected
+	 */
 	public Boolean getIsSelected() {
 		return isSelected;
 	}
 
+	/**
+	 * Sets the checks if is selected.
+	 *
+	 * @param isSelected the new checks if is selected
+	 */
 	public void setIsSelected(Boolean isSelected) {
 		this.isSelected = isSelected;
 	}
 
+	/**
+	 * Gets the line rental price.
+	 *
+	 * @return the line rental price
+	 */
 	public Price getLineRentalPrice() {
 		return lineRentalPrice;
 	}
 
+	/**
+	 * Sets the line rental price.
+	 *
+	 * @param lineRentalPrice the new line rental price
+	 */
 	public void setLineRentalPrice(Price lineRentalPrice) {
 		this.lineRentalPrice = lineRentalPrice;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -525,6 +689,9 @@ public class FlbBundle {
 				&& Objects.equals(this.earliestAvailableDate, flbBundle.earliestAvailableDate);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(skuId, name, description, bundleName, bundleFeatures, bundleDescription, speed, usage,
@@ -532,6 +699,9 @@ public class FlbBundle {
 				isSelected, isSpeedLess, preOrderable, earliestAvailableDate);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -562,6 +732,9 @@ public class FlbBundle {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

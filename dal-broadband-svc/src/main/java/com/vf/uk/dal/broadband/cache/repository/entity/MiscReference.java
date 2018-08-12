@@ -13,38 +13,38 @@ public class MiscReference implements Serializable {
 	private static final long serialVersionUID = -8859851765986955170L;
 
 	/** The Constant SERVICEPROVIDERNAME. */
-	private static final String SERVICEPROVIDERNAME = "serviceProviderName";
+	private static final String SERVICEPROVIDER_NAME = "serviceProviderName";
 
 	/** The Constant LINELENGTH. */
-	private static final String LINELENGTH = "lineLength";
+	private static final String LINE_LENGTH = "lineLength";
 
 	/** The Constant CUSTOMERAGREEDDATE. */
-	private static final String CUSTOMERAGREEDDATE = "customerAgreedDate";
+	private static final String CUSTOMERAGREED_DATE = "customerAgreedDate";
 
 	/** The Constant READYFORSERVICEDATE. */
-	private static final String READYFORSERVICEDATE = "readyForServiceDate";
+	private static final String READYFORSERVICE_DATE = "readyForServiceDate";
 
 	/** The Constant ANFP. */
-	private static final String ANFP = "anfp";
+	private static final String AN_FP = "anfp";
 
 	/** The service provider name. */
-	@JsonProperty(SERVICEPROVIDERNAME)
+	@JsonProperty(SERVICEPROVIDER_NAME)
 	private String serviceProviderName;
 
 	/** The line length. */
-	@JsonProperty(LINELENGTH)
+	@JsonProperty(LINE_LENGTH)
 	private String lineLength;
 
 	/** The customer agreed date. */
-	@JsonProperty(CUSTOMERAGREEDDATE)
+	@JsonProperty(CUSTOMERAGREED_DATE)
 	private String customerAgreedDate;
 
 	/** The ready for service date. */
-	@JsonProperty(READYFORSERVICEDATE)
+	@JsonProperty(READYFORSERVICE_DATE)
 	private String readyForServiceDate;
 
 	/** The anfp. */
-	@JsonProperty(ANFP)
+	@JsonProperty(AN_FP)
 	private String anfp;
 
 	@JsonProperty("installationType")

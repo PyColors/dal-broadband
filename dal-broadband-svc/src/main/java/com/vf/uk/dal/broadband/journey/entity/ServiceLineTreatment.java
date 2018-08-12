@@ -17,136 +17,220 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * ServiceLineTreatment
+ * ServiceLineTreatment.
  */
 public class ServiceLineTreatment {
+	
+	/** The parent identification. */
 	private String parentIdentification = null;
 
+	/** The service type. */
 	private String serviceType = null;
 
+	/** The service action. */
 	private String serviceAction = null;
 
+	/** The sim value. */
 	private String simValue = null;
 
+	/** The line info. */
 	private String lineInfo = null;
 
+	/** The can number be retained. */
 	private String canNumberBeRetained = null;
 
+	/** The port in flag. */
 	private String portInFlag = null;
 
+	/** The vic code. */
 	private String vicCode = null;
 
+	/** The pending orders. */
 	private List<PendingOrder> pendingOrders = null;
 
+	/** The access line. */
 	private AccessLine accessLine = null;
 
+	/**
+	 * Parent identification.
+	 *
+	 * @param parentIdentification the parent identification
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment parentIdentification(String parentIdentification) {
 		this.parentIdentification = parentIdentification;
 		return this;
 	}
 
 	/**
-	 * Get parentIdentification
-	 * 
+	 * Get parentIdentification.
+	 *
 	 * @return parentIdentification
-	 **/
+	 */
 	public String getParentIdentification() {
 		return parentIdentification;
 	}
 
+	/**
+	 * Sets the parent identification.
+	 *
+	 * @param parentIdentification the new parent identification
+	 */
 	public void setParentIdentification(String parentIdentification) {
 		this.parentIdentification = parentIdentification;
 	}
 
+	/**
+	 * Service type.
+	 *
+	 * @param serviceType the service type
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment serviceType(String serviceType) {
 		this.serviceType = serviceType;
 		return this;
 	}
 
 	/**
-	 * 
+	 * Gets the service type.
+	 *
 	 * @return serviceType
-	 **/
+	 */
 	public String getServiceType() {
 		return serviceType;
 	}
 
+	/**
+	 * Sets the service type.
+	 *
+	 * @param serviceType the new service type
+	 */
 	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
 	}
 
+	/**
+	 * Service action.
+	 *
+	 * @param serviceAction the service action
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment serviceAction(String serviceAction) {
 		this.serviceAction = serviceAction;
 		return this;
 	}
 
 	/**
-	 * Identifies the action that needs to be applied to the line
-	 * 
+	 * Identifies the action that needs to be applied to the line.
+	 *
 	 * @return serviceAction
-	 **/
+	 */
 	public String getServiceAction() {
 		return serviceAction;
 	}
 
+	/**
+	 * Sets the service action.
+	 *
+	 * @param serviceAction the new service action
+	 */
 	public void setServiceAction(String serviceAction) {
 		this.serviceAction = serviceAction;
 	}
 
+	/**
+	 * Sim value.
+	 *
+	 * @param simValue the sim value
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment simValue(String simValue) {
 		this.simValue = simValue;
 		return this;
 	}
 
 	/**
-	 * Flag specifying if a SIM2 is needed or not (SIM2 – Simultaneous Provide)
-	 * 
+	 * Flag specifying if a SIM2 is needed or not (SIM2 – Simultaneous Provide).
+	 *
 	 * @return simValue
-	 **/
+	 */
 	public String getSimValue() {
 		return simValue;
 	}
 
+	/**
+	 * Sets the sim value.
+	 *
+	 * @param simValue the new sim value
+	 */
 	public void setSimValue(String simValue) {
 		this.simValue = simValue;
 	}
 
+	/**
+	 * Line info.
+	 *
+	 * @param lineInfo the line info
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment lineInfo(String lineInfo) {
 		this.lineInfo = lineInfo;
 		return this;
 	}
 
 	/**
-	 * Information given to the agent regarding the treatment of the line
-	 * 
+	 * Information given to the agent regarding the treatment of the line.
+	 *
 	 * @return lineInfo
-	 **/
+	 */
 	public String getLineInfo() {
 		return lineInfo;
 	}
 
+	/**
+	 * Sets the line info.
+	 *
+	 * @param lineInfo the new line info
+	 */
 	public void setLineInfo(String lineInfo) {
 		this.lineInfo = lineInfo;
 	}
 
+	/**
+	 * Can number be retained.
+	 *
+	 * @param canNumberBeRetained the can number be retained
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment canNumberBeRetained(String canNumberBeRetained) {
 		this.canNumberBeRetained = canNumberBeRetained;
 		return this;
 	}
 
 	/**
-	 * Flag specifying if the existing FTN can be retained or not
-	 * 
+	 * Flag specifying if the existing FTN can be retained or not.
+	 *
 	 * @return canNumberBeRetained
-	 **/
+	 */
 	public String getCanNumberBeRetained() {
 		return canNumberBeRetained;
 	}
 
+	/**
+	 * Sets the can number be retained.
+	 *
+	 * @param canNumberBeRetained the new can number be retained
+	 */
 	public void setCanNumberBeRetained(String canNumberBeRetained) {
 		this.canNumberBeRetained = canNumberBeRetained;
 	}
 
+	/**
+	 * Port in flag.
+	 *
+	 * @param portInFlag the port in flag
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment portInFlag(String portInFlag) {
 		this.portInFlag = portInFlag;
 		return this;
@@ -161,10 +245,21 @@ public class ServiceLineTreatment {
 		return portInFlag;
 	}
 
+	/**
+	 * Sets the port in flag.
+	 *
+	 * @param portInFlag the new port in flag
+	 */
 	public void setPortInFlag(String portInFlag) {
 		this.portInFlag = portInFlag;
 	}
 
+	/**
+	 * Vic code.
+	 *
+	 * @param vicCode the vic code
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment vicCode(String vicCode) {
 		this.vicCode = vicCode;
 		return this;
@@ -179,54 +274,90 @@ public class ServiceLineTreatment {
 		return vicCode;
 	}
 
+	/**
+	 * Sets the vic code.
+	 *
+	 * @param vicCode the new vic code
+	 */
 	public void setVicCode(String vicCode) {
 		this.vicCode = vicCode;
 	}
 
+	/**
+	 * Pending orders.
+	 *
+	 * @param pendingOrders the pending orders
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment pendingOrders(List<PendingOrder> pendingOrders) {
 		this.pendingOrders = pendingOrders;
 		return this;
 	}
 
+	/**
+	 * Adds the pending orders item.
+	 *
+	 * @param pendingOrdersItem the pending orders item
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment addPendingOrdersItem(PendingOrder pendingOrdersItem) {
 		if (this.pendingOrders == null) {
-			this.pendingOrders = new ArrayList<PendingOrder>();
+			this.pendingOrders = new ArrayList<>();
 		}
 		this.pendingOrders.add(pendingOrdersItem);
 		return this;
 	}
 
 	/**
-	 * Get pendingOrders
-	 * 
+	 * Get pendingOrders.
+	 *
 	 * @return pendingOrders
-	 **/
+	 */
 	public List<PendingOrder> getPendingOrders() {
 		return pendingOrders;
 	}
 
+	/**
+	 * Sets the pending orders.
+	 *
+	 * @param pendingOrders the new pending orders
+	 */
 	public void setPendingOrders(List<PendingOrder> pendingOrders) {
 		this.pendingOrders = pendingOrders;
 	}
 
+	/**
+	 * Access line.
+	 *
+	 * @param accessLine the access line
+	 * @return the service line treatment
+	 */
 	public ServiceLineTreatment accessLine(AccessLine accessLine) {
 		this.accessLine = accessLine;
 		return this;
 	}
 
 	/**
-	 * Get accessLine
-	 * 
+	 * Get accessLine.
+	 *
 	 * @return accessLine
-	 **/
+	 */
 	public AccessLine getAccessLine() {
 		return accessLine;
 	}
 
+	/**
+	 * Sets the access line.
+	 *
+	 * @param accessLine the new access line
+	 */
 	public void setAccessLine(AccessLine accessLine) {
 		this.accessLine = accessLine;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -248,12 +379,18 @@ public class ServiceLineTreatment {
 				&& Objects.equals(this.accessLine, serviceLineTreatment.accessLine);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(parentIdentification, serviceType, serviceAction, simValue, lineInfo, canNumberBeRetained,
 				portInFlag, vicCode, pendingOrders, accessLine);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -276,6 +413,9 @@ public class ServiceLineTreatment {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

@@ -21,6 +21,11 @@ public class BasketAccessLine   {
   @JsonProperty("id")
   private String id = null;
 
+  /**
+   * 
+   * @param channelId
+   * @return
+   */
   public BasketAccessLine channelId(String channelId) {
     this.channelId = channelId;
     return this;
@@ -41,6 +46,11 @@ public class BasketAccessLine   {
     this.channelId = channelId;
   }
 
+  /**
+   * 
+   * @param id
+   * @return
+   */
   public BasketAccessLine id(String id) {
     this.id = id;
     return this;

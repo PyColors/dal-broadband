@@ -13,31 +13,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Group
+ * Group.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-14T16:30:22.947Z")
 
 public class Group   {
+  
+  /** The group name. */
   @JsonProperty("groupName")
   private String groupName = null;
 
+  /** The priority. */
   @JsonProperty("priority")
   private Long priority = null;
 
+  /** The specifications. */
   @JsonProperty("specifications")
   @Valid
   private List<Specification> specifications = null;
 
+  /**
+   * Group name.
+   *
+   * @param groupName the group name
+   * @return the group
+   */
   public Group groupName(String groupName) {
     this.groupName = groupName;
     return this;
   }
 
   /**
-   * Get groupName
+   * Get groupName.
+   *
    * @return groupName
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -45,19 +56,31 @@ public class Group   {
     return groupName;
   }
 
+  /**
+   * Sets the group name.
+   *
+   * @param groupName the new group name
+   */
   public void setGroupName(String groupName) {
     this.groupName = groupName;
   }
 
+  /**
+   * Priority.
+   *
+   * @param priority the priority
+   * @return the group
+   */
   public Group priority(Long priority) {
     this.priority = priority;
     return this;
   }
 
   /**
-   * Get priority
+   * Get priority.
+   *
    * @return priority
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -65,27 +88,45 @@ public class Group   {
     return priority;
   }
 
+  /**
+   * Sets the priority.
+   *
+   * @param priority the new priority
+   */
   public void setPriority(Long priority) {
     this.priority = priority;
   }
 
+  /**
+   * Specifications.
+   *
+   * @param specifications the specifications
+   * @return the group
+   */
   public Group specifications(List<Specification> specifications) {
     this.specifications = specifications;
     return this;
   }
 
+  /**
+   * Adds the specifications item.
+   *
+   * @param specificationsItem the specifications item
+   * @return the group
+   */
   public Group addSpecificationsItem(Specification specificationsItem) {
     if (this.specifications == null) {
-      this.specifications = new ArrayList<Specification>();
+      this.specifications = new ArrayList<>();
     }
     this.specifications.add(specificationsItem);
     return this;
   }
 
   /**
-   * Get specifications
+   * Get specifications.
+   *
    * @return specifications
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -94,11 +135,19 @@ public class Group   {
     return specifications;
   }
 
+  /**
+   * Sets the specifications.
+   *
+   * @param specifications the new specifications
+   */
   public void setSpecifications(List<Specification> specifications) {
     this.specifications = specifications;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -113,11 +162,17 @@ public class Group   {
         Objects.equals(this.specifications, group.specifications);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(groupName, priority, specifications);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -133,6 +188,9 @@ public class Group   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

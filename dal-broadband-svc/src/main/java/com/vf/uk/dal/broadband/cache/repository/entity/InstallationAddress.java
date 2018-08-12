@@ -12,87 +12,87 @@ public class InstallationAddress implements Serializable {
 	private static final long serialVersionUID = 720766920252325742L;
 
 	/** The Constant POSTCODE. */
-	private static final String POSTCODE = "postCode";
+	private static final String POST_CODE = "postCode";
 
 	/** The Constant HOUSENAME. */
-	private static final String HOUSENAME = "houseName";
+	private static final String HOUSE_NAME = "houseName";
 
 	/** The Constant HOUSENUMBER. */
-	private static final String HOUSENUMBER = "houseNumber";
+	private static final String HOUSE_NUMBER = "houseNumber";
 
 	/** The Constant FLATNUMBER. */
-	private static final String FLATNUMBER = "flatNumber";
+	private static final String FLAT_NUMBER = "flatNumber";
 
 	/** The Constant STREETNAME. */
-	private static final String STREETNAME = "streetName";
+	private static final String STREET_NAME = "streetName";
 
 	/** The Constant TOWN. */
-	private static final String TOWN = "town";
+	private static final String ADDRESS_TOWN = "town";
 
 	/** The Constant COUNTY. */
-	private static final String COUNTY = "county";
+	private static final String ADDRESS_COUNTY = "county";
 
 	/** The Constant COUNTRY. */
-	private static final String COUNTRY = "country";
+	private static final String ADDRESS_COUNTRY = "country";
 
 	/** The Constant LOCALITY. */
-	private static final String LOCALITY = "locality";
+	private static final String ADDRESS_LOCALITY = "locality";
 
 	/** The Constant CITYSUBDIVISIONNAME. */
-	private static final String CITYSUBDIVISIONNAME = "citySubDivisionName";
+	private static final String CITYSUBDIVISION_NAME = "citySubDivisionName";
 
 	/** The Constant IDENTIFICATION. */
-	private static final String IDENTIFICATION = "identification";
+	private static final String ADDRESS_IDENTIFICATION = "identification";
 
-	private static final String MOVETYPECODE = "moveTypeCode";
+	private static final String MOVETYPE_CODE = "moveTypeCode";
 
 	/** The identification. */
-	@JsonProperty(IDENTIFICATION)
+	@JsonProperty(ADDRESS_IDENTIFICATION)
 	private Identification identification;
 
 	/** The post code. */
-	@JsonProperty(POSTCODE)
+	@JsonProperty(POST_CODE)
 	private String postCode;
 
 	/** The house name. */
-	@JsonProperty(HOUSENAME)
+	@JsonProperty(HOUSE_NAME)
 	private String houseName;
 
 	/** The house number. */
-	@JsonProperty(HOUSENUMBER)
+	@JsonProperty(HOUSE_NUMBER)
 	private String houseNumber;
 
 	/** The flat number. */
-	@JsonProperty(FLATNUMBER)
+	@JsonProperty(FLAT_NUMBER)
 	private String flatNumber;
 
 	/** The street name. */
-	@JsonProperty(STREETNAME)
+	@JsonProperty(STREET_NAME)
 	private String streetName;
 
 	/** The town. */
-	@JsonProperty(TOWN)
+	@JsonProperty(ADDRESS_TOWN)
 	private String town;
 
 	/** The county. */
-	@JsonProperty(COUNTY)
+	@JsonProperty(ADDRESS_COUNTY)
 	private String county;
 
 	/** The country. */
-	@JsonProperty(COUNTRY)
+	@JsonProperty(ADDRESS_COUNTRY)
 	private String country;
 
 	/** The locality. */
-	@JsonProperty(LOCALITY)
+	@JsonProperty(ADDRESS_LOCALITY)
 	private String locality;
 
 	/** The city sub division name. */
-	@JsonProperty(CITYSUBDIVISIONNAME)
+	@JsonProperty(CITYSUBDIVISION_NAME)
 	private String citySubDivisionName;
 
 	
 	/** The city sub division name. */
-	@JsonProperty(MOVETYPECODE)
+	@JsonProperty(MOVETYPE_CODE)
 	private String moveTypeCode = null;
 	
 	/**

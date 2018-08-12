@@ -21,16 +21,16 @@ import org.springframework.data.redis.core.RedisHash;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * FLBBJourneyRequest
+ * FLBBJourneyRequest.
  */
 
 @RedisHash
 public class Broadband implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1511608100037673295L;
+	
+	/** The service point. */
 	@JsonProperty("servicePoint")
 	private ServicePoint servicePoint = null;
 
@@ -42,106 +42,207 @@ public class Broadband implements Serializable {
 	@JsonProperty("lineDetails")
 	private LineDetails lineDetails;
 
+	/** The engineering visit charge. */
 	@JsonProperty("engineeringVisitCharge")
 	private PriceForHardware engineeringVisitCharge = null;
 
+	/** The broad band id. */
 	@JsonProperty("broadBandId")
 	@Id
 	private String broadBandId = null;
+	
+	/** The journey id. */
 	@JsonProperty("journeyId")
 	private String journeyId = null;
 
+	/** The basket id. */
 	@JsonProperty("basketId")
 	private String basketId = null;
 
+	/** The basket info. */
 	@JsonProperty("basketInfo")
 	private BasketInfo basketInfo;
 
+	/** The category preference. */
 	@JsonProperty("categoryPreference")
 	private String categoryPreference = null;
 
+	/**
+	 * Service point.
+	 *
+	 * @param servicePoint the service point
+	 * @return the broadband
+	 */
 	public Broadband servicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 		return this;
 	}
 
 	/**
-	 * Get servicePoint
-	 * 
+	 * Get servicePoint.
+	 *
 	 * @return servicePoint
-	 **/
+	 */
 	public ServicePoint getServicePoint() {
 		return servicePoint;
 	}
 
+	/**
+	 * Sets the service point.
+	 *
+	 * @param servicePoint the new service point
+	 */
 	public void setServicePoint(ServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 	}
 
+	/**
+	 * Gets the sales order appointment.
+	 *
+	 * @return the sales order appointment
+	 */
 	public BroadbandSalesOrderAppointment getSalesOrderAppointment() {
 		return salesOrderAppointment;
 	}
 
+	/**
+	 * Sets the sales order appointment.
+	 *
+	 * @param salesOrderAppointment the new sales order appointment
+	 */
 	public void setSalesOrderAppointment(BroadbandSalesOrderAppointment salesOrderAppointment) {
 		this.salesOrderAppointment = salesOrderAppointment;
 	}
 
+	/**
+	 * Gets the broad band id.
+	 *
+	 * @return the broad band id
+	 */
 	public String getBroadBandId() {
 		return broadBandId;
 	}
 
+	/**
+	 * Sets the broad band id.
+	 *
+	 * @param broadBandId the new broad band id
+	 */
 	public void setBroadBandId(String broadBandId) {
 		this.broadBandId = broadBandId;
 	}
 
+	/**
+	 * Gets the line details.
+	 *
+	 * @return the line details
+	 */
 	public LineDetails getLineDetails() {
 		return lineDetails;
 	}
 
+	/**
+	 * Sets the line details.
+	 *
+	 * @param lineDetails the new line details
+	 */
 	public void setLineDetails(LineDetails lineDetails) {
 		this.lineDetails = lineDetails;
 	}
 
+	/**
+	 * Gets the journey id.
+	 *
+	 * @return the journey id
+	 */
 	public String getJourneyId() {
 		return journeyId;
 	}
 
+	/**
+	 * Sets the journey id.
+	 *
+	 * @param journeyId the new journey id
+	 */
 	public void setJourneyId(String journeyId) {
 		this.journeyId = journeyId;
 	}
 
+	/**
+	 * Gets the basket id.
+	 *
+	 * @return the basket id
+	 */
 	public String getBasketId() {
 		return basketId;
 	}
 
+	/**
+	 * Sets the basket id.
+	 *
+	 * @param basketId the new basket id
+	 */
 	public void setBasketId(String basketId) {
 		this.basketId = basketId;
 	}
 
+	/**
+	 * Gets the engineering visit charge.
+	 *
+	 * @return the engineering visit charge
+	 */
 	public PriceForHardware getEngineeringVisitCharge() {
 		return engineeringVisitCharge;
 	}
 
+	/**
+	 * Sets the engineering visit charge.
+	 *
+	 * @param engineeringVisitCharge the new engineering visit charge
+	 */
 	public void setEngineeringVisitCharge(PriceForHardware engineeringVisitCharge) {
 		this.engineeringVisitCharge = engineeringVisitCharge;
 	}
 
+	/**
+	 * Gets the basket info.
+	 *
+	 * @return the basket info
+	 */
 	public BasketInfo getBasketInfo() {
 		return basketInfo;
 	}
 
+	/**
+	 * Sets the basket info.
+	 *
+	 * @param basketInfo the new basket info
+	 */
 	public void setBasketInfo(BasketInfo basketInfo) {
 		this.basketInfo = basketInfo;
 	}
 
+	/**
+	 * Gets the category preference.
+	 *
+	 * @return the category preference
+	 */
 	public String getCategoryPreference() {
 		return categoryPreference;
 	}
 
+	/**
+	 * Sets the category preference.
+	 *
+	 * @param categoryPreference the new category preference
+	 */
 	public void setCategoryPreference(String categoryPreference) {
 		this.categoryPreference = categoryPreference;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -154,11 +255,17 @@ public class Broadband implements Serializable {
 		return Objects.equals(this.servicePoint, flBBJourneyDetails.servicePoint);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(servicePoint);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -172,6 +279,9 @@ public class Broadband implements Serializable {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

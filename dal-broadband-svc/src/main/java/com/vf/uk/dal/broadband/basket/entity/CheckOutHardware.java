@@ -50,6 +50,11 @@ public class CheckOutHardware   {
   @JsonProperty("skuId")
   private String skuId = null;
 
+  /**
+   * 
+   * @param action
+   * @return
+   */
   public CheckOutHardware action(String action) {
     this.action = action;
     return this;
@@ -70,14 +75,24 @@ public class CheckOutHardware   {
     this.action = action;
   }
 
+  /**
+   * 
+   * @param attributes
+   * @return
+   */
   public CheckOutHardware attributes(List<Attribute> attributes) {
     this.attributes = attributes;
     return this;
   }
 
+  /**
+   * 
+   * @param attributesItem
+   * @return
+   */
   public CheckOutHardware addAttributesItem(Attribute attributesItem) {
     if (this.attributes == null) {
-      this.attributes = new ArrayList<Attribute>();
+      this.attributes = new ArrayList<>();
     }
     this.attributes.add(attributesItem);
     return this;
@@ -99,6 +114,11 @@ public class CheckOutHardware   {
     this.attributes = attributes;
   }
 
+  /**
+   * 
+   * @param boxPrice
+   * @return
+   */
   public CheckOutHardware boxPrice(Price boxPrice) {
     this.boxPrice = boxPrice;
     return this;
@@ -120,6 +140,11 @@ public class CheckOutHardware   {
     this.boxPrice = boxPrice;
   }
 
+  /**
+   * 
+   * @param description
+   * @return
+   */
   public CheckOutHardware description(String description) {
     this.description = description;
     return this;
@@ -140,6 +165,11 @@ public class CheckOutHardware   {
     this.description = description;
   }
 
+  /**
+   * 
+   * @param displayName
+   * @return
+   */
   public CheckOutHardware displayName(String displayName) {
     this.displayName = displayName;
     return this;
@@ -160,6 +190,11 @@ public class CheckOutHardware   {
     this.displayName = displayName;
   }
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public CheckOutHardware name(String name) {
     this.name = name;
     return this;
@@ -180,6 +215,11 @@ public class CheckOutHardware   {
     this.name = name;
   }
 
+  /**
+   * 
+   * @param packageLineId
+   * @return
+   */
   public CheckOutHardware packageLineId(String packageLineId) {
     this.packageLineId = packageLineId;
     return this;
@@ -200,6 +240,11 @@ public class CheckOutHardware   {
     this.packageLineId = packageLineId;
   }
 
+  /**
+   * 
+   * @param priceDetails
+   * @return
+   */
   public CheckOutHardware priceDetails(HardwarePrices priceDetails) {
     this.priceDetails = priceDetails;
     return this;
@@ -221,6 +266,11 @@ public class CheckOutHardware   {
     this.priceDetails = priceDetails;
   }
 
+  /**
+   * 
+   * @param productClass
+   * @return
+   */
   public CheckOutHardware productClass(String productClass) {
     this.productClass = productClass;
     return this;
@@ -241,6 +291,11 @@ public class CheckOutHardware   {
     this.productClass = productClass;
   }
 
+  /**
+   * 
+   * @param skuId
+   * @return
+   */
   public CheckOutHardware skuId(String skuId) {
     this.skuId = skuId;
     return this;

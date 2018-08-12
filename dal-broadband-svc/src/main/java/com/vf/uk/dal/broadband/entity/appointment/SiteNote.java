@@ -7,20 +7,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * SiteNote
+ * SiteNote.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-23T20:55:40.172Z")
 
 public class SiteNote {
+	
+	/** The notes. */
 	@JsonProperty("notes")
 	private String notes = null;
 
+	/** The type code. */
 	@JsonProperty("typeCode")
 	private String typeCode = null;
 
 	/**
-	 * @param notes
-	 * @return
+	 * Notes.
+	 *
+	 * @param notes the notes
+	 * @return the site note
 	 */
 	public SiteNote notes(String notes) {
 		this.notes = notes;
@@ -28,23 +33,30 @@ public class SiteNote {
 	}
 
 	/**
-	 * Note for the engineer
-	 * 
+	 * Note for the engineer.
+	 *
 	 * @return notes
-	 **/
+	 */
 	@ApiModelProperty(value = "Note for the engineer")
 
 	public String getNotes() {
 		return notes;
 	}
 
+	/**
+	 * Sets the notes.
+	 *
+	 * @param notes the new notes
+	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
 	/**
-	 * @param typeCode
-	 * @return
+	 * Type code.
+	 *
+	 * @param typeCode the type code
+	 * @return the site note
 	 */
 	public SiteNote typeCode(String typeCode) {
 		this.typeCode = typeCode;
@@ -52,20 +64,28 @@ public class SiteNote {
 	}
 
 	/**
-	 * Engineer
-	 * 
+	 * Engineer.
+	 *
 	 * @return typeCode
-	 **/
+	 */
 	@ApiModelProperty(value = "Engineer")
 
 	public String getTypeCode() {
 		return typeCode;
 	}
 
+	/**
+	 * Sets the type code.
+	 *
+	 * @param typeCode the new type code
+	 */
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -78,11 +98,17 @@ public class SiteNote {
 		return Objects.equals(this.notes, siteNote.notes) && Objects.equals(this.typeCode, siteNote.typeCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(notes, typeCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -97,6 +123,9 @@ public class SiteNote {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

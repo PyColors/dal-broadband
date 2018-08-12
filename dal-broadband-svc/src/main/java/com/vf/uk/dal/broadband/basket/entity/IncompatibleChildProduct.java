@@ -32,7 +32,12 @@ public class IncompatibleChildProduct   {
   @JsonProperty("unavailable")
   private Boolean unavailable = null;
 
-  public IncompatibleChildProduct cardinalityIncompatibility(CardinalityIncompatibility cardinalityIncompatibility) {
+  /**
+   * 
+   * @param cardinalityIncompatibility
+   * @return
+   */
+	public IncompatibleChildProduct cardinalityIncompatibility(CardinalityIncompatibility cardinalityIncompatibility) {
     this.cardinalityIncompatibility = cardinalityIncompatibility;
     return this;
   }
@@ -53,6 +58,11 @@ public class IncompatibleChildProduct   {
     this.cardinalityIncompatibility = cardinalityIncompatibility;
   }
 
+  /**
+   * 
+   * @param excludesIncompatibility
+   * @return
+   */
   public IncompatibleChildProduct excludesIncompatibility(ExcludesIncompatibility excludesIncompatibility) {
     this.excludesIncompatibility = excludesIncompatibility;
     return this;
@@ -73,7 +83,11 @@ public class IncompatibleChildProduct   {
   public void setExcludesIncompatibility(ExcludesIncompatibility excludesIncompatibility) {
     this.excludesIncompatibility = excludesIncompatibility;
   }
-
+/**
+ * 
+ * @param productId
+ * @return
+ */
   public IncompatibleChildProduct productId(String productId) {
     this.productId = productId;
     return this;
@@ -94,6 +108,11 @@ public class IncompatibleChildProduct   {
     this.productId = productId;
   }
 
+  /**
+   * 
+   * @param requiresIncompatibility
+   * @return
+   */
   public IncompatibleChildProduct requiresIncompatibility(RequiresIncompatibility requiresIncompatibility) {
     this.requiresIncompatibility = requiresIncompatibility;
     return this;
@@ -115,6 +134,11 @@ public class IncompatibleChildProduct   {
     this.requiresIncompatibility = requiresIncompatibility;
   }
 
+  /**
+   * 
+   * @param unavailable
+   * @return
+   */
   public IncompatibleChildProduct unavailable(Boolean unavailable) {
     this.unavailable = unavailable;
     return this;

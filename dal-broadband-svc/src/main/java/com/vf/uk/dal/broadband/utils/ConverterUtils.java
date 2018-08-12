@@ -78,17 +78,23 @@ import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
 
 /**
- * @author Infosys limited
+ * The Class ConverterUtils.
  *
+ * @author Infosys limited
  */
 public class ConverterUtils {
 
+	/**
+	 * Instantiates a new converter utils.
+	 */
 	private ConverterUtils() {
 	}
 
 	/**
-	 * 
-	 * @param availabilityCheckRequest
+	 * Creates the get service availibility request.
+	 *
+	 * @param availabilityCheckRequest the availability check request
+	 * @param userType the user type
 	 * @return GetServiceAvailibilityRequest
 	 */
 
@@ -138,11 +144,14 @@ public class ConverterUtils {
 	}
 
 	/**
-	 * 
-	 * @param availabilityCheckRequest
-	 * @param getServiceAvailabilityResponse
-	 * @param broadbandId
-	 * @param broadBand
+	 * Creates the broadband in cache.
+	 *
+	 * @param availabilityCheckRequest the availability check request
+	 * @param getServiceAvailabilityResponse the get service availability response
+	 * @param broadbandId the broadband id
+	 * @param broadBand the broad band
+	 * @param productDetailsList the product details list
+	 * @param userType the user type
 	 * @return FLBBJourneyRequest
 	 */
 
@@ -266,20 +275,33 @@ public class ConverterUtils {
 				lineRefernce.setAvailableServices(availableService);
 			}
 			List<LineDirectory> lineDirectoryList = new ArrayList<>();
+			LineDirectory lineDirectory = new LineDirectory();
 			if (getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getLineReference()
 					.getLineDirectory() != null
 					&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getLineReference()
 							.getLineDirectory().isEmpty()) {
 				for (com.vf.uk.dal.entity.serviceavailability.LineDirectory lDirectory : getServiceAvailabilityResponse
 						.getServiceAvailabilityLine().get(0).getLineReference().getLineDirectory()) {
-					LineDirectory lineDirectory = new LineDirectory();
-					lineDirectory.setDirectoryCode(lDirectory.getDirectoryCode());
+					if(StringUtils.isNotEmpty(lDirectory.getDirectoryCode())){
+						lineDirectory.setDirectoryCode(lDirectory.getDirectoryCode());
+					}else if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
+						lineDirectory.setDirectoryCode("Ex Directory No Calls Offered");
+					}else{
+						lineDirectory.setDirectoryCode("ORDINARY");
+					}
 					lineDirectory.setFeatureCode(lDirectory.getFeatureCode());
 					lineDirectory.setLocationCode(lDirectory.getFeatureCode());
 					lineDirectoryList.add(lineDirectory);
 				}
-				lineRefernce.setLineDirectoryList(lineDirectoryList);
+			}else{
+				if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
+					lineDirectory.setDirectoryCode("Ex Directory No Calls Offered");
+				}else{
+					lineDirectory.setDirectoryCode("ORDINARY");
+				}
+				lineDirectoryList.add(lineDirectory);
 			}
+			lineRefernce.setLineDirectoryList(lineDirectoryList);
 			servicePoint.setLineReference(lineRefernce);
 		}
 		ServiceReference serviceReference = new ServiceReference();
@@ -443,20 +465,29 @@ public class ConverterUtils {
 		}
 
 		broadband.setServicePoint(servicePoint);
-	
-		if(null != broadband.getBasketInfo()){
-			BasketInfo basketInfo = broadband.getBasketInfo();
-			if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
-				if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
-					basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
-				else
-					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
-				broadband.setBasketInfo(basketInfo);
-			}
+		BasketInfo basketInfo;
+		if(null != broadband.getBasketInfo())
+			basketInfo = broadband.getBasketInfo();
+		else
+			basketInfo = new BasketInfo();
+		
+		if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
+			
+			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+				basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
+			else
+				basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+			broadband.setBasketInfo(basketInfo);
 		}
 		return broadband;
 	}
 
+	/**
+	 * Sets the engineer visit price.
+	 *
+	 * @param productDetailsList the product details list
+	 * @param broadband the broadband
+	 */
 	private static void setEngineerVisitPrice(List<CommercialProduct> productDetailsList, Broadband broadband) {
 		PriceForHardware engineeringVisitCharge = new PriceForHardware();
 
@@ -483,11 +514,12 @@ public class ConverterUtils {
 	}
 
 	/**
-	 * 
-	 * @param response
-	 * @param getServiceAvailabilityResponse
-	 * @param availabilityCheckRequest
-	 * @param productModel
+	 * Creates the availability check response.
+	 *
+	 * @param response the response
+	 * @param getServiceAvailabilityResponse the get service availability response
+	 * @param availabilityCheckRequest the availability check request
+	 * @param productDetailsList the product details list
 	 * @return AvailabilityCheckResponse
 	 */
 
@@ -658,9 +690,10 @@ public class ConverterUtils {
 	}
 
 	/**
-	 * 
-	 * @param serviceLines
-	 * @param speed
+	 * Sets the line speed for broadband.
+	 *
+	 * @param serviceLines the service lines
+	 * @param packageName the package name
 	 * @return LineSpeeds
 	 */
 
@@ -683,9 +716,11 @@ public class ConverterUtils {
 	}
 
 	/**
-	 * 
-	 * @param createAppointmentRequest
-	 * @param journey
+	 * Creates the appointment request.
+	 *
+	 * @param createAppointmentRequest the create appointment request
+	 * @param broadBand the broad band
+	 * @param userType the user type
 	 * @return CreateAppointmentRequest
 	 */
 
@@ -767,8 +802,10 @@ public class ConverterUtils {
 	}
 
 	/**
-	 * @param broadBand
-	 * @param itemReference
+	 * Sets the classification code in appointment request.
+	 *
+	 * @param broadBand the broad band
+	 * @param itemReference the item reference
 	 */
 	private static void setClassificationCodeInAppointmentRequest(Broadband broadBand,
 			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference) {
@@ -794,6 +831,13 @@ public class ConverterUtils {
 		}
 	}
 
+	/**
+	 * Creates the availability check response.
+	 *
+	 * @param response the response
+	 * @param broadBand the broad band
+	 * @return the availability check response
+	 */
 	public static AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
 			Broadband broadBand) {
 		if (broadBand != null && broadBand.getServicePoint() != null) {
@@ -928,6 +972,15 @@ public class ConverterUtils {
 		return response;
 	}
 
+	/**
+	 * Creates the update cache request.
+	 *
+	 * @param broadband the broadband
+	 * @param basketRequest the basket request
+	 * @param broadbandId the broadband id
+	 * @param basket the basket
+	 * @return the broadband
+	 */
 	public static Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest,
 			String broadbandId, Basket basket) {
 
@@ -937,7 +990,15 @@ public class ConverterUtils {
 			lineDetails = new LineDetails();
 		}
 		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
-		BasketInfo basketInfo = new BasketInfo();
+		
+		BasketInfo basketInfo;
+		if(broadband.getBasketInfo() != null)
+			basketInfo = broadband.getBasketInfo();
+		else{
+			basketInfo = new BasketInfo();
+			basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
+		}
+		
 		if (basketRequest.getAddBundle() != null
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())) {
 			basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
@@ -963,6 +1024,15 @@ public class ConverterUtils {
 		return broadband;
 	}
 
+	/**
+	 * Creates the basket request.
+	 *
+	 * @param basketRequest the basket request
+	 * @param broadband the broadband
+	 * @param servicePoint the service point
+	 * @param journey the journey
+	 * @return the creates the basket request
+	 */
 	public static CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband,
 			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, CurrentJourney journey) {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
@@ -1055,11 +1125,27 @@ public class ConverterUtils {
 		return createBasket;
 	}
 
+	/**
+	 * Creates the update cache request.
+	 *
+	 * @param broadband the broadband
+	 * @param basketId the basket id
+	 * @return the broadband
+	 */
 	public static Broadband createUpdateCacheRequest(Broadband broadband, String basketId) {
 		broadband.setBasketId(basketId);
 		return broadband;
 	}
 
+	/**
+	 * Update basket request.
+	 *
+	 * @param basketRequest the basket request
+	 * @param journey the journey
+	 * @param broadband the broadband
+	 * @param planId the plan id
+	 * @return the update package
+	 */
 	public static UpdatePackage updateBasketRequest(BasketRequest basketRequest, CurrentJourney journey,
 			Broadband broadband, String planId) {
 		UpdatePackage updatePackage = new UpdatePackage();
@@ -1106,7 +1192,7 @@ public class ConverterUtils {
 
 		if (broadband.getEngineeringVisitCharge() != null
 				&& StringUtils.isNotEmpty(broadband.getEngineeringVisitCharge().getEngVisitProductId())
-				&& StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
+				&& broadband.getLineDetails()!=null && StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
 			List<UpdateService> services = new ArrayList<>();
 			UpdateService updateService = new UpdateService();
 			updateService.setProductLineId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
@@ -1117,6 +1203,15 @@ public class ConverterUtils {
 		return updatePackage;
 	}
 
+	/**
+	 * Sets the premise and service point request.
+	 *
+	 * @param servicePoint the service point
+	 * @param broadband the broadband
+	 * @param availabilityCheckRequest the availability check request
+	 * @param updateLineRequest the update line request
+	 * @return the premise and service point
+	 */
 	public static PremiseAndServicePoint setPremiseAndServicePointRequest(
 			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, Broadband broadband,
 			AvailabilityCheckRequest availabilityCheckRequest, UpdateLineRequest updateLineRequest) {
@@ -1179,6 +1274,14 @@ public class ConverterUtils {
 		return premiseAndServicePoint;
 	}
 
+	/**
+	 * Update broadband cache.
+	 *
+	 * @param broadband the broadband
+	 * @param updateLineRequest the update line request
+	 * @param broadbandId the broadband id
+	 * @return the broadband
+	 */
 	public static Broadband updateBroadbandCache(Broadband broadband, UpdateLineRequest updateLineRequest,
 			String broadbandId) {
 		Broadband broadBand = broadband;
@@ -1192,6 +1295,12 @@ public class ConverterUtils {
 		return broadBand;
 	}
 
+	/**
+	 * Adds the product request.
+	 *
+	 * @param broadband the broadband
+	 * @return the adds the product request
+	 */
 	public static AddProductRequest addProductRequest(Broadband broadband) {
 		AddProductRequest addProductRequest = new AddProductRequest();
 		List<Product> products = new ArrayList<>();
@@ -1204,6 +1313,14 @@ public class ConverterUtils {
 		return addProductRequest;
 	}
 
+	/**
+	 * Adds the appointment info to broadband cache.
+	 *
+	 * @param broadBand the broad band
+	 * @param createAppointmentRequest the create appointment request
+	 * @param identificationId the identification id
+	 * @return the broadband
+	 */
 	public static Broadband addAppointmentInfoToBroadbandCache(Broadband broadBand,
 			CreateAppointmentRequest createAppointmentRequest, String identificationId) {
 		BroadbandSalesOrderAppointment salesOrderAppointment = null;
@@ -1229,6 +1346,13 @@ public class ConverterUtils {
 		return broadBandForSalesAppointment;
 	}
 
+	/**
+	 * Update basket with appointment request.
+	 *
+	 * @param createAppointmentRequest the create appointment request
+	 * @param applicationId the application id
+	 * @return the com.vf.uk.dal.broadband.basket.entity. appointment window
+	 */
 	public static com.vf.uk.dal.broadband.basket.entity.AppointmentWindow updateBasketWithAppointmentRequest(
 			CreateAppointmentRequest createAppointmentRequest, String applicationId) {
 		com.vf.uk.dal.broadband.basket.entity.AppointmentWindow appointmentWindow = new com.vf.uk.dal.broadband.basket.entity.AppointmentWindow();
@@ -1248,13 +1372,16 @@ public class ConverterUtils {
 		return appointmentWindow;
 	}
 
+	/**
+	 * Update broadband cache with line directory info.
+	 *
+	 * @param broadband the broadband
+	 * @return the service point
+	 */
 	public static ServicePoint updateBroadbandCacheWithLineDirectoryInfo(Broadband broadband) {
 		ServicePoint servicePoint = broadband.getServicePoint();
 		LineReference lineReference = servicePoint.getLineReference();
-		List<LineDirectory> lineDirectoryList = lineReference.getLineDirectoryList();
-		if (!CollectionUtils.isNotEmpty(lineDirectoryList)) {
-			lineDirectoryList = new ArrayList<>();
-		}
+		List<LineDirectory> lineDirectoryList = new ArrayList<>();
 		LineDirectory lineDirectory = new LineDirectory();
 		lineDirectory.setDirectoryCode("NO_DIRECTORY_ENTRY");
 		lineDirectory.setLocationCode("INDIVIDUAL");
@@ -1265,6 +1392,13 @@ public class ConverterUtils {
 		return servicePoint;
 	}
 
+	/**
+	 * Gets the appointment request.
+	 *
+	 * @param broadBand the broad band
+	 * @param userType the user type
+	 * @return the appointment request
+	 */
 	public static GetAppointmentRequest getAppointmentRequest(Broadband broadBand,String userType) {
 
 		GetAppointmentRequest request = new GetAppointmentRequest();
@@ -1336,9 +1470,10 @@ public class ConverterUtils {
 	}
 
 	/**
-	 * @param broadBand
-	 * @param startTimePeriod
-	 * @return
+	 * Gets the start time period from line treatment.
+	 *
+	 * @param broadBand the broad band
+	 * @return the start time period from line treatment
 	 */
 	private static String getStartTimePeriodFromLineTreatment(Broadband broadBand) {
 		String startTimePeriod = null;
@@ -1360,6 +1495,12 @@ public class ConverterUtils {
 		return startTimePeriod;
 	}
 
+	/**
+	 * Creates the get appointment response.
+	 *
+	 * @param getAppointmentResponse the get appointment response
+	 * @return the gets the appointment response
+	 */
 	public static GetAppointmentResponse createGetAppointmentResponse(GetAppointment getAppointmentResponse) {
 		GetAppointmentResponse getAppointmentRes = new GetAppointmentResponse();
 		List<AppointmentList> apptWindowList = new ArrayList<>();
@@ -1377,6 +1518,13 @@ public class ConverterUtils {
 		return getAppointmentRes;
 	}
 
+	/**
+	 * Creates the promotion request to optimize.
+	 *
+	 * @param broadband the broadband
+	 * @param journeyName the journey name
+	 * @return the bundle promotion request
+	 */
 	public static BundlePromotionRequest createPromotionRequestToOptimize(Broadband broadband, String journeyName) {
 		BundlePromotionRequest bundlePromotionRequest = new BundlePromotionRequest();
 		List<String> bundleIdList = new ArrayList<>();
@@ -1386,6 +1534,12 @@ public class ConverterUtils {
 		return bundlePromotionRequest;
 	}
 
+	/**
+	 * Creates the service start date request.
+	 *
+	 * @param serviceStartDate the service start date
+	 * @return the service start date request
+	 */
 	public static ServiceStartDateRequest createServiceStartDateRequest(
 			com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDate) {
 		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
@@ -1393,6 +1547,12 @@ public class ConverterUtils {
 		return serviceStartDateRequest;
 	}
 
+	/**
+	 * Format link.
+	 *
+	 * @param link the link
+	 * @return the link
+	 */
 	public static Link formatLink(Link link) {
 		Link newLink = link;
 		if (newLink != null && newLink.getHref().indexOf("/broadband") != -1) {
@@ -1402,6 +1562,14 @@ public class ConverterUtils {
 		return newLink;
 	}
 
+	/**
+	 * Gets the formatted date.
+	 *
+	 * @param dateInString the date in string
+	 * @param pattern the pattern
+	 * @param desiredPattern the desired pattern
+	 * @return the formatted date
+	 */
 	private static String getFormattedDate(String dateInString, String pattern, String desiredPattern) {
 		String dateString = null;
 		if (dateInString != null) {

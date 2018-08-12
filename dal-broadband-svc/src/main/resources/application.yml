@@ -66,7 +66,13 @@ icp:
     jdbcUrl: jdbc:oracle:thin:@e18dbref.cqrpvr4944ct.eu-west-1.rds.amazonaws.com:1521:e18dbref
     jdbcUserName: daluser
     jdbcUserPwd: simple4u
-  
+    
+springfox:
+ documentation:
+   swagger:
+     v2:
+       path: /api-docs
+
 ---
 spring:
   profiles: local

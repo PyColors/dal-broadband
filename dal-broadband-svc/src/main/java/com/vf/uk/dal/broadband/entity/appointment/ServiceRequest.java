@@ -11,33 +11,47 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * ServiceRequest
+ * ServiceRequest.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-06-18T11:02:21.569Z")
 
 public class ServiceRequest   {
+  
+  /** The category code. */
   @JsonProperty("categoryCode")
   private String categoryCode = null;
 
+  /** The classification code. */
   @JsonProperty("classificationCode")
   private String classificationCode = null;
 
+  /** The customer party reference. */
   @JsonProperty("customerPartyReference")
   private CustomerPartyReference customerPartyReference = null;
 
+  /** The item reference. */
   @JsonProperty("itemReference")
   private ItemReference itemReference = null;
 
+  /** The priority code. */
   @JsonProperty("priorityCode")
   private String priorityCode = null;
 
+  /** The sub classification code. */
   @JsonProperty("subClassificationCode")
   private String subClassificationCode = null;
 
+  /** The type code. */
   @JsonProperty("typeCode")
   private String typeCode = null;
 
+  /**
+   * Category code.
+   *
+   * @param categoryCode the category code
+   * @return the service request
+   */
   public ServiceRequest categoryCode(String categoryCode) {
     this.categoryCode = categoryCode;
     return this;
@@ -54,10 +68,21 @@ public class ServiceRequest   {
     return categoryCode;
   }
 
+  /**
+   * Sets the category code.
+   *
+   * @param categoryCode the new category code
+   */
   public void setCategoryCode(String categoryCode) {
     this.categoryCode = categoryCode;
   }
 
+  /**
+   * Classification code.
+   *
+   * @param classificationCode the classification code
+   * @return the service request
+   */
   public ServiceRequest classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
@@ -74,19 +99,31 @@ public class ServiceRequest   {
     return classificationCode;
   }
 
+  /**
+   * Sets the classification code.
+   *
+   * @param classificationCode the new classification code
+   */
   public void setClassificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
   }
 
+  /**
+   * Customer party reference.
+   *
+   * @param customerPartyReference the customer party reference
+   * @return the service request
+   */
   public ServiceRequest customerPartyReference(CustomerPartyReference customerPartyReference) {
     this.customerPartyReference = customerPartyReference;
     return this;
   }
 
   /**
-   * Get customerPartyReference
+   * Get customerPartyReference.
+   *
    * @return customerPartyReference
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -95,19 +132,31 @@ public class ServiceRequest   {
     return customerPartyReference;
   }
 
+  /**
+   * Sets the customer party reference.
+   *
+   * @param customerPartyReference the new customer party reference
+   */
   public void setCustomerPartyReference(CustomerPartyReference customerPartyReference) {
     this.customerPartyReference = customerPartyReference;
   }
 
+  /**
+   * Item reference.
+   *
+   * @param itemReference the item reference
+   * @return the service request
+   */
   public ServiceRequest itemReference(ItemReference itemReference) {
     this.itemReference = itemReference;
     return this;
   }
 
   /**
-   * Get itemReference
+   * Get itemReference.
+   *
    * @return itemReference
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -116,10 +165,21 @@ public class ServiceRequest   {
     return itemReference;
   }
 
+  /**
+   * Sets the item reference.
+   *
+   * @param itemReference the new item reference
+   */
   public void setItemReference(ItemReference itemReference) {
     this.itemReference = itemReference;
   }
 
+  /**
+   * Priority code.
+   *
+   * @param priorityCode the priority code
+   * @return the service request
+   */
   public ServiceRequest priorityCode(String priorityCode) {
     this.priorityCode = priorityCode;
     return this;
@@ -136,10 +196,21 @@ public class ServiceRequest   {
     return priorityCode;
   }
 
+  /**
+   * Sets the priority code.
+   *
+   * @param priorityCode the new priority code
+   */
   public void setPriorityCode(String priorityCode) {
     this.priorityCode = priorityCode;
   }
 
+  /**
+   * Sub classification code.
+   *
+   * @param subClassificationCode the sub classification code
+   * @return the service request
+   */
   public ServiceRequest subClassificationCode(String subClassificationCode) {
     this.subClassificationCode = subClassificationCode;
     return this;
@@ -156,10 +227,21 @@ public class ServiceRequest   {
     return subClassificationCode;
   }
 
+  /**
+   * Sets the sub classification code.
+   *
+   * @param subClassificationCode the new sub classification code
+   */
   public void setSubClassificationCode(String subClassificationCode) {
     this.subClassificationCode = subClassificationCode;
   }
 
+  /**
+   * Type code.
+   *
+   * @param typeCode the type code
+   * @return the service request
+   */
   public ServiceRequest typeCode(String typeCode) {
     this.typeCode = typeCode;
     return this;
@@ -176,11 +258,19 @@ public class ServiceRequest   {
     return typeCode;
   }
 
+  /**
+   * Sets the type code.
+   *
+   * @param typeCode the new type code
+   */
   public void setTypeCode(String typeCode) {
     this.typeCode = typeCode;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -199,11 +289,17 @@ public class ServiceRequest   {
         Objects.equals(this.typeCode, serviceRequest.typeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(categoryCode, classificationCode, customerPartyReference, itemReference, priorityCode, subClassificationCode, typeCode);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -223,6 +319,9 @@ public class ServiceRequest   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

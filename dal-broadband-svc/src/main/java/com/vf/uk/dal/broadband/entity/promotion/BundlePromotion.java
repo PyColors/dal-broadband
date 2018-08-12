@@ -13,56 +13,73 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * BundlePromotion
+ * BundlePromotion.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-17T22:32:14.737Z")
 
 public class BundlePromotion   {
+  
+  /** The bundle id. */
   @JsonProperty("bundleId")
   private String bundleId = null;
 
+  /** The data allowances. */
   @JsonProperty("dataAllowances")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwareDataAllowances> dataAllowances = null;
 
+  /** The entertainment packs. */
   @JsonProperty("entertainmentPacks")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks> entertainmentPacks = null;
 
+  /** The free accessory. */
   @JsonProperty("freeAccessory")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwareAccessory> freeAccessory = null;
 
+  /** The free extras. */
   @JsonProperty("freeExtras")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwareExtras> freeExtras = null;
 
+  /** The plan coupling promotions. */
   @JsonProperty("planCouplingPromotions")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions> planCouplingPromotions = null;
 
+  /** The promotions. */
   @JsonProperty("promotions")
   @Valid
   private List<Cataloguepromotions> promotions = null;
 
+  /** The sash. */
   @JsonProperty("sash")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwareSash> sash = null;
 
+  /** The secure net. */
   @JsonProperty("secureNet")
   @Valid
   private List<CataloguepromotionqueriesForBundleAndHardwareSecureNet> secureNet = null;
 
+  /**
+   * Bundle id.
+   *
+   * @param bundleId the bundle id
+   * @return the bundle promotion
+   */
   public BundlePromotion bundleId(String bundleId) {
     this.bundleId = bundleId;
     return this;
   }
 
   /**
-   * Get bundleId
+   * Get bundleId.
+   *
    * @return bundleId
-  **/
+   */
   @ApiModelProperty(value = "")
 
 
@@ -70,27 +87,45 @@ public class BundlePromotion   {
     return bundleId;
   }
 
+  /**
+   * Sets the bundle id.
+   *
+   * @param bundleId the new bundle id
+   */
   public void setBundleId(String bundleId) {
     this.bundleId = bundleId;
   }
 
+  /**
+   * Data allowances.
+   *
+   * @param dataAllowances the data allowances
+   * @return the bundle promotion
+   */
   public BundlePromotion dataAllowances(List<CataloguepromotionqueriesForBundleAndHardwareDataAllowances> dataAllowances) {
     this.dataAllowances = dataAllowances;
     return this;
   }
 
+  /**
+   * Adds the data allowances item.
+   *
+   * @param dataAllowancesItem the data allowances item
+   * @return the bundle promotion
+   */
   public BundlePromotion addDataAllowancesItem(CataloguepromotionqueriesForBundleAndHardwareDataAllowances dataAllowancesItem) {
     if (this.dataAllowances == null) {
-      this.dataAllowances = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareDataAllowances>();
+      this.dataAllowances = new ArrayList<>();
     }
     this.dataAllowances.add(dataAllowancesItem);
     return this;
   }
 
   /**
-   * Get dataAllowances
+   * Get dataAllowances.
+   *
    * @return dataAllowances
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -99,27 +134,45 @@ public class BundlePromotion   {
     return dataAllowances;
   }
 
+  /**
+   * Sets the data allowances.
+   *
+   * @param dataAllowances the new data allowances
+   */
   public void setDataAllowances(List<CataloguepromotionqueriesForBundleAndHardwareDataAllowances> dataAllowances) {
     this.dataAllowances = dataAllowances;
   }
 
+  /**
+   * Entertainment packs.
+   *
+   * @param entertainmentPacks the entertainment packs
+   * @return the bundle promotion
+   */
   public BundlePromotion entertainmentPacks(List<CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks> entertainmentPacks) {
     this.entertainmentPacks = entertainmentPacks;
     return this;
   }
 
+  /**
+   * Adds the entertainment packs item.
+   *
+   * @param entertainmentPacksItem the entertainment packs item
+   * @return the bundle promotion
+   */
   public BundlePromotion addEntertainmentPacksItem(CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks entertainmentPacksItem) {
     if (this.entertainmentPacks == null) {
-      this.entertainmentPacks = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks>();
+      this.entertainmentPacks = new ArrayList<>();
     }
     this.entertainmentPacks.add(entertainmentPacksItem);
     return this;
   }
 
   /**
-   * Get entertainmentPacks
+   * Get entertainmentPacks.
+   *
    * @return entertainmentPacks
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -128,27 +181,45 @@ public class BundlePromotion   {
     return entertainmentPacks;
   }
 
+  /**
+   * Sets the entertainment packs.
+   *
+   * @param entertainmentPacks the new entertainment packs
+   */
   public void setEntertainmentPacks(List<CataloguepromotionqueriesForBundleAndHardwareEntertainmentPacks> entertainmentPacks) {
     this.entertainmentPacks = entertainmentPacks;
   }
 
+  /**
+   * Free accessory.
+   *
+   * @param freeAccessory the free accessory
+   * @return the bundle promotion
+   */
   public BundlePromotion freeAccessory(List<CataloguepromotionqueriesForBundleAndHardwareAccessory> freeAccessory) {
     this.freeAccessory = freeAccessory;
     return this;
   }
 
+  /**
+   * Adds the free accessory item.
+   *
+   * @param freeAccessoryItem the free accessory item
+   * @return the bundle promotion
+   */
   public BundlePromotion addFreeAccessoryItem(CataloguepromotionqueriesForBundleAndHardwareAccessory freeAccessoryItem) {
     if (this.freeAccessory == null) {
-      this.freeAccessory = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareAccessory>();
+      this.freeAccessory = new ArrayList<>();
     }
     this.freeAccessory.add(freeAccessoryItem);
     return this;
   }
 
   /**
-   * Get freeAccessory
+   * Get freeAccessory.
+   *
    * @return freeAccessory
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -157,27 +228,45 @@ public class BundlePromotion   {
     return freeAccessory;
   }
 
+  /**
+   * Sets the free accessory.
+   *
+   * @param freeAccessory the new free accessory
+   */
   public void setFreeAccessory(List<CataloguepromotionqueriesForBundleAndHardwareAccessory> freeAccessory) {
     this.freeAccessory = freeAccessory;
   }
 
+  /**
+   * Free extras.
+   *
+   * @param freeExtras the free extras
+   * @return the bundle promotion
+   */
   public BundlePromotion freeExtras(List<CataloguepromotionqueriesForBundleAndHardwareExtras> freeExtras) {
     this.freeExtras = freeExtras;
     return this;
   }
 
+  /**
+   * Adds the free extras item.
+   *
+   * @param freeExtrasItem the free extras item
+   * @return the bundle promotion
+   */
   public BundlePromotion addFreeExtrasItem(CataloguepromotionqueriesForBundleAndHardwareExtras freeExtrasItem) {
     if (this.freeExtras == null) {
-      this.freeExtras = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareExtras>();
+      this.freeExtras = new ArrayList<>();
     }
     this.freeExtras.add(freeExtrasItem);
     return this;
   }
 
   /**
-   * Get freeExtras
+   * Get freeExtras.
+   *
    * @return freeExtras
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -186,27 +275,45 @@ public class BundlePromotion   {
     return freeExtras;
   }
 
+  /**
+   * Sets the free extras.
+   *
+   * @param freeExtras the new free extras
+   */
   public void setFreeExtras(List<CataloguepromotionqueriesForBundleAndHardwareExtras> freeExtras) {
     this.freeExtras = freeExtras;
   }
 
+  /**
+   * Plan coupling promotions.
+   *
+   * @param planCouplingPromotions the plan coupling promotions
+   * @return the bundle promotion
+   */
   public BundlePromotion planCouplingPromotions(List<CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions> planCouplingPromotions) {
     this.planCouplingPromotions = planCouplingPromotions;
     return this;
   }
 
+  /**
+   * Adds the plan coupling promotions item.
+   *
+   * @param planCouplingPromotionsItem the plan coupling promotions item
+   * @return the bundle promotion
+   */
   public BundlePromotion addPlanCouplingPromotionsItem(CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions planCouplingPromotionsItem) {
     if (this.planCouplingPromotions == null) {
-      this.planCouplingPromotions = new ArrayList<CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions>();
+      this.planCouplingPromotions = new ArrayList<>();
     }
     this.planCouplingPromotions.add(planCouplingPromotionsItem);
     return this;
   }
 
   /**
-   * Get planCouplingPromotions
+   * Get planCouplingPromotions.
+   *
    * @return planCouplingPromotions
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -215,27 +322,45 @@ public class BundlePromotion   {
     return planCouplingPromotions;
   }
 
+  /**
+   * Sets the plan coupling promotions.
+   *
+   * @param planCouplingPromotions the new plan coupling promotions
+   */
   public void setPlanCouplingPromotions(List<CataloguepromotionqueriesForBundleAndHardwarePlanCouplingPromotions> planCouplingPromotions) {
     this.planCouplingPromotions = planCouplingPromotions;
   }
 
+  /**
+   * Promotions.
+   *
+   * @param promotions the promotions
+   * @return the bundle promotion
+   */
   public BundlePromotion promotions(List<Cataloguepromotions> promotions) {
     this.promotions = promotions;
     return this;
   }
 
+  /**
+   * Adds the promotions item.
+   *
+   * @param promotionsItem the promotions item
+   * @return the bundle promotion
+   */
   public BundlePromotion addPromotionsItem(Cataloguepromotions promotionsItem) {
     if (this.promotions == null) {
-      this.promotions = new ArrayList<Cataloguepromotions>();
+      this.promotions = new ArrayList<>();
     }
     this.promotions.add(promotionsItem);
     return this;
   }
 
   /**
-   * This List consists of all Promotions applicable to Bundle
+   * This List consists of all Promotions applicable to Bundle.
+   *
    * @return promotions
-  **/
+   */
   @ApiModelProperty(value = "This List consists of all Promotions applicable to Bundle")
 
   @Valid
@@ -244,27 +369,45 @@ public class BundlePromotion   {
     return promotions;
   }
 
+  /**
+   * Sets the promotions.
+   *
+   * @param promotions the new promotions
+   */
   public void setPromotions(List<Cataloguepromotions> promotions) {
     this.promotions = promotions;
   }
 
+  /**
+   * Sash.
+   *
+   * @param sash the sash
+   * @return the bundle promotion
+   */
   public BundlePromotion sash(List<CataloguepromotionqueriesForBundleAndHardwareSash> sash) {
     this.sash = sash;
     return this;
   }
 
+  /**
+   * Adds the sash item.
+   *
+   * @param sashItem the sash item
+   * @return the bundle promotion
+   */
   public BundlePromotion addSashItem(CataloguepromotionqueriesForBundleAndHardwareSash sashItem) {
     if (this.sash == null) {
-      this.sash = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareSash>();
+      this.sash = new ArrayList<>();
     }
     this.sash.add(sashItem);
     return this;
   }
 
   /**
-   * Get sash
+   * Get sash.
+   *
    * @return sash
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -273,27 +416,45 @@ public class BundlePromotion   {
     return sash;
   }
 
+  /**
+   * Sets the sash.
+   *
+   * @param sash the new sash
+   */
   public void setSash(List<CataloguepromotionqueriesForBundleAndHardwareSash> sash) {
     this.sash = sash;
   }
 
+  /**
+   * Secure net.
+   *
+   * @param secureNet the secure net
+   * @return the bundle promotion
+   */
   public BundlePromotion secureNet(List<CataloguepromotionqueriesForBundleAndHardwareSecureNet> secureNet) {
     this.secureNet = secureNet;
     return this;
   }
 
+  /**
+   * Adds the secure net item.
+   *
+   * @param secureNetItem the secure net item
+   * @return the bundle promotion
+   */
   public BundlePromotion addSecureNetItem(CataloguepromotionqueriesForBundleAndHardwareSecureNet secureNetItem) {
     if (this.secureNet == null) {
-      this.secureNet = new ArrayList<CataloguepromotionqueriesForBundleAndHardwareSecureNet>();
+      this.secureNet = new ArrayList<>();
     }
     this.secureNet.add(secureNetItem);
     return this;
   }
 
   /**
-   * Get secureNet
+   * Get secureNet.
+   *
    * @return secureNet
-  **/
+   */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -302,11 +463,19 @@ public class BundlePromotion   {
     return secureNet;
   }
 
+  /**
+   * Sets the secure net.
+   *
+   * @param secureNet the new secure net
+   */
   public void setSecureNet(List<CataloguepromotionqueriesForBundleAndHardwareSecureNet> secureNet) {
     this.secureNet = secureNet;
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -327,11 +496,17 @@ public class BundlePromotion   {
         Objects.equals(this.secureNet, bundlePromotion.secureNet);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return Objects.hash(bundleId, dataAllowances, entertainmentPacks, freeAccessory, freeExtras, planCouplingPromotions, promotions, sash, secureNet);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -353,6 +528,9 @@ public class BundlePromotion   {
   /**
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
+   *
+   * @param o the o
+   * @return the string
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {

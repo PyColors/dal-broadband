@@ -18,6 +18,11 @@ public class DeleteBasketResponse   {
   @JsonProperty("basketId")
   private String basketId = null;
 
+  /**
+   * 
+   * @param basketId
+   * @return
+   */
   public DeleteBasketResponse basketId(String basketId) {
     this.basketId = basketId;
     return this;

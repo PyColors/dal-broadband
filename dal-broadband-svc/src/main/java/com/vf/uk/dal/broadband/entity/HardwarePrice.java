@@ -9,12 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * HardwarePrice
+ * HardwarePrice.
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-01-22T12:29:43.835Z")
 
 public class HardwarePrice {
 
+	/** The hardware id. */
 	@JsonProperty("hardwareId")
 	private String hardwareId = null;
 
@@ -22,33 +23,53 @@ public class HardwarePrice {
 	@JsonProperty("hardwareName")
 	private String hardwareName = null;
 
+	/** The one off price. */
 	@JsonProperty("oneOffPrice")
 	private Price oneOffPrice = null;
 
+	/** The one off discount price. */
 	@JsonProperty("oneOffDiscountPrice")
 	private Price oneOffDiscountPrice = null;
 
+	/** The merchandising promotions. */
 	@JsonProperty("merchandisingPromotions")
 	private MerchandisingPromotion merchandisingPromotions = null;
 
+	/**
+	 * Hardware name.
+	 *
+	 * @param hardwareName the hardware name
+	 * @return the hardware price
+	 */
 	public HardwarePrice hardwareName(String hardwareName) {
 		this.hardwareName = hardwareName;
 		return this;
 	}
 
+	/**
+	 * Gets the hardware name.
+	 *
+	 * @return the hardware name
+	 */
 	@ApiModelProperty(value = "Name of hardware, whose price to be calculated")
 	public String getHardwareName() {
 		return hardwareName;
 	}
 
+	/**
+	 * Sets the hardware name.
+	 *
+	 * @param hardwareName the new hardware name
+	 */
 	public void setHardwareName(String hardwareName) {
 		this.hardwareName = hardwareName;
 	}
 
 	/**
-	 * 
-	 * @param hardwareId
-	 * @return
+	 * Hardware id.
+	 *
+	 * @param hardwareId the hardware id
+	 * @return the hardware price
 	 */
 	public HardwarePrice hardwareId(String hardwareId) {
 		this.hardwareId = hardwareId;
@@ -56,24 +77,30 @@ public class HardwarePrice {
 	}
 
 	/**
-	 * Hardware id of the price to be calculated
-	 * 
+	 * Hardware id of the price to be calculated.
+	 *
 	 * @return hardwareId
-	 **/
+	 */
 	@ApiModelProperty(value = "Hardware id of the price to be calculated")
 
 	public String getHardwareId() {
 		return hardwareId;
 	}
 
+	/**
+	 * Sets the hardware id.
+	 *
+	 * @param hardwareId the new hardware id
+	 */
 	public void setHardwareId(String hardwareId) {
 		this.hardwareId = hardwareId;
 	}
 
 	/**
-	 * 
-	 * @param oneOffPrice
-	 * @return
+	 * One off price.
+	 *
+	 * @param oneOffPrice the one off price
+	 * @return the hardware price
 	 */
 	public HardwarePrice oneOffPrice(Price oneOffPrice) {
 		this.oneOffPrice = oneOffPrice;
@@ -81,10 +108,10 @@ public class HardwarePrice {
 	}
 
 	/**
-	 * Get oneOffPrice
-	 * 
+	 * Get oneOffPrice.
+	 *
 	 * @return oneOffPrice
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -93,14 +120,20 @@ public class HardwarePrice {
 		return oneOffPrice;
 	}
 
+	/**
+	 * Sets the one off price.
+	 *
+	 * @param oneOffPrice the new one off price
+	 */
 	public void setOneOffPrice(Price oneOffPrice) {
 		this.oneOffPrice = oneOffPrice;
 	}
 
 	/**
-	 * 
-	 * @param oneOffDiscountPrice
-	 * @return
+	 * One off discount price.
+	 *
+	 * @param oneOffDiscountPrice the one off discount price
+	 * @return the hardware price
 	 */
 	public HardwarePrice oneOffDiscountPrice(Price oneOffDiscountPrice) {
 		this.oneOffDiscountPrice = oneOffDiscountPrice;
@@ -108,10 +141,10 @@ public class HardwarePrice {
 	}
 
 	/**
-	 * Get oneOffDiscountPrice
-	 * 
+	 * Get oneOffDiscountPrice.
+	 *
 	 * @return oneOffDiscountPrice
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -120,14 +153,20 @@ public class HardwarePrice {
 		return oneOffDiscountPrice;
 	}
 
+	/**
+	 * Sets the one off discount price.
+	 *
+	 * @param oneOffDiscountPrice the new one off discount price
+	 */
 	public void setOneOffDiscountPrice(Price oneOffDiscountPrice) {
 		this.oneOffDiscountPrice = oneOffDiscountPrice;
 	}
 
 	/**
-	 * 
-	 * @param merchandisingPromotions
-	 * @return
+	 * Merchandising promotions.
+	 *
+	 * @param merchandisingPromotions the merchandising promotions
+	 * @return the hardware price
 	 */
 	public HardwarePrice merchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
 		this.merchandisingPromotions = merchandisingPromotions;
@@ -135,10 +174,10 @@ public class HardwarePrice {
 	}
 
 	/**
-	 * Merchandising promotions applicable for the bundle
-	 * 
+	 * Merchandising promotions applicable for the bundle.
+	 *
 	 * @return merchandisingPromotions
-	 **/
+	 */
 	@ApiModelProperty(value = "Merchandising promotions applicable for the bundle")
 
 	@Valid
@@ -147,10 +186,18 @@ public class HardwarePrice {
 		return merchandisingPromotions;
 	}
 
+	/**
+	 * Sets the merchandising promotions.
+	 *
+	 * @param merchandisingPromotions the new merchandising promotions
+	 */
 	public void setMerchandisingPromotions(MerchandisingPromotion merchandisingPromotions) {
 		this.merchandisingPromotions = merchandisingPromotions;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -166,11 +213,17 @@ public class HardwarePrice {
 				&& Objects.equals(this.merchandisingPromotions, hardwarePrice.merchandisingPromotions);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(hardwareId, oneOffPrice, oneOffDiscountPrice, merchandisingPromotions);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -187,6 +240,9 @@ public class HardwarePrice {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

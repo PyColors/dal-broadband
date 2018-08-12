@@ -24,6 +24,11 @@ public class BasketItemReference   {
   @JsonProperty("name")
   private String name = null;
 
+  /**
+   * 
+   * @param classificationCode
+   * @return
+   */
   public BasketItemReference classificationCode(String classificationCode) {
     this.classificationCode = classificationCode;
     return this;
@@ -44,6 +49,11 @@ public class BasketItemReference   {
     this.classificationCode = classificationCode;
   }
 
+  /**
+   * 
+   * @param identificationId
+   * @return
+   */
   public BasketItemReference identificationId(String identificationId) {
     this.identificationId = identificationId;
     return this;
@@ -64,6 +74,11 @@ public class BasketItemReference   {
     this.identificationId = identificationId;
   }
 
+  /**
+   * 
+   * @param name
+   * @return
+   */
   public BasketItemReference name(String name) {
     this.name = name;
     return this;

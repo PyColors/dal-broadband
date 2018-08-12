@@ -13,79 +13,107 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * ModelPackage
+ * ModelPackage.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-23T16:03:05.626Z")
 
 public class ModelPackage {
+	
+	/** The account category. */
 	@JsonProperty("accountCategory")
 	private String accountCategory = null;
 
+	/** The appointment window. */
 	@JsonProperty("appointmentWindow")
 	private AppointmentWindow appointmentWindow = null;
 
+	/** The bundle. */
 	@JsonProperty("bundle")
 	private Bundle bundle = null;
 
+	/** The dependent on. */
 	@JsonProperty("dependentOn")
 	@Valid
 	private List<String> dependentOn = null;
 
+	/** The discounts. */
 	@JsonProperty("discounts")
 	@Valid
 	private List<Discount> discounts = null;
 
+	/** The hardwares. */
 	@JsonProperty("hardwares")
 	@Valid
 	private List<Hardware> hardwares = null;
 
+	/** The installation address. */
 	@JsonProperty("installationAddress")
 	private InstallationAddress installationAddress = null;
 
+	/** The is changed. */
 	@JsonProperty("isChanged")
 	private Boolean isChanged = null;
 
+	/** The line package type. */
 	@JsonProperty("linePackageType")
 	private String linePackageType = null;
 
+	/** The line treatment type. */
 	@JsonProperty("lineTreatmentType")
 	private String lineTreatmentType = null;
 
+	/** The package id. */
 	@JsonProperty("packageId")
 	private String packageId = null;
 
+	/** The package type. */
 	@JsonProperty("packageType")
 	private String packageType = null;
 
+	/** The phone number. */
 	@JsonProperty("phoneNumber")
 	private String phoneNumber = null;
 
+	/** The plan type. */
 	@JsonProperty("planType")
 	private String planType = null;
 
+	/** The price details. */
 	@JsonProperty("priceDetails")
 	private PriceDetails priceDetails = null;
 
+	/** The removable. */
 	@JsonProperty("removable")
 	private Boolean removable = null;
 
+	/** The sequence. */
 	@JsonProperty("sequence")
 	private Integer sequence = null;
 
+	/** The service point. */
 	@JsonProperty("servicePoint")
 	private BasketServicePoint servicePoint = null;
 
+	/** The service start date. */
 	@JsonProperty("serviceStartDate")
 	private String serviceStartDate = null;
 
+	/** The services. */
 	@JsonProperty("services")
 	@Valid
 	private List<Service> services = null;
 
+	/** The voucher code. */
 	@JsonProperty("voucherCode")
 	private String voucherCode = null;
 
+	/**
+	 * Account category.
+	 *
+	 * @param accountCategory the account category
+	 * @return the model package
+	 */
 	public ModelPackage accountCategory(String accountCategory) {
 		this.accountCategory = accountCategory;
 		return this;
@@ -93,30 +121,41 @@ public class ModelPackage {
 
 	/**
 	 * If the package was constructed in a segment sensitive way, this field
-	 * contains the segment (example customer or business)
-	 * 
+	 * contains the segment (example customer or business).
+	 *
 	 * @return accountCategory
-	 **/
+	 */
 	@ApiModelProperty(value = "If the package was constructed in a segment sensitive way, this field contains the segment (example customer or business)")
 
 	public String getAccountCategory() {
 		return accountCategory;
 	}
 
+	/**
+	 * Sets the account category.
+	 *
+	 * @param accountCategory the new account category
+	 */
 	public void setAccountCategory(String accountCategory) {
 		this.accountCategory = accountCategory;
 	}
 
+	/**
+	 * Appointment window.
+	 *
+	 * @param appointmentWindow the appointment window
+	 * @return the model package
+	 */
 	public ModelPackage appointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 		return this;
 	}
 
 	/**
-	 * Get appointmentWindow
-	 * 
+	 * Get appointmentWindow.
+	 *
 	 * @return appointmentWindow
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -125,20 +164,31 @@ public class ModelPackage {
 		return appointmentWindow;
 	}
 
+	/**
+	 * Sets the appointment window.
+	 *
+	 * @param appointmentWindow the new appointment window
+	 */
 	public void setAppointmentWindow(AppointmentWindow appointmentWindow) {
 		this.appointmentWindow = appointmentWindow;
 	}
 
+	/**
+	 * Bundle.
+	 *
+	 * @param bundle the bundle
+	 * @return the model package
+	 */
 	public ModelPackage bundle(Bundle bundle) {
 		this.bundle = bundle;
 		return this;
 	}
 
 	/**
-	 * Get bundle
-	 * 
+	 * Get bundle.
+	 *
 	 * @return bundle
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -147,56 +197,90 @@ public class ModelPackage {
 		return bundle;
 	}
 
+	/**
+	 * Sets the bundle.
+	 *
+	 * @param bundle the new bundle
+	 */
 	public void setBundle(Bundle bundle) {
 		this.bundle = bundle;
 	}
 
+	/**
+	 * Dependent on.
+	 *
+	 * @param dependentOn the dependent on
+	 * @return the model package
+	 */
 	public ModelPackage dependentOn(List<String> dependentOn) {
 		this.dependentOn = dependentOn;
 		return this;
 	}
 
+	/**
+	 * Adds the dependent on item.
+	 *
+	 * @param dependentOnItem the dependent on item
+	 * @return the model package
+	 */
 	public ModelPackage addDependentOnItem(String dependentOnItem) {
 		if (this.dependentOn == null) {
-			this.dependentOn = new ArrayList<String>();
+			this.dependentOn = new ArrayList<>();
 		}
 		this.dependentOn.add(dependentOnItem);
 		return this;
 	}
 
 	/**
-	 * List of package Ids on which this package is dependent on
-	 * 
+	 * List of package Ids on which this package is dependent on.
+	 *
 	 * @return dependentOn
-	 **/
+	 */
 	@ApiModelProperty(value = "List of package Ids on which this package is dependent on")
 
 	public List<String> getDependentOn() {
 		return dependentOn;
 	}
 
+	/**
+	 * Sets the dependent on.
+	 *
+	 * @param dependentOn the new dependent on
+	 */
 	public void setDependentOn(List<String> dependentOn) {
 		this.dependentOn = dependentOn;
 	}
 
+	/**
+	 * Discounts.
+	 *
+	 * @param discounts the discounts
+	 * @return the model package
+	 */
 	public ModelPackage discounts(List<Discount> discounts) {
 		this.discounts = discounts;
 		return this;
 	}
 
+	/**
+	 * Adds the discounts item.
+	 *
+	 * @param discountsItem the discounts item
+	 * @return the model package
+	 */
 	public ModelPackage addDiscountsItem(Discount discountsItem) {
 		if (this.discounts == null) {
-			this.discounts = new ArrayList<Discount>();
+			this.discounts = new ArrayList<>();
 		}
 		this.discounts.add(discountsItem);
 		return this;
 	}
 
 	/**
-	 * Get discounts
-	 * 
+	 * Get discounts.
+	 *
 	 * @return discounts
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -205,28 +289,45 @@ public class ModelPackage {
 		return discounts;
 	}
 
+	/**
+	 * Sets the discounts.
+	 *
+	 * @param discounts the new discounts
+	 */
 	public void setDiscounts(List<Discount> discounts) {
 		this.discounts = discounts;
 	}
 
+	/**
+	 * Hardwares.
+	 *
+	 * @param hardwares the hardwares
+	 * @return the model package
+	 */
 	public ModelPackage hardwares(List<Hardware> hardwares) {
 		this.hardwares = hardwares;
 		return this;
 	}
 
+	/**
+	 * Adds the hardwares item.
+	 *
+	 * @param hardwaresItem the hardwares item
+	 * @return the model package
+	 */
 	public ModelPackage addHardwaresItem(Hardware hardwaresItem) {
 		if (this.hardwares == null) {
-			this.hardwares = new ArrayList<Hardware>();
+			this.hardwares = new ArrayList<>();
 		}
 		this.hardwares.add(hardwaresItem);
 		return this;
 	}
 
 	/**
-	 * Get hardwares
-	 * 
+	 * Get hardwares.
+	 *
 	 * @return hardwares
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -235,20 +336,31 @@ public class ModelPackage {
 		return hardwares;
 	}
 
+	/**
+	 * Sets the hardwares.
+	 *
+	 * @param hardwares the new hardwares
+	 */
 	public void setHardwares(List<Hardware> hardwares) {
 		this.hardwares = hardwares;
 	}
 
+	/**
+	 * Installation address.
+	 *
+	 * @param installationAddress the installation address
+	 * @return the model package
+	 */
 	public ModelPackage installationAddress(InstallationAddress installationAddress) {
 		this.installationAddress = installationAddress;
 		return this;
 	}
 
 	/**
-	 * Get installationAddress
-	 * 
+	 * Get installationAddress.
+	 *
 	 * @return installationAddress
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -257,10 +369,21 @@ public class ModelPackage {
 		return installationAddress;
 	}
 
+	/**
+	 * Sets the installation address.
+	 *
+	 * @param installationAddress the new installation address
+	 */
 	public void setInstallationAddress(InstallationAddress installationAddress) {
 		this.installationAddress = installationAddress;
 	}
 
+	/**
+	 * Checks if is changed.
+	 *
+	 * @param isChanged the is changed
+	 * @return the model package
+	 */
 	public ModelPackage isChanged(Boolean isChanged) {
 		this.isChanged = isChanged;
 		return this;
@@ -277,70 +400,114 @@ public class ModelPackage {
 		return isChanged;
 	}
 
+	/**
+	 * Sets the checks if is changed.
+	 *
+	 * @param isChanged the new checks if is changed
+	 */
 	public void setIsChanged(Boolean isChanged) {
 		this.isChanged = isChanged;
 	}
 
+	/**
+	 * Line package type.
+	 *
+	 * @param linePackageType the line package type
+	 * @return the model package
+	 */
 	public ModelPackage linePackageType(String linePackageType) {
 		this.linePackageType = linePackageType;
 		return this;
 	}
 
 	/**
-	 * Get linePackageType
-	 * 
+	 * Get linePackageType.
+	 *
 	 * @return linePackageType
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getLinePackageType() {
 		return linePackageType;
 	}
 
+	/**
+	 * Sets the line package type.
+	 *
+	 * @param linePackageType the new line package type
+	 */
 	public void setLinePackageType(String linePackageType) {
 		this.linePackageType = linePackageType;
 	}
 
+	/**
+	 * Line treatment type.
+	 *
+	 * @param lineTreatmentType the line treatment type
+	 * @return the model package
+	 */
 	public ModelPackage lineTreatmentType(String lineTreatmentType) {
 		this.lineTreatmentType = lineTreatmentType;
 		return this;
 	}
 
 	/**
-	 * Get lineTreatmentType
-	 * 
+	 * Get lineTreatmentType.
+	 *
 	 * @return lineTreatmentType
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getLineTreatmentType() {
 		return lineTreatmentType;
 	}
 
+	/**
+	 * Sets the line treatment type.
+	 *
+	 * @param lineTreatmentType the new line treatment type
+	 */
 	public void setLineTreatmentType(String lineTreatmentType) {
 		this.lineTreatmentType = lineTreatmentType;
 	}
 
+	/**
+	 * Package id.
+	 *
+	 * @param packageId the package id
+	 * @return the model package
+	 */
 	public ModelPackage packageId(String packageId) {
 		this.packageId = packageId;
 		return this;
 	}
 
 	/**
-	 * Unique ID for the package
-	 * 
+	 * Unique ID for the package.
+	 *
 	 * @return packageId
-	 **/
+	 */
 	@ApiModelProperty(value = "Unique ID for the package")
 
 	public String getPackageId() {
 		return packageId;
 	}
 
+	/**
+	 * Sets the package id.
+	 *
+	 * @param packageId the new package id
+	 */
 	public void setPackageId(String packageId) {
 		this.packageId = packageId;
 	}
 
+	/**
+	 * Package type.
+	 *
+	 * @param packageType the package type
+	 * @return the model package
+	 */
 	public ModelPackage packageType(String packageType) {
 		this.packageType = packageType;
 		return this;
@@ -358,60 +525,93 @@ public class ModelPackage {
 		return packageType;
 	}
 
+	/**
+	 * Sets the package type.
+	 *
+	 * @param packageType the new package type
+	 */
 	public void setPackageType(String packageType) {
 		this.packageType = packageType;
 	}
 
+	/**
+	 * Phone number.
+	 *
+	 * @param phoneNumber the phone number
+	 * @return the model package
+	 */
 	public ModelPackage phoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 		return this;
 	}
 
 	/**
-	 * Phone Number for FLBB
-	 * 
+	 * Phone Number for FLBB.
+	 *
 	 * @return phoneNumber
-	 **/
+	 */
 	@ApiModelProperty(value = "Phone Number for FLBB")
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
+	/**
+	 * Sets the phone number.
+	 *
+	 * @param phoneNumber the new phone number
+	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
+	/**
+	 * Plan type.
+	 *
+	 * @param planType the plan type
+	 * @return the model package
+	 */
 	public ModelPackage planType(String planType) {
 		this.planType = planType;
 		return this;
 	}
 
 	/**
-	 * Get planType
-	 * 
+	 * Get planType.
+	 *
 	 * @return planType
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	public String getPlanType() {
 		return planType;
 	}
 
+	/**
+	 * Sets the plan type.
+	 *
+	 * @param planType the new plan type
+	 */
 	public void setPlanType(String planType) {
 		this.planType = planType;
 	}
 
+	/**
+	 * Price details.
+	 *
+	 * @param priceDetails the price details
+	 * @return the model package
+	 */
 	public ModelPackage priceDetails(PriceDetails priceDetails) {
 		this.priceDetails = priceDetails;
 		return this;
 	}
 
 	/**
-	 * Get priceDetails
-	 * 
+	 * Get priceDetails.
+	 *
 	 * @return priceDetails
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -420,10 +620,21 @@ public class ModelPackage {
 		return priceDetails;
 	}
 
+	/**
+	 * Sets the price details.
+	 *
+	 * @param priceDetails the new price details
+	 */
 	public void setPriceDetails(PriceDetails priceDetails) {
 		this.priceDetails = priceDetails;
 	}
 
+	/**
+	 * Removable.
+	 *
+	 * @param removable the removable
+	 * @return the model package
+	 */
 	public ModelPackage removable(Boolean removable) {
 		this.removable = removable;
 		return this;
@@ -431,19 +642,30 @@ public class ModelPackage {
 
 	/**
 	 * Flag to indicate if this package can be removed without affecting the
-	 * integrity of the basket
-	 * 
+	 * integrity of the basket.
+	 *
 	 * @return removable
-	 **/
+	 */
 
 	public Boolean isRemovable() {
 		return removable;
 	}
 
+	/**
+	 * Sets the removable.
+	 *
+	 * @param removable the new removable
+	 */
 	public void setRemovable(Boolean removable) {
 		this.removable = removable;
 	}
 
+	/**
+	 * Sequence.
+	 *
+	 * @param sequence the sequence
+	 * @return the model package
+	 */
 	public ModelPackage sequence(Integer sequence) {
 		this.sequence = sequence;
 		return this;
@@ -461,20 +683,31 @@ public class ModelPackage {
 		return sequence;
 	}
 
+	/**
+	 * Sets the sequence.
+	 *
+	 * @param sequence the new sequence
+	 */
 	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
 	}
 
+	/**
+	 * Service point.
+	 *
+	 * @param servicePoint the service point
+	 * @return the model package
+	 */
 	public ModelPackage servicePoint(BasketServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 		return this;
 	}
 
 	/**
-	 * Get servicePoint
-	 * 
+	 * Get servicePoint.
+	 *
 	 * @return servicePoint
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -483,48 +716,76 @@ public class ModelPackage {
 		return servicePoint;
 	}
 
+	/**
+	 * Sets the service point.
+	 *
+	 * @param servicePoint the new service point
+	 */
 	public void setServicePoint(BasketServicePoint servicePoint) {
 		this.servicePoint = servicePoint;
 	}
 
+	/**
+	 * Service start date.
+	 *
+	 * @param serviceStartDate the service start date
+	 * @return the model package
+	 */
 	public ModelPackage serviceStartDate(String serviceStartDate) {
 		this.serviceStartDate = serviceStartDate;
 		return this;
 	}
 
 	/**
-	 * Service Start Date for FLBB
-	 * 
+	 * Service Start Date for FLBB.
+	 *
 	 * @return serviceStartDate
-	 **/
+	 */
 	@ApiModelProperty(value = "Service Start Date for FLBB - 2017-10-01T09:45:00.000+02:00")
 
 	public String getServiceStartDate() {
 		return serviceStartDate;
 	}
 
+	/**
+	 * Sets the service start date.
+	 *
+	 * @param serviceStartDate the new service start date
+	 */
 	public void setServiceStartDate(String serviceStartDate) {
 		this.serviceStartDate = serviceStartDate;
 	}
 
+	/**
+	 * Services.
+	 *
+	 * @param services the services
+	 * @return the model package
+	 */
 	public ModelPackage services(List<Service> services) {
 		this.services = services;
 		return this;
 	}
 
+	/**
+	 * Adds the services item.
+	 *
+	 * @param servicesItem the services item
+	 * @return the model package
+	 */
 	public ModelPackage addServicesItem(Service servicesItem) {
 		if (this.services == null) {
-			this.services = new ArrayList<Service>();
+			this.services = new ArrayList<>();
 		}
 		this.services.add(servicesItem);
 		return this;
 	}
 
 	/**
-	 * Get services
-	 * 
+	 * Get services.
+	 *
 	 * @return services
-	 **/
+	 */
 	@ApiModelProperty(value = "")
 
 	@Valid
@@ -533,30 +794,49 @@ public class ModelPackage {
 		return services;
 	}
 
+	/**
+	 * Sets the services.
+	 *
+	 * @param services the new services
+	 */
 	public void setServices(List<Service> services) {
 		this.services = services;
 	}
 
+	/**
+	 * Voucher code.
+	 *
+	 * @param voucherCode the voucher code
+	 * @return the model package
+	 */
 	public ModelPackage voucherCode(String voucherCode) {
 		this.voucherCode = voucherCode;
 		return this;
 	}
 
 	/**
-	 * Vouchercode which is added to the package
-	 * 
+	 * Vouchercode which is added to the package.
+	 *
 	 * @return voucherCode
-	 **/
+	 */
 	@ApiModelProperty(value = "Vouchercode which is added to the package")
 
 	public String getVoucherCode() {
 		return voucherCode;
 	}
 
+	/**
+	 * Sets the voucher code.
+	 *
+	 * @param voucherCode the new voucher code
+	 */
 	public void setVoucherCode(String voucherCode) {
 		this.voucherCode = voucherCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -589,6 +869,9 @@ public class ModelPackage {
 				&& Objects.equals(this.voucherCode, modelPackage.voucherCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return Objects.hash(accountCategory, appointmentWindow, bundle, dependentOn, discounts, hardwares,
@@ -596,6 +879,9 @@ public class ModelPackage {
 				planType, priceDetails, removable, sequence, servicePoint, serviceStartDate, services, voucherCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -629,6 +915,9 @@ public class ModelPackage {
 	/**
 	 * Convert the given object to string with each line indented by 4 spaces
 	 * (except the first line).
+	 *
+	 * @param o the o
+	 * @return the string
 	 */
 	private String toIndentedString(java.lang.Object o) {
 		if (o == null) {

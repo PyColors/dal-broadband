@@ -24,6 +24,11 @@ public class BasketLineSettings   {
   @JsonProperty("terminationCode")
   private String terminationCode = null;
 
+  /**
+   * 
+   * @param installationCode
+   * @return
+   */
   public BasketLineSettings installationCode(String installationCode) {
     this.installationCode = installationCode;
     return this;
@@ -44,6 +49,11 @@ public class BasketLineSettings   {
     this.installationCode = installationCode;
   }
 
+  /**
+   * 
+   * @param serviceCode
+   * @return
+   */
   public BasketLineSettings serviceCode(String serviceCode) {
     this.serviceCode = serviceCode;
     return this;
@@ -64,6 +74,11 @@ public class BasketLineSettings   {
     this.serviceCode = serviceCode;
   }
 
+  /**
+   * 
+   * @param terminationCode
+   * @return
+   */
   public BasketLineSettings terminationCode(String terminationCode) {
     this.terminationCode = terminationCode;
     return this;

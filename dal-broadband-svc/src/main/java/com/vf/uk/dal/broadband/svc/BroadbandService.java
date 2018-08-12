@@ -15,21 +15,25 @@ import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
+import com.vf.uk.dal.broadband.entity.SelectedAvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 
 /**
- * @author Infosys limited.
+ * The Interface BroadbandService.
  *
+ * @author Infosys limited.
  */
 public interface BroadbandService {
 
 	/**
-	 * check availability service for broadband
-	 * @param availabilityCheckRequest
-	 * @param broadbandId 
-	 * @param acceptVersion 
+	 * check availability service for broadband.
+	 *
+	 * @param availabilityCheckRequest the availability check request
+	 * @param broadbandId the broadband id
+	 * @param broadband the broadband
+	 * @param userType the user type
 	 * @return AvailabilityCheckResponse
 	 */
 	
@@ -37,19 +41,20 @@ public interface BroadbandService {
 
 	
 	/**
-	 * get the FLBB bundle list
-	 * @param getBundleListSearchCriteria
-	 * @return List<FlbBundle> 
+	 * get the FLBB bundle list.
+	 *
+	 * @param getBundleListSearchCriteria the get bundle list search criteria
+	 * @return List<FlbBundle>
 	 */
 	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
 
 	/**
-	 * Service Start date
-	 * @param earliestAvailableStartDate
-	 * @param range
+	 * Service Start date.
+	 *
+	 * @param postCode the post code
+	 * @param categoryPreferences the category preferences
+	 * @param userType the user type
 	 * @return ServiceStartDates
-	 * @throws DateTimeParseException
-	 * @throws ParseException
 	 */
 	
 	/*public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
@@ -71,27 +76,83 @@ public interface BroadbandService {
 	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences,String userType);
 
 
+	/**
+	 * Creates the or update package.
+	 *
+	 * @param basketRequest the basket request
+	 * @param broadband the broadband
+	 * @param broadbandId the broadband id
+	 * @return the basket
+	 */
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId);
 
 
+	/**
+	 * Gets the broadband from cache.
+	 *
+	 * @param broadbandId the broadband id
+	 * @return the broadband from cache
+	 */
 	public Broadband getBroadbandFromCache(String broadbandId);
 
 
+	/**
+	 * Update basket with line treatment type.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param updateLineRequest the update line request
+	 */
 	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest);
 
 
+	/**
+	 * Creates the appointment.
+	 *
+	 * @param createAppointmentRequest the create appointment request
+	 * @param broadbandId the broadband id
+	 * @return the creates the appointment response
+	 */
 	public CreateAppointmentResponse createAppointment(CreateAppointmentRequest createAppointmentRequest,
 			String broadbandId);
 
 
+	/**
+	 * Gets the appointment for FLBB.
+	 *
+	 * @param broadbandId the broadband id
+	 * @return the appointment for FLBB
+	 */
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId);
 
 
+	/**
+	 * Optimize package for FLBB.
+	 *
+	 * @param optimizePackageRequest the optimize package request
+	 * @param broadbandId the broadband id
+	 * @return the optimize package response
+	 */
 	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest, String broadbandId);
 
 
+	/**
+	 * Gets the compatible devices for bundle.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param planId the plan id
+	 * @return the compatible devices for bundle
+	 */
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId);
 
 
+	/**
+	 * Update basket with service date.
+	 *
+	 * @param broadbandId the broadband id
+	 * @param serviceStartDateRequest the service start date request
+	 */
 	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest);
+
+
+	public SelectedAvailabilityCheckResponse getSelectedLineOptions(String broadbandId);
 }

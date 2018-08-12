@@ -18,7 +18,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-// TODO: Auto-generated Javadoc
 /**
  * MerchandisingPromotion.
  */
