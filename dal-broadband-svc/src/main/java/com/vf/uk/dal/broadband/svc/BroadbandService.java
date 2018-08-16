@@ -9,6 +9,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
+import com.vf.uk.dal.broadband.entity.Extra;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
@@ -155,4 +156,7 @@ public interface BroadbandService {
 
 
 	public SelectedAvailabilityCheckResponse getSelectedLineOptions(String broadbandId);
+
+
+	public Extra getCompatibleExtras(String planId);
 }

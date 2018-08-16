@@ -42,6 +42,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
+import com.vf.uk.dal.broadband.entity.Extra;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.OptimizePackageRequest;
 import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
@@ -761,6 +762,17 @@ public class BroadbandControllerTest {
 			Assert.assertEquals(204, response.getStatusCodeValue());
 		} catch (Exception e) {
 			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
+		}
+	}
+	
+	@Test
+	public void getCompatabileExtras() {
+		try {
+			 
+			ResponseEntity<Extra> response = broadBandController.getCompatibleExtras("12345678907");
+			Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+		} catch (Exception e) {
+			LogHelper.error(this, "Get Compatabile Extras!!" + e);
 		}
 	}
 
