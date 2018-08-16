@@ -43,6 +43,7 @@ import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
+import com.vf.uk.dal.broadband.entity.Extra;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
@@ -99,6 +100,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	/** The mapper. */
 	@Autowired
 	DozerBeanMapper mapper;
+	
 
 	/*
 	 * This methods calls Get Service Availability MS, if the response and
@@ -1183,5 +1185,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public Extra getCompatibleExtras(String planId) {
+		return broadbandDao.getCompatibleExtras(planId);
 	}
 }

@@ -9,7 +9,9 @@ import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentResponse;
+import com.vf.uk.dal.broadband.entity.Extra;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
 import com.vf.uk.dal.broadband.entity.GetBundleListSearchCriteria;
@@ -360,6 +363,18 @@ public class BroadbandController {
 		return new ResponseEntity<>(broadbandService.getSelectedLineOptions(broadbandId), HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Get the list of extras associated with plan ", notes = "This service gets the details of extra for a plan along with the necessary information in the response.", response = Extra.class, responseContainer = "List", tags = { "Extra", })
+	@ApiResponses(value = { 
+	        @ApiResponse(code = 200, message = "Success", response = Extra.class, responseContainer = "List"),
+	        @ApiResponse(code = 400, message = "Bad request", response = com.vf.uk.dal.broadband.entity.Error.class),
+			@ApiResponse(code = 405, message = "Method not allowed", response = com.vf.uk.dal.broadband.entity.Error.class),
+	        @ApiResponse(code = 404, message = "Not found", response = com.vf.uk.dal.broadband.entity.Error.class),
+	        @ApiResponse(code = 500, message = "Internal Server Error", response = com.vf.uk.dal.broadband.entity.Error.class) })
+	@GetMapping(value = "/compatibleExtras/{planId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Extra> getCompatibleExtras(@ApiParam(value = "Returns compatible extras for the specific plan ID", required = true) @PathVariable("planId") String planId){
+		return new ResponseEntity<>(broadbandService.getCompatibleExtras(planId),HttpStatus.OK);
+		
+	}
 	
 	
 }

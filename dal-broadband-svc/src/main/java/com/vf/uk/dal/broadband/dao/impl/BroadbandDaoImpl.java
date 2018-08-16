@@ -32,6 +32,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
 import com.vf.uk.dal.broadband.dao.BroadbandDao;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.BundleDetails;
+import com.vf.uk.dal.broadband.entity.Extra;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest;
@@ -69,6 +70,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	/** The broadband repo provider. */
 	@Autowired
 	private BroadbandRepoProvider broadbandRepoProvider;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	/*
 	 * calls the get service availability MS. (non-Javadoc)
@@ -530,6 +534,17 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		} catch (Exception e) {
 			LogHelper.error(this, "::::::Exception occured while calling updateBasketWithServiceDate " + e);
 			throw new ApplicationException(ExceptionMessages.GEN_EXCP_ADD_PRODUCT);
+		}
+	}
+
+	@Override
+	public Extra getCompatibleExtras(String planId) {
+		String url = "https://BUNDLES-V1/bundles/catalogue/bundle/%s/composition";
+		try {
+			return restTemplate.getForEntity(String.format(url, planId),  Extra.class).getBody();
+		} catch (Exception e) {
+			LogHelper.error(this, "::::::Exception occured while calling getCompatibleExtras " + e);
+			throw new ApplicationException(e.getMessage());
 		}
 	}
 }
