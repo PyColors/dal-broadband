@@ -12,90 +12,15 @@
 
 package com.vf.uk.dal.broadband.cache.repository.entity;
 
-import java.util.Objects;
+import lombok.Data;
 
 /**
  * SalesOrderAppointmentRequest
  */
+@Data
 public class SalesOrderAppointmentRequest {
 	private AppointmentWindow appointmentWindow = null;
 
 	private SiteNote siteNote = null;
-
-	public SalesOrderAppointmentRequest appointmentWindow(AppointmentWindow appointmentWindow) {
-		this.appointmentWindow = appointmentWindow;
-		return this;
-	}
-
-	/**
-	 * Get appointmentWindow
-	 * 
-	 * @return appointmentWindow
-	 **/
-	public AppointmentWindow getAppointmentWindow() {
-		return appointmentWindow;
-	}
-
-	public void setAppointmentWindow(AppointmentWindow appointmentWindow) {
-		this.appointmentWindow = appointmentWindow;
-	}
-
-	public SalesOrderAppointmentRequest siteNote(SiteNote siteNote) {
-		this.siteNote = siteNote;
-		return this;
-	}
-
-	/**
-	 * Get siteNote
-	 * 
-	 * @return siteNote
-	 **/
-	public SiteNote getSiteNote() {
-		return siteNote;
-	}
-
-	public void setSiteNote(SiteNote siteNote) {
-		this.siteNote = siteNote;
-	}
-
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SalesOrderAppointmentRequest salesOrderAppointmentRequest = (SalesOrderAppointmentRequest) o;
-		return Objects.equals(this.appointmentWindow, salesOrderAppointmentRequest.appointmentWindow)
-				&& Objects.equals(this.siteNote, salesOrderAppointmentRequest.siteNote);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(appointmentWindow, siteNote);
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class SalesOrderAppointmentRequest {\n");
-
-		sb.append("    appointmentWindow: ").append(toIndentedString(appointmentWindow)).append("\n");
-		sb.append("    siteNote: ").append(toIndentedString(siteNote)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
-
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
 
 }

@@ -64,6 +64,7 @@ import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
+import com.vf.uk.dal.broadband.exception.BroadbandJourneyCustomException;
 import com.vf.uk.dal.broadband.exception.ExceptionMessages;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
@@ -100,7 +101,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 	/** The mapper. */
 	@Autowired
 	DozerBeanMapper mapper;
-	
 
 	/*
 	 * This methods calls Get Service Availability MS, if the response and
@@ -452,8 +452,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 							if (CollectionUtils.isNotEmpty(serLines.getLineTreatmentList())) {
 								LineTreatment lineTreatment = serLines.getLineTreatmentList().get(0);
 								flbBundle.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());
-								if (lineTreatment.isPreOrder() != null) {
-									flbBundle.setPreOrderable(lineTreatment.isPreOrder());
+								if (lineTreatment.getPreOrder() != null) {
+									flbBundle.setPreOrderable(lineTreatment.getPreOrder());
 								}
 							}
 						}
@@ -617,8 +617,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 			int noOfAddress = ConfigHelper.getInt(BroadBandConstant.BROADBAND_NO_OF_ADDRESS,
 					BroadBandConstant.DEFAULT_BROADBAND_NO_OF_ADDRESS);
 			if (addressInfo.getAddresses().size() > noOfAddress) {
-				throw new ApplicationException(ExceptionMessages.BUSINESS_ADDRESS);
-			}
+				throw new BroadbandJourneyCustomException(ExceptionMessages.BUSINESS_ADDRESS_CODE, ExceptionMessages.BUSINESS_ADDRESS, "400");
+				}
 		}
 
 		ResponseEntity<AvailabilityCheckResponse> methodLinkBuilderLineOptions = ControllerLinkBuilder
@@ -913,7 +913,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			response.setApplicationId(createAppointment.getAppointmentWindow().getApplicationId());
 		} else {
 			LogHelper.error(this, "Create Appointment failed!!!");
-			throw new ApplicationException(ExceptionMessages.CREATE_APPOINTMENT_FAILED);
+			throw new BroadbandJourneyCustomException(ExceptionMessages.CREATE_APPOINTMENT_FAILED_CODE,ExceptionMessages.CREATE_APPOINTMENT_FAILED,"400");
 		}
 
 		Link selfLink = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(BroadbandController.class)
@@ -1098,7 +1098,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		} else {
 			LogHelper.error(this, "Invalid Broadband Id !!!");
-			throw new ApplicationException(ExceptionMessages.INVALID_BROADBAND_ID);
+			throw new BroadbandJourneyCustomException(ExceptionMessages.INVALID_BROADBAND_ID_CODE,ExceptionMessages.INVALID_BROADBAND_ID,"400");
 		}
 	}
 
@@ -1186,7 +1186,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		return response;
 	}
-
 	@Override
 	public Extra getCompatibleExtras(String planId) {
 		return broadbandDao.getCompatibleExtras(planId);

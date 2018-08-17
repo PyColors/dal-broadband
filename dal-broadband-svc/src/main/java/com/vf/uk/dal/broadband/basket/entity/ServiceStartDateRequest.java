@@ -1,102 +1,21 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
 
 /**
  * ServiceStartDateRequest.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+@Data
+public class ServiceStartDateRequest {
 
-public class ServiceStartDateRequest   {
-  
-  /** The service start date. */
-  @JsonProperty("serviceStartDate")
-  private String serviceStartDate = null;
+	/** The service start date. */
+	@JsonProperty("serviceStartDate")
+	private String serviceStartDate = null;
 
-  /**
-   * Service start date.
-   *
-   * @param serviceStartDate the service start date
-   * @return the service start date request
-   */
-  public ServiceStartDateRequest serviceStartDate(String serviceStartDate) {
-    this.serviceStartDate = serviceStartDate;
-    return this;
-  }
-
-  /**
-   * Get serviceStartDate.
-   *
-   * @return serviceStartDate
-   */
-
-  public String getServiceStartDate() {
-    return serviceStartDate;
-  }
-
-  /**
-   * Sets the service start date.
-   *
-   * @param serviceStartDate the new service start date
-   */
-  public void setServiceStartDate(String serviceStartDate) {
-    this.serviceStartDate = serviceStartDate;
-  }
-
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    ServiceStartDateRequest serviceStartDateRequest = (ServiceStartDateRequest) o;
-    return Objects.equals(this.serviceStartDate, serviceStartDateRequest.serviceStartDate);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode() {
-    return Objects.hash(serviceStartDate);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class ServiceStartDateRequest {\n");
-    
-    sb.append("    serviceStartDate: ").append(toIndentedString(serviceStartDate)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   *
-   * @param o the o
-   * @return the string
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
 }
-

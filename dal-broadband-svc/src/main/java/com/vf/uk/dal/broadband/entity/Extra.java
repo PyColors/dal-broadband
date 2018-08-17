@@ -6,9 +6,9 @@ import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Builder;
+import lombok.Data;
 
-@Builder
+@Data
 public class Extra   {
 
   @JsonProperty("extraId")

@@ -101,6 +101,30 @@ public class ExceptionMessages {
 	/** The Constant BUSINESS_ADDRESS. */
 	public static final String BUSINESS_ADDRESS = "Please contact sales representative";
 
+	public static final String EMPTY_SOURCE_CODE = "EMPTY_SOURCE_CODE";
+
+
+	public static final String CUSTOMER_REQUESTED_DATE = "CUSTOMER_REQUESTED_DATE";
+
+	public static final String EMPTY_PACKAGE_ID = "EMPTY_PACKAGE_ID";
+
+	public static final String EMPTY_BUNDLE_ID_CODE = "EMPTY_BUNDLE_ID_CODE";
+
+	public static final String EMPTY_HARDWARE_ID_CODE = "EMPTY_HARDWARE_ID_CODE";
+
+	public static final String EMPTY_LINE_TREATMENT_TYPE = "EMPTY_LINE_TREATMENT_TYPE";
+
+	public static final String EMPTY_START_DATE = "EMPTY_START_DATE";
+
+	public static final String INVALID_DATE_FORMAT = "INVALID_DATE_FORMAT";
+
+	public static final String EMPTY_START_TIME = "EMPTY_START_TIME";
+
+	public static final String BUSINESS_ADDRESS_CODE = "BUSINESS_ADDRESS_CODE";
+
+	public static final String CREATE_APPOINTMENT_FAILED_CODE = "CREATE_APPOINTMENT_FAILED_CODE";
+
+	public static final String INVALID_BROADBAND_ID_CODE = "INVALID_BROADBAND_ID_CODE";
 	/**
 	 * Instantiates a new exception messages.
 	 */

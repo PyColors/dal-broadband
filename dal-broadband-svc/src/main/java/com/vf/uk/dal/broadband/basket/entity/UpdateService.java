@@ -1,182 +1,29 @@
 package com.vf.uk.dal.broadband.basket.entity;
 
-import java.util.Objects;
-
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * UpdateService.
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+@Data
+public class UpdateService {
 
-public class UpdateService   {
-  
-  /** The action. */
-  @JsonProperty("action")
-  private String action = null;
+	/** The action. */
+	@JsonProperty("action")
+	private String action = null;
 
-  /** The product line id. */
-  @JsonProperty("productLineId")
-  private String productLineId = null;
+	/** The product line id. */
+	@JsonProperty("productLineId")
+	private String productLineId = null;
 
-  /** The sku id. */
-  @JsonProperty("skuId")
-  private String skuId = null;
+	/** The sku id. */
+	@JsonProperty("skuId")
+	private String skuId = null;
 
-  /**
-   * Action.
-   *
-   * @param action the action
-   * @return the update service
-   */
-  public UpdateService action(String action) {
-    this.action = action;
-    return this;
-  }
-
-  /**
-   * Get action.
-   *
-   * @return action
-   */
-  @ApiModelProperty(value = "")
-
-
-  public String getAction() {
-    return action;
-  }
-
-  /**
-   * Sets the action.
-   *
-   * @param action the new action
-   */
-  public void setAction(String action) {
-    this.action = action;
-  }
-
-  /**
-   * Product line id.
-   *
-   * @param productLineId the product line id
-   * @return the update service
-   */
-  public UpdateService productLineId(String productLineId) {
-    this.productLineId = productLineId;
-    return this;
-  }
-
-  /**
-   * Get productLineId.
-   *
-   * @return productLineId
-   */
-  @ApiModelProperty(value = "")
-
-
-  public String getProductLineId() {
-    return productLineId;
-  }
-
-  /**
-   * Sets the product line id.
-   *
-   * @param productLineId the new product line id
-   */
-  public void setProductLineId(String productLineId) {
-    this.productLineId = productLineId;
-  }
-
-  /**
-   * Sku id.
-   *
-   * @param skuId the sku id
-   * @return the update service
-   */
-  public UpdateService skuId(String skuId) {
-    this.skuId = skuId;
-    return this;
-  }
-
-  /**
-   * Get skuId.
-   *
-   * @return skuId
-   */
-  @ApiModelProperty(value = "")
-
-
-  public String getSkuId() {
-    return skuId;
-  }
-
-  /**
-   * Sets the sku id.
-   *
-   * @param skuId the new sku id
-   */
-  public void setSkuId(String skuId) {
-    this.skuId = skuId;
-  }
-
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    UpdateService updateService = (UpdateService) o;
-    return Objects.equals(this.action, updateService.action) &&
-        Objects.equals(this.productLineId, updateService.productLineId) &&
-        Objects.equals(this.skuId, updateService.skuId);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode() {
-    return Objects.hash(action, productLineId, skuId);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateService {\n");
-    
-    sb.append("    action: ").append(toIndentedString(action)).append("\n");
-    sb.append("    productLineId: ").append(toIndentedString(productLineId)).append("\n");
-    sb.append("    skuId: ").append(toIndentedString(skuId)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   *
-   * @param o the o
-   * @return the string
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
 }
-
