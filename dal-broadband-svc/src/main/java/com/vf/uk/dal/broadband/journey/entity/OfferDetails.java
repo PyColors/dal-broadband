@@ -12,126 +12,18 @@
 
 package com.vf.uk.dal.broadband.journey.entity;
 
-import java.util.Objects;
+import lombok.Data;
 
 /**
  * OfferDetails.
  */
+@Data
 public class OfferDetails {
-	
+
 	/** The type. */
 	private String type = null;
 
 	/** The code. */
 	private String code = null;
-
-	/**
-	 * Type.
-	 *
-	 * @param type the type
-	 * @return the offer details
-	 */
-	public OfferDetails type(String type) {
-		this.type = type;
-		return this;
-	}
-
-	/**
-	 * Offer type. Possible values are HARDWARE,SERVICE,INSURANCE etc.
-	 * 
-	 * @return type
-	 **/
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the new type
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	/**
-	 * Code.
-	 *
-	 * @param code the code
-	 * @return the offer details
-	 */
-	public OfferDetails code(String code) {
-		this.code = code;
-		return this;
-	}
-
-	/**
-	 * Offer Id.
-	 *
-	 * @return code
-	 */
-	public String getCode() {
-		return code;
-	}
-
-	/**
-	 * Sets the code.
-	 *
-	 * @param code the new code
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		OfferDetails offerDetails = (OfferDetails) o;
-		return Objects.equals(this.type, offerDetails.type) && Objects.equals(this.code, offerDetails.code);
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(type, code);
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class OfferDetails {\n");
-
-		sb.append("    type: ").append(toIndentedString(type)).append("\n");
-		sb.append("    code: ").append(toIndentedString(code)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
-
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 *
-	 * @param o the o
-	 * @return the string
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
 
 }

@@ -57,12 +57,11 @@ import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
+import com.vf.uk.dal.broadband.exception.BroadbandJourneyCustomException;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
-import com.vf.uk.dal.common.exception.ApplicationException;
 import com.vf.uk.dal.common.logger.LogHelper;
-import com.vf.uk.dal.common.registry.client.RegistryClient;
 import com.vf.uk.dal.common.registry.client.Utility;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
@@ -77,9 +76,6 @@ public class BroadbandControllerTest {
 	BroadbandController broadBandController;
 
 	@MockBean
-	RegistryClient registryClient;
-
-	@MockBean
 	RestTemplate restTemplate;
 	@MockBean
 	BroadbandRepoProvider broadBandRepoProvider;
@@ -90,12 +86,10 @@ public class BroadbandControllerTest {
 	@Before
 	public void setupMockBehaviour() throws Exception {
 
-		given(registryClient.getRestTemplate()).willReturn(restTemplate);
 		String gsaRequest = new String(Utility.readFile("\\rest-mock\\GSAREQUEST1.json"));
 		GetServiceAvailibilityRequest requestGsa = new ObjectMapper().readValue(gsaRequest,
 				GetServiceAvailibilityRequest.class);
 		ConfigurationManager.loadCascadedPropertiesFromResources("DigitalDBMock");
-		given(registryClient.getRestTemplate()).willReturn(restTemplate);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\GSAREQUEST.json"));
 		GetServiceAvailibilityRequest request = new ObjectMapper().readValue(jsonString,
 				GetServiceAvailibilityRequest.class);
@@ -328,19 +322,6 @@ public class BroadbandControllerTest {
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 	}
 
-	@Test
-	public void testCheckAvailabilityForBroadbandForInvalidClassificationCode()
-			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST3.json"));
-		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-		thrown.expect(ApplicationException.class);
-		thrown.expectMessage("INVALID_CLASSIFICATION_CODE");
-		broadBandController.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
-
-	}
 
 	@Test
 	public void testCheckAvailabilityForBroadbandForValidClassificationCode()
@@ -356,20 +337,6 @@ public class BroadbandControllerTest {
 
 	}
 
-	@Test
-	public void testCheckAvailabilityForBroadbandForEmptyGSAResponse()
-			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
-		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
-
-		thrown.expect(ApplicationException.class);
-		thrown.expectMessage("No Data recieved from TIL");
-		broadBandController.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER");
-
-	}
 
 	@Test
 	public void testCheckAvailabilityForBroadbandForUpdateBasket()
@@ -430,7 +397,7 @@ public class BroadbandControllerTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest.json"));
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Source cannot be null while creating or updating the basket");
 		broadBandController.createOrUpdatePackage("1234907888", request);
 	}
@@ -442,7 +409,7 @@ public class BroadbandControllerTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest3.json"));
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Hardware Id or Package Id is null. Not a valid request while updating");
 		broadBandController.createOrUpdatePackage("12345678907888", request);
 	}
@@ -455,7 +422,7 @@ public class BroadbandControllerTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest4.json"));
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Bundle Id or Package Id is null. Not a valid request while updating");
 		broadBandController.createOrUpdatePackage("12345678907888", request);
 	}
@@ -467,7 +434,7 @@ public class BroadbandControllerTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest5.json"));
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Package id is empty. Not a valid request whule updating the basket");
 		broadBandController.createOrUpdatePackage("12345678907888", request);
 	}
@@ -479,7 +446,7 @@ public class BroadbandControllerTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest2.json"));
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Customer Requested date cannot be null while creating or updating the basket");
 		broadBandController.createOrUpdatePackage("1234907888", request);
 	}
@@ -531,7 +498,7 @@ public class BroadbandControllerTest {
 	@Test
 	public void testUpdateLineTreatmentTypeWithInvalidRequest() {
 		UpdateLineRequest updateLineReq = new UpdateLineRequest();
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Line treatment type cannot be null.");
 		broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq);
 
@@ -671,7 +638,7 @@ public class BroadbandControllerTest {
 		SiteNote siteNote = new SiteNote();
 		siteNote.setNotes("Hello");
 		request.setSiteNote(siteNote);
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
 		broadBandController.createAppointmentForFLBB("12345678907888", request);
 		
@@ -721,7 +688,7 @@ public class BroadbandControllerTest {
 		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
 		serviceStartDateRequest.setStartDateTime("");
 		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
-		thrown.expect(ApplicationException.class);
+		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Invalid BroadBand Id sent in the Request");
 		broadBandController.serviceStartDate("1234", serviceStartDateRequest);
 	}
@@ -731,7 +698,7 @@ public class BroadbandControllerTest {
 			ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
 			serviceStartDateRequest.setStartDateTime("");
 			serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
-			thrown.expect(ApplicationException.class);
+			thrown.expect(BroadbandJourneyCustomException.class);
 			thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
 			broadBandController.serviceStartDate("12345678907888", serviceStartDateRequest);
 		

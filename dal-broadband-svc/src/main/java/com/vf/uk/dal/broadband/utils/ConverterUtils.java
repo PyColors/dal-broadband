@@ -428,7 +428,7 @@ public class ConverterUtils {
 								serviceLineTreatment.setPortInFlag(serviceLineTreatmentReq.getPortInFlag());
 								serviceLineTreatment.setServiceAction(serviceLineTreatmentReq.getServiceAction());
 								serviceLineTreatment.setServiceType(serviceLineTreatmentReq.getServiceType());
-								serviceLineTreatment.setsIM2Value(serviceLineTreatmentReq.getSIM2Value());
+								serviceLineTreatment.setSIM2Value(serviceLineTreatmentReq.getSIM2Value());
 								serviceLineTreatment.setVicCode(serviceLineTreatmentReq.getViCCode());
 								AccessLine accessLineForJourney = new AccessLine();
 								accessLineForJourney.setId(serviceLineTreatmentReq.getAccessLineID());
@@ -1187,7 +1187,7 @@ public class ConverterUtils {
 			updateDevice.setSkuId(basketRequest.getAddHardware().getHardwareId());
 			updateDevice.setProductLineId(basketRequest.getAddHardware().getPackageLineId());
 			hardwares.add(updateDevice);
-			updatePackage.addHardwaresItem(updateDevice);
+			updatePackage.setHardwares(hardwares);
 		}
 
 		if (broadband.getEngineeringVisitCharge() != null
@@ -1358,8 +1358,10 @@ public class ConverterUtils {
 		com.vf.uk.dal.broadband.basket.entity.AppointmentWindow appointmentWindow = new com.vf.uk.dal.broadband.basket.entity.AppointmentWindow();
 		appointmentWindow.setStartDateTime(createAppointmentRequest.getStartTimePeriod());
 		appointmentWindow.setTimeSlot(createAppointmentRequest.getTimeSlot());
-		appointmentWindow.setOperationalPreferenceCode(applicationId);
+		appointmentWindow.setOperationalPreferenceCode("STANDARD");
 		appointmentWindow.setIdentificationId(applicationId);
+		appointmentWindow.setStartTime(createAppointmentRequest.getStartTime());
+		appointmentWindow.setEndTime(createAppointmentRequest.getEndTime());
 		if (createAppointmentRequest.getSiteNote() != null
 				&& createAppointmentRequest.getSiteNote().getNotes() != null) {
 			List<com.vf.uk.dal.broadband.basket.entity.SiteNote> siteNoteList = new ArrayList<>();

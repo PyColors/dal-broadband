@@ -6,9 +6,12 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Data;
+
 /**
  * The Class AvailableServices.
  */
+@Data
 public class AvailableServices implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -20,62 +23,5 @@ public class AvailableServices implements Serializable {
 	/** The service. */
 	@JsonProperty(AVAILABLE_SERVICE)
 	private List<String> service = new ArrayList<>();
-
-	/**
-	 * Gets the service.
-	 *
-	 * @return the service
-	 */
-	public List<String> getService() {
-		return service;
-	}
-
-	/**
-	 * Sets the service.
-	 *
-	 * @param service the new service
-	 */
-	public void setService(List<String> service) {
-		this.service = service;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((service == null) ? 0 : service.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AvailableServices other = (AvailableServices) obj;
-		if (service == null) {
-			if (other.service != null)
-				return false;
-		} else if (!service.equals(other.service))
-			return false;
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "AvailableServices [service=" + service + "]";
-	}
 
 }
