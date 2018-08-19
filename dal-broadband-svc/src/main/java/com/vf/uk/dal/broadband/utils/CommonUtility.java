@@ -1,6 +1,13 @@
 package com.vf.uk.dal.broadband.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.hateoas.Link;
+
+import com.vf.uk.dal.broadband.assembler.BroadbandJourneyServiceAssembler;
+import com.vf.uk.dal.common.logger.LogHelper;
 
 /**
  * The Class CommonUtility.
@@ -50,6 +57,47 @@ public class CommonUtility {
 			urlBuilder.append("&duration=" + duration);
 		}
 		return urlBuilder.toString();
+	}
+
+	/**
+	 * Gets the formatted date.
+	 *
+	 * @param dateInString the date in string
+	 * @param pattern the pattern
+	 * @param desiredPattern the desired pattern
+	 * @return the formatted date
+	 */
+	public static String getFormattedDate(String dateInString, String pattern, String desiredPattern) {
+		String dateString = null;
+		if (dateInString != null) {
+			try {
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				java.util.Date date = simpleDateFormat.parse(dateInString);
+				if (desiredPattern != null) {
+					SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(desiredPattern);
+					dateString = simpleDateFormat1.format(date);
+				}
+			} catch (ParseException e) {
+				LogHelper.error(BroadbandJourneyServiceAssembler.class,
+						dateInString + "is not in pattern " + pattern + " and desired pattern is " + desiredPattern);
+			}
+		}
+		return dateString;
+	}
+
+	/**
+	 * Format link.
+	 *
+	 * @param link the link
+	 * @return the link
+	 */
+	public static Link formatLink(Link link) {
+		Link newLink = link;
+		if (newLink != null && newLink.getHref().indexOf("/broadband") != -1) {
+			newLink = newLink.withHref(
+					newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
+		}
+		return newLink;
 	}
 
 }
