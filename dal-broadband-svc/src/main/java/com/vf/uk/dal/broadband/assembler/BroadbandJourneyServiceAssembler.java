@@ -1,14 +1,11 @@
-package com.vf.uk.dal.broadband.utils;
+package com.vf.uk.dal.broadband.assembler;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
-import org.springframework.hateoas.Link;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
@@ -70,7 +67,7 @@ import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
-import com.vf.uk.dal.common.logger.LogHelper;
+import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
@@ -82,12 +79,12 @@ import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
  *
  * @author Infosys limited
  */
-public class ConverterUtils {
+public class BroadbandJourneyServiceAssembler {
 
 	/**
 	 * Instantiates a new converter utils.
 	 */
-	private ConverterUtils() {
+	private BroadbandJourneyServiceAssembler() {
 	}
 
 	/**
@@ -786,7 +783,7 @@ public class ConverterUtils {
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
 			String startTimePeriod = createAppointmentRequest.getStartTimePeriod();
 			if (StringUtils.isNotBlank(createAppointmentRequest.getStartTimePeriod())) {
-				startTimePeriod = getFormattedDate(createAppointmentRequest.getStartTimePeriod(),
+				startTimePeriod = CommonUtility.getFormattedDate(createAppointmentRequest.getStartTimePeriod(),
 						BroadBandConstant.DATE_PATTERN2, BroadBandConstant.DATE_PATTERN1);
 			}
 			appointmentWindow.setStartTimePeriod(startTimePeriod);
@@ -1487,7 +1484,7 @@ public class ConverterUtils {
 				for (LineTreatment lineTreatment : serLines.getLineTreatmentList()) {
 					if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
 							broadBand.getLineDetails().getLineTreatmentType())) {
-						startTimePeriod = getFormattedDate(lineTreatment.getEarliestAvailableDate(),
+						startTimePeriod = CommonUtility.getFormattedDate(lineTreatment.getEarliestAvailableDate(),
 								BroadBandConstant.DATE_PATTERN4, BroadBandConstant.DATE_PATTERN3);
 					}
 				}
@@ -1547,47 +1544,6 @@ public class ConverterUtils {
 		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
 		serviceStartDateRequest.setServiceStartDate(serviceStartDate.getStartDateTime());
 		return serviceStartDateRequest;
-	}
-
-	/**
-	 * Format link.
-	 *
-	 * @param link the link
-	 * @return the link
-	 */
-	public static Link formatLink(Link link) {
-		Link newLink = link;
-		if (newLink != null && newLink.getHref().indexOf("/broadband") != -1) {
-			newLink = newLink.withHref(
-					newLink.getHref().substring(newLink.getHref().indexOf("/broadband"), newLink.getHref().length()));
-		}
-		return newLink;
-	}
-
-	/**
-	 * Gets the formatted date.
-	 *
-	 * @param dateInString the date in string
-	 * @param pattern the pattern
-	 * @param desiredPattern the desired pattern
-	 * @return the formatted date
-	 */
-	private static String getFormattedDate(String dateInString, String pattern, String desiredPattern) {
-		String dateString = null;
-		if (dateInString != null) {
-			try {
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-				java.util.Date date = simpleDateFormat.parse(dateInString);
-				if (desiredPattern != null) {
-					SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(desiredPattern);
-					dateString = simpleDateFormat1.format(date);
-				}
-			} catch (ParseException e) {
-				LogHelper.error(ConverterUtils.class,
-						dateInString + "is not in pattern " + pattern + " and desired pattern is " + desiredPattern);
-			}
-		}
-		return dateString;
 	}
 
 }

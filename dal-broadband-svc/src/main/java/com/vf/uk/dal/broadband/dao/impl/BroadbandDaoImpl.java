@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vf.uk.dal.broadband.assembler.BroadbandJourneyServiceAssembler;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -41,7 +42,6 @@ import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
-import com.vf.uk.dal.broadband.utils.ConverterUtils;
 import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
@@ -74,7 +74,7 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			String userType) {
 
 		GetServiceAvailibilityResponse availabilityCheckResponse = null;
-		GetServiceAvailibilityRequest request = ConverterUtils
+		GetServiceAvailibilityRequest request = BroadbandJourneyServiceAssembler
 				.createGetServiceAvailibilityRequest(availabilityCheckRequest, userType);
 
 		ResponseEntity<GetServiceAvailibilityResponse> client = restTemplate.postForEntity(
