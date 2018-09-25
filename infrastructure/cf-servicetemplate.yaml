@@ -158,6 +158,7 @@ Resources:
           
   EcsService:
     Type: AWS::ECS::Service
+    DependsOn: ListenerRule
     Properties:
       Cluster: !Sub digitalx-${Environment}-ecs-mas
       DeploymentConfiguration:
