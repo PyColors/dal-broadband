@@ -263,4 +263,6 @@ public interface BroadbandDao {
 	EnhanceCompatibleExtraResponse getCompatibleExtras(String planId, String productGroupType);
 	
 	List<Account> getAccountDetailsByAccountId(String accountId);
+
+	void deleteProductFromBasket(String basketId, String packageId, String engVisitProductLine);
 }
