@@ -1,0 +1,149 @@
+{
+  "servicePoint": {
+    "lineReference": {
+      "installationAddress": {
+        "identification": {
+          "id": "A90000221048",
+          "contextId": "Gold"
+        },
+        "postCode": "LS29 0JJ",
+        "houseName": "",
+        "houseNumber": "1",
+        "flatNumber": "",
+        "streetName": "Craven Crescent",
+        "town": null,
+        "county": "Norfolk",
+        "country": null,
+        "locality": "Brooke",
+        "citySubDivisionName": "LS",
+        "moveTypeCode": null
+      },
+      "lineLocator": {
+        "exchangeCode": "NORW3",
+        "exchangeName": "Norwich 3",
+        "districtCode": null,
+        "l2SID": null,
+        "cableLinkID": null,
+        "distributionPoint": null
+      },
+      "lineDirectoryList": [],
+      "lineSettings": null,
+      "lineStatus": {
+        "statusCode": "Working",
+        "accessLineStatus": "Working",
+        "gnpStatus": null,
+        "lineOption": null,
+        "technology": null,
+        "lineType": null,
+        "tempStructure": "false",
+        "standbyPowerRequired": "false",
+        "narrowBandServicesAvailable": "false"
+      },
+      "availableServices": null
+    },
+    "serviceReference": {
+      "serviceLinesList": [
+        {
+          "classificationCode": "Line and ADSL",
+          "networkType": "Onnet",
+          "lineTreatments": [
+            {
+              "identification": "EXISTING",
+              "earliestAvailableDate": "2018-04-26",
+              "appointmentNeeded": false,
+              "connectionCharge": "No Charge",
+              "lineTreatmentType": "EXISTING"
+            }
+          ],
+          "serviceLines": [
+            {
+              "itemReference": {
+                "identificationId": null,
+                "name": null,
+                "classificationCode": "Line"
+              },
+              "classificationCode": "Line",
+              "lineSpeeds": null,
+              "serviceLineTreatments": [],
+              "miscRefernce": null
+            },
+            {
+              "itemReference": {
+                "identificationId": "PC00024",
+                "name": "Single Play Enhanced Transit",
+                "classificationCode": "ADSL"
+              },
+              "classificationCode": "ADSL",
+              "lineSpeeds": {
+                "maxDownSpeed": "1210.0",
+                "minDownSpeed": "510.0",
+                "avgDownSpeed": null,
+                "minGuaranteedDownSpeed": "395.0",
+                "maxUpSpeed": "1000.0",
+                "minUpSpeed": "500.0",
+                "bandwidthMeasure": null
+              },
+              "serviceLineTreatments": [
+                {
+                  "parentIdentification": "EXISTING",
+                  "accessLine": {
+                    "id": "C002086814083",
+                    "channelId": null
+                  },
+                  "serviceType": "SMPF",
+                  "serviceAction": "Provide",
+                  "simValue": null,
+                  "lineInfo": "PSTN Working Line Takeover",
+                  "canNumberBeRetained": false,
+                  "portInFlag": "BT",
+                  "vicCode": null,
+                  "pendingOrders": [
+                    {
+                      "completionDate": null,
+                      "typeCode": "CANCEL",
+                      "thirdPartyFlag": false
+                    }
+                  ]
+                },
+                {
+                  "portInFlag": null,
+                  "parentIdentification": "NEW",
+                  "accessLine": null,
+                  "serviceType": "SMPF",
+                  "serviceAction": "Provide",
+                  "simValue": null,
+                  "lineInfo": "Spare Pair",
+                  "canNumberBeRetained": false,
+                  "vicCode": null,
+                  "pendingOrders": []
+                }
+              ],
+              "miscRefernce": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "salesOrderAppointment": null,
+  "lineDetails": {
+    "classificationCode": "string",
+    "earliestAvailableDate": "string",
+    "flbbNumber": "string",
+    "lineTreatmentType": null
+  },
+  "broadBandId": "1234567823444",
+  "basketId":"2b23e0a1-eefd-409c-a919-e0ca774b9017",
+  "basketInfo": {
+    "accountCategory":"Consumer",
+  	"packageId": null,
+  	"planProductLineId" : null,
+  	"hardwareProductLineId" : null
+  },
+  "journeyId" : null,
+  "engineeringVisitCharge":{
+  "gross" :"100.00",
+  "net" : "80.00",
+  "vat" : "20"
+  }
+}

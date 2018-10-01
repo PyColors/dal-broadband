@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: BROADBAND-V1
+  redis:
+    cluster:
+      enabled: false
+      max-redirects: 2
+      nodes:
+      - master.dal-dev-bband-red.m6ipwu.euw1.cache.amazonaws.com:6379
+    host: master.dal-dev-bband-red.m6ipwu.euw1.cache.amazonaws.com
+    port: 6379
+    password: digitalx2018bband
+    ssl: true
+    timeout: 5000
+    ttl: 3600  
+info:
+  build:
+    version: @swaggerVersion@
+    projectName: @project.artifactId@
+server:
+  contextPath: /broadband
+  port: 8080
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-password: password
+    key-password: password
+    enabled: true
+    trust-store: classpath:myTrustStore.jks
+    trust-store-password: password
+
+endpoints:
+  actuator:
+    enabled: false
+    sensitive: false
+  autoconfig:
+    enabled: true
+  configprops:
+    enabled: true
+  beans:
+    enabled: true
+  loggers:
+    enabled: true
+  health:
+    enabled: true
+  dump:
+    enabled: true
+  heapdump:
+    enabled: true
+  info:
+    enabled: true  
+
+management:
+  health:   
+    solr:
+      enabled: false
+  security:
+    enabled: false
+        
+icp:
+  env:
+    kafka:
+      host: kafka
+      port: 9092
+      logTopic: logs
+  config:
+    jdbcUrl: jdbc:oracle:thin:@e18dbref.cqrpvr4944ct.eu-west-1.rds.amazonaws.com:1521:e18dbref
+    jdbcUserName: daluser
+    jdbcUserPwd: simple4u
+    
+springfox:
+ documentation:
+   swagger:
+     v2:
+       path: /api-docs
+
+---
+spring:
+  profiles: local
+  application:
+    name: BROADBAND-V1
+server:
+  contextPath: /broadband
+  port: 3347
+  ssl:
+    trust-store: classpath:alblowerkeystore.jks
+    trust-store-password: tib123
+icp:
+  config:
+    jdbcUrl: jdbc:oracle:thin:@100.66.65.206:1521:oradb
+    jdbcUserName: daluser
+    jdbcUserPwd: simple4u
+  restclient:
+    mock: 
+      enabled: true
+  env:
+    enableLogStreaming: false
+  security:
+    enabled: false

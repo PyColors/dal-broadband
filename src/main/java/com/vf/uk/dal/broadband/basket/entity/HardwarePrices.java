@@ -1,0 +1,25 @@
+package com.vf.uk.dal.broadband.basket.entity;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+
+/**
+ * HardwarePrice
+ */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-04-13T15:08:00.974Z")
+@Data
+public class HardwarePrices {
+	@JsonProperty("merchandisingPromotions")
+	private MerchandisingPromotions merchandisingPromotions = null;
+
+	@JsonProperty("oneOffDiscountPrice")
+	private Price oneOffDiscountPrice = null;
+
+	@JsonProperty("oneOffPrice")
+	private Price oneOffPrice = null;
+
+}

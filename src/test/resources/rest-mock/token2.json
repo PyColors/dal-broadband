@@ -1,0 +1,27 @@
+{
+   "platform_session_id": "12345678907888",
+    "assurance_level": "2",
+    "contact_id": "1-41DOW5B",
+    "username": "AUT7000352184",
+    "given_name": "DONOT ALTERPLEASE",
+    "number_of_accounts": "1",
+    "account": {
+      "id": "7000352184",
+      "type": "Consumer",
+      "category": "Individual",
+      "sub_category": "Consumer",
+      "roles": "owner",
+      "status": "Active",
+      "parent_account_id": null,
+      "number_of_subscriptions": "1"
+    },
+    "subscription": {
+      "id": "447389778168",
+      "type": "SIMO",
+      "roles": "Owner,BillPayer,User",
+      "payment_type": "Postpaid",
+      "status": "Active",
+      "billing_account_id": "7000352184",
+      "billing_profile_id": "1-41DP23X"
+    }
+}

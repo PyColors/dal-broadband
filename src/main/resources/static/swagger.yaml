@@ -1,0 +1,1299 @@
+swagger: '2.0'
+info:
+  title: Broadband APIs
+  description: Braod band API for anonymous and logged in customer
+  version: 1.0.0
+host: api.vodafone.com
+schemes:
+  - http
+basePath: /api/v1
+produces:
+  - application/json
+paths:
+  /broadband/lineOptions:
+    post:
+      summary: check the availability checker for the braod band journey
+      description: >-
+        This service accepts address, calls the GSA and creates / update the
+        journey with the service point information.
+      operationId: COMM_001_AvailabilityChecker
+      parameters:
+        - name: availabilityCheckerRequest
+          in: body
+          description: Sends the availability check request
+          required: true
+          schema:
+            $ref: '#/definitions/AvailabilityCheckRequest'
+      tags:
+        - AvailabilityCheck
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AvailabilityCheckResponse'
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /broadband/{journeyId}/basket:
+    post:
+      summary: Create the basket or add the package to the basket
+      description: >-
+        This Services takes in the journey id as the path param and gets teh details from journey and calls the create / update basket
+      operationId: COMM_001_CreateOrUpdateBasket
+      parameters:
+        - name: journeyId
+          in: path
+          description: Journey id of the broadband - Unique
+          required: true
+          type: string
+        - name: basketRequest
+          in: body
+          description: Send the basket request
+          required: true
+          schema:
+            $ref: '#/definitions/BasketRequest'
+      tags:
+        - CreateUpdateBasket
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Basket'
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  
+  /broadband/{journeyId}/appointment :
+    post:
+      summary: check the availability checker for the broad band journey
+      description: >-
+        This service calls the Create Appointment TIL wrapper, update the journey with the appointment and site note information and update the basket with the appointment date
+      operationId: COMM_001_CreateAppointment
+      parameters:
+        - name: journeyId
+          in: path
+          description: Journey id of the broadband - Unique
+          required: true
+          type: string
+        - name: CreateAppointmentRequest
+          in: body
+          description: Sends the availability check request
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAppointmentRequest'
+      tags:
+        - CreateAppointment
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateAppointmentResponse'
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /broadband/availableServiceStartDates:
+    get:
+      summary: >-
+        Utility Service which accepts earliest available service start date
+        returned by GSA service and returns the next possible service start
+        dates (working days - excluding weekends and bank holidays), within the
+        requested date range.
+      description: >-
+        This service accepts earliest available service start date returned by
+        GSA service and returns the next possible service start dates (working
+        days - excluding weekends and bank holidays), within the requested date
+        range. The 
+      operationId: BB_002_ServiceDatesUtility
+      parameters:
+        - name: earliestAvailableStartDate
+          in: query
+          description: earliest available service start date returned by GSA service
+          required: true
+          type: string
+        - name: range
+          in: query
+          description: >-
+            The range of days , based on which the service will send the
+            available service startDates
+          required: true
+          type: number
+      tags:
+        - ServiceStartDates
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ServiceStartDates'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+  /broadband/plan:
+    get:
+      summary: Get the list of bundle(FLBB)  based on the filter criteria.
+      description: >-
+        The service gets the details of the bundles from solr based on the
+        filter criteria in the response.
+      operationId: PRDT_010-GetFlbbList
+      parameters:
+        - name: userType
+          in: query
+          description: >-
+            To identify the User, the possible values are "consumer" or
+            "business" for get bundle list and consumer , enterprise and soho
+            for compatible plans Accepts Consumer, Enterprose and Soho. If none
+            is passed then by default it takes consumer.
+          required: false
+          type: string
+        - name: offerCode
+          in: query
+          description: >-
+            Offercode sets the pricing information based on the offercode sent,
+            and gets the data from promotions API.
+          required: false
+          type: string
+        - name: journeyType
+          in: query
+          description: >-
+            Indicates the journeyType of the customer. For eg. upgrade Accepts
+            SecondLine, Upgrade. Upgrade is currently not supported. The
+            provision is there but should not be sent until backend starts
+            supporting. If nothing is passed then we default it to Acquisition
+            or New Customer secondline, etc.
+          required: false
+          type: string
+        - name: duration
+          in: query
+          description: >-
+            bundles will be filter based on duration like 18 months or 24
+            months. Format is 18 Months or 24 Months or 12 Months
+          required: false
+          type: string
+        - name: classificationCode
+          in: query
+          description: >-
+            Filter based on speed. Accepts single and comma seperated aswell Eg:
+            Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed
+            then we show all the packages for corresponding journeyType.
+          required: false
+          type: string
+      tags:
+        - Bundle
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FlbBundle'
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+
+  CreateAppointmentResponse:
+    type: object
+    properties:
+      applicationId:
+        type: string
+        description: Unique Id created by TIL on confirmation of appointment
+      
+
+  BasketRequest:
+    type: object
+    properties:
+      basketId:
+        type: string
+        description: Unique Id representing the basket
+      hardwareId:
+        type: string
+        description: Unique Id representing the hardware
+      bundleId:
+        type: string
+        description: Unique Id representing the Bundle
+      serviceId:
+        type: string
+        description: Unique Id representing the extra  
+  CreateAppointmentRequest:
+    type: object
+    properties:
+      journeyId:
+        type: string
+        description: Journey id of the broadband - Unique
+      basketId:
+        type: string
+        description: Basket id - Unique
+      startTimePeriod:
+        type: string
+        description: Earliest required appointment date. The format should be yyyy-mm-dd hh:mm:ss or Date at which appointment needs ot be booked.
+      timeSlot:
+        type: string
+        description: 'AM PM EV etc'
+      siteNote:
+        $ref: '#/definitions/SiteNote'  
+  SiteNote:
+    type: object
+    properties:
+      notes:
+        type: string
+        description : 'Note for the engineer'
+      typeCode:
+        type: string
+        description : 'Engineer'
+      
+  AvailabilityCheckResponse:
+    type: object
+    properties:
+      journeyId:
+        type: string
+        description: Journey id of the broadband - Unique
+      installationAddress:
+        $ref: '#/definitions/InstallationAddress'
+      appointmentAndAvailabilityDetail:
+        type: array
+        items:
+          $ref: '#/definitions/AppointmentAndAvailabilityDetail'
+      engineeringVisitCharge:
+        $ref: '#/definitions/Price'
+      lineSpeeds:
+        $ref: '#/definitions/LineSpeeds'
+      classificationCode:
+        type: array
+        items:
+          type: string
+  AppointmentAndAvailabilityDetail:
+    type: object
+    properties:
+      appointmentNeeded:
+        type: boolean
+        description: >-
+          Whether the appointment is needed or not. If appointmenr needed flag
+          is false, it means customer has existing line if it is true it means
+          customer does not have existing line and should only take a new line
+          option
+      earliestAvailableDate:
+        type: string
+        description: The earliest available date when the service will be available
+      lineTreatmentType:
+        type: string
+        description: EXISTING OR NEW
+  LineRef:
+    type: object
+    properties:
+      lineIdentification:
+        $ref: '#/definitions/LineIdentification'
+  LineIdentification:
+    type: object
+    properties:
+      fllandlineNumber:
+        type: string
+        description: The directory number currently associated with the copper pair
+      typeCode:
+        type: string
+        description: Flag that identifies the type of Business Customer
+      serviceClassificationCode:
+        type: string
+        description: >-
+          Represents the type of Business service to query for service
+          availability. This is optional field
+      moveFromPostCode:
+        type: string
+        description: >-
+          Specifies the post code from which the prospective customer is willing
+          to move
+      installationAddress:
+        $ref: '#/definitions/InstallationAddress'
+  AvailabilityCheckRequest:
+    type: object
+    properties:
+      lineRef:
+        $ref: '#/definitions/LineRef'
+      journeyId:
+        type: string
+        description: >-
+          Existing journey id, for logged in customer journey id will not be
+          null else null
+      classificationCode:
+        type: array
+        items:
+          type: string
+  Identification:
+    type: object
+    properties:
+      id:
+        type: string
+        description: >-
+          This is the Wholesale address reference identifier that uniquely
+          identifies the address in the Fixed Line or PostOffice system
+      contextId:
+        type: string
+  InstallationAddress:
+    type: object
+    properties:
+      identification:
+        $ref: '#/definitions/Identification'
+      postCode:
+        type: string
+        description: The postcode of the prospective customer as per the Fixed Line system
+      houseName:
+        type: string
+        description: House Name
+      houseNumber:
+        type: string
+        description: House number
+      flatNumber:
+        type: string
+        description: flat number
+      streetName:
+        type: string
+        description: street name
+      town:
+        type: string
+        description: town
+      county:
+        type: string
+        description: county
+      country:
+        type: string
+        description: country
+      locality:
+        type: string
+        description: locality
+      citySubDivisionName:
+        type: string
+        description: city sub division code
+      moveTypeCode:
+        type: string
+        description: Code identifying whether it is change of address scenario
+  LineSpeeds:
+    type: object
+    properties:
+      maxDownSpeed:
+        type: number
+        format: double
+        description: 'The maximum download speed offered (in kilobits per second [kbps])'
+      minDownSpeed:
+        type: number
+        format: double
+        description: 'The minimum download speed offered (in kilobits per second [kbps])'
+      avgDownSpeed:
+        type: number
+        format: double
+        description: 'The average download speed offered (in kilobits per second [kbps])'
+      minGuaranteedDownSpeed:
+        type: number
+        format: double
+        description: >-
+          The minimum guaranteed download speed offered (in kilobits per second
+          [kbps])
+      maxUpSpeed:
+        type: number
+        format: double
+        description: 'The max  upload speed offered (in kilobits per second [kbps])'
+      minUpSpeed:
+        type: number
+        format: double
+        description: 'The min upload speed offered (in kilobits per second [kbps])'
+      bandwidthMeasure:
+        type: string
+        description: Indicates whether the best speed is predicted or actual
+  FlbBundle:
+    type: object
+    properties:
+      skuId:
+        type: string
+        description: Unique bundle id as available from the product catalogue
+      name:
+        type: string
+        description: Name of the bundle as provided in the product catalogue
+      description:
+        type: string
+        description: Description of the bundle as provided in the product catalogue
+      bundleName:
+        type: string
+        description: Name of the bundle as provided in the merchandising file
+      bundleDescription:
+        type: string
+        description: Description of the bundle as provided in the merchandising file
+      speed:
+        type: string
+        description: Speed of the bundle as provided in the merchandising file
+      minSpeed:
+        type: string
+        description: Min Speed of the bundle as provided in the merchandising file
+      maxSpeed:
+        type: string
+        description: Max Speed of the bundle as provided in the merchandising file
+      usage:
+        type: string
+        description: Usage of the bundle as provided in the merchandising file
+      classificationCode:
+        type: string
+        description: >-
+          ClassificationCode of the Flb bundle as provided in the Product
+          catalogue
+      commitmentPeriod:
+        type: string
+        description: Commitment period of the bundle
+      planCoupleId:
+        type: string
+        description: PlanID of the Couple Plan
+      planCoupleFlag:
+        type: boolean
+        description: 'Indicate whether this plan is to be coupled or not True, False.'
+      planCoupleLabel:
+        type: string
+        description: Message needs to be build based on data difference and cost logic.
+      productName:
+        type: string
+        description: Name of the Product(Router) as provided in the product catalogue
+      productDescription:
+        type: string
+        description: >-
+          Description of the Product(Router) as provided in the product
+          catalogue
+      merchandisingMedia:
+        type: array
+        items:
+          $ref: '#/definitions/MediaLink'
+      priceInfo:
+        $ref: '#/definitions/PriceForBundleAndHardware'
+  MediaLink:
+    type: object
+    properties:
+      id:
+        type: string
+        description: >-
+          Unique id given for this link which provide a reference for UI to
+          place this on the screen
+      value:
+        type: string
+        description: URL Link from the content site for the media
+      type:
+        type: string
+        description: Will provide UI information on the type of the link (like URL)
+      priority:
+        type: integer
+        description: priority of the media link
+      packageType:
+        type: array
+        description: List of packageTypes available for the MediaLink
+        items:
+          type: string
+  PriceForBundleAndHardware:
+    type: object
+    properties:
+      bundlePrice:
+        $ref: '#/definitions/BundlePrice'
+      hardwarePrice:
+        $ref: '#/definitions/HardwarePrice'
+      oneOffPrice:
+        $ref: '#/definitions/Price'
+      oneOffDiscountPrice:
+        $ref: '#/definitions/Price'
+      monthlyPrice:
+        $ref: '#/definitions/Price'
+      monthlyDiscountPrice:
+        $ref: '#/definitions/Price'
+      stepPrices:
+        type: array
+        items:
+          $ref: '#/definitions/StepPricingInfo'
+  BundlePrice:
+    type: object
+    properties:
+      bundleId:
+        type: string
+        description: Bundle id of the price to be calculated
+      monthlyPrice:
+        $ref: '#/definitions/Price'
+      monthlyDiscountPrice:
+        $ref: '#/definitions/Price'
+      merchandisingPromotions:
+        $ref: '#/definitions/MerchandisingPromotion'
+  HardwarePrice:
+    type: object
+    properties:
+      hardwareId:
+        type: string
+        description: Hardware id of the price to be calculated
+      oneOffPrice:
+        $ref: '#/definitions/Price'
+      oneOffDiscountPrice:
+        $ref: '#/definitions/Price'
+      merchandisingPromotions:
+        type: array
+        items:
+          $ref: '#/definitions/MerchandisingPromotion'
+        description: Merchandising promotions applicable for the bundle
+  StepPricingInfo:
+    type: object
+    properties:
+      sequence:
+        type: string
+        description: Sequence no of the line item
+      oneOffPrice:
+        $ref: '#/definitions/Price'
+      monthlyPrice:
+        $ref: '#/definitions/Price'
+      duration:
+        $ref: '#/definitions/Duration'
+      discountSkuIds:
+        description: List of applicable discount sku Ids for this duration
+        type: array
+        items:
+          type: string
+          format: uuid
+  Duration:
+    type: object
+    properties:
+      uom:
+        type: string
+        description: Unit of measurement for duration value
+      value:
+        type: string
+        description: Duration value
+  MerchandisingPromotion:
+    type: object
+    properties:
+      tag:
+        type: string
+        description: Tag value of the merchandising promotion
+      label:
+        type: string
+        description: Label value of the merchandising promotion
+      discountId:
+        type: string
+        description: 'Discount skud Id, if applicable'
+      description:
+        type: string
+        description: 'Description , if applicable'
+      mpType:
+        type: string
+        description: 'Promotion type , if applicable'
+      priceEstablishedLabel:
+        type: string
+        description: 'PriceEstablishedLable , if applicable'
+      priority:
+        type: integer
+        description: priority of the merchandising promotion
+      packageType:
+        type: array
+        description: List of packageTypes available for the promotion
+        items:
+          type: string
+      footNotes:
+        type: array
+        description: >-
+          List of firendly Names which will uniquely identify terms and
+          conditions configured for the promotion in WCS CMS. The friendlynames
+          are mentioned in MEF file.
+        items:
+          type: string
+      promotionMedia:
+        type: string
+        description: Media URLs configured in MEF for promotions like entertainment packs
+  Price:
+    type: object
+    properties:
+      gross:
+        type: string
+        description: Gross value of the item
+      net:
+        type: string
+        description: Net value of the item
+      vat:
+        type: string
+        description: VAT component of the item price
+  ServiceStartDates:
+    type: object
+    properties:
+      dates:
+        type: array
+        description: >-
+          Array of possible service start dates within the requested range of
+          working days - FORMAT - "DD-MM-YYYY"
+        items:
+          type: string
+  
+  Basket:
+    type: object
+    properties:
+      basketId:
+        type: string
+        format: guid
+        description: Unique identifier for a basket
+      affiliateId:
+        type: string
+        description: Id of affiliate from which the basket creation was invoked
+      segment:
+        type: string
+        description: Customer type with possible values of CONSUMER or BUSINESS
+      source:
+        type: string
+        description: 'Source system identifier (WCS, MOBAPP etc)'
+      journey:
+        $ref: '#/definitions/Journey'
+      customerRequestedDate:
+        type: string
+        format: 'yyyy-mm-ddTHH:MM:SS.SSSZ'
+        description: Service request date specified by the customer
+      metadata:
+        $ref: '#/definitions/Metadata'
+      customer:
+        $ref: '#/definitions/Customer'
+      packages:
+        type: array
+        items:
+          $ref: '#/definitions/Package'
+      vetOutcome:
+        $ref: '#/definitions/VetOutcome'
+      priceDetails:
+        $ref: '#/definitions/PriceDetails'
+      totalOneoffPriceSaving:
+        description: total Oneoff price Saving for basket
+        type: string
+      totalMonthlyPriceSaving:
+        description: total Monthly price Saving for basket
+        type: string
+      deliveryInfo:
+        $ref: '#/definitions/DeliveryInfo'
+      voucherCode:
+        type: string
+        description: voucher code  specified by the customer
+      voucherDescription:
+        type: string
+        description: voucher code  description
+      voucherErrorMessage:
+        type: string
+        description: >-
+          voucher Error message will ber poulated if Voucher is Expired or not
+          applicable to basket
+      validated:
+        type: boolean
+      hashvalue:
+        type: string
+      changeCode:
+        type: string
+        description: 'Constant value that identifies what type of change it is. (for example, price change, package no more sellable, etc.)'
+      isChanged:
+        type: boolean
+        description: >-
+          value true/false. This will identify if there are any changes to the basket (at basket level and package level)
+  
+  DeliveryInfo:
+    type: object
+    properties:
+      skuId:
+        type: string
+        description: Sku ID of the delivery product
+      displayName:
+        type: string
+        description: Display name of the delivery sku
+      deliveryType:
+        type: string
+        description: 'Standard, Click & Collect, Deliver to Store or Premium'
+      stockStatus:
+        type: string
+        description: >-
+          Represents the stock status. possible values
+          instock,outofstock,preorder,backorder
+      availableFrom:
+        type: string
+        description: Availability of the stock as per the selected delivery method
+      storeInfo:
+        $ref: '#/definitions/StoreInfo'
+      price:
+        $ref: '#/definitions/Price'
+  Customer:
+    type: object
+    properties:
+      contactId:
+        type: string
+        description: The contactId of the user building the order. Blank if anonymous
+      ownedAccounts:
+        type: array
+        items:
+          type: string
+  
+  Journey:
+    type: object
+    properties:
+     journeyType:
+        type: string
+        description: The type of the user journey
+     offerCode:
+        type: string
+        description: The type of the user journey
+  
+  Package:
+    type: object
+    properties:
+      packageId:
+        type: string
+        format: guid
+        description: Unique ID for the package
+      accountCategory:
+        type: string
+        description: >-
+          If the package was constructed in a segment sensitive way, this field
+          contains the segment (example customer or business)
+      sequence:
+        type: integer
+        format: int32
+        description: >-
+          Display sequence.  Make this the order the package was added to the
+          basket (i.e. lowest number = highest display order)
+      packageType:
+        type: string
+        description: >-
+          Type of the package. Possible list is "Acquisition", "Retention",
+          "TariffMigration", "PreToPost", "Modify"
+      removable:
+        type: boolean
+        description: >-
+          Flag to indicate if this package can be removed without affecting the
+          integrity of the basket
+      dependentOn:
+        type: array
+        items:
+          type: string
+        description: List of package Ids on which this package is dependent on
+      voucherCode:
+        type: string
+        description: Vouchercode which is added to the package
+      bundle:
+        $ref: '#/definitions/Bundle'
+      hardwares:
+        type: array
+        items:
+          $ref: '#/definitions/Hardware'
+      services:
+        type: array
+        items:
+          $ref: '#/definitions/Service'
+      discounts:
+        type: array
+        items:
+          $ref: '#/definitions/Discount'
+      priceDetails:
+        $ref: '#/definitions/PriceDetails'
+      isChanged:
+        type: boolean
+        description: >-
+          value true/false. This will identify if there are any changes to the basket (at basket level and package level)
+      installationAddress:
+        $ref: "#/definitions/InstallationAddress"
+      appointmentWindow:
+        $ref: "#/definitions/AppointmentWindow"
+      
+  
+  Metadata:
+    type: object
+    properties:
+      returnURL:
+        type: string
+        description: WCS URL to be used by checkout to redirect back
+      basketStatus:
+        type: string
+        description: >-
+          Status of the basket. Expected list of values; INCOMPLETE,
+          IN_CHECKOUT, PROCESSING, PENDING_CUSTOMER_ACTION, SUBMITTED
+      salesOrderId:
+        type: string
+        description: Order Id of the siebel order created for this basket
+      reason:
+        type: string
+        description: Reason - to be set by checkout process along with basket status
+  VetOutcome:
+    type: object
+    properties:
+      outcomeCode:
+        type: string
+        description: credit vet outcome code
+      availableRecurringChargeLimit:
+        type: string
+        description: Maximum available recurring charge
+      availableNumberOfConnections:
+        type: string
+        description: Maximum number of connections available
+      creditVetId:
+        type: string
+        description: Id of the credit vet transaction
+  
+  StoreInfo:
+    type: object
+    properties:
+      storeId:
+        type: string
+        description: Sku ID of the delivery product
+      storeName:
+        type: string
+        description: Store ID selected by the user for click and collect
+      storeAlias:
+        type: string
+        description: Store ID selected by the user for click and collect
+      stockStatus:
+        type: string
+        description: >-
+          Represents the stock status. possible values
+          instock,outofstock,preorder,backorder
+          
+  PriceDetails:
+    type: object
+    properties:
+      oneOffPrice:
+        $ref: '#/definitions/Price'
+      oneOffDiscountPrice:
+        $ref: '#/definitions/Price'
+      monthlyPrice:
+        $ref: '#/definitions/Price'
+      monthlyDiscountPrice:
+        $ref: '#/definitions/Price'
+      stepPrices:
+        type: array
+        items:
+          $ref: '#/definitions/StepPricingInfo'        
+  
+  
+  
+  
+  
+  AppointmentWindow:
+    type: object
+    properties:
+      identificationId:
+        type: string
+      startDateTime:
+        type: string
+        description : 'Earliest required appointment date.'
+      operationalPreferenceCode:
+        type: string
+        description : 'The type of.window retrieved which determines whether the appointment is made during or outside of working hours'
+      timeSlot:
+        type: string
+        description : 'Time slot at which the appointment should be reserved.'
+      siteNotes:
+        type: "array"
+        description: "List of SiteNotes"
+        items:
+          $ref: "#/definitions/SiteNote"
+ 
+  Bundle:
+    type: object
+    properties:
+      packageLineId:
+        type: string
+        format: guid
+        description: unique id for this line item of the package
+      action:
+        type: string
+        description: >-
+          Action to indicate the operation requested by the use on this
+          particular bundle. Expected values are ADD/REMOVE/MODIFY
+      skuId:
+        type: string
+        description: Bundle id from the product catalogue
+      name:
+        type: string
+        description: Name of the bundle as provided in the product catalogue
+      description:
+        type: string
+        description: 'Description of the bundle as provided in the product catalogue '
+      displayName:
+        type: string
+        description: Name of the bundle as provided in the merchandising data
+      displayDescription:
+        type: string
+        description: Description of the bundle as provided in the merchandising data
+      bundleClass:
+        type: string
+        description: 'Catalogue product class identifies products - SIMO, HANDSET etc.'
+      productClass:
+        type: string
+        description: Catalogue product class identifies products
+      serviceId:
+        type: string
+        description: 'Service ID  for the Bundle'
+      paymentType:
+        type: string
+        description: 'Payment type of the bundle. For example, "postpaid", "prepaid" etc.'
+      bundleType:
+        type: string
+        description: 'Type of the bundle. For example, Standard, Red, RedPlus etc.'
+      commitmentPeriod:
+        $ref: '#/definitions/CommitmentPeriod'
+      displayOrder:
+        type: integer
+        format: int32
+        description: Will be the "order" priority of the product from the catalogue
+      showInSummary:
+        type: boolean
+        description: Flag to indicate whether the product should be shown in basket summary
+      allowances:
+        type: array
+        items:
+          $ref: '#/definitions/Allowance'
+      merchandisingMedia:
+        type: array
+        items:
+          $ref: '#/definitions/MediaLink'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/Attribute'
+      priceDetails:
+        $ref: '#/definitions/BundlePrice'
+      isChanged:
+        type: boolean
+        description: >-
+          value true/false. This will identify if there are any changes to the basket (at basket level and package level)
+      isVodafoneGlobalRoaming:
+        type: boolean
+        description: 'value true/false. This will identify if the Bundle has Global Roaming'
+      bundledServiceProducts:
+        type: "array"
+        description: "Bundled Service Product Details for FLBB"
+        items:
+          $ref: "#/definitions/BundledServiceProduct"
+  BundledServiceProduct:
+    type: "object"
+    properties:
+      skuId:
+        type: "string"
+      name:
+        type: "string"
+        description: "Name of Bundled Service Product"
+      productClass:
+        type: "string"
+        description: "product Class of of bundled Service Products"
+      priceDetail:
+        $ref: "#/definitions/ServicePrice"
+      miscellaneous:
+        $ref: "#/definitions/Attribute"
+  
+  Hardware:
+    type: object
+    properties:
+      packageLineId:
+        type: string
+        format: guid
+        description: line id of the bundle in the package
+      action:
+        type: string
+        description: Expected list is ADD/REMOVE/MODIFY
+      skuId:
+        type: string
+        format: guid
+        description: Id of the device as given in the product catalogue
+      name:
+        type: string
+        description: Name of the device as provided in the product catalogue
+      description:
+        type: string
+        description: Description of the device as provided in the product catalogue
+      displayName:
+        type: string
+        description: Name of the device as provided in the merchandising data
+      displayDescription:
+        type: string
+        description: Description of the device as provided in the merchandising data
+      deviceBriefDescription:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceBriefDescription'
+      deviceColor:
+        type: string
+        description: Color of the HandSet
+      memorySize:
+        type: string
+        description: Storage Capacity of the Device
+      make:
+        type: string
+        description: Device company name
+      model:
+        type: string
+        description: Device Model
+      groupType:
+        type: string
+        description: Device group type
+      productClass:
+        type: string
+        description: Catalogue product class (identifies e.g. Delivery products)
+      freeGiftType:
+        type: string
+        description: falg will be true when this product is free gift
+      displayOrder:
+        type: integer
+        format: int32
+        description: Will be the "order" priority of the product from the catalogue
+      showInSummary:
+        type: boolean
+        description: Should the product be shown in basket summary
+      merchandisingMedia:
+        type: array
+        items:
+          $ref: '#/definitions/MediaLink'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/Attribute'
+      boxPrice:
+        $ref: '#/definitions/Price'
+      priceDetails:
+        $ref: '#/definitions/HardwarePrice'
+      isChanged:
+        type: boolean
+        description: >-
+          value true/false. This will identify if there are any changes to the basket (at basket level and package level)
+  
+  Discount:
+    type: object
+    properties:
+      productLineId:
+        type: string
+        format: guid
+        description: line id of the discount in the package
+      action:
+        type: string
+        description: Expected list is ADD/REMOVE/MODIFY
+      skuId:
+        type: string
+        format: guid
+        description: Id of the discount as given in the product catalogue
+      tag:
+        type: string
+        description: Name of the discount as provided in the product catalogue
+      label:
+        type: string
+        description: Label of the discount as provided in the product catalogue
+      tenure:
+        type: string
+        description: >-
+          Tenure of the discount as provided in the product catalogue (can
+          possibly take the values - PARTIAL or FULL)
+      duration:
+        type: string
+        description: >-
+          Duration from the start of the subscription for which the discount
+          would be applicable
+      confirmedRequired:
+        type: string
+        description: >-
+          Flag to indicate whether user consent should be taken before applying
+          the discount
+      merchandisingMedia:
+        type: array
+        items:
+          $ref: '#/definitions/MediaLink'
+      discountValue:
+        $ref: '#/definitions/DiscountValue'
+  
+  Service:
+    type: object
+    properties:
+      packageLineId:
+        type: string
+        format: guid
+        description: line id of the bundle in the package
+      action:
+        type: string
+        description: Expected list is ADD/REMOVE/MODIFY
+      skuId:
+        type: string
+        format: guid
+        description: Id of the device as given in the product catalogue
+      name:
+        type: string
+        description: Name of the device as provided in the product catalogue
+      description:
+        type: string
+        description: Description of the device as provided in the product catalogue
+      displayName:
+        type: string
+        description: Name of the device as provided in the merchandising data
+      displayDescription:
+        type: string
+        description: Description of the device as provided in the merchandising data
+      freeGiftType:
+        type: string
+        description: falg will be true when this product is free gift
+      specificationGroup:
+        type: array
+        items:
+          $ref: '#/definitions/Specifications'
+      merchandisingMedia:
+        type: array
+        items:
+          $ref: '#/definitions/MediaLink'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/Attribute'
+      priceDetails:
+        $ref: '#/definitions/ServicePrice'
+      isChanged:
+        type: boolean
+        description: >-
+          value true/false. This will identify if there are any changes to the basket (at basket level and package level)
+      allowances:
+          type: "array"
+          description: "Allowances for Service"
+          items:
+            $ref: "#/definitions/Allowance"
+
+      rewardPoints:
+          type: "string"
+          description: "Reward Points of Plan/Service"
+      isEuropeanZoneRoaming:
+          type: "boolean"
+          description: "value true/false. This will identify if the Plan/Service has\
+            \ European Zone Roaming"
+      planDuration:
+          $ref: "#/definitions/CommitmentPeriod"
+      dataRollover:
+          type: "string"
+          description: "Data Rollover of Plan/Service"
+      rootProductId:
+        type: "string"
+        description: "Root Product SkuId"
+  
+  DiscountValue:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Discount type - "PERCENTAGE" or "GBP"
+      value:
+        type: string
+        description: Discount value
+  ServicePrice:
+    type: object
+    properties:
+      oneOffPrice:
+        $ref: '#/definitions/Price'
+      monthlyPrice:
+        $ref: '#/definitions/Price'
+      oneOffDiscountPrice:
+        $ref: '#/definitions/Price'
+      monthlyDiscountPrice:
+        $ref: '#/definitions/Price'
+      merchandisingPromotions:
+        $ref: '#/definitions/MerchandisingPromotion'
+  Allowance:
+    type: object
+    properties:
+      type:
+        type: string
+        description: 'Allowance type - "DATA","TEXT","CALL. Roaming"'
+      value:
+        type: string
+        description: Value of the allowance
+      uom:
+        type: string
+        description: >-
+          Unit of measurement to be used for the allowance - "MB" for DATA.
+          "COUNT" fpr TEXT amd "MIN" for CALL
+      displayUom:
+        type: string
+        description: >-
+          Unit of measurement to be used for the allowance - "MB" for DATA.
+          "COUNT" fpr TEXT amd "MIN" for CALL
+      tilUom:
+        type: string
+        description: >-
+          Unit of measurement to be used for the allowance - "MB" for DATA.
+          "COUNT" fpr TEXT amd "MIN" for CALL
+  
+  Specifications:
+    type: object
+    properties:
+      name:
+        type: string
+        description: ' Value of the Descriptions - "Worldwide cover (30 days)","Theft","Loss"'
+      value:
+        type: string
+        description: 'Value of the Descriptions - "Yes","No"'
+      specPriority:
+        type: string
+        description: ' - priporty of the specfication'
+      comparable:
+        type: string
+        description: ' value of Comparable -"Yes" , "No"'
+      iskey:
+        type: string
+        description: ' is the key sample value are -"Yes" , "No"'
+      valueType:
+        type: string
+        description: Value of types--"boolean"
+      valueUOM:
+        type: string
+        description: Unit of measurement for value
+      footnote:
+        type: string
+        description: footNote
+      description:
+        type: string
+        description: ' Specfication Description '
+  
+  DeviceBriefDescription:
+    type: object
+    properties:
+      key:
+        type: string
+        description: ' - "UPS1",""UPS2","UPS3","UPS4",'
+      value:
+        type: string
+        description: >-
+          Value of the Descriptions - "4G ready","Seamless performance","Premium
+          design","Ultra power saving mode"
+      type:
+        type: string
+        description: Device Description types"
+      valueUOM:
+        type: string
+        description: Unit of measurement for value
+  Attribute:
+    type: object
+    properties:
+      name:
+        type: string
+        description: use the name of the attribute
+      value:
+        type: string
+        description: use the value  of the attribute
+  CommitmentPeriod:
+    type: object
+    properties:
+      uom:
+        type: string
+        description: Unit of measurement for the commitment period
+      value:
+        type: string
+        description: Value for the commitment period        
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      referenceId:
+        type: string

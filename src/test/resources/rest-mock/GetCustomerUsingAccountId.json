@@ -1,0 +1,178 @@
+[
+  {
+    "classificationCode": "Customer",
+    "accountStatus": "Active",
+    "accountName": "NIKKI SHARMA",
+    "accountCreationDateTime": "2018-08-29T00:00:00",
+    "accountId": "7000412877",
+    "sellingProfileIdentificationScheme": null,
+    "sellingProfileIdentificationID": null,
+    "note": null,
+    "businessReferenceNumber": "",
+    "registrationCode": null,
+    "charityNumber": "",
+    "tradingAs": "",
+    "accountCategory": "Individual",
+    "accountSubCategory": "Consumer",
+    "accountSegment": null,
+    "accountSubSegment": null,
+    "postpayMobileServicecount": 0,
+    "parentAccountId": null,
+    "storeId": null,
+    "daysSinceLastSuspension": null,
+    "suspensionsNumberInLast90Days": 0,
+    "suspensionsNumberInLast180Days": 0,
+    "typeCode": "Consumer",
+    "creditVet": {
+      "creditVetId": null,
+      "outcome": null,
+      "outcomeReasonCode": null,
+      "creditClass": null,
+      "recurringChargeLimit": null,
+      "expiryDateOfLastVet": null,
+      "creditLimit": null,
+      "shadowLimit": null,
+      "maximumNumberOfPostpaidConnectionsAllowed": null,
+      "depositAmount": null,
+      "depositTimePeriod": null,
+      "additionalBusinessTerm1": null,
+      "additionalBusinessTerm2": null,
+      "callBarProductId": null,
+      "callBarFlag": null,
+      "agentNotes": null,
+      "disableSubscriptionPurchases": "false"
+    },
+    "contact": [
+      {
+        "statusCode": "New",
+        "preferredCommunicationChannelCode": null,
+        "criticallyIll": null,
+        "birthDateTime": "1988-08-29",
+        "jobTitle": null,
+        "title": null,
+        "firstName": "NIKKI",
+        "familyName": "SHARMA",
+        "salutation": "Miss.",
+        "maritalStatusCode": null,
+        "middleName": null,
+        "genderCode": null,
+        "deceasedIndicator": false,
+        "ageProof": "Unvalidated",
+        "userName": "TEST_7000412877",
+        "type": null,
+        "identityStatus": "Active",
+        "pin": "9081",
+        "memorableWord": "vodafone",
+        "hint": "vodafone",
+        "contactId": "1-4MYTKHP",
+        "emailDetails": {
+          "email": "kamana.mishra@vodafone.com"
+        },
+        "contactCharacteristic": [
+          {
+            "name": "ShareLocationData",
+            "value": "true"
+          },
+          {
+            "name": "ShareTrafficData",
+            "value": "true"
+          },
+          {
+            "name": "FullAccess",
+            "value": "yes"
+          },
+          {
+            "name": "VoicePrintEnrolment",
+            "value": "Yes"
+          }
+        ],
+        "accountcontactrelationship": {
+          "contactAccountStatus": true,
+          "preferredcontactIndicator": true
+        },
+        "contactCommunicationDetails": [
+          {
+            "contactNumber": null,
+            "phoneNumberType": null,
+            "preferenceIndicator": "false"
+          },
+          {
+            "contactNumber": null,
+            "phoneNumberType": "FAX",
+            "preferenceIndicator": "false"
+          }
+        ]
+      }
+    ],
+    "address": [
+      {
+        "locationId": "1-LVS3",
+        "locationReferenceName": "JUNCTION STREET, CARLISLE, -, CARLISLE MAIL CENTRE, TEST, CA1 2AA",
+        "dateMovedIn": null,
+        "iasAccountShippingAddress": true,
+        "category": null,
+        "lineOne": "JUNCTION STREET",
+        "lineTwo": null,
+        "lineThree": null,
+        "lineFour": "TEST",
+        "buildingName": null,
+        "cityName": "CARLISLE",
+        "countyName": null,
+        "countryCode": "United Kingdom",
+        "postalCode": null,
+        "emailAddress": null,
+        "fao": null,
+        "mainAddress": true,
+        "billingAddress": true
+      }
+    ],
+    "billingProfile": [
+      {
+        "preferredIndicator": true,
+        "note": null,
+        "billingProfileEmailId": null,
+        "billingInquiryPhoneNumber": "447389779898",
+        "billingProfileName": "1-4MYU68G",
+        "billingProfileStatus": "Active",
+        "billingProfileId": "1-4MYU68G",
+        "dayOfMonthCode": null,
+        "frequencyCode": null,
+        "billTypeCode": "Itemised",
+        "mediaTypeCode": null,
+        "paymentType": "postpaid",
+        "prepaidAutoTopUp": false,
+        "prepaidTopUpUOM": "",
+        "prepaidTopUpAmount": null,
+        "prepaidSMSNotification": false,
+        "prepaidThresholdAmount": "",
+        "prepaidThresholdUOM": null,
+        "preferredContactId": "1-4MYTKHP",
+        "preferredAddressId": "1-LVS3",
+        "legalGroupOwnerStatus": "Active",
+        "legalGroupOwnerBillingProfileId": null,
+        "paymentMethod": {
+          "paymentMethodCode": "Cash",
+          "statusReasonCode": null,
+          "statusCode": "Not Authorized",
+          "creditCardNumber": null,
+          "expirationMonth": null,
+          "expirationYear": null,
+          "cardHolderBillingAddressPostalCode": null,
+          "cardHolderBillingAddressLineThree": null,
+          "preferredIndicator": false
+        },
+        "bankAccountDetails": {
+          "mandateId": null,
+          "bankAccountNumber": null,
+          "bankAccountName": null,
+          "typeCode": "Savings",
+          "bankBranchReference": null,
+          "preferredLanguageCode": "ENU",
+          "organizationName": null,
+          "routingNumber": null,
+          "description": "1-4MYU68G"
+        }
+      }
+    ]
+  }
+]
