@@ -91,7 +91,7 @@ steps:
     templateFile: 'infrastructure/cf-ecrtemplate.yaml'
     templateParametersSource: inline
     templateParameters: |
-     - ParameterKey: ecrname
+     - ParameterKey: EcrName
        ParameterValue: "$(Build.DefinitionName)"
     warnWhenNoWorkNeeded: false
     timeoutInMins: 5
