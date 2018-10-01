@@ -1,9 +1,0 @@
-{
-  "resultStatus": "string",
-  "appointmentWindow": {
-    "startTimePeriod": "string",
-    "operationalPreferenceCode": "string",
-    "timeSlot": "string",
-    "applicationId": "string"
-  }
-}
