@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
@@ -25,6 +26,7 @@ import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
+import com.vf.uk.dal.broadband.basket.entity.Service;
 import com.vf.uk.dal.broadband.basket.entity.UpdatePackage;
 import com.vf.uk.dal.broadband.cache.repository.entity.BasketInfo;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
@@ -737,13 +739,31 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
 				broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+		List<List<Service>> services =  broadbandDao.getBasket(broadband.getBasketId()).getPackages().stream().map(pack -> pack.getServices()).collect(Collectors.toList());
+		String serviceIdSku = null;
+		String engVisitProductLine = null;
+		if(CollectionUtils.isNotEmpty(services)){
+			for(List<Service> service : services){
+				for(Service ser : service){
+					if(StringUtils.equalsIgnoreCase(ser.getProductClass(), "Fee")
+							|| StringUtils.equalsIgnoreCase(ser.getProductClass(), "Fixed Fee")||
+							StringUtils.equalsIgnoreCase(ser.getProductClass(), "Installation Fee")){
+						serviceIdSku = ser.getSkuId();
+						engVisitProductLine = ser.getPackageLineId();
+					}
+				}
+			}
+		}
 
 		if ("NEW".equalsIgnoreCase(updateLineRequest.getLineTreatmentType())
 				&& broadband.getEngineeringVisitCharge() != null
-				&& broadband.getEngineeringVisitCharge().getGross() != null) {
+				&& broadband.getEngineeringVisitCharge().getGross() != null && !StringUtils.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())) {
 			AddProductRequest addProductRequest = broadbandJourneyServiceAssembler.addProductRequest(broadband);
 			broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
 					broadband.getBasketInfo().getPackageId());
+		}else if ("EXISTING".equalsIgnoreCase(updateLineRequest.getLineTreatmentType())
+				&& StringUtils.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())){
+			broadbandDao.deleteProductFromBasket(broadband.getBasketId(),broadband.getBasketInfo().getPackageId(),engVisitProductLine);
 		}
 	}
 

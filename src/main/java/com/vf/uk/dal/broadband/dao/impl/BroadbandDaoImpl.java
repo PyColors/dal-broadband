@@ -459,4 +459,10 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		return Collections.emptyList();
 	}
 
+	@Override
+	public void deleteProductFromBasket(String basketId, String packageId, String engVisitProductLine) {
+		restTemplate.delete("http://BASKET-V1/basket/"+basketId+"/package/"+packageId+"/productLine/"+engVisitProductLine);
+		
+	}
+
 }

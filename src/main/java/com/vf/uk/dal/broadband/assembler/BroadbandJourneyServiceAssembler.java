@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
@@ -68,6 +68,7 @@ import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
+import com.vf.uk.dal.broadband.mapper.BroadbandMapper;
 import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
@@ -82,6 +83,10 @@ import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
  */
 @Component
 public class BroadbandJourneyServiceAssembler {
+	
+	
+	@Autowired
+	BroadbandMapper broadbandMapper;
 
 	/**
 	 * Instantiates a new converter utils.
@@ -680,9 +685,7 @@ public class BroadbandJourneyServiceAssembler {
 		
 		response.setInstallationAddress(installationAddress);
 		if (CollectionUtils.isNotEmpty(getServiceAvailabilityResponse.getWarningErrorList())) {
-			DozerBeanMapper beanMapper = new DozerBeanMapper();
-			List<ErrorInfo> warningMessagesList = new ArrayList<>();
-			beanMapper.map(getServiceAvailabilityResponse.getWarningErrorList(), warningMessagesList);
+			List<ErrorInfo> warningMessagesList = broadbandMapper.mapWarningMessage(getServiceAvailabilityResponse.getWarningErrorList());
 			response.setWarningErrorList(warningMessagesList);
 		}
 		

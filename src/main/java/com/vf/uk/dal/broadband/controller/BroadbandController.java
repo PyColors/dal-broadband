@@ -48,6 +48,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * The Class BroadbandController.
@@ -218,6 +219,7 @@ public class BroadbandController {
 	 *            the broadband id
 	 * @return the broadband info
 	 */
+	@ApiIgnore
 	@ApiOperation(value = "Gives the Broadband cache using broadband id", notes = "Gets the broadband cache using broadband id", response = Broadband.class, tags = {
 			"Broadband" })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Broadband.class),
@@ -227,7 +229,6 @@ public class BroadbandController {
 	@RequestMapping(value = "/broadband/{broadbandId}", produces = { "application/json" }, method = RequestMethod.GET)
 	public Broadband getBroadbandInfo(
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId) {
-		broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");;
 		return broadbandService.getBroadbandFromCache(broadbandId);
 	}
 

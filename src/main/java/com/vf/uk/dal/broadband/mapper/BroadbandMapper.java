@@ -1,6 +1,8 @@
 package com.vf.uk.dal.broadband.mapper;
 
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,6 +11,7 @@ import com.vf.uk.dal.broadband.cache.repository.entity.InstallationAddress;
 import com.vf.uk.dal.broadband.cache.repository.entity.PriceForHardware;
 import com.vf.uk.dal.broadband.cache.repository.entity.ServicePoint;
 import com.vf.uk.dal.broadband.entity.BundleHeader;
+import com.vf.uk.dal.broadband.entity.ErrorInfo;
 import com.vf.uk.dal.broadband.entity.FlbBundle;
 import com.vf.uk.dal.broadband.entity.Price;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
@@ -39,6 +42,8 @@ public interface BroadbandMapper {
 	Price deliveryPriceToPrice(final DeliveryPrice dp);
 	
 	Price engPriceToPrice(final PriceForHardware priceForHardware); 
+	
+	List<ErrorInfo> mapWarningMessage(final List<com.vf.uk.dal.entity.serviceavailability.ErrorInfo> errorInfo);
 	
 
 }
