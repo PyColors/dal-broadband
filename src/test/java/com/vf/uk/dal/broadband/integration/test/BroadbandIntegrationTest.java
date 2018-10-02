@@ -983,6 +983,62 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
+	public void testGetFlbbListForExistingAndNew_WithAffiliate() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseV3.json"));
+		Broadband broadbandV3 = new ObjectMapper().readValue(jsonString8, Broadband.class);
+		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888")).willReturn(broadbandV3);
+		String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+		given(restTemplate.getForObject(
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+						.willReturn(bundleDetails);
+
+		String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+		DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+		given(restTemplate.getForEntity(
+				"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+				DeliveryMethods[].class))
+						.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/12345678907888/plan").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).param("userType", "Consumer").param("affiliateId", "12345678"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+
+	}
+	@Test
+	public void testGetFlbbListForExistingAndNew_WithoutAffiliate() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		String jsonString8 = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseV3.json"));
+		Broadband broadbandV3 = new ObjectMapper().readValue(jsonString8, Broadband.class);
+		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888")).willReturn(broadbandV3);
+		String jsonString1 = new String(Utility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
+		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
+		given(restTemplate.getForObject(
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+						.willReturn(bundleDetails);
+
+		String jsonString2 = new String(Utility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
+		DeliveryMethods[] deliveryMethods = new ObjectMapper().readValue(jsonString2, DeliveryMethods[].class);
+		given(restTemplate.getForEntity(
+				"http://INVENTORY-V1/inventory/product/deliveryMethods?skuId=085897&useCache=false",
+				DeliveryMethods[].class))
+						.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/12345678907888/plan").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).param("userType", "Consumer"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+
+	}
+	@Test
 	public void testGetFlbbListForExistingAndNew_AssuranceLevelZero() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
