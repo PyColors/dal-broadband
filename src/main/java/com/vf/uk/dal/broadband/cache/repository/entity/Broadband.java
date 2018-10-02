@@ -70,5 +70,9 @@ public class Broadband implements Serializable {
 	/** The category preference. */
 	@JsonProperty("categoryPreference")
 	private String categoryPreference = null;
+	
+	/** The isAffiliate flag. */
+	@JsonProperty("isAffiliate")
+	private Boolean isAffiliate = null;
 
 }

@@ -134,6 +134,7 @@ public class BroadbandController {
 			@ApiParam(value = "bundles will be filter based on duration like 18 months or 24 months. Format is 18 Months or 24 Months or 12 Months") @RequestParam(value = "duration", required = false) String duration,
 			@ApiParam(value = "Filter based on speed. Accepts single and comma seperated aswell Eg: Line Fibre with Speed 76,Line Fibre with Speed 38. If none is passed then we show all the packages for corresponding journeyType.") @RequestParam(value = "classificationCode", required = false) String classificationCode,
 			@ApiParam(value = "Filter based on category preferences. Accepts FTTH or FTTC") @RequestParam(value = "categoryPreference", required = false) String categoryPreference,
+			@ApiParam(value = "Affiliate Id") @RequestParam(value = "affiliateId", required = false) String affiliateId,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
 		broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
 		List<FlbBundle> listOfFlbBundle;
@@ -145,8 +146,13 @@ public class BroadbandController {
 		getBundleListSearchCriteria.setClassificationCode(classificationCode);
 		getBundleListSearchCriteria.setDuration(duration);
 		getBundleListSearchCriteria.setBundleClass("FTTH");
+		getBundleListSearchCriteria.setIsAffiliate(false);
 		if (StringUtils.isNotBlank(categoryPreference)) {
 			getBundleListSearchCriteria.setBundleClass(categoryPreference);
+		}
+		if(StringUtils.isNotBlank(affiliateId))
+		{
+			getBundleListSearchCriteria.setIsAffiliate(true);
 		}
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
 		return new ResponseEntity<>(listOfFlbBundle, HttpStatus.OK);

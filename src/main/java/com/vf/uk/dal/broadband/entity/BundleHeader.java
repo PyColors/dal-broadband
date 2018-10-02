@@ -141,5 +141,10 @@ public class BundleHeader {
 	/** The promotions package. */
 	@JsonProperty("promotionsPackage")
 	private MerchandisingPromotionsPackage promotionsPackage = null;
+	
+	
+	/** The isAffiliate flag. */
+	@JsonProperty("isAffiliate")
+	private Boolean isAffiliate = null;
 
 }

@@ -529,7 +529,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null);
+					null, null, null, null, null, null, null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -557,7 +557,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null);
+					null, null, null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -585,7 +585,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null);
+					null, null, null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -613,7 +613,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null);
+					null, null, null, null, null, null,null);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);

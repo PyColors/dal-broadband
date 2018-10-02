@@ -63,5 +63,8 @@ public class GetBundleListSearchCriteria {
 
 	/** The broadband id. */
 	private String broadbandId;
+	
+	/** The isAffiliate flag. */
+	private Boolean isAffiliate;
 
 }
