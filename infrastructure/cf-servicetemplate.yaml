@@ -39,7 +39,7 @@ Parameters:
   MinCapacity:
     Description: Min number of containers to run on ECS Cluster
     Type: Number
-  BuildNumber:
+  BuildID:
     Description: buildnumber from VSTS.
     Type: String
   HostName:
@@ -102,10 +102,10 @@ Resources:
         Protocol: HTTPS
         Port: 8080
         HealthCheckPath: !Sub /${ContextPath}/health
-        HealthyThresholdCount: !Ref ${HealthyThresholdCount}
-        UnhealthyThresholdCount: !Ref ${UnhealthyThresholdCount}
-        HealthCheckTimeoutSeconds: !Ref ${HealthCheckTimeoutSeconds}
-        HealthCheckIntervalSeconds: !Ref ${HealthCheckIntervalSeconds}
+        HealthyThresholdCount: !Ref HealthyThresholdCount
+        UnhealthyThresholdCount: !Ref UnhealthyThresholdCount
+        HealthCheckTimeoutSeconds: !Ref HealthCheckTimeoutSeconds
+        HealthCheckIntervalSeconds: !Ref HealthCheckIntervalSeconds
         Matcher:
           HttpCode: 200-299
         Tags:
@@ -145,7 +145,7 @@ Resources:
               Value: !Ref JtcFilename
           Memory: !Ref Memory
           MemoryReservation: !Ref MemoryReservation
-          Image: !Sub ${EcrLocation}/${BuildName}:${BuildNumber}
+          Image: !Sub ${EcrLocation}/${BuildName}:${BuildID}
           PortMappings:
             - ContainerPort: 8080
               HostPort: 0
