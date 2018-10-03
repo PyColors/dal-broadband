@@ -143,7 +143,7 @@
   "basketId":"2b23e0a1-eefd-409c-a919-e0ca774b9017",
   "basketInfo": {
     "accountCategory":"Consumer",
-  	"packageId": null,
+  	"packageId": "1111111111111111111",
   	"planProductLineId" : null,
   	"hardwareProductLineId" : null,
   	"planId" : "110264"

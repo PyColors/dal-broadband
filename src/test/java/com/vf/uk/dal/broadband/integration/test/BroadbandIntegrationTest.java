@@ -1010,6 +1010,7 @@ public class BroadbandIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
+
 	@Test
 	public void testGetFlbbListForExistingAndNew_WithoutAffiliate() throws Exception {
 		SecurityContext.unsetContext();
@@ -1038,6 +1039,7 @@ public class BroadbandIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
+
 	@Test
 	public void testGetFlbbListForExistingAndNew_AssuranceLevelZero() throws Exception {
 		SecurityContext.unsetContext();
@@ -2146,8 +2148,7 @@ public class BroadbandIntegrationTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/12345678907888/lineOptions/selected").headers(header)
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
 	}
-	
-	
+
 	@Test
 	public void testAvailabilityCheckReturnScenarioWithAuth_AssuranceLevelZero() throws Exception {
 		SecurityContext.unsetContext();
@@ -2155,12 +2156,11 @@ public class BroadbandIntegrationTest {
 		HttpHeaders header = new HttpHeaders();
 		header.add("Authorization", "JWT adasdf");
 
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/12345678907888/lineOptions/selected?useAuthorization=true").headers(header)
-				.contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/12345678907888/lineOptions/selected?useAuthorization=true")
+						.headers(header).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
-	
-	
-	
 
 	@Test
 	public void testAvailabilityCheckReturnScenario_AssuranceLevelOne() throws Exception {
@@ -2324,6 +2324,24 @@ public class BroadbandIntegrationTest {
 		Date exp = new Date(expMillis);
 		builder.setExpiration(exp);
 		authorizationJWTUtility.validateAuthContextFromJWT(builder.compact());
+	}
+
+	@Test
+	public void clearBasketCacheTest_AssuranceLevel2() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token2.json");
+		String basketId = "2b23e0a1-eefd-409c-a919-e0ca774b9017";
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("BasketId", basketId);
+		final HttpEntity<HttpStatus> entity = new HttpEntity<>(headers);
+
+		given(restTemplate.exchange("http://Basket-V1/basket/basket/" + basketId, HttpMethod.DELETE, entity,
+				Void.class)).willReturn(new ResponseEntity<>(HttpStatus.OK));
+
+		this.mockMvc.perform(MockMvcRequestBuilders.put("/12345678907888/premise/reset?useAuthorization=true").headers(headers))
+				.andExpect(MockMvcResultMatchers.status().isNoContent());
+
 	}
 
 	@After

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -90,8 +91,8 @@ public class BroadbandController {
 			@ApiParam(value = "user type", required = false) @RequestParam(value = "userType", required = false, defaultValue = "CONSUMER") String userType,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
 		AvailabilityCheckResponse availabilityCheckResponse = broadbandService
@@ -139,8 +140,8 @@ public class BroadbandController {
 			@ApiParam(value = "Affiliate Id") @RequestParam(value = "affiliateId", required = false) String affiliateId,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		List<FlbBundle> listOfFlbBundle;
 		GetBundleListSearchCriteria getBundleListSearchCriteria = new GetBundleListSearchCriteria();
@@ -155,8 +156,7 @@ public class BroadbandController {
 		if (StringUtils.isNotBlank(categoryPreference)) {
 			getBundleListSearchCriteria.setBundleClass(categoryPreference);
 		}
-		if(StringUtils.isNotBlank(affiliateId))
-		{
+		if (StringUtils.isNotBlank(affiliateId)) {
 			getBundleListSearchCriteria.setIsAffiliate(true);
 		}
 		listOfFlbBundle = broadbandService.getFlbList(getBundleListSearchCriteria);
@@ -189,7 +189,7 @@ public class BroadbandController {
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
 		try {
-			if(useAuthorization){
+			if (useAuthorization) {
 				broadbandAuthorizationHelper.authorizeAnonymousRequest("0", "1", "2", "3");
 			}
 			return broadbandService.getAddressInfoByPostcodeFromPremise(URLDecoder.decode(postCode, "UTF-8"),
@@ -221,8 +221,8 @@ public class BroadbandController {
 			@ApiParam(value = "Sends the availability check request", required = true) @Valid @RequestBody BasketRequest basketRequest,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		Broadband broadband = broadbandService.getBroadbandFromCache(broadbandId);
 		BroadbandValidator.isBasketCreateOrUpdateRequestValid(basketRequest, broadband);
@@ -270,8 +270,8 @@ public class BroadbandController {
 			@ApiParam(value = "Request to update the line treatment type in the basket and cache", required = true) @Valid @RequestBody UpdateLineRequest updateLineRequest,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		BroadbandValidator.isUpdateLineTreatmentRequestValid(updateLineRequest);
 		broadbandService.updateBasketWithLineTreatmentType(broadbandId, updateLineRequest);
@@ -299,8 +299,8 @@ public class BroadbandController {
 			@ApiParam(value = "Request to update the broadband with the appointment information ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		BroadbandValidator.isCreateAppointmentRequestValid(createAppointmentRequest);
 		CreateAppointmentResponse createAppointmentresponse;
@@ -336,8 +336,8 @@ public class BroadbandController {
 			@ApiParam(value = "Request to update the broadband with the service start date information, Date format Should be yyyy-MM-dd ", required = true) @Valid @RequestBody com.vf.uk.dal.broadband.entity.ServiceStartDateRequest serviceStartDateRequest,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		broadbandService.updateBasketWithServiceDate(broadbandId, serviceStartDateRequest);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -365,8 +365,8 @@ public class BroadbandController {
 			@ApiParam(value = "Request for optimizing the broadband package", required = true) @Valid @RequestBody OptimizePackageRequest optimizePackageRequest,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		return new ResponseEntity<>(broadbandService.optimizePackageForFLBB(optimizePackageRequest, broadbandId),
 				HttpStatus.OK);
@@ -392,8 +392,8 @@ public class BroadbandController {
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
 		try {
-			if(useAuthorization){
-				broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+			if (useAuthorization) {
+				broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 			}
 			return new ResponseEntity<>(broadbandService.getAppointmentForFLBB(broadbandId), HttpStatus.OK);
 		} catch (TILException e) {
@@ -426,8 +426,8 @@ public class BroadbandController {
 			@ApiParam(value = "plan id based on which we need to query the compatible devices", required = true) @PathVariable("planId") String planId,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		return new ResponseEntity<>(broadbandService.getCompatibleDevicesForBundle(broadbandId, planId), HttpStatus.OK);
 	}
@@ -454,8 +454,8 @@ public class BroadbandController {
 			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
 			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
-		if(useAuthorization){
-			broadbandAuthorizationHelper.authorizeRequest(broadbandId,"0", "1", "2", "3");
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
 		}
 		return new ResponseEntity<>(broadbandService.getSelectedLineOptions(broadbandId), HttpStatus.OK);
 	}
@@ -473,8 +473,31 @@ public class BroadbandController {
 			@ApiParam(value = "Returns compatible extras for the specific plan ID", required = true) @PathVariable("planId") String planId,
 			@ApiParam(value = "Returns compatible extras for the specific productGroupType", required = true) @PathVariable("productGroupType") String productGroupType,
 			@RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
-		//broadbandAuthorizationHelper.authorizeAnonymousRequest("0", "1", "2", "3");
+		// broadbandAuthorizationHelper.authorizeAnonymousRequest("0", "1", "2",
+		// "3");
 		return new ResponseEntity<>(broadbandService.getCompatibleExtras(planId, productGroupType), HttpStatus.OK);
+
+	}
+
+	@ApiOperation(value = "remove basket details and contents from the basket cache", notes = "This service removes the basket details and basket contents from the basket cache based on the broadband and basket id provided", response = HttpStatus.class, tags = {
+			"Clear basket and cache" })
+	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success", response = HttpStatus.class),
+			@ApiResponse(code = 400, message = "Bad request", response = HttpStatus.class),
+			@ApiResponse(code = 405, message = "Method not allowed", response = HttpStatus.class),
+			@ApiResponse(code = 404, message = "Not found", response = HttpStatus.class),
+			@ApiResponse(code = 500, message = "Internal Server Error", response = HttpStatus.class) })
+	@DeleteMapping(value = "/{broadbandId}/package", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HttpStatus> changeDetails(
+			@RequestHeader(value = "BasketId", required = false) String basketId,
+			@ApiParam(value = "broadband id to query from broad band cache", required = true) @PathVariable("broadbandId") String broadbandId,
+			@RequestHeader(value = "Authorization", required = false) String authorizationHeader,
+			@ApiParam(value = "use authorization", required = false) @RequestParam(value = "useAuthorization", required = false, defaultValue = "false") boolean useAuthorization) {
+		if (useAuthorization) {
+			broadbandAuthorizationHelper.authorizeRequest(broadbandId, "0", "1", "2", "3");
+		}
+		broadbandService.clearPackageAndBasketCache(broadbandId, basketId);
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 	}
 

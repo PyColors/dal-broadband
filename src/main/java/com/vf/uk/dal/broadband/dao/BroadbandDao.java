@@ -265,4 +265,6 @@ public interface BroadbandDao {
 	List<Account> getAccountDetailsByAccountId(String accountId);
 
 	void deleteProductFromBasket(String basketId, String packageId, String engVisitProductLine);
+	
+	void deletePackage(String basketId, String packageId);
 }
