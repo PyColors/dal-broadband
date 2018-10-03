@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -461,8 +462,18 @@ public class BroadbandDaoImpl implements BroadbandDao {
 
 	@Override
 	public void deleteProductFromBasket(String basketId, String packageId, String engVisitProductLine) {
-		restTemplate.delete("http://BASKET-V1/basket/"+basketId+"/package/"+packageId+"/productLine/"+engVisitProductLine);
-		
+		restTemplate.delete("http://BASKET-V1/basket/" + basketId + "/package/" + packageId + "/productLine/"
+				+ engVisitProductLine);
+
+	}
+
+	@Override
+	public void deletePackage(String basketId, String packageId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		final HttpEntity<HttpStatus> entity = new HttpEntity<>(headers);
+		String url = BroadBandConstant.BASKET_URL + basketId+"/package/"+packageId;
+		restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
 	}
 
 }

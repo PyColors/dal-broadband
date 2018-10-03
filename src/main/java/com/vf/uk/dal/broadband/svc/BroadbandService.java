@@ -31,20 +31,25 @@ public interface BroadbandService {
 	/**
 	 * check availability service for broadband.
 	 *
-	 * @param availabilityCheckRequest the availability check request
-	 * @param broadbandId the broadband id
-	 * @param broadband the broadband
-	 * @param userType the user type
+	 * @param availabilityCheckRequest
+	 *            the availability check request
+	 * @param broadbandId
+	 *            the broadband id
+	 * @param broadband
+	 *            the broadband
+	 * @param userType
+	 *            the user type
 	 * @return AvailabilityCheckResponse
 	 */
-	
-	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest, String broadbandId, Broadband broadband, String userType);
 
-	
+	public AvailabilityCheckResponse checkAvailabilityForBroadband(AvailabilityCheckRequest availabilityCheckRequest,
+			String broadbandId, Broadband broadband, String userType);
+
 	/**
 	 * get the FLBB bundle list.
 	 *
-	 * @param getBundleListSearchCriteria the get bundle list search criteria
+	 * @param getBundleListSearchCriteria
+	 *            the get bundle list search criteria
 	 * @return List<FlbBundle>
 	 */
 	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria);
@@ -52,111 +57,132 @@ public interface BroadbandService {
 	/**
 	 * Service Start date.
 	 *
-	 * @param postCode the post code
-	 * @param categoryPreferences the category preferences
-	 * @param userType the user type
+	 * @param postCode
+	 *            the post code
+	 * @param categoryPreferences
+	 *            the category preferences
+	 * @param userType
+	 *            the user type
 	 * @return ServiceStartDates
 	 */
-	
-	/*public ServiceStartDates getAvailableServiceStartDates(String earliestAvailableStartDate, BigDecimal range)
-			throws DateTimeParseException, ParseException;*/
-	
+
+	/*
+	 * public ServiceStartDates getAvailableServiceStartDates(String
+	 * earliestAvailableStartDate, BigDecimal range) throws
+	 * DateTimeParseException, ParseException;
+	 */
+
 	/**
 	 * Create the appointment.
+	 * 
 	 * @param createAppointmentRequest
-	 * @param journeyId 
+	 * @param journeyId
 	 * @return CreateAppointmentResponse
 	 */
-	/*CreateAppointmentResponse createAppointmentForFLBB(CreateAppointmentRequest createAppointmentRequest, String journeyId);*/
+	/*
+	 * CreateAppointmentResponse
+	 * createAppointmentForFLBB(CreateAppointmentRequest
+	 * createAppointmentRequest, String journeyId);
+	 */
 
 	/**
 	 * Get address list by post code from Premise
+	 * 
 	 * @param postCode
 	 * @return AddressInfo
 	 */
-	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences,String userType);
-
+	public AddressInfo getAddressInfoByPostcodeFromPremise(String postCode, String categoryPreferences,
+			String userType);
 
 	/**
 	 * Creates the or update package.
 	 *
-	 * @param basketRequest the basket request
-	 * @param broadband the broadband
-	 * @param broadbandId the broadband id
+	 * @param basketRequest
+	 *            the basket request
+	 * @param broadband
+	 *            the broadband
+	 * @param broadbandId
+	 *            the broadband id
 	 * @return the basket
 	 */
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId);
 
-
 	/**
 	 * Gets the broadband from cache.
 	 *
-	 * @param broadbandId the broadband id
+	 * @param broadbandId
+	 *            the broadband id
 	 * @return the broadband from cache
 	 */
 	public Broadband getBroadbandFromCache(String broadbandId);
 
-
 	/**
 	 * Update basket with line treatment type.
 	 *
-	 * @param broadbandId the broadband id
-	 * @param updateLineRequest the update line request
+	 * @param broadbandId
+	 *            the broadband id
+	 * @param updateLineRequest
+	 *            the update line request
 	 */
 	public void updateBasketWithLineTreatmentType(String broadbandId, UpdateLineRequest updateLineRequest);
-
 
 	/**
 	 * Creates the appointment.
 	 *
-	 * @param createAppointmentRequest the create appointment request
-	 * @param broadbandId the broadband id
+	 * @param createAppointmentRequest
+	 *            the create appointment request
+	 * @param broadbandId
+	 *            the broadband id
 	 * @return the creates the appointment response
 	 */
 	public CreateAppointmentResponse createAppointment(CreateAppointmentRequest createAppointmentRequest,
 			String broadbandId);
 
-
 	/**
 	 * Gets the appointment for FLBB.
 	 *
-	 * @param broadbandId the broadband id
+	 * @param broadbandId
+	 *            the broadband id
 	 * @return the appointment for FLBB
 	 */
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId);
 
-
 	/**
 	 * Optimize package for FLBB.
 	 *
-	 * @param optimizePackageRequest the optimize package request
-	 * @param broadbandId the broadband id
+	 * @param optimizePackageRequest
+	 *            the optimize package request
+	 * @param broadbandId
+	 *            the broadband id
 	 * @return the optimize package response
 	 */
-	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest, String broadbandId);
-
+	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest,
+			String broadbandId);
 
 	/**
 	 * Gets the compatible devices for bundle.
 	 *
-	 * @param broadbandId the broadband id
-	 * @param planId the plan id
+	 * @param broadbandId
+	 *            the broadband id
+	 * @param planId
+	 *            the plan id
 	 * @return the compatible devices for bundle
 	 */
 	public List<RouterDetails> getCompatibleDevicesForBundle(String broadbandId, String planId);
 
-
 	/**
 	 * Update basket with service date.
 	 *
-	 * @param broadbandId the broadband id
-	 * @param serviceStartDateRequest the service start date request
+	 * @param broadbandId
+	 *            the broadband id
+	 * @param serviceStartDateRequest
+	 *            the service start date request
 	 */
 	public void updateBasketWithServiceDate(String broadbandId, ServiceStartDateRequest serviceStartDateRequest);
 
-
 	public SelectedAvailabilityCheckResponse getSelectedLineOptions(String broadbandId);
 
-
 	EnhanceCompatibleExtraResponse getCompatibleExtras(String planId, String productGroupType);
+
+	void clearPackageAndBasketCache(String broadbandId, String basketId);
 }
