@@ -2339,7 +2339,7 @@ public class BroadbandIntegrationTest {
 		given(restTemplate.exchange("http://Basket-V1/basket/basket/" + basketId, HttpMethod.DELETE, entity,
 				Void.class)).willReturn(new ResponseEntity<>(HttpStatus.OK));
 
-		this.mockMvc.perform(MockMvcRequestBuilders.put("/12345678907888/premise/reset?useAuthorization=true").headers(headers))
+		this.mockMvc.perform(MockMvcRequestBuilders.delete("/12345678907888/package?useAuthorization=true").headers(headers))
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
 
 	}
