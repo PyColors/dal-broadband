@@ -265,7 +265,7 @@ public class BroadbandControllerTest {
 				AvailabilityCheckRequest.class);
 		
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"123456789078", "CONSUMER", "JWT aaaa");
+				"123456789078", "CONSUMER", "JWT aaaa",true);
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 		List<String> classificationCodeList = new ArrayList<>();
 		classificationCodeList.add("Line and ADSL");
@@ -288,7 +288,7 @@ public class BroadbandControllerTest {
 				AvailabilityCheckRequest.class);
 
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"123456789078", "CONSUMER", null);
+				"123456789078", "CONSUMER", null,true);
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 		List<String> classificationCodeList = new ArrayList<>();
 		classificationCodeList.add("Line and ADSL");
@@ -310,7 +310,7 @@ public class BroadbandControllerTest {
 		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
 
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"123456789078", "CONSUMER", null);
+				"123456789078", "CONSUMER", null,true);
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 	}
 
@@ -324,7 +324,7 @@ public class BroadbandControllerTest {
 		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
 
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"12345678907888", "CONSUMER", null);
+				"12345678907888", "CONSUMER", null, true);
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 	}
 
@@ -337,7 +337,7 @@ public class BroadbandControllerTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST4.json"));
 		AvailabilityCheckRequest request = new ObjectMapper().readValue(jsonString, AvailabilityCheckRequest.class);
 		ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController.checkAvailabilityForBroadband(request,
-				"12345678907888", "CONSUMER", null);
+				"12345678907888", "CONSUMER", null, true);
 		assertEquals(HttpStatus.OK, resonse.getStatusCode());
 
 	}
@@ -353,7 +353,7 @@ public class BroadbandControllerTest {
 
 		try {
 			ResponseEntity<AvailabilityCheckResponse> resonse = broadBandController
-					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER", null);
+					.checkAvailabilityForBroadband(request, "12345678907888", "CONSUMER", null,true);
 			assertEquals(HttpStatus.OK, resonse.getStatusCode());
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -370,7 +370,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 
 		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request, null);
+			Basket resonse = broadBandController.createOrUpdatePackage("12345678907888", request, null,true);
 			assertEquals("2b23e0a1-eefd-409c-a919-e0ca774b9017", resonse.getBasketId());
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -386,7 +386,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 
 		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("123456789078881", request, null);
+			Basket resonse = broadBandController.createOrUpdatePackage("123456789078881", request, null,true);
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -403,7 +403,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Source cannot be null while creating or updating the basket");
-		broadBandController.createOrUpdatePackage("1234907888", request, null);
+		broadBandController.createOrUpdatePackage("1234907888", request, null,true);
 	}
 
 	@Test
@@ -415,7 +415,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Hardware Id or Package Id is null. Not a valid request while updating");
-		broadBandController.createOrUpdatePackage("12345678907888", request, null);
+		broadBandController.createOrUpdatePackage("12345678907888", request, null,true);
 	}
 
 	@Test
@@ -428,7 +428,7 @@ public class BroadbandControllerTest {
 
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Bundle Id or Package Id is null. Not a valid request while updating");
-		broadBandController.createOrUpdatePackage("12345678907888", request, null);
+		broadBandController.createOrUpdatePackage("12345678907888", request, null,true);
 	}
 
 	@Test
@@ -440,7 +440,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Package id is empty. Not a valid request whule updating the basket");
-		broadBandController.createOrUpdatePackage("12345678907888", request, null);
+		broadBandController.createOrUpdatePackage("12345678907888", request, null,true);
 	}
 
 	@Test
@@ -452,7 +452,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Customer Requested date cannot be null while creating or updating the basket");
-		broadBandController.createOrUpdatePackage("1234907888", request, null);
+		broadBandController.createOrUpdatePackage("1234907888", request, null,true);
 	}
 
 	@Test
@@ -464,7 +464,7 @@ public class BroadbandControllerTest {
 		BasketRequest request = new ObjectMapper().readValue(jsonString, BasketRequest.class);
 
 		try {
-			Basket resonse = broadBandController.createOrUpdatePackage("178907888", request, null);
+			Basket resonse = broadBandController.createOrUpdatePackage("178907888", request, null,true);
 			assertEquals("2b23e0a1-eefd-409c-a919-e0ca774b9017", resonse.getBasketId());
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -480,7 +480,7 @@ public class BroadbandControllerTest {
 	@Test
 	public void testGetAddressByPostCodeFromPremise() {
 		AddressInfo addressInfo = broadBandController.getAddressByPostcode("LS290JJ", "FTTH",
-				BroadBandConstant.BROADBAND_CONSUMER, null);
+				BroadBandConstant.BROADBAND_CONSUMER, null,true);
 		assertEquals(addressInfo.getAddresses().size(), 1);
 	}
 
@@ -489,9 +489,9 @@ public class BroadbandControllerTest {
 		try {
 			UpdateLineRequest updateLineReq = new UpdateLineRequest();
 			updateLineReq.setLineTreatmentType("NEW");
-			broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq, null);
+			broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq, null,true);
 			assertEquals(
-					broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq, null).getStatusCode(),
+					broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq, null,true).getStatusCode(),
 					HttpStatus.NO_CONTENT);
 			// assertNotNull(object);
 		} catch (Exception e) {
@@ -505,7 +505,7 @@ public class BroadbandControllerTest {
 		UpdateLineRequest updateLineReq = new UpdateLineRequest();
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Line treatment type cannot be null.");
-		broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq, null);
+		broadBandController.updateLineTypeInBasket("12345678907888", updateLineReq, null,true);
 
 	}
 
@@ -529,7 +529,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null, null);
+					null, null, null, null, null, null, null,true);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -557,7 +557,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null,null);
+					null, null, null, null, null, null,null,true);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -585,7 +585,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null,null);
+					null, null, null, null, null, null,null,true);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -613,7 +613,7 @@ public class BroadbandControllerTest {
 							.willReturn(new ResponseEntity<DeliveryMethods[]>(deliveryMethods, HttpStatus.OK));
 
 			ResponseEntity<List<FlbBundle>> flbbList = broadBandController.getFlbbList("1234567823444", "Consumer",
-					null, null, null, null, null, null,null);
+					null, null, null, null, null, null,null,true);
 			assertNotNull(flbbList);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -630,7 +630,7 @@ public class BroadbandControllerTest {
 		SiteNote siteNote = new SiteNote();
 		siteNote.setNotes("Hello");
 		request.setSiteNote(siteNote);
-		ResponseEntity<?> resonse = broadBandController.createAppointmentForFLBB("12345678907888", request, null);
+		ResponseEntity<?> resonse = broadBandController.createAppointmentForFLBB("12345678907888", request, null,true);
 		assertEquals(resonse.getStatusCode(), HttpStatus.OK);
 
 	}
@@ -644,13 +644,13 @@ public class BroadbandControllerTest {
 		request.setSiteNote(siteNote);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
-		broadBandController.createAppointmentForFLBB("12345678907888", request, null);
+		broadBandController.createAppointmentForFLBB("12345678907888", request, null,true);
 
 	}
 
 	@Test
 	public void testGetAppointmentResponse() {
-		ResponseEntity<?> resonse = broadBandController.getAppointmentForFLBB("1234567890788889", null);
+		ResponseEntity<?> resonse = broadBandController.getAppointmentForFLBB("1234567890788889", null,true);
 		assertEquals(resonse.getStatusCode(), HttpStatus.OK);
 
 	}
@@ -665,7 +665,7 @@ public class BroadbandControllerTest {
 					RouterProductDetails[].class))
 							.willReturn(new ResponseEntity<RouterProductDetails[]>(productDetails, HttpStatus.OK));
 			ResponseEntity<List<RouterDetails>> resonse = broadBandController
-					.getCompatibleDevicesForBundle("12345678907888", "110264", null);
+					.getCompatibleDevicesForBundle("12345678907888", "110264", null,true);
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -678,7 +678,7 @@ public class BroadbandControllerTest {
 			OptimizePackageRequest optimizePackageRequest = new OptimizePackageRequest();
 			optimizePackageRequest.setJourneyId("2290f3b1-1ed5-4513-9f86-110531c5fbfb");
 			ResponseEntity<OptimizePackageResponse> resonse = broadBandController
-					.optimizePackageForFLBB("12345678907888", optimizePackageRequest, null);
+					.optimizePackageForFLBB("12345678907888", optimizePackageRequest, null,true);
 			assertNotNull(resonse);
 		} catch (Exception e) {
 			LogHelper.error(this, "Null object is send \n" + e);
@@ -692,7 +692,7 @@ public class BroadbandControllerTest {
 		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Invalid BroadBand Id sent in the Request");
-		broadBandController.serviceStartDate("1234", serviceStartDateRequest, null);
+		broadBandController.serviceStartDate("1234", serviceStartDateRequest, null,true);
 	}
 
 	@Test
@@ -702,7 +702,7 @@ public class BroadbandControllerTest {
 		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
-		broadBandController.serviceStartDate("12345678907888", serviceStartDateRequest, null);
+		broadBandController.serviceStartDate("12345678907888", serviceStartDateRequest, null,true);
 
 	}
 
@@ -713,7 +713,7 @@ public class BroadbandControllerTest {
 			serviceStartDateRequest.setStartDateTime("2018-10-01T18:45:00.000+00:00");
 			serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
 			ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("12345678907",
-					serviceStartDateRequest, null);
+					serviceStartDateRequest, null,true);
 			Assert.assertEquals(204, response.getStatusCodeValue());
 		} catch (Exception e) {
 			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
@@ -727,7 +727,7 @@ public class BroadbandControllerTest {
 			serviceStartDateRequest.setStartDateTime("2018-10-01T18:45:00.000+00:00");
 			serviceStartDateRequest.setRemoveFromPhoneDirectory(true);
 			ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("12345678907",
-					serviceStartDateRequest, null);
+					serviceStartDateRequest, null,true);
 			Assert.assertEquals(204, response.getStatusCodeValue());
 		} catch (Exception e) {
 			LogHelper.error(this, "Start Date time or time slot is null. This cannot be null!!" + e);
