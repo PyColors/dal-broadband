@@ -2146,6 +2146,21 @@ public class BroadbandIntegrationTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/12345678907888/lineOptions/selected").headers(header)
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
 	}
+	
+	
+	@Test
+	public void testAvailabilityCheckReturnScenarioWithAuth_AssuranceLevelZero() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/12345678907888/lineOptions/selected?useAuthorization=true").headers(header)
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
+	
+	
 
 	@Test
 	public void testAvailabilityCheckReturnScenario_AssuranceLevelOne() throws Exception {

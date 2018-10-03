@@ -23,14 +23,12 @@ public class BroadbandAuthorizationHelper {
 	 * @return
 	 */
 	public void authorizeRequest(String broadbandId,String... assuranceLevels) {
-		if (StringUtils.isNotBlank(authorizationEnabled) && BooleanUtils.toBoolean(authorizationEnabled)) {
 			if (com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer.getAuthContext() != null) {
 				com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer
 						.validatePlatformSessionIdAccess(broadbandId, assuranceLevels);
 			} else {
 				throw new BroadbandJourneyCustomException("401", "Access is denied as authorization is missing", "ACCESS_DENIED_MISSING_AUTHORIZATION");
 			}
-		}
 	}
 	/**
 	 * 
@@ -38,13 +36,11 @@ public class BroadbandAuthorizationHelper {
 	 * @return
 	 */
 	public void authorizeAnonymousRequest(String... assuranceLevels) {
-		if (StringUtils.isNotBlank(authorizationEnabled) && BooleanUtils.toBoolean(authorizationEnabled)) {
 			if (com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer.getAuthContext() != null) {
 				com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer
 				.validateAssuranceLevel(assuranceLevels);
 			} else {
 				throw new BroadbandJourneyCustomException("401", "Access is denied as authorization is missing", "ACCESS_DENIED_MISSING_AUTHORIZATION");
 			}
-		}
 	}
 }
