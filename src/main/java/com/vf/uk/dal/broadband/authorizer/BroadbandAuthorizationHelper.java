@@ -1,19 +1,12 @@
 
 package com.vf.uk.dal.broadband.authorizer;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang3.BooleanUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.vf.uk.dal.broadband.exception.BroadbandJourneyCustomException;
 
 @Component
 public class BroadbandAuthorizationHelper {
-
-	@Value("${dal.authorization.enabled}")
-	private String authorizationEnabled;
-
 	
 
 	/**
