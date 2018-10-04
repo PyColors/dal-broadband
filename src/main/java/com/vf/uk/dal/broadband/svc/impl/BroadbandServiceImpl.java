@@ -423,8 +423,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 							&& StringUtils.isNotBlank(bundleHeader.getMiscAttributes().getPlanCallOut())) {
 						flbBundle.setBundleFeatures(bundleHeader.getMiscAttributes().getPlanCallOut());
 					}
-					Speed speedForBB = new Speed();
-					speedForBB = flbBundle.getSpeed();
+					Speed speedForBB = flbBundle.getSpeed();
 					setCommercialSpeedInPlansResponse(flbBundle, speedForBB);
 					flbBundle.setPreOrderable(false);
 					flbBundle.setIsSelected(false);
