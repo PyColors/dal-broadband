@@ -31,6 +31,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
@@ -85,6 +86,8 @@ public class BroadbandIntegrationTest {
 	@Autowired
 	BroadbandController broadBandController;
 
+	
+	
 	@Autowired
 	AuthorizationJWTUtility authorizationJWTUtility;
 
@@ -1995,7 +1998,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelZero() throws Exception {
+	public void testUpdateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelZero() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2013,7 +2016,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelOne() throws Exception {
+	public void testUpdateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelOne() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token1.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2031,7 +2034,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelTwo() throws Exception {
+	public void testUpdateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelTwo() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token2.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2049,7 +2052,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelThree() throws Exception {
+	public void testUpdateServiceDateinBasketWithOutRemoveFromPhoneDirectory_AssuranceLevelThree() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token3.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2067,7 +2070,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelZero() throws Exception {
+	public void testUpdateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelZero() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2085,7 +2088,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelOne() throws Exception {
+	public void testUpdateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelOne() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token1.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2103,7 +2106,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelTwo() throws Exception {
+	public void testUpdateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelTwo() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token2.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2121,7 +2124,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void updateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelThree() throws Exception {
+	public void testUpdateServiceDateinBasketWithRemoveFromPhoneDirectory_AssuranceLevelThree() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token3.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2196,7 +2199,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void getCompatabileExtras_AssuranceLevelZero() throws Exception {
+	public void testGetCompatabileExtras_AssuranceLevelZero() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2219,7 +2222,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void getCompatabileExtras_AssuranceLevelOne() throws Exception {
+	public void testGetCompatabileExtras_AssuranceLevelOne() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token1.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2242,7 +2245,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void getCompatabileExtras_AssuranceLevelTwo() throws Exception {
+	public void testGetCompatabileExtras_AssuranceLevelTwo() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token2.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2265,7 +2268,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void getCompatabileExtras_AssuranceLevelThree() throws Exception {
+	public void testGetCompatabileExtras_AssuranceLevelThree() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token3.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2327,7 +2330,7 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
-	public void clearBasketCacheTest_AssuranceLevel2() throws Exception {
+	public void testClearBasketCacheTest_AssuranceLevelTwo() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token2.json");
 		String basketId = "2b23e0a1-eefd-409c-a919-e0ca774b9017";
@@ -2343,6 +2346,169 @@ public class BroadbandIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
 
 	}
+	@Test
+	public void testCreateOrUpdateBasket_InvalidRequest_EmptySourceCode() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest.json"));
+		thrown.expectMessage("Source cannot be null while creating or updating the basket");
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
+	public void testCreateOrUpdateBasket_InvalidRequest_EmptyHardwarId() throws Exception {
+		
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest3.json"));
+		thrown.expectMessage("Hardware Id or Package Id is null. Not a valid request while updating");
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
+	public void testCreateOrUpdateBasket_InvalidRequest_EmptyBundleId()
+			throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest4.json"));
+		thrown.expectMessage("Bundle Id or Package Id is null. Not a valid request while updating");
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
+	public void testCreateOrUpdateBasket_InvalidRequest_EmptyPackageId()
+			throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest5.json"));
+		thrown.expectMessage("Package id is empty. Not a valid request whule updating the basket");
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+
+	@Test
+	public void testCreateOrUpdateBasket_InvalidRequest_CustomerDate() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);		
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest2.json"));
+		thrown.expectMessage("Customer Requested date cannot be null while creating or updating the basket");
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+	@Test
+	public void testCreateAppointmentResponse_NegativeScenario() throws Exception {
+		
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		CreateAppointmentRequest request = new CreateAppointmentRequest();
+		request.setRemoveFromPhoneDirectory(true);
+		request.setStartTimePeriod("");
+		request.setTimeSlot("");
+		SiteNote siteNote = new SiteNote();
+		siteNote.setNotes("Hello");
+		request.setSiteNote(siteNote);
+		Gson gson = new Gson();
+		String requestString = gson.toJson(request);
+		thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/appointment")
+						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.content(requestString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	}
+	
+	@Test
+	public void testUpdateServiceDateinBasket_InvalidBroadBandId() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+		serviceStartDateRequest.setStartDateTime("2018-10-01T18:45:00.000+00:00");
+		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
+		Gson gson = new Gson();
+		String request = gson.toJson(serviceStartDateRequest);
+		thrown.expectMessage("Invalid BroadBand Id sent in the Request");
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.put("/1234/startDate").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(request.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	}
+
+	@Test
+	public void testUpdateServiceDateinBasket_EmptySatrtDate() throws Exception {
+		
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
+		serviceStartDateRequest.setStartDateTime("");
+		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
+		Gson gson = new Gson();
+		String request = gson.toJson(serviceStartDateRequest);
+		thrown.expectMessage("Start Date time or time slot is null. This cannot be null");
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.put("/12345678907888/startDate").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(request.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	}
+
+	@Test
+	public void testUpdateLineTreatmentType_InvalidRequest() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		final String request = "{\"lineTreatmentType\":\"\"}";
+		thrown.expectMessage("Line treatment type cannot be null.");
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.put("/12345678907888/lineType").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(request.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	}
+
 
 	@After
 	public void tearDown() {
