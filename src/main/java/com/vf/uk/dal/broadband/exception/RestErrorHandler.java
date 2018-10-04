@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.RestClientResponseException;
 
+import com.vf.uk.dal.authorization.filter.util.exception.AuthorizationException;
 import com.vf.uk.dal.common.context.ServiceContext;
 import com.vf.uk.dal.common.exception.ErrorResponse;
 import com.vf.uk.dal.common.logger.LogHelper;
@@ -27,6 +28,15 @@ public class RestErrorHandler {
 				err.getMessage());
 		error.setReferenceId(ServiceContext.getCorrelationId());
 		return ResponseEntity.status(Integer.valueOf(err.getStatusCode())).body(error);
+	}
+	
+	
+	@ExceptionHandler
+	public ResponseEntity<?> handleException(final AuthorizationException err) {
+		ErrorResponse error = new ErrorResponse(401, err.getErrorCode(),
+				err.getMessage());
+		error.setReferenceId(ServiceContext.getCorrelationId());
+		return ResponseEntity.status(401).body(error);
 	}
 
 	@ExceptionHandler
