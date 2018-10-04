@@ -86,6 +86,8 @@ public class BroadbandIntegrationTest {
 	@Autowired
 	BroadbandController broadBandController;
 
+	
+	
 	@Autowired
 	AuthorizationJWTUtility authorizationJWTUtility;
 
