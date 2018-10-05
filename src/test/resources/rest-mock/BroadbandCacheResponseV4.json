@@ -145,5 +145,6 @@
   "gross" :"100.00",
   "net" : "80.00",
   "vat" : "20"
-  }
+  },
+  "isAffiliate": true
 }

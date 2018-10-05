@@ -195,6 +195,18 @@ public class BroadbandControllerTest {
 
 		CreateBasketRequest createBasketRequest = new ObjectMapper().readValue(createBasketJsonRequest,
 				CreateBasketRequest.class);
+		
+		
+		String createBasketJsonRequestWithServicePoint = new String(Utility.readFile("\\rest-mock\\CreateBasketRequestWithServicePoint.json"));
+
+		CreateBasketRequest createBasketRequestWithServicePoint = new ObjectMapper().readValue(createBasketJsonRequestWithServicePoint,
+				CreateBasketRequest.class);
+		
+		
+		String createBasketJsonRequestWithoutAffiliate = new String(Utility.readFile("\\rest-mock\\CreateBasketRequestWithoutAffiliate.json"));
+
+		CreateBasketRequest createBasketRequestWithoutAffiliate = new ObjectMapper().readValue(createBasketJsonRequestWithoutAffiliate,
+				CreateBasketRequest.class);
 
 		String bbCacheResponse = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponse1.json"));
 		Broadband bbResponse = new ObjectMapper().readValue(bbCacheResponse, Broadband.class);
@@ -203,6 +215,11 @@ public class BroadbandControllerTest {
 
 		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest, Basket.class))
 				.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequestWithServicePoint, Basket.class))
+		.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
+		
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequestWithoutAffiliate, Basket.class))
+		.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
 		
 		
 		String createBasketJsonRequestWithServieId = new String(Utility.readFile("\\rest-mock\\CreateBasketRequestWithServiceId.json"));

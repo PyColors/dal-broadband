@@ -226,6 +226,23 @@ public class BroadbandIntegrationTest {
 
 		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest, Basket.class))
 				.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+		
+		String createBasketJsonRequestWithServicePoint = new String(Utility.readFile("\\rest-mock\\CreateBasketRequestWithServicePoint.json"));
+
+		CreateBasketRequest createBasketRequestWithServicePoint = new ObjectMapper().readValue(createBasketJsonRequestWithServicePoint,
+				CreateBasketRequest.class);
+		
+		
+		String createBasketJsonRequestWithoutAffiliate = new String(Utility.readFile("\\rest-mock\\CreateBasketRequestWithoutAffiliate.json"));
+
+		CreateBasketRequest createBasketRequestWithoutAffiliate = new ObjectMapper().readValue(createBasketJsonRequestWithoutAffiliate,
+				CreateBasketRequest.class);
+		
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequestWithServicePoint, Basket.class))
+		.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
+		
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequestWithoutAffiliate, Basket.class))
+		.willReturn(new ResponseEntity<>(basket, HttpStatus.OK));
 
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888")).willReturn(broadbandCacheResponse);
 		given(broadBandRepoProvider.getBroadbandFromCache("123456789078881"))
@@ -590,14 +607,13 @@ public class BroadbandIntegrationTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		thrown.expectMessage("No Data recieved from TIL");
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
-						.content(jsonString.getBytes(Charset.defaultCharset())))
-				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-				.andExpect(jsonPath("referenceId").isNotEmpty())
-				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+		.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+				.contentType(MediaType.APPLICATION_JSON).headers(header)
+				.content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
+		
 
 	}
 
@@ -612,14 +628,12 @@ public class BroadbandIntegrationTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		thrown.expectMessage("No Data recieved from TIL");
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).content(jsonString.getBytes(Charset.defaultCharset()))
-						.headers(header))
-				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-				.andExpect(jsonPath("referenceId").isNotEmpty())
-				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+		.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+				.contentType(MediaType.APPLICATION_JSON).headers(header)
+				.content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 
 	}
 
@@ -634,14 +648,12 @@ public class BroadbandIntegrationTest {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		thrown.expectMessage("No Data recieved from TIL");
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
-						.content(jsonString.getBytes(Charset.defaultCharset())))
-				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-				.andExpect(jsonPath("referenceId").isNotEmpty())
-				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+		.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+				.contentType(MediaType.APPLICATION_JSON).headers(header)
+				.content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 
 	}
 
@@ -655,14 +667,12 @@ public class BroadbandIntegrationTest {
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		thrown.expectMessage("No Data recieved from TIL");
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
-						.content(jsonString.getBytes(Charset.defaultCharset())))
-				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-				.andExpect(jsonPath("referenceId").isNotEmpty())
-				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+		.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+				.contentType(MediaType.APPLICATION_JSON).headers(header)
+				.content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 
 	}
 

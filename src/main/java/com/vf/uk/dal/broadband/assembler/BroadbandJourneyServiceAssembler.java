@@ -1042,6 +1042,9 @@ public class BroadbandJourneyServiceAssembler {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
 		createBasket.setCustomerRequestedDate(basketRequest.getCustomerRequestedDate());
 		createBasket.setSource(basketRequest.getSource());
+		if(broadband!=null) {
+			createBasket.setAffiliateFlag(broadband.getIsAffiliate());
+		}
 		List<AddPackage> packages = new ArrayList<>();
 		AddPackage addPackage = new AddPackage();
 		// add bundle in basket

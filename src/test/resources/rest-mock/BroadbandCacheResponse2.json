@@ -147,5 +147,6 @@
   	"planProductLineId" : null,
   	"hardwareProductLineId" : null
   },
-  "journeyId" : null
+  "journeyId" : null,
+  "isAffiliate": true
 }
