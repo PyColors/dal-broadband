@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
@@ -1042,6 +1043,9 @@ public class BroadbandJourneyServiceAssembler {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
 		createBasket.setCustomerRequestedDate(basketRequest.getCustomerRequestedDate());
 		createBasket.setSource(basketRequest.getSource());
+		if(broadband!=null) {
+			createBasket.setAffiliateFlag(broadband.getIsAffiliate());
+		}
 		List<AddPackage> packages = new ArrayList<>();
 		AddPackage addPackage = new AddPackage();
 		// add bundle in basket
@@ -1126,6 +1130,8 @@ public class BroadbandJourneyServiceAssembler {
 
 		packages.add(addPackage);
 		createBasket.setPackages(packages);
+		Gson gson = new Gson();
+		gson.toJson(createBasket);
 		return createBasket;
 	}
 
