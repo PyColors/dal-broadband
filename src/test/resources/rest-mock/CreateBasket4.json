@@ -1,0 +1,176 @@
+{
+  "affiliateFlag": null,
+  "affiliateId": null,
+  "customerRequestedDate": "2017-10-01T18:45:00.000+00:00",
+  "journey": null,
+  "packages": [
+    {
+      "accountCategory": "Consumer",
+      "appointmentWindow": null,
+      "bundle": {
+        "action": "ADD",
+        "attributes": null,
+        "skuId": "110266"
+      },
+      "hardwares": [
+        {
+          "action": "ADD",
+          "attributes": null,
+          "skuId": "085897"
+        }
+      ],
+      "installationAddress": {
+        "citySubDivisionName": "LS",
+        "country": null,
+        "county": "Norfolk",
+        "flatNumber": "",
+        "houseName": "",
+        "houseNumber": "1",
+        "identification": {
+          "contextId": "Gold",
+          "id": "A90000221048"
+        },
+        "locality": "Brooke",
+        "moveTypeCode": null,
+        "postCode": "LS29 0JJ",
+        "streetName": "Craven Crescent",
+        "town": null
+      },
+      "packageType": "Acquisition",
+      "phoneNumber": "string",
+      "servicePoint": {
+        "lineRefernece": {
+          "availableServices": null,
+          "lineDirectory": [
+            
+          ],
+          "lineLocator": {
+            "cableLinkID": null,
+            "distributionPoint": null,
+            "districtCode": null,
+            "exchangeCode": "NORW3",
+            "exchangeName": "Norwich 3",
+            "l2SID": null
+          },
+          "lineSettings": null,
+          "lineStatus": {
+            "accessLineStatus": "Working",
+            "gnpStatus": null,
+            "lineOption": null,
+            "lineType": null,
+            "narrowBandServicesAvailable": "false",
+            "standbyPowerRequired": false,
+            "statusCode": "Working",
+            "technology": null,
+            "tempStructure": false
+          }
+        },
+        "serviceReference": {
+          "serviceLines": [
+            {
+              "classificationCode": "Line and ADSL",
+              "lineTreatments": [
+                {
+                  "appointmentNeeded": false,
+                  "connectionCharge": "No Charge",
+                  "earliestAvailableDate": "2018-04-26",
+                  "identification": "EXISTING",
+                  "preOrder": null,
+                  "registerOfInterest": null
+                },
+                {
+                  "appointmentNeeded": true,
+                  "connectionCharge": "Line",
+                  "earliestAvailableDate": "2018-04-23",
+                  "identification": "NEW",
+                  "preOrder": null,
+                  "registerOfInterest": null
+                }
+              ],
+              "networkType": "Onnet",
+              "serviceLines": [
+                {
+                  "itemReference": {
+                    "classificationCode": "Line",
+                    "identificationId": null,
+                    "name": null
+                  },
+                  "lineSpeeds": null,
+                  "miscRefernce": null,
+                  "serviceLineTreatments": [
+                    
+                  ]
+                },
+                {
+                  "itemReference": {
+                    "classificationCode": "ADSL",
+                    "identificationId": "PC00024",
+                    "name": "Single Play Enhanced Transit"
+                  },
+                  "lineSpeeds": {
+                    "avgDownSpeed": null,
+                    "bandwidthMeasure": null,
+                    "maxDownSpeed": "1210.0",
+                    "maxUpSpeed": "1000.0",
+                    "minDownSpeed": "510.0",
+                    "minGuaranteedDownSpeed": "395.0",
+                    "minUpSpeed": "500.0"
+                  },
+                  "miscRefernce": null,
+                  "serviceLineTreatments": [
+                    {
+                      "accessLine": {
+                        "channelId": null,
+                        "id": "C002086814083"
+                      },
+                      "canNumberBeRetained": false,
+                      "lineInfo": "PSTN Working Line Takeover",
+                      "parentIdentification": "EXISTING",
+                      "pendingOrders": [
+                        {
+                          "completionDate": null,
+                          "thirdPartyFlag": "false",
+                          "typeCode": "CANCEL"
+                        }
+                      ],
+                      "portInFlag": "BT",
+                      "serviceAction": "Provide",
+                      "serviceType": "SMPF",
+                      "simValue": null,
+                      "vicCode": null
+                    },
+                    {
+                      "accessLine": null,
+                      "canNumberBeRetained": false,
+                      "lineInfo": "Spare Pair",
+                      "parentIdentification": "NEW",
+                      "pendingOrders": [
+                        
+                      ],
+                      "portInFlag": null,
+                      "serviceAction": "Provide",
+                      "serviceType": "SMPF",
+                      "simValue": null,
+                      "vicCode": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "serviceStartDate": null,
+      "services": [
+        {
+          "action": "ADD",
+          "attributes": null,
+          "skuId": "107573"
+        }
+      ]
+    }
+  ],
+  "returnURL": null,
+  "source": "WCS",
+  "ttl": null
+}

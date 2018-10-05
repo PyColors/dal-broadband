@@ -86,8 +86,6 @@ public class BroadbandIntegrationTest {
 	@Autowired
 	BroadbandController broadBandController;
 
-	
-	
 	@Autowired
 	AuthorizationJWTUtility authorizationJWTUtility;
 
@@ -228,6 +226,7 @@ public class BroadbandIntegrationTest {
 
 		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest, Basket.class))
 				.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+
 		given(broadBandRepoProvider.getBroadbandFromCache("12345678907888")).willReturn(broadbandCacheResponse);
 		given(broadBandRepoProvider.getBroadbandFromCache("123456789078881"))
 				.willReturn(broadbandCacheResWithoutBasketId);
@@ -259,6 +258,18 @@ public class BroadbandIntegrationTest {
 		given(restTemplate.exchange(
 				"http://BASKET-V1/basket/basket/2b23e0a1-eefd-409c-a919-e0ca774b9017/broadbandPackage/3b23e0a1-eefd-409c-a919-e0ca774b9018/serviceStartDate",
 				HttpMethod.PUT, entity1, Void.class)).willReturn(new ResponseEntity<Void>(HttpStatus.NO_CONTENT));
+
+		String createBasketJsonRequest6 = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest6.json"));
+		CreateBasketRequest createBasketRequest6 = new ObjectMapper().readValue(createBasketJsonRequest6,
+				CreateBasketRequest.class);
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest6, Basket.class))
+				.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+		String createBasketJsonRequest4 = new String(Utility.readFile("\\rest-mock\\CreateBasket4.json"));
+		CreateBasketRequest createBasketRequest4 = new ObjectMapper().readValue(createBasketJsonRequest4,
+				CreateBasketRequest.class);
+		given(restTemplate.postForEntity("http://BASKET-V1/basket/basket/", createBasketRequest4, Basket.class))
+				.willReturn(new ResponseEntity<Basket>(basket, HttpStatus.OK));
+
 	}
 
 	@Test
@@ -273,7 +284,7 @@ public class BroadbandIntegrationTest {
 		String checkAvailabilityRequest = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(checkAvailabilityRequest.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -345,7 +356,7 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(jsonString.getBytes(Charset.defaultCharset())).headers(header))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -417,7 +428,7 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(jsonString.getBytes(Charset.defaultCharset())).headers(header))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -508,7 +519,7 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST4.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(jsonString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -578,19 +589,16 @@ public class BroadbandIntegrationTest {
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
-			this.mockMvc
-					.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-							.contentType(MediaType.APPLICATION_JSON).headers(header)
-							.content(jsonString.getBytes(Charset.defaultCharset())))
-					.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-					.andExpect(jsonPath("referenceId").isNotEmpty())
-					.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-					.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
+				.andExpect(jsonPath("referenceId").isNotEmpty())
+				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
+				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+
 	}
 
 	@Test
@@ -603,19 +611,16 @@ public class BroadbandIntegrationTest {
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
-			this.mockMvc
-					.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-							.contentType(MediaType.APPLICATION_JSON)
-							.content(jsonString.getBytes(Charset.defaultCharset())).headers(header))
-					.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-					.andExpect(jsonPath("referenceId").isNotEmpty())
-					.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-					.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+						.contentType(MediaType.APPLICATION_JSON).content(jsonString.getBytes(Charset.defaultCharset()))
+						.headers(header))
+				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
+				.andExpect(jsonPath("referenceId").isNotEmpty())
+				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
+				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+
 	}
 
 	@Test
@@ -628,19 +633,16 @@ public class BroadbandIntegrationTest {
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
-			this.mockMvc
-					.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-							.contentType(MediaType.APPLICATION_JSON).headers(header)
-							.content(jsonString.getBytes(Charset.defaultCharset())))
-					.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-					.andExpect(jsonPath("referenceId").isNotEmpty())
-					.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-					.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
+				.andExpect(jsonPath("referenceId").isNotEmpty())
+				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
+				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
+
 	}
 
 	@Test
@@ -652,20 +654,16 @@ public class BroadbandIntegrationTest {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isInternalServerError())
+				.andExpect(jsonPath("referenceId").isNotEmpty())
+				.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
+				.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
 
-		try {
-			String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST5.json"));
-			this.mockMvc
-					.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-							.contentType(MediaType.APPLICATION_JSON).headers(header)
-							.content(jsonString.getBytes(Charset.defaultCharset())))
-					.andExpect(MockMvcResultMatchers.status().isInternalServerError())
-					.andExpect(jsonPath("referenceId").isNotEmpty())
-					.andExpect(jsonPath("errorMessage").value("No Data recieved from TIL"))
-					.andExpect(jsonPath("errorCode").value("BROADBAND_NO_TIL_RESPONSE"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Test
@@ -680,7 +678,7 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\REQUEST2.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(jsonString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -748,7 +746,8 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+						.headers(header).param("useAuthorization", "true").param("useAuthorization", "true")
+						.content(jsonString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
@@ -811,7 +810,7 @@ public class BroadbandIntegrationTest {
 		HttpHeaders header = new HttpHeaders();
 		header.add("Authorization", "JWT adasdf");
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/broadband/12345678907888")
-				.contentType(MediaType.APPLICATION_JSON).headers(header))
+				.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -861,7 +860,7 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.get("/07888/plan").contentType(MediaType.APPLICATION_JSON)
-						.headers(header).param("userType", "Consumer"))
+						.headers(header).param("userType", "Consumer").param("useAuthorization", "true"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
@@ -886,7 +885,7 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.get("/premise/LS290JJ").contentType(MediaType.APPLICATION_JSON)
-						.headers(header).param("categoryPreference", "FTTH"))
+						.headers(header).param("categoryPreference", "FTTH").param("useAuthorization", "true"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -938,7 +937,7 @@ public class BroadbandIntegrationTest {
 		final String request = "{\"lineTreatmentType\":\"" + "NEW" + "\"}";
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.put("/12345678907888/lineType").contentType(MediaType.APPLICATION_JSON)
-						.headers(header).content(request.getBytes(Charset.defaultCharset())))
+						.headers(header).param("useAuthorization", "true").content(request.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
 
 	}
@@ -1733,7 +1732,7 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/appointment")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(requestString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -1820,7 +1819,7 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.get("/12345678907888/appointment")
-						.contentType(MediaType.APPLICATION_JSON).headers(header))
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -1877,7 +1876,7 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.get("/12345678907888/plan/110264/router")
-						.contentType(MediaType.APPLICATION_JSON).headers(header))
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
@@ -1943,7 +1942,7 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/optimize/package")
-						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
 						.content(request.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -2010,7 +2009,7 @@ public class BroadbandIntegrationTest {
 		String request = gson.toJson(serviceStartDateRequest);
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.put("/12345678907888/startDate").contentType(MediaType.APPLICATION_JSON)
-						.headers(header).content(request.getBytes(Charset.defaultCharset())))
+						.headers(header).param("useAuthorization", "true").content(request.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
 
 	}
@@ -2342,10 +2341,13 @@ public class BroadbandIntegrationTest {
 		given(restTemplate.exchange("http://Basket-V1/basket/basket/" + basketId, HttpMethod.DELETE, entity,
 				Void.class)).willReturn(new ResponseEntity<>(HttpStatus.OK));
 
-		this.mockMvc.perform(MockMvcRequestBuilders.delete("/12345678907888/package?useAuthorization=true").headers(headers))
+		this.mockMvc
+				.perform(
+						MockMvcRequestBuilders.delete("/12345678907888/package?useAuthorization=true").headers(headers))
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
 
 	}
+
 	@Test
 	public void testCreateOrUpdateBasket_InvalidRequest_EmptySourceCode() throws Exception {
 		SecurityContext.unsetContext();
@@ -2360,13 +2362,13 @@ public class BroadbandIntegrationTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+						.headers(header).param("useAuthorization", "true").content(jsonString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 
 	@Test
 	public void testCreateOrUpdateBasket_InvalidRequest_EmptyHardwarId() throws Exception {
-		
+
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2377,14 +2379,13 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest3.json"));
 		thrown.expectMessage("Hardware Id or Package Id is null. Not a valid request while updating");
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 
 	@Test
-	public void testCreateOrUpdateBasket_InvalidRequest_EmptyBundleId()
-			throws Exception {
+	public void testCreateOrUpdateBasket_InvalidRequest_EmptyBundleId() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2395,14 +2396,13 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest4.json"));
 		thrown.expectMessage("Bundle Id or Package Id is null. Not a valid request while updating");
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 
 	@Test
-	public void testCreateOrUpdateBasket_InvalidRequest_EmptyPackageId()
-			throws Exception {
+	public void testCreateOrUpdateBasket_InvalidRequest_EmptyPackageId() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2413,9 +2413,9 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest5.json"));
 		thrown.expectMessage("Package id is empty. Not a valid request whule updating the basket");
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 
 	@Test
@@ -2426,17 +2426,18 @@ public class BroadbandIntegrationTest {
 		header.add("Authorization", "JWT adasdf");
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);		
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasketInvRequest2.json"));
 		thrown.expectMessage("Customer Requested date cannot be null while creating or updating the basket");
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
-				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+				.perform(MockMvcRequestBuilders.post("/12345678907888/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
+
 	@Test
 	public void testCreateAppointmentResponse_NegativeScenario() throws Exception {
-		
+
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2457,7 +2458,7 @@ public class BroadbandIntegrationTest {
 						.content(requestString.getBytes(Charset.defaultCharset())))
 				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
-	
+
 	@Test
 	public void testUpdateServiceDateinBasket_InvalidBroadBandId() throws Exception {
 		SecurityContext.unsetContext();
@@ -2478,7 +2479,7 @@ public class BroadbandIntegrationTest {
 
 	@Test
 	public void testUpdateServiceDateinBasket_EmptySatrtDate() throws Exception {
-		
+
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
@@ -2509,6 +2510,39 @@ public class BroadbandIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 
+	@Test
+	public void testCreateOrUpdateBasket_InvalidBroadbandId() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/178907888/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+
+	}
+
+	@Test
+	public void testCreateOrUpdateBasket_EmptyBaskedId() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/123456789078881/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+
+	}
 
 	@After
 	public void tearDown() {
