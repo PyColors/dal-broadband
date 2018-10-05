@@ -47,13 +47,7 @@
           "classificationCode": "Line and ADSL",
           "networkType": "Onnet",
           "lineTreatments": [
-            {
-              "identification": "EXISTING",
-              "earliestAvailableDate": "2018-04-26",
-              "appointmentNeeded": false,
-              "connectionCharge": "No Charge",
-              "lineTreatmentType": "EXISTING"
-            },
+            
             {
               "identification": "NEW",
               "earliestAvailableDate": "2018-04-23",
