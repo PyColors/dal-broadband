@@ -2,6 +2,7 @@ package com.vf.uk.dal.broadband.dao;
 
 import java.util.List;
 
+import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -267,4 +268,6 @@ public interface BroadbandDao {
 	void deleteProductFromBasket(String basketId, String packageId, String engVisitProductLine);
 	
 	void deletePackage(String basketId, String packageId);
+
+	void addPackage(AddPackage createAddPackageRequest, String basketId);
 }

@@ -13,6 +13,7 @@ import com.vf.uk.dal.broadband.basket.entity.AddProduct;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
 import com.vf.uk.dal.broadband.basket.entity.BasketRequest;
+import com.vf.uk.dal.broadband.basket.entity.BasketServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
@@ -1046,6 +1047,22 @@ public class BroadbandJourneyServiceAssembler {
 			createBasket.setAffiliateFlag(broadband.getIsAffiliate());
 		}
 		List<AddPackage> packages = new ArrayList<>();
+		AddPackage addPackage = addPackageToBasket(basketRequest, broadband, servicePoint, journey);
+
+		packages.add(addPackage);
+		createBasket.setPackages(packages);
+		return createBasket;
+	}
+
+	/**
+	 * @param basketRequest
+	 * @param broadband
+	 * @param servicePoint
+	 * @param journey
+	 * @return
+	 */
+	private AddPackage addPackageToBasket(BasketRequest basketRequest, Broadband broadband,
+			com.vf.uk.dal.broadband.basket.entity.BasketServicePoint servicePoint, CurrentJourney journey) {
 		AddPackage addPackage = new AddPackage();
 		// add bundle in basket
 		if (broadband != null && broadband.getLineDetails() != null
@@ -1126,10 +1143,7 @@ public class BroadbandJourneyServiceAssembler {
 			services.add(addProductForServices);
 		}
 		addPackage.setServices(services);
-
-		packages.add(addPackage);
-		createBasket.setPackages(packages);
-		return createBasket;
+		return addPackage;
 	}
 
 	/**
@@ -1554,6 +1568,11 @@ public class BroadbandJourneyServiceAssembler {
 		ServiceStartDateRequest serviceStartDateRequest = new ServiceStartDateRequest();
 		serviceStartDateRequest.setServiceStartDate(serviceStartDate.getStartDateTime());
 		return serviceStartDateRequest;
+	}
+
+	public AddPackage createAddPackageRequest(BasketRequest basketRequest, Broadband broadbandCache,
+			BasketServicePoint basketServicePoint, CurrentJourney journey) {
+		return addPackageToBasket(basketRequest, broadbandCache, basketServicePoint, journey);
 	}
 
 }

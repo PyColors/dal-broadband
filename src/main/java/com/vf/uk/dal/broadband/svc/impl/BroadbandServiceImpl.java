@@ -651,7 +651,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						.withType("GET");
 				basket.add(CommonUtility.formatLink(getAddressLink));
 				broadbandCache.setBasketId(basket.getBasketId());
-			} else {
+			} else if (broadbandCache.getBasketInfo()!=null){
 				UpdatePackage updatePackageRequest = broadbandJourneyServiceAssembler.updateBasketRequest(basketRequest,
 						journey, broadbandCache, null);
 				ResponseEntity<HttpStatus> methodLinkBuilderLineType = ControllerLinkBuilder
@@ -662,6 +662,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
 				basket = broadbandDao.getBasket(basketId);
 				basket.add(CommonUtility.formatLink(lineTypeLink));
+			}else{
+				broadbandDao.addPackage(broadbandJourneyServiceAssembler.createAddPackageRequest(
+						basketRequest, broadbandCache,
+						broadbandMapper.servicePointToBasketServicePoint(broadbandCache.getServicePoint()), journey),broadbandCache.getBasketId());
+				basket = broadbandDao.getBasket(basketId);
 			}
 			broadbandCache = broadbandJourneyServiceAssembler.createUpdateCacheRequest(broadbandCache, basketRequest,
 					broadbandId, basket);

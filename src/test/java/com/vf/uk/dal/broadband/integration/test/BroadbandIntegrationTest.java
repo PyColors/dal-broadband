@@ -2536,6 +2536,29 @@ public class BroadbandIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 
 	}
+	
+	
+	
+	@Test
+	public void testCreateOrUpdateBasket1() throws Exception {
+		String getBroadbandCacheResponse = new String(Utility.readFile("\\rest-mock\\BroadbandCacheResponseNoBasketInfo.json"));
+		Broadband broadbandCacheResponse = new ObjectMapper().readValue(getBroadbandCacheResponse, Broadband.class);
+		given(broadBandRepoProvider.getBroadbandFromCache("1234569099099")).willReturn(broadbandCacheResponse);
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(Utility.readFile("\\rest-mock\\CreateBasket.json"));
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/1234569099099/package").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+
+	}
+	
 
 	@Test
 	public void testCreateOrUpdateBasket_EmptyBaskedId() throws Exception {
@@ -2553,6 +2576,13 @@ public class BroadbandIntegrationTest {
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	@After
 	public void tearDown() {

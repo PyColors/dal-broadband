@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vf.uk.dal.broadband.assembler.BroadbandJourneyServiceAssembler;
+import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -474,6 +475,16 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		final HttpEntity<HttpStatus> entity = new HttpEntity<>(headers);
 		String url = BroadBandConstant.BASKET_URL + basketId+"/package/"+packageId;
 		restTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+	}
+
+	@Override
+	public void addPackage(AddPackage createAddPackageRequest, String basketId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		final HttpEntity<AddPackage> entity = new HttpEntity<>(createAddPackageRequest, headers);
+		String url = BroadBandConstant.BASKET_URL + basketId + "/package";
+		restTemplate.exchange(url, HttpMethod.POST, entity, CreatePackageResponse.class);
+		
 	}
 
 }
