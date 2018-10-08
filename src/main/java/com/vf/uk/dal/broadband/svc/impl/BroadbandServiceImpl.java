@@ -1045,7 +1045,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			}
 			String planId = broadband.getBasketInfo().getPlanId();
 			if (!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& StringUtils.equalsIgnoreCase(paymentType, "postpaid")) {
+					&& (StringUtils.equalsIgnoreCase(paymentType, "postpaid") || StringUtils.isEmpty(broadband.getJourneyId()))) {
 				BundlePromotionRequest bundlePromotionRequest = broadbandJourneyServiceAssembler
 						.createPromotionRequestToOptimize(broadband, journeyName);
 				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
@@ -1065,7 +1065,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 			}
 
-			if (StringUtils.equalsIgnoreCase(paymentType, "postpaid")) {
+			if (response.getHasPackageOptimized()) {
 				UpdatePackage updatePackageRequest = broadbandJourneyServiceAssembler.updateBasketRequest(null, journey,
 						broadband, planId);
 				broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(),
