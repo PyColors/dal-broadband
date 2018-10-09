@@ -66,6 +66,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.customer.Account;
+import com.vf.uk.dal.broadband.entity.customer.BillingProfile;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
@@ -1042,7 +1043,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 					if (CollectionUtils.isNotEmpty(accountList) && accountList.get(0) != null
 							&& CollectionUtils.isNotEmpty(accountList.get(0).getBillingProfile())) {
 						UserDetails userDetails = new UserDetails();
-						paymentType = accountList.get(0).getBillingProfile().get(0).getPaymentType();
+						List<BillingProfile> billingProfiles =  accountList.get(0).getBillingProfile();
+						for(BillingProfile billingProfile : billingProfiles){
+							if(billingProfile.isPreferredIndicator()){
+								paymentType = billingProfile.getPaymentType();
+								break;
+							}
+						}
 						userDetails.setPaymentType(paymentType);
 						broadband.setUserDetails(userDetails);
 					}
