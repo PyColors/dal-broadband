@@ -360,7 +360,7 @@ public class BroadbandControllerTest {
 		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Invalid BroadBand Id sent in the Request");
-		ResponseEntity<HttpStatus> response = broadBandController.serviceStartDate("1234", serviceStartDateRequest,
+		broadBandController.serviceStartDate("1234", serviceStartDateRequest,
 				null, false);
 	}
 
