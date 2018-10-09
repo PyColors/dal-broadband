@@ -1,0 +1,64 @@
+{
+  "installationAddress": {
+    "identification": {
+      "id": "A90000243748",
+      "contextId": "Gold"
+    },
+    "postCode": "OL6 6FB",
+    "houseName": "",
+    "houseNumber": "07",
+    "flatNumber": "",
+    "streetName": "Ashton",
+    "town": "Falkirk",
+    "county": "Lancashire",
+    "country": "United Kingdom",
+    "locality": "",
+    "citySubDivisionName": "MR",
+    "moveTypeCode": ""
+  },
+  "appointmentAndAvailabilityDetail": {
+    "appointmentNeeded": true,
+    "earliestAvailableDate": "2018-10-19",
+    "lineTreatmentType": "NEW",
+    "canNumberBeRetained": null
+  },
+  "lineSpeeds": [
+    {
+      "packageName": null,
+      "maxDownSpeed": 1210.0,
+      "minDownSpeed": 510.0,
+      "avgDownSpeed": null,
+      "minGuaranteedDownSpeed": 395.0,
+      "maxUpSpeed": 1000.0,
+      "minUpSpeed": 500.0,
+      "bandwidthMeasure": null
+    },
+    {
+      "packageName": null,
+      "maxDownSpeed": 49500.0,
+      "minDownSpeed": 33000.0,
+      "avgDownSpeed": null,
+      "minGuaranteedDownSpeed": 54270.0,
+      "maxUpSpeed": 18450.0,
+      "minUpSpeed": 12300.0,
+      "bandwidthMeasure": "Predicted"
+    },
+    {
+      "packageName": null,
+      "maxDownSpeed": 38000.0,
+      "minDownSpeed": 33000.0,
+      "avgDownSpeed": null,
+      "minGuaranteedDownSpeed": 35000.0,
+      "maxUpSpeed": 10000.0,
+      "minUpSpeed": 10000.0,
+      "bandwidthMeasure": "Predicted"
+    }
+  ],
+  "packageNames": [
+    "Line and ADSL",
+    "Line and Fibre with Speed 76",
+    "Line and Fibre with Speed 38"
+  ],
+  "phoneNumber": null,
+  "lineTreatmentType": "New"
+}
