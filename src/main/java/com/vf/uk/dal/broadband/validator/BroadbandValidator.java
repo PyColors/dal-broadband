@@ -51,7 +51,7 @@ public class BroadbandValidator {
 					ExceptionMessages.EMPTY_CUSTOMER_REQUESTED_DATE, "400");
 		}
 
-		if (broadband != null && org.apache.commons.lang.StringUtils.isNotEmpty(broadband.getBasketId())) {
+		if (broadband != null && org.apache.commons.lang.StringUtils.isNotEmpty(broadband.getBasketId()) && broadband.getBasketInfo()!=null) {
 			if (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getPackageId())) {
 				LogHelper.error(BroadbandValidator.class, "Package Id cannot be empty while updating");
 				throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_PACKAGE_ID,
