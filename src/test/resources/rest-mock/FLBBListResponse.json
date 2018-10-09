@@ -1,0 +1,177 @@
+[
+      {
+      "skuId": "110512",
+      "name": "Superfast 2",
+      "description": "Superfast 2",
+      "bundleName": "Home Broadband -Superfast 2 and phone - FTR5 18m",
+      "bundleDescription": null,
+      "bundleFeatures": "Great",
+      "speed":       {
+         "minSpeed": "33000.0",
+         "maxSpeed": "49500.0",
+         "speed": "76",
+         "commercialSpeed": "49.6",
+         "avgUploadSpeed": null,
+         "avgDownloadSpeed": null
+      },
+      "usage": "Unlimited Broadband",
+      "classificationCode": "Line and Fibre with Speed 76",
+      "commitmentPeriod": "18 Months",
+      "productName": null,
+      "productDescription": null,
+      "merchandisingMedia": null,
+      "priceInfo":       {
+         "bundlePrice":          {
+            "bundleId": "110512",
+            "monthlyPrice":             {
+               "gross": "27",
+               "net": "22.50",
+               "vat": "4.50"
+            },
+            "monthlyDiscountPrice":             {
+               "gross": null,
+               "net": null,
+               "vat": null
+            },
+            "merchandisingPromotions": null
+         },
+         "routerPrice":          {
+            "hardwareId": "085897",
+            "hardwareName": "Vodafone Broadband router",
+            "oneOffPrice":             {
+               "gross": "0",
+               "net": "0",
+               "vat": "0"
+            },
+            "oneOffDiscountPrice":             {
+               "gross": null,
+               "net": null,
+               "vat": null
+            },
+            "merchandisingPromotions":             {
+               "links": [],
+               "tag": "FLBB.UpfrontDiscount.Bundle",
+               "label": "15% of the plan",
+               "description": null,
+               "discountId": null,
+               "mpType": "Upfront_Discount",
+               "priceEstablishedLabel": null,
+               "priority": 241,
+               "packageType":                [
+                  "Acquisition",
+                  "Upgrade"
+               ],
+               "footNotes": [],
+               "promotionMedia": null
+            }
+         },
+         "deliveryPrice": null,
+         "engineerVisitFees": null,
+         "totalCost":          {
+            "gross": "0",
+            "net": "0",
+            "vat": "0"
+         }
+      },
+      "isSpeedLess": true,
+      "isSelected": false,
+      "preOrderable": false,
+      "earliestAvailableDate": "2018-10-23",
+      "lineRentalPrice": null
+   },
+      {
+      "skuId": "110510",
+      "name": "Superfast 1",
+      "description": "Superfast 1",
+      "bundleName": "Home Broadband -Superfast 1 and phone - FTR5 18m",
+      "bundleDescription": null,
+      "bundleFeatures": "Great",
+      "speed":       {
+         "minSpeed": "33000.0",
+         "maxSpeed": "38000.0",
+         "speed": "38",
+         "commercialSpeed": "25",
+         "avgUploadSpeed": null,
+         "avgDownloadSpeed": null
+      },
+      "usage": "Unlimited Broadband",
+      "classificationCode": "Line and Fibre with Speed 38",
+      "commitmentPeriod": "18 Months",
+      "productName": null,
+      "productDescription": null,
+      "merchandisingMedia": null,
+      "priceInfo":       {
+         "bundlePrice":          {
+            "bundleId": "110510",
+            "monthlyPrice":             {
+               "gross": "22",
+               "net": "18.33",
+               "vat": "3.67"
+            },
+            "monthlyDiscountPrice":             {
+               "gross": "16",
+               "net": "13.33",
+               "vat": "2.67"
+            },
+            "merchandisingPromotions":             {
+               "links": [],
+               "tag": "SIMO.Full.GBP",
+               "label": "Save £6 a month",
+               "description": null,
+               "discountId": "107391",
+               "mpType": "full_duration",
+               "priceEstablishedLabel": "Was",
+               "priority": 63,
+               "packageType":                [
+                  "Acquisition",
+                  "SecondLine"
+               ],
+               "footNotes": [],
+               "promotionMedia": null
+            }
+         },
+         "routerPrice":          {
+            "hardwareId": "085897",
+            "hardwareName": "Vodafone Broadband router",
+            "oneOffPrice":             {
+               "gross": "0",
+               "net": "0",
+               "vat": "0"
+            },
+            "oneOffDiscountPrice":             {
+               "gross": null,
+               "net": null,
+               "vat": null
+            },
+            "merchandisingPromotions":             {
+               "links": [],
+               "tag": "FLBB.UpfrontDiscount.Bundle",
+               "label": "15% of the plan",
+               "description": null,
+               "discountId": null,
+               "mpType": "Upfront_Discount",
+               "priceEstablishedLabel": null,
+               "priority": 241,
+               "packageType":                [
+                  "Acquisition",
+                  "Upgrade"
+               ],
+               "footNotes": [],
+               "promotionMedia": null
+            }
+         },
+         "deliveryPrice": null,
+         "engineerVisitFees": null,
+         "totalCost":          {
+            "gross": "0",
+            "net": "0",
+            "vat": "0"
+         }
+      },
+      "isSpeedLess": false,
+      "isSelected": false,
+      "preOrderable": false,
+      "earliestAvailableDate": "2018-10-23",
+      "lineRentalPrice": null
+   }
+]
