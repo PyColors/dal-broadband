@@ -380,6 +380,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 
 		else {
+			broadBand.setIsAffiliate(isAffiliate);
 			if (CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
 				bundleClass = CATEGORY_PREFERENCE_FTTC;
 			}
@@ -398,7 +399,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
 
 				broadBand.setBasketInfo(basketInfo);
-				broadBand.setIsAffiliate(isAffiliate);
+				
 				broadbandDao.setBroadBandInCache(broadBand);
 			}
 		}
