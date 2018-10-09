@@ -3197,6 +3197,41 @@ public class BroadbandIntegrationTest {
 		assertEquals(true, response.getAffiliateFlag());
 
 	}
+	
+	
+	@Test
+	public void testCreateOrUpdateBasket_NoAuthorization() throws Exception {
+		SecurityContext.unsetContext();
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(FileUtility.readFile("\\rest-mock\\CreateBasket.json"));
+		thrown.expectMessage("Access is denied as authorization is missing");		
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.post("/123456789078881/package?useAuthorization=true").contentType(MediaType.APPLICATION_JSON)
+				.headers(header).content(jsonString.getBytes(Charset.defaultCharset())))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+	}
+	
+	
+	@Test
+	public void testGetAddressByPostCodeFromPremise_WithoutAssuranceLevel() throws Exception {
+		SecurityContext.unsetContext();
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		thrown.expectMessage("Access is denied as authorization is missing");		
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/premise/LS290JJ?useAuthorization=true").contentType(MediaType.APPLICATION_JSON)
+						.headers(header).param("categoryPreference", "FTTH").param("useAuthorization", "true"))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+		
+		
+		
+	}
+	
+	
 
 	@After
 	public void tearDown() {
