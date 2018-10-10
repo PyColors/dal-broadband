@@ -1344,7 +1344,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1380,7 +1380,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1416,7 +1416,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1452,7 +1452,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1488,7 +1488,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1524,7 +1524,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 		
@@ -1560,7 +1560,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1596,7 +1596,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1632,7 +1632,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1668,7 +1668,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 		
@@ -1704,7 +1704,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1740,7 +1740,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1776,7 +1776,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1809,7 +1809,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 		
@@ -1843,7 +1843,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1876,7 +1876,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1909,7 +1909,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1942,7 +1942,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -1975,7 +1975,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -2008,7 +2008,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -2041,7 +2041,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -2077,7 +2077,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -2113,7 +2113,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -2149,7 +2149,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
@@ -2185,7 +2185,7 @@ public class BroadbandIntegrationTest {
 		Gson gson = new Gson(); 
 		FlbBundle[] response = gson.fromJson(result.getResponse().getContentAsString(), FlbBundle[].class);
 		
-		assertEquals("Unlimited Fibre 76", response[0].getName());
+		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
 		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
