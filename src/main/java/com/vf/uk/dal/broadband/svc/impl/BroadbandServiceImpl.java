@@ -381,6 +381,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 
 		else {
+			if(broadBand.getIsAffiliate()!=null){
+				isAffiliate=broadBand.getIsAffiliate();
+			}
 			broadBand.setIsAffiliate(isAffiliate);
 			if (CATEGORY_PREFERENCE_FTTC.equalsIgnoreCase(broadBand.getCategoryPreference())) {
 				bundleClass = CATEGORY_PREFERENCE_FTTC;
