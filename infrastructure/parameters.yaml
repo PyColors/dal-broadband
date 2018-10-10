@@ -68,3 +68,5 @@
   ParameterValue: ${ICPCONFIGJDBCUSERPWD}
 - ParameterKey: icpenvkafkahost
   ParameterValue: ${ICPENVKAFKAHOST}
+- ParameterKey: icpenvkafkaport
+  ParameterValue: ${ICPENVKAFKAPORT}
