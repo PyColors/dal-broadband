@@ -8,8 +8,8 @@
   ParameterValue: "${ECRLOCATION}"
 - ParameterKey: "BuildName"
   ParameterValue: "${BUILD_DEFINITIONNAME}"
-- ParameterKey: "BuildNumber"
-  ParameterValue: "${BUILD_BUILDNUMBER}"
+- ParameterKey: "BuildID"
+  ParameterValue: "${BUILD_BUILDID}"
 - ParameterKey: "Priority"
   ParameterValue: "${PRIORITY}"
 - ParameterKey: "MaxCapacity"
@@ -36,11 +36,15 @@
   ParameterValue: "${XMS}"
 - ParameterKey: XMX
   ParameterValue: "${XMX}"
-- ParameterKey: HealthyThresholdCount:
+- ParameterKey: "JtcLocation"
+  ParameterValue: "${JTCLOCATION}"
+- ParameterKey: "JtcFilename"
+  ParameterValue: "${JTCFILENAME}"
+- ParameterKey: HealthyThresholdCount
   ParameterValue: "${HealthyThresholdCount}"
-- ParameterKey: UnhealthyThresholdCount:
+- ParameterKey: UnhealthyThresholdCount
   ParameterValue: "${UnhealthyThresholdCount}"
-- ParameterKey: HealthCheckTimeoutSeconds:
+- ParameterKey: HealthCheckTimeoutSeconds
   ParameterValue: "${HealthCheckTimeoutSeconds}"
-- ParameterKey: HealthCheckIntervalSeconds:
+- ParameterKey: HealthCheckIntervalSeconds
   ParameterValue: "${HealthCheckIntervalSeconds}"
