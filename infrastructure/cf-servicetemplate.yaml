@@ -1,8 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Deployment of a DAL Microservice to AWS.
-
 Parameters:
-
   Environment:
     Description: The name of the environment that is being deployed to.
     Type: String
@@ -25,7 +23,8 @@ Parameters:
     Description: The account loaction of the ECR Repository
     Type: String
   BuildName:
-    Description: Name of the ECR Repository for the Service. This will be created as part of the build.
+    Description: Name of the ECR Repository for the Service. This will be created
+      as part of the build.
     Type: String
   Version:
     Description: Version to pass in logStreamPrefix
@@ -56,7 +55,7 @@ Parameters:
     Type: String
   XMS:
     Description: XMS Value
-    Type: String   
+    Type: String
   XMX:
     Description: XMX Number
     Type: String
@@ -78,184 +77,224 @@ Parameters:
   JtcFilename:
     Description: Filename of JTC Config within S3 bucket
     Type: String
+  springredishost:
+    Description: Fill me in please and update my type!
+    Type: String
+  springredispassword:
+    Description: Fill me in please and update my type!
+    Type: String
+  springredisport:
+    Description: Fill me in please and update my type!
+    Type: String
+  springredistimeout:
+    Description: Fill me in please and update my type!
+    Type: String
+  springredisttl:
+    Description: Fill me in please and update my type!
+    Type: String
+  springredisclusterenabled:
+    Description: Fill me in please and update my type!
+    Type: String
+  icpconfigjdbcUrl:
+    Description: Fill me in please and update my type!
+    Type: String
+  icpconfigjdbcUserName:
+    Description: Fill me in please and update my type!
+    Type: String
+  icpconfigjdbcUserPwd:
+    Description: Fill me in please and update my type!
+    Type: String
+  icpenvkafkahost:
+    Description: Fill me in please and update my type!
+    Type: String
 Resources:
-
   ListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
     Properties:
-        Actions:
-        - TargetGroupArn: !Ref TargetGroup
+      Actions:
+        - TargetGroupArn: !Ref 'TargetGroup'
           Type: forward
-        Conditions:
-          - Field: path-pattern
-            Values:
-            - !Sub /${ContextPath}/*
-        ListenerArn:
-          Fn::ImportValue: !Sub digitalx-${Environment}-alb-mas-Listener
-        Priority: !Ref Priority
-
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - !Sub '/${ContextPath}/*'
+      ListenerArn: !ImportValue
+        Fn::Sub: digitalx-${Environment}-alb-mas-Listener
+      Priority: !Ref 'Priority'
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-        HealthCheckProtocol: HTTPS
-        Name: !Ref AWS::StackName
-        Protocol: HTTPS
-        Port: 8080
-        HealthCheckPath: !Sub /${ContextPath}/health
-        HealthyThresholdCount: !Ref HealthyThresholdCount
-        UnhealthyThresholdCount: !Ref UnhealthyThresholdCount
-        HealthCheckTimeoutSeconds: !Ref HealthCheckTimeoutSeconds
-        HealthCheckIntervalSeconds: !Ref HealthCheckIntervalSeconds
-        Matcher:
-          HttpCode: 200-299
-        Tags:
+      HealthCheckProtocol: HTTPS
+      Name: !Ref 'AWS::StackName'
+      Protocol: HTTPS
+      Port: 8080
+      HealthCheckPath: !Sub '/${ContextPath}/health'
+      HealthyThresholdCount: !Ref 'HealthyThresholdCount'
+      UnhealthyThresholdCount: !Ref 'UnhealthyThresholdCount'
+      HealthCheckTimeoutSeconds: !Ref 'HealthCheckTimeoutSeconds'
+      HealthCheckIntervalSeconds: !Ref 'HealthCheckIntervalSeconds'
+      Matcher:
+        HttpCode: 200-299
+      Tags:
         - Key: Name
-          Value: !Ref AWS::StackName
-        VpcId:
-          Fn::ImportValue: !Sub digitalx-${Environment}-vpc-VpcId
-        TargetGroupAttributes:
+          Value: !Ref 'AWS::StackName'
+      VpcId: !ImportValue
+        Fn::Sub: digitalx-${Environment}-vpc-VpcId
+      TargetGroupAttributes:
         - Key: deregistration_delay.timeout_seconds
           Value: 5
-
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-        Family: !Ref AWS::StackName
-        TaskRoleArn:
-          Fn::ImportValue: !Sub digitalx-${Environment}-ecs-mas-DefaultTaskRoleArn
-        ContainerDefinitions:
-        - Name: !Ref AWS::StackName
-          Cpu: !Ref Cpu
-          Environment: 
+      Family: !Ref 'AWS::StackName'
+      TaskRoleArn: !ImportValue
+        Fn::Sub: digitalx-${Environment}-ecs-mas-DefaultTaskRoleArn
+      ContainerDefinitions:
+        - Name: !Ref 'AWS::StackName'
+          Cpu: !Ref 'Cpu'
+          Environment:
             - Name: Hostname
-              Value: !Ref Hostname
+              Value: !Ref 'Hostname'
             - Name: AppDPort
-              Value: !Ref AppDPort
+              Value: !Ref 'AppDPort'
             - Name: AppDKey
-              Value: !Ref AppDKey
+              Value: !Ref 'AppDKey'
             - Name: AppDFlag
-              Value: !Ref AppDFlag
+              Value: !Ref 'AppDFlag'
             - Name: XMS
-              Value: !Ref XMS 
+              Value: !Ref 'XMS'
             - Name: XMX
-              Value: !Ref XMX
+              Value: !Ref 'XMX'
             - Name: JtcLocation
-              Value: !Ref JtcLocation
+              Value: !Ref 'JtcLocation'
             - Name: JtcFilename
-              Value: !Ref JtcFilename
-          Memory: !Ref Memory
-          MemoryReservation: !Ref MemoryReservation
-          Image: !Sub ${EcrLocation}/${BuildName}:${BuildID}
+              Value: !Ref 'JtcFilename'
+            - Name: spring_redis_host
+              Value: !Ref 'springredishost'
+            - Name: spring_redis_password
+              Value: !Ref 'springredispassword'
+            - Name: spring_redis_port
+              Value: !Ref 'springredisport'
+            - Name: spring_redis_timeout
+              Value: !Ref 'springredistimeout'
+            - Name: spring_redis_ttl
+              Value: !Ref 'springredisttl'
+            - Name: spring_redis_cluster_enabled
+              Value: !Ref 'springredisclusterenabled'
+            - Name: icp_config_jdbcUrl
+              Value: !Ref 'icpconfigjdbcUrl'
+            - Name: icp_config_jdbcUserName
+              Value: !Ref 'icpconfigjdbcUserName'
+            - Name: icp_config_jdbcUserPwd
+              Value: !Ref 'icpconfigjdbcUserPwd'
+            - Name: icp_env_kafka_host
+              Value: !Ref 'icpenvkafkahost'
+          Memory: !Ref 'Memory'
+          MemoryReservation: !Ref 'MemoryReservation'
+          Image: !Sub '${EcrLocation}/${BuildName}:${BuildID}'
           PortMappings:
             - ContainerPort: 8080
               HostPort: 0
           LogConfiguration:
-              LogDriver: awslogs
-              Options:
-                awslogs-group: !Ref AWS::StackName
-                awslogs-region: !Ref AWS::Region
-                awslogs-stream-prefix: !Ref Version 
-          
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref 'AWS::StackName'
+              awslogs-region: !Ref 'AWS::Region'
+              awslogs-stream-prefix: !Ref 'Version'
   EcsService:
     Type: AWS::ECS::Service
     DependsOn: ListenerRule
     Properties:
-      Cluster: !Sub digitalx-${Environment}-ecs-mas
+      Cluster: !Sub 'digitalx-${Environment}-ecs-mas'
       DeploymentConfiguration:
-          MaximumPercent: 200
-          MinimumHealthyPercent: 50
-      DesiredCount: !Ref DesiredCount
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+      DesiredCount: !Ref 'DesiredCount'
       HealthCheckGracePeriodSeconds: 120
       PlacementStrategies:
         - Type: spread
           Field: attribute:ecs.availability-zone
       LoadBalancers:
-        - ContainerName: !Ref AWS::StackName
+        - ContainerName: !Ref 'AWS::StackName'
           ContainerPort: 8080
-          TargetGroupArn: !Ref TargetGroup
-      Role:
-          Fn::ImportValue: !Sub digitalx-${Environment}-ecs-mas-ServiceSchedulerRoleArn
-      TaskDefinition: !Ref TaskDefinition
-      
+          TargetGroupArn: !Ref 'TargetGroup'
+      Role: !ImportValue
+        Fn::Sub: digitalx-${Environment}-ecs-mas-ServiceSchedulerRoleArn
+      TaskDefinition: !Ref 'TaskDefinition'
   LogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Ref AWS::StackName
+      LogGroupName: !Ref 'AWS::StackName'
       RetentionInDays: 30
-
   ScalableTarget:
     Type: AWS::ApplicationAutoScaling::ScalableTarget
     Properties:
-        MaxCapacity: !Ref MaxCapacity
-        MinCapacity: !Ref MinCapacity
-        ResourceId: !Sub service/digitalx-${Environment}-ecs-mas/${EcsService.Name}
-        RoleARN:
-          Fn::ImportValue: !Sub digitalx-${Environment}-ecs-mas-ScalableTargetRoleArn
-        ScalableDimension: ecs:service:DesiredCount
-        ServiceNamespace: ecs
-
+      MaxCapacity: !Ref 'MaxCapacity'
+      MinCapacity: !Ref 'MinCapacity'
+      ResourceId: !Sub 'service/digitalx-${Environment}-ecs-mas/${EcsService.Name}'
+      RoleARN: !ImportValue
+        Fn::Sub: digitalx-${Environment}-ecs-mas-ScalableTargetRoleArn
+      ScalableDimension: ecs:service:DesiredCount
+      ServiceNamespace: ecs
   ScalingPolicyUp:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
     Properties:
-        PolicyName: !Sub ${AWS::StackName}-scale-up
-        PolicyType: StepScaling
-        ScalingTargetId: !Ref ScalableTarget
-        StepScalingPolicyConfiguration:
-          AdjustmentType: PercentChangeInCapacity
-          Cooldown: 180
-          MinAdjustmentMagnitude: 2
-          StepAdjustments:
-            - MetricIntervalLowerBound: 0
-              ScalingAdjustment: 25
-
+      PolicyName: !Sub '${AWS::StackName}-scale-up'
+      PolicyType: StepScaling
+      ScalingTargetId: !Ref 'ScalableTarget'
+      StepScalingPolicyConfiguration:
+        AdjustmentType: PercentChangeInCapacity
+        Cooldown: 180
+        MinAdjustmentMagnitude: 2
+        StepAdjustments:
+          - MetricIntervalLowerBound: 0
+            ScalingAdjustment: 25
   ScalingPolicyDown:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
     Properties:
-        PolicyName: !Sub ${AWS::StackName}-scale-down
-        PolicyType: StepScaling
-        ScalingTargetId: !Ref ScalableTarget
-        StepScalingPolicyConfiguration:
-          AdjustmentType: PercentChangeInCapacity
-          Cooldown: 180
-          MinAdjustmentMagnitude: 2
-          StepAdjustments:
-            - MetricIntervalUpperBound: 0
-              ScalingAdjustment: -25
-
+      PolicyName: !Sub '${AWS::StackName}-scale-down'
+      PolicyType: StepScaling
+      ScalingTargetId: !Ref 'ScalableTarget'
+      StepScalingPolicyConfiguration:
+        AdjustmentType: PercentChangeInCapacity
+        Cooldown: 180
+        MinAdjustmentMagnitude: 2
+        StepAdjustments:
+          - MetricIntervalUpperBound: 0
+            ScalingAdjustment: -25
   CPUUtilizationHighAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-        AlarmDescription: Above high CPU threshold
-        Namespace: AWS/ECS
-        Dimensions:
+      AlarmDescription: Above high CPU threshold
+      Namespace: AWS/ECS
+      Dimensions:
         - Name: ClusterName
-          Value: !Sub digitalx-${Environment}-ecs-mas
+          Value: !Sub 'digitalx-${Environment}-ecs-mas'
         - Name: ServiceName
-          Value: !GetAtt EcsService.Name
-        MetricName: CPUUtilization
-        ComparisonOperator: GreaterThanThreshold
-        Statistic: Average
-        Period: 60
-        EvaluationPeriods: 3
-        Threshold: 80
-        AlarmActions:
-        - !Ref ScalingPolicyUp
-
+          Value: !GetAtt 'EcsService.Name'
+      MetricName: CPUUtilization
+      ComparisonOperator: GreaterThanThreshold
+      Statistic: Average
+      Period: 60
+      EvaluationPeriods: 3
+      Threshold: 80
+      AlarmActions:
+        - !Ref 'ScalingPolicyUp'
   CPUUtilizationLowAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-        AlarmDescription: Below low CPU threshold
-        Namespace: AWS/ECS
-        Dimensions:
+      AlarmDescription: Below low CPU threshold
+      Namespace: AWS/ECS
+      Dimensions:
         - Name: ClusterName
-          Value: !Sub digitalx-${Environment}-ecs-mas
+          Value: !Sub 'digitalx-${Environment}-ecs-mas'
         - Name: ServiceName
-          Value: !GetAtt EcsService.Name
-        MetricName: CPUUtilization
-        ComparisonOperator: LessThanThreshold
-        Statistic: Average
-        Period: 60
-        EvaluationPeriods: 5
-        Threshold: 20
-        AlarmActions:
-        - !Ref ScalingPolicyDown
+          Value: !GetAtt 'EcsService.Name'
+      MetricName: CPUUtilization
+      ComparisonOperator: LessThanThreshold
+      Statistic: Average
+      Period: 60
+      EvaluationPeriods: 5
+      Threshold: 20
+      AlarmActions:
+        - !Ref 'ScalingPolicyDown'
