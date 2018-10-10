@@ -130,6 +130,9 @@ public class BroadbandIntegrationTest {
 		String jsonString = new String(FileUtility.readFile("\\rest-mock\\GSAREQUEST.json"));
 		GetServiceAvailibilityRequest request = new ObjectMapper().readValue(jsonString,
 				GetServiceAvailibilityRequest.class);
+		String jsonStringFTTH = new String(FileUtility.readFile("\\rest-mock\\GSAREQUEST_FTTH.json"));
+		GetServiceAvailibilityRequest requestFTTH = new ObjectMapper().readValue(jsonStringFTTH,
+				GetServiceAvailibilityRequest.class);
 
 		String gsaResponse = new String(FileUtility.readFile("\\rest-mock\\GSAResponse.json"));
 		GetServiceAvailibilityResponse responseGsa = new ObjectMapper().readValue(gsaResponse,
@@ -255,12 +258,27 @@ public class BroadbandIntegrationTest {
 		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit",
 				CommercialProduct[].class))
 						.willReturn(new ResponseEntity<CommercialProduct[]>(productDetails, HttpStatus.OK));
+		
+		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fixed Fee:Standard Installation Fee&isFTTH=true&preorderable=false",
+				CommercialProduct[].class))
+						.willReturn(new ResponseEntity<CommercialProduct[]>(productDetails, HttpStatus.OK));
+		
+		
+		
+		given(restTemplate.getForEntity("http://PRODUCTS-V1/products/catalogue/products?class:name=Fee:Engineer Visit&isFTTH=false&preorderable=false",
+				CommercialProduct[].class))
+						.willReturn(new ResponseEntity<CommercialProduct[]>(productDetails, HttpStatus.OK));
 
 		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability",
 				requestGsa, GetServiceAvailibilityResponse.class)).willReturn(null);
 
 		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability",
 				request, GetServiceAvailibilityResponse.class))
+						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(responseGsa, HttpStatus.OK));
+		
+		
+		given(restTemplate.postForEntity("http://AVAILABILITY-V1/serviceAvailability/broadbandServiceAvailability",
+				requestFTTH, GetServiceAvailibilityResponse.class))
 						.willReturn(new ResponseEntity<GetServiceAvailibilityResponse>(responseGsa, HttpStatus.OK));
 
 		given(restTemplate.getForEntity("http://PREMISE-V1/premise/address/LS290JJ?qualified=true&categoryType=FTTH",
@@ -660,6 +678,33 @@ public class BroadbandIntegrationTest {
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
+	
+	
+	@Test
+	public void testCheckAvailabilityForBroadbandForValidClassificationCodeFTTH_AssuranceLevelOne() throws Exception {
+		SecurityContext.unsetContext();
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token1.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		String jsonString = new String(FileUtility.readFile("\\rest-mock\\REQUESTFTTH.json"));
+		MvcResult result = mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/lineOptions")
+						.contentType(MediaType.APPLICATION_JSON).headers(header)
+						.content(jsonString.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		
+		Gson gson = new Gson(); 
+		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
+		
+		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
+		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
+
+	}
+	
 
 	@Test
 	public void testCheckAvailabilityForBroadbandForValidClassificationCode_AssuranceLevelTwo() throws Exception {
