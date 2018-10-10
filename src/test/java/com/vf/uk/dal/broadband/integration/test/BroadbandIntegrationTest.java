@@ -1346,7 +1346,7 @@ public class BroadbandIntegrationTest {
 
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1382,7 +1382,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1418,7 +1418,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1454,7 +1454,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1490,7 +1490,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1526,7 +1526,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 		
 	}
 
@@ -1562,7 +1562,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1598,7 +1598,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1634,7 +1634,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1670,7 +1670,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 		
 	}
 
@@ -1706,7 +1706,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1742,7 +1742,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1778,7 +1778,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1811,7 +1811,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 		
 
 	}
@@ -1845,7 +1845,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1878,7 +1878,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1911,7 +1911,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1944,7 +1944,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -1977,7 +1977,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -2010,7 +2010,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -2043,7 +2043,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -2079,7 +2079,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -2115,7 +2115,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -2151,7 +2151,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
@@ -2187,7 +2187,7 @@ public class BroadbandIntegrationTest {
 		
 		assertEquals("Unlimited Fibre 38", response[0].getName());
 		assertEquals(false, response[0].getIsSpeedLess());
-		assertEquals("110266", response[0].getPriceInfo().getBundlePrice().getBundleId());
+		assertEquals("110265", response[0].getPriceInfo().getBundlePrice().getBundleId());
 
 	}
 
