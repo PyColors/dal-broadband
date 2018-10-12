@@ -109,7 +109,6 @@ public class BroadbandIntegrationTest {
 	public void setupMockBehaviour() throws Exception {
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(broadBandController).build();
-		ConfigurationManager.loadCascadedPropertiesFromResources("DigitalDBMock");
 		String gsaRequest = new String(FileUtility.readFile("\\rest-mock\\GSAREQUEST1.json"));
 		GetServiceAvailibilityRequest requestGsa = new ObjectMapper().readValue(gsaRequest,
 				GetServiceAvailibilityRequest.class);
@@ -195,7 +194,10 @@ public class BroadbandIntegrationTest {
 
 		String getBroadbandCacheResponse = new String(FileUtility.readFile("\\rest-mock\\BroadbandCacheResponse.json"));
 		Broadband broadbandCacheResponse = new ObjectMapper().readValue(getBroadbandCacheResponse, Broadband.class);
-
+		
+		String getBroadbandCacheResponsev4 = new String(FileUtility.readFile("\\rest-mock\\BroadbandCacheResponse4.json"));
+		Broadband broadbandCacheResponsev4 = new ObjectMapper().readValue(getBroadbandCacheResponsev4, Broadband.class);
+		given(broadBandRepoProvider.getBroadbandFromCache("1234567890788811")).willReturn(broadbandCacheResponsev4);
 		String getBroadbandCacheBusResponse = new String(
 				FileUtility.readFile("\\rest-mock\\BroadbandCacheResponseForBusiness.json"));
 		Broadband broadbandCacheBusResponse = new ObjectMapper().readValue(getBroadbandCacheBusResponse,
@@ -2444,6 +2446,52 @@ public class BroadbandIntegrationTest {
 	}
 
 	@Test
+	public void testOptimizeBasketWithFTR6Package_AssuranceLevelZero() throws Exception {
+		SecurityContext.unsetContext();
+		ConfigurationManager.loadCascadedPropertiesFromResources("DigitalDBMock1");
+		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		final String request = "{\"journeyId\":\"" + "2290f3b1-1ed5-4513-9f86-110531c5fbfb" + "\"}";
+
+		MvcResult result = mockMvc
+				.perform(MockMvcRequestBuilders.post("/12345678907888/optimize/package")
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "true")
+						.content(request.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		
+		Gson gsonResponse = new Gson(); 
+		OptimizePackageResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), OptimizePackageResponse.class);
+		
+		assertEquals(true, response.getHasPackageOptimized());
+
+
+	}
+	
+	
+	@Test
+	public void testOptimizeBasketWithPlanTypeFTTH_AsuranceLevelZero() throws Exception {
+		SecurityContext.unsetContext();
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "JWT adasdf");
+		final String request = "{\"journeyId\":\"" + "2290f3b1-1ed5-4513-9f86-110531c5fbfb" + "\"}";
+
+		MvcResult result = mockMvc
+				.perform(MockMvcRequestBuilders.post("/1234567890788811/optimize/package")
+						.contentType(MediaType.APPLICATION_JSON).headers(header).param("useAuthorization", "false")
+						.content(request.getBytes(Charset.defaultCharset())))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		
+		Gson gsonResponse = new Gson(); 
+		OptimizePackageResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), OptimizePackageResponse.class);
+		
+		assertEquals(true, response.getHasPackageOptimized());
+
+
+	}
+	
+	
+	@Test
 	public void testGetCompatibleDevices_AssuranceLevelTwo() throws Exception {
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token2.json");
@@ -2493,6 +2541,7 @@ public class BroadbandIntegrationTest {
 
 	@Test
 	public void testOptimizeBasket_AssuranceLevelZero() throws Exception {
+		ConfigurationManager.loadCascadedPropertiesFromResources("DigitalDBMock");
 		SecurityContext.unsetContext();
 		setAuthorizationTokenToContext("src/test/resources/rest-mock/token0.json");
 		HttpHeaders header = new HttpHeaders();
