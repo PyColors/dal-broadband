@@ -75,6 +75,8 @@ public class BroadBandConstant {
 	
 	/** The Constant DEFAULT_BROADBAND_NO_OF_ADDRESS. */
 	public static final int DEFAULT_BROADBAND_NO_OF_ADDRESS = 3;
+
+	public static final String IS_NEW_EXISTING_PACKAGE_SAME = "IS_NEW_EXISTING_PACKAGE_SAME";
 	
 	
 	/**

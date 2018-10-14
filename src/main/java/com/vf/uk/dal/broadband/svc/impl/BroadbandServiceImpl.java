@@ -1060,23 +1060,29 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 			}
 			String planId = broadband.getBasketInfo().getPlanId();
-			if (!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& (StringUtils.equalsIgnoreCase(paymentType, "postpaid") || StringUtils.isEmpty(broadband.getJourneyId()))) {
+			
+			
+			
+			if ((!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
+					&& (StringUtils.equalsIgnoreCase(paymentType, "postpaid") || StringUtils.isEmpty(broadband.getJourneyId())))) {
 				BundlePromotionRequest bundlePromotionRequest = broadbandJourneyServiceAssembler
 						.createPromotionRequestToOptimize(broadband, journeyName);
 				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
-
+				String newAndExistingPackage = ConfigHelper.getString(BroadBandConstant.IS_NEW_EXISTING_PACKAGE_SAME, "false"); 
+				if(!BooleanUtils.toBoolean(newAndExistingPackage)) {
 				for (BundlePromotion bundlePromotion : bundlePromotions) {
-					if (StringUtils.equalsIgnoreCase(bundlePromotion.getBundleId(), planId)
-							&& CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())) {
 						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
 						response.setHasPackageOptimized(true);
 						break;
-
+						
 					}
+				
+				} else if(StringUtils.equalsIgnoreCase(paymentType, "postpaid")) {
+					response.setHasPackageOptimized(true);
 				}
-			} else if (StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& StringUtils.equalsIgnoreCase(paymentType, "postpaid")) {
+								 
+			} else if ((StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
+					&& StringUtils.equalsIgnoreCase(paymentType, "postpaid"))) {
 				response.setHasPackageOptimized(true);
 
 			}
