@@ -791,7 +791,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			AddProductRequest addProductRequest = broadbandJourneyServiceAssembler.addProductRequest(broadband);
 			broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
 					broadband.getBasketInfo().getPackageId());
-		} else if ("EXISTING".equalsIgnoreCase(updateLineRequest.getLineTreatmentType()) && StringUtils
+		} else if ("EXISTING".equalsIgnoreCase(updateLineRequest.getLineTreatmentType()) && broadband.getEngineeringVisitCharge() != null && StringUtils
 				.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())) {
 			broadbandDao.deleteProductFromBasket(broadband.getBasketId(), broadband.getBasketInfo().getPackageId(),
 					engVisitProductLine);
