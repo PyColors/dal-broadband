@@ -2,6 +2,7 @@ package com.vf.uk.dal.broadband.assembler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -18,6 +19,7 @@ import com.vf.uk.dal.broadband.basket.entity.CreateBasketRequest;
 import com.vf.uk.dal.broadband.basket.entity.ModelPackage;
 import com.vf.uk.dal.broadband.basket.entity.PremiseAndServicePoint;
 import com.vf.uk.dal.broadband.basket.entity.Product;
+import com.vf.uk.dal.broadband.basket.entity.Service;
 import com.vf.uk.dal.broadband.basket.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.basket.entity.UpdateBundle;
 import com.vf.uk.dal.broadband.basket.entity.UpdateDevice;
@@ -1573,6 +1575,23 @@ public class BroadbandJourneyServiceAssembler {
 	public AddPackage createAddPackageRequest(BasketRequest basketRequest, Broadband broadbandCache,
 			BasketServicePoint basketServicePoint, CurrentJourney journey) {
 		return addPackageToBasket(basketRequest, broadbandCache, basketServicePoint, journey);
+	}
+	
+	public Service getServiceDetails(Basket basket){
+		List<List<Service>> services = basket.getPackages().stream()
+				.map(pack -> pack.getServices()).collect(Collectors.toList());
+		if (CollectionUtils.isNotEmpty(services)) {
+			for (List<Service> service : services) {
+				for (Service ser : service) {
+					if (StringUtils.equalsIgnoreCase(ser.getProductClass(), "Fee")
+							|| StringUtils.equalsIgnoreCase(ser.getProductClass(), "Fixed Fee")
+							|| StringUtils.equalsIgnoreCase(ser.getProductClass(), "Installation Fee")) {
+						return ser;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 }
