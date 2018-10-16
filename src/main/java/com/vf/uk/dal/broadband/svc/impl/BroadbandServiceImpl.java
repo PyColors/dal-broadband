@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
@@ -409,7 +408,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		}
 
 		if (StringUtils.isNotEmpty(broadBand.getJourneyId()) && broadBand.getUserDetails() != null
-				&& StringUtils.equalsIgnoreCase(broadBand.getUserDetails().getPaymentType(), "postpaid")) {
+				&& StringUtils.equalsIgnoreCase(broadBand.getUserDetails().getPaymentType(), BroadBandConstant.POSTPAID)) {
 			journeyType = getJourneyName(broadbandDao.getJourney(broadBand.getJourneyId()), broadBand.getJourneyId());
 		}
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
@@ -767,23 +766,10 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 		broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
 				broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
-		List<List<Service>> services = broadbandDao.getBasket(broadband.getBasketId()).getPackages().stream()
-				.map(pack -> pack.getServices()).collect(Collectors.toList());
-		String serviceIdSku = null;
-		String engVisitProductLine = null;
-		if (CollectionUtils.isNotEmpty(services)) {
-			for (List<Service> service : services) {
-				for (Service ser : service) {
-					if (StringUtils.equalsIgnoreCase(ser.getProductClass(), "Fee")
-							|| StringUtils.equalsIgnoreCase(ser.getProductClass(), "Fixed Fee")
-							|| StringUtils.equalsIgnoreCase(ser.getProductClass(), "Installation Fee")) {
-						serviceIdSku = ser.getSkuId();
-						engVisitProductLine = ser.getPackageLineId();
-					}
-				}
-			}
-		}
 
+		Service service = broadbandJourneyServiceAssembler.getServiceDetails(broadbandDao.getBasket(broadband.getBasketId()));
+		String serviceIdSku = service!=null?service.getSkuId():null;
+		String engVisitProductLine = service!=null?service.getPackageLineId():null;
 		if ("NEW".equalsIgnoreCase(updateLineRequest.getLineTreatmentType())
 				&& broadband.getEngineeringVisitCharge() != null
 				&& broadband.getEngineeringVisitCharge().getGross() != null && !StringUtils
@@ -958,6 +944,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public GetAppointmentResponse getAppointmentForFLBB(String broadbandId) {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+		Service service = broadbandJourneyServiceAssembler.getServiceDetails(broadbandDao.getBasket(broadband.getBasketId()));
+		String serviceIdSku = service!=null?service.getSkuId():null;
 		if (broadband.getServicePoint() != null && broadband.getServicePoint().getServiceReference() != null
 				&& CollectionUtils
 						.isNotEmpty(broadband.getServicePoint().getServiceReference().getServiceLinesList())) {
@@ -967,8 +955,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 				if (StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(),
 						broadband.getLineDetails().getClassificationCode())
 						&& CollectionUtils.isNotEmpty(lineTreatmentList) && lineTreatmentList.size() == 1
-						&& "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())) {
-
+						&& "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())
+						&& !StringUtils
+						.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())) {
 					PremiseAndServicePoint premiseAndServicePoint = broadbandJourneyServiceAssembler
 							.setPremiseAndServicePointRequest(
 									broadbandMapper.servicePointToBasketServicePoint(broadband.getServicePoint()),
@@ -1064,7 +1053,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			
 			
 			if ((!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& (StringUtils.equalsIgnoreCase(paymentType, "postpaid") || StringUtils.isEmpty(broadband.getJourneyId())))) {
+					&& (StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID) || StringUtils.isEmpty(broadband.getJourneyId())))) {
 				BundlePromotionRequest bundlePromotionRequest = broadbandJourneyServiceAssembler
 						.createPromotionRequestToOptimize(broadband, journeyName);
 				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
@@ -1077,12 +1066,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 						
 					}
 				
-				} else if(StringUtils.equalsIgnoreCase(paymentType, "postpaid")) {
+				} else if(StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID)) {
 					response.setHasPackageOptimized(true);
 				}
 								 
 			} else if ((StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& StringUtils.equalsIgnoreCase(paymentType, "postpaid"))) {
+					&& StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID))) {
 				response.setHasPackageOptimized(true);
 
 			}
