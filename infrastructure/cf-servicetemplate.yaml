@@ -156,8 +156,8 @@ Resources:
         - Name: !Ref 'AWS::StackName'
           Cpu: !Ref 'Cpu'
           Environment:
-            - Name: Hostname
-              Value: !Ref 'Hostname'
+            - Name: HostName
+              Value: !Ref 'HostName'
             - Name: AppDPort
               Value: !Ref 'AppDPort'
             - Name: AppDKey
