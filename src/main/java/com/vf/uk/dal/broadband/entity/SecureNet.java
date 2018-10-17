@@ -27,6 +27,6 @@ public class SecureNet {
 	private Integer priority = null;
 
 	/** The package type. */
-	public List<String> packageType = new ArrayList<>();
+	private List<String> packageType = new ArrayList<>();
 
 }
