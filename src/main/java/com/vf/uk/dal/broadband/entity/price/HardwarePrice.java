@@ -1,5 +1,9 @@
 package com.vf.uk.dal.broadband.entity.price;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,4 +36,10 @@ public class HardwarePrice {
 	@JsonProperty("oneOffPrice")
 	private Price oneOffPrice = null;
 
+	@JsonProperty("deviceFinancingId")
+	private String deviceFinancingId = null;
+
+	@JsonProperty("financingOptions")
+	@Valid
+	private List<DeviceFinancingOption> financingOptions = null;
 }

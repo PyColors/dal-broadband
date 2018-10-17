@@ -29,4 +29,8 @@ public class BundlePrice {
 	@JsonProperty("monthlyPrice")
 	private Price monthlyPrice = null;
 
+	@JsonProperty("bundledServicePrices")
+	@Valid
+	private List<BundleServicePrice> bundledServicePrices = null;
+
 }

@@ -1,0 +1,25 @@
+{
+  "activePackages": [
+    {
+      "bundleId": "110265",
+      "discounts": null,
+      "identifier": null
+    }
+  ],
+  
+  "bundleAndHardwareList": [
+    {
+      "hardwareId": "085897",
+      "bundleId": "110265"
+    },
+    {
+      "hardwareId": "085897",
+      "bundleId": "110264"
+    },
+    {
+      "hardwareId": "085897",
+      "bundleId": "110266"
+    }
+  ],
+  "packageType": null
+}

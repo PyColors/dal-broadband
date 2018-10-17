@@ -1073,10 +1073,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 				String newAndExistingPackage = ConfigHelper.getString(BroadBandConstant.IS_NEW_EXISTING_PACKAGE_SAME, "false"); 
 				if(!BooleanUtils.toBoolean(newAndExistingPackage)) {
 				for (BundlePromotion bundlePromotion : bundlePromotions) {
+					if(CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())){
 						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
 						response.setHasPackageOptimized(true);
 						break;
-						
+					}	
 					}
 				
 				} else if(StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID)) {

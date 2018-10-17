@@ -501,6 +501,6 @@ public class BroadbandDaoImpl implements BroadbandDao {
 			priceForBundleAndHardwareList = Arrays.asList(client.getBody());
 
 		return priceForBundleAndHardwareList;
+		
 	}
-
 }
