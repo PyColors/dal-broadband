@@ -19,6 +19,8 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.customer.Account;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware;
+import com.vf.uk.dal.broadband.entity.price.RequestForBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
@@ -270,4 +272,7 @@ public interface BroadbandDao {
 	void deletePackage(String basketId, String packageId);
 
 	void addPackage(AddPackage createAddPackageRequest, String basketId);
+
+	List<PriceForBundleAndHardware> getBundleAndHardwarePrice(
+			RequestForBundleAndHardware bundleAndHardwarePriceRequest);
 }

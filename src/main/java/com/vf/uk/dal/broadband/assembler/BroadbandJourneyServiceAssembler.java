@@ -54,6 +54,7 @@ import com.vf.uk.dal.broadband.entity.AppointmentAndAvailabilityDetail;
 import com.vf.uk.dal.broadband.entity.AppointmentList;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckRequest;
 import com.vf.uk.dal.broadband.entity.AvailabilityCheckResponse;
+import com.vf.uk.dal.broadband.entity.BundleHeader;
 import com.vf.uk.dal.broadband.entity.CreateAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.ErrorInfo;
 import com.vf.uk.dal.broadband.entity.GetAppointmentResponse;
@@ -68,6 +69,9 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.appointment.Organisation;
 import com.vf.uk.dal.broadband.entity.appointment.ServiceRequest;
+import com.vf.uk.dal.broadband.entity.price.ActivePackagesInRequest;
+import com.vf.uk.dal.broadband.entity.price.BundleAndHardwareTuple;
+import com.vf.uk.dal.broadband.entity.price.RequestForBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
@@ -1592,6 +1596,31 @@ public class BroadbandJourneyServiceAssembler {
 			}
 		}
 		return null;
+	}
+
+	public RequestForBundleAndHardware createBundleAndHarwareRequest(List<BundleHeader> planList, Basket basket,
+			String journeyType) {
+		RequestForBundleAndHardware bundleAndHarwarePriceRequest = new RequestForBundleAndHardware();
+		List<ActivePackagesInRequest> activePackageList = new ArrayList<>();
+		if (basket != null) {
+			for (ModelPackage modelPackage : basket.getPackages()) {
+				ActivePackagesInRequest activePackage = new ActivePackagesInRequest();
+				activePackage.setBundleId(modelPackage.getBundle().getSkuId());
+				activePackageList.add(activePackage);
+			}
+		}
+		bundleAndHarwarePriceRequest.setActivePackages(activePackageList);
+		List<BundleAndHardwareTuple> bundleAndHardwareList = new ArrayList<>();
+		for (BundleHeader bundleHeader : planList) {
+			BundleAndHardwareTuple tuple = new BundleAndHardwareTuple();
+			tuple.setBundleId(bundleHeader.getSkuId());
+			tuple.setHardwareId(bundleHeader.getPriceInfo().getHardwarePrice().getHardwareId());
+			bundleAndHardwareList.add(tuple);
+		}
+		bundleAndHarwarePriceRequest.setBundleAndHardwareList(bundleAndHardwareList);
+		bundleAndHarwarePriceRequest.setPackageType(journeyType);
+	
+		return bundleAndHarwarePriceRequest;
 	}
 
 }

@@ -7,10 +7,10 @@ spring:
       max-redirects: 2
       nodes:
       - master.dal-dev-bband-red.m6ipwu.euw1.cache.amazonaws.com:6379
-    host: master.dal-dev-bband-red.m6ipwu.euw1.cache.amazonaws.com
+    host: localhost
     port: 6379
     password: digitalx2018bband
-    ssl: true
+    ssl: false
     timeout: 5000
     ttl: 3600  
 info:
@@ -63,7 +63,7 @@ icp:
       port: 9092
       logTopic: logs
   config:
-    jdbcUrl: jdbc:oracle:thin:@e18dbref.cqrpvr4944ct.eu-west-1.rds.amazonaws.com:1521:e18dbref
+    jdbcUrl: jdbc:oracle:thin:@localhost:1521:e18dbref
     jdbcUserName: daluser
     jdbcUserPwd: simple4u
     

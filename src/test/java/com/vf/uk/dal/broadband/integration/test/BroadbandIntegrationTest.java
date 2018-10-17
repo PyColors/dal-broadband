@@ -67,6 +67,7 @@ import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.customer.Account;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.price.RequestForBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
@@ -177,6 +178,15 @@ public class BroadbandIntegrationTest {
 						.willReturn(new ResponseEntity<BundlePromotion[]>(bundlePromotion, HttpStatus.OK));
 		/////
 
+		String priceRequest = new String(
+				FileUtility.readFile("\\rest-mock\\RequestForPrice.json"));
+		RequestForBundleAndHardware requestForPriceAndHardware = new ObjectMapper().readValue(priceRequest, RequestForBundleAndHardware.class);
+		
+		String priceResponse = new String(FileUtility.readFile("\\rest-mock\\ResponseFromPrice.json"));
+		com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware[] resPrice = new ObjectMapper().readValue(priceResponse, com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware[].class);
+		
+		given(restTemplate.postForEntity("http://PRICE-V1/price/calculateForBundleAndHardware", requestForPriceAndHardware, com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware[].class))
+		.willReturn(new ResponseEntity<com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware[]>(resPrice, HttpStatus.OK));	
 		//////// Get Current Journey
 
 		String getCurrentJourneyResponse = new String(FileUtility.readFile("\\rest-mock\\GetCurrentJourneyResponse.json"));

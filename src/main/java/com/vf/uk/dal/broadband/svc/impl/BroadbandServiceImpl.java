@@ -67,6 +67,7 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.customer.Account;
 import com.vf.uk.dal.broadband.entity.customer.BillingProfile;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.price.RequestForBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
@@ -414,8 +415,17 @@ public class BroadbandServiceImpl implements BroadbandService {
 		String url = CommonUtility.getRequestUrlForFlbb(bundleClass, userType, journeyType, offerCode,
 				classificationCode, duration);
 		bundleDetails = broadbandDao.getBundleDetailsFromGetBundleListAPI(url);
-		// Broadband broadband =
-		// broadbandDao.getBroadbandFromCache(broadbandId);
+
+		Basket basket = null;
+		if (StringUtils.isNotEmpty(broadBand.getBasketId())) {
+			basket = broadbandDao.getBasket(broadBand.getBasketId());
+		}
+		RequestForBundleAndHardware bundleAndHardwarePriceRequest = broadbandJourneyServiceAssembler
+				.createBundleAndHarwareRequest(bundleDetails.getPlanList(), basket,journeyType);
+		List<com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware> priceForBundleAndHardwareList = broadbandDao
+				.getBundleAndHardwarePrice(bundleAndHardwarePriceRequest);
+		
+		
 		Set<String> routerProductIds = new HashSet<>();
 		if (bundleDetails != null && CollectionUtils.isNotEmpty(bundleDetails.getPlanList())) {
 
@@ -436,13 +446,19 @@ public class BroadbandServiceImpl implements BroadbandService {
 					flbBundle.setIsSpeedLess(false);
 					setSpeedInPlansResponseAfterGSA(broadBand, flbBundle, speedForBB);
 
-					PriceForBBBundleAndHardware priceBB = new PriceForBBBundleAndHardware();
-					priceBB.setBundlePrice(bundleHeader.getPriceInfo().getBundlePrice());
-					priceBB.setRouterPrice(bundleHeader.getPriceInfo().getHardwarePrice());
-					flbBundle.setPriceInfo(priceBB);
-					routerProductIds.add(bundleHeader.getPriceInfo().getHardwarePrice().getHardwareId());
+					if (CollectionUtils.isNotEmpty(priceForBundleAndHardwareList)) {
+						for (com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware priceForBundleAndHardware : priceForBundleAndHardwareList) {
+							if (priceForBundleAndHardware.getBundlePrice()!=null && (priceForBundleAndHardware.getBundlePrice().getBundleId()
+									.equals(bundleHeader.getSkuId()))) {
+								PriceForBBBundleAndHardware priceBB = new PriceForBBBundleAndHardware();
+								priceBB.setBundlePrice(broadbandMapper.bundlePrice(priceForBundleAndHardware.getBundlePrice()));
+								priceBB.setRouterPrice(broadbandMapper.routerPrice(priceForBundleAndHardware.getHardwarePrice()));
+								flbBundle.setPriceInfo(priceBB);
+								routerProductIds.add(priceForBundleAndHardware.getHardwarePrice().getHardwareId());
+							}
+						}
+					}
 					listOfFlbBundle.add(flbBundle);
-					// listOfProducts.add(bundleHeader.getPriceInfo().getHardwarePrice().getHardwareId());
 				}
 			}
 			if (CollectionUtils.isNotEmpty(routerProductIds)) {
@@ -451,9 +467,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					deliveryMethodsMap.put(productId, broadbandDao.getDeliveryMethods(productId, true));
 				});
 				if (CollectionUtils.isNotEmpty(deliveryMethodsMap.keySet())) {
-
 					for (FlbBundle flbBundle : listOfFlbBundle) {
-
 						PriceForBBBundleAndHardware priceBB = flbBundle.getPriceInfo();
 						setDeliveryPriceInPlansResponse(deliveryMethodsMap, priceBB);
 						// Setting of EngineerVisitFee Price
@@ -464,7 +478,6 @@ public class BroadbandServiceImpl implements BroadbandService {
 								String.valueOf(CommonUtility.dataFormatforDouble(getTotalGrossPrice(priceBB))));
 						totalPrice.setVat(String.valueOf(CommonUtility.dataFormatforDouble(getTotalVatPrice(priceBB))));
 						priceBB.setTotalOneOffCost(totalPrice);
-
 					}
 				}
 			}
@@ -1060,10 +1073,11 @@ public class BroadbandServiceImpl implements BroadbandService {
 				String newAndExistingPackage = ConfigHelper.getString(BroadBandConstant.IS_NEW_EXISTING_PACKAGE_SAME, "false"); 
 				if(!BooleanUtils.toBoolean(newAndExistingPackage)) {
 				for (BundlePromotion bundlePromotion : bundlePromotions) {
+					if(CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())){
 						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
 						response.setHasPackageOptimized(true);
 						break;
-						
+					}	
 					}
 				
 				} else if(StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID)) {

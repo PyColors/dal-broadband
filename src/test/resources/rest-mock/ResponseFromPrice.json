@@ -1,0 +1,362 @@
+[
+  {
+    "bundlePrice": {
+      "bundleId": "110266",
+      "monthlyPrice": {
+        "gross": "25",
+        "net": "20.83",
+        "vat": "4.17"
+      },
+      "monthlyDiscountPrice": {
+        "gross": "10",
+        "net": "8.33",
+        "vat": "1.67"
+      },
+      "merchandisingPromotions": {
+        "tag": "FLBB.SIMO.1GB.FTTC.Combi",
+        "label": "15 GBP off on FLBB with SIMO 18 1 GB plan",
+        "description": null,
+        "discountId": "109899,107396",
+        "mpType": "multi_package_discount",
+        "priceEstablishedLabel": null,
+        "priority": "234",
+        "offerGroup": null,
+        "confirmRequired": false,
+        "footNotes": [
+          "Combi Discout on FLBB Plans with SIMO18 1 GB plan"
+        ],
+        "packageType": [
+          "Acquisition",
+          "Upgrade",
+          "SecondLine"
+        ],
+        "qualifier": {
+          "bundleId": "110680",
+          "identifier": {
+            "key": "fromActivePackage",
+            "value": "123456"
+          }
+        },
+        "promotionMedia": null
+      },
+      "bundledServicePrices": [
+        {
+          "serviceId": "107552",
+          "oneOffPrice": null,
+          "monthlyPrice": {
+            "gross": "25",
+            "net": "20.83",
+            "vat": "4.17"
+          }
+        },
+        {
+          "serviceId": "107551",
+          "oneOffPrice": null,
+          "monthlyPrice": {
+            "gross": "0",
+            "net": "0",
+            "vat": "0"
+          }
+        }
+      ]
+    },
+    "hardwarePrice": {
+      "hardwareId": "085897",
+      "oneOffPrice": {
+        "gross": "49",
+        "net": "40.83",
+        "vat": "8.17"
+      },
+      "oneOffDiscountPrice": {
+        "gross": "40.67",
+        "net": "33.89",
+        "vat": "6.78"
+      },
+      "monthlyPrice": null,
+      "monthlyDiscountPrice": null,
+      "merchandisingPromotions": {
+        "tag": "FLBB.Router.Discount",
+        "label": "17% Discount on Router",
+        "description": null,
+        "discountId": null,
+        "mpType": "Upfront_Discount",
+        "priceEstablishedLabel": null,
+        "priority": "243",
+        "offerGroup": null,
+        "confirmRequired": null,
+        "footNotes": [
+          "Direct Upfront Discount on BB Router"
+        ],
+        "packageType": [
+          "Acquisition",
+          "SecondLine"
+        ],
+        "qualifier": null,
+        "promotionMedia": null
+      },
+      "deviceFinancingId": null,
+      "financingOptions": null
+    },
+    "oneOffPrice": {
+      "gross": "49",
+      "net": "40.83",
+      "vat": "8.17"
+    },
+    "oneOffDiscountPrice": {
+      "gross": "40.67",
+      "net": "33.89",
+      "vat": "6.78"
+    },
+    "monthlyPrice": {
+      "gross": "25",
+      "net": "20.83",
+      "vat": "4.17"
+    },
+    "monthlyDiscountPrice": {
+      "gross": "10",
+      "net": "8.33",
+      "vat": "1.67"
+    },
+    "stepPrices": []
+  },
+  {
+    "bundlePrice": {
+      "bundleId": "110265",
+      "monthlyPrice": {
+        "gross": "25",
+        "net": "20.83",
+        "vat": "4.17"
+      },
+      "monthlyDiscountPrice": {
+        "gross": "10",
+        "net": "8.33",
+        "vat": "1.67"
+      },
+      "merchandisingPromotions": {
+        "tag": "FLBB.SIMO.1GB.FTTC.Combi",
+        "label": "15 GBP off on FLBB with SIMO 18 1 GB plan",
+        "description": null,
+        "discountId": "109899,107396",
+        "mpType": "multi_package_discount",
+        "priceEstablishedLabel": null,
+        "priority": "234",
+        "offerGroup": null,
+        "confirmRequired": false,
+        "footNotes": [
+          "Combi Discout on FLBB Plans with SIMO18 1 GB plan"
+        ],
+        "packageType": [
+          "Acquisition",
+          "Upgrade",
+          "SecondLine"
+        ],
+        "qualifier": {
+          "bundleId": "110680",
+          "identifier": {
+            "key": "fromActivePackage",
+            "value": "123456"
+          }
+        },
+        "promotionMedia": null
+      },
+      "bundledServicePrices": [
+        {
+          "serviceId": "107551",
+          "oneOffPrice": null,
+          "monthlyPrice": {
+            "gross": "0",
+            "net": "0",
+            "vat": "0"
+          }
+        },
+        {
+          "serviceId": "107552",
+          "oneOffPrice": null,
+          "monthlyPrice": {
+            "gross": "25",
+            "net": "20.83",
+            "vat": "4.17"
+          }
+        }
+      ]
+    },
+    "hardwarePrice": {
+      "hardwareId": "085897",
+      "oneOffPrice": {
+        "gross": "49",
+        "net": "40.83",
+        "vat": "8.17"
+      },
+      "oneOffDiscountPrice": {
+        "gross": "40.67",
+        "net": "33.89",
+        "vat": "6.78"
+      },
+      "monthlyPrice": null,
+      "monthlyDiscountPrice": null,
+      "merchandisingPromotions": {
+        "tag": "FLBB.Router.Discount",
+        "label": "17% Discount on Router",
+        "description": null,
+        "discountId": null,
+        "mpType": "Upfront_Discount",
+        "priceEstablishedLabel": null,
+        "priority": "243",
+        "offerGroup": null,
+        "confirmRequired": null,
+        "footNotes": [
+          "Direct Upfront Discount on BB Router"
+        ],
+        "packageType": [
+          "Acquisition",
+          "SecondLine"
+        ],
+        "qualifier": null,
+        "promotionMedia": null
+      },
+      "deviceFinancingId": null,
+      "financingOptions": null
+    },
+    "oneOffPrice": {
+      "gross": "49",
+      "net": "40.83",
+      "vat": "8.17"
+    },
+    "oneOffDiscountPrice": {
+      "gross": "40.67",
+      "net": "33.89",
+      "vat": "6.78"
+    },
+    "monthlyPrice": {
+      "gross": "25",
+      "net": "20.83",
+      "vat": "4.17"
+    },
+    "monthlyDiscountPrice": {
+      "gross": "10",
+      "net": "8.33",
+      "vat": "1.67"
+    },
+    "stepPrices": []
+  },
+  {
+    "bundlePrice": {
+      "bundleId": "110264",
+      "monthlyPrice": {
+        "gross": "25",
+        "net": "20.83",
+        "vat": "4.17"
+      },
+      "monthlyDiscountPrice": {
+        "gross": "10",
+        "net": "8.33",
+        "vat": "1.67"
+      },
+      "merchandisingPromotions": {
+        "tag": "FLBB.SIMO.1GB.FTTC.Combi",
+        "label": "15 GBP off on FLBB with SIMO 18 1 GB plan",
+        "description": null,
+        "discountId": "109899,107396",
+        "mpType": "multi_package_discount",
+        "priceEstablishedLabel": null,
+        "priority": "234",
+        "offerGroup": null,
+        "confirmRequired": false,
+        "footNotes": [
+          "Combi Discout on FLBB Plans with SIMO18 1 GB plan"
+        ],
+        "packageType": [
+          "Acquisition",
+          "Upgrade",
+          "SecondLine"
+        ],
+        "qualifier": {
+          "bundleId": "110680",
+          "identifier": {
+            "key": "fromActivePackage",
+            "value": "123456"
+          }
+        },
+        "promotionMedia": null
+      },
+      "bundledServicePrices": [
+        {
+          "serviceId": "107552",
+          "oneOffPrice": null,
+          "monthlyPrice": {
+            "gross": "25",
+            "net": "20.83",
+            "vat": "4.17"
+          }
+        },
+        {
+          "serviceId": "107551",
+          "oneOffPrice": null,
+          "monthlyPrice": {
+            "gross": "0",
+            "net": "0",
+            "vat": "0"
+          }
+        }
+      ]
+    },
+    "hardwarePrice": {
+      "hardwareId": "085897",
+      "oneOffPrice": {
+        "gross": "49",
+        "net": "40.83",
+        "vat": "8.17"
+      },
+      "oneOffDiscountPrice": {
+        "gross": "40.67",
+        "net": "33.89",
+        "vat": "6.78"
+      },
+      "monthlyPrice": null,
+      "monthlyDiscountPrice": null,
+      "merchandisingPromotions": {
+        "tag": "FLBB.Router.Discount",
+        "label": "17% Discount on Router",
+        "description": null,
+        "discountId": null,
+        "mpType": "Upfront_Discount",
+        "priceEstablishedLabel": null,
+        "priority": "243",
+        "offerGroup": null,
+        "confirmRequired": null,
+        "footNotes": [
+          "Direct Upfront Discount on BB Router"
+        ],
+        "packageType": [
+          "Acquisition",
+          "SecondLine"
+        ],
+        "qualifier": null,
+        "promotionMedia": null
+      },
+      "deviceFinancingId": null,
+      "financingOptions": null
+    },
+    "oneOffPrice": {
+      "gross": "49",
+      "net": "40.83",
+      "vat": "8.17"
+    },
+    "oneOffDiscountPrice": {
+      "gross": "40.67",
+      "net": "33.89",
+      "vat": "6.78"
+    },
+    "monthlyPrice": {
+      "gross": "25",
+      "net": "20.83",
+      "vat": "4.17"
+    },
+    "monthlyDiscountPrice": {
+      "gross": "10",
+      "net": "8.33",
+      "vat": "1.67"
+    },
+    "stepPrices": []
+  }
+]
