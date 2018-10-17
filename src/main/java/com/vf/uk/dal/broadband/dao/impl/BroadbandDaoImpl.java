@@ -40,6 +40,7 @@ import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointmentRequest;
 import com.vf.uk.dal.broadband.entity.customer.Account;
 import com.vf.uk.dal.broadband.entity.premise.AddressInfo;
+import com.vf.uk.dal.broadband.entity.price.RequestForBundleAndHardware;
 import com.vf.uk.dal.broadband.entity.product.CommercialProduct;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotion;
 import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
@@ -485,6 +486,21 @@ public class BroadbandDaoImpl implements BroadbandDao {
 		String url = BroadBandConstant.BASKET_URL + basketId + "/package";
 		restTemplate.exchange(url, HttpMethod.POST, entity, CreatePackageResponse.class);
 		
+	}
+	
+	@Override
+	public List<com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware> getBundleAndHardwarePrice(
+			RequestForBundleAndHardware bundleAndHardwarePriceRequest) {
+		List<com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware> priceForBundleAndHardwareList = null;
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		ResponseEntity<com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware[]> client = restTemplate.postForEntity(
+				BroadBandConstant.PRICE_URL + "calculateForBundleAndHardware", bundleAndHardwarePriceRequest, com.vf.uk.dal.broadband.entity.price.PriceForBundleAndHardware[].class);
+		if (client != null)
+			priceForBundleAndHardwareList = Arrays.asList(client.getBody());
+
+		return priceForBundleAndHardwareList;
 	}
 
 }
