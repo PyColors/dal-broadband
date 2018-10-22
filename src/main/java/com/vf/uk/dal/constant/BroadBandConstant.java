@@ -79,6 +79,8 @@ public class BroadBandConstant {
 	public static final String IS_NEW_EXISTING_PACKAGE_SAME = "IS_NEW_EXISTING_PACKAGE_SAME";
 
 	public static final String POSTPAID = "postpaid";
+	
+	public static final String SECONDLINE = "SecondLine";
 
 	/** The Constant PRICE_URL. */
 	public static final String PRICE_URL = "http://PRICE-V1/price/";	

@@ -1446,7 +1446,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1482,7 +1482,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1590,7 +1590,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1626,7 +1626,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1734,7 +1734,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1770,7 +1770,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -2143,7 +2143,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -2179,7 +2179,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -2610,7 +2610,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		OptimizePackageResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), OptimizePackageResponse.class);
 		
-		assertEquals(true, response.getHasPackageOptimized());
+		assertEquals(false, response.getHasPackageOptimized());
 
 	}
 
@@ -2631,7 +2631,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		OptimizePackageResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), OptimizePackageResponse.class);
 		
-		assertEquals(true, response.getHasPackageOptimized());
+		assertEquals(false, response.getHasPackageOptimized());
 
 	}
 

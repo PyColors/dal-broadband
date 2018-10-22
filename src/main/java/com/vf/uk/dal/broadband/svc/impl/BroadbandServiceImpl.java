@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.vf.uk.dal.broadband.assembler.BroadbandJourneyServiceAssembler;
+import com.vf.uk.dal.broadband.authorizer.BroadbandAuthorizationHelper;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
 import com.vf.uk.dal.broadband.basket.entity.AppointmentWindow;
 import com.vf.uk.dal.broadband.basket.entity.Basket;
@@ -110,6 +111,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 
 	@Autowired
 	BroadbandMapper broadbandMapper;
+	
+	@Autowired
+	BroadbandAuthorizationHelper broadbandAuthorizationHelper;
 
 	/*
 	 * This methods calls Get Service Availability MS, if the response and
@@ -354,7 +358,13 @@ public class BroadbandServiceImpl implements BroadbandService {
 		BundleDetails bundleDetails = null;
 		List<FlbBundle> listOfFlbBundle = new ArrayList<>();
 		String userType = getBundleListSearchCriteria.getUserType();
-		String journeyType = getBundleListSearchCriteria.getJourneyType();
+		String journeyType = null;
+		if(StringUtils.contains(broadbandAuthorizationHelper.getAssuranceLevel(), "2") || StringUtils.contains(broadbandAuthorizationHelper.getAssuranceLevel(), "3")) {
+			journeyType  = ConfigHelper.getString(BroadBandConstant.SECONDLINE, BroadBandConstant.SECONDLINE);;
+		}
+		else {
+			journeyType = getBundleListSearchCriteria.getJourneyType();
+		}
 		String offerCode = getBundleListSearchCriteria.getOfferCode();
 		String bundleClass = getBundleListSearchCriteria.getBundleClass();
 		String classificationCode = getBundleListSearchCriteria.getClassificationCode();
@@ -646,7 +656,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 	public Basket createOrUpdatePackage(BasketRequest basketRequest, Broadband broadband, String broadbandId) {
 		Basket basket = null;
 		Broadband broadbandCache = broadband;
-		String journeyType = "Acquisition";
+		String journeyType = null;
+		if(StringUtils.contains(broadbandAuthorizationHelper.getAssuranceLevel(), "2") || StringUtils.contains(broadbandAuthorizationHelper.getAssuranceLevel(), "3")) {
+			journeyType  = ConfigHelper.getString(BroadBandConstant.SECONDLINE, BroadBandConstant.SECONDLINE);
+		} else {
+			journeyType = "Acquisition";
+		}
 		if (broadbandCache != null) {
 			String basketId = broadbandCache.getBasketId();
 			String journeyId = broadbandCache.getJourneyId();
@@ -679,7 +694,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
 				basket = broadbandDao.getBasket(basketId);
 				basket.add(CommonUtility.formatLink(lineTypeLink));
-			}else{
+			} else{
 				broadbandDao.addPackage(broadbandJourneyServiceAssembler.createAddPackageRequest(
 						basketRequest, broadbandCache,
 						broadbandMapper.servicePointToBasketServicePoint(broadbandCache.getServicePoint()), journey),broadbandCache.getBasketId());
@@ -1020,92 +1035,95 @@ public class BroadbandServiceImpl implements BroadbandService {
 	@Override
 	public OptimizePackageResponse optimizePackageForFLBB(OptimizePackageRequest optimizePackageRequest,
 			String broadbandId) {
+		
 		OptimizePackageResponse response = new OptimizePackageResponse();
-		response.setHasPackageOptimized(false);
-		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
-		if (broadband == null) {
-			broadband = new Broadband();
-		}
-		broadband.setBroadBandId(broadbandId);
-		if (StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())) {
-			broadband.setJourneyId(optimizePackageRequest.getJourneyId());
+        response.setHasPackageOptimized(false);
+        Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
+        if (broadband == null) {
+            broadband = new Broadband();
+        }
+        broadband.setBroadBandId(broadbandId);
+        if (StringUtils.isNotEmpty(optimizePackageRequest.getJourneyId())) {
+            broadband.setJourneyId(optimizePackageRequest.getJourneyId());
 
-		}
-		String paymentType = null;
-		if (broadband != null && StringUtils.isNotEmpty(broadband.getBasketId())) {
-			CurrentJourney journey = null;
-			if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
-				journey = broadbandDao.getJourney(broadband.getJourneyId());
-			}
-			String journeyName = null;
-			if (journey != null && journey.getJourneyData() != null) {
-				if (StringUtils.isNotEmpty(journey.getJourneyData().getName())) {
-					journeyName = journey.getJourneyData().getName();
-				}
-				if (StringUtils.isNotEmpty(journey.getJourneyData().getCustomerPartyID())) {
-					List<Account> accountList = broadbandDao
-							.getAccountDetailsByAccountId(journey.getJourneyData().getCustomerPartyID());
-					if (CollectionUtils.isNotEmpty(accountList) && accountList.get(0) != null
-							&& CollectionUtils.isNotEmpty(accountList.get(0).getBillingProfile())) {
-						UserDetails userDetails = new UserDetails();
-						List<BillingProfile> billingProfiles =  accountList.get(0).getBillingProfile();
-						for(BillingProfile billingProfile : billingProfiles){
-							if(billingProfile.isPreferredIndicator()){
-								paymentType = billingProfile.getPaymentType();
-								break;
-							}
-						}
-						userDetails.setPaymentType(paymentType);
-						broadband.setUserDetails(userDetails);
-					}
-				}
+        }
+        String paymentType = null;
+        if (broadband != null && StringUtils.isNotEmpty(broadband.getBasketId())) {
+            CurrentJourney journey = null;
+            if (StringUtils.isNotEmpty(broadband.getJourneyId())) {
+                journey = broadbandDao.getJourney(broadband.getJourneyId());
+            }
+            String journeyName = null;
+            String accountId=null;
+            if(StringUtils.contains(broadbandAuthorizationHelper.getAssuranceLevel(), "2") || StringUtils.contains(broadbandAuthorizationHelper.getAssuranceLevel(), "3")) {
+            	journeyName = ConfigHelper.getString(BroadBandConstant.SECONDLINE, BroadBandConstant.SECONDLINE);
+            	accountId=broadbandAuthorizationHelper.getAccountIdFromAuthorization();
+            }else if (journey != null && journey.getJourneyData() != null) {
+                journeyName = journey.getJourneyData().getName();
+                accountId=journey.getJourneyData().getCustomerPartyID();
+            }  
 
-			}
-			String planId = broadband.getBasketInfo().getPlanId();
-			
-			
-			
-			if ((!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& (StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID) || StringUtils.isEmpty(broadband.getJourneyId())))) {
-				BundlePromotionRequest bundlePromotionRequest = broadbandJourneyServiceAssembler
-						.createPromotionRequestToOptimize(broadband, journeyName);
-				List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
-				String newAndExistingPackage = ConfigHelper.getString(BroadBandConstant.IS_NEW_EXISTING_PACKAGE_SAME, "false"); 
-				if(!BooleanUtils.toBoolean(newAndExistingPackage)) {
-				for (BundlePromotion bundlePromotion : bundlePromotions) {
-					if(CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())){
-						planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
-						response.setHasPackageOptimized(true);
-						break;
-					}	
-					}
-				
-				} else if(StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID)) {
-					response.setHasPackageOptimized(true);
-				}
-								 
-			} else if ((StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
-					&& StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID))) {
-				response.setHasPackageOptimized(true);
+                if (StringUtils.isNotEmpty(accountId)) {
+                    List<Account> accountList = broadbandDao
+                            .getAccountDetailsByAccountId(accountId);
+                    if (CollectionUtils.isNotEmpty(accountList) && accountList.get(0) != null
+                            && CollectionUtils.isNotEmpty(accountList.get(0).getBillingProfile())) {
+                        UserDetails userDetails = new UserDetails();
+                        List<BillingProfile> billingProfiles =  accountList.get(0).getBillingProfile();
+                        for(BillingProfile billingProfile : billingProfiles){
+                            if(billingProfile.isPreferredIndicator()){
+                                paymentType = billingProfile.getPaymentType();
+                                break;
+                            }
+                        }
+                        userDetails.setPaymentType(paymentType);
+                        broadband.setUserDetails(userDetails);
+                    }
+                }
 
-			}
+            
+            String planId = broadband.getBasketInfo().getPlanId();
+            if ((!StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
+                    && (StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID) || StringUtils.isEmpty(broadband.getJourneyId())))) {
+                BundlePromotionRequest bundlePromotionRequest = broadbandJourneyServiceAssembler
+                        .createPromotionRequestToOptimize(broadband, journeyName);
+                List<BundlePromotion> bundlePromotions = broadbandDao.getPromotionForBundleList(bundlePromotionRequest);
+                String newAndExistingPackage = ConfigHelper.getString(BroadBandConstant.IS_NEW_EXISTING_PACKAGE_SAME, "false");
+                if(!BooleanUtils.toBoolean(newAndExistingPackage)) {
+                for (BundlePromotion bundlePromotion : bundlePromotions) {
+                    if(CollectionUtils.isNotEmpty(bundlePromotion.getPlanCouplingPromotions())){
+                        planId = bundlePromotion.getPlanCouplingPromotions().get(0).getPlancoupleId();
+                        response.setHasPackageOptimized(true);
+                        break;
+                    }    
+                    }
+                
+                } else if(StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID)) {
+                    response.setHasPackageOptimized(true);
+                }
+                                
+            } else if ((StringUtils.containsIgnoreCase(broadband.getBasketInfo().getPlanType(), CATEGORY_PREFERENCE_FTTH)
+                    && StringUtils.equalsIgnoreCase(paymentType, BroadBandConstant.POSTPAID))) {
+                response.setHasPackageOptimized(true);
 
-			if (response.getHasPackageOptimized()) {
-				UpdatePackage updatePackageRequest = broadbandJourneyServiceAssembler.updateBasketRequest(null, journey,
-						broadband, planId);
-				broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(),
-						broadband.getBasketId());
-			}
-			BasketInfo basketInfo = broadband.getBasketInfo();
-			if (basketInfo == null) {
-				basketInfo = new BasketInfo();
-			}
-			basketInfo.setPlanId(planId);
-			broadband.setBasketInfo(basketInfo);
+            }
 
-		}
-		broadbandDao.setBroadBandInCache(broadband);
-		return response;
+            if (response.getHasPackageOptimized()) {
+                UpdatePackage updatePackageRequest = broadbandJourneyServiceAssembler.updateBasketRequest(null, journey,
+                        broadband, planId);
+                broadbandDao.updatePackage(updatePackageRequest, broadband.getBasketInfo().getPackageId(),
+                        broadband.getBasketId());
+            }
+            BasketInfo basketInfo = broadband.getBasketInfo();
+            if (basketInfo == null) {
+                basketInfo = new BasketInfo();
+            }
+            basketInfo.setPlanId(planId);
+            broadband.setBasketInfo(basketInfo);
+
+        }
+        broadbandDao.setBroadBandInCache(broadband);
+        return response;
 	}
 
 	/*
