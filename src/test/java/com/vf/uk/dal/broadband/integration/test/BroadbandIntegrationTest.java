@@ -127,6 +127,10 @@ public class BroadbandIntegrationTest {
 				entity2, Account[].class))
 						.willReturn(new ResponseEntity<Account[]>(getAccountResponseUsingAccountId, HttpStatus.OK));
 		
+		given(restTemplate.exchange("http://CUSTOMER-V1/customer/contact/accounts?accountId=7000352184", HttpMethod.GET,
+				entity2, Account[].class))
+						.willReturn(new ResponseEntity<Account[]>(getAccountResponseUsingAccountId, HttpStatus.OK));
+		
 		String jsonString = new String(FileUtility.readFile("\\rest-mock\\GSAREQUEST.json"));
 		GetServiceAvailibilityRequest request = new ObjectMapper().readValue(jsonString,
 				GetServiceAvailibilityRequest.class);
@@ -2610,7 +2614,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		OptimizePackageResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), OptimizePackageResponse.class);
 		
-		assertEquals(false, response.getHasPackageOptimized());
+		assertEquals(true, response.getHasPackageOptimized());
 
 	}
 
@@ -2631,7 +2635,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		OptimizePackageResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), OptimizePackageResponse.class);
 		
-		assertEquals(false, response.getHasPackageOptimized());
+		assertEquals(true, response.getHasPackageOptimized());
 
 	}
 

@@ -39,12 +39,12 @@ public class BroadbandAuthorizationHelper {
 	}
 	
 	public String getAccountIdFromAuthorization(){
-        String subscriptionId = null;
+        String accountId = null;
         if (com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer.getAuthContext() != null) {
-            com.vf.uk.dal.authorization.filter.util.entity.SubscriptionClaim subscriptionClaim = com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer.getAuthContext().getSubscription();
-            subscriptionId = subscriptionClaim!=null?subscriptionClaim.getId():null;
+            com.vf.uk.dal.authorization.filter.util.entity.AccountClaim accountClaim = com.vf.uk.dal.authorization.filter.util.context.CustomerAuthorizer.getAuthContext().getAccount();
+            accountId = accountClaim!=null?accountClaim.getId():null;
         }
-        return subscriptionId;
+        return accountId;
     }
 	
 	public String getAssuranceLevel(){
