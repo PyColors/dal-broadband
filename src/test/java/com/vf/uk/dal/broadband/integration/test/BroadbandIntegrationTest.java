@@ -127,6 +127,10 @@ public class BroadbandIntegrationTest {
 				entity2, Account[].class))
 						.willReturn(new ResponseEntity<Account[]>(getAccountResponseUsingAccountId, HttpStatus.OK));
 		
+		given(restTemplate.exchange("http://CUSTOMER-V1/customer/contact/accounts?accountId=7000352184", HttpMethod.GET,
+				entity2, Account[].class))
+						.willReturn(new ResponseEntity<Account[]>(getAccountResponseUsingAccountId, HttpStatus.OK));
+		
 		String jsonString = new String(FileUtility.readFile("\\rest-mock\\GSAREQUEST.json"));
 		GetServiceAvailibilityRequest request = new ObjectMapper().readValue(jsonString,
 				GetServiceAvailibilityRequest.class);
@@ -1446,7 +1450,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1482,7 +1486,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1590,7 +1594,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1626,7 +1630,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1734,7 +1738,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -1770,7 +1774,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -2143,7 +2147,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
@@ -2179,7 +2183,7 @@ public class BroadbandIntegrationTest {
 		String jsonString1 = new String(FileUtility.readFile("\\rest-mock\\GetFLBBListResponse.json"));
 		BundleDetails bundleDetails = new ObjectMapper().readValue(jsonString1, BundleDetails.class);
 		given(restTemplate.getForObject(
-				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer", BundleDetails.class))
+				"http://BUNDLES-V1/bundles/catalogue/bundle/?bundleClass=FTTH&userType=Consumer&journeyType=SecondLine", BundleDetails.class))
 						.willReturn(bundleDetails);
 
 		String jsonString2 = new String(FileUtility.readFile("\\rest-mock\\GetDeliveryMethodsResponseV1.json"));
