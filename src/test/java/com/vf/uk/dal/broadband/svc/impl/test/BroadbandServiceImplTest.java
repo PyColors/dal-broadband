@@ -1,7 +1,6 @@
 package com.vf.uk.dal.broadband.svc.impl.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.given;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +35,6 @@ import com.vf.uk.dal.broadband.entity.OptimizePackageResponse;
 import com.vf.uk.dal.broadband.entity.RouterDetails;
 import com.vf.uk.dal.broadband.entity.RouterProductDetails;
 import com.vf.uk.dal.broadband.entity.SelectedAvailabilityCheckResponse;
-import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.appointment.CreateAppointment;
 import com.vf.uk.dal.broadband.entity.appointment.GetAppointment;
 import com.vf.uk.dal.broadband.entity.customer.Account;
@@ -83,11 +81,6 @@ public class BroadbandServiceImplTest {
 		CreateBasketRequest createBasketRequest = new ObjectMapper().readValue(createBasketJsonRequest,
 				CreateBasketRequest.class);
 		Mockito.when(broadbandDao.createBasket(createBasketRequest)).thenReturn(basketResponse);
-		
-//		String createApointmentRequest = new String(FileUtility.readFile("\\rest-mock\\CreateAppointmentRequest.json"));
-//		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createApptRequest = new ObjectMapper()
-//				.readValue(createApointmentRequest,
-//						com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest.class);
 		
 		String createAppointmentJsonResponse = new String(
 				FileUtility.readFile("\\rest-mock\\CreateAppointment_Response.json"));
@@ -141,7 +134,7 @@ public class BroadbandServiceImplTest {
 		SelectedAvailabilityCheckResponse respActual = serviceImpl.getSelectedLineOptions("12345678907888");
 		assertEquals("LS29 0JJ", respActual.getInstallationAddress().getPostCode());
 		assertEquals("A90000221048", respActual.getInstallationAddress().getIdentification().getId());
-		assertEquals("string", respActual.getPhoneNumber());
+		assertEquals("Gold", respActual.getInstallationAddress().getIdentification().getContextId());
 	}
 
 	@Test
@@ -157,14 +150,6 @@ public class BroadbandServiceImplTest {
 				respActual.getExtrasGroups().get(0).getGroupName());
 		assertEquals(respExpected.getExtrasGroups().get(0).getGroupPriority(),
 				respActual.getExtrasGroups().get(0).getGroupPriority());
-	}
-
-	@Test
-	public void testClearPackageAndBasketCache() throws Exception {
-		String getBroadbandCacheResponse = new String(FileUtility.readFile("\\rest-mock\\BroadbandCacheResponse.json"));
-		Broadband broadbandCacheResponse = new ObjectMapper().readValue(getBroadbandCacheResponse, Broadband.class);
-		Mockito.when(broadbandDao.getBroadbandFromCache(Mockito.anyString())).thenReturn(broadbandCacheResponse);
-		serviceImpl.clearPackageAndBasketCache("12345678907888", "123456789078");
 	}
 	
 	@Test
@@ -227,8 +212,7 @@ public class BroadbandServiceImplTest {
 						com.vf.uk.dal.broadband.entity.CreateAppointmentRequest.class);
 		
 		CreateAppointmentResponse response = serviceImpl.createAppointment(createApptRequest, "12345678907888");
-		
-		assertEquals("string", response.getApplicationId());
+		assertEquals("DX12345", response.getApplicationId());
 		
 	}
 	
