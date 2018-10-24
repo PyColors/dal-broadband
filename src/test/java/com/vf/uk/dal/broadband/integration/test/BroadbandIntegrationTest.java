@@ -2232,7 +2232,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		CreateAppointmentResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), CreateAppointmentResponse.class);
 
-		assertEquals("string", response.getApplicationId());
+		assertEquals("DX12345", response.getApplicationId());
 		assertEquals("GET", response.getLinks().get(1).getType());
 		assertEquals("self", response.getLinks().get(0).getRel());
 
@@ -2263,7 +2263,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		CreateAppointmentResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), CreateAppointmentResponse.class);
 
-		assertEquals("string", response.getApplicationId());
+		assertEquals("DX12345", response.getApplicationId());
 		assertEquals("GET", response.getLinks().get(1).getType());
 		assertEquals("self", response.getLinks().get(0).getRel());
 	}
@@ -2293,7 +2293,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		CreateAppointmentResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), CreateAppointmentResponse.class);
 
-		assertEquals("string", response.getApplicationId());
+		assertEquals("DX12345", response.getApplicationId());
 		assertEquals("GET", response.getLinks().get(1).getType());
 		assertEquals("self", response.getLinks().get(0).getRel());
 	}
@@ -2323,7 +2323,7 @@ public class BroadbandIntegrationTest {
 		Gson gsonResponse = new Gson(); 
 		CreateAppointmentResponse response = gsonResponse.fromJson(result.getResponse().getContentAsString(), CreateAppointmentResponse.class);
 
-		assertEquals("string", response.getApplicationId());
+		assertEquals("DX12345", response.getApplicationId());
 		assertEquals("GET", response.getLinks().get(1).getType());
 		assertEquals("self", response.getLinks().get(0).getRel());
 
