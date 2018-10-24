@@ -1,9 +1,9 @@
 {
-  "resultStatus": "string",
+  "resultStatus": "S",
   "appointmentWindow": {
     "startTimePeriod": "string",
-    "operationalPreferenceCode": "string",
-    "timeSlot": "string",
-    "applicationId": "string"
+    "operationalPreferenceCode": "DX12345",
+    "timeSlot": "AM",
+    "applicationId": "DX12345"
   }
 }
