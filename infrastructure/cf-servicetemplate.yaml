@@ -104,12 +104,6 @@ Parameters:
   icpconfigjdbcUserPwd:
     Description: Fill me in please and update my type!
     Type: String
-  icpenvkafkahost:
-    Description: Fill me in please and update my type!
-    Type: String
-  icpenvkafkaport:
-    Description: Fill me in please and update my type!
-    Type: String
 Resources:
   ListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
@@ -190,10 +184,6 @@ Resources:
               Value: !Ref 'icpconfigjdbcUserName'
             - Name: icp_config_jdbcUserPwd
               Value: !Ref 'icpconfigjdbcUserPwd'
-            - Name: icp_env_kafka_host
-              Value: !Ref 'icpenvkafkahost'
-            - Name: icp_env_kafka_port
-              Value: !Ref 'icpenvkafkaport'
           Memory: !Ref 'Memory'
           MemoryReservation: !Ref 'MemoryReservation'
           Image: !Sub '${EcrLocation}/${BuildName}:${BuildID}'
