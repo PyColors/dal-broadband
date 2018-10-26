@@ -550,6 +550,7 @@ public class BroadbandJourneyServiceAssembler {
 			List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityList = new ArrayList<>();
 			for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse
 					.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()) {
+				response.setRegisterOfInterest(lineTreatment.isRegisterOfInterest());
 				AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
 				appointmentDetails.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
 				appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailabilityDate());
@@ -878,6 +879,7 @@ public class BroadbandJourneyServiceAssembler {
 					List<LineTreatment> lineTreatmentList = serLines.getLineTreatments();
 					List<ServieLine> serviceLineList = serLines.getServiceLines();
 					for (LineTreatment lineTreatment : lineTreatmentList) {
+						response.setRegisterOfInterest(lineTreatment.getRegisterOfInterest());
 						AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
 						appointmentDetails.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
 						appointmentDetails.setEarliestAvailableDate(lineTreatment.getEarliestAvailableDate());

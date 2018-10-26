@@ -347,8 +347,7 @@ public class BroadbandIntegrationTest {
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
 		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
-
-		
+		assertEquals(true,response.getRegisterOfInterest());
 	}
 
 	@Test
