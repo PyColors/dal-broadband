@@ -43,4 +43,6 @@ public class AvailabilityCheckResponse extends ResourceSupport {
 	@JsonProperty("warningErrorList")
 	private List<ErrorInfo> warningErrorList = null;
 
+	@JsonProperty("registerOfInterest")
+	private Boolean registerOfInterest = null;
 }
