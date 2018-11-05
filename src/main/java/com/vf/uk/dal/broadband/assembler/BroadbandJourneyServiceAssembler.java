@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
@@ -445,6 +446,7 @@ public class BroadbandJourneyServiceAssembler {
 								serviceLineTreatment.setVicCode(serviceLineTreatmentReq.getViCCode());
 								AccessLine accessLineForJourney = new AccessLine();
 								accessLineForJourney.setId(serviceLineTreatmentReq.getAccessLineID());
+								accessLineForJourney.setChannelId(serviceLineTreatmentReq.getAccessLineType());
 								serviceLineTreatment.setAccessLine(accessLineForJourney);
 								List<PendingOrder> pendingOrderList = new ArrayList<>();
 								if (serviceLineTreatmentReq.getPendingOrder() != null
@@ -1144,12 +1146,24 @@ public class BroadbandJourneyServiceAssembler {
 		}
 
 		List<AddProduct> services = new ArrayList<>();
-		for (String skuId : basketRequest.getServiceIds()) {
+		
+		if(CollectionUtils.isNotEmpty(basketRequest.getServiceIds())){
+			for (String skuId : basketRequest.getServiceIds()) {
+				AddProduct addProductForServices = new AddProduct();
+				addProductForServices.setAction("ADD");
+				addProductForServices.setSkuId(skuId);
+				services.add(addProductForServices);
+			}
+		}
+		
+		else if(broadband.getEngineeringVisitCharge()!=null){
 			AddProduct addProductForServices = new AddProduct();
 			addProductForServices.setAction("ADD");
-			addProductForServices.setSkuId(skuId);
+			addProductForServices.setSkuId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
 			services.add(addProductForServices);
 		}
+		
+		
 		addPackage.setServices(services);
 		return addPackage;
 	}
