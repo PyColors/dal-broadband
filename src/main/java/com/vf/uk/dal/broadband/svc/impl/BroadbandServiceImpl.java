@@ -986,6 +986,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 						&& "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())
 						&& !StringUtils
 						.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())) {
+					LineDetails lineDetails = broadband.getLineDetails();
+					if (lineDetails == null) {
+						lineDetails = new LineDetails();
+					}
+					lineDetails.setLineTreatmentType("NEW");
+					broadband.setLineDetails(lineDetails);
 					PremiseAndServicePoint premiseAndServicePoint = broadbandJourneyServiceAssembler
 							.setPremiseAndServicePointRequest(
 									broadbandMapper.servicePointToBasketServicePoint(broadband.getServicePoint()),
@@ -999,12 +1005,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 						broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
 								broadband.getBasketInfo().getPackageId());
 					}
-					LineDetails lineDetails = broadband.getLineDetails();
-					if (lineDetails == null) {
-						lineDetails = new LineDetails();
-					}
-					lineDetails.setLineTreatmentType("NEW");
-					broadband.setLineDetails(lineDetails);
+					
 				}
 			}
 		}
