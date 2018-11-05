@@ -1061,8 +1061,6 @@ public class BroadbandJourneyServiceAssembler {
 
 		packages.add(addPackage);
 		createBasket.setPackages(packages);
-		Gson gson = new Gson();
-		gson.toJson(createBasket);
 		return createBasket;
 	}
 
