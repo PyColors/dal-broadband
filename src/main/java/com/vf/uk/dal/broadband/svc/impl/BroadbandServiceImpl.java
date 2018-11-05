@@ -990,6 +990,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					if (lineDetails == null) {
 						lineDetails = new LineDetails();
 					}
+					
 					lineDetails.setLineTreatmentType("NEW");
 					broadband.setLineDetails(lineDetails);
 					PremiseAndServicePoint premiseAndServicePoint = broadbandJourneyServiceAssembler
