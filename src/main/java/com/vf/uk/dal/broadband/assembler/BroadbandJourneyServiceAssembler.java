@@ -1156,7 +1156,7 @@ public class BroadbandJourneyServiceAssembler {
 			}
 		}
 		
-		else if(broadband.getEngineeringVisitCharge()!=null){
+		else if(broadband != null && broadband.getEngineeringVisitCharge()!=null){
 			AddProduct addProductForServices = new AddProduct();
 			addProductForServices.setAction("ADD");
 			addProductForServices.setSkuId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
