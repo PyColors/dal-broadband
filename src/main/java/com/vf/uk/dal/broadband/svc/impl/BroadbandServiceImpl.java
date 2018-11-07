@@ -983,9 +983,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				if (StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(),
 						broadband.getLineDetails().getClassificationCode())
 						&& CollectionUtils.isNotEmpty(lineTreatmentList) && lineTreatmentList.size() == 1
-						&& "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())
-						&& !StringUtils
-						.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())) {
+						&& "NEW".equalsIgnoreCase(lineTreatmentList.get(0).getLineTreatmentType())) {
 					LineDetails lineDetails = broadband.getLineDetails();
 					if (lineDetails == null) {
 						lineDetails = new LineDetails();
@@ -993,19 +991,23 @@ public class BroadbandServiceImpl implements BroadbandService {
 					
 					lineDetails.setLineTreatmentType("NEW");
 					broadband.setLineDetails(lineDetails);
-					PremiseAndServicePoint premiseAndServicePoint = broadbandJourneyServiceAssembler
-							.setPremiseAndServicePointRequest(
-									broadbandMapper.servicePointToBasketServicePoint(broadband.getServicePoint()),
-									broadband, null, null);
-					broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
-							broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
-					if (broadband.getEngineeringVisitCharge() != null
-							&& broadband.getEngineeringVisitCharge().getGross() != null) {
-						AddProductRequest addProductRequest = broadbandJourneyServiceAssembler
-								.addProductRequest(broadband);
-						broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
-								broadband.getBasketInfo().getPackageId());
+					if(!StringUtils
+						.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())){
+						PremiseAndServicePoint premiseAndServicePoint = broadbandJourneyServiceAssembler
+								.setPremiseAndServicePointRequest(
+										broadbandMapper.servicePointToBasketServicePoint(broadband.getServicePoint()),
+										broadband, null, null);
+						broadbandDao.updateBasketWithPremiseAndServicePoint(premiseAndServicePoint,
+								broadband.getBasketInfo().getPackageId(), broadband.getBasketId());
+						if (broadband.getEngineeringVisitCharge() != null
+								&& broadband.getEngineeringVisitCharge().getGross() != null) {
+							AddProductRequest addProductRequest = broadbandJourneyServiceAssembler
+									.addProductRequest(broadband);
+							broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
+									broadband.getBasketInfo().getPackageId());
+						}
 					}
+					
 					
 				}
 			}
