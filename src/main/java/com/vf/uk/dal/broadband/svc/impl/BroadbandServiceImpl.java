@@ -579,8 +579,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 				boolean checkIfLinetreatmentTypeContainsNew = lineTreatmentList.size() == 2
 						&& (StringUtils.isNotBlank(lineTreatmentType) && StringUtils.equalsIgnoreCase(lineTreatmentType,
 								BroadBandConstant.LINE_TREATMENT_TYPE_NEW));
-				if ((checkIfLinetreatmentTypeIsNewAndSize1)
-						|| (checkIfLinetreatmentTypeContainsNew) && broadBand.getEngineeringVisitCharge() != null) {
+				if (((checkIfLinetreatmentTypeIsNewAndSize1)
+						|| (checkIfLinetreatmentTypeContainsNew)) && broadBand.getEngineeringVisitCharge() != null) {
 					engineeringFee.setHardwareId(broadBand.getEngineeringVisitCharge().getEngVisitProductId());
 					Price engFee = broadbandMapper.engPriceToPrice(broadBand.getEngineeringVisitCharge());
 					engineeringFee.setOneOffPrice(engFee);
