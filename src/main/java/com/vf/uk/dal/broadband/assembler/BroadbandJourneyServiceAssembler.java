@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
 import com.vf.uk.dal.broadband.basket.entity.AddPackage;
 import com.vf.uk.dal.broadband.basket.entity.AddProduct;
 import com.vf.uk.dal.broadband.basket.entity.AddProductRequest;
@@ -91,8 +90,7 @@ import com.vf.uk.dal.entity.serviceavailability.MoveTypeCodeEnum;
  */
 @Component
 public class BroadbandJourneyServiceAssembler {
-	
-	
+
 	@Autowired
 	BroadbandMapper broadbandMapper;
 
@@ -105,8 +103,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the get service availibility request.
 	 *
-	 * @param availabilityCheckRequest the availability check request
-	 * @param userType the user type
+	 * @param availabilityCheckRequest
+	 *            the availability check request
+	 * @param userType
+	 *            the user type
 	 * @return GetServiceAvailibilityRequest
 	 */
 
@@ -117,10 +117,10 @@ public class BroadbandJourneyServiceAssembler {
 		request.setLandlineNumber(availabilityCheckRequest.getLineRef().getLineIdentification().getFllandlineNumber());
 		request.setMoveFromPostCode(
 				availabilityCheckRequest.getLineRef().getLineIdentification().getMoveFromPostCode());
-		if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString())){
-				request.setCustomerType(
-						com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.BUSINESS);
-		}else{
+		if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString())) {
+			request.setCustomerType(
+					com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.BUSINESS);
+		} else {
 			request.setCustomerType(
 					com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest.CustomerTypeEnum.INDIVIDUAL);
 		}
@@ -158,12 +158,18 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the broadband in cache.
 	 *
-	 * @param availabilityCheckRequest the availability check request
-	 * @param getServiceAvailabilityResponse the get service availability response
-	 * @param broadbandId the broadband id
-	 * @param broadBand the broad band
-	 * @param productDetailsList the product details list
-	 * @param userType the user type
+	 * @param availabilityCheckRequest
+	 *            the availability check request
+	 * @param getServiceAvailabilityResponse
+	 *            the get service availability response
+	 * @param broadbandId
+	 *            the broadband id
+	 * @param broadBand
+	 *            the broad band
+	 * @param productDetailsList
+	 *            the product details list
+	 * @param userType
+	 *            the user type
 	 * @return FLBBJourneyRequest
 	 */
 
@@ -294,25 +300,25 @@ public class BroadbandJourneyServiceAssembler {
 							.getLineDirectory().isEmpty()) {
 				for (com.vf.uk.dal.entity.serviceavailability.LineDirectory lDirectory : getServiceAvailabilityResponse
 						.getServiceAvailabilityLine().get(0).getLineReference().getLineDirectory()) {
-					if(StringUtils.isNotEmpty(lDirectory.getDirectoryCode())){
+					if (StringUtils.isNotEmpty(lDirectory.getDirectoryCode())) {
 						lineDirectory.setDirectoryCode(lDirectory.getDirectoryCode());
-					}else if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
+					} else if (StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")) {
 						lineDirectory.setDirectoryCode("DIRECTORY_ENQUIRIES_ONLY");
-					}else{
+					} else {
 						lineDirectory.setDirectoryCode("ORDINARY");
 					}
 					lineDirectory.setFeatureCode("MAINLINE_DIRECTORY");
 					lineDirectory.setLocationCode("INDIVIDUAL");
 					lineDirectoryList.add(lineDirectory);
 				}
-			}else{
-				if(StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")){
+			} else {
+				if (StringUtils.equals(availabilityCheckRequest.getCategory(), "FTTH")) {
 					lineDirectory.setDirectoryCode("DIRECTORY_ENQUIRIES_ONLY");
-				}else{
+				} else {
 					lineDirectory.setDirectoryCode("ORDINARY");
 				}
 				lineDirectory.setFeatureCode("MAINLINE_DIRECTORY");
-					lineDirectory.setLocationCode("INDIVIDUAL");
+				lineDirectory.setLocationCode("INDIVIDUAL");
 				lineDirectoryList.add(lineDirectory);
 			}
 			lineRefernce.setLineDirectoryList(lineDirectoryList);
@@ -481,14 +487,14 @@ public class BroadbandJourneyServiceAssembler {
 
 		broadband.setServicePoint(servicePoint);
 		BasketInfo basketInfo;
-		if(null != broadband.getBasketInfo())
+		if (null != broadband.getBasketInfo())
 			basketInfo = broadband.getBasketInfo();
 		else
 			basketInfo = new BasketInfo();
-		
-		if(!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)){
-			
-			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+
+		if (!StringUtils.equalsIgnoreCase(basketInfo.getAccountCategory(), userType)) {
+
+			if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
 				basketInfo.setAccountCategory(CustomerTypeEnum.BUSINESS.toString());
 			else
 				basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
@@ -500,8 +506,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Sets the engineer visit price.
 	 *
-	 * @param productDetailsList the product details list
-	 * @param broadband the broadband
+	 * @param productDetailsList
+	 *            the product details list
+	 * @param broadband
+	 *            the broadband
 	 */
 	private static void setEngineerVisitPrice(List<CommercialProduct> productDetailsList, Broadband broadband) {
 		PriceForHardware engineeringVisitCharge = new PriceForHardware();
@@ -531,10 +539,14 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the availability check response.
 	 *
-	 * @param response the response
-	 * @param getServiceAvailabilityResponse the get service availability response
-	 * @param availabilityCheckRequest the availability check request
-	 * @param productDetailsList the product details list
+	 * @param response
+	 *            the response
+	 * @param getServiceAvailabilityResponse
+	 *            the get service availability response
+	 * @param availabilityCheckRequest
+	 *            the availability check request
+	 * @param productDetailsList
+	 *            the product details list
 	 * @return AvailabilityCheckResponse
 	 */
 
@@ -550,8 +562,23 @@ public class BroadbandJourneyServiceAssembler {
 				&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines().get(0)
 						.getLineTreatment().isEmpty()) {
 			List<AppointmentAndAvailabilityDetail> appointmentAndAvailabilityList = new ArrayList<>();
-			for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse
-					.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()) {
+			List<com.vf.uk.dal.entity.serviceavailability.ServiceLines> tempServiceLineList = getServiceAvailabilityResponse
+					.getServiceAvailabilityLine().get(0).getServiceLines();
+			List<com.vf.uk.dal.entity.serviceavailability.ServiceLines> serviceLineList = new ArrayList<>();
+
+			for (com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceAvailability : tempServiceLineList) {
+				if (!StringUtils.equalsIgnoreCase(serviceAvailability.getClassificationCode(), "Line")
+						&& !StringUtils.equalsIgnoreCase(serviceAvailability.getClassificationCode(), "ADSL")
+						&& !StringUtils.equalsIgnoreCase(serviceAvailability.getClassificationCode(),
+								"Line And ADSL")) {
+
+					serviceLineList.add(serviceAvailability);
+				}
+			}
+
+			com.vf.uk.dal.entity.serviceavailability.ServiceLines serLines = serviceLineList.get(0);
+
+			for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : serLines.getLineTreatment()) {
 				response.setRegisterOfInterest(lineTreatment.isRegisterOfInterest());
 				AppointmentAndAvailabilityDetail appointmentDetails = new AppointmentAndAvailabilityDetail();
 				appointmentDetails.setAppointmentNeeded(lineTreatment.isAppointmentNeeded());
@@ -560,7 +587,9 @@ public class BroadbandJourneyServiceAssembler {
 					appointmentDetails.setLineTreatmentType(lineTreatment.getLineTreatmentType().toString());
 				}
 				appointmentAndAvailabilityList.add(appointmentDetails);
-
+			}
+			for (com.vf.uk.dal.entity.serviceavailability.LineTreatment lineTreatment : getServiceAvailabilityResponse
+					.getServiceAvailabilityLine().get(0).getServiceLines().get(0).getLineTreatment()) {
 				if (!StringUtils.equalsIgnoreCase(availabilityCheckRequest.getCategory(), "FTTH")
 						&& StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType().toString(),
 								BroadBandConstant.NEW)
@@ -614,23 +643,32 @@ public class BroadbandJourneyServiceAssembler {
 				}
 
 			}
+			List<com.vf.uk.dal.entity.serviceavailability.ServiceLines> serviceLinesLists = new ArrayList<>();
 			for (AppointmentAndAvailabilityDetail appointmentDetails : appointmentAndAvailabilityList) {
 				for (com.vf.uk.dal.entity.serviceavailability.ServiceLines serviceLines : getServiceAvailabilityResponse
 						.getServiceAvailabilityLine().get(0).getServiceLines()) {
-					List<com.vf.uk.dal.entity.serviceavailability.ServiceLine> serviceLineList = serviceLines
-							.getServiceLine();
-					for (com.vf.uk.dal.entity.serviceavailability.ServiceLine sLine : serviceLineList) {
-						if (!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")) {
-							List<com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment> serviceLineTreatmentList = sLine
-									.getLineTreatment();
-							for (com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList) {
-								if (StringUtils.equalsIgnoreCase(appointmentDetails.getLineTreatmentType(),
-										serviceLineTreatment.getLineTreatmentType().toString()))
-									appointmentDetails.setCanNumberBeRetained(
-											String.valueOf(serviceLineTreatment.getCanNumberBeRetained()));
+						if (!StringUtils.equalsIgnoreCase(serviceLines.getClassificationCode(), "Line")
+								&& !StringUtils.equalsIgnoreCase(serviceLines.getClassificationCode(), "ADSL")
+								&& !StringUtils.equalsIgnoreCase(serviceLines.getClassificationCode(), "Line And ADSL")){
+							serviceLinesLists.add(serviceLines);
+						}
+						if(CollectionUtils.isNotEmpty(serviceLinesLists)){
+							List<com.vf.uk.dal.entity.serviceavailability.ServiceLine> sLineLists = serviceLinesLists.get(0).getServiceLine();
+							for (com.vf.uk.dal.entity.serviceavailability.ServiceLine sLine : sLineLists) {
+								if (!StringUtils.equalsIgnoreCase(sLine.getClassificationCode(), "Line")) {
+									List<com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment> serviceLineTreatmentList = sLine
+											.getLineTreatment();
+									for (com.vf.uk.dal.entity.serviceavailability.ServiceLineTreatment serviceLineTreatment : serviceLineTreatmentList) {
+										if (StringUtils.equalsIgnoreCase(appointmentDetails.getLineTreatmentType(),
+												serviceLineTreatment.getLineTreatmentType().toString()))
+											appointmentDetails.setCanNumberBeRetained(
+													String.valueOf(serviceLineTreatment.getCanNumberBeRetained()));
+									}
+								}
 							}
 						}
-					}
+						
+					
 				}
 			}
 			response.setAppointmentAndAvailabilityDetail(appointmentAndAvailabilityList);
@@ -692,22 +730,24 @@ public class BroadbandJourneyServiceAssembler {
 			}
 			response.setClassificationCode(classificationCodeList);
 		}
-		
+
 		response.setInstallationAddress(installationAddress);
 		if (CollectionUtils.isNotEmpty(getServiceAvailabilityResponse.getWarningErrorList())) {
-			List<ErrorInfo> warningMessagesList = broadbandMapper.mapWarningMessage(getServiceAvailabilityResponse.getWarningErrorList());
+			List<ErrorInfo> warningMessagesList = broadbandMapper
+					.mapWarningMessage(getServiceAvailabilityResponse.getWarningErrorList());
 			response.setWarningErrorList(warningMessagesList);
 		}
-		
-		
+
 		return response;
 	}
 
 	/**
 	 * Sets the line speed for broadband.
 	 *
-	 * @param serviceLines the service lines
-	 * @param packageName the package name
+	 * @param serviceLines
+	 *            the service lines
+	 * @param packageName
+	 *            the package name
 	 * @return LineSpeeds
 	 */
 
@@ -732,14 +772,18 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the appointment request.
 	 *
-	 * @param createAppointmentRequest the create appointment request
-	 * @param broadBand the broad band
-	 * @param userType the user type
+	 * @param createAppointmentRequest
+	 *            the create appointment request
+	 * @param broadBand
+	 *            the broad band
+	 * @param userType
+	 *            the user type
 	 * @return CreateAppointmentRequest
 	 */
 
 	public com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest createAppointmentRequest(
-			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand,String userType) {
+			com.vf.uk.dal.broadband.entity.CreateAppointmentRequest createAppointmentRequest, Broadband broadBand,
+			String userType) {
 		com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest request = new com.vf.uk.dal.broadband.entity.appointment.CreateAppointmentRequest();
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getLineReference() != null
 				&& broadBand.getServicePoint().getLineReference().getInstallationAddress() != null) {
@@ -788,13 +832,13 @@ public class BroadbandJourneyServiceAssembler {
 			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
-			
-			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+
+			if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
 				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.BUSINESS.toString());
-			
-			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
+
+			if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
 				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
-			
+
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
@@ -818,8 +862,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Sets the classification code in appointment request.
 	 *
-	 * @param broadBand the broad band
-	 * @param itemReference the item reference
+	 * @param broadBand
+	 *            the broad band
+	 * @param itemReference
+	 *            the item reference
 	 */
 	private static void setClassificationCodeInAppointmentRequest(Broadband broadBand,
 			com.vf.uk.dal.broadband.entity.appointment.ItemReference itemReference) {
@@ -848,8 +894,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the availability check response.
 	 *
-	 * @param response the response
-	 * @param broadBand the broad band
+	 * @param response
+	 *            the response
+	 * @param broadBand
+	 *            the broad band
 	 * @return the availability check response
 	 */
 	public AvailabilityCheckResponse createAvailabilityCheckResponse(AvailabilityCheckResponse response,
@@ -866,7 +914,16 @@ public class BroadbandJourneyServiceAssembler {
 
 			if (broadBand.getServicePoint().getServiceReference() != null) {
 				ServiceReference serviceReference = broadBand.getServicePoint().getServiceReference();
-				List<ServiceLines> serviceLinesList = serviceReference.getServiceLinesList();
+				List<ServiceLines> tempServiceLinesList = serviceReference.getServiceLinesList();
+				List<ServiceLines> serviceLinesList = new ArrayList<>();
+				for (ServiceLines serviceLine : tempServiceLinesList) {
+					if (!StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "Line")
+							&& !StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "ADSL")
+							&& !StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "Line And ADSL")) {
+						serviceLinesList.add(serviceLine);
+					}
+				}
+
 				List<String> classificationCodeList = new ArrayList<>();
 				for (ServiceLines sLines : serviceLinesList) {
 					classificationCodeList.add(sLines.getClassificationCode());
@@ -990,14 +1047,18 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the update cache request.
 	 *
-	 * @param broadband the broadband
-	 * @param basketRequest the basket request
-	 * @param broadbandId the broadband id
-	 * @param basket the basket
+	 * @param broadband
+	 *            the broadband
+	 * @param basketRequest
+	 *            the basket request
+	 * @param broadbandId
+	 *            the broadband id
+	 * @param basket
+	 *            the basket
 	 * @return the broadband
 	 */
-	public Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest,
-			String broadbandId, Basket basket) {
+	public Broadband createUpdateCacheRequest(Broadband broadband, BasketRequest basketRequest, String broadbandId,
+			Basket basket) {
 
 		LineDetails lineDetails = broadband.getLineDetails();
 
@@ -1005,15 +1066,15 @@ public class BroadbandJourneyServiceAssembler {
 			lineDetails = new LineDetails();
 		}
 		lineDetails.setClassificationCode(basketRequest.getSelectedPackageCode());
-		
+
 		BasketInfo basketInfo;
-		if(broadband.getBasketInfo() != null)
+		if (broadband.getBasketInfo() != null)
 			basketInfo = broadband.getBasketInfo();
-		else{
+		else {
 			basketInfo = new BasketInfo();
 			basketInfo.setAccountCategory(CustomerTypeEnum.CONSUMER.toString());
 		}
-		
+
 		if (basketRequest.getAddBundle() != null
 				&& StringUtils.isNotEmpty(basketRequest.getAddBundle().getBundleId())) {
 			basketInfo.setPlanId(basketRequest.getAddBundle().getBundleId());
@@ -1042,10 +1103,14 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the basket request.
 	 *
-	 * @param basketRequest the basket request
-	 * @param broadband the broadband
-	 * @param servicePoint the service point
-	 * @param journey the journey
+	 * @param basketRequest
+	 *            the basket request
+	 * @param broadband
+	 *            the broadband
+	 * @param servicePoint
+	 *            the service point
+	 * @param journey
+	 *            the journey
 	 * @return the creates the basket request
 	 */
 	public CreateBasketRequest createBasketRequest(BasketRequest basketRequest, Broadband broadband,
@@ -1053,7 +1118,7 @@ public class BroadbandJourneyServiceAssembler {
 		CreateBasketRequest createBasket = new CreateBasketRequest();
 		createBasket.setCustomerRequestedDate(basketRequest.getCustomerRequestedDate());
 		createBasket.setSource(basketRequest.getSource());
-		if(broadband!=null) {
+		if (broadband != null) {
 			createBasket.setAffiliateFlag(broadband.getIsAffiliate());
 		}
 		List<AddPackage> packages = new ArrayList<>();
@@ -1146,8 +1211,8 @@ public class BroadbandJourneyServiceAssembler {
 		}
 
 		List<AddProduct> services = new ArrayList<>();
-		
-		if(CollectionUtils.isNotEmpty(basketRequest.getServiceIds())){
+
+		if (CollectionUtils.isNotEmpty(basketRequest.getServiceIds())) {
 			for (String skuId : basketRequest.getServiceIds()) {
 				AddProduct addProductForServices = new AddProduct();
 				addProductForServices.setAction("ADD");
@@ -1155,15 +1220,14 @@ public class BroadbandJourneyServiceAssembler {
 				services.add(addProductForServices);
 			}
 		}
-		
-		else if(broadband != null && broadband.getEngineeringVisitCharge()!=null){
+
+		else if (broadband != null && broadband.getEngineeringVisitCharge() != null) {
 			AddProduct addProductForServices = new AddProduct();
 			addProductForServices.setAction("ADD");
 			addProductForServices.setSkuId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
 			services.add(addProductForServices);
 		}
-		
-		
+
 		addPackage.setServices(services);
 		return addPackage;
 	}
@@ -1171,8 +1235,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the update cache request.
 	 *
-	 * @param broadband the broadband
-	 * @param basketId the basket id
+	 * @param broadband
+	 *            the broadband
+	 * @param basketId
+	 *            the basket id
 	 * @return the broadband
 	 */
 	public Broadband createUpdateCacheRequest(Broadband broadband, String basketId) {
@@ -1183,14 +1249,18 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Update basket request.
 	 *
-	 * @param basketRequest the basket request
-	 * @param journey the journey
-	 * @param broadband the broadband
-	 * @param planId the plan id
+	 * @param basketRequest
+	 *            the basket request
+	 * @param journey
+	 *            the journey
+	 * @param broadband
+	 *            the broadband
+	 * @param planId
+	 *            the plan id
 	 * @return the update package
 	 */
-	public UpdatePackage updateBasketRequest(BasketRequest basketRequest, CurrentJourney journey,
-			Broadband broadband, String planId) {
+	public UpdatePackage updateBasketRequest(BasketRequest basketRequest, CurrentJourney journey, Broadband broadband,
+			String planId) {
 		UpdatePackage updatePackage = new UpdatePackage();
 		if (broadband.getBasketInfo() != null
 				&& StringUtils.isNotEmpty(broadband.getBasketInfo().getAccountCategory())) {
@@ -1235,7 +1305,8 @@ public class BroadbandJourneyServiceAssembler {
 
 		if (broadband.getEngineeringVisitCharge() != null
 				&& StringUtils.isNotEmpty(broadband.getEngineeringVisitCharge().getEngVisitProductId())
-				&& broadband.getLineDetails()!=null && StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
+				&& broadband.getLineDetails() != null
+				&& StringUtils.equalsIgnoreCase(broadband.getLineDetails().getLineTreatmentType(), "NEW")) {
 			List<UpdateService> services = new ArrayList<>();
 			UpdateService updateService = new UpdateService();
 			updateService.setProductLineId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
@@ -1249,10 +1320,14 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Sets the premise and service point request.
 	 *
-	 * @param servicePoint the service point
-	 * @param broadband the broadband
-	 * @param availabilityCheckRequest the availability check request
-	 * @param updateLineRequest the update line request
+	 * @param servicePoint
+	 *            the service point
+	 * @param broadband
+	 *            the broadband
+	 * @param availabilityCheckRequest
+	 *            the availability check request
+	 * @param updateLineRequest
+	 *            the update line request
 	 * @return the premise and service point
 	 */
 	public PremiseAndServicePoint setPremiseAndServicePointRequest(
@@ -1320,9 +1395,12 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Update broadband cache.
 	 *
-	 * @param broadband the broadband
-	 * @param updateLineRequest the update line request
-	 * @param broadbandId the broadband id
+	 * @param broadband
+	 *            the broadband
+	 * @param updateLineRequest
+	 *            the update line request
+	 * @param broadbandId
+	 *            the broadband id
 	 * @return the broadband
 	 */
 	public Broadband updateBroadbandCache(Broadband broadband, UpdateLineRequest updateLineRequest,
@@ -1341,7 +1419,8 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Adds the product request.
 	 *
-	 * @param broadband the broadband
+	 * @param broadband
+	 *            the broadband
 	 * @return the adds the product request
 	 */
 	public AddProductRequest addProductRequest(Broadband broadband) {
@@ -1359,9 +1438,12 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Adds the appointment info to broadband cache.
 	 *
-	 * @param broadBand the broad band
-	 * @param createAppointmentRequest the create appointment request
-	 * @param identificationId the identification id
+	 * @param broadBand
+	 *            the broad band
+	 * @param createAppointmentRequest
+	 *            the create appointment request
+	 * @param identificationId
+	 *            the identification id
 	 * @return the broadband
 	 */
 	public Broadband addAppointmentInfoToBroadbandCache(Broadband broadBand,
@@ -1392,8 +1474,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Update basket with appointment request.
 	 *
-	 * @param createAppointmentRequest the create appointment request
-	 * @param applicationId the application id
+	 * @param createAppointmentRequest
+	 *            the create appointment request
+	 * @param applicationId
+	 *            the application id
 	 * @return the com.vf.uk.dal.broadband.basket.entity. appointment window
 	 */
 	public com.vf.uk.dal.broadband.basket.entity.AppointmentWindow updateBasketWithAppointmentRequest(
@@ -1420,7 +1504,8 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Update broadband cache with line directory info.
 	 *
-	 * @param broadband the broadband
+	 * @param broadband
+	 *            the broadband
 	 * @return the service point
 	 */
 	public ServicePoint updateBroadbandCacheWithLineDirectoryInfo(Broadband broadband) {
@@ -1440,11 +1525,13 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Gets the appointment request.
 	 *
-	 * @param broadBand the broad band
-	 * @param userType the user type
+	 * @param broadBand
+	 *            the broad band
+	 * @param userType
+	 *            the user type
 	 * @return the appointment request
 	 */
-	public GetAppointmentRequest getAppointmentRequest(Broadband broadBand,String userType) {
+	public GetAppointmentRequest getAppointmentRequest(Broadband broadBand, String userType) {
 
 		GetAppointmentRequest request = new GetAppointmentRequest();
 		if (broadBand.getServicePoint() != null && broadBand.getServicePoint().getServiceReference() != null
@@ -1495,13 +1582,13 @@ public class BroadbandJourneyServiceAssembler {
 			setClassificationCodeInAppointmentRequest(broadBand, itemReference);
 			serviceRequest.setItemReference(itemReference);
 			CustomerPartyReference customerPartyRef = new CustomerPartyReference();
-			
-			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
+
+			if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString()))
 				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.BUSINESS.toString());
-			
-			if(StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
+
+			if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.CONSUMER.toString()))
 				customerPartyRef.setCustomerPartyAccountTypeCode(CustomerTypeEnum.INDIVIDUAL.toString());
-			
+
 			serviceRequest.setCustomerPartyReference(customerPartyRef);
 			appointmentDetails.setServiceRequest(serviceRequest);
 			AppointmentWindow appointmentWindow = new AppointmentWindow();
@@ -1517,7 +1604,8 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Gets the start time period from line treatment.
 	 *
-	 * @param broadBand the broad band
+	 * @param broadBand
+	 *            the broad band
 	 * @return the start time period from line treatment
 	 */
 	private static String getStartTimePeriodFromLineTreatment(Broadband broadBand) {
@@ -1526,15 +1614,15 @@ public class BroadbandJourneyServiceAssembler {
 				.getServiceReference().getServiceLinesList()) {
 			if (StringUtils.equalsIgnoreCase(serLines.getClassificationCode(),
 					broadBand.getLineDetails().getClassificationCode())) {
-			if (CollectionUtils.isNotEmpty(serLines.getLineTreatments())) {
-				for (LineTreatment lineTreatment : serLines.getLineTreatments()) {
-					if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
-							broadBand.getLineDetails().getLineTreatmentType())) {
-						startTimePeriod = CommonUtility.getFormattedDate(lineTreatment.getEarliestAvailableDate(),
-								BroadBandConstant.DATE_PATTERN4, BroadBandConstant.DATE_PATTERN3);
+				if (CollectionUtils.isNotEmpty(serLines.getLineTreatments())) {
+					for (LineTreatment lineTreatment : serLines.getLineTreatments()) {
+						if (StringUtils.equalsIgnoreCase(lineTreatment.getLineTreatmentType(),
+								broadBand.getLineDetails().getLineTreatmentType())) {
+							startTimePeriod = CommonUtility.getFormattedDate(lineTreatment.getEarliestAvailableDate(),
+									BroadBandConstant.DATE_PATTERN4, BroadBandConstant.DATE_PATTERN3);
+						}
 					}
 				}
-			}
 			}
 		}
 		return startTimePeriod;
@@ -1543,7 +1631,8 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the get appointment response.
 	 *
-	 * @param getAppointmentResponse the get appointment response
+	 * @param getAppointmentResponse
+	 *            the get appointment response
 	 * @return the gets the appointment response
 	 */
 	public GetAppointmentResponse createGetAppointmentResponse(GetAppointment getAppointmentResponse) {
@@ -1566,8 +1655,10 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the promotion request to optimize.
 	 *
-	 * @param broadband the broadband
-	 * @param journeyName the journey name
+	 * @param broadband
+	 *            the broadband
+	 * @param journeyName
+	 *            the journey name
 	 * @return the bundle promotion request
 	 */
 	public BundlePromotionRequest createPromotionRequestToOptimize(Broadband broadband, String journeyName) {
@@ -1582,7 +1673,8 @@ public class BroadbandJourneyServiceAssembler {
 	/**
 	 * Creates the service start date request.
 	 *
-	 * @param serviceStartDate the service start date
+	 * @param serviceStartDate
+	 *            the service start date
 	 * @return the service start date request
 	 */
 	public ServiceStartDateRequest createServiceStartDateRequest(
@@ -1596,10 +1688,10 @@ public class BroadbandJourneyServiceAssembler {
 			BasketServicePoint basketServicePoint, CurrentJourney journey) {
 		return addPackageToBasket(basketRequest, broadbandCache, basketServicePoint, journey);
 	}
-	
-	public Service getServiceDetails(Basket basket){
-		List<List<Service>> services = basket.getPackages().stream()
-				.map(pack -> pack.getServices()).collect(Collectors.toList());
+
+	public Service getServiceDetails(Basket basket) {
+		List<List<Service>> services = basket.getPackages().stream().map(pack -> pack.getServices())
+				.collect(Collectors.toList());
 		if (CollectionUtils.isNotEmpty(services)) {
 			for (List<Service> service : services) {
 				for (Service ser : service) {
@@ -1635,7 +1727,7 @@ public class BroadbandJourneyServiceAssembler {
 		}
 		bundleAndHarwarePriceRequest.setBundleAndHardwareList(bundleAndHardwareList);
 		bundleAndHarwarePriceRequest.setPackageType(journeyType);
-	
+
 		return bundleAndHarwarePriceRequest;
 	}
 
