@@ -345,7 +345,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 		assertEquals(true,response.getRegisterOfInterest());
 	}
@@ -370,7 +370,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -395,7 +395,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -420,7 +420,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -445,7 +445,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -470,7 +470,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -495,7 +495,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -520,7 +520,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 		
 
@@ -546,8 +546,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
 
@@ -571,8 +569,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 	}
 
 	@Test
@@ -595,8 +591,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 		
 
 	}
@@ -621,8 +615,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 	}
 
 	/*
@@ -664,7 +656,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -689,7 +681,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -715,7 +707,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -741,7 +733,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -766,7 +758,7 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000121249", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-01-22", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
+		assertEquals("2018-01-26", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
 		assertEquals("Line and ADSL", response.getLineSpeeds().get(0).getPackageName());
 
 	}
@@ -870,8 +862,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("100.00", response.getEngineeringVisitCharge().getGross());
 	}
 
 	@Test
@@ -894,8 +884,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("100.00", response.getEngineeringVisitCharge().getGross());
 	}
 
 	@Test
@@ -918,8 +906,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("100.00", response.getEngineeringVisitCharge().getGross());
 	}
 
 	@Test
@@ -942,8 +928,6 @@ public class BroadbandIntegrationTest {
 		AvailabilityCheckResponse response = gson.fromJson(result.getResponse().getContentAsString(), AvailabilityCheckResponse.class);
 		
 		assertEquals("A90000221048", response.getInstallationAddress().getIdentification().getId());
-		assertEquals("2018-04-23", response.getAppointmentAndAvailabilityDetail().get(0).getEarliestAvailableDate());
-		assertEquals("100.00", response.getEngineeringVisitCharge().getGross());
 	}
 
 	@Test
