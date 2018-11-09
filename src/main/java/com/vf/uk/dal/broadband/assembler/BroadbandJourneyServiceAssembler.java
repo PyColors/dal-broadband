@@ -1229,6 +1229,10 @@ public class BroadbandJourneyServiceAssembler {
 		}
 
 		addPackage.setServices(services);
+		addPackage.setLinePackageType(basketRequest.getSelectedPackageCode());
+		if(broadband != null && StringUtils.equalsIgnoreCase(broadband.getCategoryPreference(), "FTTH")){
+			addPackage.setLineTreatmentType("NEW");
+		}
 		return addPackage;
 	}
 
