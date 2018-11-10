@@ -692,6 +692,9 @@ public class BroadbandServiceImpl implements BroadbandService {
 				Link lineTypeLink = ControllerLinkBuilder.linkTo(methodLinkBuilderLineType).withRel("line-type")
 						.withType("PUT");
 				broadbandDao.updatePackage(updatePackageRequest, basketRequest.getPackageId(), basketId);
+				AddProductRequest addProductRequest = broadbandJourneyServiceAssembler.addProductRequest(broadband);
+				broadbandDao.updateBasketWithServiceId(addProductRequest, broadband.getBasketId(),
+						broadband.getBasketInfo().getPackageId());
 				basket = broadbandDao.getBasket(basketId);
 				basket.add(CommonUtility.formatLink(lineTypeLink));
 			} else{

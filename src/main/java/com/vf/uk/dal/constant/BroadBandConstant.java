@@ -53,7 +53,7 @@ public class BroadBandConstant {
 	public static final String DATE_PATTERN4 = "yyyy-MM-dd";
 
 	/** The Constant FTTC_SUB_CLASSIFICATIONCODE. */
-	public static final String FTTC_SUB_CLASSIFICATIONCODE = "Generic Ethernet Access";
+	public static final String FTTC_SUB_CLASSIFICATIONCODE = "FTTC Sim2";
 
 	/** The Constant FTTC_ITEM_REFERENCE_CODE. */
 	public static final String FTTC_ITEM_REFERENCE_CODE = "NGAFTTC";
