@@ -2,7 +2,6 @@ package com.vf.uk.dal.broadband.controller.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doThrow;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +77,9 @@ public class BroadbandControllerTest {
 
 	@Before
 	public void setupMockBehaviour() throws Exception {
+		String getBroadbandCacheResponse = new String(FileUtility.readFile("\\rest-mock\\BroadbandCacheResponse.json"));
+		Broadband broadbandCacheResponse = new ObjectMapper().readValue(getBroadbandCacheResponse, Broadband.class);
+		Mockito.when(broadbandService.getBroadbandFromCache(Mockito.anyString())).thenReturn(broadbandCacheResponse);
 
 	}
 
@@ -147,9 +149,6 @@ public class BroadbandControllerTest {
 
 	@Test
 	public void testBroadbandFromCache() throws Exception {
-		String getBroadbandCacheResponse = new String(FileUtility.readFile("\\rest-mock\\BroadbandCacheResponse.json"));
-		Broadband broadbandCacheResponse = new ObjectMapper().readValue(getBroadbandCacheResponse, Broadband.class);
-		Mockito.when(broadbandService.getBroadbandFromCache(Mockito.anyString())).thenReturn(broadbandCacheResponse);
 		Broadband response = broadBandController.getBroadbandInfo("12345678907888");
 		assertEquals("2b23e0a1-eefd-409c-a919-e0ca774b9017", response.getBasketId());
 		assertEquals("12345678907888", response.getBroadBandId());
@@ -358,8 +357,7 @@ public class BroadbandControllerTest {
 		serviceStartDateRequest.setRemoveFromPhoneDirectory(false);
 		thrown.expect(BroadbandJourneyCustomException.class);
 		thrown.expectMessage("Invalid BroadBand Id sent in the Request");
-		broadBandController.serviceStartDate("1234", serviceStartDateRequest,
-				null, false);
+		broadBandController.serviceStartDate("1234", serviceStartDateRequest, null, false);
 	}
 
 }

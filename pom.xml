@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -9,10 +10,29 @@
 	<packaging>jar</packaging>
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<swaggerVersion>11.1.4</swaggerVersion>
+		<map.strut.version>1.2.0.Final</map.strut.version>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<springfox-version>2.9.2</springfox-version>
+		<spring-cloud-dependencies.version>2.0.2.RELEASE</spring-cloud-dependencies.version>
+		<sonar.coverage.exclusions>
+			**/entity/**,
+			**/config/**,
+			**/BroadbandApplication.java,
+			**/constant/**,
+			**/exception/**,
+			**/BroadbandRepoProvider.java
+		</sonar.coverage.exclusions>
+	</properties>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.10.RELEASE</version>
+		<version>2.0.6.RELEASE</version>
 	</parent>
 	<build>
 		<plugins>
@@ -141,16 +161,19 @@
 		</dependency>
 		<!-- Dependencies for redis cache -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-redis</artifactId> 
+			</dependency> <dependency> <groupId>biz.paluch.redis</groupId> <artifactId>lettuce</artifactId> 
+			<version>4.4.3.Final</version> </dependency> -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>2.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>biz.paluch.redis</groupId>
-			<artifactId>lettuce</artifactId>
-			<version>4.4.3.Final</version>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<version>5.1.1.RELEASE</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
@@ -173,8 +196,9 @@
 
 		<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
 		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.netflix.archaius/archaius-core -->
@@ -193,23 +217,18 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-netflix</artifactId>
+				<version>${spring-cloud-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<swaggerVersion>11.1.4</swaggerVersion>
-		<map.strut.version>1.2.0.Final</map.strut.version>
-		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-		<springfox-version>2.6.1</springfox-version>
-		<sonar.coverage.exclusions>
-			**/entity/**,
-			**/config/**,
-			**/BroadbandApplication.java,
-			**/constant/**,
-			**/exception/**,
-			**/BroadbandRepoProvider.java
-		</sonar.coverage.exclusions>
-	</properties>
 	<repositories>
 		<repository>
 			<id>maven2</id>

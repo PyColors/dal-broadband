@@ -1,14 +1,17 @@
 package com.vf.uk.dal.broadband.cache.redis.config;
 
+import java.time.Duration;
 import java.util.Collections;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisNode;
+import org.springframework.data.redis.connection.RedisStaticMasterReplicaConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.convert.KeyspaceConfiguration;
@@ -19,11 +22,12 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.lambdaworks.redis.resource.ClientResources;
-import com.lambdaworks.redis.resource.DefaultClientResources;
-import com.lambdaworks.redis.resource.DnsResolvers;
 import com.vf.uk.dal.broadband.cache.redis.config.RedisCacheConfiguration.BroadbandKeyspaceConfiguration;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
+
+import io.lettuce.core.resource.ClientResources;
+import io.lettuce.core.resource.DefaultClientResources;
+import io.lettuce.core.resource.DnsResolvers;
 
 /**
  * The Class RedisCacheConfiguration.
@@ -61,29 +65,29 @@ public class RedisCacheConfiguration {
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		
-		LettuceConnectionFactory connectionFactory = null;
-		if (clusterProperties.isEnabled() && CollectionUtils.isNotEmpty(clusterProperties.getNodes())) {
-			RedisClusterConfiguration clusterConfig = new RedisClusterConfiguration();
-			clusterProperties.getNodes().forEach(a -> {
-				String[] nodeDetails = a.split(":");
-				RedisNode redisNode = new RedisNode(nodeDetails[0], Integer.valueOf(nodeDetails[1]));
-				clusterConfig.addClusterNode(redisNode);
-			});
-			clusterConfig.setMaxRedirects(clusterProperties.getMaxRedirects());
-			connectionFactory= new LettuceConnectionFactory(clusterConfig);
-		}else {
-			connectionFactory= new LettuceConnectionFactory(redisCacheProperties.getHost(),
-					redisCacheProperties.getPort());
-		}
-		
-		connectionFactory.setPassword(redisCacheProperties.getPassword());
-		connectionFactory.setTimeout(redisCacheProperties.getTimeout());
-		connectionFactory.setUseSsl(redisCacheProperties.getSsl());
-
-		connectionFactory.setClientResources(clientResources());
-
-		connectionFactory.afterPropertiesSet();
-		return connectionFactory;
+		 LettuceConnectionFactory connectionFactory = null;
+	        LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
+	                .useSsl().disablePeerVerification().and().clientResources(clientResources())
+	                .commandTimeout(Duration.ofSeconds(3))
+	                .shutdownTimeout(Duration.ZERO)
+	                .build();
+	        if (clusterProperties.isEnabled() && CollectionUtils.isNotEmpty(clusterProperties.getNodes())) {
+	            RedisClusterConfiguration clusterConfig = new RedisClusterConfiguration();
+	            clusterProperties.getNodes().forEach(a -> {
+	                String[] nodeDetails = a.split(":");
+	                RedisNode redisNode = new RedisNode(nodeDetails[0], Integer.valueOf(nodeDetails[1]));
+	                clusterConfig.addClusterNode(redisNode);
+	            });
+	            clusterConfig.setMaxRedirects(clusterProperties.getMaxRedirects());
+	            connectionFactory = new LettuceConnectionFactory(clusterConfig);
+	        } else {
+	            RedisStaticMasterReplicaConfiguration redisStaticMasterReplicaConfiguration =
+	                    new RedisStaticMasterReplicaConfiguration(redisCacheProperties.getHost(), Integer.valueOf(redisCacheProperties.getPort()));
+	            redisStaticMasterReplicaConfiguration.setPassword(redisCacheProperties.getPassword());
+	            connectionFactory = new LettuceConnectionFactory(redisStaticMasterReplicaConfiguration, clientConfig);
+	        }
+	        connectionFactory.afterPropertiesSet();
+	        return connectionFactory;
 	}
 
 	/**
