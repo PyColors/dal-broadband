@@ -110,7 +110,6 @@ public class BroadbandServiceImplTest {
 				"123456789078", null, "CONSUMER");
 		assertEquals("LS29 0JJ", respActual.getInstallationAddress().getPostCode());
 		assertEquals("A90000121249", respActual.getInstallationAddress().getIdentification().getId());
-		assertEquals("60", respActual.getEngineeringVisitCharge().getGross());
 	}
 
 	

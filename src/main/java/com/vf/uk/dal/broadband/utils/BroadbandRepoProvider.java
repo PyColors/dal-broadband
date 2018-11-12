@@ -1,5 +1,7 @@
 package com.vf.uk.dal.broadband.utils;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -35,7 +37,9 @@ public class BroadbandRepoProvider {
 	 * @return the broadband from cache
 	 */
 	public Broadband getBroadbandFromCache(String broadBandSessionId) {
-		return broadbandRepository.findOne(broadBandSessionId);
+		
+		Optional<Broadband> optionalBroadbandJourney = broadbandRepository.findById(broadBandSessionId);
+		return optionalBroadbandJourney.isPresent() ? optionalBroadbandJourney.get() : null;
 	}
 	
 	
