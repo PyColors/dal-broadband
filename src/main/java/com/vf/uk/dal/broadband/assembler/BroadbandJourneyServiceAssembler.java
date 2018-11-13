@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -308,7 +308,12 @@ public class BroadbandJourneyServiceAssembler {
 						lineDirectory.setDirectoryCode("ORDINARY");
 					}
 					lineDirectory.setFeatureCode("MAINLINE_DIRECTORY");
-					lineDirectory.setLocationCode("INDIVIDUAL");
+					if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString())){
+						lineDirectory.setLocationCode("BUSINESS");
+					}else{
+						lineDirectory.setLocationCode("INDIVIDUAL");
+					}
+					
 					lineDirectoryList.add(lineDirectory);
 				}
 			} else {
@@ -318,7 +323,11 @@ public class BroadbandJourneyServiceAssembler {
 					lineDirectory.setDirectoryCode("ORDINARY");
 				}
 				lineDirectory.setFeatureCode("MAINLINE_DIRECTORY");
-				lineDirectory.setLocationCode("INDIVIDUAL");
+				if (StringUtils.equalsIgnoreCase(userType, CustomerTypeEnum.BUSINESS.toString())){
+					lineDirectory.setLocationCode("BUSINESS");
+				}else{
+					lineDirectory.setLocationCode("INDIVIDUAL");
+				}
 				lineDirectoryList.add(lineDirectory);
 			}
 			lineRefernce.setLineDirectoryList(lineDirectoryList);
@@ -1221,7 +1230,7 @@ public class BroadbandJourneyServiceAssembler {
 			}
 		}
 
-		else if (broadband != null && broadband.getEngineeringVisitCharge() != null) {
+		else if (broadband != null && broadband.getEngineeringVisitCharge() != null && StringUtils.equalsIgnoreCase(broadband.getCategoryPreference(), "FTTH")) {
 			AddProduct addProductForServices = new AddProduct();
 			addProductForServices.setAction("ADD");
 			addProductForServices.setSkuId(broadband.getEngineeringVisitCharge().getEngVisitProductId());
