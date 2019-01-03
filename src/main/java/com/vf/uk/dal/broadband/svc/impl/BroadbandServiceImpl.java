@@ -548,8 +548,8 @@ public class BroadbandServiceImpl implements BroadbandService {
 	}
 
 	private void setSelectedPlanInPlansResponse(Broadband broadBand, FlbBundle flbBundle) {
-		if (broadBand != null && broadBand.getLineDetails() != null && StringUtils.equalsIgnoreCase(
-				flbBundle.getClassificationCode(), broadBand.getLineDetails().getClassificationCode())) {
+		if (broadBand != null && broadBand.getBasketInfo() != null && StringUtils.equalsIgnoreCase(
+				flbBundle.getSkuId(), broadBand.getBasketInfo().getPlanId())) {
 			flbBundle.setIsSelected(true);
 		}
 	}
