@@ -167,7 +167,7 @@ public class BroadbandServiceImplTest {
 		
 		assertEquals( "Home Broadband - Unlimited Fibre 38 and Phone - FTR4 -18 m" , flbBundleList.get(0).getBundleName());
 		assertEquals( "Line and ADSL" , flbBundleList.get(0).getClassificationCode());
-		assertEquals( true, flbBundleList.get(0).getIsSelected());
+		assertEquals( false, flbBundleList.get(0).getIsSelected());
 		
 	}
 	
