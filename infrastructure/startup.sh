@@ -11,4 +11,4 @@ else
    JAVA_OPTS="-Xmx${XMX} -Xms${XMS}"
 fi
 
-java $JAVA_OPTS -jar /apps/sb/${MSNAME}-svc-${VERSION}.jar
+java $JAVA_OPTS -jar /apps/sb/${MSNAME}-svc-${VERSION}.jar 

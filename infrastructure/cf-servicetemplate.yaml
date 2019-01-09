@@ -164,7 +164,7 @@ Resources:
             - Name: Environment
               Value: !Ref Environment
             - Name: AppDEnv
-              Value: !Ref AppDEnv  
+              Value: !Ref AppDEnv 
             - Name: XMS
               Value: !Ref 'XMS'
             - Name: XMX
