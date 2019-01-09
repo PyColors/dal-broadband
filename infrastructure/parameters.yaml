@@ -50,6 +50,9 @@
 - 
   ParameterKey: AppDFlag
   ParameterValue: "${APPDFLAG}"
+-
+  ParameterKey: AppDEnv
+  ParameterValue: "${APPDENV}"
 - 
   ParameterKey: XMS
   ParameterValue: "${XMS}"
