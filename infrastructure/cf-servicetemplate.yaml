@@ -53,6 +53,9 @@ Parameters:
   AppDFlag:
     Description: AppD True or False
     Type: String
+  AppDEnv:
+   Description: The name of the App Dynamics environment that is being deployed to.
+   Type: String
   XMS:
     Description: XMS Value
     Type: String
@@ -158,6 +161,10 @@ Resources:
               Value: !Ref 'AppDKey'
             - Name: AppDFlag
               Value: !Ref 'AppDFlag'
+            - Name: Environment
+              Value: !Ref Environment
+            - Name: AppDEnv
+              Value: !Ref AppDEnv 
             - Name: XMS
               Value: !Ref 'XMS'
             - Name: XMX

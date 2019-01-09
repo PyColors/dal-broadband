@@ -44,12 +44,15 @@
 - 
   ParameterKey: AppDPort
   ParameterValue: "${APPDPORT}"
-- 
+-
   ParameterKey: AppDKey
   ParameterValue: "${APPDKEY}"
 - 
   ParameterKey: AppDFlag
   ParameterValue: "${APPDFLAG}"
+-
+  ParameterKey: AppDEnv
+  ParameterValue: "${APPDENV}"
 - 
   ParameterKey: XMS
   ParameterValue: "${XMS}"
