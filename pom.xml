@@ -6,7 +6,7 @@
 
 	<groupId>com.vf.uk.dal</groupId>
 	<artifactId>dal-broadband-svc</artifactId>
-	<version>11.3.2</version>
+	<version>11.3.3</version>
 	<packaging>jar</packaging>
 	<name>dal-broadband-svc</name>
 	<description>Micro Service of Broadband Service</description>
@@ -176,6 +176,10 @@
 				<exclusion>
 					<artifactId>log4j-over-slf4j</artifactId>
 					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jackson-dataformat-xml</artifactId>
+					<groupId>com.fasterxml.jackson.dataformat</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
