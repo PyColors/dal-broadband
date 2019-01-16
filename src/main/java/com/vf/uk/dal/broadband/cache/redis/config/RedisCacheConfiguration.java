@@ -20,7 +20,6 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.vf.uk.dal.broadband.cache.redis.config.RedisCacheConfiguration.BroadbandKeyspaceConfiguration;
 import com.vf.uk.dal.broadband.cache.repository.entity.Broadband;
@@ -90,16 +89,6 @@ public class RedisCacheConfiguration {
 	        return connectionFactory;
 	}
 
-	/**
-	 * Object mapper.
-	 *
-	 * @return the object mapper
-	 */
-	@Bean
-	public ObjectMapper objectMapper() {
-		return Jackson2ObjectMapperBuilder.json().featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // ISODate
-				.build();
-	}
 
 	/**
 	 * Redis template.
@@ -112,9 +101,9 @@ public class RedisCacheConfiguration {
 		redisTemplate.setConnectionFactory(redisConnectionFactory());
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper()));
-		// redisTemplate.setHashValueSerializer(new
-		// GenericJackson2JsonRedisSerializer(objectMapper()));
+		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer(Jackson2ObjectMapperBuilder.json().featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) // ISODate
+				.build()));
+		
 		redisTemplate.afterPropertiesSet();
 
 		return redisTemplate;
