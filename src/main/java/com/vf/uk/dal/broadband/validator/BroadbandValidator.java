@@ -14,11 +14,13 @@ import com.vf.uk.dal.broadband.entity.ServiceStartDateRequest;
 import com.vf.uk.dal.broadband.entity.UpdateLineRequest;
 import com.vf.uk.dal.broadband.exception.BroadbandJourneyCustomException;
 import com.vf.uk.dal.broadband.exception.ExceptionMessages;
-import com.vf.uk.dal.common.logger.LogHelper;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Class BroadbandValidator.
  */
+@Slf4j
 public class BroadbandValidator {
 
 	/**
@@ -39,37 +41,34 @@ public class BroadbandValidator {
 	public static void isBasketCreateOrUpdateRequestValid(BasketRequest basketRequest, Broadband broadband) {
 
 		if (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getSource())) {
-			LogHelper.error(BroadbandValidator.class, "Source cannot be null while creating or updating package");
+			log.error("Source cannot be null while creating or updating package");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_SOURCE_CODE,
 					ExceptionMessages.EMPTY_SOURCE, "400");
 		}
 
 		if (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getCustomerRequestedDate())) {
-			LogHelper.error(BroadbandValidator.class,
-					"Customer Requested date cannot be null while creating or updating package");
+			log.error("Customer Requested date cannot be null while creating or updating package");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.CUSTOMER_REQUESTED_DATE,
 					ExceptionMessages.EMPTY_CUSTOMER_REQUESTED_DATE, "400");
 		}
 
 		if (broadband != null && org.apache.commons.lang.StringUtils.isNotEmpty(broadband.getBasketId()) && broadband.getBasketInfo()!=null) {
 			if (org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getPackageId())) {
-				LogHelper.error(BroadbandValidator.class, "Package Id cannot be empty while updating");
+				log.error("Package Id cannot be empty while updating");
 				throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_PACKAGE_ID,
 						ExceptionMessages.PACKAGE_ID_EMPTY, "400");
 			}
 			if (basketRequest.getAddBundle() != null && (org.apache.commons.lang.StringUtils
 					.isEmpty(basketRequest.getAddBundle().getPackageLineId())
 					|| org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddBundle().getBundleId()))) {
-				LogHelper.error(BroadbandValidator.class,
-						"Bundle Id and Package line id of bundle cannot be null while updating");
+				log.error("Bundle Id and Package line id of bundle cannot be null while updating");
 				throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_BUNDLE_ID_CODE,
 						ExceptionMessages.BUNDLE_ID_EMPTY, "400");
 			}
 			if (basketRequest.getAddHardware() != null && (org.apache.commons.lang.StringUtils
 					.isEmpty(basketRequest.getAddHardware().getPackageLineId())
 					|| org.apache.commons.lang.StringUtils.isEmpty(basketRequest.getAddHardware().getHardwareId()))) {
-				LogHelper.error(BroadbandValidator.class,
-						"hardware Id and Package line id of bundle cannot be null while updating");
+				log.error("hardware Id and Package line id of bundle cannot be null while updating");
 				throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_HARDWARE_ID_CODE,
 						ExceptionMessages.HARDWARE_ID_EMPTY, "400");
 			}
@@ -85,8 +84,7 @@ public class BroadbandValidator {
 	 */
 	public static void isUpdateLineTreatmentRequestValid(UpdateLineRequest updateLineRequest) {
 		if (StringUtils.isEmpty(updateLineRequest.getLineTreatmentType())) {
-			LogHelper.error(BroadbandValidator.class,
-					"Line Treatment Type cannot be null whule updating the basket for line treatment type");
+			log.error("Line Treatment Type cannot be null whule updating the basket for line treatment type");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_LINE_TREATMENT_TYPE,
 					ExceptionMessages.LINE_TREATEMENT_TYPE_EMPTY, "400");
 		}
@@ -102,7 +100,7 @@ public class BroadbandValidator {
 	public static void isCreateAppointmentRequestValid(CreateAppointmentRequest createAppointmentRequest) {
 		if (StringUtils.isEmpty(createAppointmentRequest.getStartTimePeriod())
 				|| StringUtils.isEmpty(createAppointmentRequest.getTimeSlot())) {
-			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
+			log.error("Start time date cannot be empty");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_START_DATE,
 					ExceptionMessages.START_DATE_EMPTY, "400");
 		}
@@ -124,12 +122,12 @@ public class BroadbandValidator {
 				formatter.parse(serviceStartDateRequest.getStartDateTime());
 				isValidStartDate = true;
 			} catch (ParseException exception) {
-				LogHelper.error(BroadbandValidator.class, exception.getMessage());
+				log.error(exception.getMessage());
 				throw new BroadbandJourneyCustomException(ExceptionMessages.INVALID_DATE_FORMAT,
 						ExceptionMessages.INVALID_INPUT_INCORRECT_DATE_FORMAT, "400");
 			}
 		} else {
-			LogHelper.error(BroadbandValidator.class, "Start time date cannot be empty");
+			log.error("Start time date cannot be empty");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.EMPTY_START_TIME,
 					ExceptionMessages.START_DATE_EMPTY, "400");
 		}
@@ -152,7 +150,7 @@ public class BroadbandValidator {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 			formattedDate = formatter.format(ts);
 		} catch (ParseException e) {
-			LogHelper.error(BroadbandValidator.class, e.getMessage());
+			log.error(e.getMessage());
 			throw new BroadbandJourneyCustomException(ExceptionMessages.INVALID_DATE_FORMAT,
 					ExceptionMessages.INVALID_INPUT_INCORRECT_DATE_FORMAT, "400");
 		}

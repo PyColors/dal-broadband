@@ -82,11 +82,12 @@ import com.vf.uk.dal.broadband.utils.CommonUtility;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 import com.vf.uk.dal.common.configuration.ConfigHelper;
 import com.vf.uk.dal.common.exception.ApplicationException;
-import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.CustomerTypeEnum;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
 import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Class BroadbandServiceImpl.
@@ -94,6 +95,7 @@ import com.vf.uk.dal.entity.serviceavailability.ServiceLines;
  * @author Infosys Limited.
  */
 @Component("broadbandService")
+@Slf4j
 public class BroadbandServiceImpl implements BroadbandService {
 
 	/** The Constant CATEGORY_PREFERENCE_FTTH. */
@@ -152,12 +154,12 @@ public class BroadbandServiceImpl implements BroadbandService {
 			GetServiceAvailibilityResponse getServiceAvailabilityResponse = broadbandDao
 					.getServiceAvailability(availabilityCheckRequest, userType);
 			if (getServiceAvailabilityResponse == null) {
-				LogHelper.error(this, "Invalid classification code !!!");
+				log.error("Invalid classification code !!!");
 				throw new ApplicationException(ExceptionMessages.EMPTY_GSA_RESPONSE);
 			} else if (getServiceAvailabilityResponse.getServiceAvailabilityLine() != null
 					&& !getServiceAvailabilityResponse.getServiceAvailabilityLine().isEmpty()
 					&& getServiceAvailabilityResponse.getServiceAvailabilityLine().get(0).getServiceLines() == null) {
-				LogHelper.error(this, "No Service Lines Recieved From TIL !!!");
+				log.error("No Service Lines Recieved From TIL !!!");
 				throw new ApplicationException(ExceptionMessages.INVALID_SERVICE_LINE);
 
 			}
@@ -214,7 +216,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 				response = broadbandJourneyServiceAssembler.createAvailabilityCheckResponse(response,
 						getServiceAvailabilityResponse, availabilityCheckRequest, productDetailsList);
 			} else {
-				LogHelper.error(this, "Invalid classification code !!!");
+				log.error("Invalid classification code !!!");
 				throw new ApplicationException("INVALID_CLASSIFICATION_CODE");
 			}
 		}
@@ -354,7 +356,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 	@Override
 	public List<FlbBundle> getFlbList(GetBundleListSearchCriteria getBundleListSearchCriteria) {
-		LogHelper.debug(getClass(), "Enter getBundleListBySearchCriteria");
+		log.debug("Enter getBundleListBySearchCriteria");
 		BundleDetails bundleDetails = null;
 		List<FlbBundle> listOfFlbBundle = new ArrayList<>();
 		String userType = getBundleListSearchCriteria.getUserType();
@@ -776,7 +778,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 	 */
 	@Override
 	public Broadband getBroadbandFromCache(String broadbandId) {
-		LogHelper.info(getClass(), "Retrieveing Data from BB Cache : " + broadbandId);
+		log.info("Retrieveing Data from BB Cache : " + broadbandId);
 		return broadbandDao.getBroadbandFromCache(broadbandId);
 	}
 
@@ -950,7 +952,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			broadbandDao.setBroadBandInCache(broadband);
 			response.setApplicationId(createAppointment.getAppointmentWindow().getApplicationId());
 		} else {
-			LogHelper.error(this, "Create Appointment failed!!!");
+			log.error("Create Appointment failed!!!");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.CREATE_APPOINTMENT_FAILED_CODE,
 					ExceptionMessages.CREATE_APPOINTMENT_FAILED, "400");
 		}
@@ -1164,7 +1166,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 		Broadband broadband = broadbandDao.getBroadbandFromCache(broadbandId);
 
 		if (broadband == null) {
-			LogHelper.error(this, "Invalid Broadband Id !!!");
+			log.error("Invalid Broadband Id !!!");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.INVALID_BROADBAND_ID_CODE,
 					ExceptionMessages.INVALID_BROADBAND_ID, "400");
 		}
@@ -1326,7 +1328,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 			return enhanceCompatibleExtraResponse;
 
 		} else {
-			LogHelper.error(this, "GetCompatibleExtras failed!!!");
+			log.error("GetCompatibleExtras failed!!!");
 			throw new BroadbandJourneyCustomException(ExceptionMessages.GET_COMPATIBLE_FAILED_CODE,
 					ExceptionMessages.GET_COMPATIBLE_FAILED, "400");
 		}
