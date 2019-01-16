@@ -14,12 +14,14 @@ import org.springframework.web.client.RestClientResponseException;
 import com.vf.uk.dal.authorization.filter.util.exception.AuthorizationException;
 import com.vf.uk.dal.common.context.ServiceContext;
 import com.vf.uk.dal.common.exception.ErrorResponse;
-import com.vf.uk.dal.common.logger.LogHelper;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Class RestErrorHandler.
  */
 @ControllerAdvice
+@Slf4j
 public class RestErrorHandler {
 
 	@ExceptionHandler
@@ -68,7 +70,7 @@ public class RestErrorHandler {
 		try {
 			jsonError = (JSONObject) parser.parse(err.getResponseBodyAsString());
 		} catch (org.json.simple.parser.ParseException pe) {
-			LogHelper.error(getClass(), "Exception while parsing json object: " + pe);
+			log.error("Exception while parsing json object: " + pe);
 		}
 		String errorMessage = null;
 		String errorCode = null;

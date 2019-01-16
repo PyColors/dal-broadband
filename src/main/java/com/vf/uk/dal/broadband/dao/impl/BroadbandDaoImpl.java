@@ -47,16 +47,18 @@ import com.vf.uk.dal.broadband.entity.promotion.BundlePromotionRequest;
 import com.vf.uk.dal.broadband.inventory.entity.DeliveryMethods;
 import com.vf.uk.dal.broadband.journey.entity.CurrentJourney;
 import com.vf.uk.dal.broadband.utils.BroadbandRepoProvider;
-import com.vf.uk.dal.common.logger.LogHelper;
 import com.vf.uk.dal.constant.BroadBandConstant;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityRequest;
 import com.vf.uk.dal.entity.serviceavailability.GetServiceAvailibilityResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Class BroadbandDaoImpl.
  *
  * @author Infosys Limited
  */
+@Slf4j
 @Component("broadbandDao")
 public class BroadbandDaoImpl implements BroadbandDao {
 
@@ -102,9 +104,9 @@ public class BroadbandDaoImpl implements BroadbandDao {
 	 */
 	@Override
 	public BundleDetails getBundleDetailsFromGetBundleListAPI(String url) {
-		LogHelper.info(this, "Start -->  calling  getBundleDetailsFromGetBundleListAPI");
+		log.info("Start -->  calling  getBundleDetailsFromGetBundleListAPI");
 		BundleDetails client = restTemplate.getForObject(url, BundleDetails.class);
-		LogHelper.info(this, "End --> calling getBundleDetailsFromGetBundleListAPI");
+		log.info("End --> calling getBundleDetailsFromGetBundleListAPI");
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.convertValue(client, new TypeReference<BundleDetails>() {
 		});

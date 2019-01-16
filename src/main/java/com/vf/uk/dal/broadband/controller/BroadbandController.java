@@ -43,12 +43,12 @@ import com.vf.uk.dal.broadband.exception.TILException;
 import com.vf.uk.dal.broadband.svc.BroadbandService;
 import com.vf.uk.dal.broadband.validator.BroadbandValidator;
 import com.vf.uk.dal.common.exception.ApplicationException;
-import com.vf.uk.dal.common.logger.LogHelper;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
@@ -56,6 +56,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class BroadbandController {
 
 	/** The broadband service. */
@@ -307,7 +308,7 @@ public class BroadbandController {
 		try {
 			createAppointmentresponse = broadbandService.createAppointment(createAppointmentRequest, broadbandId);
 		} catch (TILException e) {
-			LogHelper.error(getClass(), "ERROR WHILE CALLING CREATE APPOINTMENT: " + e);
+			log.error("ERROR WHILE CALLING CREATE APPOINTMENT: " + e);
 			com.vf.uk.dal.common.exception.ErrorResponse error = new com.vf.uk.dal.common.exception.ErrorResponse(400,
 					"BROADBAND_CREATE_APPOINTMENT_EXCEPTION", e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
@@ -397,7 +398,7 @@ public class BroadbandController {
 			}
 			return new ResponseEntity<>(broadbandService.getAppointmentForFLBB(broadbandId), HttpStatus.OK);
 		} catch (TILException e) {
-			LogHelper.error(getClass(), "ERROR WHILE CALLING GET APPOINTMENT: " + e);
+			log.error("ERROR WHILE CALLING GET APPOINTMENT: " + e);
 			com.vf.uk.dal.common.exception.ErrorResponse error = new com.vf.uk.dal.common.exception.ErrorResponse(400,
 					"BROADBAND_GET_APPOINTMENT_EXCEPTION", e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);

@@ -4,7 +4,6 @@ package com.vf.uk.dal.broadband.authorizer;
 import org.springframework.stereotype.Component;
 
 import com.vf.uk.dal.broadband.exception.BroadbandJourneyCustomException;
-import com.vf.uk.dal.customer.auth.token.SubscriptionClaim;
 
 @Component
 public class BroadbandAuthorizationHelper {
