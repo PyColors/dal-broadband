@@ -7,14 +7,14 @@ import java.text.SimpleDateFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.hateoas.Link;
 
-import com.vf.uk.dal.broadband.assembler.BroadbandJourneyServiceAssembler;
-import com.vf.uk.dal.common.logger.LogHelper;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The Class CommonUtility.
  *
  * @author Infosys Limited
  */
+@Slf4j
 public class CommonUtility {
 
 	/**
@@ -88,8 +88,7 @@ public class CommonUtility {
 					dateString = simpleDateFormat1.format(date);
 				}
 			} catch (ParseException e) {
-				LogHelper.error(BroadbandJourneyServiceAssembler.class,
-						dateInString + "is not in pattern " + pattern + " and desired pattern is " + desiredPattern);
+				log.error(dateInString + "is not in pattern " + pattern + " and desired pattern is " + desiredPattern);
 			}
 		}
 		return dateString;
