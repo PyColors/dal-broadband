@@ -64,6 +64,10 @@ icp:
     jdbcUserName: daluser
     jdbcUserPwd: simple4u
     
+logging:
+  pattern:
+    level: "%5p %clr([%mdc]){blue}"
+    
 springfox:
  documentation:
    swagger:
