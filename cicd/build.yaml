@@ -44,6 +44,23 @@ steps:
 - task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
   ## This task posts the SonarQube quality gate on the Build. This is not required as yet.
   displayName: 'Publish Quality Gate Result'
+- bash: |
+   get_status=$(curl -s -u ${USER}:${TOKEN} https://sonarqube.vision.vodafoneaws.co.uk/api/qualitygates/project_status?projectKey=com.vf.uk.dal:$(Build.DefinitionName)-svc)
+   echo $get_status
+   status=$(jq '.projectStatus.status' <<< "${get_status}")
+   echo $status
+   if [[ ${status} == '"ERROR"' ]]; then
+   echo "Fail"
+   echo "##vso[task.logissue type=warning;]SonarQube quality gate failure.";
+   fi
+  displayName: 'Build Breaker'
+
+- task: mspremier.BuildQualityChecks.QualityChecks-task.BuildQualityChecks@5
+  displayName: 'Check build quality'
+  inputs:
+    checkWarnings: true
+    warningFailOption: fixed
+    warningTaskFilters: '/Build Breaker/i'   
 
 - task: CopyFiles@2
   ## This copies jar file to the correct location within the VSTS agent.  This is a required task.
