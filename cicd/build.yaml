@@ -45,7 +45,7 @@ steps:
   ## This task posts the SonarQube quality gate on the Build. This is not required as yet.
   displayName: 'Publish Quality Gate Result'
 - bash: |
-   get_status=$(curl -s -u ${USER}:${TOKEN} https://sonarqube.vision.vodafoneaws.co.uk/api/qualitygates/project_status?projectKey=com.vf.uk.dal:$(Build.DefinitionName)-svc)
+   get_status=$(curl -s -u $(SONAR_USER):$(TOKEN) https://sonarqube.vision.vodafoneaws.co.uk/api/qualitygates/project_status?projectKey=com.vf.uk.dal:$(Build.DefinitionName)-svc)
    echo $get_status
    status=$(jq '.projectStatus.status' <<< "${get_status}")
    echo $status
