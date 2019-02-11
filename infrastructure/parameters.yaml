@@ -34,6 +34,8 @@
   ParameterValue: "${APPDFLAG}"
 - ParameterKey: AppDEnv
   ParameterValue: "${APPDENV}"
+- ParameterKey: DdogFlag
+  ParameterValue: "${DDOGFLAG}"
 - ParameterKey: XMS
   ParameterValue: "${XMS}"
 - ParameterKey: XMX

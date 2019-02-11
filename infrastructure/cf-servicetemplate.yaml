@@ -56,6 +56,10 @@ Parameters:
   AppDEnv:
    Description: The name of the App Dynamics environment that is being deployed to.
    Type: String
+  DdogFlag:
+    Description: Datadog True or False
+    Type: String
+  AppDEnv:
   XMS:
     Description: XMS Value
     Type: String
@@ -194,6 +198,8 @@ Resources:
               Value: !Ref Environment
             - Name: AppDEnv
               Value: !Ref AppDEnv  
+            - Name: DdogFlag
+              Value: !Ref 'DdogFlag'
             - Name: XMS
               Value: !Ref 'XMS'
             - Name: XMX

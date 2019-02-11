@@ -90,6 +90,18 @@ steps:
     targetFolder: '$(Build.SourcesDirectory)'
     flattenFolders: true
 
+- task: AmazonWebServices.aws-vsts-tools.S3Download.S3Download@1
+  displayName: 'S3 Download: Datadog Agent'
+  ## This task downloads the datadog agent to the VSTS agent. This is currently a required task.
+  inputs:
+    awsCredentials: 'non-prod'
+    regionName: 'eu-west-1'
+    bucketName: 'digitalx-app-commons3bucket'
+    sourceFolder: artifacts/datadog
+    globExpressions: dd-java-agent.jar
+    targetFolder: '$(Build.SourcesDirectory)'
+    flattenFolders: true
+
 - task: PublishBuildArtifacts@1
   ## This task publishes the VSTS agent to VSTS for use in the release. This is a required task.
   displayName: 'Publish Artifact: $(Build.DefinitionName)'
