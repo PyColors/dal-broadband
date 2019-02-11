@@ -54,12 +54,11 @@ Parameters:
     Description: AppD True or False
     Type: String
   AppDEnv:
-   Description: The name of the App Dynamics environment that is being deployed to.
-   Type: String
+    Description: The name of the App Dynamics environment that is being deployed to.
+    Type: String
   DdogFlag:
     Description: Datadog True or False
     Type: String
-  AppDEnv:
   XMS:
     Description: XMS Value
     Type: String
