@@ -80,7 +80,7 @@
   ParameterValue: "${VPCID}"
 - ParameterKey: ScalableTargetRoleArn
   ParameterValue: "${SCALABLETARGETROLEARN}"
-- ParameterKey: TaskRoleArn
-  ParameterValue: "${TASKROLEARN}"
 - ParameterKey: ServiceSchedulerRoleArn
   ParameterValue: "${SERVICESCHEDULERROLEARN}"
+- ParameterKey: VPCName
+  ParameterValue: "${VPCNAME}"
