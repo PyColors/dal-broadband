@@ -128,6 +128,9 @@ Parameters:
   ServiceSchedulerRoleArn:
     Description: ame of the Service Scheduler Role ARN to be attached to the ECS Service
     Type: String
+  VPCName:
+    Description: The VPC Name to use ie newvo-e, non-prod.
+    Type: String
 Resources:
   ListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
@@ -176,8 +179,7 @@ Resources:
     Type: AWS::ECS::TaskDefinition
     Properties:
       Family: !Ref 'AWS::StackName'
-      TaskRoleArn:
-        !GetAtt 'DalEcsDefaultTaskRole.Arn'
+      TaskRoleArn: !GetAtt 'DalEcsDefaultTaskRole.Arn'
       ContainerDefinitions:
         - Name: !Ref 'AWS::StackName'
           Cpu: !Ref 'Cpu'
