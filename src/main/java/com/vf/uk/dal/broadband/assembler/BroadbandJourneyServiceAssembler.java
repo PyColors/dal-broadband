@@ -765,7 +765,8 @@ public class BroadbandJourneyServiceAssembler {
 		com.vf.uk.dal.broadband.entity.LineSpeeds lineSpeedForResponse = new com.vf.uk.dal.broadband.entity.LineSpeeds();
 		lineSpeedForResponse.setPackageName(packageName);
 		for (com.vf.uk.dal.entity.serviceavailability.ServiceLine serviceLine : serviceLines.getServiceLine()) {
-			if (!StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "Line")) {
+			if (!StringUtils.equalsIgnoreCase(serviceLine.getClassificationCode(), "Line")
+					&& serviceLine.getLineSpeeds()!=null) {
 				lineSpeedForResponse.setAvgDownSpeed(serviceLine.getLineSpeeds().getAvgDownSpeed());
 				lineSpeedForResponse.setBandwidthMeasure(serviceLine.getLineSpeeds().getBandwidthMeasure());
 				lineSpeedForResponse.setMaxDownSpeed(serviceLine.getLineSpeeds().getMaxDownSpeed());
