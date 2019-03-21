@@ -998,7 +998,7 @@ public class BroadbandServiceImpl implements BroadbandService {
 					
 					lineDetails.setLineTreatmentType("NEW");
 					broadband.setLineDetails(lineDetails);
-					if(!StringUtils
+					if(broadband.getEngineeringVisitCharge()!=null && !StringUtils
 						.equalsIgnoreCase(serviceIdSku, broadband.getEngineeringVisitCharge().getEngVisitProductId())){
 						PremiseAndServicePoint premiseAndServicePoint = broadbandJourneyServiceAssembler
 								.setPremiseAndServicePointRequest(
