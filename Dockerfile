@@ -26,4 +26,7 @@ COPY $MSNAME-svc-$VERSION.jar /apps/sb/
 
 RUN chmod +x /apps/startup/startup.sh
 
+LABEL com.datadoghq.ad.logs="[{\"source\": \"java\", \"service\": \"${MSNAME}\", \"log_processing_rules\": [\
+{\"type\": \"multi_line\", \"name\": \"log_start_with_date\", \"pattern\": \"\\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])\"}\
+]}]
 ENTRYPOINT ["/apps/startup/startup.sh"]
