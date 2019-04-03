@@ -131,6 +131,10 @@ Parameters:
   ServiceSchedulerRoleArn:
     Description: ame of the Service Scheduler Role ARN to be attached to the ECS Service
     Type: String
+  LogDest:
+    Description: Destination logging driver
+    Type: String
+    Default: awslogs
 Resources:
   ListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
@@ -194,9 +198,9 @@ Resources:
             - Name: AppDFlag
               Value: !Ref 'AppDFlag'
             - Name: Environment
-              Value: !Ref Environment
+              Value: !Ref 'Environment'
             - Name: AppDEnv
-              Value: !Ref AppDEnv  
+              Value: !Ref 'AppDEnv'
             - Name: DdogFlag
               Value: !Ref 'DdogFlag'
             - Name: XMS
@@ -232,11 +236,31 @@ Resources:
             - ContainerPort: 8080
               HostPort: 0
           LogConfiguration:
-            LogDriver: awslogs
+            LogDriver: !If
+              - LogToCloud
+              - awslogs
+              - json-file
             Options:
-              awslogs-group: !Ref 'AWS::StackName'
-              awslogs-region: !Ref 'AWS::Region'
-              awslogs-stream-prefix: !Ref 'Version'
+              awslogs-group: !If
+                - LogToCloud
+                - !Ref 'AWS::StackName'
+                - !Ref 'AWS::NoValue'
+              awslogs-region: !If
+                - LogToCloud
+                - !Ref 'AWS::Region'
+                - !Ref 'AWS::NoValue'
+              awslogs-stream-prefix: !If
+                - LogToCloud
+                - !Ref 'Version'
+                - !Ref 'AWS::NoValue'
+              max-size: !If
+                - LogToCloud
+                - AWS::NoValue
+                - 10m
+              max-file: !If
+                - LogToCloud
+                - AWS::NoValue
+                - '2'
   EcsService:
     Type: AWS::ECS::Service
     DependsOn: ListenerRule
@@ -334,3 +358,7 @@ Resources:
       Threshold: 20
       AlarmActions:
         - !Ref 'ScalingPolicyDown'
+Conditions:
+  LogToCloud: !Equals
+    - !Ref 'LogDest'
+    - awslogs
