@@ -347,11 +347,5 @@ Resources:
               - sts:AssumeRole
       Path: /
       ManagedPolicyArns:
-        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-codecommit-read-config-db
-        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-dynamo-db-access
-        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-sns-list-topics
-        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-sns-publish
-        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-sqs-default
-        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-sqs-list-queues
         - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-create-logs
         - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-dx-${VPCName}-application-config-s3-bucket
