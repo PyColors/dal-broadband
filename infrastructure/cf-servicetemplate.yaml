@@ -125,9 +125,6 @@ Parameters:
   ScalableTargetRoleArn:
     Description: Name of the service scheduler
     Type: String
-  TaskRoleArn:
-    Description: Name of the role to be attached to the task definition on runtime
-    Type: String
   ServiceSchedulerRoleArn:
     Description: ame of the Service Scheduler Role ARN to be attached to the ECS Service
     Type: String
@@ -135,6 +132,9 @@ Parameters:
     Description: Destination logging driver
     Type: String
     Default: awslogs
+  VPCName:
+    Description: The VPC Name to use ie newvo-e, non-prod.
+    Type: String
 Resources:
   ListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
@@ -183,8 +183,7 @@ Resources:
     Type: AWS::ECS::TaskDefinition
     Properties:
       Family: !Ref 'AWS::StackName'
-      TaskRoleArn: !ImportValue
-        Ref: TaskRoleArn
+      TaskRoleArn: !GetAtt 'DalEcsDefaultTaskRole.Arn'
       ContainerDefinitions:
         - Name: !Ref 'AWS::StackName'
           Cpu: !Ref 'Cpu'
@@ -358,6 +357,22 @@ Resources:
       Threshold: 20
       AlarmActions:
         - !Ref 'ScalingPolicyDown'
+  DalEcsDefaultTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ecs-tasks.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-create-logs
+        - !Sub arn:aws:iam::${AWS::AccountId}:policy/dx-${Environment}-dal-dx-${VPCName}-application-config-s3-bucket
 Conditions:
   LogToCloud: !Equals
     - !Ref 'LogDest'
