@@ -254,11 +254,11 @@ Resources:
                 - !Ref 'AWS::NoValue'
               max-size: !If
                 - LogToCloud
-                - AWS::NoValue
+                - !Ref "AWS::NoValue"
                 - 10m
               max-file: !If
                 - LogToCloud
-                - AWS::NoValue
+                - !Ref "AWS::NoValue"
                 - '2'
   EcsService:
     Type: AWS::ECS::Service
