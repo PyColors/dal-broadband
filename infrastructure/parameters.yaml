@@ -84,3 +84,5 @@
   ParameterValue: "${SERVICESCHEDULERROLEARN}"
 - ParameterKey: VPCName
   ParameterValue: "${VPCNAME}"
+- ParameterKey: LogDest
+  ParameterValue: "${LOGDEST}"
